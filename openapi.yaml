@@ -704,6 +704,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List affiliate billing records
             operationId: BackofficeAffiliate_ListAffiliateBills
             requestBody:
                 content:
@@ -722,6 +723,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Create a new affiliate campaign
             operationId: BackofficeAffiliate_CreateCampaign
             requestBody:
                 content:
@@ -740,6 +742,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Delete an affiliate campaign
             operationId: BackofficeAffiliate_DeleteCampaign
             requestBody:
                 content:
@@ -758,6 +761,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List affiliate campaigns with pagination and filters
             operationId: BackofficeAffiliate_ListCampaigns
             requestBody:
                 content:
@@ -776,6 +780,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List campaigns belonging to a specific affiliate
             operationId: BackofficeAffiliate_ListAffiliateCampaigns
             requestBody:
                 content:
@@ -794,6 +799,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Update an existing affiliate campaign
             operationId: BackofficeAffiliate_UpdateCampaign
             requestBody:
                 content:
@@ -812,6 +818,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List affiliate commissions with pagination and filters
             operationId: BackofficeAffiliate_ListCommissions
             requestBody:
                 content:
@@ -830,6 +837,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Create a new affiliate commission plan
             operationId: BackofficeAffiliate_CreateCommissionPlan
             requestBody:
                 content:
@@ -848,6 +856,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Delete a commission plan
             operationId: BackofficeAffiliate_DeleteCommissionPlan
             requestBody:
                 content:
@@ -866,6 +875,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Get a commission plan by ID
             operationId: BackofficeAffiliate_GetCommissionPlan
             requestBody:
                 content:
@@ -884,6 +894,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List commission plans with pagination and filters
             operationId: BackofficeAffiliate_ListCommissionPlans
             requestBody:
                 content:
@@ -902,6 +913,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List commission plans assigned to a specific affiliate
             operationId: BackofficeAffiliate_ListAffiliateCommissionPlans
             requestBody:
                 content:
@@ -920,6 +932,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List all commission plans across the operator hierarchy
             operationId: BackofficeAffiliate_ListAllCommissionPlans
             requestBody:
                 content:
@@ -938,6 +951,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Update an existing commission plan
             operationId: BackofficeAffiliate_UpdateCommissionPlan
             requestBody:
                 content:
@@ -956,6 +970,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Create a new affiliate account
             operationId: BackofficeAffiliate_CreateAffiliate
             requestBody:
                 content:
@@ -974,6 +989,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Get aggregate affiliate dashboard metrics for a time range
             operationId: BackofficeAffiliate_GetAffiliateDashboard
             requestBody:
                 content:
@@ -992,6 +1008,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Get affiliate trend data grouped by day, week, or month
             operationId: BackofficeAffiliate_GetAffiliateTrend
             requestBody:
                 content:
@@ -1010,6 +1027,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Delete an affiliate (soft delete)
             operationId: BackofficeAffiliate_DeleteAffiliate
             requestBody:
                 content:
@@ -1028,6 +1046,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List affiliate tracking domains for a target operator
             operationId: BackofficeAffiliate_ListAffiliateDomains
             requestBody:
                 content:
@@ -1046,6 +1065,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Create or update an affiliate tracking domain
             operationId: BackofficeAffiliate_SetAffiliateDomain
             requestBody:
                 content:
@@ -1064,6 +1084,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List affiliate events (registrations, deposits, etc.) with filters
             operationId: BackofficeAffiliate_ListEvents
             requestBody:
                 content:
@@ -1082,6 +1103,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Get detailed information about a specific affiliate
             operationId: BackofficeAffiliate_GetAffiliateDetails
             requestBody:
                 content:
@@ -1233,6 +1255,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Create a new landing page template
             operationId: BackofficeAffiliate_CreateLandingTemplate
             requestBody:
                 content:
@@ -1251,6 +1274,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Delete a landing page template
             operationId: BackofficeAffiliate_DeleteLandingTemplate
             requestBody:
                 content:
@@ -1269,6 +1293,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List landing page templates for a target operator
             operationId: BackofficeAffiliate_ListLandingTemplates
             requestBody:
                 content:
@@ -1287,6 +1312,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List landing page templates associated with a specific campaign
             operationId: BackofficeAffiliate_ListLandingTemplatesByCampaign
             requestBody:
                 content:
@@ -1305,6 +1331,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Update an existing landing page template
             operationId: BackofficeAffiliate_UpdateLandingTemplate
             requestBody:
                 content:
@@ -1323,6 +1350,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List affiliates with pagination and filters
             operationId: BackofficeAffiliate_ListAffiliates
             requestBody:
                 content:
@@ -1341,6 +1369,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Get affiliate operator-level settings
             operationId: BackofficeAffiliate_GetAffiliateOperatorSettings
             requestBody:
                 content:
@@ -1359,6 +1388,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Update affiliate operator-level settings
             operationId: BackofficeAffiliate_UpdateAffiliateOperatorSettings
             requestBody:
                 content:
@@ -1377,6 +1407,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Create a new affiliate postback
             operationId: BackofficeAffiliate_CreatePostback
             requestBody:
                 content:
@@ -1395,6 +1426,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Delete an affiliate postback
             operationId: BackofficeAffiliate_DeletePostback
             requestBody:
                 content:
@@ -1413,6 +1445,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List affiliate postbacks with pagination and status filter
             operationId: BackofficeAffiliate_ListPostbacks
             requestBody:
                 content:
@@ -1431,6 +1464,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List affiliate postback execution logs
             operationId: BackofficeAffiliate_ListPostbackLogs
             requestBody:
                 content:
@@ -1449,6 +1483,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Update an existing affiliate postback
             operationId: BackofficeAffiliate_UpdatePostback
             requestBody:
                 content:
@@ -1467,6 +1502,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Reset an affiliate's password
             operationId: BackofficeAffiliate_ResetAffiliatePassword
             requestBody:
                 content:
@@ -1485,6 +1521,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Send account credentials email to an affiliate
             operationId: BackofficeAffiliate_SendAffiliateAccountEmail
             requestBody:
                 content:
@@ -1503,6 +1540,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Create a sub-account for an affiliate
             operationId: BackofficeAffiliate_CreateAffiliateSubAccount
             requestBody:
                 content:
@@ -1521,6 +1559,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List sub-accounts of an affiliate
             operationId: BackofficeAffiliate_ListAffiliateSubAccounts
             requestBody:
                 content:
@@ -1539,6 +1578,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Update an affiliate sub-account (enable/disable, reset password, 2FA)
             operationId: BackofficeAffiliate_UpdateAffiliateSubAccount
             requestBody:
                 content:
@@ -1557,6 +1597,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Update an existing affiliate's details
             operationId: BackofficeAffiliate_UpdateAffiliate
             requestBody:
                 content:
@@ -1575,6 +1616,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Export affiliate users to CSV, Excel, or PDF
             operationId: BackofficeAffiliate_ExportAffiliateUsers
             requestBody:
                 content:
@@ -1593,6 +1635,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List users acquired through affiliates
             operationId: BackofficeAffiliate_ListAffiliateUsers
             requestBody:
                 content:
@@ -6385,6 +6428,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Get referral plan for a target operator and currency
             operationId: BackofficeAffiliate_GetReferralPlan
             requestBody:
                 content:
@@ -6403,6 +6447,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Create or update a referral plan for a target operator
             operationId: BackofficeAffiliate_SetReferralPlan
             requestBody:
                 content:
@@ -7613,6 +7658,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
+            description: Get app download reward config for a target operator
             operationId: BackofficeWallet_GetAppDownloadRewardConfig
             requestBody:
                 content:
@@ -7631,6 +7677,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
+            description: Set app download reward config for a target operator
             operationId: BackofficeWallet_SetAppDownloadRewardConfig
             requestBody:
                 content:
@@ -7687,6 +7734,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
+            description: Get credit transaction details by credit ID
             operationId: BackofficeWallet_GetWalletCreditTransactions
             requestBody:
                 content:
@@ -7724,6 +7772,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
+            description: Get wallet credit/debit transaction history for a user
             operationId: BackofficeWallet_GetWalletCredits
             requestBody:
                 content:
@@ -7742,6 +7791,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
+            description: Add a new currency to the wallet configuration
             operationId: BackofficeWallet_AddWalletCurrency
             requestBody:
                 content:
@@ -7779,6 +7829,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
+            description: Update wallet currency settings (visibility, icon, decimal places, etc.)
             operationId: BackofficeWallet_UpdateWalletCurrency
             requestBody:
                 content:
@@ -7911,6 +7962,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
+            description: Get exchange rates for specified currencies
             operationId: BackofficeWallet_GetExchangeRates
             requestBody:
                 content:
@@ -8024,6 +8076,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
+            description: Get wallet balances for a user
             operationId: BackofficeWallet_GetWallets
             requestBody:
                 content:
@@ -8479,6 +8532,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
+            description: Update wallet settings (e.g. enable/disable a currency for a user)
             operationId: BackofficeWallet_UpdateWallet
             requestBody:
                 content:
@@ -10655,8 +10709,10 @@ components:
                     type: string
                 vatAmountUsd:
                     type: string
+                    description: placeholder
                 vatAmountReportingCurrency:
                     type: string
+                    description: placeholder
         api.affiliate.service.v1.AffiliateDetails_CommissionPlan:
             type: object
             properties:
@@ -10677,6 +10733,7 @@ components:
                     type: string
                 subAffiliateCommissionRate:
                     type: string
+                    description: percentage
         api.affiliate.service.v1.AffiliateDomain_Affiliate:
             type: object
             properties:
@@ -10719,6 +10776,7 @@ components:
                         $ref: '#/components/schemas/api.affiliate.service.v1.ContactType'
                 country:
                     type: string
+                    description: country code
                 region:
                     type: string
                 city:
@@ -10731,10 +10789,12 @@ components:
                     type: array
                     items:
                         type: string
+                    description: not implemented
                 teammateIds:
                     type: array
                     items:
                         type: string
+                    description: not implemented
                 internalInfo:
                     type: string
         api.affiliate.service.v1.AffiliateSnapshotReportItem:
@@ -11113,17 +11173,22 @@ components:
                     type: string
                 commissionSubtype:
                     type: string
+                    description: '"cpa", "revshare", "cpl", "cpc", or "flat_fee"'
                 quantity:
                     type: integer
                     format: int32
                 priceUsd:
                     type: string
+                    description: amount / quantity
                 priceReportingCurrency:
                     type: string
+                    description: amount / quantity
                 amountUsd:
                     type: string
+                    description: amount
                 amountReportingCurrency:
                     type: string
+                    description: amount
         api.affiliate.service.v1.CPAConfig:
             type: object
             properties:
@@ -11131,6 +11196,7 @@ components:
                     type: boolean
                 commissionType:
                     type: string
+                    description: '"flat", "flat_by_countries", "progressive", or "progressive_by_countries"'
                 flat:
                     $ref: '#/components/schemas/api.affiliate.service.v1.FlatCommission'
                 flatByCountries:
@@ -11150,6 +11216,7 @@ components:
                     type: boolean
                 commissionType:
                     type: string
+                    description: '"flat" or "flat_by_countries"'
                 flat:
                     $ref: '#/components/schemas/api.affiliate.service.v1.FlatCommission'
                 flatByCountries:
@@ -11182,6 +11249,7 @@ components:
                     type: string
                 channelType:
                     type: string
+                    description: '"facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"'
                 channelConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig'
                 params:
@@ -11261,8 +11329,10 @@ components:
             properties:
                 targetCurrency:
                     type: string
+                    description: Currency to receive the converted total
                 snapshotTime:
                     type: string
+                    description: Snapshot timestamp from Get, ensures claim scope matches preview
         api.affiliate.service.v1.ClaimUserReferralRewardsAllCurrenciesResponse:
             type: object
             properties:
@@ -11272,6 +11342,7 @@ components:
                         $ref: '#/components/schemas/api.affiliate.service.v1.ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail'
                 totalCreditedAmount:
                     type: string
+                    description: Total credited to wallet in target currency
                 targetCurrency:
                     type: string
         api.affiliate.service.v1.ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail:
@@ -11281,10 +11352,13 @@ components:
                     type: string
                 sourceAmount:
                     type: string
+                    description: Amount in source currency
                 convertedAmount:
                     type: string
+                    description: Amount converted to target currency
                 exchangeRate:
                     type: string
+                    description: Exchange rate used
                 commissionCount:
                     type: integer
                     format: int32
@@ -11305,8 +11379,10 @@ components:
             properties:
                 actionType:
                     type: string
+                    description: '"OPEN_REGISTRATION", "GO_TO_MAIN_SITE", or "CUSTOM_URL"'
                 customUrl:
                     type: string
+                    description: required when action_type is CUSTOM_URL
         api.affiliate.service.v1.CommissionPlan:
             type: object
             properties:
@@ -11318,12 +11394,15 @@ components:
                     type: string
                 source:
                     type: string
+                    description: '"system", "retailer", "company", or "operator"'
                 types:
                     type: array
                     items:
                         type: string
+                    description: '"cpa", "revshare", "cpl", "cpc", "flat_fee" (multiple allowed)'
                 assignedCount:
                     type: integer
+                    description: Not supported yet
                     format: int32
                 baseCurrency:
                     type: string
@@ -11478,6 +11557,7 @@ components:
                     type: string
                 to:
                     type: string
+                    description: nil indicates no upper limit
                 rewardAmount:
                     type: string
         api.affiliate.service.v1.ConversionTierRewards:
@@ -11563,6 +11643,7 @@ components:
             properties:
                 referralCode:
                     type: string
+                    description: nil means backend will randomly generate a new code
         api.affiliate.service.v1.CreateUserReferralCodeResponse:
             type: object
             properties:
@@ -11676,6 +11757,7 @@ components:
                     type: string
                 to:
                     type: string
+                    description: nil indicates no upper limit
                 cashbackPercentage:
                     type: string
         api.affiliate.service.v1.DepositCashbackTierRewardConfig:
@@ -11753,6 +11835,7 @@ components:
                     type: boolean
                 period:
                     type: string
+                    description: '"one_time", "monthly", or "yearly"'
                 amount:
                     type: string
                 startTime:
@@ -11798,6 +11881,7 @@ components:
                     type: string
                 active:
                     type: boolean
+                    description: online status, not implemented
                 lastLoginIp:
                     type: string
                 lastLoginAt:
@@ -11815,6 +11899,7 @@ components:
                         $ref: '#/components/schemas/api.affiliate.service.v1.ContactType'
                 country:
                     type: string
+                    description: country code
                 region:
                     type: string
                 city:
@@ -11827,18 +11912,23 @@ components:
                     type: array
                     items:
                         type: string
+                    description: not implemented
                 teammateIds:
                     type: array
                     items:
                         type: string
+                    description: not implemented
                 internalInfo:
                     type: string
                 referrer:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDetails_Referrer'
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDetails_Referrer'
+                    description: referred by who, not implemented
                 pendingBalanceUsd:
                     type: string
                 pendingBalanceReportingCurrency:
                     type: string
+                    description: pending bill amount
                 email:
                     type: string
                 twoFaEnabled:
@@ -11998,6 +12088,7 @@ components:
                     type: string
                 tier:
                     type: integer
+                    description: Filter referred stats by tier; other fields remain the same
                     format: int32
                 conversionStartTime:
                     type: string
@@ -12016,6 +12107,7 @@ components:
             properties:
                 unpaidRewardAmount:
                     type: string
+                    description: Currently only calculated for user's tier 1
                 unclaimedRewardAmount:
                     type: string
                 claimedRewardAmount:
@@ -12024,34 +12116,42 @@ components:
                     type: object
                     additionalProperties:
                         type: string
+                    description: Map of tier number (1-10) to GGR amount in the period
                 ngrAmountInPeriod:
                     type: object
                     additionalProperties:
                         type: string
+                    description: Map of tier number (1-10) to NGR amount in the period
                 bonus2cashAmountInPeriod:
                     type: object
                     additionalProperties:
                         type: string
+                    description: Map of tier number (1-10) to bonus2cash amount in the period
                 referredStats:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat'
                 teamSize:
                     type: integer
+                    description: Number of users in the team
                     format: int32
                 total:
                     type: integer
+                    description: Total count for referred stats pagination
                     format: int32
                 page:
                     type: integer
+                    description: Page number for referred stats
                     format: int32
                 pageSize:
                     type: integer
+                    description: Page size for referred stats
                     format: int32
                 adminFeeAmountInPeriod:
                     type: object
                     additionalProperties:
                         type: string
+                    description: Map of tier number (1-10) to admin fee amount = (NGR/GGR) * admin_rate / 100
         api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat:
             type: object
             properties:
@@ -12098,6 +12198,7 @@ components:
             properties:
                 targetCurrency:
                     type: string
+                    description: Target currency for exchange rate conversion display
         api.affiliate.service.v1.GetUserReferralRewardsAllCurrenciesResponse:
             type: object
             properties:
@@ -12107,33 +12208,45 @@ components:
                         $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward'
                 totalConvertedAmount:
                     type: string
+                    description: Total of all currencies converted to target
                 targetCurrency:
                     type: string
                 snapshotTime:
                     type: string
+                    description: Snapshot timestamp in milliseconds, pass to Claim
         api.affiliate.service.v1.GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward:
             type: object
             properties:
                 currency:
                     type: string
+                    description: Source currency
                 amount:
                     type: string
+                    description: Total claimable amount in source currency
                 convertedAmount:
                     type: string
+                    description: Amount converted to target_currency
                 exchangeRate:
                     type: string
+                    description: 'Exchange rate: 1 source = X target'
                 commissionCount:
                     type: integer
+                    description: Number of claimable commissions
                     format: int32
                 referralAmount:
                     type: string
-                    description: breakdown by reward type
+                    description: |-
+                        Breakdown by reward type:
+                         conversion_reward subtotal
                 commissionAmount:
                     type: string
+                    description: deposit_cashback + wagering_commission subtotal
                 lossRevShareAmount:
                     type: string
+                    description: loss_rev_share subtotal (only included when >= 0)
                 lossRevShareExcluded:
                     type: boolean
+                    description: true if loss_rev_share sum < 0 and excluded
         api.affiliate.service.v1.GetUserReferralRewardsRequest:
             type: object
             properties:
@@ -12175,19 +12288,23 @@ components:
                     additionalProperties:
                         type: integer
                         format: int32
+                    description: Map of tier number (1-10) to conversion count
                 depositAmount:
                     type: object
                     additionalProperties:
                         type: string
+                    description: Map of tier number (1-10) to deposit amount
                 wageringAmount:
                     type: object
                     additionalProperties:
                         type: string
+                    description: Map of tier number (1-10) to wagering amount (game bet and game bet rollback)
         api.affiliate.service.v1.GetUserReferralStatsResponse_ReferralRewards:
             type: object
             properties:
                 availableReferralRewardAmount:
                     type: string
+                    description: Amount for this currency
                 availableCommissionRewardAmount:
                     type: string
                 totalReceivedReferralRewardAmount:
@@ -12340,6 +12457,7 @@ components:
                     format: date-time
                 status:
                     type: string
+                    description: '"paid" or "unpaid"'
                 amountUsd:
                     type: string
                 amountReportingCurrency:
@@ -12379,10 +12497,12 @@ components:
                     type: string
                 source:
                     type: string
+                    description: '"system", "retailer", "company", or "operator"'
                 types:
                     type: array
                     items:
                         type: string
+                    description: '"cpa", "revshare", "cpl", "cpc", "flat_fee" (multiple allowed)'
                 baseCurrency:
                     type: string
                 sourceOperatorName:
@@ -12412,10 +12532,12 @@ components:
                     type: string
                 availableToAll:
                     type: boolean
+                    description: only visible to operator
                 affiliates:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDomain_Affiliate'
+                    description: only visible to operator
                 operatorId:
                     type: string
                 companyOperatorId:
@@ -12522,6 +12644,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: not implemented
                 status:
                     type: string
                 commissionPlanNames:
@@ -12532,6 +12655,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: not implemented
                 lastLoginIp:
                     type: string
                 balanceUsd:
@@ -12592,6 +12716,7 @@ components:
                     type: string
                 eventMappingsStatus:
                     type: string
+                    description: '"configured", "not_configured", or "not_required"'
                 eventMappingsCount:
                     type: integer
                     format: int32
@@ -12662,6 +12787,7 @@ components:
                     format: date-time
                 status:
                     type: string
+                    description: '"pending", "approved", or "rejected"'
                 paid:
                     type: boolean
                 commissionPlanId:
@@ -12670,8 +12796,10 @@ components:
                     type: string
                 commissionType:
                     type: string
+                    description: '"cpa", "revshare", "cpl", "cpc", or "flat_fee"'
                 commissionSubtype:
                     type: string
+                    description: '"flat", "flat_by_countries", "progressive", or "progressive_by_countries"'
                 reportingCurrency:
                     type: string
                 revenueUsd:
@@ -12785,12 +12913,15 @@ components:
                     type: string
                 postbackUrl:
                     type: string
+                    description: Final URL after macro replacement
                 postBody:
                     type: string
+                    description: Final POST body after macro replacement
                 actionType:
                     type: string
                 requestMethod:
                     type: string
+                    description: '"GET" or "POST"'
                 httpStatusCode:
                     type: integer
                     format: int32
@@ -12800,27 +12931,37 @@ components:
                     type: boolean
                 attemptNumber:
                     type: integer
+                    description: 1, 2, or 3
                     format: int32
                 userId:
                     type: string
+                    description: User that triggered the event
                 trafficSource:
                     type: string
+                    description: '"aff", "ref", or "direct_reg"'
                 affiliateId:
                     type: string
+                    description: Affiliate user ID (> 0 when traffic=aff)
                 referrerUserId:
                     type: string
+                    description: Referrer user ID (> 0 when traffic=ref)
                 eventUniqueKey:
                     type: string
+                    description: Idempotency key (e.g. "game_bet:123456")
                 operatorId:
                     type: string
                 responseBody:
                     type: string
+                    description: Response body from third-party server (max 2KB)
                 responseHeaders:
                     type: string
+                    description: Response headers as JSON string
                 latencyMs:
                     type: string
+                    description: Request latency in milliseconds
                 createdAt:
                     type: string
+                    description: Unix milliseconds
         api.affiliate.service.v1.ListGlobalPostbacksResponse:
             type: object
             properties:
@@ -12933,24 +13074,33 @@ components:
                     type: string
                 postbackUrl:
                     type: string
+                    description: Final URL after macro replacement
                 actionType:
                     type: string
+                    description: 'User action: register, deposit, etc.'
                 requestMethod:
                     type: string
+                    description: GET/POST
                 httpStatusCode:
                     type: integer
+                    description: HTTP response status code
                     format: int32
                 reason:
                     type: string
+                    description: Success or error message
                 success:
                     type: boolean
+                    description: true if HTTP 2xx
                 attemptNumber:
                     type: integer
+                    description: 1, 2, or 3
                     format: int32
                 eventId:
                     type: string
+                    description: Related event ID
                 userId:
                     type: string
+                    description: User that triggered the event
                 affiliateId:
                     type: string
                 affiliateName:
@@ -12972,10 +13122,13 @@ components:
                     format: date-time
                 responseBody:
                     type: string
+                    description: Response body from third-party server (max 2KB)
                 responseHeaders:
                     type: string
+                    description: Response headers as JSON string
                 latencyMs:
                     type: string
+                    description: Request latency in milliseconds
         api.affiliate.service.v1.ListPostbacksResponse:
             type: object
             properties:
@@ -13007,6 +13160,7 @@ components:
                     type: string
                 status:
                     type: string
+                    description: '"active" or "inactive"'
                 affiliateId:
                     type: string
                 affiliateName:
@@ -13029,10 +13183,12 @@ components:
                         $ref: '#/components/schemas/api.affiliate.service.v1.Postback_Campaign'
                 actionType:
                     type: string
+                    description: '"register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"'
                 postbackUrl:
                     type: string
                 requestMethod:
                     type: string
+                    description: '"GET" or "POST"'
         api.affiliate.service.v1.ListReferralContributionReportResponse:
             type: object
             properties:
@@ -13100,6 +13256,7 @@ components:
                     type: string
                 rewardType:
                     type: string
+                    description: '"conversion_reward", "deposit_cashback_reward", "wagering_commission_reward", or "loss_revenue_share_reward"'
                 referralCode:
                     type: string
                 userId:
@@ -13219,8 +13376,10 @@ components:
                     type: string
                 depositMinusWithdrawalAmountUsd:
                     type: string
+                    description: deposit_amount - withdrawal_amount
                 depositMinusWithdrawalAmountReportingCurrency:
                     type: string
+                    description: deposit_amount - withdrawal_amount
                 betCount:
                     type: integer
                     format: int32
@@ -13246,6 +13405,7 @@ components:
                     type: string
                 roi:
                     type: string
+                    description: percentage, ngr / commission
         api.affiliate.service.v1.LossRevenueShare:
             type: object
             properties:
@@ -13253,8 +13413,10 @@ components:
                     type: boolean
                 basedOn:
                     type: string
+                    description: '"ggr" or "ngr"'
                 negativeCarryover:
                     type: string
+                    description: '"discard" or "carry_to_next_period"'
                 tierRewards:
                     type: object
                     additionalProperties:
@@ -13262,6 +13424,7 @@ components:
                     description: Map of tier number (1-10) to tier rewards
                 period:
                     type: string
+                    description: '"weekly" or "monthly"'
         api.affiliate.service.v1.LossRevenueShareTierReward:
             type: object
             properties:
@@ -13269,8 +13432,10 @@ components:
                     type: string
                 to:
                     type: string
+                    description: nil indicates no upper limit
                 rate:
                     type: string
+                    description: Percentage string, e.g. "35" for 35%
         api.affiliate.service.v1.LossRevenueShareTierRewards:
             type: object
             properties:
@@ -13283,10 +13448,13 @@ components:
             properties:
                 paymentChannelRate:
                     type: string
+                    description: represent as a percentage, e.g. "35" for 35%
                 thirdPartyGameRate:
                     type: string
+                    description: represent as a percentage, e.g. "35" for 35%
                 referralLossRevShareMode:
                     type: string
+                    description: '"cross_currency_hedging" or "independent_by_currency"'
         api.affiliate.service.v1.Params:
             type: object
             properties:
@@ -13317,6 +13485,7 @@ components:
             properties:
                 metric:
                     type: string
+                    description: '"ftd_amount", "ftd_count_in_period", "total_deposits", or "deposits_amount"'
                 countryGroups:
                     type: array
                     items:
@@ -13343,6 +13512,7 @@ components:
             properties:
                 metric:
                     type: string
+                    description: '"ftd_amount", "ftd_count_in_period", "total_deposits", or "deposits_amount"'
                 ranges:
                     type: array
                     items:
@@ -13388,6 +13558,7 @@ components:
                     format: int32
                 allowedPlayerStatuses:
                     type: string
+                    description: Not available yet
         api.affiliate.service.v1.RateRange:
             type: object
             properties:
@@ -13395,6 +13566,7 @@ components:
                     type: string
                 to:
                     type: string
+                    description: nil indicates no upper limit
                 rate:
                     type: string
         api.affiliate.service.v1.ReferralCode:
@@ -13410,10 +13582,13 @@ components:
                     type: string
                 referralUserCount:
                     type: string
+                    description: Number of users who registered with this referral code
                 earningAmountUsd:
                     type: string
+                    description: Earnings in USD from this referral code
                 earningAmountReportingCurrency:
                     type: string
+                    description: Earnings in reporting currency from this referral code
         api.affiliate.service.v1.ReferralPlan:
             type: object
             properties:
@@ -13426,8 +13601,10 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlanConfig'
                 paymentChannelRate:
                     type: string
+                    description: Percentage string, e.g. "35" for 35%
                 thirdPartyGameRate:
                     type: string
+                    description: Percentage string, e.g. "35" for 35%
             description: Complete referral plan configuration
         api.affiliate.service.v1.ReferralPlanConfig:
             type: object
@@ -13455,8 +13632,10 @@ components:
                     type: boolean
                 basedOn:
                     type: string
+                    description: '"ggr" or "ngr"'
                 negativeCarryover:
                     type: string
+                    description: '"discard" or "carry_to_next_period"'
                 commissionType:
                     type: string
                 flat:
@@ -13805,6 +13984,7 @@ components:
                     type: boolean
                 maxGameHouseEdge:
                     type: string
+                    description: Percentage string, e.g. "35" for 35%
                 tierRewards:
                     type: object
                     additionalProperties:
@@ -13812,6 +13992,7 @@ components:
                     description: Map of tier number (1-10) to tier rewards
                 period:
                     type: string
+                    description: '"real_time", "daily", "weekly", or "monthly"'
         api.affiliate.service.v1.WageringCommissionTierReward:
             type: object
             properties:
@@ -13819,8 +14000,10 @@ components:
                     type: string
                 to:
                     type: string
+                    description: nil indicates no upper limit
                 rate:
                     type: string
+                    description: Percentage string, e.g. "35" for 35%
         api.affiliate.service.v1.WageringCommissionTierRewards:
             type: object
             properties:
@@ -14823,6 +15006,7 @@ components:
                     type: string
                 channelType:
                     type: string
+                    description: '"facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"'
                 channelConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig'
         api.backoffice.service.v1.CreateCommissionPlanRequest:
@@ -15282,16 +15466,19 @@ components:
                     type: string
                 status:
                     type: string
+                    description: '"active" or "inactive"'
                 campaignIds:
                     type: array
                     items:
                         type: string
                 actionType:
                     type: string
+                    description: '"register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"'
                 postbackUrl:
                     type: string
                 requestMethod:
                     type: string
+                    description: '"GET" or "POST"'
                 targetAffiliateId:
                     type: string
         api.backoffice.service.v1.CreatePromoCodeCampaignRequest:
@@ -15684,6 +15871,7 @@ components:
                     type: string
                 alternativeCommissionPlanId:
                     type: string
+                    description: Not supported yet
         api.backoffice.service.v1.DeleteCrmCampaignRequest:
             type: object
             properties:
@@ -15706,10 +15894,12 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                    description: The sequences to delete
                 dailyRewardSequences:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                    description: The sequences to delete
         api.backoffice.service.v1.DeleteGlobalPostbackRequest:
             type: object
             properties:
@@ -15912,8 +16102,10 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 format:
                     type: string
+                    description: '"csv", "excel", or "pdf"'
                 timeZone:
                     type: string
+                    description: e.g. "UTC+0", "UTC+8"
         api.backoffice.service.v1.ExportBetsRequest:
             type: object
             properties:
@@ -15992,8 +16184,10 @@ components:
                     type: string
                 format:
                     type: string
+                    description: '"csv", "excel", or "pdf"'
                 timeZone:
                     type: string
+                    description: e.g. "UTC+0", "UTC+8"
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ExportCustomerStrikeReportsRequest:
@@ -16025,8 +16219,10 @@ components:
                     format: int32
                 format:
                     type: string
+                    description: '"csv", "excel", or "pdf"'
                 timeZone:
                     type: string
+                    description: e.g. "UTC+0", "UTC+8"
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ExportGameDataRequest:
@@ -16081,8 +16277,10 @@ components:
                     type: string
                 format:
                     type: string
+                    description: '"csv", "excel", or "pdf"'
                 timeZone:
                     type: string
+                    description: e.g. "UTC+0", "UTC+8"
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ExportMultipleBetsRequest:
@@ -16399,6 +16597,7 @@ components:
                     format: date-time
                 groupBy:
                     type: string
+                    description: '"day", "week", or "month"'
         api.backoffice.service.v1.GetAppDownloadRewardConfigRequest:
             type: object
             properties:
@@ -17942,6 +18141,7 @@ components:
                     type: string
                 transactionType:
                     type: string
+                    description: '"credit" or "debit"'
                 currency:
                     type: string
                 startTime:
@@ -18360,12 +18560,15 @@ components:
                     type: array
                     items:
                         type: string
+                    description: Not implemented
                 teammateIds:
                     type: array
                     items:
                         type: string
+                    description: Not implemented
                 status:
                     type: string
+                    description: '"pending", "active", or "inactive"'
                 page:
                     type: integer
                     format: int32
@@ -18376,6 +18579,7 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 pagination:
                     type: boolean
+                    description: If nil, pagination is true
         api.backoffice.service.v1.ListAllCommissionPlansRequest:
             type: object
             properties:
@@ -18385,6 +18589,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: Not supported yet
                 status:
                     type: string
         api.backoffice.service.v1.ListAllOperatorsRequest:
@@ -18893,6 +19098,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: 'OR logic: filter by commission plan IDs, match if ID is any of these values'
                 userId:
                     type: string
                 affiliateId:
@@ -18901,6 +19107,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: '"cpa", "revshare", "cpl", "cpc", "flat_fee" (multiple allowed)'
                 countries:
                     type: array
                     items:
@@ -18917,6 +19124,7 @@ components:
                     format: date-time
                 status:
                     type: string
+                    description: '"pending", "approved", or "rejected"'
                 page:
                     type: integer
                     format: int32
@@ -20097,9 +20305,11 @@ components:
                         type: string
                 page:
                     type: integer
+                    description: Default 1
                     format: int32
                 pageSize:
                     type: integer
+                    description: Default 20
                     format: int32
         api.backoffice.service.v1.ListOperatorByoDomainsRequest:
             type: object
@@ -20420,6 +20630,7 @@ components:
                     type: string
                 status:
                     type: string
+                    description: '"active" or "inactive"'
                 page:
                     type: integer
                     format: int32
@@ -20455,8 +20666,10 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 status:
                     type: string
+                    description: '"active", "paused", or "disabled"'
                 codeType:
                     type: string
+                    description: '"one_time" or "universal"'
                 startTime:
                     type: string
                     format: date-time
@@ -22130,6 +22343,7 @@ components:
                     description: 'direction: "add", "subtract"'
                 value:
                     type: string
+                    description: Adjustment value (positive number)
             description: ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
         api.backoffice.service.v1.ManualCreditRequest:
             type: object
@@ -22140,6 +22354,7 @@ components:
                     type: string
                 transactionType:
                     type: string
+                    description: '"manual_credit_cash" or "manual_credit_bonus"'
                 cashAmount:
                     type: string
                 cashTurnoverThreshold:
@@ -22161,6 +22376,7 @@ components:
                     type: string
                 transactionType:
                     type: string
+                    description: '"manual_debit_cash" or "manual_debit_bonus"'
                 amount:
                     type: string
                 comment:
@@ -22365,6 +22581,7 @@ components:
                     type: string
                 cashAmount:
                     type: string
+                    description: Cash amount in the operator's balance currency
         api.backoffice.service.v1.OperatorSwapResponse:
             type: object
             properties:
@@ -23244,8 +23461,10 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlanConfig'
                 paymentChannelRate:
                     type: string
+                    description: Percentage string, e.g. "35" for 35%
                 thirdPartyGameRate:
                     type: string
+                    description: Percentage string, e.g. "35" for 35%
         api.backoffice.service.v1.SetSegmentOverrideRequest:
             type: object
             properties:
@@ -23990,16 +24209,19 @@ components:
                     type: string
                 status:
                     type: string
+                    description: '"active" or "inactive"'
                 campaignIds:
                     type: array
                     items:
                         type: string
                 actionType:
                     type: string
+                    description: '"register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"'
                 postbackUrl:
                     type: string
                 requestMethod:
                     type: string
+                    description: '"GET" or "POST"'
                 targetAffiliateId:
                     type: string
         api.backoffice.service.v1.UpdatePromoCodeCampaignRequest:
@@ -24034,6 +24256,7 @@ components:
                     type: string
                 status:
                     type: string
+                    description: '"active", "paused", or "disabled"'
             description: Update Campaign Status
         api.backoffice.service.v1.UpdateProviderRequest:
             type: object
@@ -24228,8 +24451,10 @@ components:
                     format: int32
                 thousandsSeparator:
                     type: string
+                    description: Placeholder for future use
                 decimalSeparator:
                     type: string
+                    description: Placeholder for future use
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateWalletRequest:
@@ -31454,6 +31679,7 @@ components:
             properties:
                 conditionType:
                     type: string
+                    description: '"deposit", "registration_time", "invitation", "turnover", "referrer", "affiliate", or "verification_status"'
                 satisfied:
                     type: boolean
             description: Condition validation result
@@ -31487,8 +31713,10 @@ components:
                     format: int32
                 thousandsSeparator:
                     type: string
+                    description: placeholder for future use
                 decimalSeparator:
                     type: string
+                    description: placeholder for future use
                 aggregatedEnabled:
                     type: boolean
                 aggregatedHidden:
@@ -31529,6 +31757,7 @@ components:
             properties:
                 timeRangeDays:
                     type: integer
+                    description: 0 = no time range
                     format: int32
                 reportingCurrencyAggregate:
                     type: boolean
@@ -31586,6 +31815,7 @@ components:
             properties:
                 transactionType:
                     type: string
+                    description: '"payment_deposit", "payment_withdraw_freeze", "game_bet", "game_win", "deposit_reward"'
                 thresholdAmount:
                     type: string
         api.wallet.service.v1.FreeBetConfig:
@@ -31595,8 +31825,10 @@ components:
                     type: boolean
                 rewardType:
                     type: string
+                    description: '"cash" or "bonus" (winning credit type)'
                 currency:
                     type: string
+                    description: Settlement currency
                 wageringRequirement:
                     type: integer
                     format: int32
@@ -31604,6 +31836,7 @@ components:
                     type: string
                 rewardValidity:
                     type: string
+                    description: Winning reward validity (ms)
                 rewards:
                     type: array
                     items:
@@ -31616,10 +31849,13 @@ components:
                     type: string
                 amount:
                     type: string
+                    description: Free bet amount (decimal string)
                 freeBetValidity:
                     type: string
+                    description: ms, 0 = no expiration
                 extra:
                     type: string
+                    description: Extra data (JSON), optional
                     format: bytes
         api.wallet.service.v1.FreeBetDetail:
             type: object
@@ -31628,26 +31864,35 @@ components:
                     type: string
                 sourceType:
                     type: string
+                    description: '"deposit_reward", "promo_code"'
                 sourceId:
                     type: string
                 currency:
                     type: string
-                    description: Currency info
+                    description: |-
+                        Currency info
+                         Betting currency (settlement currency)
                 reportingCurrency:
                     type: string
                 rewardType:
                     type: string
-                    description: Reward config
+                    description: |-
+                        Reward config
+                         "cash", "bonus"
                 wageringRequirement:
                     type: integer
+                    description: Turnover multiplier
                     format: int32
                 maxWithdrawalMultiplier:
                     type: string
                 rewardValidity:
                     type: string
+                    description: Validity duration for winnings reward in milliseconds
                 totalWinnings:
                     type: string
-                    description: Total winnings aggregated across all reward items
+                    description: |-
+                        Total winnings aggregated across all reward items
+                         In settlement currency
                 totalWinningsUsd:
                     type: string
                 totalWinningsReportingCurrency:
@@ -31667,22 +31912,32 @@ components:
             properties:
                 templateId:
                     type: string
+                    description: External template reference
                 amount:
                     type: string
+                    description: Free bet amount (decimal string)
                 usedCount:
                     type: integer
-                    description: Usage status
+                    description: |-
+                        Usage status
+                         Usage count (typically 0 or 1)
                     format: int32
                 isUsed:
                     type: boolean
+                    description: Whether the free bet has been used
                 freeBetValidity:
                     type: string
-                    description: Expiration
+                    description: |-
+                        Expiration
+                         Configured validity duration in milliseconds
                 expiredAt:
                     type: string
+                    description: Calculated expiration timestamp in milliseconds, 0 means never expires
                 winnings:
                     type: string
-                    description: Winnings for this specific free bet
+                    description: |-
+                        Winnings for this specific free bet
+                         In settlement currency
                 winningsUsd:
                     type: string
                 winningsReportingCurrency:
@@ -31699,8 +31954,10 @@ components:
                     type: boolean
                 rewardType:
                     type: string
+                    description: '"cash" or "bonus" (winning credit type)'
                 currency:
                     type: string
+                    description: Play currency
                 spinCount:
                     type: integer
                     format: int32
@@ -31711,6 +31968,7 @@ components:
                     type: string
                 rewardValidity:
                     type: string
+                    description: Winning reward validity (ms)
                 rewards:
                     type: array
                     items:
@@ -31728,6 +31986,7 @@ components:
                     format: int32
                 freeSpinValidity:
                     type: string
+                    description: ms, 0 = no expiration
         api.wallet.service.v1.FreeSpinDetail:
             type: object
             properties:
@@ -31735,28 +31994,38 @@ components:
                     type: string
                 sourceType:
                     type: string
+                    description: '"deposit_reward", "promo_code"'
                 sourceId:
                     type: string
                 settlementCurrency:
                     type: string
-                    description: Currency info
+                    description: |-
+                        Currency info
+                         Deposit/settlement currency
                 currency:
                     type: string
+                    description: Game currency (play currency)
                 reportingCurrency:
                     type: string
                 rewardType:
                     type: string
-                    description: Reward config
+                    description: |-
+                        Reward config
+                         "cash", "bonus"
                 wageringRequirement:
                     type: integer
+                    description: Turnover multiplier
                     format: int32
                 maxWithdrawalMultiplier:
                     type: string
                 rewardValidity:
                     type: string
+                    description: Validity duration for winnings reward in milliseconds
                 totalWinnings:
                     type: string
-                    description: Total winnings aggregated across all reward items
+                    description: |-
+                        Total winnings aggregated across all reward items
+                         In settlement currency
                 totalWinningsUsd:
                     type: string
                 totalWinningsReportingCurrency:
@@ -31772,10 +32041,13 @@ components:
                     type: string
                 roundsPlayed:
                     type: integer
-                    description: Freespin usage counts (synced from game service, shared across all games)
+                    description: |-
+                        Freespin usage counts (synced from game service, shared across all games)
+                         Rounds already played (aggregated)
                     format: int32
                 totalRounds:
                     type: integer
+                    description: Total rounds available (aggregated)
                     format: int32
             description: Free spin details - all fields from UserFreeSpin DO
         api.wallet.service.v1.FreeSpinRewardDetail:
@@ -31783,29 +32055,41 @@ components:
             properties:
                 providerId:
                     type: string
+                    description: Game provider ID
                 gameId:
                     type: string
+                    description: Game ID
                 level:
                     type: integer
+                    description: Free spin level
                     format: int32
                 spinCount:
                     type: integer
-                    description: Spin counts
+                    description: |-
+                        Spin counts
+                         Total spin count
                     format: int32
                 usedCount:
                     type: integer
+                    description: Already used count
                     format: int32
                 remainingCount:
                     type: integer
+                    description: Remaining count (spin_count - used_count)
                     format: int32
                 freeSpinValidity:
                     type: string
-                    description: Expiration
+                    description: |-
+                        Expiration
+                         Configured validity duration in milliseconds
                 expiredAt:
                     type: string
+                    description: Calculated expiration timestamp in milliseconds, 0 means never expires
                 winnings:
                     type: string
-                    description: Winnings for this specific game
+                    description: |-
+                        Winnings for this specific game
+                         In settlement currency
                 winningsUsd:
                     type: string
                 winningsReportingCurrency:
@@ -31882,8 +32166,10 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 aggregated:
                     type: boolean
+                    description: include aggregated_enabled and aggregated_hidden fields
                 parent:
                     type: boolean
+                    description: include parent_enabled and parent_hidden fields, not implemented yet
         api.wallet.service.v1.GetCurrenciesResponse:
             type: object
             properties:
@@ -31923,6 +32209,7 @@ components:
                         type: string
                 baseCurrency:
                     type: string
+                    description: USD if not provided
         api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse:
             type: object
             properties:
@@ -31971,12 +32258,14 @@ components:
                     type: string
                 codeType:
                     type: string
+                    description: '"one_time" or "universal"'
                 campaignId:
                     type: string
                 campaignName:
                     type: string
                 campaignStatus:
                     type: string
+                    description: '"active", "paused", or "disabled"'
                 startTime:
                     type: string
                     format: date-time
@@ -31985,12 +32274,15 @@ components:
                     format: date-time
                 usageCount:
                     type: integer
+                    description: This code's usage count
                     format: int32
                 maxUsageLimit:
                     type: integer
+                    description: Max usage limit (for universal)
                     format: int32
                 alreadyUsedByUser:
                     type: boolean
+                    description: Whether current user has already used this promo code campaign
                 rewardConfigs:
                     $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeRewardConfigs'
                 rewardConditions:
@@ -32001,9 +32293,12 @@ components:
                         $ref: '#/components/schemas/api.wallet.service.v1.ConditionValidationResult'
                 claimable:
                     type: boolean
-                    description: Claimability status
+                    description: |-
+                        Claimability status
+                         Whether the code can be claimed by this user
                 unclaimableReason:
                     type: string
+                    description: Reason why the code cannot be claimed (empty if claimable)
         api.wallet.service.v1.GetUserBalanceDetailsRequest:
             type: object
             properties:
@@ -32110,6 +32405,7 @@ components:
                     type: string
                 turnoverThreshold:
                     type: string
+                    description: cash turnover threshold + bonus turnover threshold
                 turnover:
                     type: string
                 cashTurnover:
@@ -32235,6 +32531,7 @@ components:
             properties:
                 timeRangeDays:
                     type: integer
+                    description: 0 = no time range
                     format: int32
                 invitationCount:
                     type: integer
@@ -32365,6 +32662,7 @@ components:
                     type: string
                 transactionTime:
                     type: string
+                    description: created_at
                     format: date-time
                 transactionId:
                     type: string
@@ -32434,6 +32732,7 @@ components:
                     type: string
                 transactionTime:
                     type: string
+                    description: updated_at
                     format: date-time
                 initiatorUserId:
                     type: string
@@ -32453,12 +32752,14 @@ components:
                     type: string
                 beforeBalance:
                     type: string
+                    description: for this currency
                 beforeBalanceUsd:
                     type: string
                 beforeBalanceReportingCurrency:
                     type: string
                 afterBalance:
                     type: string
+                    description: for this currency
                 afterBalanceUsd:
                     type: string
                 afterBalanceReportingCurrency:
@@ -32472,14 +32773,17 @@ components:
             properties:
                 codeType:
                     type: string
+                    description: '"one_time" or "universal" (indicates which list is populated)'
                 codes:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeListItem'
+                    description: Populated for one_time campaigns
                 usages:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeUsageListItem'
+                    description: Populated for universal campaigns
                 total:
                     type: integer
                     format: int32
@@ -32584,6 +32888,7 @@ components:
                     type: string
                 protocol:
                     type: string
+                    description: placeholder for future use
                 cash:
                     type: string
                 cashUsd:
@@ -32615,8 +32920,10 @@ components:
                     type: string
                 rewardType:
                     type: string
+                    description: '"cash" or "bonus"'
                 amount:
                     type: string
+                    description: Fixed amount
                 wageringRequirement:
                     type: integer
                     format: int32
@@ -32624,6 +32931,7 @@ components:
                     type: string
                 rewardValidity:
                     type: string
+                    description: ms, 0 = no expiration
             description: Bonus money config for promo code campaign
         api.wallet.service.v1.PromoCodeCampaignListItem:
             type: object
@@ -32634,20 +32942,26 @@ components:
                     type: string
                 codeType:
                     type: string
+                    description: '"one_time" or "universal"'
                 rewardTrigger:
                     type: string
+                    description: '"instant" or "conditional"'
                 status:
                     type: string
+                    description: '"active", "paused", or "disabled"'
                 rewardConfigs:
                     $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeRewardConfigs'
                 usageCount:
                     type: integer
+                    description: Current code usage count
                     format: int32
                 totalCodesGenerated:
                     type: integer
+                    description: Total codes generated for campaign
                     format: int32
                 maxUsageLimit:
                     type: integer
+                    description: Max usage limit
                     format: int32
                 createdAt:
                     type: string
@@ -32662,7 +32976,9 @@ components:
                     type: string
                     format: date-time
                 rewardConditions:
-                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeConditions'
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeConditions'
+                    description: Campaign reward conditions
         api.wallet.service.v1.PromoCodeConditions:
             type: object
             properties:
@@ -32688,6 +33004,7 @@ components:
                     type: string
                 status:
                     type: string
+                    description: '"unused" or "used"'
                 usedByUserId:
                     type: string
                 countryCode:
@@ -32702,6 +33019,7 @@ components:
                     format: date-time
                 expiredAt:
                     type: string
+                    description: Same as campaign end_time, used directly from campaign
                     format: date-time
             description: Code item for one_time campaigns
         api.wallet.service.v1.PromoCodeRewardConfigs:
@@ -32733,6 +33051,7 @@ components:
                     format: date-time
                 expiredAt:
                     type: string
+                    description: Same as campaign end_time, used directly from campaign
                     format: date-time
             description: Usage item for universal campaigns
         api.wallet.service.v1.ReferrerCondition:
@@ -32839,11 +33158,14 @@ components:
                     type: boolean
                 rewardType:
                     type: string
+                    description: cash or bonus
                 wageringRequirement:
                     type: integer
+                    description: Coefficient
                     format: int32
                 rewardValidity:
                     type: string
+                    description: Milliseconds
                 tierConfigs:
                     type: array
                     items:
@@ -32867,6 +33189,7 @@ components:
                     type: string
                 maxWithdrawalMultiplier:
                     type: string
+                    description: only available for bonus reward
                 rewardMoneyEnabled:
                     type: boolean
                 freeSpinConfig:
@@ -32887,6 +33210,7 @@ components:
             properties:
                 timeRangeDays:
                     type: integer
+                    description: 0 = no time range
                     format: int32
                 reportingCurrencyAggregate:
                     type: boolean
@@ -32967,6 +33291,7 @@ components:
             properties:
                 deductionType:
                     type: string
+                    description: '"cash_first", "bonus_first", "mixed"'
                 cashRatio:
                     type: string
                 bonusRatio:

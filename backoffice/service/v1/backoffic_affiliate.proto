@@ -18,42 +18,49 @@ service BackofficeAffiliate {
 	
 	// -------------- Commission Plan --------------
 
+	// Create a new affiliate commission plan
 	rpc CreateCommissionPlan(CreateCommissionPlanRequest) returns (api.affiliate.service.v1.CreateCommissionPlanResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/plan/create"
 			body: "*"
 		};
 	}
+    // Update an existing commission plan
     rpc UpdateCommissionPlan(UpdateCommissionPlanRequest) returns (api.affiliate.service.v1.UpdateCommissionPlanResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/plan/update"
 			body: "*"
 		};
 	}
+	// Get a commission plan by ID
 	rpc GetCommissionPlan(GetCommissionPlanRequest) returns (api.affiliate.service.v1.GetCommissionPlanResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/plan/get"
 			body: "*"
 		};
 	}
+	// List commission plans with pagination and filters
 	rpc ListCommissionPlans(ListCommissionPlansRequest) returns (api.affiliate.service.v1.ListCommissionPlansResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/plan/list"
 			body: "*"
 		};
 	}
+	// Delete a commission plan
 	rpc DeleteCommissionPlan(DeleteCommissionPlanRequest) returns (api.affiliate.service.v1.DeleteCommissionPlanResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/plan/delete"
 			body: "*"
 		};
 	}
+	// List all commission plans across the operator hierarchy
 	rpc ListAllCommissionPlans(ListAllCommissionPlansRequest) returns (api.affiliate.service.v1.ListAllCommissionPlansResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/plan/list/all"
 			body: "*"
 		};
 	}
+	// List commission plans assigned to a specific affiliate
 	rpc ListAffiliateCommissionPlans(ListAffiliateCommissionPlansRequest) returns (api.affiliate.service.v1.ListAffiliateCommissionPlansResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/plan/list/affiliate"
@@ -63,42 +70,49 @@ service BackofficeAffiliate {
 
 	// -------------- Affiliate --------------
 
+	// Create a new affiliate account
 	rpc CreateAffiliate(CreateAffiliateRequest) returns (api.affiliate.service.v1.CreateAffiliateResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/create"
 			body: "*"
 		};
 	}
+	// Update an existing affiliate's details
 	rpc UpdateAffiliate(UpdateAffiliateRequest) returns (api.affiliate.service.v1.UpdateAffiliateResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/update"
 			body: "*"
 		};
 	}
+	// List affiliates with pagination and filters
 	rpc ListAffiliates(ListAffiliatesRequest) returns (api.affiliate.service.v1.ListAffiliatesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/list"
 			body: "*"
 		};
 	}
+	// Delete an affiliate (soft delete)
 	rpc DeleteAffiliate(DeleteAffiliateRequest) returns (api.affiliate.service.v1.DeleteAffiliateResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/delete"
 			body: "*"
 		};
 	}
+	// Get detailed information about a specific affiliate
 	rpc GetAffiliateDetails(GetAffiliateDetailsRequest) returns (api.affiliate.service.v1.GetAffiliateDetailsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/get/details"
 			body: "*"
 		};
 	}
+	// Reset an affiliate's password
 	rpc ResetAffiliatePassword(ResetAffiliatePasswordRequest) returns (api.affiliate.service.v1.ResetAffiliatePasswordResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/reset-password"
 			body: "*"
 		};
 	}
+	// Send account credentials email to an affiliate
 	rpc SendAffiliateAccountEmail(SendAffiliateAccountEmailRequest) returns (SendAffiliateAccountEmailResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/send-account-email"
@@ -108,30 +122,35 @@ service BackofficeAffiliate {
 
 	// -------------- Campaign --------------
 
+	// Create a new affiliate campaign
 	rpc CreateCampaign(CreateCampaignRequest) returns (api.affiliate.service.v1.CreateCampaignResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/campaign/create"
 			body: "*"
 		};
 	}
+	// Update an existing affiliate campaign
 	rpc UpdateCampaign(UpdateCampaignRequest) returns (api.affiliate.service.v1.UpdateCampaignResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/campaign/update"
 			body: "*"
 		};
 	}
+	// List affiliate campaigns with pagination and filters
 	rpc ListCampaigns(ListCampaignsRequest) returns (api.affiliate.service.v1.ListCampaignsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/campaign/list"
 			body: "*"
 		};
 	}
+	// List campaigns belonging to a specific affiliate
 	rpc ListAffiliateCampaigns(ListAffiliateCampaignsRequest) returns (api.affiliate.service.v1.ListCampaignsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/campaign/list/by_affiliate"
 			body: "*"
 		};
 	}
+	// Delete an affiliate campaign
 	rpc DeleteCampaign(DeleteCampaignRequest) returns (api.affiliate.service.v1.DeleteCampaignResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/campaign/delete"
@@ -141,6 +160,7 @@ service BackofficeAffiliate {
 
 	// -------------- Postback --------------
 
+	// Create a new affiliate postback
 	rpc CreatePostback(CreatePostbackRequest) returns (api.affiliate.service.v1.CreatePostbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/postback/create"
@@ -148,6 +168,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Update an existing affiliate postback
 	rpc UpdatePostback(UpdatePostbackRequest) returns (api.affiliate.service.v1.UpdatePostbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/postback/update"
@@ -155,6 +176,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Delete an affiliate postback
 	rpc DeletePostback(DeletePostbackRequest) returns (api.affiliate.service.v1.DeletePostbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/postback/delete"
@@ -162,6 +184,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// List affiliate postbacks with pagination and status filter
 	rpc ListPostbacks(ListPostbacksRequest) returns (api.affiliate.service.v1.ListPostbacksResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/postback/list"
@@ -169,6 +192,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// List affiliate postback execution logs
 	rpc ListPostbackLogs(ListPostbackLogsRequest) returns (api.affiliate.service.v1.ListPostbackLogsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/postback/log/list"
@@ -178,6 +202,7 @@ service BackofficeAffiliate {
 
 	// -------------- Affiliate Domain --------------
 
+	// List affiliate tracking domains for a target operator
 	rpc ListAffiliateDomains(ListAffiliateDomainsRequest) returns (api.affiliate.service.v1.ListAffiliateDomainsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/domain/list"
@@ -185,6 +210,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Create or update an affiliate tracking domain
 	rpc SetAffiliateDomain(SetAffiliateDomainRequest) returns (api.affiliate.service.v1.SetAffiliateDomainResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/domain/set"
@@ -194,6 +220,7 @@ service BackofficeAffiliate {
 
 	// -------------- Event --------------
 
+	// List affiliate events (registrations, deposits, etc.) with filters
 	rpc ListEvents(ListEventsRequest) returns (api.affiliate.service.v1.ListEventsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/event/list"
@@ -203,6 +230,7 @@ service BackofficeAffiliate {
 
 	// -------------- Commission --------------
 
+	// List affiliate commissions with pagination and filters
 	rpc ListCommissions(ListCommissionsRequest) returns (api.affiliate.service.v1.ListCommissionsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/list"
@@ -212,6 +240,7 @@ service BackofficeAffiliate {
 
 	// -------------- User --------------
 
+	// List users acquired through affiliates
 	rpc ListAffiliateUsers(ListAffiliateUsersRequest) returns (api.affiliate.service.v1.ListUsersResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/user/list"
@@ -219,6 +248,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Export affiliate users to CSV, Excel, or PDF
 	rpc ExportAffiliateUsers(ExportAffiliateUsersRequest) returns (api.affiliate.service.v1.ExportUsersResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/user/export"
@@ -228,6 +258,7 @@ service BackofficeAffiliate {
 
 	// -------------- Affiliate Bill --------------
 
+	// List affiliate billing records
 	rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (api.affiliate.service.v1.ListAffiliateBillsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/bill/list"
@@ -237,6 +268,7 @@ service BackofficeAffiliate {
 
 	// -------------- Settings --------------
 
+	// Get affiliate operator-level settings
 	rpc GetAffiliateOperatorSettings(GetAffiliateOperatorSettingsRequest) returns (api.affiliate.service.v1.GetOperatorSettingsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/operator/settings/get"
@@ -244,6 +276,7 @@ service BackofficeAffiliate {
 		};
 	}
 	
+	// Update affiliate operator-level settings
 	rpc UpdateAffiliateOperatorSettings(UpdateAffiliateOperatorSettingsRequest) returns (api.affiliate.service.v1.UpdateOperatorSettingsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/operator/settings/update"
@@ -253,6 +286,7 @@ service BackofficeAffiliate {
 
 	// -------------- Referral Plan --------------
 
+	// Create or update a referral plan for a target operator
 	rpc SetReferralPlan(SetReferralPlanRequest) returns (api.affiliate.service.v1.SetReferralPlanResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/referral/plan/set"
@@ -260,6 +294,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Get referral plan for a target operator and currency
 	rpc GetReferralPlan(GetReferralPlanRequest) returns (api.affiliate.service.v1.GetReferralPlanResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/referral/plan/get"
@@ -269,6 +304,7 @@ service BackofficeAffiliate {
 
 	// -------------- Landing Template --------------
 
+	// Create a new landing page template
 	rpc CreateLandingTemplate(CreateLandingTemplateRequest) returns (api.affiliate.service.v1.CreateLandingTemplateResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/landing-template/create"
@@ -276,6 +312,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Update an existing landing page template
 	rpc UpdateLandingTemplate(UpdateLandingTemplateRequest) returns (api.affiliate.service.v1.UpdateLandingTemplateResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/landing-template/update"
@@ -283,6 +320,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Delete a landing page template
 	rpc DeleteLandingTemplate(DeleteLandingTemplateRequest) returns (api.affiliate.service.v1.DeleteLandingTemplateResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/landing-template/delete"
@@ -290,6 +328,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// List landing page templates for a target operator
 	rpc ListLandingTemplates(ListLandingTemplatesRequest) returns (api.affiliate.service.v1.ListLandingTemplatesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/landing-template/list"
@@ -297,6 +336,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// List landing page templates associated with a specific campaign
 	rpc ListLandingTemplatesByCampaign(ListLandingTemplatesByCampaignRequest) returns (api.affiliate.service.v1.ListLandingTemplatesByCampaignResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/landing-template/list/by-campaign"
@@ -306,6 +346,7 @@ service BackofficeAffiliate {
 
 	// -------------- Dashboard --------------
 
+	// Get aggregate affiliate dashboard metrics for a time range
 	rpc GetAffiliateDashboard(GetAffiliateDashboardRequest) returns (api.affiliate.service.v1.GetAffiliateDashboardResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/dashboard/get"
@@ -313,6 +354,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Get affiliate trend data grouped by day, week, or month
 	rpc GetAffiliateTrend(GetAffiliateTrendRequest) returns (api.affiliate.service.v1.GetAffiliateTrendResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/dashboard/trend/get"
@@ -322,6 +364,7 @@ service BackofficeAffiliate {
 
 	// -------------- Sub-Account Management --------------
 
+	// Create a sub-account for an affiliate
 	rpc CreateAffiliateSubAccount(CreateAffiliateSubAccountRequest) returns (api.affiliate.service.v1.CreateAffiliateSubAccountResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/sub-account/create"
@@ -329,6 +372,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// List sub-accounts of an affiliate
 	rpc ListAffiliateSubAccounts(ListAffiliateSubAccountsRequest) returns (api.affiliate.service.v1.ListAffiliateSubAccountsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/sub-account/list"
@@ -336,6 +380,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Update an affiliate sub-account (enable/disable, reset password, 2FA)
 	rpc UpdateAffiliateSubAccount(UpdateAffiliateSubAccountRequest) returns (UpdateAffiliateSubAccountResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/sub-account/update"
@@ -434,12 +479,14 @@ message ListCommissionPlansRequest {
 
 message DeleteCommissionPlanRequest {
 	int64 commission_plan_id = 1;
-	optional int64 alternative_commission_plan_id = 2; // not supported yet
+	// Not supported yet
+	optional int64 alternative_commission_plan_id = 2;
 }
 
 message ListAllCommissionPlansRequest {
 	api.common.OperatorContext target_operator_context = 1;
-	repeated string countries = 2; // not supported yet
+	// Not supported yet
+	repeated string countries = 2;
 	optional string status = 3;
 }
 
@@ -462,13 +509,17 @@ message UpdateAffiliateRequest {
 
 message ListAffiliatesRequest {
 	repeated string countries = 1;
-    repeated string traffic_source_ids = 2; // not implemented
-    repeated string teammate_ids = 3; // not implemented
-    string status = 4; // pending, active, inactive
+    // Not implemented
+    repeated string traffic_source_ids = 2;
+    // Not implemented
+    repeated string teammate_ids = 3;
+    // "pending", "active", or "inactive"
+    string status = 4;
     optional int32 page = 5;
     optional int32 page_size = 6;
 	api.common.OperatorContext target_operator_context = 7;
-	optional bool pagination = 8; // if nil, pagination is true
+	// If nil, pagination is true
+	optional bool pagination = 8;
 }
 
 message DeleteAffiliateRequest {
@@ -501,7 +552,8 @@ message CreateCampaignRequest {
     message Campaign {
         string domain = 1;
         string campaign_name = 2;
-        string channel_type = 3; // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
+        // "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+        string channel_type = 3;
         api.affiliate.service.v1.ChannelConfig channel_config = 4;
     }
     Campaign campaign = 1;
@@ -545,22 +597,28 @@ message DeleteCampaignRequest {
 
 message CreatePostbackRequest {
     string postback_name = 1;
-    string status = 2; // active/inactive
+    // "active" or "inactive"
+    string status = 2;
     repeated int64 campaign_ids = 3;
-    string action_type = 4; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    // "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+    string action_type = 4;
     string postback_url = 5;
-    string request_method = 6; // GET/POST
+    // "GET" or "POST"
+    string request_method = 6;
     optional int64 target_affiliate_id = 7;
 }
 
 message UpdatePostbackRequest {
     int64 postback_id = 1;
     string postback_name = 2;
-    string status = 3; // active/inactive
+    // "active" or "inactive"
+    string status = 3;
     repeated int64 campaign_ids = 4;
-    string action_type = 5; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    // "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+    string action_type = 5;
     string postback_url = 6;
-    string request_method = 7; // GET/POST
+    // "GET" or "POST"
+    string request_method = 7;
     optional int64 target_affiliate_id = 8;
 }
 
@@ -571,7 +629,8 @@ message DeletePostbackRequest {
 
 message ListPostbacksRequest {
     optional int64 affiliate_id = 1;
-	optional string status = 2; // active/inactive
+	// "active" or "inactive"
+	optional string status = 2;
     optional int32 page = 3;
     optional int32 page_size = 4;
     api.common.OperatorContextFilters operator_context_filters = 5;
@@ -621,16 +680,19 @@ message ListEventsRequest {
 // -------------- Commission --------------
 
 message ListCommissionsRequest {
-	repeated int64 commission_plan_ids = 1; // OR logic: filter by commission plan IDs, match if ID is any of these values
+	// OR logic: filter by commission plan IDs, match if ID is any of these values
+	repeated int64 commission_plan_ids = 1;
 	optional int64 user_id = 2;
 	optional int64 affiliate_id = 3;
-	repeated string commission_subtypes = 4; // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
+	// "cpa", "revshare", "cpl", "cpc", "flat_fee" (multiple allowed)
+	repeated string commission_subtypes = 4;
 	repeated string countries = 5;
 	optional int64 commission_id = 6;
 	optional int64 bill_id = 7;
 	google.protobuf.Timestamp start_time = 8;
 	google.protobuf.Timestamp end_time = 9;
-	optional string status = 10; // pending/approved/rejected
+	// "pending", "approved", or "rejected"
+	optional string status = 10;
 	optional int32 page = 11;
 	optional int32 page_size = 12;
 	api.common.OperatorContextFilters operator_context_filters = 13;
@@ -658,8 +720,10 @@ message ExportAffiliateUsersRequest {
 	google.protobuf.Timestamp registration_start_time = 5;
 	google.protobuf.Timestamp registration_end_time = 6;
 	api.common.OperatorContextFilters operator_context_filters = 7;
-	string format = 8; // accepted values: csv, excel, pdf
-    string time_zone = 9; // e.g. UTC+0, UTC+8, etc.
+	// "csv", "excel", or "pdf"
+	string format = 8;
+	// e.g. "UTC+0", "UTC+8"
+    string time_zone = 9;
 }
 
 // -------------- Affiliate Bill --------------
@@ -694,8 +758,10 @@ message SetReferralPlanRequest {
 	optional bool enabled = 4;
 	optional int32 max_tier = 5;
 	optional api.affiliate.service.v1.ReferralPlanConfig plan_config = 6;
-	optional string payment_channel_rate = 7; // represent as a percentage, e.g. "35" for 35%
-    optional string third_party_game_rate = 8; // represent as a percentage, e.g. "35" for 35%
+	// Percentage string, e.g. "35" for 35%
+	optional string payment_channel_rate = 7;
+	// Percentage string, e.g. "35" for 35%
+    optional string third_party_game_rate = 8;
 }
 
 message GetReferralPlanRequest {
@@ -713,7 +779,8 @@ message GetAffiliateDashboardRequest {
 message GetAffiliateTrendRequest {
 	google.protobuf.Timestamp start_time = 1;
 	google.protobuf.Timestamp end_time = 2;
-	string group_by = 3;  // "day", "week", "month"
+	// "day", "week", or "month"
+	string group_by = 3;
 }
 
 // -------------- Landing Template --------------

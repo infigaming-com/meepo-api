@@ -90,16 +90,19 @@ type AffiliateInfo struct {
 	Lastname          string                 `protobuf:"bytes,10,opt,name=lastname,proto3" json:"lastname,omitempty"`
 	Phone             string                 `protobuf:"bytes,11,opt,name=phone,proto3" json:"phone,omitempty"`
 	ContactTypes      []*ContactType         `protobuf:"bytes,12,rep,name=contact_types,json=contactTypes,proto3" json:"contact_types,omitempty"`
-	Country           string                 `protobuf:"bytes,13,opt,name=country,proto3" json:"country,omitempty"` // country code
-	Region            string                 `protobuf:"bytes,14,opt,name=region,proto3" json:"region,omitempty"`
-	City              string                 `protobuf:"bytes,15,opt,name=city,proto3" json:"city,omitempty"`
-	PostCode          string                 `protobuf:"bytes,16,opt,name=post_code,json=postCode,proto3" json:"post_code,omitempty"`
-	Street            string                 `protobuf:"bytes,17,opt,name=street,proto3" json:"street,omitempty"`
-	TrafficSourceIds  []int64                `protobuf:"varint,18,rep,packed,name=traffic_source_ids,json=trafficSourceIds,proto3" json:"traffic_source_ids,omitempty"` // not implemented
-	TeammateIds       []int64                `protobuf:"varint,19,rep,packed,name=teammate_ids,json=teammateIds,proto3" json:"teammate_ids,omitempty"`                  // not implemented
-	InternalInfo      string                 `protobuf:"bytes,20,opt,name=internal_info,json=internalInfo,proto3" json:"internal_info,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// country code
+	Country  string `protobuf:"bytes,13,opt,name=country,proto3" json:"country,omitempty"`
+	Region   string `protobuf:"bytes,14,opt,name=region,proto3" json:"region,omitempty"`
+	City     string `protobuf:"bytes,15,opt,name=city,proto3" json:"city,omitempty"`
+	PostCode string `protobuf:"bytes,16,opt,name=post_code,json=postCode,proto3" json:"post_code,omitempty"`
+	Street   string `protobuf:"bytes,17,opt,name=street,proto3" json:"street,omitempty"`
+	// not implemented
+	TrafficSourceIds []int64 `protobuf:"varint,18,rep,packed,name=traffic_source_ids,json=trafficSourceIds,proto3" json:"traffic_source_ids,omitempty"`
+	// not implemented
+	TeammateIds   []int64 `protobuf:"varint,19,rep,packed,name=teammate_ids,json=teammateIds,proto3" json:"teammate_ids,omitempty"`
+	InternalInfo  string  `protobuf:"bytes,20,opt,name=internal_info,json=internalInfo,proto3" json:"internal_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AffiliateInfo) Reset() {
@@ -489,18 +492,22 @@ func (*UpdateAffiliateResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListAffiliatesRequest struct {
-	state                    protoimpl.MessageState  `protogen:"open.v1"`
-	Countries                []string                `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"`
-	TrafficSourceIds         []string                `protobuf:"bytes,2,rep,name=traffic_source_ids,json=trafficSourceIds,proto3" json:"traffic_source_ids,omitempty"` // not implemented
-	TeammateIds              []string                `protobuf:"bytes,3,rep,name=teammate_ids,json=teammateIds,proto3" json:"teammate_ids,omitempty"`                  // not implemented
-	Status                   string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                                               // pending, active, inactive
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Countries []string               `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"`
+	// not implemented
+	TrafficSourceIds []string `protobuf:"bytes,2,rep,name=traffic_source_ids,json=trafficSourceIds,proto3" json:"traffic_source_ids,omitempty"`
+	// not implemented
+	TeammateIds []string `protobuf:"bytes,3,rep,name=teammate_ids,json=teammateIds,proto3" json:"teammate_ids,omitempty"`
+	// "pending", "active", or "inactive"
+	Status                   string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	Page                     *int32                  `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize                 *int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,7,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	Pagination               *bool                   `protobuf:"varint,9,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"` // if nil, pagination is true
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// if nil, pagination is true
+	Pagination    *bool `protobuf:"varint,9,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListAffiliatesRequest) Reset() {
@@ -985,13 +992,14 @@ func (*ResetAffiliatePasswordResponse) Descriptor() ([]byte, []int) {
 }
 
 type Campaign struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	CampaignName  string                 `protobuf:"bytes,2,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	ChannelType   string                 `protobuf:"bytes,3,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"` // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
-	ChannelConfig *ChannelConfig         `protobuf:"bytes,4,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
-	Params        *Params                `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
-	EventMappings *EventMappings         `protobuf:"bytes,6,opt,name=event_mappings,json=eventMappings,proto3" json:"event_mappings,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Domain       string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	CampaignName string                 `protobuf:"bytes,2,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	// "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+	ChannelType   string         `protobuf:"bytes,3,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
+	ChannelConfig *ChannelConfig `protobuf:"bytes,4,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
+	Params        *Params        `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
+	EventMappings *EventMappings `protobuf:"bytes,6,opt,name=event_mappings,json=eventMappings,proto3" json:"event_mappings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1909,9 +1917,11 @@ func (*DeleteCampaignResponse) Descriptor() ([]byte, []int) {
 }
 
 type ClickAction struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ActionType    string                 `protobuf:"bytes,1,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`    // OPEN_REGISTRATION, GO_TO_MAIN_SITE, CUSTOM_URL
-	CustomUrl     *string                `protobuf:"bytes,2,opt,name=custom_url,json=customUrl,proto3,oneof" json:"custom_url,omitempty"` // required when action_type is CUSTOM_URL
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// "OPEN_REGISTRATION", "GO_TO_MAIN_SITE", or "CUSTOM_URL"
+	ActionType string `protobuf:"bytes,1,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	// required when action_type is CUSTOM_URL
+	CustomUrl     *string `protobuf:"bytes,2,opt,name=custom_url,json=customUrl,proto3,oneof" json:"custom_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3065,13 +3075,16 @@ func (x *ListEventsResponse) GetPageSize() int32 {
 }
 
 type CreatePostbackRequest struct {
-	state                    protoimpl.MessageState  `protogen:"open.v1"`
-	PostbackName             string                  `protobuf:"bytes,1,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	Status                   string                  `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // active/inactive
-	CampaignIds              []int64                 `protobuf:"varint,3,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
-	ActionType               string                  `protobuf:"bytes,4,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"` // register, deposit, first_deposit, withdrawal, game_start, game_bet
-	PostbackUrl              string                  `protobuf:"bytes,5,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
-	RequestMethod            string                  `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET/POST
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	PostbackName string                 `protobuf:"bytes,1,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	// "active" or "inactive"
+	Status      string  `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	CampaignIds []int64 `protobuf:"varint,3,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+	ActionType  string `protobuf:"bytes,4,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	PostbackUrl string `protobuf:"bytes,5,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// "GET" or "POST"
+	RequestMethod            string                  `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
 	InitiatorUserId          int64                   `protobuf:"varint,7,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	InitiatorUserRoleId      int32                   `protobuf:"varint,8,opt,name=initiator_user_role_id,json=initiatorUserRoleId,proto3" json:"initiator_user_role_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
@@ -3225,14 +3238,17 @@ func (x *CreatePostbackResponse) GetPostbackId() int64 {
 }
 
 type UpdatePostbackRequest struct {
-	state                    protoimpl.MessageState  `protogen:"open.v1"`
-	PostbackId               int64                   `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
-	PostbackName             string                  `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	Status                   string                  `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // active/inactive
-	CampaignIds              []int64                 `protobuf:"varint,4,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
-	ActionType               string                  `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"` // register, deposit, first_deposit, withdrawal, game_start, game_bet
-	PostbackUrl              string                  `protobuf:"bytes,6,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
-	RequestMethod            string                  `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET/POST
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	PostbackId   int64                  `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
+	PostbackName string                 `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	// "active" or "inactive"
+	Status      string  `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	CampaignIds []int64 `protobuf:"varint,4,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+	ActionType  string `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	PostbackUrl string `protobuf:"bytes,6,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// "GET" or "POST"
+	RequestMethod            string                  `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
 	InitiatorUserId          int64                   `protobuf:"varint,8,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	InitiatorUserRoleId      int32                   `protobuf:"varint,9,opt,name=initiator_user_role_id,json=initiatorUserRoleId,proto3" json:"initiator_user_role_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,10,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
@@ -3497,9 +3513,10 @@ func (*DeletePostbackResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListPostbacksRequest struct {
-	state                    protoimpl.MessageState         `protogen:"open.v1"`
-	AffiliateId              *int64                         `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
-	Status                   *string                        `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"` // active/inactive
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateId *int64                 `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
+	// "active" or "inactive"
+	Status                   *string                        `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	Page                     *int32                         `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize                 *int32                         `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	InitiatorUserId          int64                          `protobuf:"varint,5,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
@@ -4140,17 +4157,20 @@ func (*SetAffiliateDomainResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListCommissionsRequest struct {
-	state                    protoimpl.MessageState         `protogen:"open.v1"`
-	CommissionPlanIds        []int64                        `protobuf:"varint,1,rep,packed,name=commission_plan_ids,json=commissionPlanIds,proto3" json:"commission_plan_ids,omitempty"` // OR logic: filter by commission plan IDs, match if ID is any of these values
-	UserId                   *int64                         `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	AffiliateId              *int64                         `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
-	CommissionSubtypes       []string                       `protobuf:"bytes,4,rep,name=commission_subtypes,json=commissionSubtypes,proto3" json:"commission_subtypes,omitempty"` // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
-	Countries                []string                       `protobuf:"bytes,5,rep,name=countries,proto3" json:"countries,omitempty"`
-	CommissionId             *int64                         `protobuf:"varint,6,opt,name=commission_id,json=commissionId,proto3,oneof" json:"commission_id,omitempty"`
-	BillId                   *int64                         `protobuf:"varint,7,opt,name=bill_id,json=billId,proto3,oneof" json:"bill_id,omitempty"`
-	StartTime                *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime                  *timestamppb.Timestamp         `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	Status                   *string                        `protobuf:"bytes,10,opt,name=status,proto3,oneof" json:"status,omitempty"` // pending/approved/rejected
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// OR logic: filter by commission plan IDs, match if ID is any of these values
+	CommissionPlanIds []int64 `protobuf:"varint,1,rep,packed,name=commission_plan_ids,json=commissionPlanIds,proto3" json:"commission_plan_ids,omitempty"`
+	UserId            *int64  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	AffiliateId       *int64  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
+	// "cpa", "revshare", "cpl", "cpc", or "flat_fee", multiple subtypes are allowed
+	CommissionSubtypes []string               `protobuf:"bytes,4,rep,name=commission_subtypes,json=commissionSubtypes,proto3" json:"commission_subtypes,omitempty"`
+	Countries          []string               `protobuf:"bytes,5,rep,name=countries,proto3" json:"countries,omitempty"`
+	CommissionId       *int64                 `protobuf:"varint,6,opt,name=commission_id,json=commissionId,proto3,oneof" json:"commission_id,omitempty"`
+	BillId             *int64                 `protobuf:"varint,7,opt,name=bill_id,json=billId,proto3,oneof" json:"bill_id,omitempty"`
+	StartTime          *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime            *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	// "pending", "approved", or "rejected"
+	Status                   *string                        `protobuf:"bytes,10,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	Page                     *int32                         `protobuf:"varint,11,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize                 *int32                         `protobuf:"varint,12,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	InitiatorUserId          int64                          `protobuf:"varint,13,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
@@ -4607,10 +4627,12 @@ type ExportUsersRequest struct {
 	InitiatorRoleId          int64                          `protobuf:"varint,8,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,9,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,10,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Format                   string                         `protobuf:"bytes,11,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone                 string                         `protobuf:"bytes,12,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// accepted values: csv, excel, pdf
+	Format string `protobuf:"bytes,11,opt,name=format,proto3" json:"format,omitempty"`
+	// e.g. UTC+0, UTC+8, etc.
+	TimeZone      string `protobuf:"bytes,12,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ExportUsersRequest) Reset() {
@@ -4956,9 +4978,10 @@ func (x *ListAffiliateBillsResponse) GetPageSize() int32 {
 }
 
 type GetUserPromoConditionInfoRequest struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	UserId                  int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	InvitationTimeRangeDays int32                  `protobuf:"varint,2,opt,name=invitation_time_range_days,json=invitationTimeRangeDays,proto3" json:"invitation_time_range_days,omitempty"` // Time range in days for counting qualified referrals, 0 = no limit
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// Time range in days for counting qualified referrals, 0 = no limit
+	InvitationTimeRangeDays int32 `protobuf:"varint,2,opt,name=invitation_time_range_days,json=invitationTimeRangeDays,proto3" json:"invitation_time_range_days,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -5010,14 +5033,19 @@ func (x *GetUserPromoConditionInfoRequest) GetInvitationTimeRangeDays() int32 {
 type GetUserPromoConditionInfoResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Referrer info
-	Tier1UserId       int64  `protobuf:"varint,1,opt,name=tier1_user_id,json=tier1UserId,proto3" json:"tier1_user_id,omitempty"`                  // Direct referrer user ID, 0 = no referrer
-	Tier1ReferralCode string `protobuf:"bytes,2,opt,name=tier1_referral_code,json=tier1ReferralCode,proto3" json:"tier1_referral_code,omitempty"` // Direct referrer's referral code
+	// Direct referrer user ID, 0 = no referrer
+	Tier1UserId int64 `protobuf:"varint,1,opt,name=tier1_user_id,json=tier1UserId,proto3" json:"tier1_user_id,omitempty"`
+	// Direct referrer's referral code
+	Tier1ReferralCode string `protobuf:"bytes,2,opt,name=tier1_referral_code,json=tier1ReferralCode,proto3" json:"tier1_referral_code,omitempty"`
 	// Qualified referral count
-	QualifiedReferralCount int32 `protobuf:"varint,3,opt,name=qualified_referral_count,json=qualifiedReferralCount,proto3" json:"qualified_referral_count,omitempty"` // Count of tier1 referrals with has_met_conversion_conditions=true
+	// Count of tier1 referrals with has_met_conversion_conditions=true
+	QualifiedReferralCount int32 `protobuf:"varint,3,opt,name=qualified_referral_count,json=qualifiedReferralCount,proto3" json:"qualified_referral_count,omitempty"`
 	// User's affiliate info
-	AffiliateId int64 `protobuf:"varint,4,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"` // User's affiliate_id, 0 = not an affiliate
+	// User's affiliate_id, 0 = not an affiliate
+	AffiliateId int64 `protobuf:"varint,4,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
 	// Conversion conditions
-	HasMetConversionConditions bool `protobuf:"varint,5,opt,name=has_met_conversion_conditions,json=hasMetConversionConditions,proto3" json:"has_met_conversion_conditions,omitempty"` // true if user has met conversion conditions
+	// true if user has met conversion conditions
+	HasMetConversionConditions bool `protobuf:"varint,5,opt,name=has_met_conversion_conditions,json=hasMetConversionConditions,proto3" json:"has_met_conversion_conditions,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -5140,10 +5168,13 @@ func (x *GetOperatorSettingsRequest) GetTargetOperatorContext() *common.Operator
 }
 
 type OperatorSettings struct {
-	state                    protoimpl.MessageState `protogen:"open.v1"`
-	PaymentChannelRate       string                 `protobuf:"bytes,1,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`                             // represent as a percentage, e.g. "35" for 35%
-	ThirdPartyGameRate       string                 `protobuf:"bytes,2,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"`                           // represent as a percentage, e.g. "35" for 35%
-	ReferralLossRevShareMode *string                `protobuf:"bytes,3,opt,name=referral_loss_rev_share_mode,json=referralLossRevShareMode,proto3,oneof" json:"referral_loss_rev_share_mode,omitempty"` // "cross_currency_hedging" or "independent_by_currency"
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// represent as a percentage, e.g. "35" for 35%
+	PaymentChannelRate string `protobuf:"bytes,1,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`
+	// represent as a percentage, e.g. "35" for 35%
+	ThirdPartyGameRate string `protobuf:"bytes,2,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"`
+	// "cross_currency_hedging" or "independent_by_currency"
+	ReferralLossRevShareMode *string `protobuf:"bytes,3,opt,name=referral_loss_rev_share_mode,json=referralLossRevShareMode,proto3,oneof" json:"referral_loss_rev_share_mode,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -5748,11 +5779,12 @@ func (x *DashboardMetrics) GetValidTurnoverReportingCurrency() string {
 }
 
 type GetAffiliateTrendRequest struct {
-	state                    protoimpl.MessageState  `protogen:"open.v1"`
-	AffiliateId              int64                   `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	StartTime                *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime                  *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	GroupBy                  string                  `protobuf:"bytes,4,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"` // "day", "week", "month"
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateId int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	StartTime   *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	// "day", "week", or "month"
+	GroupBy                  string                  `protobuf:"bytes,4,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
@@ -6922,9 +6954,10 @@ func (x *GetGlobalPostbackResponse) GetUpdatedAt() int64 {
 }
 
 type ListGlobalPostbacksRequest struct {
-	state                    protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Status                   *string                 `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"` // "active" / "inactive" (empty = all)
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// "active" or "inactive" (empty = all)
+	Status                   *string                 `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	Page                     *int32                  `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize                 *int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	InitiatorUserId          int64                   `protobuf:"varint,5,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
@@ -7090,10 +7123,12 @@ func (x *ListGlobalPostbacksResponse) GetPageSize() int32 {
 }
 
 type ListGlobalPostbackLogsRequest struct {
-	state                    protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	StartTime                *int64                  `protobuf:"varint,2,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"` // Unix milliseconds
-	EndTime                  *int64                  `protobuf:"varint,3,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`       // Unix milliseconds
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// Unix milliseconds
+	StartTime *int64 `protobuf:"varint,2,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	// Unix milliseconds
+	EndTime                  *int64                  `protobuf:"varint,3,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	Page                     *int32                  `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize                 *int32                  `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	InitiatorUserId          int64                   `protobuf:"varint,6,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
@@ -7431,24 +7466,26 @@ func (x *SimulateGlobalPostbackResponse) GetLatencyMs() int64 {
 }
 
 type ListAffiliatesResponse_Affiliate struct {
-	state                       protoimpl.MessageState `protogen:"open.v1"`
-	AffiliateId                 int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	PhotoUrl                    string                 `protobuf:"bytes,2,opt,name=photo_url,json=photoUrl,proto3" json:"photo_url,omitempty"`
-	CompanyName                 string                 `protobuf:"bytes,3,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
-	FirstName                   string                 `protobuf:"bytes,4,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName                    string                 `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	RetailerOperatorName        string                 `protobuf:"bytes,6,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	CompanyOperatorName         string                 `protobuf:"bytes,7,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	OperatorName                string                 `protobuf:"bytes,8,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	TrafficSourceNames          []string               `protobuf:"bytes,9,rep,name=traffic_source_names,json=trafficSourceNames,proto3" json:"traffic_source_names,omitempty"` // not implemented
-	Status                      string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
-	CommissionPlanNames         []string               `protobuf:"bytes,11,rep,name=commission_plan_names,json=commissionPlanNames,proto3" json:"commission_plan_names,omitempty"`
-	TeammateNames               []string               `protobuf:"bytes,12,rep,name=teammate_names,json=teammateNames,proto3" json:"teammate_names,omitempty"` // not implemented
-	LastLoginIp                 string                 `protobuf:"bytes,13,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
-	BalanceUsd                  string                 `protobuf:"bytes,14,opt,name=balance_usd,json=balanceUsd,proto3" json:"balance_usd,omitempty"`
-	BalanceReportingCurrency    string                 `protobuf:"bytes,15,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
-	CommisionsUsd               string                 `protobuf:"bytes,16,opt,name=commisions_usd,json=commisionsUsd,proto3" json:"commisions_usd,omitempty"`
-	CommisionsReportingCurrency string                 `protobuf:"bytes,17,opt,name=commisions_reporting_currency,json=commisionsReportingCurrency,proto3" json:"commisions_reporting_currency,omitempty"`
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateId          int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	PhotoUrl             string                 `protobuf:"bytes,2,opt,name=photo_url,json=photoUrl,proto3" json:"photo_url,omitempty"`
+	CompanyName          string                 `protobuf:"bytes,3,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	FirstName            string                 `protobuf:"bytes,4,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName             string                 `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,6,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,7,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,8,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	// not implemented
+	TrafficSourceNames  []string `protobuf:"bytes,9,rep,name=traffic_source_names,json=trafficSourceNames,proto3" json:"traffic_source_names,omitempty"`
+	Status              string   `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+	CommissionPlanNames []string `protobuf:"bytes,11,rep,name=commission_plan_names,json=commissionPlanNames,proto3" json:"commission_plan_names,omitempty"`
+	// not implemented
+	TeammateNames               []string `protobuf:"bytes,12,rep,name=teammate_names,json=teammateNames,proto3" json:"teammate_names,omitempty"`
+	LastLoginIp                 string   `protobuf:"bytes,13,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
+	BalanceUsd                  string   `protobuf:"bytes,14,opt,name=balance_usd,json=balanceUsd,proto3" json:"balance_usd,omitempty"`
+	BalanceReportingCurrency    string   `protobuf:"bytes,15,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
+	CommisionsUsd               string   `protobuf:"bytes,16,opt,name=commisions_usd,json=commisionsUsd,proto3" json:"commisions_usd,omitempty"`
+	CommisionsReportingCurrency string   `protobuf:"bytes,17,opt,name=commisions_reporting_currency,json=commisionsReportingCurrency,proto3" json:"commisions_reporting_currency,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -7603,33 +7640,39 @@ func (x *ListAffiliatesResponse_Affiliate) GetCommisionsReportingCurrency() stri
 }
 
 type GetAffiliateDetailsResponse_AffiliateDetails struct {
-	state                           protoimpl.MessageState                                         `protogen:"open.v1"`
-	AffiliateId                     int64                                                          `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	CompanyName                     string                                                         `protobuf:"bytes,2,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
-	Status                          string                                                         `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
-	CommissionPlans                 []*GetAffiliateDetailsResponse_AffiliateDetails_CommissionPlan `protobuf:"bytes,4,rep,name=commission_plans,json=commissionPlans,proto3" json:"commission_plans,omitempty"`
-	InvoicePeriod                   string                                                         `protobuf:"bytes,5,opt,name=invoice_period,json=invoicePeriod,proto3" json:"invoice_period,omitempty"`
-	PhotoUrl                        string                                                         `protobuf:"bytes,6,opt,name=photo_url,json=photoUrl,proto3" json:"photo_url,omitempty"`
-	Active                          bool                                                           `protobuf:"varint,7,opt,name=active,proto3" json:"active,omitempty"` // online status, not implemented
-	LastLoginIp                     string                                                         `protobuf:"bytes,8,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
-	LastLoginAt                     *timestamppb.Timestamp                                         `protobuf:"bytes,9,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
-	Firstname                       string                                                         `protobuf:"bytes,10,opt,name=firstname,proto3" json:"firstname,omitempty"`
-	Lastname                        string                                                         `protobuf:"bytes,11,opt,name=lastname,proto3" json:"lastname,omitempty"`
-	Phone                           string                                                         `protobuf:"bytes,12,opt,name=phone,proto3" json:"phone,omitempty"`
-	ContactTypes                    []*ContactType                                                 `protobuf:"bytes,13,rep,name=contact_types,json=contactTypes,proto3" json:"contact_types,omitempty"`
-	Country                         string                                                         `protobuf:"bytes,14,opt,name=country,proto3" json:"country,omitempty"` // country code
-	Region                          string                                                         `protobuf:"bytes,15,opt,name=region,proto3" json:"region,omitempty"`
-	City                            string                                                         `protobuf:"bytes,16,opt,name=city,proto3" json:"city,omitempty"`
-	PostCode                        string                                                         `protobuf:"bytes,17,opt,name=post_code,json=postCode,proto3" json:"post_code,omitempty"`
-	Street                          string                                                         `protobuf:"bytes,18,opt,name=street,proto3" json:"street,omitempty"`
-	TrafficSourceIds                []int64                                                        `protobuf:"varint,19,rep,packed,name=traffic_source_ids,json=trafficSourceIds,proto3" json:"traffic_source_ids,omitempty"` // not implemented
-	TeammateIds                     []int64                                                        `protobuf:"varint,20,rep,packed,name=teammate_ids,json=teammateIds,proto3" json:"teammate_ids,omitempty"`                  // not implemented
-	InternalInfo                    string                                                         `protobuf:"bytes,21,opt,name=internal_info,json=internalInfo,proto3" json:"internal_info,omitempty"`
-	Referrer                        *GetAffiliateDetailsResponse_AffiliateDetails_Referrer         `protobuf:"bytes,22,opt,name=referrer,proto3,oneof" json:"referrer,omitempty"` // referred by who, not implemented
-	PendingBalanceUsd               string                                                         `protobuf:"bytes,23,opt,name=pending_balance_usd,json=pendingBalanceUsd,proto3" json:"pending_balance_usd,omitempty"`
-	PendingBalanceReportingCurrency string                                                         `protobuf:"bytes,24,opt,name=pending_balance_reporting_currency,json=pendingBalanceReportingCurrency,proto3" json:"pending_balance_reporting_currency,omitempty"` // pending bill amount
-	Email                           string                                                         `protobuf:"bytes,25,opt,name=email,proto3" json:"email,omitempty"`
-	TwoFaEnabled                    bool                                                           `protobuf:"varint,26,opt,name=two_fa_enabled,json=twoFaEnabled,proto3" json:"two_fa_enabled,omitempty"`
+	state           protoimpl.MessageState                                         `protogen:"open.v1"`
+	AffiliateId     int64                                                          `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	CompanyName     string                                                         `protobuf:"bytes,2,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	Status          string                                                         `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	CommissionPlans []*GetAffiliateDetailsResponse_AffiliateDetails_CommissionPlan `protobuf:"bytes,4,rep,name=commission_plans,json=commissionPlans,proto3" json:"commission_plans,omitempty"`
+	InvoicePeriod   string                                                         `protobuf:"bytes,5,opt,name=invoice_period,json=invoicePeriod,proto3" json:"invoice_period,omitempty"`
+	PhotoUrl        string                                                         `protobuf:"bytes,6,opt,name=photo_url,json=photoUrl,proto3" json:"photo_url,omitempty"`
+	// online status, not implemented
+	Active       bool                   `protobuf:"varint,7,opt,name=active,proto3" json:"active,omitempty"`
+	LastLoginIp  string                 `protobuf:"bytes,8,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
+	LastLoginAt  *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
+	Firstname    string                 `protobuf:"bytes,10,opt,name=firstname,proto3" json:"firstname,omitempty"`
+	Lastname     string                 `protobuf:"bytes,11,opt,name=lastname,proto3" json:"lastname,omitempty"`
+	Phone        string                 `protobuf:"bytes,12,opt,name=phone,proto3" json:"phone,omitempty"`
+	ContactTypes []*ContactType         `protobuf:"bytes,13,rep,name=contact_types,json=contactTypes,proto3" json:"contact_types,omitempty"`
+	// country code
+	Country  string `protobuf:"bytes,14,opt,name=country,proto3" json:"country,omitempty"`
+	Region   string `protobuf:"bytes,15,opt,name=region,proto3" json:"region,omitempty"`
+	City     string `protobuf:"bytes,16,opt,name=city,proto3" json:"city,omitempty"`
+	PostCode string `protobuf:"bytes,17,opt,name=post_code,json=postCode,proto3" json:"post_code,omitempty"`
+	Street   string `protobuf:"bytes,18,opt,name=street,proto3" json:"street,omitempty"`
+	// not implemented
+	TrafficSourceIds []int64 `protobuf:"varint,19,rep,packed,name=traffic_source_ids,json=trafficSourceIds,proto3" json:"traffic_source_ids,omitempty"`
+	// not implemented
+	TeammateIds  []int64 `protobuf:"varint,20,rep,packed,name=teammate_ids,json=teammateIds,proto3" json:"teammate_ids,omitempty"`
+	InternalInfo string  `protobuf:"bytes,21,opt,name=internal_info,json=internalInfo,proto3" json:"internal_info,omitempty"`
+	// referred by who, not implemented
+	Referrer          *GetAffiliateDetailsResponse_AffiliateDetails_Referrer `protobuf:"bytes,22,opt,name=referrer,proto3,oneof" json:"referrer,omitempty"`
+	PendingBalanceUsd string                                                 `protobuf:"bytes,23,opt,name=pending_balance_usd,json=pendingBalanceUsd,proto3" json:"pending_balance_usd,omitempty"`
+	// pending bill amount
+	PendingBalanceReportingCurrency string `protobuf:"bytes,24,opt,name=pending_balance_reporting_currency,json=pendingBalanceReportingCurrency,proto3" json:"pending_balance_reporting_currency,omitempty"`
+	Email                           string `protobuf:"bytes,25,opt,name=email,proto3" json:"email,omitempty"`
+	TwoFaEnabled                    bool   `protobuf:"varint,26,opt,name=two_fa_enabled,json=twoFaEnabled,proto3" json:"two_fa_enabled,omitempty"`
 	unknownFields                   protoimpl.UnknownFields
 	sizeCache                       protoimpl.SizeCache
 }
@@ -7847,12 +7890,13 @@ func (x *GetAffiliateDetailsResponse_AffiliateDetails) GetTwoFaEnabled() bool {
 }
 
 type GetAffiliateDetailsResponse_AffiliateDetails_Referrer struct {
-	state                      protoimpl.MessageState `protogen:"open.v1"`
-	AffiliateId                int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	AffiliateFirstname         string                 `protobuf:"bytes,2,opt,name=affiliate_firstname,json=affiliateFirstname,proto3" json:"affiliate_firstname,omitempty"`
-	AffiliateLastname          string                 `protobuf:"bytes,3,opt,name=affiliate_lastname,json=affiliateLastname,proto3" json:"affiliate_lastname,omitempty"`
-	AffiliateCompanyName       string                 `protobuf:"bytes,4,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
-	SubAffiliateCommissionRate string                 `protobuf:"bytes,5,opt,name=sub_affiliate_commission_rate,json=subAffiliateCommissionRate,proto3" json:"sub_affiliate_commission_rate,omitempty"` // percentage
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateId          int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateFirstname   string                 `protobuf:"bytes,2,opt,name=affiliate_firstname,json=affiliateFirstname,proto3" json:"affiliate_firstname,omitempty"`
+	AffiliateLastname    string                 `protobuf:"bytes,3,opt,name=affiliate_lastname,json=affiliateLastname,proto3" json:"affiliate_lastname,omitempty"`
+	AffiliateCompanyName string                 `protobuf:"bytes,4,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
+	// percentage
+	SubAffiliateCommissionRate string `protobuf:"bytes,5,opt,name=sub_affiliate_commission_rate,json=subAffiliateCommissionRate,proto3" json:"sub_affiliate_commission_rate,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -8503,11 +8547,12 @@ func (x *EventMappings_EventMapping) GetCustomName() string {
 }
 
 type CreateCampaignRequest_Campaign struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	CampaignName  string                 `protobuf:"bytes,2,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	ChannelType   string                 `protobuf:"bytes,3,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"` // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
-	ChannelConfig *ChannelConfig         `protobuf:"bytes,4,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Domain       string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	CampaignName string                 `protobuf:"bytes,2,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	// "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+	ChannelType   string         `protobuf:"bytes,3,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
+	ChannelConfig *ChannelConfig `protobuf:"bytes,4,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8580,14 +8625,15 @@ type ListCampaignsResponse_CampaignInfo struct {
 	CompanyOperatorName  string                 `protobuf:"bytes,6,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	OperatorName         string                 `protobuf:"bytes,7,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	CampaignName         string                 `protobuf:"bytes,8,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	EventMappingsStatus  string                 `protobuf:"bytes,9,opt,name=event_mappings_status,json=eventMappingsStatus,proto3" json:"event_mappings_status,omitempty"` // configured/not_configured/not_required
-	EventMappingsCount   int32                  `protobuf:"varint,10,opt,name=event_mappings_count,json=eventMappingsCount,proto3" json:"event_mappings_count,omitempty"`
-	Enabled              bool                   `protobuf:"varint,11,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Campaign             *Campaign              `protobuf:"bytes,12,opt,name=campaign,proto3" json:"campaign,omitempty"`
-	LandingPageSettings  *LandingPageSettings   `protobuf:"bytes,13,opt,name=landing_page_settings,json=landingPageSettings,proto3,oneof" json:"landing_page_settings,omitempty"`
-	LandingTemplateName  *string                `protobuf:"bytes,14,opt,name=landing_template_name,json=landingTemplateName,proto3,oneof" json:"landing_template_name,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// "configured", "not_configured", or "not_required"
+	EventMappingsStatus string               `protobuf:"bytes,9,opt,name=event_mappings_status,json=eventMappingsStatus,proto3" json:"event_mappings_status,omitempty"`
+	EventMappingsCount  int32                `protobuf:"varint,10,opt,name=event_mappings_count,json=eventMappingsCount,proto3" json:"event_mappings_count,omitempty"`
+	Enabled             bool                 `protobuf:"varint,11,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Campaign            *Campaign            `protobuf:"bytes,12,opt,name=campaign,proto3" json:"campaign,omitempty"`
+	LandingPageSettings *LandingPageSettings `protobuf:"bytes,13,opt,name=landing_page_settings,json=landingPageSettings,proto3,oneof" json:"landing_page_settings,omitempty"`
+	LandingTemplateName *string              `protobuf:"bytes,14,opt,name=landing_template_name,json=landingTemplateName,proto3,oneof" json:"landing_template_name,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ListCampaignsResponse_CampaignInfo) Reset() {
@@ -8943,10 +8989,11 @@ func (x *ListEventsResponse_Event_CommissionPlan) GetCommissionPlanName() string
 }
 
 type ListPostbacksResponse_Postback struct {
-	state                protoimpl.MessageState                     `protogen:"open.v1"`
-	PostbackId           int64                                      `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
-	PostbackName         string                                     `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	Status               string                                     `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // active/inactive
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	PostbackId   int64                  `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
+	PostbackName string                 `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	// "active" or "inactive"
+	Status               string                                     `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	AffiliateId          int64                                      `protobuf:"varint,4,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
 	AffiliateName        string                                     `protobuf:"bytes,5,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
 	RetailerOperatorId   int64                                      `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
@@ -8956,11 +9003,13 @@ type ListPostbacksResponse_Postback struct {
 	OperatorId           int64                                      `protobuf:"varint,10,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName         string                                     `protobuf:"bytes,11,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	Campaigns            []*ListPostbacksResponse_Postback_Campaign `protobuf:"bytes,12,rep,name=campaigns,proto3" json:"campaigns,omitempty"`
-	ActionType           string                                     `protobuf:"bytes,13,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"` // register, deposit, first_deposit, withdrawal, game_start, game_bet
-	PostbackUrl          string                                     `protobuf:"bytes,14,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
-	RequestMethod        string                                     `protobuf:"bytes,15,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET/POST
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+	ActionType  string `protobuf:"bytes,13,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	PostbackUrl string `protobuf:"bytes,14,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// "GET" or "POST"
+	RequestMethod string `protobuf:"bytes,15,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListPostbacksResponse_Postback) Reset() {
@@ -9151,19 +9200,28 @@ func (x *ListPostbacksResponse_Postback_Campaign) GetCampaignName() string {
 }
 
 type ListPostbackLogsResponse_PostbackLog struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	LogId                int64                  `protobuf:"varint,1,opt,name=log_id,json=logId,proto3" json:"log_id,omitempty"`
-	PostbackId           int64                  `protobuf:"varint,2,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
-	PostbackName         string                 `protobuf:"bytes,3,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	PostbackUrl          string                 `protobuf:"bytes,4,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`             // Final URL after macro replacement
-	ActionType           string                 `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`                // User action: register, deposit, etc.
-	RequestMethod        string                 `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`       // GET/POST
-	HttpStatusCode       int32                  `protobuf:"varint,7,opt,name=http_status_code,json=httpStatusCode,proto3" json:"http_status_code,omitempty"` // HTTP response status code
-	Reason               string                 `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason,omitempty"`                                          // Success or error message
-	Success              bool                   `protobuf:"varint,9,opt,name=success,proto3" json:"success,omitempty"`                                       // true if HTTP 2xx
-	AttemptNumber        int32                  `protobuf:"varint,10,opt,name=attempt_number,json=attemptNumber,proto3" json:"attempt_number,omitempty"`     // 1, 2, or 3
-	EventId              int64                  `protobuf:"varint,11,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`                       // Related event ID
-	UserId               int64                  `protobuf:"varint,12,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                          // User that triggered the event
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	LogId        int64                  `protobuf:"varint,1,opt,name=log_id,json=logId,proto3" json:"log_id,omitempty"`
+	PostbackId   int64                  `protobuf:"varint,2,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
+	PostbackName string                 `protobuf:"bytes,3,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	// Final URL after macro replacement
+	PostbackUrl string `protobuf:"bytes,4,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// User action: register, deposit, etc.
+	ActionType string `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	// GET/POST
+	RequestMethod string `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
+	// HTTP response status code
+	HttpStatusCode int32 `protobuf:"varint,7,opt,name=http_status_code,json=httpStatusCode,proto3" json:"http_status_code,omitempty"`
+	// Success or error message
+	Reason string `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason,omitempty"`
+	// true if HTTP 2xx
+	Success bool `protobuf:"varint,9,opt,name=success,proto3" json:"success,omitempty"`
+	// 1, 2, or 3
+	AttemptNumber int32 `protobuf:"varint,10,opt,name=attempt_number,json=attemptNumber,proto3" json:"attempt_number,omitempty"`
+	// Related event ID
+	EventId int64 `protobuf:"varint,11,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	// User that triggered the event
+	UserId               int64                  `protobuf:"varint,12,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	AffiliateId          int64                  `protobuf:"varint,13,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
 	AffiliateName        string                 `protobuf:"bytes,14,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
 	RetailerOperatorId   int64                  `protobuf:"varint,15,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
@@ -9173,11 +9231,14 @@ type ListPostbackLogsResponse_PostbackLog struct {
 	OperatorId           int64                  `protobuf:"varint,19,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName         string                 `protobuf:"bytes,20,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	ResponseBody         string                 `protobuf:"bytes,22,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"`          // Response body from third-party server (max 2KB)
-	ResponseHeaders      string                 `protobuf:"bytes,23,opt,name=response_headers,json=responseHeaders,proto3" json:"response_headers,omitempty"` // Response headers as JSON string
-	LatencyMs            int64                  `protobuf:"varint,24,opt,name=latency_ms,json=latencyMs,proto3" json:"latency_ms,omitempty"`                  // Request latency in milliseconds
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Response body from third-party server (max 2KB)
+	ResponseBody string `protobuf:"bytes,22,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"`
+	// Response headers as JSON string
+	ResponseHeaders string `protobuf:"bytes,23,opt,name=response_headers,json=responseHeaders,proto3" json:"response_headers,omitempty"`
+	// Request latency in milliseconds
+	LatencyMs     int64 `protobuf:"varint,24,opt,name=latency_ms,json=latencyMs,proto3" json:"latency_ms,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListPostbackLogsResponse_PostbackLog) Reset() {
@@ -9379,10 +9440,12 @@ func (x *ListPostbackLogsResponse_PostbackLog) GetLatencyMs() int64 {
 }
 
 type ListAffiliateDomainsResponse_AffiliateDomain struct {
-	state                protoimpl.MessageState                                    `protogen:"open.v1"`
-	Domain               string                                                    `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	AvailableToAll       bool                                                      `protobuf:"varint,2,opt,name=available_to_all,json=availableToAll,proto3" json:"available_to_all,omitempty"` // only visible to operator
-	Affiliates           []*ListAffiliateDomainsResponse_AffiliateDomain_Affiliate `protobuf:"bytes,3,rep,name=affiliates,proto3" json:"affiliates,omitempty"`                                  // only visible to operator
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	Domain string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	// only visible to operator
+	AvailableToAll bool `protobuf:"varint,2,opt,name=available_to_all,json=availableToAll,proto3" json:"available_to_all,omitempty"`
+	// only visible to operator
+	Affiliates           []*ListAffiliateDomainsResponse_AffiliateDomain_Affiliate `protobuf:"bytes,3,rep,name=affiliates,proto3" json:"affiliates,omitempty"`
 	OperatorId           int64                                                     `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	CompanyOperatorId    int64                                                     `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
 	RetailerOperatorId   int64                                                     `protobuf:"varint,7,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
@@ -9547,31 +9610,34 @@ func (x *ListAffiliateDomainsResponse_AffiliateDomain_Affiliate) GetAffiliateCom
 }
 
 type ListCommissionsResponse_Commission struct {
-	state                         protoimpl.MessageState `protogen:"open.v1"`
-	CommissionId                  int64                  `protobuf:"varint,1,opt,name=commission_id,json=commissionId,proto3" json:"commission_id,omitempty"`
-	Country                       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	CreatedAt                     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Status                        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // pending/approved/rejected
-	Paid                          bool                   `protobuf:"varint,5,opt,name=paid,proto3" json:"paid,omitempty"`
-	CommissionPlanId              int64                  `protobuf:"varint,6,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
-	CommissionPlanName            string                 `protobuf:"bytes,7,opt,name=commission_plan_name,json=commissionPlanName,proto3" json:"commission_plan_name,omitempty"`
-	CommissionType                string                 `protobuf:"bytes,8,opt,name=commission_type,json=commissionType,proto3" json:"commission_type,omitempty"`          // cpa/revshare/cpl/cpc/flat_fee
-	CommissionSubtype             string                 `protobuf:"bytes,9,opt,name=commission_subtype,json=commissionSubtype,proto3" json:"commission_subtype,omitempty"` // flat/flat_by_countries/progressive/progressive_by_countries
-	ReportingCurrency             string                 `protobuf:"bytes,10,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	RevenueUsd                    string                 `protobuf:"bytes,11,opt,name=revenue_usd,json=revenueUsd,proto3" json:"revenue_usd,omitempty"`
-	RevenueReportingCurrency      string                 `protobuf:"bytes,12,opt,name=revenue_reporting_currency,json=revenueReportingCurrency,proto3" json:"revenue_reporting_currency,omitempty"`
-	CommissionUsd                 string                 `protobuf:"bytes,13,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
-	CommissionReportingCurrency   string                 `protobuf:"bytes,14,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
-	AdjustAmountUsd               string                 `protobuf:"bytes,15,opt,name=adjust_amount_usd,json=adjustAmountUsd,proto3" json:"adjust_amount_usd,omitempty"`
-	AdjustAmountReportingCurrency string                 `protobuf:"bytes,16,opt,name=adjust_amount_reporting_currency,json=adjustAmountReportingCurrency,proto3" json:"adjust_amount_reporting_currency,omitempty"`
-	AffiliateId                   int64                  `protobuf:"varint,17,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	AffiliateName                 string                 `protobuf:"bytes,18,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
-	UserId                        int64                  `protobuf:"varint,19,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	RetailerOperatorName          string                 `protobuf:"bytes,20,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	CompanyOperatorName           string                 `protobuf:"bytes,21,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	OperatorName                  string                 `protobuf:"bytes,22,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	BillId                        int64                  `protobuf:"varint,23,opt,name=bill_id,json=billId,proto3" json:"bill_id,omitempty"`
-	EventId                       int64                  `protobuf:"varint,24,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	CommissionId int64                  `protobuf:"varint,1,opt,name=commission_id,json=commissionId,proto3" json:"commission_id,omitempty"`
+	Country      string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	CreatedAt    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// "pending", "approved", or "rejected"
+	Status             string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	Paid               bool   `protobuf:"varint,5,opt,name=paid,proto3" json:"paid,omitempty"`
+	CommissionPlanId   int64  `protobuf:"varint,6,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
+	CommissionPlanName string `protobuf:"bytes,7,opt,name=commission_plan_name,json=commissionPlanName,proto3" json:"commission_plan_name,omitempty"`
+	// "cpa", "revshare", "cpl", "cpc", or "flat_fee"
+	CommissionType string `protobuf:"bytes,8,opt,name=commission_type,json=commissionType,proto3" json:"commission_type,omitempty"`
+	// "flat", "flat_by_countries", "progressive", or "progressive_by_countries"
+	CommissionSubtype             string `protobuf:"bytes,9,opt,name=commission_subtype,json=commissionSubtype,proto3" json:"commission_subtype,omitempty"`
+	ReportingCurrency             string `protobuf:"bytes,10,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	RevenueUsd                    string `protobuf:"bytes,11,opt,name=revenue_usd,json=revenueUsd,proto3" json:"revenue_usd,omitempty"`
+	RevenueReportingCurrency      string `protobuf:"bytes,12,opt,name=revenue_reporting_currency,json=revenueReportingCurrency,proto3" json:"revenue_reporting_currency,omitempty"`
+	CommissionUsd                 string `protobuf:"bytes,13,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
+	CommissionReportingCurrency   string `protobuf:"bytes,14,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
+	AdjustAmountUsd               string `protobuf:"bytes,15,opt,name=adjust_amount_usd,json=adjustAmountUsd,proto3" json:"adjust_amount_usd,omitempty"`
+	AdjustAmountReportingCurrency string `protobuf:"bytes,16,opt,name=adjust_amount_reporting_currency,json=adjustAmountReportingCurrency,proto3" json:"adjust_amount_reporting_currency,omitempty"`
+	AffiliateId                   int64  `protobuf:"varint,17,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName                 string `protobuf:"bytes,18,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	UserId                        int64  `protobuf:"varint,19,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RetailerOperatorName          string `protobuf:"bytes,20,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName           string `protobuf:"bytes,21,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName                  string `protobuf:"bytes,22,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	BillId                        int64  `protobuf:"varint,23,opt,name=bill_id,json=billId,proto3" json:"bill_id,omitempty"`
+	EventId                       int64  `protobuf:"varint,24,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
 }
@@ -9775,42 +9841,45 @@ func (x *ListCommissionsResponse_Commission) GetEventId() int64 {
 }
 
 type ListUsersResponse_User struct {
-	state                                         protoimpl.MessageState `protogen:"open.v1"`
-	UserId                                        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Country                                       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	AffiliateId                                   int64                  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	AffiliateName                                 string                 `protobuf:"bytes,4,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
-	AffiliateCompanyName                          string                 `protobuf:"bytes,5,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
-	ReportingCurrency                             string                 `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	CampaignUrl                                   string                 `protobuf:"bytes,7,opt,name=campaign_url,json=campaignUrl,proto3" json:"campaign_url,omitempty"`
-	CampaignId                                    int64                  `protobuf:"varint,8,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	CampaignName                                  string                 `protobuf:"bytes,9,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	RegisteredAt                                  *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
-	FtdAt                                         *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=ftd_at,json=ftdAt,proto3" json:"ftd_at,omitempty"`
-	FtdAmountUsd                                  string                 `protobuf:"bytes,12,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
-	FtdAmountReportingCurrency                    string                 `protobuf:"bytes,13,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
-	DepositCount                                  int32                  `protobuf:"varint,14,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	DepositAmountUsd                              string                 `protobuf:"bytes,15,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
-	DepositAmountReportingCurrency                string                 `protobuf:"bytes,16,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
-	WithdrawalCount                               int32                  `protobuf:"varint,17,opt,name=withdrawal_count,json=withdrawalCount,proto3" json:"withdrawal_count,omitempty"`
-	WithdrawalAmountUsd                           string                 `protobuf:"bytes,18,opt,name=withdrawal_amount_usd,json=withdrawalAmountUsd,proto3" json:"withdrawal_amount_usd,omitempty"`
-	WithdrawalAmountReportingCurrency             string                 `protobuf:"bytes,19,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
-	DepositMinusWithdrawalAmountUsd               string                 `protobuf:"bytes,20,opt,name=deposit_minus_withdrawal_amount_usd,json=depositMinusWithdrawalAmountUsd,proto3" json:"deposit_minus_withdrawal_amount_usd,omitempty"`                                             // deposit_amount - withdrawal_amount
-	DepositMinusWithdrawalAmountReportingCurrency string                 `protobuf:"bytes,21,opt,name=deposit_minus_withdrawal_amount_reporting_currency,json=depositMinusWithdrawalAmountReportingCurrency,proto3" json:"deposit_minus_withdrawal_amount_reporting_currency,omitempty"` // deposit_amount - withdrawal_amount
-	BetCount                                      int32                  `protobuf:"varint,22,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	BetAmountUsd                                  string                 `protobuf:"bytes,23,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
-	BetAmountReportingCurrency                    string                 `protobuf:"bytes,24,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
-	WinAmountUsd                                  string                 `protobuf:"bytes,25,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
-	WinAmountReportingCurrency                    string                 `protobuf:"bytes,26,opt,name=win_amount_reporting_currency,json=winAmountReportingCurrency,proto3" json:"win_amount_reporting_currency,omitempty"`
-	GgrUsd                                        string                 `protobuf:"bytes,27,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	GgrReportingCurrency                          string                 `protobuf:"bytes,28,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
-	NgrUsd                                        string                 `protobuf:"bytes,29,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	NgrReportingCurrency                          string                 `protobuf:"bytes,30,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	CommissionUsd                                 string                 `protobuf:"bytes,31,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
-	CommissionReportingCurrency                   string                 `protobuf:"bytes,32,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
-	Roi                                           string                 `protobuf:"bytes,33,opt,name=roi,proto3" json:"roi,omitempty"` // percentage, ngr / commission
-	unknownFields                                 protoimpl.UnknownFields
-	sizeCache                                     protoimpl.SizeCache
+	state                             protoimpl.MessageState `protogen:"open.v1"`
+	UserId                            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Country                           string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	AffiliateId                       int64                  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName                     string                 `protobuf:"bytes,4,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	AffiliateCompanyName              string                 `protobuf:"bytes,5,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
+	ReportingCurrency                 string                 `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	CampaignUrl                       string                 `protobuf:"bytes,7,opt,name=campaign_url,json=campaignUrl,proto3" json:"campaign_url,omitempty"`
+	CampaignId                        int64                  `protobuf:"varint,8,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	CampaignName                      string                 `protobuf:"bytes,9,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	RegisteredAt                      *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	FtdAt                             *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=ftd_at,json=ftdAt,proto3" json:"ftd_at,omitempty"`
+	FtdAmountUsd                      string                 `protobuf:"bytes,12,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
+	FtdAmountReportingCurrency        string                 `protobuf:"bytes,13,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
+	DepositCount                      int32                  `protobuf:"varint,14,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	DepositAmountUsd                  string                 `protobuf:"bytes,15,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
+	DepositAmountReportingCurrency    string                 `protobuf:"bytes,16,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
+	WithdrawalCount                   int32                  `protobuf:"varint,17,opt,name=withdrawal_count,json=withdrawalCount,proto3" json:"withdrawal_count,omitempty"`
+	WithdrawalAmountUsd               string                 `protobuf:"bytes,18,opt,name=withdrawal_amount_usd,json=withdrawalAmountUsd,proto3" json:"withdrawal_amount_usd,omitempty"`
+	WithdrawalAmountReportingCurrency string                 `protobuf:"bytes,19,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
+	// deposit_amount - withdrawal_amount
+	DepositMinusWithdrawalAmountUsd string `protobuf:"bytes,20,opt,name=deposit_minus_withdrawal_amount_usd,json=depositMinusWithdrawalAmountUsd,proto3" json:"deposit_minus_withdrawal_amount_usd,omitempty"`
+	// deposit_amount - withdrawal_amount
+	DepositMinusWithdrawalAmountReportingCurrency string `protobuf:"bytes,21,opt,name=deposit_minus_withdrawal_amount_reporting_currency,json=depositMinusWithdrawalAmountReportingCurrency,proto3" json:"deposit_minus_withdrawal_amount_reporting_currency,omitempty"`
+	BetCount                                      int32  `protobuf:"varint,22,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd                                  string `protobuf:"bytes,23,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	BetAmountReportingCurrency                    string `protobuf:"bytes,24,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
+	WinAmountUsd                                  string `protobuf:"bytes,25,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	WinAmountReportingCurrency                    string `protobuf:"bytes,26,opt,name=win_amount_reporting_currency,json=winAmountReportingCurrency,proto3" json:"win_amount_reporting_currency,omitempty"`
+	GgrUsd                                        string `protobuf:"bytes,27,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrReportingCurrency                          string `protobuf:"bytes,28,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrUsd                                        string `protobuf:"bytes,29,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NgrReportingCurrency                          string `protobuf:"bytes,30,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	CommissionUsd                                 string `protobuf:"bytes,31,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
+	CommissionReportingCurrency                   string `protobuf:"bytes,32,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
+	// percentage, ngr / commission
+	Roi           string `protobuf:"bytes,33,opt,name=roi,proto3" json:"roi,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListUsersResponse_User) Reset() {
@@ -10075,16 +10144,17 @@ func (x *ListUsersResponse_User) GetRoi() string {
 }
 
 type ListAffiliateBillsResponse_AffiliateBill struct {
-	state                   protoimpl.MessageState                               `protogen:"open.v1"`
-	AffiliateId             int64                                                `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	AffiliateName           string                                               `protobuf:"bytes,2,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
-	AffiliateCompanyName    string                                               `protobuf:"bytes,3,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
-	RetailerOperatorName    string                                               `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	CompanyOperatorName     string                                               `protobuf:"bytes,5,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	OperatorName            string                                               `protobuf:"bytes,6,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	BillId                  int64                                                `protobuf:"varint,7,opt,name=bill_id,json=billId,proto3" json:"bill_id,omitempty"`
-	UpdatedAt               *timestamppb.Timestamp                               `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Status                  string                                               `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"` // paid/unpaid
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateId          int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName        string                 `protobuf:"bytes,2,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	AffiliateCompanyName string                 `protobuf:"bytes,3,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,5,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,6,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	BillId               int64                  `protobuf:"varint,7,opt,name=bill_id,json=billId,proto3" json:"bill_id,omitempty"`
+	UpdatedAt            *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// "paid" or "unpaid"
+	Status                  string                                               `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
 	AmountUsd               string                                               `protobuf:"bytes,10,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
 	AmountReportingCurrency string                                               `protobuf:"bytes,11,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
 	PeriodStartTime         *timestamppb.Timestamp                               `protobuf:"bytes,12,opt,name=period_start_time,json=periodStartTime,proto3" json:"period_start_time,omitempty"`
@@ -10227,10 +10297,12 @@ type ListAffiliateBillsResponse_AffiliateBill_BillDetail struct {
 	BillItems                    []*ListAffiliateBillsResponse_AffiliateBill_BillDetail_BillItem `protobuf:"bytes,1,rep,name=bill_items,json=billItems,proto3" json:"bill_items,omitempty"`
 	TotalAmountUsd               string                                                          `protobuf:"bytes,2,opt,name=total_amount_usd,json=totalAmountUsd,proto3" json:"total_amount_usd,omitempty"`
 	TotalAmountReportingCurrency string                                                          `protobuf:"bytes,3,opt,name=total_amount_reporting_currency,json=totalAmountReportingCurrency,proto3" json:"total_amount_reporting_currency,omitempty"`
-	VatAmountUsd                 string                                                          `protobuf:"bytes,4,opt,name=vat_amount_usd,json=vatAmountUsd,proto3" json:"vat_amount_usd,omitempty"`                                             // placeholder
-	VatAmountReportingCurrency   string                                                          `protobuf:"bytes,5,opt,name=vat_amount_reporting_currency,json=vatAmountReportingCurrency,proto3" json:"vat_amount_reporting_currency,omitempty"` // placeholder
-	unknownFields                protoimpl.UnknownFields
-	sizeCache                    protoimpl.SizeCache
+	// placeholder
+	VatAmountUsd string `protobuf:"bytes,4,opt,name=vat_amount_usd,json=vatAmountUsd,proto3" json:"vat_amount_usd,omitempty"`
+	// placeholder
+	VatAmountReportingCurrency string `protobuf:"bytes,5,opt,name=vat_amount_reporting_currency,json=vatAmountReportingCurrency,proto3" json:"vat_amount_reporting_currency,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListAffiliateBillsResponse_AffiliateBill_BillDetail) Reset() {
@@ -10299,15 +10371,20 @@ func (x *ListAffiliateBillsResponse_AffiliateBill_BillDetail) GetVatAmountReport
 }
 
 type ListAffiliateBillsResponse_AffiliateBill_BillDetail_BillItem struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	CommissionPlanName      string                 `protobuf:"bytes,1,opt,name=commission_plan_name,json=commissionPlanName,proto3" json:"commission_plan_name,omitempty"`
-	CommissionPlanId        int64                  `protobuf:"varint,2,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
-	CommissionSubtype       string                 `protobuf:"bytes,3,opt,name=commission_subtype,json=commissionSubtype,proto3" json:"commission_subtype,omitempty"` // cpa/revshare/cpl/cpc/flat_fee
-	Quantity                int32                  `protobuf:"varint,4,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	PriceUsd                string                 `protobuf:"bytes,5,opt,name=price_usd,json=priceUsd,proto3" json:"price_usd,omitempty"`                                                // amount / quantity
-	PriceReportingCurrency  string                 `protobuf:"bytes,6,opt,name=price_reporting_currency,json=priceReportingCurrency,proto3" json:"price_reporting_currency,omitempty"`    // amount / quantity
-	AmountUsd               string                 `protobuf:"bytes,7,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`                                             // amount
-	AmountReportingCurrency string                 `protobuf:"bytes,8,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"` // amount
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	CommissionPlanName string                 `protobuf:"bytes,1,opt,name=commission_plan_name,json=commissionPlanName,proto3" json:"commission_plan_name,omitempty"`
+	CommissionPlanId   int64                  `protobuf:"varint,2,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
+	// "cpa", "revshare", "cpl", "cpc", or "flat_fee"
+	CommissionSubtype string `protobuf:"bytes,3,opt,name=commission_subtype,json=commissionSubtype,proto3" json:"commission_subtype,omitempty"`
+	Quantity          int32  `protobuf:"varint,4,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	// amount / quantity
+	PriceUsd string `protobuf:"bytes,5,opt,name=price_usd,json=priceUsd,proto3" json:"price_usd,omitempty"`
+	// amount / quantity
+	PriceReportingCurrency string `protobuf:"bytes,6,opt,name=price_reporting_currency,json=priceReportingCurrency,proto3" json:"price_reporting_currency,omitempty"`
+	// amount
+	AmountUsd string `protobuf:"bytes,7,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	// amount
+	AmountReportingCurrency string `protobuf:"bytes,8,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -10815,26 +10892,39 @@ type ListGlobalPostbackLogsResponse_GlobalPostbackLog struct {
 	LogId            int64                  `protobuf:"varint,1,opt,name=log_id,json=logId,proto3" json:"log_id,omitempty"`
 	GlobalPostbackId int64                  `protobuf:"varint,2,opt,name=global_postback_id,json=globalPostbackId,proto3" json:"global_postback_id,omitempty"`
 	PostbackName     string                 `protobuf:"bytes,3,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	PostbackUrl      string                 `protobuf:"bytes,4,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"` // Final URL after macro replacement
-	PostBody         string                 `protobuf:"bytes,5,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`          // Final POST body after macro replacement
-	ActionType       string                 `protobuf:"bytes,6,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
-	RequestMethod    string                 `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET / POST
-	HttpStatusCode   int32                  `protobuf:"varint,8,opt,name=http_status_code,json=httpStatusCode,proto3" json:"http_status_code,omitempty"`
-	Reason           string                 `protobuf:"bytes,9,opt,name=reason,proto3" json:"reason,omitempty"`
-	Success          bool                   `protobuf:"varint,10,opt,name=success,proto3" json:"success,omitempty"`
-	AttemptNumber    int32                  `protobuf:"varint,11,opt,name=attempt_number,json=attemptNumber,proto3" json:"attempt_number,omitempty"`      // 1, 2, or 3
-	UserId           int64                  `protobuf:"varint,12,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                           // User that triggered the event
-	TrafficSource    string                 `protobuf:"bytes,13,opt,name=traffic_source,json=trafficSource,proto3" json:"traffic_source,omitempty"`       // aff / ref / direct_reg
-	AffiliateId      int64                  `protobuf:"varint,14,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`            // Affiliate user ID (> 0 when traffic=aff)
-	ReferrerUserId   int64                  `protobuf:"varint,15,opt,name=referrer_user_id,json=referrerUserId,proto3" json:"referrer_user_id,omitempty"` // Referrer user ID (> 0 when traffic=ref)
-	EventUniqueKey   string                 `protobuf:"bytes,16,opt,name=event_unique_key,json=eventUniqueKey,proto3" json:"event_unique_key,omitempty"`  // Idempotency key (e.g. game_bet:123456)
-	OperatorId       int64                  `protobuf:"varint,17,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	ResponseBody     string                 `protobuf:"bytes,18,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"`          // Response body from third-party server (max 2KB)
-	ResponseHeaders  string                 `protobuf:"bytes,19,opt,name=response_headers,json=responseHeaders,proto3" json:"response_headers,omitempty"` // Response headers as JSON string
-	LatencyMs        int64                  `protobuf:"varint,20,opt,name=latency_ms,json=latencyMs,proto3" json:"latency_ms,omitempty"`                  // Request latency in milliseconds
-	CreatedAt        int64                  `protobuf:"varint,21,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                  // Unix milliseconds
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Final URL after macro replacement
+	PostbackUrl string `protobuf:"bytes,4,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// Final POST body after macro replacement
+	PostBody   string `protobuf:"bytes,5,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`
+	ActionType string `protobuf:"bytes,6,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	// "GET" or "POST"
+	RequestMethod  string `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
+	HttpStatusCode int32  `protobuf:"varint,8,opt,name=http_status_code,json=httpStatusCode,proto3" json:"http_status_code,omitempty"`
+	Reason         string `protobuf:"bytes,9,opt,name=reason,proto3" json:"reason,omitempty"`
+	Success        bool   `protobuf:"varint,10,opt,name=success,proto3" json:"success,omitempty"`
+	// 1, 2, or 3
+	AttemptNumber int32 `protobuf:"varint,11,opt,name=attempt_number,json=attemptNumber,proto3" json:"attempt_number,omitempty"`
+	// User that triggered the event
+	UserId int64 `protobuf:"varint,12,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// "aff", "ref", or "direct_reg"
+	TrafficSource string `protobuf:"bytes,13,opt,name=traffic_source,json=trafficSource,proto3" json:"traffic_source,omitempty"`
+	// Affiliate user ID (> 0 when traffic=aff)
+	AffiliateId int64 `protobuf:"varint,14,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	// Referrer user ID (> 0 when traffic=ref)
+	ReferrerUserId int64 `protobuf:"varint,15,opt,name=referrer_user_id,json=referrerUserId,proto3" json:"referrer_user_id,omitempty"`
+	// Idempotency key (e.g. "game_bet:123456")
+	EventUniqueKey string `protobuf:"bytes,16,opt,name=event_unique_key,json=eventUniqueKey,proto3" json:"event_unique_key,omitempty"`
+	OperatorId     int64  `protobuf:"varint,17,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// Response body from third-party server (max 2KB)
+	ResponseBody string `protobuf:"bytes,18,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"`
+	// Response headers as JSON string
+	ResponseHeaders string `protobuf:"bytes,19,opt,name=response_headers,json=responseHeaders,proto3" json:"response_headers,omitempty"`
+	// Request latency in milliseconds
+	LatencyMs int64 `protobuf:"varint,20,opt,name=latency_ms,json=latencyMs,proto3" json:"latency_ms,omitempty"`
+	// Unix milliseconds
+	CreatedAt     int64 `protobuf:"varint,21,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListGlobalPostbackLogsResponse_GlobalPostbackLog) Reset() {

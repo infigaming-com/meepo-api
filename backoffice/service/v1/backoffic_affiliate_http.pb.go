@@ -74,64 +74,109 @@ const OperationBackofficeAffiliateUpdateLandingTemplate = "/api.backoffice.servi
 const OperationBackofficeAffiliateUpdatePostback = "/api.backoffice.service.v1.BackofficeAffiliate/UpdatePostback"
 
 type BackofficeAffiliateHTTPServer interface {
+	// CreateAffiliate Create a new affiliate account
 	CreateAffiliate(context.Context, *CreateAffiliateRequest) (*v1.CreateAffiliateResponse, error)
+	// CreateAffiliateSubAccount Create a sub-account for an affiliate
 	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error)
+	// CreateCampaign Create a new affiliate campaign
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error)
+	// CreateCommissionPlan Create a new affiliate commission plan
 	CreateCommissionPlan(context.Context, *CreateCommissionPlanRequest) (*v1.CreateCommissionPlanResponse, error)
 	// CreateGlobalPostback Create a new operator-level global postback configuration
 	CreateGlobalPostback(context.Context, *CreateGlobalPostbackRequest) (*v1.CreateGlobalPostbackResponse, error)
+	// CreateLandingTemplate Create a new landing page template
 	CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*v1.CreateLandingTemplateResponse, error)
+	// CreatePostback Create a new affiliate postback
 	CreatePostback(context.Context, *CreatePostbackRequest) (*v1.CreatePostbackResponse, error)
+	// DeleteAffiliate Delete an affiliate (soft delete)
 	DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*v1.DeleteAffiliateResponse, error)
+	// DeleteCampaign Delete an affiliate campaign
 	DeleteCampaign(context.Context, *DeleteCampaignRequest) (*v1.DeleteCampaignResponse, error)
+	// DeleteCommissionPlan Delete a commission plan
 	DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*v1.DeleteCommissionPlanResponse, error)
 	// DeleteGlobalPostback Soft delete a global postback (sets hidden=true)
 	DeleteGlobalPostback(context.Context, *DeleteGlobalPostbackRequest) (*v1.DeleteGlobalPostbackResponse, error)
+	// DeleteLandingTemplate Delete a landing page template
 	DeleteLandingTemplate(context.Context, *DeleteLandingTemplateRequest) (*v1.DeleteLandingTemplateResponse, error)
+	// DeletePostback Delete an affiliate postback
 	DeletePostback(context.Context, *DeletePostbackRequest) (*v1.DeletePostbackResponse, error)
+	// ExportAffiliateUsers Export affiliate users to CSV, Excel, or PDF
 	ExportAffiliateUsers(context.Context, *ExportAffiliateUsersRequest) (*v1.ExportUsersResponse, error)
+	// GetAffiliateDashboard Get aggregate affiliate dashboard metrics for a time range
 	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*v1.GetAffiliateDashboardResponse, error)
+	// GetAffiliateDetails Get detailed information about a specific affiliate
 	GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*v1.GetAffiliateDetailsResponse, error)
+	// GetAffiliateOperatorSettings Get affiliate operator-level settings
 	GetAffiliateOperatorSettings(context.Context, *GetAffiliateOperatorSettingsRequest) (*v1.GetOperatorSettingsResponse, error)
+	// GetAffiliateTrend Get affiliate trend data grouped by day, week, or month
 	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error)
+	// GetCommissionPlan Get a commission plan by ID
 	GetCommissionPlan(context.Context, *GetCommissionPlanRequest) (*v1.GetCommissionPlanResponse, error)
 	// GetGlobalPostback Get a single global postback by ID, including resolved whitelist names
 	GetGlobalPostback(context.Context, *GetGlobalPostbackRequest) (*v1.GetGlobalPostbackResponse, error)
+	// GetReferralPlan Get referral plan for a target operator and currency
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error)
+	// ListAffiliateBills List affiliate billing records
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error)
+	// ListAffiliateCampaigns List campaigns belonging to a specific affiliate
 	ListAffiliateCampaigns(context.Context, *ListAffiliateCampaignsRequest) (*v1.ListCampaignsResponse, error)
+	// ListAffiliateCommissionPlans List commission plans assigned to a specific affiliate
 	ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListAffiliateCommissionPlansResponse, error)
+	// ListAffiliateDomains List affiliate tracking domains for a target operator
 	ListAffiliateDomains(context.Context, *ListAffiliateDomainsRequest) (*v1.ListAffiliateDomainsResponse, error)
+	// ListAffiliateSubAccounts List sub-accounts of an affiliate
 	ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*v1.ListAffiliateSubAccountsResponse, error)
+	// ListAffiliateUsers List users acquired through affiliates
 	ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error)
+	// ListAffiliates List affiliates with pagination and filters
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*v1.ListAffiliatesResponse, error)
+	// ListAllCommissionPlans List all commission plans across the operator hierarchy
 	ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*v1.ListAllCommissionPlansResponse, error)
+	// ListCampaigns List affiliate campaigns with pagination and filters
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*v1.ListCampaignsResponse, error)
+	// ListCommissionPlans List commission plans with pagination and filters
 	ListCommissionPlans(context.Context, *ListCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error)
+	// ListCommissions List affiliate commissions with pagination and filters
 	ListCommissions(context.Context, *ListCommissionsRequest) (*v1.ListCommissionsResponse, error)
+	// ListEvents List affiliate events (registrations, deposits, etc.) with filters
 	ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error)
 	// ListGlobalPostbackLogs List global postback execution logs with optional filters (time range, action_type, success)
 	ListGlobalPostbackLogs(context.Context, *ListGlobalPostbackLogsRequest) (*v1.ListGlobalPostbackLogsResponse, error)
 	// ListGlobalPostbacks List global postbacks for a target operator with pagination and status counts
 	ListGlobalPostbacks(context.Context, *ListGlobalPostbacksRequest) (*v1.ListGlobalPostbacksResponse, error)
+	// ListLandingTemplates List landing page templates for a target operator
 	ListLandingTemplates(context.Context, *ListLandingTemplatesRequest) (*v1.ListLandingTemplatesResponse, error)
+	// ListLandingTemplatesByCampaign List landing page templates associated with a specific campaign
 	ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*v1.ListLandingTemplatesByCampaignResponse, error)
+	// ListPostbackLogs List affiliate postback execution logs
 	ListPostbackLogs(context.Context, *ListPostbackLogsRequest) (*v1.ListPostbackLogsResponse, error)
+	// ListPostbacks List affiliate postbacks with pagination and status filter
 	ListPostbacks(context.Context, *ListPostbacksRequest) (*v1.ListPostbacksResponse, error)
+	// ResetAffiliatePassword Reset an affiliate's password
 	ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*v1.ResetAffiliatePasswordResponse, error)
+	// SendAffiliateAccountEmail Send account credentials email to an affiliate
 	SendAffiliateAccountEmail(context.Context, *SendAffiliateAccountEmailRequest) (*SendAffiliateAccountEmailResponse, error)
+	// SetAffiliateDomain Create or update an affiliate tracking domain
 	SetAffiliateDomain(context.Context, *SetAffiliateDomainRequest) (*v1.SetAffiliateDomainResponse, error)
+	// SetReferralPlan Create or update a referral plan for a target operator
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error)
 	// SimulateGlobalPostback Simulate a global postback by sending a test HTTP request. Does not require a saved postback; URL and macros are passed directly.
 	SimulateGlobalPostback(context.Context, *SimulateGlobalPostbackRequest) (*v1.SimulateGlobalPostbackResponse, error)
+	// UpdateAffiliate Update an existing affiliate's details
 	UpdateAffiliate(context.Context, *UpdateAffiliateRequest) (*v1.UpdateAffiliateResponse, error)
+	// UpdateAffiliateOperatorSettings Update affiliate operator-level settings
 	UpdateAffiliateOperatorSettings(context.Context, *UpdateAffiliateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error)
+	// UpdateAffiliateSubAccount Update an affiliate sub-account (enable/disable, reset password, 2FA)
 	UpdateAffiliateSubAccount(context.Context, *UpdateAffiliateSubAccountRequest) (*UpdateAffiliateSubAccountResponse, error)
+	// UpdateCampaign Update an existing affiliate campaign
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*v1.UpdateCampaignResponse, error)
+	// UpdateCommissionPlan Update an existing commission plan
 	UpdateCommissionPlan(context.Context, *UpdateCommissionPlanRequest) (*v1.UpdateCommissionPlanResponse, error)
 	// UpdateGlobalPostback Update an existing global postback configuration
 	UpdateGlobalPostback(context.Context, *UpdateGlobalPostbackRequest) (*v1.UpdateGlobalPostbackResponse, error)
+	// UpdateLandingTemplate Update an existing landing page template
 	UpdateLandingTemplate(context.Context, *UpdateLandingTemplateRequest) (*v1.UpdateLandingTemplateResponse, error)
+	// UpdatePostback Update an existing affiliate postback
 	UpdatePostback(context.Context, *UpdatePostbackRequest) (*v1.UpdatePostbackResponse, error)
 }
 
@@ -1336,64 +1381,109 @@ func _BackofficeAffiliate_SimulateGlobalPostback0_HTTP_Handler(srv BackofficeAff
 }
 
 type BackofficeAffiliateHTTPClient interface {
+	// CreateAffiliate Create a new affiliate account
 	CreateAffiliate(ctx context.Context, req *CreateAffiliateRequest, opts ...http.CallOption) (rsp *v1.CreateAffiliateResponse, err error)
+	// CreateAffiliateSubAccount Create a sub-account for an affiliate
 	CreateAffiliateSubAccount(ctx context.Context, req *CreateAffiliateSubAccountRequest, opts ...http.CallOption) (rsp *v1.CreateAffiliateSubAccountResponse, err error)
+	// CreateCampaign Create a new affiliate campaign
 	CreateCampaign(ctx context.Context, req *CreateCampaignRequest, opts ...http.CallOption) (rsp *v1.CreateCampaignResponse, err error)
+	// CreateCommissionPlan Create a new affiliate commission plan
 	CreateCommissionPlan(ctx context.Context, req *CreateCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.CreateCommissionPlanResponse, err error)
 	// CreateGlobalPostback Create a new operator-level global postback configuration
 	CreateGlobalPostback(ctx context.Context, req *CreateGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.CreateGlobalPostbackResponse, err error)
+	// CreateLandingTemplate Create a new landing page template
 	CreateLandingTemplate(ctx context.Context, req *CreateLandingTemplateRequest, opts ...http.CallOption) (rsp *v1.CreateLandingTemplateResponse, err error)
+	// CreatePostback Create a new affiliate postback
 	CreatePostback(ctx context.Context, req *CreatePostbackRequest, opts ...http.CallOption) (rsp *v1.CreatePostbackResponse, err error)
+	// DeleteAffiliate Delete an affiliate (soft delete)
 	DeleteAffiliate(ctx context.Context, req *DeleteAffiliateRequest, opts ...http.CallOption) (rsp *v1.DeleteAffiliateResponse, err error)
+	// DeleteCampaign Delete an affiliate campaign
 	DeleteCampaign(ctx context.Context, req *DeleteCampaignRequest, opts ...http.CallOption) (rsp *v1.DeleteCampaignResponse, err error)
+	// DeleteCommissionPlan Delete a commission plan
 	DeleteCommissionPlan(ctx context.Context, req *DeleteCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.DeleteCommissionPlanResponse, err error)
 	// DeleteGlobalPostback Soft delete a global postback (sets hidden=true)
 	DeleteGlobalPostback(ctx context.Context, req *DeleteGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.DeleteGlobalPostbackResponse, err error)
+	// DeleteLandingTemplate Delete a landing page template
 	DeleteLandingTemplate(ctx context.Context, req *DeleteLandingTemplateRequest, opts ...http.CallOption) (rsp *v1.DeleteLandingTemplateResponse, err error)
+	// DeletePostback Delete an affiliate postback
 	DeletePostback(ctx context.Context, req *DeletePostbackRequest, opts ...http.CallOption) (rsp *v1.DeletePostbackResponse, err error)
+	// ExportAffiliateUsers Export affiliate users to CSV, Excel, or PDF
 	ExportAffiliateUsers(ctx context.Context, req *ExportAffiliateUsersRequest, opts ...http.CallOption) (rsp *v1.ExportUsersResponse, err error)
+	// GetAffiliateDashboard Get aggregate affiliate dashboard metrics for a time range
 	GetAffiliateDashboard(ctx context.Context, req *GetAffiliateDashboardRequest, opts ...http.CallOption) (rsp *v1.GetAffiliateDashboardResponse, err error)
+	// GetAffiliateDetails Get detailed information about a specific affiliate
 	GetAffiliateDetails(ctx context.Context, req *GetAffiliateDetailsRequest, opts ...http.CallOption) (rsp *v1.GetAffiliateDetailsResponse, err error)
+	// GetAffiliateOperatorSettings Get affiliate operator-level settings
 	GetAffiliateOperatorSettings(ctx context.Context, req *GetAffiliateOperatorSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorSettingsResponse, err error)
+	// GetAffiliateTrend Get affiliate trend data grouped by day, week, or month
 	GetAffiliateTrend(ctx context.Context, req *GetAffiliateTrendRequest, opts ...http.CallOption) (rsp *v1.GetAffiliateTrendResponse, err error)
+	// GetCommissionPlan Get a commission plan by ID
 	GetCommissionPlan(ctx context.Context, req *GetCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.GetCommissionPlanResponse, err error)
 	// GetGlobalPostback Get a single global postback by ID, including resolved whitelist names
 	GetGlobalPostback(ctx context.Context, req *GetGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.GetGlobalPostbackResponse, err error)
+	// GetReferralPlan Get referral plan for a target operator and currency
 	GetReferralPlan(ctx context.Context, req *GetReferralPlanRequest, opts ...http.CallOption) (rsp *v1.GetReferralPlanResponse, err error)
+	// ListAffiliateBills List affiliate billing records
 	ListAffiliateBills(ctx context.Context, req *ListAffiliateBillsRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateBillsResponse, err error)
+	// ListAffiliateCampaigns List campaigns belonging to a specific affiliate
 	ListAffiliateCampaigns(ctx context.Context, req *ListAffiliateCampaignsRequest, opts ...http.CallOption) (rsp *v1.ListCampaignsResponse, err error)
+	// ListAffiliateCommissionPlans List commission plans assigned to a specific affiliate
 	ListAffiliateCommissionPlans(ctx context.Context, req *ListAffiliateCommissionPlansRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateCommissionPlansResponse, err error)
+	// ListAffiliateDomains List affiliate tracking domains for a target operator
 	ListAffiliateDomains(ctx context.Context, req *ListAffiliateDomainsRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateDomainsResponse, err error)
+	// ListAffiliateSubAccounts List sub-accounts of an affiliate
 	ListAffiliateSubAccounts(ctx context.Context, req *ListAffiliateSubAccountsRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateSubAccountsResponse, err error)
+	// ListAffiliateUsers List users acquired through affiliates
 	ListAffiliateUsers(ctx context.Context, req *ListAffiliateUsersRequest, opts ...http.CallOption) (rsp *v1.ListUsersResponse, err error)
+	// ListAffiliates List affiliates with pagination and filters
 	ListAffiliates(ctx context.Context, req *ListAffiliatesRequest, opts ...http.CallOption) (rsp *v1.ListAffiliatesResponse, err error)
+	// ListAllCommissionPlans List all commission plans across the operator hierarchy
 	ListAllCommissionPlans(ctx context.Context, req *ListAllCommissionPlansRequest, opts ...http.CallOption) (rsp *v1.ListAllCommissionPlansResponse, err error)
+	// ListCampaigns List affiliate campaigns with pagination and filters
 	ListCampaigns(ctx context.Context, req *ListCampaignsRequest, opts ...http.CallOption) (rsp *v1.ListCampaignsResponse, err error)
+	// ListCommissionPlans List commission plans with pagination and filters
 	ListCommissionPlans(ctx context.Context, req *ListCommissionPlansRequest, opts ...http.CallOption) (rsp *v1.ListCommissionPlansResponse, err error)
+	// ListCommissions List affiliate commissions with pagination and filters
 	ListCommissions(ctx context.Context, req *ListCommissionsRequest, opts ...http.CallOption) (rsp *v1.ListCommissionsResponse, err error)
+	// ListEvents List affiliate events (registrations, deposits, etc.) with filters
 	ListEvents(ctx context.Context, req *ListEventsRequest, opts ...http.CallOption) (rsp *v1.ListEventsResponse, err error)
 	// ListGlobalPostbackLogs List global postback execution logs with optional filters (time range, action_type, success)
 	ListGlobalPostbackLogs(ctx context.Context, req *ListGlobalPostbackLogsRequest, opts ...http.CallOption) (rsp *v1.ListGlobalPostbackLogsResponse, err error)
 	// ListGlobalPostbacks List global postbacks for a target operator with pagination and status counts
 	ListGlobalPostbacks(ctx context.Context, req *ListGlobalPostbacksRequest, opts ...http.CallOption) (rsp *v1.ListGlobalPostbacksResponse, err error)
+	// ListLandingTemplates List landing page templates for a target operator
 	ListLandingTemplates(ctx context.Context, req *ListLandingTemplatesRequest, opts ...http.CallOption) (rsp *v1.ListLandingTemplatesResponse, err error)
+	// ListLandingTemplatesByCampaign List landing page templates associated with a specific campaign
 	ListLandingTemplatesByCampaign(ctx context.Context, req *ListLandingTemplatesByCampaignRequest, opts ...http.CallOption) (rsp *v1.ListLandingTemplatesByCampaignResponse, err error)
+	// ListPostbackLogs List affiliate postback execution logs
 	ListPostbackLogs(ctx context.Context, req *ListPostbackLogsRequest, opts ...http.CallOption) (rsp *v1.ListPostbackLogsResponse, err error)
+	// ListPostbacks List affiliate postbacks with pagination and status filter
 	ListPostbacks(ctx context.Context, req *ListPostbacksRequest, opts ...http.CallOption) (rsp *v1.ListPostbacksResponse, err error)
+	// ResetAffiliatePassword Reset an affiliate's password
 	ResetAffiliatePassword(ctx context.Context, req *ResetAffiliatePasswordRequest, opts ...http.CallOption) (rsp *v1.ResetAffiliatePasswordResponse, err error)
+	// SendAffiliateAccountEmail Send account credentials email to an affiliate
 	SendAffiliateAccountEmail(ctx context.Context, req *SendAffiliateAccountEmailRequest, opts ...http.CallOption) (rsp *SendAffiliateAccountEmailResponse, err error)
+	// SetAffiliateDomain Create or update an affiliate tracking domain
 	SetAffiliateDomain(ctx context.Context, req *SetAffiliateDomainRequest, opts ...http.CallOption) (rsp *v1.SetAffiliateDomainResponse, err error)
+	// SetReferralPlan Create or update a referral plan for a target operator
 	SetReferralPlan(ctx context.Context, req *SetReferralPlanRequest, opts ...http.CallOption) (rsp *v1.SetReferralPlanResponse, err error)
 	// SimulateGlobalPostback Simulate a global postback by sending a test HTTP request. Does not require a saved postback; URL and macros are passed directly.
 	SimulateGlobalPostback(ctx context.Context, req *SimulateGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.SimulateGlobalPostbackResponse, err error)
+	// UpdateAffiliate Update an existing affiliate's details
 	UpdateAffiliate(ctx context.Context, req *UpdateAffiliateRequest, opts ...http.CallOption) (rsp *v1.UpdateAffiliateResponse, err error)
+	// UpdateAffiliateOperatorSettings Update affiliate operator-level settings
 	UpdateAffiliateOperatorSettings(ctx context.Context, req *UpdateAffiliateOperatorSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorSettingsResponse, err error)
+	// UpdateAffiliateSubAccount Update an affiliate sub-account (enable/disable, reset password, 2FA)
 	UpdateAffiliateSubAccount(ctx context.Context, req *UpdateAffiliateSubAccountRequest, opts ...http.CallOption) (rsp *UpdateAffiliateSubAccountResponse, err error)
+	// UpdateCampaign Update an existing affiliate campaign
 	UpdateCampaign(ctx context.Context, req *UpdateCampaignRequest, opts ...http.CallOption) (rsp *v1.UpdateCampaignResponse, err error)
+	// UpdateCommissionPlan Update an existing commission plan
 	UpdateCommissionPlan(ctx context.Context, req *UpdateCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.UpdateCommissionPlanResponse, err error)
 	// UpdateGlobalPostback Update an existing global postback configuration
 	UpdateGlobalPostback(ctx context.Context, req *UpdateGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.UpdateGlobalPostbackResponse, err error)
+	// UpdateLandingTemplate Update an existing landing page template
 	UpdateLandingTemplate(ctx context.Context, req *UpdateLandingTemplateRequest, opts ...http.CallOption) (rsp *v1.UpdateLandingTemplateResponse, err error)
+	// UpdatePostback Update an existing affiliate postback
 	UpdatePostback(ctx context.Context, req *UpdatePostbackRequest, opts ...http.CallOption) (rsp *v1.UpdatePostbackResponse, err error)
 }
 
@@ -1405,6 +1495,7 @@ func NewBackofficeAffiliateHTTPClient(client *http.Client) BackofficeAffiliateHT
 	return &BackofficeAffiliateHTTPClientImpl{client}
 }
 
+// CreateAffiliate Create a new affiliate account
 func (c *BackofficeAffiliateHTTPClientImpl) CreateAffiliate(ctx context.Context, in *CreateAffiliateRequest, opts ...http.CallOption) (*v1.CreateAffiliateResponse, error) {
 	var out v1.CreateAffiliateResponse
 	pattern := "/v1/backoffice/affiliate/create"
@@ -1418,6 +1509,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) CreateAffiliate(ctx context.Context,
 	return &out, nil
 }
 
+// CreateAffiliateSubAccount Create a sub-account for an affiliate
 func (c *BackofficeAffiliateHTTPClientImpl) CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...http.CallOption) (*v1.CreateAffiliateSubAccountResponse, error) {
 	var out v1.CreateAffiliateSubAccountResponse
 	pattern := "/v1/backoffice/affiliate/sub-account/create"
@@ -1431,6 +1523,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) CreateAffiliateSubAccount(ctx contex
 	return &out, nil
 }
 
+// CreateCampaign Create a new affiliate campaign
 func (c *BackofficeAffiliateHTTPClientImpl) CreateCampaign(ctx context.Context, in *CreateCampaignRequest, opts ...http.CallOption) (*v1.CreateCampaignResponse, error) {
 	var out v1.CreateCampaignResponse
 	pattern := "/v1/backoffice/affiliate/campaign/create"
@@ -1444,6 +1537,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) CreateCampaign(ctx context.Context, 
 	return &out, nil
 }
 
+// CreateCommissionPlan Create a new affiliate commission plan
 func (c *BackofficeAffiliateHTTPClientImpl) CreateCommissionPlan(ctx context.Context, in *CreateCommissionPlanRequest, opts ...http.CallOption) (*v1.CreateCommissionPlanResponse, error) {
 	var out v1.CreateCommissionPlanResponse
 	pattern := "/v1/backoffice/affiliate/commission/plan/create"
@@ -1471,6 +1565,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) CreateGlobalPostback(ctx context.Con
 	return &out, nil
 }
 
+// CreateLandingTemplate Create a new landing page template
 func (c *BackofficeAffiliateHTTPClientImpl) CreateLandingTemplate(ctx context.Context, in *CreateLandingTemplateRequest, opts ...http.CallOption) (*v1.CreateLandingTemplateResponse, error) {
 	var out v1.CreateLandingTemplateResponse
 	pattern := "/v1/backoffice/affiliate/landing-template/create"
@@ -1484,6 +1579,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) CreateLandingTemplate(ctx context.Co
 	return &out, nil
 }
 
+// CreatePostback Create a new affiliate postback
 func (c *BackofficeAffiliateHTTPClientImpl) CreatePostback(ctx context.Context, in *CreatePostbackRequest, opts ...http.CallOption) (*v1.CreatePostbackResponse, error) {
 	var out v1.CreatePostbackResponse
 	pattern := "/v1/backoffice/affiliate/postback/create"
@@ -1497,6 +1593,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) CreatePostback(ctx context.Context, 
 	return &out, nil
 }
 
+// DeleteAffiliate Delete an affiliate (soft delete)
 func (c *BackofficeAffiliateHTTPClientImpl) DeleteAffiliate(ctx context.Context, in *DeleteAffiliateRequest, opts ...http.CallOption) (*v1.DeleteAffiliateResponse, error) {
 	var out v1.DeleteAffiliateResponse
 	pattern := "/v1/backoffice/affiliate/delete"
@@ -1510,6 +1607,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) DeleteAffiliate(ctx context.Context,
 	return &out, nil
 }
 
+// DeleteCampaign Delete an affiliate campaign
 func (c *BackofficeAffiliateHTTPClientImpl) DeleteCampaign(ctx context.Context, in *DeleteCampaignRequest, opts ...http.CallOption) (*v1.DeleteCampaignResponse, error) {
 	var out v1.DeleteCampaignResponse
 	pattern := "/v1/backoffice/affiliate/campaign/delete"
@@ -1523,6 +1621,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) DeleteCampaign(ctx context.Context, 
 	return &out, nil
 }
 
+// DeleteCommissionPlan Delete a commission plan
 func (c *BackofficeAffiliateHTTPClientImpl) DeleteCommissionPlan(ctx context.Context, in *DeleteCommissionPlanRequest, opts ...http.CallOption) (*v1.DeleteCommissionPlanResponse, error) {
 	var out v1.DeleteCommissionPlanResponse
 	pattern := "/v1/backoffice/affiliate/commission/plan/delete"
@@ -1550,6 +1649,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) DeleteGlobalPostback(ctx context.Con
 	return &out, nil
 }
 
+// DeleteLandingTemplate Delete a landing page template
 func (c *BackofficeAffiliateHTTPClientImpl) DeleteLandingTemplate(ctx context.Context, in *DeleteLandingTemplateRequest, opts ...http.CallOption) (*v1.DeleteLandingTemplateResponse, error) {
 	var out v1.DeleteLandingTemplateResponse
 	pattern := "/v1/backoffice/affiliate/landing-template/delete"
@@ -1563,6 +1663,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) DeleteLandingTemplate(ctx context.Co
 	return &out, nil
 }
 
+// DeletePostback Delete an affiliate postback
 func (c *BackofficeAffiliateHTTPClientImpl) DeletePostback(ctx context.Context, in *DeletePostbackRequest, opts ...http.CallOption) (*v1.DeletePostbackResponse, error) {
 	var out v1.DeletePostbackResponse
 	pattern := "/v1/backoffice/affiliate/postback/delete"
@@ -1576,6 +1677,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) DeletePostback(ctx context.Context, 
 	return &out, nil
 }
 
+// ExportAffiliateUsers Export affiliate users to CSV, Excel, or PDF
 func (c *BackofficeAffiliateHTTPClientImpl) ExportAffiliateUsers(ctx context.Context, in *ExportAffiliateUsersRequest, opts ...http.CallOption) (*v1.ExportUsersResponse, error) {
 	var out v1.ExportUsersResponse
 	pattern := "/v1/backoffice/affiliate/user/export"
@@ -1589,6 +1691,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ExportAffiliateUsers(ctx context.Con
 	return &out, nil
 }
 
+// GetAffiliateDashboard Get aggregate affiliate dashboard metrics for a time range
 func (c *BackofficeAffiliateHTTPClientImpl) GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...http.CallOption) (*v1.GetAffiliateDashboardResponse, error) {
 	var out v1.GetAffiliateDashboardResponse
 	pattern := "/v1/backoffice/affiliate/dashboard/get"
@@ -1602,6 +1705,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) GetAffiliateDashboard(ctx context.Co
 	return &out, nil
 }
 
+// GetAffiliateDetails Get detailed information about a specific affiliate
 func (c *BackofficeAffiliateHTTPClientImpl) GetAffiliateDetails(ctx context.Context, in *GetAffiliateDetailsRequest, opts ...http.CallOption) (*v1.GetAffiliateDetailsResponse, error) {
 	var out v1.GetAffiliateDetailsResponse
 	pattern := "/v1/backoffice/affiliate/get/details"
@@ -1615,6 +1719,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) GetAffiliateDetails(ctx context.Cont
 	return &out, nil
 }
 
+// GetAffiliateOperatorSettings Get affiliate operator-level settings
 func (c *BackofficeAffiliateHTTPClientImpl) GetAffiliateOperatorSettings(ctx context.Context, in *GetAffiliateOperatorSettingsRequest, opts ...http.CallOption) (*v1.GetOperatorSettingsResponse, error) {
 	var out v1.GetOperatorSettingsResponse
 	pattern := "/v1/backoffice/affiliate/operator/settings/get"
@@ -1628,6 +1733,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) GetAffiliateOperatorSettings(ctx con
 	return &out, nil
 }
 
+// GetAffiliateTrend Get affiliate trend data grouped by day, week, or month
 func (c *BackofficeAffiliateHTTPClientImpl) GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...http.CallOption) (*v1.GetAffiliateTrendResponse, error) {
 	var out v1.GetAffiliateTrendResponse
 	pattern := "/v1/backoffice/affiliate/dashboard/trend/get"
@@ -1641,6 +1747,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) GetAffiliateTrend(ctx context.Contex
 	return &out, nil
 }
 
+// GetCommissionPlan Get a commission plan by ID
 func (c *BackofficeAffiliateHTTPClientImpl) GetCommissionPlan(ctx context.Context, in *GetCommissionPlanRequest, opts ...http.CallOption) (*v1.GetCommissionPlanResponse, error) {
 	var out v1.GetCommissionPlanResponse
 	pattern := "/v1/backoffice/affiliate/commission/plan/get"
@@ -1668,6 +1775,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) GetGlobalPostback(ctx context.Contex
 	return &out, nil
 }
 
+// GetReferralPlan Get referral plan for a target operator and currency
 func (c *BackofficeAffiliateHTTPClientImpl) GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...http.CallOption) (*v1.GetReferralPlanResponse, error) {
 	var out v1.GetReferralPlanResponse
 	pattern := "/v1/backoffice/referral/plan/get"
@@ -1681,6 +1789,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) GetReferralPlan(ctx context.Context,
 	return &out, nil
 }
 
+// ListAffiliateBills List affiliate billing records
 func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...http.CallOption) (*v1.ListAffiliateBillsResponse, error) {
 	var out v1.ListAffiliateBillsResponse
 	pattern := "/v1/backoffice/affiliate/bill/list"
@@ -1694,6 +1803,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateBills(ctx context.Conte
 	return &out, nil
 }
 
+// ListAffiliateCampaigns List campaigns belonging to a specific affiliate
 func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateCampaigns(ctx context.Context, in *ListAffiliateCampaignsRequest, opts ...http.CallOption) (*v1.ListCampaignsResponse, error) {
 	var out v1.ListCampaignsResponse
 	pattern := "/v1/backoffice/affiliate/campaign/list/by_affiliate"
@@ -1707,6 +1817,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateCampaigns(ctx context.C
 	return &out, nil
 }
 
+// ListAffiliateCommissionPlans List commission plans assigned to a specific affiliate
 func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateCommissionPlans(ctx context.Context, in *ListAffiliateCommissionPlansRequest, opts ...http.CallOption) (*v1.ListAffiliateCommissionPlansResponse, error) {
 	var out v1.ListAffiliateCommissionPlansResponse
 	pattern := "/v1/backoffice/affiliate/commission/plan/list/affiliate"
@@ -1720,6 +1831,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateCommissionPlans(ctx con
 	return &out, nil
 }
 
+// ListAffiliateDomains List affiliate tracking domains for a target operator
 func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateDomains(ctx context.Context, in *ListAffiliateDomainsRequest, opts ...http.CallOption) (*v1.ListAffiliateDomainsResponse, error) {
 	var out v1.ListAffiliateDomainsResponse
 	pattern := "/v1/backoffice/affiliate/domain/list"
@@ -1733,6 +1845,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateDomains(ctx context.Con
 	return &out, nil
 }
 
+// ListAffiliateSubAccounts List sub-accounts of an affiliate
 func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...http.CallOption) (*v1.ListAffiliateSubAccountsResponse, error) {
 	var out v1.ListAffiliateSubAccountsResponse
 	pattern := "/v1/backoffice/affiliate/sub-account/list"
@@ -1746,6 +1859,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateSubAccounts(ctx context
 	return &out, nil
 }
 
+// ListAffiliateUsers List users acquired through affiliates
 func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateUsers(ctx context.Context, in *ListAffiliateUsersRequest, opts ...http.CallOption) (*v1.ListUsersResponse, error) {
 	var out v1.ListUsersResponse
 	pattern := "/v1/backoffice/affiliate/user/list"
@@ -1759,6 +1873,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateUsers(ctx context.Conte
 	return &out, nil
 }
 
+// ListAffiliates List affiliates with pagination and filters
 func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliates(ctx context.Context, in *ListAffiliatesRequest, opts ...http.CallOption) (*v1.ListAffiliatesResponse, error) {
 	var out v1.ListAffiliatesResponse
 	pattern := "/v1/backoffice/affiliate/list"
@@ -1772,6 +1887,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliates(ctx context.Context, 
 	return &out, nil
 }
 
+// ListAllCommissionPlans List all commission plans across the operator hierarchy
 func (c *BackofficeAffiliateHTTPClientImpl) ListAllCommissionPlans(ctx context.Context, in *ListAllCommissionPlansRequest, opts ...http.CallOption) (*v1.ListAllCommissionPlansResponse, error) {
 	var out v1.ListAllCommissionPlansResponse
 	pattern := "/v1/backoffice/affiliate/commission/plan/list/all"
@@ -1785,6 +1901,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAllCommissionPlans(ctx context.C
 	return &out, nil
 }
 
+// ListCampaigns List affiliate campaigns with pagination and filters
 func (c *BackofficeAffiliateHTTPClientImpl) ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...http.CallOption) (*v1.ListCampaignsResponse, error) {
 	var out v1.ListCampaignsResponse
 	pattern := "/v1/backoffice/affiliate/campaign/list"
@@ -1798,6 +1915,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListCampaigns(ctx context.Context, i
 	return &out, nil
 }
 
+// ListCommissionPlans List commission plans with pagination and filters
 func (c *BackofficeAffiliateHTTPClientImpl) ListCommissionPlans(ctx context.Context, in *ListCommissionPlansRequest, opts ...http.CallOption) (*v1.ListCommissionPlansResponse, error) {
 	var out v1.ListCommissionPlansResponse
 	pattern := "/v1/backoffice/affiliate/commission/plan/list"
@@ -1811,6 +1929,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListCommissionPlans(ctx context.Cont
 	return &out, nil
 }
 
+// ListCommissions List affiliate commissions with pagination and filters
 func (c *BackofficeAffiliateHTTPClientImpl) ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...http.CallOption) (*v1.ListCommissionsResponse, error) {
 	var out v1.ListCommissionsResponse
 	pattern := "/v1/backoffice/affiliate/commission/list"
@@ -1824,6 +1943,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListCommissions(ctx context.Context,
 	return &out, nil
 }
 
+// ListEvents List affiliate events (registrations, deposits, etc.) with filters
 func (c *BackofficeAffiliateHTTPClientImpl) ListEvents(ctx context.Context, in *ListEventsRequest, opts ...http.CallOption) (*v1.ListEventsResponse, error) {
 	var out v1.ListEventsResponse
 	pattern := "/v1/backoffice/affiliate/event/list"
@@ -1865,6 +1985,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListGlobalPostbacks(ctx context.Cont
 	return &out, nil
 }
 
+// ListLandingTemplates List landing page templates for a target operator
 func (c *BackofficeAffiliateHTTPClientImpl) ListLandingTemplates(ctx context.Context, in *ListLandingTemplatesRequest, opts ...http.CallOption) (*v1.ListLandingTemplatesResponse, error) {
 	var out v1.ListLandingTemplatesResponse
 	pattern := "/v1/backoffice/affiliate/landing-template/list"
@@ -1878,6 +1999,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListLandingTemplates(ctx context.Con
 	return &out, nil
 }
 
+// ListLandingTemplatesByCampaign List landing page templates associated with a specific campaign
 func (c *BackofficeAffiliateHTTPClientImpl) ListLandingTemplatesByCampaign(ctx context.Context, in *ListLandingTemplatesByCampaignRequest, opts ...http.CallOption) (*v1.ListLandingTemplatesByCampaignResponse, error) {
 	var out v1.ListLandingTemplatesByCampaignResponse
 	pattern := "/v1/backoffice/affiliate/landing-template/list/by-campaign"
@@ -1891,6 +2013,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListLandingTemplatesByCampaign(ctx c
 	return &out, nil
 }
 
+// ListPostbackLogs List affiliate postback execution logs
 func (c *BackofficeAffiliateHTTPClientImpl) ListPostbackLogs(ctx context.Context, in *ListPostbackLogsRequest, opts ...http.CallOption) (*v1.ListPostbackLogsResponse, error) {
 	var out v1.ListPostbackLogsResponse
 	pattern := "/v1/backoffice/affiliate/postback/log/list"
@@ -1904,6 +2027,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListPostbackLogs(ctx context.Context
 	return &out, nil
 }
 
+// ListPostbacks List affiliate postbacks with pagination and status filter
 func (c *BackofficeAffiliateHTTPClientImpl) ListPostbacks(ctx context.Context, in *ListPostbacksRequest, opts ...http.CallOption) (*v1.ListPostbacksResponse, error) {
 	var out v1.ListPostbacksResponse
 	pattern := "/v1/backoffice/affiliate/postback/list"
@@ -1917,6 +2041,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListPostbacks(ctx context.Context, i
 	return &out, nil
 }
 
+// ResetAffiliatePassword Reset an affiliate's password
 func (c *BackofficeAffiliateHTTPClientImpl) ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...http.CallOption) (*v1.ResetAffiliatePasswordResponse, error) {
 	var out v1.ResetAffiliatePasswordResponse
 	pattern := "/v1/backoffice/affiliate/reset-password"
@@ -1930,6 +2055,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ResetAffiliatePassword(ctx context.C
 	return &out, nil
 }
 
+// SendAffiliateAccountEmail Send account credentials email to an affiliate
 func (c *BackofficeAffiliateHTTPClientImpl) SendAffiliateAccountEmail(ctx context.Context, in *SendAffiliateAccountEmailRequest, opts ...http.CallOption) (*SendAffiliateAccountEmailResponse, error) {
 	var out SendAffiliateAccountEmailResponse
 	pattern := "/v1/backoffice/affiliate/send-account-email"
@@ -1943,6 +2069,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) SendAffiliateAccountEmail(ctx contex
 	return &out, nil
 }
 
+// SetAffiliateDomain Create or update an affiliate tracking domain
 func (c *BackofficeAffiliateHTTPClientImpl) SetAffiliateDomain(ctx context.Context, in *SetAffiliateDomainRequest, opts ...http.CallOption) (*v1.SetAffiliateDomainResponse, error) {
 	var out v1.SetAffiliateDomainResponse
 	pattern := "/v1/backoffice/affiliate/domain/set"
@@ -1956,6 +2083,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) SetAffiliateDomain(ctx context.Conte
 	return &out, nil
 }
 
+// SetReferralPlan Create or update a referral plan for a target operator
 func (c *BackofficeAffiliateHTTPClientImpl) SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...http.CallOption) (*v1.SetReferralPlanResponse, error) {
 	var out v1.SetReferralPlanResponse
 	pattern := "/v1/backoffice/referral/plan/set"
@@ -1983,6 +2111,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) SimulateGlobalPostback(ctx context.C
 	return &out, nil
 }
 
+// UpdateAffiliate Update an existing affiliate's details
 func (c *BackofficeAffiliateHTTPClientImpl) UpdateAffiliate(ctx context.Context, in *UpdateAffiliateRequest, opts ...http.CallOption) (*v1.UpdateAffiliateResponse, error) {
 	var out v1.UpdateAffiliateResponse
 	pattern := "/v1/backoffice/affiliate/update"
@@ -1996,6 +2125,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) UpdateAffiliate(ctx context.Context,
 	return &out, nil
 }
 
+// UpdateAffiliateOperatorSettings Update affiliate operator-level settings
 func (c *BackofficeAffiliateHTTPClientImpl) UpdateAffiliateOperatorSettings(ctx context.Context, in *UpdateAffiliateOperatorSettingsRequest, opts ...http.CallOption) (*v1.UpdateOperatorSettingsResponse, error) {
 	var out v1.UpdateOperatorSettingsResponse
 	pattern := "/v1/backoffice/affiliate/operator/settings/update"
@@ -2009,6 +2139,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) UpdateAffiliateOperatorSettings(ctx 
 	return &out, nil
 }
 
+// UpdateAffiliateSubAccount Update an affiliate sub-account (enable/disable, reset password, 2FA)
 func (c *BackofficeAffiliateHTTPClientImpl) UpdateAffiliateSubAccount(ctx context.Context, in *UpdateAffiliateSubAccountRequest, opts ...http.CallOption) (*UpdateAffiliateSubAccountResponse, error) {
 	var out UpdateAffiliateSubAccountResponse
 	pattern := "/v1/backoffice/affiliate/sub-account/update"
@@ -2022,6 +2153,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) UpdateAffiliateSubAccount(ctx contex
 	return &out, nil
 }
 
+// UpdateCampaign Update an existing affiliate campaign
 func (c *BackofficeAffiliateHTTPClientImpl) UpdateCampaign(ctx context.Context, in *UpdateCampaignRequest, opts ...http.CallOption) (*v1.UpdateCampaignResponse, error) {
 	var out v1.UpdateCampaignResponse
 	pattern := "/v1/backoffice/affiliate/campaign/update"
@@ -2035,6 +2167,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) UpdateCampaign(ctx context.Context, 
 	return &out, nil
 }
 
+// UpdateCommissionPlan Update an existing commission plan
 func (c *BackofficeAffiliateHTTPClientImpl) UpdateCommissionPlan(ctx context.Context, in *UpdateCommissionPlanRequest, opts ...http.CallOption) (*v1.UpdateCommissionPlanResponse, error) {
 	var out v1.UpdateCommissionPlanResponse
 	pattern := "/v1/backoffice/affiliate/commission/plan/update"
@@ -2062,6 +2195,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) UpdateGlobalPostback(ctx context.Con
 	return &out, nil
 }
 
+// UpdateLandingTemplate Update an existing landing page template
 func (c *BackofficeAffiliateHTTPClientImpl) UpdateLandingTemplate(ctx context.Context, in *UpdateLandingTemplateRequest, opts ...http.CallOption) (*v1.UpdateLandingTemplateResponse, error) {
 	var out v1.UpdateLandingTemplateResponse
 	pattern := "/v1/backoffice/affiliate/landing-template/update"
@@ -2075,6 +2209,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) UpdateLandingTemplate(ctx context.Co
 	return &out, nil
 }
 
+// UpdatePostback Update an existing affiliate postback
 func (c *BackofficeAffiliateHTTPClientImpl) UpdatePostback(ctx context.Context, in *UpdatePostbackRequest, opts ...http.CallOption) (*v1.UpdatePostbackResponse, error) {
 	var out v1.UpdatePostbackResponse
 	pattern := "/v1/backoffice/affiliate/postback/update"

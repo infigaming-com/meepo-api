@@ -73,18 +73,25 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeWalletClient interface {
+	// Get wallet balances for a user
 	GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...grpc.CallOption) (*v1.GetWalletsResponse, error)
+	// Get wallet credit/debit transaction history for a user
 	GetWalletCredits(ctx context.Context, in *GetWalletCreditsRequest, opts ...grpc.CallOption) (*GetWalletCreditsResponse, error)
 	// ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(ctx context.Context, in *ListWalletBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListWalletBalanceTransactionsResponse, error)
+	// Get credit transaction details by credit ID
 	GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error)
+	// Update wallet settings (e.g. enable/disable a currency for a user)
 	UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...grpc.CallOption) (*UpdateWalletResponse, error)
+	// Add a new currency to the wallet configuration
 	AddWalletCurrency(ctx context.Context, in *AddWalletCurrencyRequest, opts ...grpc.CallOption) (*AddWalletCurrencyResponse, error)
 	// ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
 	ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...grpc.CallOption) (*v1.ListCurrenciesResponse, error)
+	// Update wallet currency settings (visibility, icon, decimal places, etc.)
 	UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyResponse, error)
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*v1.ListBottomOperatorBalancesResponse, error)
+	// Get exchange rates for specified currencies
 	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
 	// OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error)
@@ -108,7 +115,9 @@ type BackofficeWalletClient interface {
 	DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetDepositRewardConfigResponse, error)
+	// Set app download reward config for a target operator
 	SetAppDownloadRewardConfig(ctx context.Context, in *SetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*v1.SetAppDownloadRewardConfigResponse, error)
+	// Get app download reward config for a target operator
 	GetAppDownloadRewardConfig(ctx context.Context, in *GetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetAppDownloadRewardConfigResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(ctx context.Context, in *CreatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*v1.CreatePromoCodeCampaignResponse, error)
@@ -642,18 +651,25 @@ func (c *backofficeWalletClient) ManualAdjustCreditTurnoverField(ctx context.Con
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
 type BackofficeWalletServer interface {
+	// Get wallet balances for a user
 	GetWallets(context.Context, *GetWalletsRequest) (*v1.GetWalletsResponse, error)
+	// Get wallet credit/debit transaction history for a user
 	GetWalletCredits(context.Context, *GetWalletCreditsRequest) (*GetWalletCreditsResponse, error)
 	// ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error)
+	// Get credit transaction details by credit ID
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
+	// Update wallet settings (e.g. enable/disable a currency for a user)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
+	// Add a new currency to the wallet configuration
 	AddWalletCurrency(context.Context, *AddWalletCurrencyRequest) (*AddWalletCurrencyResponse, error)
 	// ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*v1.ListCurrenciesResponse, error)
+	// Update wallet currency settings (visibility, icon, decimal places, etc.)
 	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateOperatorCurrencyResponse, error)
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
+	// Get exchange rates for specified currencies
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
 	// OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
@@ -677,7 +693,9 @@ type BackofficeWalletServer interface {
 	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*v1.DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
+	// Set app download reward config for a target operator
 	SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*v1.SetAppDownloadRewardConfigResponse, error)
+	// Get app download reward config for a target operator
 	GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*v1.GetAppDownloadRewardConfigResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*v1.CreatePromoCodeCampaignResponse, error)

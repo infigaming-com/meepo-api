@@ -25,17 +25,20 @@ const (
 
 // Free spin config for deposit reward or promo code
 type FreeSpinConfig struct {
-	state                   protoimpl.MessageState           `protogen:"open.v1"`
-	Enabled                 bool                             `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType              string                           `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
-	Currency                string                           `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`                       // play currency
-	SpinCount               int32                            `protobuf:"varint,4,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`
-	WageringRequirement     int32                            `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                           `protobuf:"bytes,6,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                            `protobuf:"varint,7,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
-	Rewards                 []*FreeSpinConfig_FreeSpinReward `protobuf:"bytes,8,rep,name=rewards,proto3" json:"rewards,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// "cash" or "bonus" (winning credit type)
+	RewardType string `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
+	// Play currency
+	Currency                string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	SpinCount               int32  `protobuf:"varint,4,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`
+	WageringRequirement     int32  `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string `protobuf:"bytes,6,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	// Winning reward validity (ms)
+	RewardValidity int64                            `protobuf:"varint,7,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`
+	Rewards        []*FreeSpinConfig_FreeSpinReward `protobuf:"bytes,8,rep,name=rewards,proto3" json:"rewards,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *FreeSpinConfig) Reset() {
@@ -126,16 +129,19 @@ func (x *FreeSpinConfig) GetRewards() []*FreeSpinConfig_FreeSpinReward {
 
 // Free bet config for deposit reward or promo code
 type FreeBetConfig struct {
-	state                   protoimpl.MessageState         `protogen:"open.v1"`
-	Enabled                 bool                           `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType              string                         `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
-	Currency                string                         `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`                       // settlement currency
-	WageringRequirement     int32                          `protobuf:"varint,4,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                         `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                          `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
-	Rewards                 []*FreeBetConfig_FreeBetReward `protobuf:"bytes,7,rep,name=rewards,proto3" json:"rewards,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// "cash" or "bonus" (winning credit type)
+	RewardType string `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
+	// Settlement currency
+	Currency                string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	WageringRequirement     int32  `protobuf:"varint,4,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	// Winning reward validity (ms)
+	RewardValidity int64                          `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`
+	Rewards        []*FreeBetConfig_FreeBetReward `protobuf:"bytes,7,rep,name=rewards,proto3" json:"rewards,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *FreeBetConfig) Reset() {
@@ -219,16 +225,19 @@ func (x *FreeBetConfig) GetRewards() []*FreeBetConfig_FreeBetReward {
 
 // Bonus money config for promo code campaign
 type PromoCodeBonusMoneyConfig struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	Enabled                 bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Currency                string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	RewardType              string                 `protobuf:"bytes,3,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus
-	Amount                  string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`                           // fixed amount
-	WageringRequirement     int32                  `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                 `protobuf:"bytes,6,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                  `protobuf:"varint,7,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // ms, 0 = no expiration
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Enabled  bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// "cash" or "bonus"
+	RewardType string `protobuf:"bytes,3,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
+	// Fixed amount
+	Amount                  string `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	WageringRequirement     int32  `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string `protobuf:"bytes,6,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	// ms, 0 = no expiration
+	RewardValidity int64 `protobuf:"varint,7,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *PromoCodeBonusMoneyConfig) Reset() {
@@ -373,11 +382,12 @@ func (x *PromoCodeRewardConfigs) GetFreeBetConfig() *FreeBetConfig {
 
 // Deposit condition for promo code campaign
 type DepositCondition struct {
-	state                      protoimpl.MessageState `protogen:"open.v1"`
-	TimeRangeDays              int32                  `protobuf:"varint,1,opt,name=time_range_days,json=timeRangeDays,proto3" json:"time_range_days,omitempty"` // 0 = no time range
-	ReportingCurrencyAggregate bool                   `protobuf:"varint,2,opt,name=reporting_currency_aggregate,json=reportingCurrencyAggregate,proto3" json:"reporting_currency_aggregate,omitempty"`
-	Currency                   string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	Amount                     string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// 0 = no time range
+	TimeRangeDays              int32  `protobuf:"varint,1,opt,name=time_range_days,json=timeRangeDays,proto3" json:"time_range_days,omitempty"`
+	ReportingCurrencyAggregate bool   `protobuf:"varint,2,opt,name=reporting_currency_aggregate,json=reportingCurrencyAggregate,proto3" json:"reporting_currency_aggregate,omitempty"`
+	Currency                   string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	Amount                     string `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -495,9 +505,10 @@ func (x *RegistrationTimeCondition) GetEndTime() *timestamppb.Timestamp {
 
 // Invitation condition for promo code campaign
 type InvitationCondition struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	TimeRangeDays   int32                  `protobuf:"varint,1,opt,name=time_range_days,json=timeRangeDays,proto3" json:"time_range_days,omitempty"` // 0 = no time range
-	InvitationCount int32                  `protobuf:"varint,2,opt,name=invitation_count,json=invitationCount,proto3" json:"invitation_count,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// 0 = no time range
+	TimeRangeDays   int32 `protobuf:"varint,1,opt,name=time_range_days,json=timeRangeDays,proto3" json:"time_range_days,omitempty"`
+	InvitationCount int32 `protobuf:"varint,2,opt,name=invitation_count,json=invitationCount,proto3" json:"invitation_count,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -548,11 +559,12 @@ func (x *InvitationCondition) GetInvitationCount() int32 {
 
 // Turnover condition for promo code campaign
 type TurnoverCondition struct {
-	state                      protoimpl.MessageState `protogen:"open.v1"`
-	TimeRangeDays              int32                  `protobuf:"varint,1,opt,name=time_range_days,json=timeRangeDays,proto3" json:"time_range_days,omitempty"` // 0 = no time range
-	ReportingCurrencyAggregate bool                   `protobuf:"varint,2,opt,name=reporting_currency_aggregate,json=reportingCurrencyAggregate,proto3" json:"reporting_currency_aggregate,omitempty"`
-	Currency                   string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	Amount                     string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// 0 = no time range
+	TimeRangeDays              int32  `protobuf:"varint,1,opt,name=time_range_days,json=timeRangeDays,proto3" json:"time_range_days,omitempty"`
+	ReportingCurrencyAggregate bool   `protobuf:"varint,2,opt,name=reporting_currency_aggregate,json=reportingCurrencyAggregate,proto3" json:"reporting_currency_aggregate,omitempty"`
+	Currency                   string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	Amount                     string `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -860,15 +872,18 @@ func (x *PromoCodeConditions) GetVerificationStatusCondition() *VerificationStat
 }
 
 type PromoCodeCampaign struct {
-	state            protoimpl.MessageState  `protogen:"open.v1"`
-	Id               int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	OperatorContext  *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Name             string                  `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	CodeType         string                  `protobuf:"bytes,4,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`                   // one_time | universal
-	MaxUsageLimit    int32                   `protobuf:"varint,5,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"` // for universal code
-	StartTime        *timestamppb.Timestamp  `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime          *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	Status           string                  `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"` // active | paused | disabled
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	Id              int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Name            string                  `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// "one_time" or "universal"
+	CodeType string `protobuf:"bytes,4,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`
+	// For universal code
+	MaxUsageLimit int32                  `protobuf:"varint,5,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	// "active", "paused", or "disabled"
+	Status           string                  `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
 	RewardConditions *PromoCodeConditions    `protobuf:"bytes,9,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"`
 	RewardConfigs    *PromoCodeRewardConfigs `protobuf:"bytes,10,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
 	CreatedAt        *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -995,17 +1010,18 @@ func (x *PromoCodeCampaign) GetUpdatedAt() *timestamppb.Timestamp {
 type CreatePromoCodeCampaignRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator must be an operator, not other operator type
-	CreateUserId             int64                   `protobuf:"varint,3,opt,name=create_user_id,json=createUserId,proto3" json:"create_user_id,omitempty"`
-	Name                     string                  `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	CodeType                 string                  `protobuf:"bytes,5,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`
-	MaxUsageLimit            int32                   `protobuf:"varint,6,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`
-	StartTime                *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime                  *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	RewardConditions         *PromoCodeConditions    `protobuf:"bytes,9,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"`
-	RewardConfigs            *PromoCodeRewardConfigs `protobuf:"bytes,10,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// Target operator must be an operator, not other operator type
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	CreateUserId          int64                   `protobuf:"varint,3,opt,name=create_user_id,json=createUserId,proto3" json:"create_user_id,omitempty"`
+	Name                  string                  `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	CodeType              string                  `protobuf:"bytes,5,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`
+	MaxUsageLimit         int32                   `protobuf:"varint,6,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`
+	StartTime             *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime               *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	RewardConditions      *PromoCodeConditions    `protobuf:"bytes,9,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"`
+	RewardConfigs         *PromoCodeRewardConfigs `protobuf:"bytes,10,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CreatePromoCodeCampaignRequest) Reset() {
@@ -1303,9 +1319,10 @@ type UpdatePromoCodeCampaignStatusRequest struct {
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	CampaignId               int64                   `protobuf:"varint,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	Status                   string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // active | paused | disabled
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// "active", "paused", or "disabled"
+	Status        string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdatePromoCodeCampaignStatusRequest) Reset() {
@@ -1407,14 +1424,16 @@ type ListPromoCodeCampaignsRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Status                   *string                 `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`                     // active | paused | disabled
-	CodeType                 *string                 `protobuf:"bytes,4,opt,name=code_type,json=codeType,proto3,oneof" json:"code_type,omitempty"` // one_time | universal
-	StartTime                *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime                  *timestamppb.Timestamp  `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	Page                     *int32                  `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize                 *int32                  `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// "active", "paused", or "disabled"
+	Status *string `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	// "one_time" or "universal"
+	CodeType      *string                `protobuf:"bytes,4,opt,name=code_type,json=codeType,proto3,oneof" json:"code_type,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	Page          *int32                 `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListPromoCodeCampaignsRequest) Reset() {
@@ -1504,23 +1523,30 @@ func (x *ListPromoCodeCampaignsRequest) GetPageSize() int32 {
 }
 
 type PromoCodeCampaignListItem struct {
-	state               protoimpl.MessageState  `protogen:"open.v1"`
-	Id                  int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name                string                  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	CodeType            string                  `protobuf:"bytes,3,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`                // one_time | universal
-	RewardTrigger       string                  `protobuf:"bytes,4,opt,name=reward_trigger,json=rewardTrigger,proto3" json:"reward_trigger,omitempty"` // instant | conditional
-	Status              string                  `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`                                    // active | paused | disabled
-	RewardConfigs       *PromoCodeRewardConfigs `protobuf:"bytes,6,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
-	UsageCount          int32                   `protobuf:"varint,7,opt,name=usage_count,json=usageCount,proto3" json:"usage_count,omitempty"`                              // current code usage count
-	TotalCodesGenerated int32                   `protobuf:"varint,8,opt,name=total_codes_generated,json=totalCodesGenerated,proto3" json:"total_codes_generated,omitempty"` // total codes generated for campaign
-	MaxUsageLimit       int32                   `protobuf:"varint,9,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`                   // max usage limit
-	CreatedAt           *timestamppb.Timestamp  `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	StartTime           *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime             *timestamppb.Timestamp  `protobuf:"bytes,12,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	UpdatedAt           *timestamppb.Timestamp  `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	RewardConditions    *PromoCodeConditions    `protobuf:"bytes,14,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"` // campaign reward conditions
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name  string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// "one_time" or "universal"
+	CodeType string `protobuf:"bytes,3,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`
+	// "instant" or "conditional"
+	RewardTrigger string `protobuf:"bytes,4,opt,name=reward_trigger,json=rewardTrigger,proto3" json:"reward_trigger,omitempty"`
+	// "active", "paused", or "disabled"
+	Status        string                  `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	RewardConfigs *PromoCodeRewardConfigs `protobuf:"bytes,6,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
+	// Current code usage count
+	UsageCount int32 `protobuf:"varint,7,opt,name=usage_count,json=usageCount,proto3" json:"usage_count,omitempty"`
+	// Total codes generated for campaign
+	TotalCodesGenerated int32 `protobuf:"varint,8,opt,name=total_codes_generated,json=totalCodesGenerated,proto3" json:"total_codes_generated,omitempty"`
+	// Max usage limit
+	MaxUsageLimit int32                  `protobuf:"varint,9,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Campaign reward conditions
+	RewardConditions *PromoCodeConditions `protobuf:"bytes,14,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *PromoCodeCampaignListItem) Reset() {
@@ -1838,15 +1864,17 @@ func (x *ListPromoCodeCampaignDetailsRequest) GetPageSize() int32 {
 
 // Code item for one_time campaigns
 type PromoCodeListItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // unused | used
-	UsedByUserId  int64                  `protobuf:"varint,3,opt,name=used_by_user_id,json=usedByUserId,proto3" json:"used_by_user_id,omitempty"`
-	CountryCode   string                 `protobuf:"bytes,4,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
-	VipLevel      string                 `protobuf:"bytes,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UsedAt        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
-	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // same as campaign end_time, used directly from campaign
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Code  string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	// "unused" or "used"
+	Status       string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	UsedByUserId int64                  `protobuf:"varint,3,opt,name=used_by_user_id,json=usedByUserId,proto3" json:"used_by_user_id,omitempty"`
+	CountryCode  string                 `protobuf:"bytes,4,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
+	VipLevel     string                 `protobuf:"bytes,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	CreatedAt    *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UsedAt       *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
+	// Same as campaign end_time, used directly from campaign
+	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1939,14 +1967,15 @@ func (x *PromoCodeListItem) GetExpiredAt() *timestamppb.Timestamp {
 
 // Usage item for universal campaigns
 type PromoCodeUsageListItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	CountryCode   string                 `protobuf:"bytes,3,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
-	VipLevel      string                 `protobuf:"bytes,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UsedAt        *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
-	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // same as campaign end_time, used directly from campaign
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Code        string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	UserId      int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	CountryCode string                 `protobuf:"bytes,3,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
+	VipLevel    string                 `protobuf:"bytes,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	CreatedAt   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UsedAt      *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
+	// Same as campaign end_time, used directly from campaign
+	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2031,10 +2060,13 @@ func (x *PromoCodeUsageListItem) GetExpiredAt() *timestamppb.Timestamp {
 }
 
 type ListPromoCodeCampaignDetailsResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	CodeType      string                    `protobuf:"bytes,1,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"` // one_time | universal (indicates which list is populated)
-	Codes         []*PromoCodeListItem      `protobuf:"bytes,2,rep,name=codes,proto3" json:"codes,omitempty"`                       // populated for one_time campaigns
-	Usages        []*PromoCodeUsageListItem `protobuf:"bytes,3,rep,name=usages,proto3" json:"usages,omitempty"`                     // populated for universal campaigns
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// "one_time" or "universal" (indicates which list is populated)
+	CodeType string `protobuf:"bytes,1,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`
+	// Populated for one_time campaigns
+	Codes []*PromoCodeListItem `protobuf:"bytes,2,rep,name=codes,proto3" json:"codes,omitempty"`
+	// Populated for universal campaigns
+	Usages        []*PromoCodeUsageListItem `protobuf:"bytes,3,rep,name=usages,proto3" json:"usages,omitempty"`
 	Total         int32                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	Page          int32                     `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                     `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -2120,11 +2152,14 @@ type GenerateOneTimePromoCodesRequest struct {
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	GeneratedByUserId        int64                   `protobuf:"varint,2,opt,name=generated_by_user_id,json=generatedByUserId,proto3" json:"generated_by_user_id,omitempty"`
 	CampaignId               int64                   `protobuf:"varint,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	CodeLength               int32                   `protobuf:"varint,4,opt,name=code_length,json=codeLength,proto3" json:"code_length,omitempty"` // 8 | 10 | 12
-	CodeFormat               string                  `protobuf:"bytes,5,opt,name=code_format,json=codeFormat,proto3" json:"code_format,omitempty"`  // alphanumeric | uppercase | numeric
-	Count                    int32                   `protobuf:"varint,6,opt,name=count,proto3" json:"count,omitempty"`                             // 1-10000
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// 8, 10, or 12
+	CodeLength int32 `protobuf:"varint,4,opt,name=code_length,json=codeLength,proto3" json:"code_length,omitempty"`
+	// "alphanumeric", "uppercase", or "numeric"
+	CodeFormat string `protobuf:"bytes,5,opt,name=code_format,json=codeFormat,proto3" json:"code_format,omitempty"`
+	// 1 to 10000
+	Count         int32 `protobuf:"varint,6,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GenerateOneTimePromoCodesRequest) Reset() {
@@ -2499,23 +2534,30 @@ func (x *GetPromoCodeInfoRequest) GetCode() string {
 }
 
 type GetPromoCodeInfoResponse struct {
-	state             protoimpl.MessageState       `protogen:"open.v1"`
-	Code              string                       `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	CodeType          string                       `protobuf:"bytes,2,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"` // one_time | universal
-	CampaignId        int64                        `protobuf:"varint,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	CampaignName      string                       `protobuf:"bytes,4,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	CampaignStatus    string                       `protobuf:"bytes,5,opt,name=campaign_status,json=campaignStatus,proto3" json:"campaign_status,omitempty"` // active | paused | disabled
-	StartTime         *timestamppb.Timestamp       `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime           *timestamppb.Timestamp       `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	UsageCount        int32                        `protobuf:"varint,8,opt,name=usage_count,json=usageCount,proto3" json:"usage_count,omitempty"`                           // this code's usage count
-	MaxUsageLimit     int32                        `protobuf:"varint,9,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`                // max usage limit (for universal)
-	AlreadyUsedByUser bool                         `protobuf:"varint,10,opt,name=already_used_by_user,json=alreadyUsedByUser,proto3" json:"already_used_by_user,omitempty"` // whether current user has already used this promo code campaign
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Code  string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	// "one_time" or "universal"
+	CodeType     string `protobuf:"bytes,2,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`
+	CampaignId   int64  `protobuf:"varint,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	CampaignName string `protobuf:"bytes,4,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	// "active", "paused", or "disabled"
+	CampaignStatus string                 `protobuf:"bytes,5,opt,name=campaign_status,json=campaignStatus,proto3" json:"campaign_status,omitempty"`
+	StartTime      *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	// This code's usage count
+	UsageCount int32 `protobuf:"varint,8,opt,name=usage_count,json=usageCount,proto3" json:"usage_count,omitempty"`
+	// Max usage limit (for universal)
+	MaxUsageLimit int32 `protobuf:"varint,9,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`
+	// Whether current user has already used this promo code campaign
+	AlreadyUsedByUser bool                         `protobuf:"varint,10,opt,name=already_used_by_user,json=alreadyUsedByUser,proto3" json:"already_used_by_user,omitempty"`
 	RewardConfigs     *PromoCodeRewardConfigs      `protobuf:"bytes,11,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
 	RewardConditions  *PromoCodeConditions         `protobuf:"bytes,12,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"`
 	ConditionResults  []*ConditionValidationResult `protobuf:"bytes,13,rep,name=condition_results,json=conditionResults,proto3" json:"condition_results,omitempty"`
 	// Claimability status
-	Claimable         bool   `protobuf:"varint,14,opt,name=claimable,proto3" json:"claimable,omitempty"`                                         // whether the code can be claimed by this user
-	UnclaimableReason string `protobuf:"bytes,15,opt,name=unclaimable_reason,json=unclaimableReason,proto3" json:"unclaimable_reason,omitempty"` // reason why the code cannot be claimed (empty if claimable)
+	// Whether the code can be claimed by this user
+	Claimable bool `protobuf:"varint,14,opt,name=claimable,proto3" json:"claimable,omitempty"`
+	// Reason why the code cannot be claimed (empty if claimable)
+	UnclaimableReason string `protobuf:"bytes,15,opt,name=unclaimable_reason,json=unclaimableReason,proto3" json:"unclaimable_reason,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -2738,9 +2780,10 @@ func (*ClaimPromoCodeResponse) Descriptor() ([]byte, []int) {
 
 // Condition validation result
 type ConditionValidationResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConditionType string                 `protobuf:"bytes,1,opt,name=condition_type,json=conditionType,proto3" json:"condition_type,omitempty"` // deposit | registration_time | invitation | turnover | referrer | affiliate | verification_status
-	Satisfied     bool                   `protobuf:"varint,2,opt,name=satisfied,proto3" json:"satisfied,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// "deposit", "registration_time", "invitation", "turnover", "referrer", "affiliate", or "verification_status"
+	ConditionType string `protobuf:"bytes,1,opt,name=condition_type,json=conditionType,proto3" json:"condition_type,omitempty"`
+	Satisfied     bool   `protobuf:"varint,2,opt,name=satisfied,proto3" json:"satisfied,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2790,11 +2833,12 @@ func (x *ConditionValidationResult) GetSatisfied() bool {
 }
 
 type FreeSpinConfig_FreeSpinReward struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	ProviderId       string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
-	GameId           string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	Level            int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
-	FreeSpinValidity int64                  `protobuf:"varint,4,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"` // ms, 0 = no expiration
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	GameId     string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	Level      int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
+	// ms, 0 = no expiration
+	FreeSpinValidity int64 `protobuf:"varint,4,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -2858,13 +2902,16 @@ func (x *FreeSpinConfig_FreeSpinReward) GetFreeSpinValidity() int64 {
 }
 
 type FreeBetConfig_FreeBetReward struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	TemplateId      string                 `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
-	Amount          string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`                                             // free bet amount (decimal string)
-	FreeBetValidity int64                  `protobuf:"varint,3,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"` // ms, 0 = no expiration
-	Extra           []byte                 `protobuf:"bytes,4,opt,name=extra,proto3,oneof" json:"extra,omitempty"`                                         // extra data (JSON), optional
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	TemplateId string                 `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	// Free bet amount (decimal string)
+	Amount string `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	// ms, 0 = no expiration
+	FreeBetValidity int64 `protobuf:"varint,3,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"`
+	// Extra data (JSON), optional
+	Extra         []byte `protobuf:"bytes,4,opt,name=extra,proto3,oneof" json:"extra,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FreeBetConfig_FreeBetReward) Reset() {

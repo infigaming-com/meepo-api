@@ -16,35 +16,45 @@ option java_package = "api.wallet.service.v1";
 // Free spin config for deposit reward or promo code
 message FreeSpinConfig {
 	bool enabled = 1;
-	string reward_type = 2;              // cash | bonus (winning credit type)
-	string currency = 3;                 // play currency
+	// "cash" or "bonus" (winning credit type)
+	string reward_type = 2;
+	// Play currency
+	string currency = 3;
 	int32 spin_count = 4;
 	int32 wagering_requirement = 5;
 	string max_withdrawal_multiplier = 6;
-	int64 reward_validity = 7;          // winning reward validity (ms)
+	// Winning reward validity (ms)
+	int64 reward_validity = 7;
 	repeated FreeSpinReward rewards = 8;
 	message FreeSpinReward {
 		string provider_id = 1;
 		string game_id = 2;
 		int32 level = 3;
-		int64 free_spin_validity = 4;        // ms, 0 = no expiration
+		// ms, 0 = no expiration
+		int64 free_spin_validity = 4;
 	}
 }
 
 // Free bet config for deposit reward or promo code
 message FreeBetConfig {
 	bool enabled = 1;
-	string reward_type = 2;              // cash | bonus (winning credit type)
-	string currency = 3;                 // settlement currency
+	// "cash" or "bonus" (winning credit type)
+	string reward_type = 2;
+	// Settlement currency
+	string currency = 3;
 	int32 wagering_requirement = 4;
 	string max_withdrawal_multiplier = 5;
-	int64 reward_validity = 6;           // winning reward validity (ms)
+	// Winning reward validity (ms)
+	int64 reward_validity = 6;
 	repeated FreeBetReward rewards = 7;
 	message FreeBetReward {
 		string template_id = 1;
-		string amount = 2;                   // free bet amount (decimal string)
-		int64 free_bet_validity = 3;         // ms, 0 = no expiration
-		optional bytes extra = 4;            // extra data (JSON), optional
+		// Free bet amount (decimal string)
+		string amount = 2;
+		// ms, 0 = no expiration
+		int64 free_bet_validity = 3;
+		// Extra data (JSON), optional
+		optional bytes extra = 4;
 	}
 }
 
@@ -56,11 +66,14 @@ message FreeBetConfig {
 message PromoCodeBonusMoneyConfig {
 	bool enabled = 1;
 	string currency = 2;
-	string reward_type = 3;              // cash | bonus
-	string amount = 4;                   // fixed amount
+	// "cash" or "bonus"
+	string reward_type = 3;
+	// Fixed amount
+	string amount = 4;
 	int32 wagering_requirement = 5;
 	string max_withdrawal_multiplier = 6;
-	int64 reward_validity = 7;           // ms, 0 = no expiration
+	// ms, 0 = no expiration
+	int64 reward_validity = 7;
 }
 
 // Campaign reward configs (all optional)
@@ -72,7 +85,8 @@ message PromoCodeRewardConfigs {
 
 // Deposit condition for promo code campaign
 message DepositCondition {
-	int32 time_range_days = 1;           // 0 = no time range
+	// 0 = no time range
+	int32 time_range_days = 1;
 	bool reporting_currency_aggregate = 2;
 	string currency = 3;
 	string amount = 4;
@@ -86,13 +100,15 @@ message RegistrationTimeCondition {
 
 // Invitation condition for promo code campaign
 message InvitationCondition {
-	int32 time_range_days = 1;           // 0 = no time range
+	// 0 = no time range
+	int32 time_range_days = 1;
 	int32 invitation_count = 2;
 }
 
 // Turnover condition for promo code campaign
 message TurnoverCondition {
-	int32 time_range_days = 1;           // 0 = no time range
+	// 0 = no time range
+	int32 time_range_days = 1;
 	bool reporting_currency_aggregate = 2;
 	string currency = 3;
 	string amount = 4;
@@ -130,11 +146,14 @@ message PromoCodeCampaign {
 	int64 id = 1;
 	api.common.OperatorContext operator_context = 2;
 	string name = 3;
-	string code_type = 4;                // one_time | universal
-	int32 max_usage_limit = 5;           // for universal code
+	// "one_time" or "universal"
+	string code_type = 4;
+	// For universal code
+	int32 max_usage_limit = 5;
 	google.protobuf.Timestamp start_time = 6;
 	google.protobuf.Timestamp end_time = 7;
-	string status = 8;                   // active | paused | disabled
+	// "active", "paused", or "disabled"
+	string status = 8;
 	PromoCodeConditions reward_conditions = 9;
 	PromoCodeRewardConfigs reward_configs = 10;
 	google.protobuf.Timestamp created_at = 11;
@@ -144,7 +163,8 @@ message PromoCodeCampaign {
 // Create Campaign (status defaults to active)
 message CreatePromoCodeCampaignRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2; // target operator must be an operator, not other operator type
+	// Target operator must be an operator, not other operator type
+	api.common.OperatorContext target_operator_context = 2;
 	int64 create_user_id = 3;
 	string name = 4;
 	string code_type = 5;
@@ -180,7 +200,8 @@ message UpdatePromoCodeCampaignStatusRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
 	int64 campaign_id = 3;
-	string status = 4;                   // active | paused | disabled
+	// "active", "paused", or "disabled"
+	string status = 4;
 }
 
 message UpdatePromoCodeCampaignStatusResponse {
@@ -190,8 +211,10 @@ message UpdatePromoCodeCampaignStatusResponse {
 message ListPromoCodeCampaignsRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
-	optional string status = 3;                   // active | paused | disabled
-	optional string code_type = 4;                // one_time | universal
+	// "active", "paused", or "disabled"
+	optional string status = 3;
+	// "one_time" or "universal"
+	optional string code_type = 4;
 	google.protobuf.Timestamp start_time = 5;
 	google.protobuf.Timestamp end_time = 6;
 	optional int32 page = 7;
@@ -201,18 +224,25 @@ message ListPromoCodeCampaignsRequest {
 message PromoCodeCampaignListItem {
 	int64 id = 1;
 	string name = 2;
-	string code_type = 3;                // one_time | universal
-	string reward_trigger = 4;           // instant | conditional
-	string status = 5;                   // active | paused | disabled
+	// "one_time" or "universal"
+	string code_type = 3;
+	// "instant" or "conditional"
+	string reward_trigger = 4;
+	// "active", "paused", or "disabled"
+	string status = 5;
 	PromoCodeRewardConfigs reward_configs = 6;
-	int32 usage_count = 7;               // current code usage count
-	int32 total_codes_generated = 8;     // total codes generated for campaign
-	int32 max_usage_limit = 9;           // max usage limit
+	// Current code usage count
+	int32 usage_count = 7;
+	// Total codes generated for campaign
+	int32 total_codes_generated = 8;
+	// Max usage limit
+	int32 max_usage_limit = 9;
 	google.protobuf.Timestamp created_at = 10;
 	google.protobuf.Timestamp start_time = 11;
 	google.protobuf.Timestamp end_time = 12;
 	google.protobuf.Timestamp updated_at = 13;
-	PromoCodeConditions reward_conditions = 14;  // campaign reward conditions
+	// Campaign reward conditions
+	PromoCodeConditions reward_conditions = 14;
 }
 
 message ListPromoCodeCampaignsResponse {
@@ -239,13 +269,15 @@ message ListPromoCodeCampaignDetailsRequest {
 // Code item for one_time campaigns
 message PromoCodeListItem {
 	string code = 1;
-	string status = 2;                   // unused | used
+	// "unused" or "used"
+	string status = 2;
 	int64 used_by_user_id = 3;
 	string country_code = 4;
 	string vip_level = 5;
 	google.protobuf.Timestamp created_at = 6;
 	google.protobuf.Timestamp used_at = 7;
-	google.protobuf.Timestamp expired_at = 8; // same as campaign end_time, used directly from campaign
+	// Same as campaign end_time, used directly from campaign
+	google.protobuf.Timestamp expired_at = 8;
 }
 
 // Usage item for universal campaigns
@@ -256,13 +288,17 @@ message PromoCodeUsageListItem {
 	string vip_level = 4;
 	google.protobuf.Timestamp created_at = 5;
 	google.protobuf.Timestamp used_at = 6;
-	google.protobuf.Timestamp expired_at = 7; // same as campaign end_time, used directly from campaign
+	// Same as campaign end_time, used directly from campaign
+	google.protobuf.Timestamp expired_at = 7;
 }
 
 message ListPromoCodeCampaignDetailsResponse {
-	string code_type = 1;                // one_time | universal (indicates which list is populated)
-	repeated PromoCodeListItem codes = 2;       // populated for one_time campaigns
-	repeated PromoCodeUsageListItem usages = 3; // populated for universal campaigns
+	// "one_time" or "universal" (indicates which list is populated)
+	string code_type = 1;
+	// Populated for one_time campaigns
+	repeated PromoCodeListItem codes = 2;
+	// Populated for universal campaigns
+	repeated PromoCodeUsageListItem usages = 3;
 	int32 total = 4;
 	int32 page = 5;
 	int32 page_size = 6;
@@ -273,9 +309,12 @@ message GenerateOneTimePromoCodesRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	int64 generated_by_user_id = 2;
 	int64 campaign_id = 3;
-	int32 code_length = 4;              // 8 | 10 | 12
-	string code_format = 5;              // alphanumeric | uppercase | numeric
-	int32 count = 6;                     // 1-10000
+	// 8, 10, or 12
+	int32 code_length = 4;
+	// "alphanumeric", "uppercase", or "numeric"
+	string code_format = 5;
+	// 1 to 10000
+	int32 count = 6;
 }
 
 message GenerateOneTimePromoCodesResponse {
@@ -320,22 +359,29 @@ message GetPromoCodeInfoRequest {
 
 message GetPromoCodeInfoResponse {
 	string code = 1;
-	string code_type = 2;                        // one_time | universal
+	// "one_time" or "universal"
+	string code_type = 2;
 	int64 campaign_id = 3;
 	string campaign_name = 4;
-	string campaign_status = 5;                  // active | paused | disabled
+	// "active", "paused", or "disabled"
+	string campaign_status = 5;
 	google.protobuf.Timestamp start_time = 6;
 	google.protobuf.Timestamp end_time = 7;
-	int32 usage_count = 8;                       // this code's usage count
-	int32 max_usage_limit = 9;                   // max usage limit (for universal)
-	bool already_used_by_user = 10;               // whether current user has already used this promo code campaign
+	// This code's usage count
+	int32 usage_count = 8;
+	// Max usage limit (for universal)
+	int32 max_usage_limit = 9;
+	// Whether current user has already used this promo code campaign
+	bool already_used_by_user = 10;
 	PromoCodeRewardConfigs reward_configs = 11;
 	PromoCodeConditions reward_conditions = 12;
 	repeated ConditionValidationResult condition_results = 13;
 
 	// Claimability status
-	bool claimable = 14;                         // whether the code can be claimed by this user
-	string unclaimable_reason = 15;              // reason why the code cannot be claimed (empty if claimable)
+	// Whether the code can be claimed by this user
+	bool claimable = 14;
+	// Reason why the code cannot be claimed (empty if claimable)
+	string unclaimable_reason = 15;
 }
 
 // ClaimPromoCode - Claim promo code reward
@@ -348,6 +394,7 @@ message ClaimPromoCodeResponse {
 
 // Condition validation result
 message ConditionValidationResult {
-	string condition_type = 1;                   // deposit | registration_time | invitation | turnover | referrer | affiliate | verification_status
+	// "deposit", "registration_time", "invitation", "turnover", "referrer", "affiliate", or "verification_status"
+	string condition_type = 1;
 	bool satisfied = 2;
 }

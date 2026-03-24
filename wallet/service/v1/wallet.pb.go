@@ -752,25 +752,28 @@ func (x *GameDebitRequest) GetAllowOverdraft() bool {
 }
 
 type AffectedCredit struct {
-	state                                 protoimpl.MessageState `protogen:"open.v1"`
-	CreditId                              int64                  `protobuf:"varint,1,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
-	SettlementCurrency                    string                 `protobuf:"bytes,2,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`                     // currency of the credit
-	Amount                                string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`                                                                       // currency amount of the game transaction
-	AmountSettlementCurrency              string                 `protobuf:"bytes,4,opt,name=amount_settlement_currency,json=amountSettlementCurrency,proto3" json:"amount_settlement_currency,omitempty"` // settlement currency amount of the wallet transaction
-	AmountUsd                             string                 `protobuf:"bytes,5,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
-	AmountReportingCurrency               string                 `protobuf:"bytes,6,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
-	CashAmount                            string                 `protobuf:"bytes,7,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	CashAmountSettlementCurrency          string                 `protobuf:"bytes,8,opt,name=cash_amount_settlement_currency,json=cashAmountSettlementCurrency,proto3" json:"cash_amount_settlement_currency,omitempty"`
-	CashAmountUsd                         string                 `protobuf:"bytes,9,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
-	CashAmountReportingCurrency           string                 `protobuf:"bytes,10,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
-	OperatorBonusAmount                   string                 `protobuf:"bytes,11,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
-	OperatorBonusAmountSettlementCurrency string                 `protobuf:"bytes,12,opt,name=operator_bonus_amount_settlement_currency,json=operatorBonusAmountSettlementCurrency,proto3" json:"operator_bonus_amount_settlement_currency,omitempty"`
-	OperatorBonusAmountUsd                string                 `protobuf:"bytes,13,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
-	OperatorBonusAmountReportingCurrency  string                 `protobuf:"bytes,14,opt,name=operator_bonus_amount_reporting_currency,json=operatorBonusAmountReportingCurrency,proto3" json:"operator_bonus_amount_reporting_currency,omitempty"`
-	ProviderBonusAmount                   string                 `protobuf:"bytes,15,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
-	ProviderBonusAmountSettlementCurrency string                 `protobuf:"bytes,16,opt,name=provider_bonus_amount_settlement_currency,json=providerBonusAmountSettlementCurrency,proto3" json:"provider_bonus_amount_settlement_currency,omitempty"`
-	ProviderBonusAmountUsd                string                 `protobuf:"bytes,17,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
-	ProviderBonusAmountReportingCurrency  string                 `protobuf:"bytes,18,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	CreditId int64                  `protobuf:"varint,1,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
+	// currency of the credit
+	SettlementCurrency string `protobuf:"bytes,2,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	// currency amount of the game transaction
+	Amount string `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	// settlement currency amount of the wallet transaction
+	AmountSettlementCurrency              string `protobuf:"bytes,4,opt,name=amount_settlement_currency,json=amountSettlementCurrency,proto3" json:"amount_settlement_currency,omitempty"`
+	AmountUsd                             string `protobuf:"bytes,5,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency               string `protobuf:"bytes,6,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	CashAmount                            string `protobuf:"bytes,7,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	CashAmountSettlementCurrency          string `protobuf:"bytes,8,opt,name=cash_amount_settlement_currency,json=cashAmountSettlementCurrency,proto3" json:"cash_amount_settlement_currency,omitempty"`
+	CashAmountUsd                         string `protobuf:"bytes,9,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
+	CashAmountReportingCurrency           string `protobuf:"bytes,10,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
+	OperatorBonusAmount                   string `protobuf:"bytes,11,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
+	OperatorBonusAmountSettlementCurrency string `protobuf:"bytes,12,opt,name=operator_bonus_amount_settlement_currency,json=operatorBonusAmountSettlementCurrency,proto3" json:"operator_bonus_amount_settlement_currency,omitempty"`
+	OperatorBonusAmountUsd                string `protobuf:"bytes,13,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
+	OperatorBonusAmountReportingCurrency  string `protobuf:"bytes,14,opt,name=operator_bonus_amount_reporting_currency,json=operatorBonusAmountReportingCurrency,proto3" json:"operator_bonus_amount_reporting_currency,omitempty"`
+	ProviderBonusAmount                   string `protobuf:"bytes,15,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
+	ProviderBonusAmountSettlementCurrency string `protobuf:"bytes,16,opt,name=provider_bonus_amount_settlement_currency,json=providerBonusAmountSettlementCurrency,proto3" json:"provider_bonus_amount_settlement_currency,omitempty"`
+	ProviderBonusAmountUsd                string `protobuf:"bytes,17,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
+	ProviderBonusAmountReportingCurrency  string `protobuf:"bytes,18,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
 	unknownFields                         protoimpl.UnknownFields
 	sizeCache                             protoimpl.SizeCache
 }
@@ -1522,11 +1525,12 @@ func (x *FreezeRequest) GetChannelInfo() *ChannelInfo {
 }
 
 type FreezeResponse struct {
-	state                       protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId               int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OperatorFreezeAmount        string                 `protobuf:"bytes,2,opt,name=operator_freeze_amount,json=operatorFreezeAmount,proto3" json:"operator_freeze_amount,omitempty"` // amount of the operator's freeze
-	OperatorFreezeCurrency      string                 `protobuf:"bytes,3,opt,name=operator_freeze_currency,json=operatorFreezeCurrency,proto3" json:"operator_freeze_currency,omitempty"`
-	OperatorFreezeTransactionId int64                  `protobuf:"varint,4,opt,name=operator_freeze_transaction_id,json=operatorFreezeTransactionId,proto3" json:"operator_freeze_transaction_id,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	// amount of the operator's freeze
+	OperatorFreezeAmount        string `protobuf:"bytes,2,opt,name=operator_freeze_amount,json=operatorFreezeAmount,proto3" json:"operator_freeze_amount,omitempty"`
+	OperatorFreezeCurrency      string `protobuf:"bytes,3,opt,name=operator_freeze_currency,json=operatorFreezeCurrency,proto3" json:"operator_freeze_currency,omitempty"`
+	OperatorFreezeTransactionId int64  `protobuf:"varint,4,opt,name=operator_freeze_transaction_id,json=operatorFreezeTransactionId,proto3" json:"operator_freeze_transaction_id,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -2066,7 +2070,8 @@ type ListWalletBalanceTransactionsRequest struct {
 	Page             *int32                  `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize         *int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContext  *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Pagination       *bool                   `protobuf:"varint,9,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"` // if not provided, default is true
+	// if not provided, default is true
+	Pagination *bool `protobuf:"varint,9,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
 	// source_credit_id: filter to get balance transactions that created this credit
 	// Only returns source transaction types: payment_deposit, deposit_reward, promo_code_reward, free_spin_win, free_bet_win
 	SourceCreditId *int64 `protobuf:"varint,10,opt,name=source_credit_id,json=sourceCreditId,proto3,oneof" json:"source_credit_id,omitempty"`
@@ -2581,9 +2586,10 @@ func (x *GetExchangeRatesResponse) GetExchangeRates() map[string]string {
 }
 
 type GetExchangeRatesWithBaseCurrencyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currencies    []string               `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	BaseCurrency  *string                `protobuf:"bytes,2,opt,name=base_currency,json=baseCurrency,proto3,oneof" json:"base_currency,omitempty"` // USD if not provided
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Currencies []string               `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	// USD if not provided
+	BaseCurrency  *string `protobuf:"bytes,2,opt,name=base_currency,json=baseCurrency,proto3,oneof" json:"base_currency,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3066,48 +3072,61 @@ func (x *GetBackofficeUserOverviewFromWalletRequest) GetOperatorContext() *commo
 }
 
 type GetBackofficeUserOverviewFromWalletResponse struct {
-	state                                 protoimpl.MessageState `protogen:"open.v1"`
-	BalanceUsd                            string                 `protobuf:"bytes,1,opt,name=balance_usd,json=balanceUsd,proto3" json:"balance_usd,omitempty"`
-	DepositMinusWithdrawUsd               string                 `protobuf:"bytes,2,opt,name=deposit_minus_withdraw_usd,json=depositMinusWithdrawUsd,proto3" json:"deposit_minus_withdraw_usd,omitempty"`
-	TurnoverUsd                           string                 `protobuf:"bytes,3,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
-	CashTurnoverUsd                       string                 `protobuf:"bytes,4,opt,name=cash_turnover_usd,json=cashTurnoverUsd,proto3" json:"cash_turnover_usd,omitempty"`
-	BonusTurnoverUsd                      string                 `protobuf:"bytes,5,opt,name=bonus_turnover_usd,json=bonusTurnoverUsd,proto3" json:"bonus_turnover_usd,omitempty"`
-	DepositUsd                            string                 `protobuf:"bytes,6,opt,name=deposit_usd,json=depositUsd,proto3" json:"deposit_usd,omitempty"`
-	LastDepositUsd                        string                 `protobuf:"bytes,7,opt,name=last_deposit_usd,json=lastDepositUsd,proto3" json:"last_deposit_usd,omitempty"`
-	DepositCount                          int32                  `protobuf:"varint,8,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	WithdrawUsd                           string                 `protobuf:"bytes,9,opt,name=withdraw_usd,json=withdrawUsd,proto3" json:"withdraw_usd,omitempty"`
-	LastWithdrawUsd                       string                 `protobuf:"bytes,10,opt,name=last_withdraw_usd,json=lastWithdrawUsd,proto3" json:"last_withdraw_usd,omitempty"`
-	WithdrawCount                         int32                  `protobuf:"varint,11,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"`
-	BonusUsd                              string                 `protobuf:"bytes,12,opt,name=bonus_usd,json=bonusUsd,proto3" json:"bonus_usd,omitempty"`                           // Not available for now, only return 0
-	ValidTurnoverUsd                      string                 `protobuf:"bytes,13,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"` // Not available for now, only return 0
-	AverageBetAmountUsd                   string                 `protobuf:"bytes,14,opt,name=average_bet_amount_usd,json=averageBetAmountUsd,proto3" json:"average_bet_amount_usd,omitempty"`
-	GgrUsd                                string                 `protobuf:"bytes,15,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	GgrPercentage                         string                 `protobuf:"bytes,16,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`                                   // Round to 2 decimal places
-	ManuallyAddedBalanceUsd               string                 `protobuf:"bytes,17,opt,name=manually_added_balance_usd,json=manuallyAddedBalanceUsd,proto3" json:"manually_added_balance_usd,omitempty"` // Not available for now, only return 0
-	BonusClaimedUsd                       string                 `protobuf:"bytes,18,opt,name=bonus_claimed_usd,json=bonusClaimedUsd,proto3" json:"bonus_claimed_usd,omitempty"`                           // Not available for now, only return 0
-	NgrUsd                                string                 `protobuf:"bytes,19,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	GgrToNgrPercentage                    string                 `protobuf:"bytes,20,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`             // Round to 2 decimal places
-	TurnoverMultiplier                    string                 `protobuf:"bytes,21,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`                 // Round to 2 decimal places
-	WithdrawToDepositRatio                string                 `protobuf:"bytes,22,opt,name=withdraw_to_deposit_ratio,json=withdrawToDepositRatio,proto3" json:"withdraw_to_deposit_ratio,omitempty"` // Round to 2 decimal places
-	Rtp                                   string                 `protobuf:"bytes,23,opt,name=rtp,proto3" json:"rtp,omitempty"`                                                                         // Round to 2 decimal places
-	BalanceReportingCurrency              string                 `protobuf:"bytes,24,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
-	DepositMinusWithdrawReportingCurrency string                 `protobuf:"bytes,25,opt,name=deposit_minus_withdraw_reporting_currency,json=depositMinusWithdrawReportingCurrency,proto3" json:"deposit_minus_withdraw_reporting_currency,omitempty"`
-	TurnoverReportingCurrency             string                 `protobuf:"bytes,26,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
-	CashTurnoverReportingCurrency         string                 `protobuf:"bytes,27,opt,name=cash_turnover_reporting_currency,json=cashTurnoverReportingCurrency,proto3" json:"cash_turnover_reporting_currency,omitempty"`
-	BonusTurnoverReportingCurrency        string                 `protobuf:"bytes,28,opt,name=bonus_turnover_reporting_currency,json=bonusTurnoverReportingCurrency,proto3" json:"bonus_turnover_reporting_currency,omitempty"`
-	DepositReportingCurrency              string                 `protobuf:"bytes,29,opt,name=deposit_reporting_currency,json=depositReportingCurrency,proto3" json:"deposit_reporting_currency,omitempty"`
-	LastDepositReportingCurrency          string                 `protobuf:"bytes,30,opt,name=last_deposit_reporting_currency,json=lastDepositReportingCurrency,proto3" json:"last_deposit_reporting_currency,omitempty"`
-	WithdrawReportingCurrency             string                 `protobuf:"bytes,31,opt,name=withdraw_reporting_currency,json=withdrawReportingCurrency,proto3" json:"withdraw_reporting_currency,omitempty"`
-	LastWithdrawReportingCurrency         string                 `protobuf:"bytes,32,opt,name=last_withdraw_reporting_currency,json=lastWithdrawReportingCurrency,proto3" json:"last_withdraw_reporting_currency,omitempty"`
-	BonusReportingCurrency                string                 `protobuf:"bytes,33,opt,name=bonus_reporting_currency,json=bonusReportingCurrency,proto3" json:"bonus_reporting_currency,omitempty"`                           // Not available for now, only return 0
-	ValidTurnoverReportingCurrency        string                 `protobuf:"bytes,34,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"` // Not available for now, only return 0
-	AverageBetAmountReportingCurrency     string                 `protobuf:"bytes,35,opt,name=average_bet_amount_reporting_currency,json=averageBetAmountReportingCurrency,proto3" json:"average_bet_amount_reporting_currency,omitempty"`
-	GgrReportingCurrency                  string                 `protobuf:"bytes,36,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
-	ManuallyAddedBalanceReportingCurrency string                 `protobuf:"bytes,37,opt,name=manually_added_balance_reporting_currency,json=manuallyAddedBalanceReportingCurrency,proto3" json:"manually_added_balance_reporting_currency,omitempty"` // Not available for now, only return 0
-	BonusClaimedReportingCurrency         string                 `protobuf:"bytes,38,opt,name=bonus_claimed_reporting_currency,json=bonusClaimedReportingCurrency,proto3" json:"bonus_claimed_reporting_currency,omitempty"`                           // Not available for now, only return 0
-	NgrReportingCurrency                  string                 `protobuf:"bytes,39,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	unknownFields                         protoimpl.UnknownFields
-	sizeCache                             protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	BalanceUsd              string                 `protobuf:"bytes,1,opt,name=balance_usd,json=balanceUsd,proto3" json:"balance_usd,omitempty"`
+	DepositMinusWithdrawUsd string                 `protobuf:"bytes,2,opt,name=deposit_minus_withdraw_usd,json=depositMinusWithdrawUsd,proto3" json:"deposit_minus_withdraw_usd,omitempty"`
+	TurnoverUsd             string                 `protobuf:"bytes,3,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	CashTurnoverUsd         string                 `protobuf:"bytes,4,opt,name=cash_turnover_usd,json=cashTurnoverUsd,proto3" json:"cash_turnover_usd,omitempty"`
+	BonusTurnoverUsd        string                 `protobuf:"bytes,5,opt,name=bonus_turnover_usd,json=bonusTurnoverUsd,proto3" json:"bonus_turnover_usd,omitempty"`
+	DepositUsd              string                 `protobuf:"bytes,6,opt,name=deposit_usd,json=depositUsd,proto3" json:"deposit_usd,omitempty"`
+	LastDepositUsd          string                 `protobuf:"bytes,7,opt,name=last_deposit_usd,json=lastDepositUsd,proto3" json:"last_deposit_usd,omitempty"`
+	DepositCount            int32                  `protobuf:"varint,8,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	WithdrawUsd             string                 `protobuf:"bytes,9,opt,name=withdraw_usd,json=withdrawUsd,proto3" json:"withdraw_usd,omitempty"`
+	LastWithdrawUsd         string                 `protobuf:"bytes,10,opt,name=last_withdraw_usd,json=lastWithdrawUsd,proto3" json:"last_withdraw_usd,omitempty"`
+	WithdrawCount           int32                  `protobuf:"varint,11,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"`
+	// Not available for now, only return 0
+	BonusUsd string `protobuf:"bytes,12,opt,name=bonus_usd,json=bonusUsd,proto3" json:"bonus_usd,omitempty"`
+	// Not available for now, only return 0
+	ValidTurnoverUsd    string `protobuf:"bytes,13,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"`
+	AverageBetAmountUsd string `protobuf:"bytes,14,opt,name=average_bet_amount_usd,json=averageBetAmountUsd,proto3" json:"average_bet_amount_usd,omitempty"`
+	GgrUsd              string `protobuf:"bytes,15,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	// Round to 2 decimal places
+	GgrPercentage string `protobuf:"bytes,16,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
+	// Not available for now, only return 0
+	ManuallyAddedBalanceUsd string `protobuf:"bytes,17,opt,name=manually_added_balance_usd,json=manuallyAddedBalanceUsd,proto3" json:"manually_added_balance_usd,omitempty"`
+	// Not available for now, only return 0
+	BonusClaimedUsd string `protobuf:"bytes,18,opt,name=bonus_claimed_usd,json=bonusClaimedUsd,proto3" json:"bonus_claimed_usd,omitempty"`
+	NgrUsd          string `protobuf:"bytes,19,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	// Round to 2 decimal places
+	GgrToNgrPercentage string `protobuf:"bytes,20,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
+	// Round to 2 decimal places
+	TurnoverMultiplier string `protobuf:"bytes,21,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`
+	// Round to 2 decimal places
+	WithdrawToDepositRatio string `protobuf:"bytes,22,opt,name=withdraw_to_deposit_ratio,json=withdrawToDepositRatio,proto3" json:"withdraw_to_deposit_ratio,omitempty"`
+	// Round to 2 decimal places
+	Rtp                                   string `protobuf:"bytes,23,opt,name=rtp,proto3" json:"rtp,omitempty"`
+	BalanceReportingCurrency              string `protobuf:"bytes,24,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
+	DepositMinusWithdrawReportingCurrency string `protobuf:"bytes,25,opt,name=deposit_minus_withdraw_reporting_currency,json=depositMinusWithdrawReportingCurrency,proto3" json:"deposit_minus_withdraw_reporting_currency,omitempty"`
+	TurnoverReportingCurrency             string `protobuf:"bytes,26,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
+	CashTurnoverReportingCurrency         string `protobuf:"bytes,27,opt,name=cash_turnover_reporting_currency,json=cashTurnoverReportingCurrency,proto3" json:"cash_turnover_reporting_currency,omitempty"`
+	BonusTurnoverReportingCurrency        string `protobuf:"bytes,28,opt,name=bonus_turnover_reporting_currency,json=bonusTurnoverReportingCurrency,proto3" json:"bonus_turnover_reporting_currency,omitempty"`
+	DepositReportingCurrency              string `protobuf:"bytes,29,opt,name=deposit_reporting_currency,json=depositReportingCurrency,proto3" json:"deposit_reporting_currency,omitempty"`
+	LastDepositReportingCurrency          string `protobuf:"bytes,30,opt,name=last_deposit_reporting_currency,json=lastDepositReportingCurrency,proto3" json:"last_deposit_reporting_currency,omitempty"`
+	WithdrawReportingCurrency             string `protobuf:"bytes,31,opt,name=withdraw_reporting_currency,json=withdrawReportingCurrency,proto3" json:"withdraw_reporting_currency,omitempty"`
+	LastWithdrawReportingCurrency         string `protobuf:"bytes,32,opt,name=last_withdraw_reporting_currency,json=lastWithdrawReportingCurrency,proto3" json:"last_withdraw_reporting_currency,omitempty"`
+	// Not available for now, only return 0
+	BonusReportingCurrency string `protobuf:"bytes,33,opt,name=bonus_reporting_currency,json=bonusReportingCurrency,proto3" json:"bonus_reporting_currency,omitempty"`
+	// Not available for now, only return 0
+	ValidTurnoverReportingCurrency    string `protobuf:"bytes,34,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"`
+	AverageBetAmountReportingCurrency string `protobuf:"bytes,35,opt,name=average_bet_amount_reporting_currency,json=averageBetAmountReportingCurrency,proto3" json:"average_bet_amount_reporting_currency,omitempty"`
+	GgrReportingCurrency              string `protobuf:"bytes,36,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	// Not available for now, only return 0
+	ManuallyAddedBalanceReportingCurrency string `protobuf:"bytes,37,opt,name=manually_added_balance_reporting_currency,json=manuallyAddedBalanceReportingCurrency,proto3" json:"manually_added_balance_reporting_currency,omitempty"`
+	// Not available for now, only return 0
+	BonusClaimedReportingCurrency string `protobuf:"bytes,38,opt,name=bonus_claimed_reporting_currency,json=bonusClaimedReportingCurrency,proto3" json:"bonus_claimed_reporting_currency,omitempty"`
+	NgrReportingCurrency          string `protobuf:"bytes,39,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *GetBackofficeUserOverviewFromWalletResponse) Reset() {
@@ -3414,22 +3433,24 @@ func (x *GetBackofficeUserOverviewFromWalletResponse) GetNgrReportingCurrency() 
 }
 
 type Currency struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Currency           string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled            bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Hidden             bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
-	Type               string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Symbol             string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Icon               string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
-	DecimalPlaces      int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
-	ThousandsSeparator string                 `protobuf:"bytes,8,opt,name=thousands_separator,json=thousandsSeparator,proto3" json:"thousands_separator,omitempty"` // placeholder for future use
-	DecimalSeparator   string                 `protobuf:"bytes,9,opt,name=decimal_separator,json=decimalSeparator,proto3" json:"decimal_separator,omitempty"`       // placeholder for future use
-	AggregatedEnabled  bool                   `protobuf:"varint,10,opt,name=aggregated_enabled,json=aggregatedEnabled,proto3" json:"aggregated_enabled,omitempty"`
-	AggregatedHidden   bool                   `protobuf:"varint,11,opt,name=aggregated_hidden,json=aggregatedHidden,proto3" json:"aggregated_hidden,omitempty"`
-	ParentEnabled      bool                   `protobuf:"varint,12,opt,name=parent_enabled,json=parentEnabled,proto3" json:"parent_enabled,omitempty"`
-	ParentHidden       bool                   `protobuf:"varint,13,opt,name=parent_hidden,json=parentHidden,proto3" json:"parent_hidden,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled       bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Hidden        bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
+	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Symbol        string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	Icon          string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
+	DecimalPlaces int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
+	// placeholder for future use
+	ThousandsSeparator string `protobuf:"bytes,8,opt,name=thousands_separator,json=thousandsSeparator,proto3" json:"thousands_separator,omitempty"`
+	// placeholder for future use
+	DecimalSeparator  string `protobuf:"bytes,9,opt,name=decimal_separator,json=decimalSeparator,proto3" json:"decimal_separator,omitempty"`
+	AggregatedEnabled bool   `protobuf:"varint,10,opt,name=aggregated_enabled,json=aggregatedEnabled,proto3" json:"aggregated_enabled,omitempty"`
+	AggregatedHidden  bool   `protobuf:"varint,11,opt,name=aggregated_hidden,json=aggregatedHidden,proto3" json:"aggregated_hidden,omitempty"`
+	ParentEnabled     bool   `protobuf:"varint,12,opt,name=parent_enabled,json=parentEnabled,proto3" json:"parent_enabled,omitempty"`
+	ParentHidden      bool   `protobuf:"varint,13,opt,name=parent_hidden,json=parentHidden,proto3" json:"parent_hidden,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Currency) Reset() {
@@ -3773,10 +3794,12 @@ type GetCurrenciesRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	Currencies            []string                `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Aggregated            *bool                   `protobuf:"varint,3,opt,name=aggregated,proto3,oneof" json:"aggregated,omitempty"` // include aggregated_enabled and aggregated_hidden fields
-	Parent                *bool                   `protobuf:"varint,4,opt,name=parent,proto3,oneof" json:"parent,omitempty"`         // include parent_enabled and parent_hidden fields, not implemented yet
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// include aggregated_enabled and aggregated_hidden fields
+	Aggregated *bool `protobuf:"varint,3,opt,name=aggregated,proto3,oneof" json:"aggregated,omitempty"`
+	// include parent_enabled and parent_hidden fields, not implemented yet
+	Parent        *bool `protobuf:"varint,4,opt,name=parent,proto3,oneof" json:"parent,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetCurrenciesRequest) Reset() {
@@ -4100,11 +4123,13 @@ type UpdateOperatorCurrencyRequest struct {
 	Icon                     *string                 `protobuf:"bytes,7,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
 	DecimalPlaces            *int32                  `protobuf:"varint,8,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	ThousandsSeparator       *string                 `protobuf:"bytes,10,opt,name=thousands_separator,json=thousandsSeparator,proto3,oneof" json:"thousands_separator,omitempty"` // placeholder for future use
-	DecimalSeparator         *string                 `protobuf:"bytes,11,opt,name=decimal_separator,json=decimalSeparator,proto3,oneof" json:"decimal_separator,omitempty"`       // placeholder for future use
-	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,12,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// placeholder for future use
+	ThousandsSeparator *string `protobuf:"bytes,10,opt,name=thousands_separator,json=thousandsSeparator,proto3,oneof" json:"thousands_separator,omitempty"`
+	// placeholder for future use
+	DecimalSeparator      *string                 `protobuf:"bytes,11,opt,name=decimal_separator,json=decimalSeparator,proto3,oneof" json:"decimal_separator,omitempty"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,12,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UpdateOperatorCurrencyRequest) Reset() {
@@ -4365,11 +4390,14 @@ type ListBottomOperatorBalancesRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,2,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // define the basic range of operators
-	Page                   *int32                         `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`                                       // default 1
-	PageSize               *int32                         `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`               // default 20
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// define the basic range of operators
+	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// default 1
+	Page *int32 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	// default 20
+	PageSize      *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListBottomOperatorBalancesRequest) Reset() {
@@ -4438,17 +4466,18 @@ func (x *ListBottomOperatorBalancesRequest) GetPageSize() int32 {
 }
 
 type OperatorBalance struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	RetailerOperatorName  string                  `protobuf:"bytes,2,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	CompanyOperatorName   string                  `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	OperatorName          string                  `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	Currency              string                  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	Protocol              string                  `protobuf:"bytes,6,opt,name=protocol,proto3" json:"protocol,omitempty"` // placeholder for future use
-	Cash                  string                  `protobuf:"bytes,7,opt,name=cash,proto3" json:"cash,omitempty"`
-	CashUsd               string                  `protobuf:"bytes,8,opt,name=cash_usd,json=cashUsd,proto3" json:"cash_usd,omitempty"`
-	CashReportingCurrency string                  `protobuf:"bytes,9,opt,name=cash_reporting_currency,json=cashReportingCurrency,proto3" json:"cash_reporting_currency,omitempty"`
-	Enabled               bool                    `protobuf:"varint,10,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	state                protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext      *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	RetailerOperatorName string                  `protobuf:"bytes,2,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName  string                  `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName         string                  `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Currency             string                  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	// placeholder for future use
+	Protocol              string `protobuf:"bytes,6,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Cash                  string `protobuf:"bytes,7,opt,name=cash,proto3" json:"cash,omitempty"`
+	CashUsd               string `protobuf:"bytes,8,opt,name=cash_usd,json=cashUsd,proto3" json:"cash_usd,omitempty"`
+	CashReportingCurrency string `protobuf:"bytes,9,opt,name=cash_reporting_currency,json=cashReportingCurrency,proto3" json:"cash_reporting_currency,omitempty"`
+	Enabled               bool   `protobuf:"varint,10,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -4638,9 +4667,11 @@ func (x *ListBottomOperatorBalancesResponse) GetPageSize() int32 {
 }
 
 type OperatorTransferRequest struct {
-	state                   protoimpl.MessageState  `protogen:"open.v1"`
-	SourceOperatorContext   *common.OperatorContext `protobuf:"bytes,1,opt,name=source_operator_context,json=sourceOperatorContext,proto3" json:"source_operator_context,omitempty"` // source operator context
-	TargetOperatorContext   *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator (company)
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Source operator context
+	SourceOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=source_operator_context,json=sourceOperatorContext,proto3" json:"source_operator_context,omitempty"`
+	// Target operator (company)
+	TargetOperatorContext   *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	Currency                string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	ReportingCurrency       string                  `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	TargetCurrency          string                  `protobuf:"bytes,5,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
@@ -4806,16 +4837,19 @@ func (x *OperatorTransferResponse) GetTargetOperatorBalanceCurrency() string {
 }
 
 type OperatorSwapRequest struct {
-	state                    protoimpl.MessageState  `protogen:"open.v1"`
-	SourceOperatorContext    *common.OperatorContext `protobuf:"bytes,1,opt,name=source_operator_context,json=sourceOperatorContext,proto3" json:"source_operator_context,omitempty"` // source operator
-	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator
-	Currency                 string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	ReportingCurrency        string                  `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	TargetCurrency           string                  `protobuf:"bytes,5,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
-	TargetReportingCurrency  string                  `protobuf:"bytes,6,opt,name=target_reporting_currency,json=targetReportingCurrency,proto3" json:"target_reporting_currency,omitempty"`
-	TransactionType          string                  `protobuf:"bytes,7,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	CashAmount               string                  `protobuf:"bytes,8,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"` // initiator context (who initiates this swap)
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Source operator
+	SourceOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=source_operator_context,json=sourceOperatorContext,proto3" json:"source_operator_context,omitempty"`
+	// Target operator
+	TargetOperatorContext   *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Currency                string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	ReportingCurrency       string                  `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	TargetCurrency          string                  `protobuf:"bytes,5,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	TargetReportingCurrency string                  `protobuf:"bytes,6,opt,name=target_reporting_currency,json=targetReportingCurrency,proto3" json:"target_reporting_currency,omitempty"`
+	TransactionType         string                  `protobuf:"bytes,7,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	CashAmount              string                  `protobuf:"bytes,8,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	// Initiator context (who initiates this swap)
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -4998,9 +5032,11 @@ func (x *OperatorSwapResponse) GetTargetCurrencyBalanceCashReportingCurrency() s
 }
 
 type OperatorFreezeRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`                     // initiator operator context
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator context
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Initiator operator context
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// Target operator context
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	Currency              string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	ReportingCurrency     string                  `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	TransactionType       string                  `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
@@ -5150,9 +5186,11 @@ func (x *OperatorFreezeResponse) GetCash() string {
 }
 
 type OperatorRollbackRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`                     // initiator operator context
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator context
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Initiator operator context
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// Target operator context
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	ExternalTransactionId *int64                  `protobuf:"varint,3,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
 	OriginalTransactionId int64                   `protobuf:"varint,4,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
 	TransactionType       string                  `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
@@ -5310,9 +5348,11 @@ func (x *OperatorRollbackResponse) GetCashAmountReportingCurrency() string {
 }
 
 type OperatorSettleRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`                     // initiator operator context
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator context
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Initiator operator context
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// Target operator context
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	Currency              string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	ExternalTransactionId *int64                  `protobuf:"varint,4,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
 	OriginalTransactionId int64                   `protobuf:"varint,5,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
@@ -5589,12 +5629,15 @@ type ListOperatorBalanceTransactionsRequest struct {
 	TransactionId          *int64                         `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
 	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // define the basic range of operators
-	TargetOperatorType     string                         `protobuf:"bytes,8,opt,name=target_operator_type,json=targetOperatorType,proto3" json:"target_operator_type,omitempty"`
-	Page                   *int32                         `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`                          // default 1
-	PageSize               *int32                         `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"` // default 20
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// define the basic range of operators
+	OperatorContext    *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	TargetOperatorType string                  `protobuf:"bytes,8,opt,name=target_operator_type,json=targetOperatorType,proto3" json:"target_operator_type,omitempty"`
+	// default 1
+	Page *int32 `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	// default 20
+	PageSize      *int32 `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListOperatorBalanceTransactionsRequest) Reset() {
@@ -6618,18 +6661,21 @@ func (x *GetOperatorBalanceTransactionsByIdsResponse) GetTransactions() []*Opera
 }
 
 type RewardSequence struct {
-	state               protoimpl.MessageState       `protogen:"open.v1"`
-	SerialNumber        int32                        `protobuf:"varint,1,opt,name=serial_number,json=serialNumber,proto3" json:"serial_number,omitempty"`
-	Name                string                       `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Enabled             bool                         `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType          string                       `protobuf:"bytes,4,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`                             // cash or bonus
-	WageringRequirement int32                        `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"` // coefficient
-	RewardValidity      int64                        `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`                // milliseconds
-	TierConfigs         []*RewardSequence_TierConfig `protobuf:"bytes,7,rep,name=tier_configs,json=tierConfigs,proto3" json:"tier_configs,omitempty"`
-	StartTime           *timestamppb.Timestamp       `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime             *timestamppb.Timestamp       `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	SerialNumber int32                  `protobuf:"varint,1,opt,name=serial_number,json=serialNumber,proto3" json:"serial_number,omitempty"`
+	Name         string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Enabled      bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// cash or bonus
+	RewardType string `protobuf:"bytes,4,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
+	// Coefficient
+	WageringRequirement int32 `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	// Milliseconds
+	RewardValidity int64                        `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`
+	TierConfigs    []*RewardSequence_TierConfig `protobuf:"bytes,7,rep,name=tier_configs,json=tierConfigs,proto3" json:"tier_configs,omitempty"`
+	StartTime      *timestamppb.Timestamp       `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime        *timestamppb.Timestamp       `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *RewardSequence) Reset() {
@@ -7407,11 +7453,12 @@ func (x *GetGamificationCurrencyConfigRequest) GetTargetOperatorContext() *commo
 }
 
 type WalletConfig struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	DeductionType          string                 `protobuf:"bytes,1,opt,name=deduction_type,json=deductionType,proto3" json:"deduction_type,omitempty"` // cash_first, bonus_first, mixed
-	CashRatio              *string                `protobuf:"bytes,2,opt,name=cash_ratio,json=cashRatio,proto3,oneof" json:"cash_ratio,omitempty"`
-	BonusRatio             *string                `protobuf:"bytes,3,opt,name=bonus_ratio,json=bonusRatio,proto3,oneof" json:"bonus_ratio,omitempty"`
-	ClearBonusOnWithdrawal *bool                  `protobuf:"varint,4,opt,name=clear_bonus_on_withdrawal,json=clearBonusOnWithdrawal,proto3,oneof" json:"clear_bonus_on_withdrawal,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// "cash_first", "bonus_first", "mixed"
+	DeductionType          string  `protobuf:"bytes,1,opt,name=deduction_type,json=deductionType,proto3" json:"deduction_type,omitempty"`
+	CashRatio              *string `protobuf:"bytes,2,opt,name=cash_ratio,json=cashRatio,proto3,oneof" json:"cash_ratio,omitempty"`
+	BonusRatio             *string `protobuf:"bytes,3,opt,name=bonus_ratio,json=bonusRatio,proto3,oneof" json:"bonus_ratio,omitempty"`
+	ClearBonusOnWithdrawal *bool   `protobuf:"varint,4,opt,name=clear_bonus_on_withdrawal,json=clearBonusOnWithdrawal,proto3,oneof" json:"clear_bonus_on_withdrawal,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -9129,14 +9176,16 @@ func (x *ListCustomerRecordsResponse) GetPageSize() int32 {
 }
 
 type ExportCustomerRecordsRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	UserId                 *int64                         `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	TransactionId          *int64                         `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
-	TransactionType        *string                        `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
-	Format                 string                         `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone               string                         `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	StartTime       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	UserId          *int64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	TransactionId   *int64                 `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
+	TransactionType *string                `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
+	// accepted values: "csv", "excel", "pdf"
+	Format string `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`
+	// e.g. UTC+0, UTC+8, etc.
+	TimeZone               string                         `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
 	OperatorContext        *common.OperatorContext        `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,9,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	InitiatorUserId        int64                          `protobuf:"varint,10,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
@@ -9709,14 +9758,16 @@ func (x *ListFICAThresholdTransactionsResponse) GetPageSize() int32 {
 }
 
 type ExportFICAThresholdTransactionsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	StartTime             *timestamppb.Timestamp  `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime               *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	TransactionType       *string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
-	Currency              *string                 `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	KycLevel              *int32                  `protobuf:"varint,5,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
-	Format                string                  `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone              string                  `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	StartTime       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	TransactionType *string                `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
+	Currency        *string                `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	KycLevel        *int32                 `protobuf:"varint,5,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
+	// accepted values: "csv", "excel", "pdf"
+	Format string `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`
+	// e.g. UTC+0, UTC+8, etc.
+	TimeZone              string                  `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
 	OperatorContext       *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	InitiatorUserId       int64                   `protobuf:"varint,10,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
@@ -10133,13 +10184,15 @@ func (x *ListManualJournalEntriesResponse) GetPageSize() int32 {
 }
 
 type ExportManualJournalEntriesRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	UserId                 *int64                         `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	Currency               *string                        `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Format                 string                         `protobuf:"bytes,5,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone               string                         `protobuf:"bytes,6,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime   *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	UserId    *int64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	Currency  *string                `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	// accepted values: "csv", "excel", "pdf"
+	Format string `protobuf:"bytes,5,opt,name=format,proto3" json:"format,omitempty"`
+	// e.g. UTC+0, UTC+8, etc.
+	TimeZone               string                         `protobuf:"bytes,6,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,7,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	OperatorContext        *common.OperatorContext        `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	InitiatorUserId        int64                          `protobuf:"varint,9,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
@@ -10569,33 +10622,36 @@ func (x *GetUserGameTransactionsSummaryRequest) GetSettlementCurrency() string {
 }
 
 type GetUserGameTransactionsSummaryResponse struct {
-	state                                   protoimpl.MessageState `protogen:"open.v1"`
-	Ggr                                     string                 `protobuf:"bytes,1,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrUsd                                  string                 `protobuf:"bytes,2,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	GgrReportingCurrency                    string                 `protobuf:"bytes,3,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
-	Ngr                                     string                 `protobuf:"bytes,4,opt,name=ngr,proto3" json:"ngr,omitempty"`
-	NgrUsd                                  string                 `protobuf:"bytes,5,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	NgrReportingCurrency                    string                 `protobuf:"bytes,6,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	BetCashAmount                           string                 `protobuf:"bytes,7,opt,name=bet_cash_amount,json=betCashAmount,proto3" json:"bet_cash_amount,omitempty"` // game bet and game bet rollback
-	BetCashAmountUsd                        string                 `protobuf:"bytes,8,opt,name=bet_cash_amount_usd,json=betCashAmountUsd,proto3" json:"bet_cash_amount_usd,omitempty"`
-	BetCashAmountReportingCurrency          string                 `protobuf:"bytes,9,opt,name=bet_cash_amount_reporting_currency,json=betCashAmountReportingCurrency,proto3" json:"bet_cash_amount_reporting_currency,omitempty"`
-	BetOperatorBonusAmount                  string                 `protobuf:"bytes,10,opt,name=bet_operator_bonus_amount,json=betOperatorBonusAmount,proto3" json:"bet_operator_bonus_amount,omitempty"`
-	BetOperatorBonusAmountUsd               string                 `protobuf:"bytes,11,opt,name=bet_operator_bonus_amount_usd,json=betOperatorBonusAmountUsd,proto3" json:"bet_operator_bonus_amount_usd,omitempty"`
-	BetOperatorBonusAmountReportingCurrency string                 `protobuf:"bytes,12,opt,name=bet_operator_bonus_amount_reporting_currency,json=betOperatorBonusAmountReportingCurrency,proto3" json:"bet_operator_bonus_amount_reporting_currency,omitempty"`
-	BetProviderBonusAmount                  string                 `protobuf:"bytes,13,opt,name=bet_provider_bonus_amount,json=betProviderBonusAmount,proto3" json:"bet_provider_bonus_amount,omitempty"`
-	BetProviderBonusAmountUsd               string                 `protobuf:"bytes,14,opt,name=bet_provider_bonus_amount_usd,json=betProviderBonusAmountUsd,proto3" json:"bet_provider_bonus_amount_usd,omitempty"`
-	BetProviderBonusAmountReportingCurrency string                 `protobuf:"bytes,15,opt,name=bet_provider_bonus_amount_reporting_currency,json=betProviderBonusAmountReportingCurrency,proto3" json:"bet_provider_bonus_amount_reporting_currency,omitempty"`
-	BetCount                                int32                  `protobuf:"varint,16,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"` // can be negative
-	WinCount                                int32                  `protobuf:"varint,17,opt,name=win_count,json=winCount,proto3" json:"win_count,omitempty"` // can be negative
-	WinCashAmount                           string                 `protobuf:"bytes,18,opt,name=win_cash_amount,json=winCashAmount,proto3" json:"win_cash_amount,omitempty"`
-	WinCashAmountUsd                        string                 `protobuf:"bytes,19,opt,name=win_cash_amount_usd,json=winCashAmountUsd,proto3" json:"win_cash_amount_usd,omitempty"`
-	WinCashAmountReportingCurrency          string                 `protobuf:"bytes,20,opt,name=win_cash_amount_reporting_currency,json=winCashAmountReportingCurrency,proto3" json:"win_cash_amount_reporting_currency,omitempty"`
-	WinOperatorBonusAmount                  string                 `protobuf:"bytes,21,opt,name=win_operator_bonus_amount,json=winOperatorBonusAmount,proto3" json:"win_operator_bonus_amount,omitempty"`
-	WinOperatorBonusAmountUsd               string                 `protobuf:"bytes,22,opt,name=win_operator_bonus_amount_usd,json=winOperatorBonusAmountUsd,proto3" json:"win_operator_bonus_amount_usd,omitempty"`
-	WinOperatorBonusAmountReportingCurrency string                 `protobuf:"bytes,23,opt,name=win_operator_bonus_amount_reporting_currency,json=winOperatorBonusAmountReportingCurrency,proto3" json:"win_operator_bonus_amount_reporting_currency,omitempty"`
-	WinProviderBonusAmount                  string                 `protobuf:"bytes,24,opt,name=win_provider_bonus_amount,json=winProviderBonusAmount,proto3" json:"win_provider_bonus_amount,omitempty"`
-	WinProviderBonusAmountUsd               string                 `protobuf:"bytes,25,opt,name=win_provider_bonus_amount_usd,json=winProviderBonusAmountUsd,proto3" json:"win_provider_bonus_amount_usd,omitempty"`
-	WinProviderBonusAmountReportingCurrency string                 `protobuf:"bytes,26,opt,name=win_provider_bonus_amount_reporting_currency,json=winProviderBonusAmountReportingCurrency,proto3" json:"win_provider_bonus_amount_reporting_currency,omitempty"`
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Ggr                  string                 `protobuf:"bytes,1,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	GgrUsd               string                 `protobuf:"bytes,2,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrReportingCurrency string                 `protobuf:"bytes,3,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	Ngr                  string                 `protobuf:"bytes,4,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	NgrUsd               string                 `protobuf:"bytes,5,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NgrReportingCurrency string                 `protobuf:"bytes,6,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	// game bet and game bet rollback
+	BetCashAmount                           string `protobuf:"bytes,7,opt,name=bet_cash_amount,json=betCashAmount,proto3" json:"bet_cash_amount,omitempty"`
+	BetCashAmountUsd                        string `protobuf:"bytes,8,opt,name=bet_cash_amount_usd,json=betCashAmountUsd,proto3" json:"bet_cash_amount_usd,omitempty"`
+	BetCashAmountReportingCurrency          string `protobuf:"bytes,9,opt,name=bet_cash_amount_reporting_currency,json=betCashAmountReportingCurrency,proto3" json:"bet_cash_amount_reporting_currency,omitempty"`
+	BetOperatorBonusAmount                  string `protobuf:"bytes,10,opt,name=bet_operator_bonus_amount,json=betOperatorBonusAmount,proto3" json:"bet_operator_bonus_amount,omitempty"`
+	BetOperatorBonusAmountUsd               string `protobuf:"bytes,11,opt,name=bet_operator_bonus_amount_usd,json=betOperatorBonusAmountUsd,proto3" json:"bet_operator_bonus_amount_usd,omitempty"`
+	BetOperatorBonusAmountReportingCurrency string `protobuf:"bytes,12,opt,name=bet_operator_bonus_amount_reporting_currency,json=betOperatorBonusAmountReportingCurrency,proto3" json:"bet_operator_bonus_amount_reporting_currency,omitempty"`
+	BetProviderBonusAmount                  string `protobuf:"bytes,13,opt,name=bet_provider_bonus_amount,json=betProviderBonusAmount,proto3" json:"bet_provider_bonus_amount,omitempty"`
+	BetProviderBonusAmountUsd               string `protobuf:"bytes,14,opt,name=bet_provider_bonus_amount_usd,json=betProviderBonusAmountUsd,proto3" json:"bet_provider_bonus_amount_usd,omitempty"`
+	BetProviderBonusAmountReportingCurrency string `protobuf:"bytes,15,opt,name=bet_provider_bonus_amount_reporting_currency,json=betProviderBonusAmountReportingCurrency,proto3" json:"bet_provider_bonus_amount_reporting_currency,omitempty"`
+	// Can be negative
+	BetCount int32 `protobuf:"varint,16,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	// Can be negative
+	WinCount                                int32  `protobuf:"varint,17,opt,name=win_count,json=winCount,proto3" json:"win_count,omitempty"`
+	WinCashAmount                           string `protobuf:"bytes,18,opt,name=win_cash_amount,json=winCashAmount,proto3" json:"win_cash_amount,omitempty"`
+	WinCashAmountUsd                        string `protobuf:"bytes,19,opt,name=win_cash_amount_usd,json=winCashAmountUsd,proto3" json:"win_cash_amount_usd,omitempty"`
+	WinCashAmountReportingCurrency          string `protobuf:"bytes,20,opt,name=win_cash_amount_reporting_currency,json=winCashAmountReportingCurrency,proto3" json:"win_cash_amount_reporting_currency,omitempty"`
+	WinOperatorBonusAmount                  string `protobuf:"bytes,21,opt,name=win_operator_bonus_amount,json=winOperatorBonusAmount,proto3" json:"win_operator_bonus_amount,omitempty"`
+	WinOperatorBonusAmountUsd               string `protobuf:"bytes,22,opt,name=win_operator_bonus_amount_usd,json=winOperatorBonusAmountUsd,proto3" json:"win_operator_bonus_amount_usd,omitempty"`
+	WinOperatorBonusAmountReportingCurrency string `protobuf:"bytes,23,opt,name=win_operator_bonus_amount_reporting_currency,json=winOperatorBonusAmountReportingCurrency,proto3" json:"win_operator_bonus_amount_reporting_currency,omitempty"`
+	WinProviderBonusAmount                  string `protobuf:"bytes,24,opt,name=win_provider_bonus_amount,json=winProviderBonusAmount,proto3" json:"win_provider_bonus_amount,omitempty"`
+	WinProviderBonusAmountUsd               string `protobuf:"bytes,25,opt,name=win_provider_bonus_amount_usd,json=winProviderBonusAmountUsd,proto3" json:"win_provider_bonus_amount_usd,omitempty"`
+	WinProviderBonusAmountReportingCurrency string `protobuf:"bytes,26,opt,name=win_provider_bonus_amount_reporting_currency,json=winProviderBonusAmountReportingCurrency,proto3" json:"win_provider_bonus_amount_reporting_currency,omitempty"`
 	unknownFields                           protoimpl.UnknownFields
 	sizeCache                               protoimpl.SizeCache
 }
@@ -10813,10 +10869,12 @@ func (x *GetUserGameTransactionsSummaryResponse) GetWinProviderBonusAmountReport
 }
 
 type CreditFreespinWinRequest struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
-	UserId             int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency           string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`                                               // game currency
-	SettlementCurrency string                  `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"` // player's wallet currency, not the free spin settlement currency
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// game currency
+	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// player's wallet currency, not the free spin settlement currency
+	SettlementCurrency string                  `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
 	Amount             string                  `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	FreespinId         string                  `protobuf:"bytes,5,opt,name=freespin_id,json=freespinId,proto3" json:"freespin_id,omitempty"`
 	TxnId              string                  `protobuf:"bytes,6,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
@@ -10929,17 +10987,20 @@ func (x *CreditFreespinWinRequest) GetOperatorContext() *common.OperatorContext 
 }
 
 type CreditFreespinWinResponse struct {
-	state                           protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId                   int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	CurrencyCash                    string                 `protobuf:"bytes,2,opt,name=currency_cash,json=currencyCash,proto3" json:"currency_cash,omitempty"` // current balance cash converted to game currency's amount
-	CurrencyOperatorBonus           string                 `protobuf:"bytes,3,opt,name=currency_operator_bonus,json=currencyOperatorBonus,proto3" json:"currency_operator_bonus,omitempty"`
-	CurrencyProviderBonus           string                 `protobuf:"bytes,4,opt,name=currency_provider_bonus,json=currencyProviderBonus,proto3" json:"currency_provider_bonus,omitempty"`
-	SettlementCurrencyCash          string                 `protobuf:"bytes,5,opt,name=settlement_currency_cash,json=settlementCurrencyCash,proto3" json:"settlement_currency_cash,omitempty"` // player's wallet currency's current balance cash
-	SettlementCurrencyOperatorBonus string                 `protobuf:"bytes,6,opt,name=settlement_currency_operator_bonus,json=settlementCurrencyOperatorBonus,proto3" json:"settlement_currency_operator_bonus,omitempty"`
-	SettlementCurrencyProviderBonus string                 `protobuf:"bytes,7,opt,name=settlement_currency_provider_bonus,json=settlementCurrencyProviderBonus,proto3" json:"settlement_currency_provider_bonus,omitempty"`
-	AffectedCredits                 []*AffectedCredit      `protobuf:"bytes,8,rep,name=affected_credits,json=affectedCredits,proto3" json:"affected_credits,omitempty"` // for free spin win's credit
-	unknownFields                   protoimpl.UnknownFields
-	sizeCache                       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	// current balance cash converted to game currency's amount
+	CurrencyCash          string `protobuf:"bytes,2,opt,name=currency_cash,json=currencyCash,proto3" json:"currency_cash,omitempty"`
+	CurrencyOperatorBonus string `protobuf:"bytes,3,opt,name=currency_operator_bonus,json=currencyOperatorBonus,proto3" json:"currency_operator_bonus,omitempty"`
+	CurrencyProviderBonus string `protobuf:"bytes,4,opt,name=currency_provider_bonus,json=currencyProviderBonus,proto3" json:"currency_provider_bonus,omitempty"`
+	// player's wallet currency's current balance cash
+	SettlementCurrencyCash          string `protobuf:"bytes,5,opt,name=settlement_currency_cash,json=settlementCurrencyCash,proto3" json:"settlement_currency_cash,omitempty"`
+	SettlementCurrencyOperatorBonus string `protobuf:"bytes,6,opt,name=settlement_currency_operator_bonus,json=settlementCurrencyOperatorBonus,proto3" json:"settlement_currency_operator_bonus,omitempty"`
+	SettlementCurrencyProviderBonus string `protobuf:"bytes,7,opt,name=settlement_currency_provider_bonus,json=settlementCurrencyProviderBonus,proto3" json:"settlement_currency_provider_bonus,omitempty"`
+	// for free spin win's credit
+	AffectedCredits []*AffectedCredit `protobuf:"bytes,8,rep,name=affected_credits,json=affectedCredits,proto3" json:"affected_credits,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreditFreespinWinResponse) Reset() {
@@ -11029,10 +11090,11 @@ func (x *CreditFreespinWinResponse) GetAffectedCredits() []*AffectedCredit {
 }
 
 type CreditFreeBetWinRequest struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
-	UserId             int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency           string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	SettlementCurrency string                  `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"` // player's wallet currency, not the free bet settlement currency
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// player's wallet currency, not the free bet settlement currency
+	SettlementCurrency string                  `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
 	Amount             string                  `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	FreebetId          string                  `protobuf:"bytes,5,opt,name=freebet_id,json=freebetId,proto3" json:"freebet_id,omitempty"`
 	TxnId              string                  `protobuf:"bytes,6,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
@@ -11145,17 +11207,20 @@ func (x *CreditFreeBetWinRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type CreditFreeBetWinResponse struct {
-	state                           protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId                   int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	CurrencyCash                    string                 `protobuf:"bytes,2,opt,name=currency_cash,json=currencyCash,proto3" json:"currency_cash,omitempty"` // current balance cash converted to game currency's amount
-	CurrencyOperatorBonus           string                 `protobuf:"bytes,3,opt,name=currency_operator_bonus,json=currencyOperatorBonus,proto3" json:"currency_operator_bonus,omitempty"`
-	CurrencyProviderBonus           string                 `protobuf:"bytes,4,opt,name=currency_provider_bonus,json=currencyProviderBonus,proto3" json:"currency_provider_bonus,omitempty"`
-	SettlementCurrencyCash          string                 `protobuf:"bytes,5,opt,name=settlement_currency_cash,json=settlementCurrencyCash,proto3" json:"settlement_currency_cash,omitempty"` // player's wallet currency's current balance cash
-	SettlementCurrencyOperatorBonus string                 `protobuf:"bytes,6,opt,name=settlement_currency_operator_bonus,json=settlementCurrencyOperatorBonus,proto3" json:"settlement_currency_operator_bonus,omitempty"`
-	SettlementCurrencyProviderBonus string                 `protobuf:"bytes,7,opt,name=settlement_currency_provider_bonus,json=settlementCurrencyProviderBonus,proto3" json:"settlement_currency_provider_bonus,omitempty"`
-	AffectedCredits                 []*AffectedCredit      `protobuf:"bytes,8,rep,name=affected_credits,json=affectedCredits,proto3" json:"affected_credits,omitempty"` // for free bet win's credit
-	unknownFields                   protoimpl.UnknownFields
-	sizeCache                       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	// current balance cash converted to game currency's amount
+	CurrencyCash          string `protobuf:"bytes,2,opt,name=currency_cash,json=currencyCash,proto3" json:"currency_cash,omitempty"`
+	CurrencyOperatorBonus string `protobuf:"bytes,3,opt,name=currency_operator_bonus,json=currencyOperatorBonus,proto3" json:"currency_operator_bonus,omitempty"`
+	CurrencyProviderBonus string `protobuf:"bytes,4,opt,name=currency_provider_bonus,json=currencyProviderBonus,proto3" json:"currency_provider_bonus,omitempty"`
+	// player's wallet currency's current balance cash
+	SettlementCurrencyCash          string `protobuf:"bytes,5,opt,name=settlement_currency_cash,json=settlementCurrencyCash,proto3" json:"settlement_currency_cash,omitempty"`
+	SettlementCurrencyOperatorBonus string `protobuf:"bytes,6,opt,name=settlement_currency_operator_bonus,json=settlementCurrencyOperatorBonus,proto3" json:"settlement_currency_operator_bonus,omitempty"`
+	SettlementCurrencyProviderBonus string `protobuf:"bytes,7,opt,name=settlement_currency_provider_bonus,json=settlementCurrencyProviderBonus,proto3" json:"settlement_currency_provider_bonus,omitempty"`
+	// for free bet win's credit
+	AffectedCredits []*AffectedCredit `protobuf:"bytes,8,rep,name=affected_credits,json=affectedCredits,proto3" json:"affected_credits,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreditFreeBetWinResponse) Reset() {
@@ -11248,8 +11313,10 @@ type GetOperatorUserFinancialSummaryRequest struct {
 	state                   protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext         *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	IncludeTransactionStats bool                    `protobuf:"varint,2,opt,name=include_transaction_stats,json=includeTransactionStats,proto3" json:"include_transaction_stats,omitempty"`
-	StartTime               *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"` // affected if include_transaction_stats is true
-	EndTime                 *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`       // affected if include_transaction_stats is true
+	// Affected if include_transaction_stats is true
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	// Affected if include_transaction_stats is true
+	EndTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	// Optional: filter by user role ID. If not provided, returns all roles.
 	// Use util.PlayerRoleId (0) to filter only player wallets.
 	RoleId        *int64 `protobuf:"varint,5,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
@@ -11487,9 +11554,10 @@ type BatchGetUserFinancialMetricsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	UserIds         []int64                 `protobuf:"varint,1,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currency        *string                 `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"` // Empty means all currencies aggregated (returns USD)
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Empty means all currencies aggregated (returns USD)
+	Currency      *string `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *BatchGetUserFinancialMetricsRequest) Reset() {
@@ -11544,8 +11612,9 @@ func (x *BatchGetUserFinancialMetricsRequest) GetCurrency() string {
 }
 
 type BatchGetUserFinancialMetricsResponse struct {
-	state         protoimpl.MessageState                                       `protogen:"open.v1"`
-	UserMetrics   map[string]*BatchGetUserFinancialMetricsResponse_UserMetrics `protobuf:"bytes,1,rep,name=user_metrics,json=userMetrics,proto3" json:"user_metrics,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // user_id -> metrics
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// user_id -> metrics
+	UserMetrics   map[string]*BatchGetUserFinancialMetricsResponse_UserMetrics `protobuf:"bytes,1,rep,name=user_metrics,json=userMetrics,proto3" json:"user_metrics,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -11591,12 +11660,14 @@ type ManualAdjustCreditTurnoverFieldRequest struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	TargetUserId int64                  `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
 	Currency     string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	CreditId     int64                  `protobuf:"varint,3,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"` // The credit to adjust
+	// The credit to adjust
+	CreditId int64 `protobuf:"varint,3,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
 	// transaction_type: "adjust_cash_turnover", "adjust_cash_turnover_threshold", "adjust_operator_bonus_turnover", "adjust_operator_bonus_turnover_threshold"
 	TransactionType string `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	// direction: "add", "subtract"
 	Direction string `protobuf:"bytes,5,opt,name=direction,proto3" json:"direction,omitempty"`
-	Value     string `protobuf:"bytes,6,opt,name=value,proto3" json:"value,omitempty"` // Adjustment value (positive number)
+	// Adjustment value (positive number)
+	Value string `protobuf:"bytes,6,opt,name=value,proto3" json:"value,omitempty"`
 	// Initiator info
 	InitiatorUserId          int64                   `protobuf:"varint,7,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
@@ -11850,21 +11921,28 @@ func (x *ListUserFreeRewardsResponse) GetFreeBets() []*FreeBetDetail {
 
 // Free spin details - all fields from UserFreeSpin DO
 type FreeSpinDetail struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	Id         int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	SourceType string                 `protobuf:"bytes,2,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"` // "deposit_reward" | "promo_code"
-	SourceId   int64                  `protobuf:"varint,3,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// "deposit_reward", "promo_code"
+	SourceType string `protobuf:"bytes,2,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
+	SourceId   int64  `protobuf:"varint,3,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
 	// Currency info
-	SettlementCurrency string `protobuf:"bytes,4,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"` // Deposit/settlement currency
-	Currency           string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`                                               // Game currency (play currency)
-	ReportingCurrency  string `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	// Deposit/settlement currency
+	SettlementCurrency string `protobuf:"bytes,4,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	// Game currency (play currency)
+	Currency          string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	ReportingCurrency string `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	// Reward config
-	RewardType              string `protobuf:"bytes,7,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`                             // "cash" | "bonus"
-	WageringRequirement     int32  `protobuf:"varint,8,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"` // Turnover multiplier
+	// "cash", "bonus"
+	RewardType string `protobuf:"bytes,7,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
+	// Turnover multiplier
+	WageringRequirement     int32  `protobuf:"varint,8,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
 	MaxWithdrawalMultiplier string `protobuf:"bytes,9,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64  `protobuf:"varint,10,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // Validity duration for winnings reward in milliseconds
+	// Validity duration for winnings reward in milliseconds
+	RewardValidity int64 `protobuf:"varint,10,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`
 	// Total winnings aggregated across all reward items
-	TotalWinnings                  string `protobuf:"bytes,11,opt,name=total_winnings,json=totalWinnings,proto3" json:"total_winnings,omitempty"` // In settlement currency
+	// In settlement currency
+	TotalWinnings                  string `protobuf:"bytes,11,opt,name=total_winnings,json=totalWinnings,proto3" json:"total_winnings,omitempty"`
 	TotalWinningsUsd               string `protobuf:"bytes,12,opt,name=total_winnings_usd,json=totalWinningsUsd,proto3" json:"total_winnings_usd,omitempty"`
 	TotalWinningsReportingCurrency string `protobuf:"bytes,13,opt,name=total_winnings_reporting_currency,json=totalWinningsReportingCurrency,proto3" json:"total_winnings_reporting_currency,omitempty"`
 	// Per-game reward details
@@ -11872,8 +11950,10 @@ type FreeSpinDetail struct {
 	CreatedAt int64                   `protobuf:"varint,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt int64                   `protobuf:"varint,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// Freespin usage counts (synced from game service, shared across all games)
-	RoundsPlayed  int32 `protobuf:"varint,17,opt,name=rounds_played,json=roundsPlayed,proto3" json:"rounds_played,omitempty"` // Rounds already played (aggregated)
-	TotalRounds   int32 `protobuf:"varint,18,opt,name=total_rounds,json=totalRounds,proto3" json:"total_rounds,omitempty"`    // Total rounds available (aggregated)
+	// Rounds already played (aggregated)
+	RoundsPlayed int32 `protobuf:"varint,17,opt,name=rounds_played,json=roundsPlayed,proto3" json:"rounds_played,omitempty"`
+	// Total rounds available (aggregated)
+	TotalRounds   int32 `protobuf:"varint,18,opt,name=total_rounds,json=totalRounds,proto3" json:"total_rounds,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -12036,19 +12116,28 @@ func (x *FreeSpinDetail) GetTotalRounds() int32 {
 
 // Single free spin reward item - from FreeSpinRewardItem in JSONB
 type FreeSpinRewardDetail struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	ProviderId string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"` // Game provider ID
-	GameId     string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`             // Game ID
-	Level      int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`                            // Free spin level
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Game provider ID
+	ProviderId string `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	// Game ID
+	GameId string `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	// Free spin level
+	Level int32 `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
 	// Spin counts
-	SpinCount      int32 `protobuf:"varint,4,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`                // Total spin count
-	UsedCount      int32 `protobuf:"varint,5,opt,name=used_count,json=usedCount,proto3" json:"used_count,omitempty"`                // Already used count
-	RemainingCount int32 `protobuf:"varint,6,opt,name=remaining_count,json=remainingCount,proto3" json:"remaining_count,omitempty"` // Remaining count (spin_count - used_count)
+	// Total spin count
+	SpinCount int32 `protobuf:"varint,4,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`
+	// Already used count
+	UsedCount int32 `protobuf:"varint,5,opt,name=used_count,json=usedCount,proto3" json:"used_count,omitempty"`
+	// Remaining count (spin_count - used_count)
+	RemainingCount int32 `protobuf:"varint,6,opt,name=remaining_count,json=remainingCount,proto3" json:"remaining_count,omitempty"`
 	// Expiration
-	FreeSpinValidity int64 `protobuf:"varint,7,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"` // Configured validity duration in milliseconds
-	ExpiredAt        int64 `protobuf:"varint,8,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`                        // Calculated expiration timestamp in milliseconds, 0 means never expires
+	// Configured validity duration in milliseconds
+	FreeSpinValidity int64 `protobuf:"varint,7,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"`
+	// Calculated expiration timestamp in milliseconds, 0 means never expires
+	ExpiredAt int64 `protobuf:"varint,8,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
 	// Winnings for this specific game
-	Winnings                  string `protobuf:"bytes,9,opt,name=winnings,proto3" json:"winnings,omitempty"` // In settlement currency
+	// In settlement currency
+	Winnings                  string `protobuf:"bytes,9,opt,name=winnings,proto3" json:"winnings,omitempty"`
 	WinningsUsd               string `protobuf:"bytes,10,opt,name=winnings_usd,json=winningsUsd,proto3" json:"winnings_usd,omitempty"`
 	WinningsReportingCurrency string `protobuf:"bytes,11,opt,name=winnings_reporting_currency,json=winningsReportingCurrency,proto3" json:"winnings_reporting_currency,omitempty"`
 	unknownFields             protoimpl.UnknownFields
@@ -12164,20 +12253,26 @@ func (x *FreeSpinRewardDetail) GetWinningsReportingCurrency() string {
 
 // Free bet details - all fields from UserFreeBet DO
 type FreeBetDetail struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	Id         int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	SourceType string                 `protobuf:"bytes,2,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"` // "deposit_reward" | "promo_code"
-	SourceId   int64                  `protobuf:"varint,3,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// "deposit_reward", "promo_code"
+	SourceType string `protobuf:"bytes,2,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
+	SourceId   int64  `protobuf:"varint,3,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
 	// Currency info
-	Currency          string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"` // Betting currency (settlement currency)
+	// Betting currency (settlement currency)
+	Currency          string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	ReportingCurrency string `protobuf:"bytes,5,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	// Reward config
-	RewardType              string `protobuf:"bytes,6,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`                             // "cash" | "bonus"
-	WageringRequirement     int32  `protobuf:"varint,7,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"` // Turnover multiplier
+	// "cash", "bonus"
+	RewardType string `protobuf:"bytes,6,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
+	// Turnover multiplier
+	WageringRequirement     int32  `protobuf:"varint,7,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
 	MaxWithdrawalMultiplier string `protobuf:"bytes,8,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64  `protobuf:"varint,9,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // Validity duration for winnings reward in milliseconds
+	// Validity duration for winnings reward in milliseconds
+	RewardValidity int64 `protobuf:"varint,9,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`
 	// Total winnings aggregated across all reward items
-	TotalWinnings                  string `protobuf:"bytes,10,opt,name=total_winnings,json=totalWinnings,proto3" json:"total_winnings,omitempty"` // In settlement currency
+	// In settlement currency
+	TotalWinnings                  string `protobuf:"bytes,10,opt,name=total_winnings,json=totalWinnings,proto3" json:"total_winnings,omitempty"`
 	TotalWinningsUsd               string `protobuf:"bytes,11,opt,name=total_winnings_usd,json=totalWinningsUsd,proto3" json:"total_winnings_usd,omitempty"`
 	TotalWinningsReportingCurrency string `protobuf:"bytes,12,opt,name=total_winnings_reporting_currency,json=totalWinningsReportingCurrency,proto3" json:"total_winnings_reporting_currency,omitempty"`
 	// Per-template reward details
@@ -12325,17 +12420,24 @@ func (x *FreeBetDetail) GetUpdatedAt() int64 {
 
 // Single free bet reward item - from FreeBetRewardItem in JSONB
 type FreeBetRewardDetail struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	TemplateId string                 `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"` // External template reference
-	Amount     string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`                           // Free bet amount (decimal string)
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// External template reference
+	TemplateId string `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	// Free bet amount (decimal string)
+	Amount string `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Usage status
-	UsedCount int32 `protobuf:"varint,3,opt,name=used_count,json=usedCount,proto3" json:"used_count,omitempty"` // Usage count (typically 0 or 1)
-	IsUsed    bool  `protobuf:"varint,4,opt,name=is_used,json=isUsed,proto3" json:"is_used,omitempty"`          // Whether the free bet has been used
+	// Usage count (typically 0 or 1)
+	UsedCount int32 `protobuf:"varint,3,opt,name=used_count,json=usedCount,proto3" json:"used_count,omitempty"`
+	// Whether the free bet has been used
+	IsUsed bool `protobuf:"varint,4,opt,name=is_used,json=isUsed,proto3" json:"is_used,omitempty"`
 	// Expiration
-	FreeBetValidity int64 `protobuf:"varint,5,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"` // Configured validity duration in milliseconds
-	ExpiredAt       int64 `protobuf:"varint,6,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`                     // Calculated expiration timestamp in milliseconds, 0 means never expires
+	// Configured validity duration in milliseconds
+	FreeBetValidity int64 `protobuf:"varint,5,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"`
+	// Calculated expiration timestamp in milliseconds, 0 means never expires
+	ExpiredAt int64 `protobuf:"varint,6,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
 	// Winnings for this specific free bet
-	Winnings                  string `protobuf:"bytes,7,opt,name=winnings,proto3" json:"winnings,omitempty"` // In settlement currency
+	// In settlement currency
+	Winnings                  string `protobuf:"bytes,7,opt,name=winnings,proto3" json:"winnings,omitempty"`
 	WinningsUsd               string `protobuf:"bytes,8,opt,name=winnings_usd,json=winningsUsd,proto3" json:"winnings_usd,omitempty"`
 	WinningsReportingCurrency string `protobuf:"bytes,9,opt,name=winnings_reporting_currency,json=winningsReportingCurrency,proto3" json:"winnings_reporting_currency,omitempty"`
 	// Optional extra data
@@ -13960,20 +14062,21 @@ func (x *GetWalletsResponse_TotalAssets) GetValidTurnoverReportingCurrency() str
 }
 
 type GetWalletsResponse_Credit struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	CreatedAt              *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	CreditId               int64                  `protobuf:"varint,2,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
-	Cash                   string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
-	OriginalCash           string                 `protobuf:"bytes,4,opt,name=original_cash,json=originalCash,proto3" json:"original_cash,omitempty"`
-	Bonus                  string                 `protobuf:"bytes,5,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	OriginalBonus          string                 `protobuf:"bytes,6,opt,name=original_bonus,json=originalBonus,proto3" json:"original_bonus,omitempty"`
-	TurnoverThreshold      string                 `protobuf:"bytes,7,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"` // cash turnover threshold + bonus turnover threshold
-	Turnover               string                 `protobuf:"bytes,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	CashTurnover           string                 `protobuf:"bytes,9,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	BonusTurnover          string                 `protobuf:"bytes,10,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
-	TurnoverMultiplier     string                 `protobuf:"bytes,11,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`
-	CashTurnoverThreshold  string                 `protobuf:"bytes,12,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
-	BonusTurnoverThreshold string                 `protobuf:"bytes,13,opt,name=bonus_turnover_threshold,json=bonusTurnoverThreshold,proto3" json:"bonus_turnover_threshold,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreditId      int64                  `protobuf:"varint,2,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
+	Cash          string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	OriginalCash  string                 `protobuf:"bytes,4,opt,name=original_cash,json=originalCash,proto3" json:"original_cash,omitempty"`
+	Bonus         string                 `protobuf:"bytes,5,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	OriginalBonus string                 `protobuf:"bytes,6,opt,name=original_bonus,json=originalBonus,proto3" json:"original_bonus,omitempty"`
+	// cash turnover threshold + bonus turnover threshold
+	TurnoverThreshold      string `protobuf:"bytes,7,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
+	Turnover               string `protobuf:"bytes,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	CashTurnover           string `protobuf:"bytes,9,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	BonusTurnover          string `protobuf:"bytes,10,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
+	TurnoverMultiplier     string `protobuf:"bytes,11,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`
+	CashTurnoverThreshold  string `protobuf:"bytes,12,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
+	BonusTurnoverThreshold string `protobuf:"bytes,13,opt,name=bonus_turnover_threshold,json=bonusTurnoverThreshold,proto3" json:"bonus_turnover_threshold,omitempty"`
 	// New fields for original amounts
 	OriginalOperatorBonus string `protobuf:"bytes,14,opt,name=original_operator_bonus,json=originalOperatorBonus,proto3" json:"original_operator_bonus,omitempty"`
 	OriginalProviderBonus string `protobuf:"bytes,15,opt,name=original_provider_bonus,json=originalProviderBonus,proto3" json:"original_provider_bonus,omitempty"`
@@ -15216,15 +15319,16 @@ func (x *ListUserTransactionSummariesResponse_UserTransactionSummary) GetUserId(
 }
 
 type RewardSequence_TierConfig struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	MinDepositAmount        string                 `protobuf:"bytes,1,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
-	MaxDepositAmount        string                 `protobuf:"bytes,2,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
-	RewardPercentage        string                 `protobuf:"bytes,3,opt,name=reward_percentage,json=rewardPercentage,proto3" json:"reward_percentage,omitempty"`
-	MaxRewardAmount         string                 `protobuf:"bytes,4,opt,name=max_reward_amount,json=maxRewardAmount,proto3" json:"max_reward_amount,omitempty"`
-	MaxWithdrawalMultiplier string                 `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"` // only available for bonus reward
-	RewardMoneyEnabled      bool                   `protobuf:"varint,6,opt,name=reward_money_enabled,json=rewardMoneyEnabled,proto3" json:"reward_money_enabled,omitempty"`
-	FreeSpinConfig          *FreeSpinConfig        `protobuf:"bytes,7,opt,name=free_spin_config,json=freeSpinConfig,proto3,oneof" json:"free_spin_config,omitempty"`
-	FreeBetConfig           *FreeBetConfig         `protobuf:"bytes,8,opt,name=free_bet_config,json=freeBetConfig,proto3,oneof" json:"free_bet_config,omitempty"`
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	MinDepositAmount string                 `protobuf:"bytes,1,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
+	MaxDepositAmount string                 `protobuf:"bytes,2,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
+	RewardPercentage string                 `protobuf:"bytes,3,opt,name=reward_percentage,json=rewardPercentage,proto3" json:"reward_percentage,omitempty"`
+	MaxRewardAmount  string                 `protobuf:"bytes,4,opt,name=max_reward_amount,json=maxRewardAmount,proto3" json:"max_reward_amount,omitempty"`
+	// only available for bonus reward
+	MaxWithdrawalMultiplier string          `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	RewardMoneyEnabled      bool            `protobuf:"varint,6,opt,name=reward_money_enabled,json=rewardMoneyEnabled,proto3" json:"reward_money_enabled,omitempty"`
+	FreeSpinConfig          *FreeSpinConfig `protobuf:"bytes,7,opt,name=free_spin_config,json=freeSpinConfig,proto3,oneof" json:"free_spin_config,omitempty"`
+	FreeBetConfig           *FreeBetConfig  `protobuf:"bytes,8,opt,name=free_bet_config,json=freeBetConfig,proto3,oneof" json:"free_bet_config,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -15612,9 +15716,10 @@ func (x *ListCustomerRecordsResponse_CustomerRecord) GetSystemOperatorName() str
 }
 
 type FICAThresholdConfig_Config struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	TransactionType string                 `protobuf:"bytes,1,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"` // payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward
-	ThresholdAmount string                 `protobuf:"bytes,2,opt,name=threshold_amount,json=thresholdAmount,proto3" json:"threshold_amount,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// "payment_deposit", "payment_withdraw_freeze", "game_bet", "game_win", "deposit_reward"
+	TransactionType string `protobuf:"bytes,1,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	ThresholdAmount string `protobuf:"bytes,2,opt,name=threshold_amount,json=thresholdAmount,proto3" json:"threshold_amount,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -15664,9 +15769,10 @@ func (x *FICAThresholdConfig_Config) GetThresholdAmount() string {
 }
 
 type ListFICAThresholdTransactionsResponse_FICAThresholdTransaction struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Type                  string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	TransactionTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=transaction_time,json=transactionTime,proto3" json:"transaction_time,omitempty"` // created_at
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Type  string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	// created_at
+	TransactionTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=transaction_time,json=transactionTime,proto3" json:"transaction_time,omitempty"`
 	TransactionId         int64                  `protobuf:"varint,3,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	Currency              string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	Amount                string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
@@ -16092,28 +16198,31 @@ func (x *ListBalancesByUserIdsResponse_UserBalanceDetail) GetTotalProviderBonusR
 }
 
 type ListManualJournalEntriesResponse_ManualJournalEntry struct {
-	state                          protoimpl.MessageState `protogen:"open.v1"`
-	Id                             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId                         int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	TransactionTime                *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=transaction_time,json=transactionTime,proto3" json:"transaction_time,omitempty"` // updated_at
-	InitiatorUserId                int64                  `protobuf:"varint,4,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	InitiatorUserName              string                 `protobuf:"bytes,5,opt,name=initiator_user_name,json=initiatorUserName,proto3" json:"initiator_user_name,omitempty"`
-	TransactionType                string                 `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	Description                    string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
-	Currency                       string                 `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
-	Amount                         string                 `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
-	AmountUsd                      string                 `protobuf:"bytes,10,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
-	AmountReportingCurrency        string                 `protobuf:"bytes,11,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
-	BeforeBalance                  string                 `protobuf:"bytes,12,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"` // for this currency
-	BeforeBalanceUsd               string                 `protobuf:"bytes,13,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
-	BeforeBalanceReportingCurrency string                 `protobuf:"bytes,14,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
-	AfterBalance                   string                 `protobuf:"bytes,15,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"` // for this currency
-	AfterBalanceUsd                string                 `protobuf:"bytes,16,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
-	AfterBalanceReportingCurrency  string                 `protobuf:"bytes,17,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
-	InitiatorRealOperatorName      string                 `protobuf:"bytes,18,opt,name=initiator_real_operator_name,json=initiatorRealOperatorName,proto3" json:"initiator_real_operator_name,omitempty"`
-	TurnoverThreshold              string                 `protobuf:"bytes,19,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
-	unknownFields                  protoimpl.UnknownFields
-	sizeCache                      protoimpl.SizeCache
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	Id     int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// updated_at
+	TransactionTime         *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=transaction_time,json=transactionTime,proto3" json:"transaction_time,omitempty"`
+	InitiatorUserId         int64                  `protobuf:"varint,4,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorUserName       string                 `protobuf:"bytes,5,opt,name=initiator_user_name,json=initiatorUserName,proto3" json:"initiator_user_name,omitempty"`
+	TransactionType         string                 `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	Description             string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	Currency                string                 `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
+	Amount                  string                 `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd               string                 `protobuf:"bytes,10,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency string                 `protobuf:"bytes,11,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	// for this currency
+	BeforeBalance                  string `protobuf:"bytes,12,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string `protobuf:"bytes,13,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string `protobuf:"bytes,14,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	// for this currency
+	AfterBalance                  string `protobuf:"bytes,15,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd               string `protobuf:"bytes,16,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency string `protobuf:"bytes,17,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	InitiatorRealOperatorName     string `protobuf:"bytes,18,opt,name=initiator_real_operator_name,json=initiatorRealOperatorName,proto3" json:"initiator_real_operator_name,omitempty"`
+	TurnoverThreshold             string `protobuf:"bytes,19,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *ListManualJournalEntriesResponse_ManualJournalEntry) Reset() {
@@ -16476,12 +16585,13 @@ func (x *ListTimeRangeDepositCreditsResponse_Credit) GetOriginalProviderBonusRep
 }
 
 type ListUserOverviewResponse_UserOverview struct {
-	state                       protoimpl.MessageState `protogen:"open.v1"`
-	UserId                      int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	NgrUsd                      string                 `protobuf:"bytes,2,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"` // cash bet - cash win
-	NgrReportingCurrency        string                 `protobuf:"bytes,3,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	Bonus2CashUsd               string                 `protobuf:"bytes,4,opt,name=bonus2cash_usd,json=bonus2cashUsd,proto3" json:"bonus2cash_usd,omitempty"`
-	Bonus2CashReportingCurrency string                 `protobuf:"bytes,5,opt,name=bonus2cash_reporting_currency,json=bonus2cashReportingCurrency,proto3" json:"bonus2cash_reporting_currency,omitempty"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// cash bet - cash win
+	NgrUsd                      string `protobuf:"bytes,2,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NgrReportingCurrency        string `protobuf:"bytes,3,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	Bonus2CashUsd               string `protobuf:"bytes,4,opt,name=bonus2cash_usd,json=bonus2cashUsd,proto3" json:"bonus2cash_usd,omitempty"`
+	Bonus2CashReportingCurrency string `protobuf:"bytes,5,opt,name=bonus2cash_reporting_currency,json=bonus2cashReportingCurrency,proto3" json:"bonus2cash_reporting_currency,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -16557,9 +16667,10 @@ type BatchGetUserFinancialMetricsResponse_UserMetrics struct {
 	DepositCount     int32                  `protobuf:"varint,2,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
 	WithdrawalAmount string                 `protobuf:"bytes,3,opt,name=withdrawal_amount,json=withdrawalAmount,proto3" json:"withdrawal_amount,omitempty"`
 	WithdrawalCount  int32                  `protobuf:"varint,4,opt,name=withdrawal_count,json=withdrawalCount,proto3" json:"withdrawal_count,omitempty"`
-	Currency         string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"` // "USD" if aggregated, otherwise the requested currency
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// "USD" if aggregated, otherwise the requested currency
+	Currency      string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *BatchGetUserFinancialMetricsResponse_UserMetrics) Reset() {

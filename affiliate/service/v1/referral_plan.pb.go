@@ -30,14 +30,20 @@ type SetReferralPlanRequest struct {
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	InitiatorUserId          int64                   `protobuf:"varint,3,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	Currency                 string                  `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	FollowParent             *bool                   `protobuf:"varint,5,opt,name=follow_parent,json=followParent,proto3,oneof" json:"follow_parent,omitempty"`                       // if target operator follows parent's (or system's) referral plan
-	Enabled                  *bool                   `protobuf:"varint,6,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`                                                     // target operator's referral plan's enabled
-	MaxTier                  *int32                  `protobuf:"varint,7,opt,name=max_tier,json=maxTier,proto3,oneof" json:"max_tier,omitempty"`                                      // target operator's referral plan's max_tier
-	PlanConfig               *ReferralPlanConfig     `protobuf:"bytes,8,opt,name=plan_config,json=planConfig,proto3,oneof" json:"plan_config,omitempty"`                              // target operator's referral plan's plan_config
-	PaymentChannelRate       *string                 `protobuf:"bytes,9,opt,name=payment_channel_rate,json=paymentChannelRate,proto3,oneof" json:"payment_channel_rate,omitempty"`    // represent as a percentage, e.g. "35" for 35%
-	ThirdPartyGameRate       *string                 `protobuf:"bytes,10,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3,oneof" json:"third_party_game_rate,omitempty"` // represent as a percentage, e.g. "35" for 35%
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// Whether target operator follows parent's (or system's) referral plan
+	FollowParent *bool `protobuf:"varint,5,opt,name=follow_parent,json=followParent,proto3,oneof" json:"follow_parent,omitempty"`
+	// Target operator's referral plan enabled state
+	Enabled *bool `protobuf:"varint,6,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	// Target operator's referral plan max tier
+	MaxTier *int32 `protobuf:"varint,7,opt,name=max_tier,json=maxTier,proto3,oneof" json:"max_tier,omitempty"`
+	// Target operator's referral plan config
+	PlanConfig *ReferralPlanConfig `protobuf:"bytes,8,opt,name=plan_config,json=planConfig,proto3,oneof" json:"plan_config,omitempty"`
+	// Percentage string, e.g. "35" for 35%
+	PaymentChannelRate *string `protobuf:"bytes,9,opt,name=payment_channel_rate,json=paymentChannelRate,proto3,oneof" json:"payment_channel_rate,omitempty"`
+	// Percentage string, e.g. "35" for 35%
+	ThirdPartyGameRate *string `protobuf:"bytes,10,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3,oneof" json:"third_party_game_rate,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *SetReferralPlanRequest) Reset() {
@@ -547,14 +553,17 @@ func (x *GetUserReferralStatsResponse) GetReferralProgress() *GetUserReferralSta
 }
 
 type ReferralCode struct {
-	state                          protoimpl.MessageState `protogen:"open.v1"`
-	UserId                         int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	UserName                       string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	ReferralCode                   string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
-	CreatedAt                      string                 `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	ReferralUserCount              int64                  `protobuf:"varint,5,opt,name=referral_user_count,json=referralUserCount,proto3" json:"referral_user_count,omitempty"`                                         // number of users who have used this referral code
-	EarningAmountUsd               string                 `protobuf:"bytes,6,opt,name=earning_amount_usd,json=earningAmountUsd,proto3" json:"earning_amount_usd,omitempty"`                                             // amount of money earned by the user who has used this referral code
-	EarningAmountReportingCurrency string                 `protobuf:"bytes,7,opt,name=earning_amount_reporting_currency,json=earningAmountReportingCurrency,proto3" json:"earning_amount_reporting_currency,omitempty"` // amount of money earned by the user who has used this referral code in reporting currency
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	UserId       int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserName     string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	ReferralCode string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
+	CreatedAt    string                 `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Number of users who registered with this referral code
+	ReferralUserCount int64 `protobuf:"varint,5,opt,name=referral_user_count,json=referralUserCount,proto3" json:"referral_user_count,omitempty"`
+	// Earnings in USD from this referral code
+	EarningAmountUsd string `protobuf:"bytes,6,opt,name=earning_amount_usd,json=earningAmountUsd,proto3" json:"earning_amount_usd,omitempty"`
+	// Earnings in reporting currency from this referral code
+	EarningAmountReportingCurrency string `protobuf:"bytes,7,opt,name=earning_amount_reporting_currency,json=earningAmountReportingCurrency,proto3" json:"earning_amount_reporting_currency,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -639,8 +648,9 @@ func (x *ReferralCode) GetEarningAmountReportingCurrency() string {
 }
 
 type CreateUserReferralCodeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ReferralCode  *string                `protobuf:"bytes,1,opt,name=referral_code,json=referralCode,proto3,oneof" json:"referral_code,omitempty"` // nil means backend will randomly generate a new code
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// nil means backend will randomly generate a new code
+	ReferralCode  *string `protobuf:"bytes,1,opt,name=referral_code,json=referralCode,proto3,oneof" json:"referral_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -727,9 +737,10 @@ func (x *CreateUserReferralCodeResponse) GetReferralCode() string {
 }
 
 type ListUserReferralRewardsRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Currency            string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	RewardType          string                 `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // conversion_reward/deposit_cashback_reward/wagering_commission_reward/loss_revenue_share_reward
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Currency string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	// "conversion_reward", "deposit_cashback_reward", "wagering_commission_reward", or "loss_revenue_share_reward"
+	RewardType          string                 `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
 	ReferralCode        *string                `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3,oneof" json:"referral_code,omitempty"`
 	UserId              *int64                 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	Tier                *int32                 `protobuf:"varint,5,opt,name=tier,proto3,oneof" json:"tier,omitempty"`
@@ -1087,11 +1098,12 @@ func (*ClaimUserReferralRewardsResponse) Descriptor() ([]byte, []int) {
 }
 
 type GetUserLossRevenueShareStatsRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Currency            string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	ReferralCode        *string                `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3,oneof" json:"referral_code,omitempty"`
-	UserId              *int64                 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	Tier                *int32                 `protobuf:"varint,5,opt,name=tier,proto3,oneof" json:"tier,omitempty"` // for filter referred stats, other fields remain the same
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Currency     string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	ReferralCode *string                `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3,oneof" json:"referral_code,omitempty"`
+	UserId       *int64                 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	// Filter referred stats by tier; other fields remain the same
+	Tier                *int32                 `protobuf:"varint,5,opt,name=tier,proto3,oneof" json:"tier,omitempty"`
 	ConversionStartTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=conversion_start_time,json=conversionStartTime,proto3,oneof" json:"conversion_start_time,omitempty"`
 	ConversionEndTime   *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=conversion_end_time,json=conversionEndTime,proto3,oneof" json:"conversion_end_time,omitempty"`
 	Page                *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
@@ -1187,21 +1199,30 @@ func (x *GetUserLossRevenueShareStatsRequest) GetPageSize() int32 {
 }
 
 type GetUserLossRevenueShareStatsResponse struct {
-	state                    protoimpl.MessageState                               `protogen:"open.v1"`
-	UnpaidRewardAmount       string                                               `protobuf:"bytes,1,opt,name=unpaid_reward_amount,json=unpaidRewardAmount,proto3" json:"unpaid_reward_amount,omitempty"` // now only calculate for user's tier 1
-	UnclaimedRewardAmount    string                                               `protobuf:"bytes,2,opt,name=unclaimed_reward_amount,json=unclaimedRewardAmount,proto3" json:"unclaimed_reward_amount,omitempty"`
-	ClaimedRewardAmount      string                                               `protobuf:"bytes,3,opt,name=claimed_reward_amount,json=claimedRewardAmount,proto3" json:"claimed_reward_amount,omitempty"`
-	GgrAmountInPeriod        map[int32]string                                     `protobuf:"bytes,4,rep,name=ggr_amount_in_period,json=ggrAmountInPeriod,proto3" json:"ggr_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`                      // map of tier number (1-10) to ggr amount in the period
-	NgrAmountInPeriod        map[int32]string                                     `protobuf:"bytes,5,rep,name=ngr_amount_in_period,json=ngrAmountInPeriod,proto3" json:"ngr_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`                      // map of tier number (1-10) to ngr amount in the period
-	Bonus2CashAmountInPeriod map[int32]string                                     `protobuf:"bytes,6,rep,name=bonus2cash_amount_in_period,json=bonus2cashAmountInPeriod,proto3" json:"bonus2cash_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // map of tier number (1-10) to bonus2cash amount in the period
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Currently only calculated for user's tier 1
+	UnpaidRewardAmount    string `protobuf:"bytes,1,opt,name=unpaid_reward_amount,json=unpaidRewardAmount,proto3" json:"unpaid_reward_amount,omitempty"`
+	UnclaimedRewardAmount string `protobuf:"bytes,2,opt,name=unclaimed_reward_amount,json=unclaimedRewardAmount,proto3" json:"unclaimed_reward_amount,omitempty"`
+	ClaimedRewardAmount   string `protobuf:"bytes,3,opt,name=claimed_reward_amount,json=claimedRewardAmount,proto3" json:"claimed_reward_amount,omitempty"`
+	// Map of tier number (1-10) to GGR amount in the period
+	GgrAmountInPeriod map[int32]string `protobuf:"bytes,4,rep,name=ggr_amount_in_period,json=ggrAmountInPeriod,proto3" json:"ggr_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Map of tier number (1-10) to NGR amount in the period
+	NgrAmountInPeriod map[int32]string `protobuf:"bytes,5,rep,name=ngr_amount_in_period,json=ngrAmountInPeriod,proto3" json:"ngr_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Map of tier number (1-10) to bonus2cash amount in the period
+	Bonus2CashAmountInPeriod map[int32]string                                     `protobuf:"bytes,6,rep,name=bonus2cash_amount_in_period,json=bonus2cashAmountInPeriod,proto3" json:"bonus2cash_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	ReferredStats            []*GetUserLossRevenueShareStatsResponse_ReferredStat `protobuf:"bytes,7,rep,name=referred_stats,json=referredStats,proto3" json:"referred_stats,omitempty"`
-	TeamSize                 int32                                                `protobuf:"varint,8,opt,name=team_size,json=teamSize,proto3" json:"team_size,omitempty"`                                                                                                                            // number of users in the team
-	Total                    int32                                                `protobuf:"varint,9,opt,name=total,proto3" json:"total,omitempty"`                                                                                                                                                  // for referred stats
-	Page                     int32                                                `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`                                                                                                                                                   // for referred stats
-	PageSize                 int32                                                `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`                                                                                                                           // for referred stats
-	AdminFeeAmountInPeriod   map[int32]string                                     `protobuf:"bytes,12,rep,name=admin_fee_amount_in_period,json=adminFeeAmountInPeriod,proto3" json:"admin_fee_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // map of tier number (1-10) to admin fee amount = (NGR/GGR) * admin_rate / 100
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// Number of users in the team
+	TeamSize int32 `protobuf:"varint,8,opt,name=team_size,json=teamSize,proto3" json:"team_size,omitempty"`
+	// Total count for referred stats pagination
+	Total int32 `protobuf:"varint,9,opt,name=total,proto3" json:"total,omitempty"`
+	// Page number for referred stats
+	Page int32 `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`
+	// Page size for referred stats
+	PageSize int32 `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Map of tier number (1-10) to admin fee amount = (NGR/GGR) * admin_rate / 100
+	AdminFeeAmountInPeriod map[int32]string `protobuf:"bytes,12,rep,name=admin_fee_amount_in_period,json=adminFeeAmountInPeriod,proto3" json:"admin_fee_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetUserLossRevenueShareStatsResponse) Reset() {
@@ -1320,12 +1341,14 @@ func (x *GetUserLossRevenueShareStatsResponse) GetAdminFeeAmountInPeriod() map[i
 
 // Complete referral plan configuration
 type ReferralPlan struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Enabled            bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	MaxTier            int32                  `protobuf:"varint,2,opt,name=max_tier,json=maxTier,proto3" json:"max_tier,omitempty"`
-	PlanConfig         *ReferralPlanConfig    `protobuf:"bytes,3,opt,name=plan_config,json=planConfig,proto3" json:"plan_config,omitempty"`
-	PaymentChannelRate string                 `protobuf:"bytes,4,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`   // represent as a percentage, e.g. "35" for 35%
-	ThirdPartyGameRate string                 `protobuf:"bytes,5,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"` // represent as a percentage, e.g. "35" for 35%
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Enabled    bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	MaxTier    int32                  `protobuf:"varint,2,opt,name=max_tier,json=maxTier,proto3" json:"max_tier,omitempty"`
+	PlanConfig *ReferralPlanConfig    `protobuf:"bytes,3,opt,name=plan_config,json=planConfig,proto3" json:"plan_config,omitempty"`
+	// Percentage string, e.g. "35" for 35%
+	PaymentChannelRate string `protobuf:"bytes,4,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`
+	// Percentage string, e.g. "35" for 35%
+	ThirdPartyGameRate string `protobuf:"bytes,5,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -1686,10 +1709,11 @@ func (x *ConversionTierRewards) GetRewards() []*ConversionTierReward {
 }
 
 type ConversionTierReward struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	From          string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
-	To            *string                `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"` // nil indicates no upper limit
-	RewardAmount  string                 `protobuf:"bytes,3,opt,name=reward_amount,json=rewardAmount,proto3" json:"reward_amount,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	From  string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	// nil indicates no upper limit
+	To            *string `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"`
+	RewardAmount  string  `protobuf:"bytes,3,opt,name=reward_amount,json=rewardAmount,proto3" json:"reward_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1903,10 +1927,11 @@ func (x *DepositCashbackTierRewardConfig) GetTierRewards() []*DepositCashbackTie
 }
 
 type DepositCashbackTierReward struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	From               string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
-	To                 *string                `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"` // nil indicates no upper limit
-	CashbackPercentage string                 `protobuf:"bytes,3,opt,name=cashback_percentage,json=cashbackPercentage,proto3" json:"cashback_percentage,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	From  string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	// nil indicates no upper limit
+	To                 *string `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"`
+	CashbackPercentage string  `protobuf:"bytes,3,opt,name=cashback_percentage,json=cashbackPercentage,proto3" json:"cashback_percentage,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -1963,12 +1988,14 @@ func (x *DepositCashbackTierReward) GetCashbackPercentage() string {
 }
 
 type WageringCommission struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Enabled          bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	MaxGameHouseEdge string                 `protobuf:"bytes,2,opt,name=max_game_house_edge,json=maxGameHouseEdge,proto3" json:"max_game_house_edge,omitempty"` // represent as a percentage, e.g. "35" for 35%
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Percentage string, e.g. "35" for 35%
+	MaxGameHouseEdge string `protobuf:"bytes,2,opt,name=max_game_house_edge,json=maxGameHouseEdge,proto3" json:"max_game_house_edge,omitempty"`
 	// Map of tier number (1-10) to tier rewards
-	TierRewards   map[int32]*WageringCommissionTierRewards `protobuf:"bytes,3,rep,name=tier_rewards,json=tierRewards,proto3" json:"tier_rewards,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Period        string                                   `protobuf:"bytes,4,opt,name=period,proto3" json:"period,omitempty"` // real_time/daily/weekly/monthly
+	TierRewards map[int32]*WageringCommissionTierRewards `protobuf:"bytes,3,rep,name=tier_rewards,json=tierRewards,proto3" json:"tier_rewards,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// "real_time", "daily", "weekly", or "monthly"
+	Period        string `protobuf:"bytes,4,opt,name=period,proto3" json:"period,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2076,10 +2103,12 @@ func (x *WageringCommissionTierRewards) GetRewards() []*WageringCommissionTierRe
 }
 
 type WageringCommissionTierReward struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	From          string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
-	To            *string                `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"` // nil indicates no upper limit
-	Rate          string                 `protobuf:"bytes,3,opt,name=rate,proto3" json:"rate,omitempty"`   // represent as a percentage, e.g. "35" for 35%
+	state protoimpl.MessageState `protogen:"open.v1"`
+	From  string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	// nil indicates no upper limit
+	To *string `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"`
+	// Percentage string, e.g. "35" for 35%
+	Rate          string `protobuf:"bytes,3,opt,name=rate,proto3" json:"rate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2136,13 +2165,16 @@ func (x *WageringCommissionTierReward) GetRate() string {
 }
 
 type LossRevenueShare struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Enabled           bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	BasedOn           string                 `protobuf:"bytes,2,opt,name=based_on,json=basedOn,proto3" json:"based_on,omitempty"`                               // ggr/ngr
-	NegativeCarryover string                 `protobuf:"bytes,3,opt,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"` // discard/carry_to_next_period
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// "ggr" or "ngr"
+	BasedOn string `protobuf:"bytes,2,opt,name=based_on,json=basedOn,proto3" json:"based_on,omitempty"`
+	// "discard" or "carry_to_next_period"
+	NegativeCarryover string `protobuf:"bytes,3,opt,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"`
 	// Map of tier number (1-10) to tier rewards
-	TierRewards   map[int32]*LossRevenueShareTierRewards `protobuf:"bytes,4,rep,name=tier_rewards,json=tierRewards,proto3" json:"tier_rewards,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Period        string                                 `protobuf:"bytes,5,opt,name=period,proto3" json:"period,omitempty"` // weekly/monthly
+	TierRewards map[int32]*LossRevenueShareTierRewards `protobuf:"bytes,4,rep,name=tier_rewards,json=tierRewards,proto3" json:"tier_rewards,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// "weekly" or "monthly"
+	Period        string `protobuf:"bytes,5,opt,name=period,proto3" json:"period,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2257,10 +2289,12 @@ func (x *LossRevenueShareTierRewards) GetRewards() []*LossRevenueShareTierReward
 }
 
 type LossRevenueShareTierReward struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	From          string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
-	To            *string                `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"` // nil indicates no upper limit
-	Rate          string                 `protobuf:"bytes,3,opt,name=rate,proto3" json:"rate,omitempty"`   // represent as a percentage, e.g. "35" for 35%
+	state protoimpl.MessageState `protogen:"open.v1"`
+	From  string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	// nil indicates no upper limit
+	To *string `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"`
+	// Percentage string, e.g. "35" for 35%
+	Rate          string `protobuf:"bytes,3,opt,name=rate,proto3" json:"rate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2317,8 +2351,9 @@ func (x *LossRevenueShareTierReward) GetRate() string {
 }
 
 type GetUserReferralRewardsAllCurrenciesRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	TargetCurrency string                 `protobuf:"bytes,1,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"` // target currency for exchange rate conversion display
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target currency for exchange rate conversion display
+	TargetCurrency string `protobuf:"bytes,1,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -2361,13 +2396,15 @@ func (x *GetUserReferralRewardsAllCurrenciesRequest) GetTargetCurrency() string 
 }
 
 type GetUserReferralRewardsAllCurrenciesResponse struct {
-	state                protoimpl.MessageState                                        `protogen:"open.v1"`
-	CurrencyRewards      []*GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward `protobuf:"bytes,1,rep,name=currency_rewards,json=currencyRewards,proto3" json:"currency_rewards,omitempty"`
-	TotalConvertedAmount string                                                        `protobuf:"bytes,2,opt,name=total_converted_amount,json=totalConvertedAmount,proto3" json:"total_converted_amount,omitempty"` // total of all currencies converted to target
-	TargetCurrency       string                                                        `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
-	SnapshotTime         int64                                                         `protobuf:"varint,4,opt,name=snapshot_time,json=snapshotTime,proto3" json:"snapshot_time,omitempty"` // snapshot timestamp(ms), pass to Claim
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state           protoimpl.MessageState                                        `protogen:"open.v1"`
+	CurrencyRewards []*GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward `protobuf:"bytes,1,rep,name=currency_rewards,json=currencyRewards,proto3" json:"currency_rewards,omitempty"`
+	// Total of all currencies converted to target
+	TotalConvertedAmount string `protobuf:"bytes,2,opt,name=total_converted_amount,json=totalConvertedAmount,proto3" json:"total_converted_amount,omitempty"`
+	TargetCurrency       string `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	// Snapshot timestamp in milliseconds, pass to Claim
+	SnapshotTime  int64 `protobuf:"varint,4,opt,name=snapshot_time,json=snapshotTime,proto3" json:"snapshot_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserReferralRewardsAllCurrenciesResponse) Reset() {
@@ -2429,11 +2466,13 @@ func (x *GetUserReferralRewardsAllCurrenciesResponse) GetSnapshotTime() int64 {
 }
 
 type ClaimUserReferralRewardsAllCurrenciesRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	TargetCurrency string                 `protobuf:"bytes,1,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"` // currency to receive the converted total
-	SnapshotTime   int64                  `protobuf:"varint,2,opt,name=snapshot_time,json=snapshotTime,proto3" json:"snapshot_time,omitempty"`      // snapshot timestamp from Get, ensures claim scope matches preview
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Currency to receive the converted total
+	TargetCurrency string `protobuf:"bytes,1,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	// Snapshot timestamp from Get, ensures claim scope matches preview
+	SnapshotTime  int64 `protobuf:"varint,2,opt,name=snapshot_time,json=snapshotTime,proto3" json:"snapshot_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClaimUserReferralRewardsAllCurrenciesRequest) Reset() {
@@ -2481,10 +2520,11 @@ func (x *ClaimUserReferralRewardsAllCurrenciesRequest) GetSnapshotTime() int64 {
 }
 
 type ClaimUserReferralRewardsAllCurrenciesResponse struct {
-	state               protoimpl.MessageState                                                 `protogen:"open.v1"`
-	ClaimedDetails      []*ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail `protobuf:"bytes,1,rep,name=claimed_details,json=claimedDetails,proto3" json:"claimed_details,omitempty"`
-	TotalCreditedAmount string                                                                 `protobuf:"bytes,2,opt,name=total_credited_amount,json=totalCreditedAmount,proto3" json:"total_credited_amount,omitempty"` // total credited to wallet in target currency
-	TargetCurrency      string                                                                 `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	state          protoimpl.MessageState                                                 `protogen:"open.v1"`
+	ClaimedDetails []*ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail `protobuf:"bytes,1,rep,name=claimed_details,json=claimedDetails,proto3" json:"claimed_details,omitempty"`
+	// Total credited to wallet in target currency
+	TotalCreditedAmount string `protobuf:"bytes,2,opt,name=total_credited_amount,json=totalCreditedAmount,proto3" json:"total_credited_amount,omitempty"`
+	TargetCurrency      string `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -2541,12 +2581,13 @@ func (x *ClaimUserReferralRewardsAllCurrenciesResponse) GetTargetCurrency() stri
 }
 
 type GetUserReferralStatsResponse_ReferralRewards struct {
-	state                               protoimpl.MessageState `protogen:"open.v1"`
-	AvailableReferralRewardAmount       string                 `protobuf:"bytes,1,opt,name=available_referral_reward_amount,json=availableReferralRewardAmount,proto3" json:"available_referral_reward_amount,omitempty"` // for this currency
-	AvailableCommissionRewardAmount     string                 `protobuf:"bytes,2,opt,name=available_commission_reward_amount,json=availableCommissionRewardAmount,proto3" json:"available_commission_reward_amount,omitempty"`
-	TotalReceivedReferralRewardAmount   string                 `protobuf:"bytes,3,opt,name=total_received_referral_reward_amount,json=totalReceivedReferralRewardAmount,proto3" json:"total_received_referral_reward_amount,omitempty"`
-	TotalReceivedCommissionRewardAmount string                 `protobuf:"bytes,4,opt,name=total_received_commission_reward_amount,json=totalReceivedCommissionRewardAmount,proto3" json:"total_received_commission_reward_amount,omitempty"`
-	TotalReceivedInviteeRewardAmount    string                 `protobuf:"bytes,5,opt,name=total_received_invitee_reward_amount,json=totalReceivedInviteeRewardAmount,proto3" json:"total_received_invitee_reward_amount,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Amount for this currency
+	AvailableReferralRewardAmount       string `protobuf:"bytes,1,opt,name=available_referral_reward_amount,json=availableReferralRewardAmount,proto3" json:"available_referral_reward_amount,omitempty"`
+	AvailableCommissionRewardAmount     string `protobuf:"bytes,2,opt,name=available_commission_reward_amount,json=availableCommissionRewardAmount,proto3" json:"available_commission_reward_amount,omitempty"`
+	TotalReceivedReferralRewardAmount   string `protobuf:"bytes,3,opt,name=total_received_referral_reward_amount,json=totalReceivedReferralRewardAmount,proto3" json:"total_received_referral_reward_amount,omitempty"`
+	TotalReceivedCommissionRewardAmount string `protobuf:"bytes,4,opt,name=total_received_commission_reward_amount,json=totalReceivedCommissionRewardAmount,proto3" json:"total_received_commission_reward_amount,omitempty"`
+	TotalReceivedInviteeRewardAmount    string `protobuf:"bytes,5,opt,name=total_received_invitee_reward_amount,json=totalReceivedInviteeRewardAmount,proto3" json:"total_received_invitee_reward_amount,omitempty"`
 	// Breakdown of available rewards by commission type
 	AvailableDepositCashbackRewardAmount    string `protobuf:"bytes,6,opt,name=available_deposit_cashback_reward_amount,json=availableDepositCashbackRewardAmount,proto3" json:"available_deposit_cashback_reward_amount,omitempty"`
 	AvailableWageringCommissionRewardAmount string `protobuf:"bytes,7,opt,name=available_wagering_commission_reward_amount,json=availableWageringCommissionRewardAmount,proto3" json:"available_wagering_commission_reward_amount,omitempty"`
@@ -2667,12 +2708,15 @@ func (x *GetUserReferralStatsResponse_ReferralRewards) GetTotalReceivedLossReven
 }
 
 type GetUserReferralStatsResponse_ReferralProgress struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	ConversionCount map[int32]int32        `protobuf:"bytes,1,rep,name=conversion_count,json=conversionCount,proto3" json:"conversion_count,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"` // map of tier number (1-10) to conversion count
-	DepositAmount   map[int32]string       `protobuf:"bytes,2,rep,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`        // map of tier number (1-10) to deposit amount
-	WageringAmount  map[int32]string       `protobuf:"bytes,3,rep,name=wagering_amount,json=wageringAmount,proto3" json:"wagering_amount,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`     // map of tier number (1-10) to wagering amount, focus on game bet and game bet rollback
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Map of tier number (1-10) to conversion count
+	ConversionCount map[int32]int32 `protobuf:"bytes,1,rep,name=conversion_count,json=conversionCount,proto3" json:"conversion_count,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	// Map of tier number (1-10) to deposit amount
+	DepositAmount map[int32]string `protobuf:"bytes,2,rep,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Map of tier number (1-10) to wagering amount (game bet and game bet rollback)
+	WageringAmount map[int32]string `protobuf:"bytes,3,rep,name=wagering_amount,json=wageringAmount,proto3" json:"wagering_amount,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GetUserReferralStatsResponse_ReferralProgress) Reset() {
@@ -2935,17 +2979,26 @@ func (x *GetUserLossRevenueShareStatsResponse_ReferredStat) GetConversionTime() 
 }
 
 type GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Currency        string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`                                       // source currency
-	Amount          string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`                                           // total claimable amount in source currency
-	ConvertedAmount string                 `protobuf:"bytes,3,opt,name=converted_amount,json=convertedAmount,proto3" json:"converted_amount,omitempty"`  // amount converted to target_currency
-	ExchangeRate    string                 `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`           // exchange rate: 1 source = X target
-	CommissionCount int32                  `protobuf:"varint,5,opt,name=commission_count,json=commissionCount,proto3" json:"commission_count,omitempty"` // number of claimable commissions
-	// breakdown by reward type
-	ReferralAmount       string `protobuf:"bytes,6,opt,name=referral_amount,json=referralAmount,proto3" json:"referral_amount,omitempty"`                        // conversion_reward subtotal
-	CommissionAmount     string `protobuf:"bytes,7,opt,name=commission_amount,json=commissionAmount,proto3" json:"commission_amount,omitempty"`                  // deposit_cashback + wagering_commission subtotal
-	LossRevShareAmount   string `protobuf:"bytes,8,opt,name=loss_rev_share_amount,json=lossRevShareAmount,proto3" json:"loss_rev_share_amount,omitempty"`        // loss_rev_share subtotal (defensive: only included when >= 0)
-	LossRevShareExcluded bool   `protobuf:"varint,9,opt,name=loss_rev_share_excluded,json=lossRevShareExcluded,proto3" json:"loss_rev_share_excluded,omitempty"` // true if loss_rev_share sum < 0 and excluded
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Source currency
+	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Total claimable amount in source currency
+	Amount string `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Amount converted to target_currency
+	ConvertedAmount string `protobuf:"bytes,3,opt,name=converted_amount,json=convertedAmount,proto3" json:"converted_amount,omitempty"`
+	// Exchange rate: 1 source = X target
+	ExchangeRate string `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	// Number of claimable commissions
+	CommissionCount int32 `protobuf:"varint,5,opt,name=commission_count,json=commissionCount,proto3" json:"commission_count,omitempty"`
+	// Breakdown by reward type:
+	// conversion_reward subtotal
+	ReferralAmount string `protobuf:"bytes,6,opt,name=referral_amount,json=referralAmount,proto3" json:"referral_amount,omitempty"`
+	// deposit_cashback + wagering_commission subtotal
+	CommissionAmount string `protobuf:"bytes,7,opt,name=commission_amount,json=commissionAmount,proto3" json:"commission_amount,omitempty"`
+	// loss_rev_share subtotal (only included when >= 0)
+	LossRevShareAmount string `protobuf:"bytes,8,opt,name=loss_rev_share_amount,json=lossRevShareAmount,proto3" json:"loss_rev_share_amount,omitempty"`
+	// true if loss_rev_share sum < 0 and excluded
+	LossRevShareExcluded bool `protobuf:"varint,9,opt,name=loss_rev_share_excluded,json=lossRevShareExcluded,proto3" json:"loss_rev_share_excluded,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -3044,12 +3097,15 @@ func (x *GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward) GetLossRevS
 }
 
 type ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	SourceCurrency  string                 `protobuf:"bytes,1,opt,name=source_currency,json=sourceCurrency,proto3" json:"source_currency,omitempty"`
-	SourceAmount    string                 `protobuf:"bytes,2,opt,name=source_amount,json=sourceAmount,proto3" json:"source_amount,omitempty"`          // amount in source currency
-	ConvertedAmount string                 `protobuf:"bytes,3,opt,name=converted_amount,json=convertedAmount,proto3" json:"converted_amount,omitempty"` // amount converted to target currency
-	ExchangeRate    string                 `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`          // exchange rate used
-	CommissionCount int32                  `protobuf:"varint,5,opt,name=commission_count,json=commissionCount,proto3" json:"commission_count,omitempty"`
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	SourceCurrency string                 `protobuf:"bytes,1,opt,name=source_currency,json=sourceCurrency,proto3" json:"source_currency,omitempty"`
+	// Amount in source currency
+	SourceAmount string `protobuf:"bytes,2,opt,name=source_amount,json=sourceAmount,proto3" json:"source_amount,omitempty"`
+	// Amount converted to target currency
+	ConvertedAmount string `protobuf:"bytes,3,opt,name=converted_amount,json=convertedAmount,proto3" json:"converted_amount,omitempty"`
+	// Exchange rate used
+	ExchangeRate    string `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	CommissionCount int32  `protobuf:"varint,5,opt,name=commission_count,json=commissionCount,proto3" json:"commission_count,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
