@@ -28075,12 +28075,15 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.push.service.v1.OTPProviderInfo'
                     description: Inline provider info for convenience (populated by the server on read operations)
-                createdByAccountId:
+                createdByOperatorId:
                     type: string
-                    description: Backoffice account ID of the user who created this binding (0 = unknown/legacy)
-                createdByAccountName:
+                    description: Operator ID of the creator's level (0 = unknown/legacy)
+                createdByOperatorName:
                     type: string
-                    description: Display name of the creator (denormalized for convenience)
+                    description: Operator name of the creator's level
+                createdByOperatorType:
+                    type: string
+                    description: Operator type of the creator's level (system, retailer, company, operator)
             description: |-
                 OTPProviderBindingInfo represents a binding between a provider and an operator+country.
 

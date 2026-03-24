@@ -1323,12 +1323,14 @@ type OTPProviderBindingInfo struct {
 	UpdatedAt     int64    `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// Inline provider info for convenience (populated by the server on read operations)
 	Provider *OTPProviderInfo `protobuf:"bytes,10,opt,name=provider,proto3" json:"provider,omitempty"`
-	// Backoffice account ID of the user who created this binding (0 = unknown/legacy)
-	CreatedByAccountId int64 `protobuf:"varint,11,opt,name=created_by_account_id,json=createdByAccountId,proto3" json:"created_by_account_id,omitempty"`
-	// Display name of the creator (denormalized for convenience)
-	CreatedByAccountName string `protobuf:"bytes,12,opt,name=created_by_account_name,json=createdByAccountName,proto3" json:"created_by_account_name,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Operator ID of the creator's level (0 = unknown/legacy)
+	CreatedByOperatorId int64 `protobuf:"varint,11,opt,name=created_by_operator_id,json=createdByOperatorId,proto3" json:"created_by_operator_id,omitempty"`
+	// Operator name of the creator's level
+	CreatedByOperatorName string `protobuf:"bytes,12,opt,name=created_by_operator_name,json=createdByOperatorName,proto3" json:"created_by_operator_name,omitempty"`
+	// Operator type of the creator's level (system, retailer, company, operator)
+	CreatedByOperatorType string `protobuf:"bytes,13,opt,name=created_by_operator_type,json=createdByOperatorType,proto3" json:"created_by_operator_type,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *OTPProviderBindingInfo) Reset() {
@@ -1431,16 +1433,23 @@ func (x *OTPProviderBindingInfo) GetProvider() *OTPProviderInfo {
 	return nil
 }
 
-func (x *OTPProviderBindingInfo) GetCreatedByAccountId() int64 {
+func (x *OTPProviderBindingInfo) GetCreatedByOperatorId() int64 {
 	if x != nil {
-		return x.CreatedByAccountId
+		return x.CreatedByOperatorId
 	}
 	return 0
 }
 
-func (x *OTPProviderBindingInfo) GetCreatedByAccountName() string {
+func (x *OTPProviderBindingInfo) GetCreatedByOperatorName() string {
 	if x != nil {
-		return x.CreatedByAccountName
+		return x.CreatedByOperatorName
+	}
+	return ""
+}
+
+func (x *OTPProviderBindingInfo) GetCreatedByOperatorType() string {
+	if x != nil {
+		return x.CreatedByOperatorType
 	}
 	return ""
 }
@@ -1474,12 +1483,14 @@ type CreateOTPProviderBindingRequest struct {
 	Priority int32 `protobuf:"varint,5,opt,name=priority,proto3" json:"priority,omitempty"`
 	// Phone number prefix filter. e.g., ["+5511", "+5521"]. Empty = matches all numbers.
 	PhonePrefixes []string `protobuf:"bytes,6,rep,name=phone_prefixes,json=phonePrefixes,proto3" json:"phone_prefixes,omitempty"`
-	// Backoffice account ID of the user creating this binding
-	CreatedByAccountId int64 `protobuf:"varint,7,opt,name=created_by_account_id,json=createdByAccountId,proto3" json:"created_by_account_id,omitempty"`
-	// Display name of the creator
-	CreatedByAccountName string `protobuf:"bytes,8,opt,name=created_by_account_name,json=createdByAccountName,proto3" json:"created_by_account_name,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Operator ID of the creator's level
+	CreatedByOperatorId int64 `protobuf:"varint,7,opt,name=created_by_operator_id,json=createdByOperatorId,proto3" json:"created_by_operator_id,omitempty"`
+	// Operator name of the creator's level
+	CreatedByOperatorName string `protobuf:"bytes,8,opt,name=created_by_operator_name,json=createdByOperatorName,proto3" json:"created_by_operator_name,omitempty"`
+	// Operator type of the creator's level (system, retailer, company, operator)
+	CreatedByOperatorType string `protobuf:"bytes,9,opt,name=created_by_operator_type,json=createdByOperatorType,proto3" json:"created_by_operator_type,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CreateOTPProviderBindingRequest) Reset() {
@@ -1554,16 +1565,23 @@ func (x *CreateOTPProviderBindingRequest) GetPhonePrefixes() []string {
 	return nil
 }
 
-func (x *CreateOTPProviderBindingRequest) GetCreatedByAccountId() int64 {
+func (x *CreateOTPProviderBindingRequest) GetCreatedByOperatorId() int64 {
 	if x != nil {
-		return x.CreatedByAccountId
+		return x.CreatedByOperatorId
 	}
 	return 0
 }
 
-func (x *CreateOTPProviderBindingRequest) GetCreatedByAccountName() string {
+func (x *CreateOTPProviderBindingRequest) GetCreatedByOperatorName() string {
 	if x != nil {
-		return x.CreatedByAccountName
+		return x.CreatedByOperatorName
+	}
+	return ""
+}
+
+func (x *CreateOTPProviderBindingRequest) GetCreatedByOperatorType() string {
+	if x != nil {
+		return x.CreatedByOperatorType
 	}
 	return ""
 }
@@ -3619,7 +3637,7 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\tproviders\x18\x01 \x03(\v2$.api.push.service.v1.OTPProviderInfoR\tproviders\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xcb\x03\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x88\x04\n" +
 	"\x16OTPProviderBindingInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -3635,9 +3653,10 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\t \x01(\x03R\tupdatedAt\x12@\n" +
 	"\bprovider\x18\n" +
-	" \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\x121\n" +
-	"\x15created_by_account_id\x18\v \x01(\x03R\x12createdByAccountId\x125\n" +
-	"\x17created_by_account_name\x18\f \x01(\tR\x14createdByAccountName\"\xc4\x02\n" +
+	" \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\x123\n" +
+	"\x16created_by_operator_id\x18\v \x01(\x03R\x13createdByOperatorId\x127\n" +
+	"\x18created_by_operator_name\x18\f \x01(\tR\x15createdByOperatorName\x127\n" +
+	"\x18created_by_operator_type\x18\r \x01(\tR\x15createdByOperatorType\"\x81\x03\n" +
 	"\x1fCreateOTPProviderBindingRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x1f\n" +
@@ -3646,9 +3665,10 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x18\n" +
 	"\aenabled\x18\x04 \x01(\bR\aenabled\x12\x1a\n" +
 	"\bpriority\x18\x05 \x01(\x05R\bpriority\x12%\n" +
-	"\x0ephone_prefixes\x18\x06 \x03(\tR\rphonePrefixes\x121\n" +
-	"\x15created_by_account_id\x18\a \x01(\x03R\x12createdByAccountId\x125\n" +
-	"\x17created_by_account_name\x18\b \x01(\tR\x14createdByAccountName\"i\n" +
+	"\x0ephone_prefixes\x18\x06 \x03(\tR\rphonePrefixes\x123\n" +
+	"\x16created_by_operator_id\x18\a \x01(\x03R\x13createdByOperatorId\x127\n" +
+	"\x18created_by_operator_name\x18\b \x01(\tR\x15createdByOperatorName\x127\n" +
+	"\x18created_by_operator_type\x18\t \x01(\tR\x15createdByOperatorType\"i\n" +
 	" CreateOTPProviderBindingResponse\x12E\n" +
 	"\abinding\x18\x01 \x01(\v2+.api.push.service.v1.OTPProviderBindingInfoR\abinding\"\x81\x02\n" +
 	"\x1fUpdateOTPProviderBindingRequest\x12\x0e\n" +

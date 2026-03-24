@@ -1624,9 +1624,11 @@ func (m *OTPProviderBindingInfo) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for CreatedByAccountId
+	// no validation rules for CreatedByOperatorId
 
-	// no validation rules for CreatedByAccountName
+	// no validation rules for CreatedByOperatorName
+
+	// no validation rules for CreatedByOperatorType
 
 	if len(errors) > 0 {
 		return OTPProviderBindingInfoMultiError(errors)
@@ -1740,9 +1742,11 @@ func (m *CreateOTPProviderBindingRequest) validate(all bool) error {
 
 	// no validation rules for Priority
 
-	// no validation rules for CreatedByAccountId
+	// no validation rules for CreatedByOperatorId
 
-	// no validation rules for CreatedByAccountName
+	// no validation rules for CreatedByOperatorName
+
+	// no validation rules for CreatedByOperatorType
 
 	if len(errors) > 0 {
 		return CreateOTPProviderBindingRequestMultiError(errors)
