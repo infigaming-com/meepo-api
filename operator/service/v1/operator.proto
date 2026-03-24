@@ -672,6 +672,7 @@ message ListCustodyOverviewRequest {
 	api.common.OperatorContext operator_context = 1;
 	optional int32 page = 2;
 	optional int32 page_size = 3;
+	optional bool no_pagination = 4;  // true = return all rows without pagination
 }
 
 message ListCustodyOverviewResponse {

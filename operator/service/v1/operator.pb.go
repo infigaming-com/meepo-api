@@ -3403,6 +3403,7 @@ type ListCustodyOverviewRequest struct {
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Page            *int32                  `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize        *int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	NoPagination    *bool                   `protobuf:"varint,4,opt,name=no_pagination,json=noPagination,proto3,oneof" json:"no_pagination,omitempty"` // true = return all rows without pagination
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3456,6 +3457,13 @@ func (x *ListCustodyOverviewRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListCustodyOverviewRequest) GetNoPagination() bool {
+	if x != nil && x.NoPagination != nil {
+		return *x.NoPagination
+	}
+	return false
 }
 
 type ListCustodyOverviewResponse struct {
@@ -6525,14 +6533,16 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x1blocked_for_pending_invoices\x18\r \x01(\tR\x18lockedForPendingInvoices\x12\x1f\n" +
 	"\voperator_id\x18\x0e \x01(\x03R\n" +
 	"operatorId\x12#\n" +
-	"\roperator_name\x18\x0f \x01(\tR\foperatorName\"\xb6\x01\n" +
+	"\roperator_name\x18\x0f \x01(\tR\foperatorName\"\xf2\x01\n" +
 	"\x1aListCustodyOverviewRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12(\n" +
+	"\rno_pagination\x18\x04 \x01(\bH\x02R\fnoPagination\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xb0\x01\n" +
+	"_page_sizeB\x10\n" +
+	"\x0e_no_pagination\"\xb0\x01\n" +
 	"\x1bListCustodyOverviewResponse\x12?\n" +
 	"\x04rows\x18\x01 \x03(\v2+.api.operator.service.v1.CustodyOverviewRowR\x04rows\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +

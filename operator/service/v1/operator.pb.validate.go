@@ -6626,6 +6626,10 @@ func (m *ListCustodyOverviewRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.NoPagination != nil {
+		// no validation rules for NoPagination
+	}
+
 	if len(errors) > 0 {
 		return ListCustodyOverviewRequestMultiError(errors)
 	}
