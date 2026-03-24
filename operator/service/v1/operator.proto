@@ -106,6 +106,9 @@ service Operator {
 
 	rpc ListRevenueShareRateConfigs(ListRevenueShareRateConfigsRequest) returns (ListRevenueShareRateConfigsResponse) {
 	}
+
+	rpc ListCustodyOverview(ListCustodyOverviewRequest) returns (ListCustodyOverviewResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -663,6 +666,33 @@ message BalancesSummaryRow {
 	string locked_for_pending_invoices = 13;
 	int64 operator_id = 14;
 	string operator_name = 15;
+}
+
+message ListCustodyOverviewRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+}
+
+message ListCustodyOverviewResponse {
+	repeated CustodyOverviewRow rows = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message CustodyOverviewRow {
+	int64 retailer_operator_id = 1;
+	string retailer_name = 2;
+	int64 company_operator_id = 3;
+	string company_name = 4;
+	int64 operator_id = 5;
+	string operator_name = 6;
+	string operator_type = 7;
+	string est_cost = 8;
+	string est_rs_to_sys = 9;
+	string locked_for_pending_invoice = 10;
 }
 
 message ListBillingPeriodsRequest {
