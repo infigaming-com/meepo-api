@@ -491,6 +491,7 @@ message UpdateAdjustmentRequest {
 	string amount = 2;
 	string description = 3;
 	string currency = 4;
+	string adjustment_type = 5; // pre-calculation or post-calculation
 }
 
 message UpdateAdjustmentResponse {
@@ -557,6 +558,7 @@ message ListAdjustmentsResponse {
 		int64 id = 7;
 		int64 created_at = 8;
 		string created_by = 9; // creator display name
+		string adjustment_type = 10; // pre-calculation or post-calculation
 	}
 	
 	repeated AdjustmentItem items = 1;

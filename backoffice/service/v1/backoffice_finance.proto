@@ -461,6 +461,8 @@ message AddAdjustmentRequest {
 	string amount = 7; // Adjustment amount as string to preserve precision
 	string description = 8; // Description of the adjustment
 	string period_key = 9; // Period key
+	int64 created_by = 10; // Backoffice user ID of the creator
+	string adjustment_type = 11; // pre-calculation or post-calculation
 }
 
 message AddAdjustmentResponse {
@@ -528,6 +530,7 @@ message ListAdjustmentsResponse {
 		int64 id = 7;
 		int64 created_at = 8;
 		string created_by = 9; // creator display name
+		string adjustment_type = 10; // pre-calculation or post-calculation
 	}
 	
 	repeated AdjustmentItem items = 1;
@@ -561,6 +564,7 @@ message UpdateAdjustmentRequest {
 	string amount = 2;
 	string description = 3;
 	string currency = 4;
+	string adjustment_type = 5; // pre-calculation or post-calculation
 }
 
 message UpdateAdjustmentResponse {

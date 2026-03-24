@@ -3813,6 +3813,8 @@ func (m *UpdateAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for AdjustmentType
+
 	if len(errors) > 0 {
 		return UpdateAdjustmentRequestMultiError(errors)
 	}
@@ -9664,6 +9666,8 @@ func (m *ListAdjustmentsResponse_AdjustmentItem) validate(all bool) error {
 	// no validation rules for CreatedAt
 
 	// no validation rules for CreatedBy
+
+	// no validation rules for AdjustmentType
 
 	if len(errors) > 0 {
 		return ListAdjustmentsResponse_AdjustmentItemMultiError(errors)
