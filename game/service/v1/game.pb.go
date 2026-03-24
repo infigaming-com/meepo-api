@@ -2012,18 +2012,19 @@ func (x *BalanceResponse) GetData() *BalanceResponse_Data {
 }
 
 type PlayRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	UserId         string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency       string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	GameId         string                 `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	RoundId        string                 `protobuf:"bytes,4,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
-	Finished       bool                   `protobuf:"varint,5,opt,name=finished,proto3" json:"finished,omitempty"`
-	SmResult       string                 `protobuf:"bytes,6,opt,name=sm_result,json=smResult,proto3" json:"sm_result,omitempty"`
-	SessionId      int64                  `protobuf:"varint,7,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	Actions        []*Action              `protobuf:"bytes,8,rep,name=actions,proto3" json:"actions,omitempty"`
-	ProviderUserId string                 `protobuf:"bytes,9,opt,name=provider_user_id,json=providerUserId,proto3" json:"provider_user_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	UserId          string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency        string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	GameId          string                 `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	RoundId         string                 `protobuf:"bytes,4,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	Finished        bool                   `protobuf:"varint,5,opt,name=finished,proto3" json:"finished,omitempty"`
+	SmResult        string                 `protobuf:"bytes,6,opt,name=sm_result,json=smResult,proto3" json:"sm_result,omitempty"`
+	SessionId       int64                  `protobuf:"varint,7,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	Actions         []*Action              `protobuf:"bytes,8,rep,name=actions,proto3" json:"actions,omitempty"`
+	ProviderUserId  string                 `protobuf:"bytes,9,opt,name=provider_user_id,json=providerUserId,proto3" json:"provider_user_id,omitempty"`
+	ProviderRoundId string                 `protobuf:"bytes,10,opt,name=provider_round_id,json=providerRoundId,proto3" json:"provider_round_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *PlayRequest) Reset() {
@@ -2115,6 +2116,13 @@ func (x *PlayRequest) GetActions() []*Action {
 func (x *PlayRequest) GetProviderUserId() string {
 	if x != nil {
 		return x.ProviderUserId
+	}
+	return ""
+}
+
+func (x *PlayRequest) GetProviderRoundId() string {
+	if x != nil {
+		return x.ProviderRoundId
 	}
 	return ""
 }
@@ -17650,7 +17658,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04Data\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\tR\abalance\x12\x14\n" +
 	"\x05bonus\x18\x02 \x01(\tR\x05bonus\x12\x19\n" +
-	"\bround_id\x18\x03 \x01(\tR\aroundId\"\xaf\x02\n" +
+	"\bround_id\x18\x03 \x01(\tR\aroundId\"\xdb\x02\n" +
 	"\vPlayRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
@@ -17661,7 +17669,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\n" +
 	"session_id\x18\a \x01(\x03R\tsessionId\x125\n" +
 	"\aactions\x18\b \x03(\v2\x1b.api.game.service.v1.ActionR\aactions\x12(\n" +
-	"\x10provider_user_id\x18\t \x01(\tR\x0eproviderUserId\"\xcf\x01\n" +
+	"\x10provider_user_id\x18\t \x01(\tR\x0eproviderUserId\x12*\n" +
+	"\x11provider_round_id\x18\n" +
+	" \x01(\tR\x0fproviderRoundId\"\xcf\x01\n" +
 	"\fPlayResponse\x12:\n" +
 	"\x04data\x18\x01 \x01(\v2&.api.game.service.v1.PlayResponse.DataR\x04data\x1a\x82\x01\n" +
 	"\x04Data\x12\x18\n" +
