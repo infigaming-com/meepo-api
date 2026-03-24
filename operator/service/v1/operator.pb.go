@@ -1929,13 +1929,14 @@ func (*AddAdjustmentResponse) Descriptor() ([]byte, []int) {
 }
 
 type UpdateAdjustmentRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Amount        string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Currency      string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Amount         string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Description    string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Currency       string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	AdjustmentType string                 `protobuf:"bytes,5,opt,name=adjustment_type,json=adjustmentType,proto3" json:"adjustment_type,omitempty"` // pre-calculation or post-calculation
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *UpdateAdjustmentRequest) Reset() {
@@ -1992,6 +1993,13 @@ func (x *UpdateAdjustmentRequest) GetDescription() string {
 func (x *UpdateAdjustmentRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *UpdateAdjustmentRequest) GetAdjustmentType() string {
+	if x != nil {
+		return x.AdjustmentType
 	}
 	return ""
 }
@@ -5425,18 +5433,19 @@ func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) GetDescription() string
 }
 
 type ListAdjustmentsResponse_AdjustmentItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Item          string                 `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`
-	OperatorId    int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	OperatorName  string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	Currency      string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	Amount        string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
-	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	Id            int64                  `protobuf:"varint,7,opt,name=id,proto3" json:"id,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"` // creator display name
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Item           string                 `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`
+	OperatorId     int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName   string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Currency       string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	Amount         string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	Description    string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Id             int64                  `protobuf:"varint,7,opt,name=id,proto3" json:"id,omitempty"`
+	CreatedAt      int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedBy      string                 `protobuf:"bytes,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`                 // creator display name
+	AdjustmentType string                 `protobuf:"bytes,10,opt,name=adjustment_type,json=adjustmentType,proto3" json:"adjustment_type,omitempty"` // pre-calculation or post-calculation
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListAdjustmentsResponse_AdjustmentItem) Reset() {
@@ -5528,6 +5537,13 @@ func (x *ListAdjustmentsResponse_AdjustmentItem) GetCreatedAt() int64 {
 func (x *ListAdjustmentsResponse_AdjustmentItem) GetCreatedBy() string {
 	if x != nil {
 		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetAdjustmentType() string {
+	if x != nil {
+		return x.AdjustmentType
 	}
 	return ""
 }
@@ -6392,12 +6408,13 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
 	"created_by\x18\n" +
 	" \x01(\x03R\tcreatedBy\"\x17\n" +
-	"\x15AddAdjustmentResponse\"\x7f\n" +
+	"\x15AddAdjustmentResponse\"\xa8\x01\n" +
 	"\x17UpdateAdjustmentRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\tR\x06amount\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1a\n" +
-	"\bcurrency\x18\x04 \x01(\tR\bcurrency\"\x1a\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12'\n" +
+	"\x0fadjustment_type\x18\x05 \x01(\tR\x0eadjustmentType\"\x1a\n" +
 	"\x18UpdateAdjustmentResponse\"p\n" +
 	"\x1cListAdjustmentConfigsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
@@ -6439,14 +6456,14 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_period_key\"\xef\x03\n" +
+	"\v_period_key\"\x98\x04\n" +
 	"\x17ListAdjustmentsResponse\x12U\n" +
 	"\x05items\x18\x01 \x03(\v2?.api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItemR\x05items\x12\x1a\n" +
 	"\bsubtotal\x18\x02 \x01(\tR\bsubtotal\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\x8e\x02\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xb7\x02\n" +
 	"\x0eAdjustmentItem\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -6459,7 +6476,9 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\t \x01(\tR\tcreatedBy\"U\n" +
+	"created_by\x18\t \x01(\tR\tcreatedBy\x12'\n" +
+	"\x0fadjustment_type\x18\n" +
+	" \x01(\tR\x0eadjustmentType\"U\n" +
 	"\x1dCreateAdjustmentConfigRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\" \n" +

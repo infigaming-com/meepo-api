@@ -995,13 +995,15 @@ type AddAdjustmentRequest struct {
 	CompanyOperatorId  int64  `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`    // Company ID
 	OperatorId         int64  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                           // Operator ID
 	// Financial information
-	AppliedDate   string `protobuf:"bytes,5,opt,name=applied_date,json=appliedDate,proto3" json:"applied_date,omitempty"` // Applied date
-	Currency      string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                          // Currency code (e.g., "USDT", "USD")
-	Amount        string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`                              // Adjustment amount as string to preserve precision
-	Description   string `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`                    // Description of the adjustment
-	PeriodKey     string `protobuf:"bytes,9,opt,name=period_key,json=periodKey,proto3" json:"period_key,omitempty"`       // Period key
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	AppliedDate    string `protobuf:"bytes,5,opt,name=applied_date,json=appliedDate,proto3" json:"applied_date,omitempty"`           // Applied date
+	Currency       string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                                    // Currency code (e.g., "USDT", "USD")
+	Amount         string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`                                        // Adjustment amount as string to preserve precision
+	Description    string `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`                              // Description of the adjustment
+	PeriodKey      string `protobuf:"bytes,9,opt,name=period_key,json=periodKey,proto3" json:"period_key,omitempty"`                 // Period key
+	CreatedBy      int64  `protobuf:"varint,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`               // Backoffice user ID of the creator
+	AdjustmentType string `protobuf:"bytes,11,opt,name=adjustment_type,json=adjustmentType,proto3" json:"adjustment_type,omitempty"` // pre-calculation or post-calculation
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *AddAdjustmentRequest) Reset() {
@@ -1093,6 +1095,20 @@ func (x *AddAdjustmentRequest) GetDescription() string {
 func (x *AddAdjustmentRequest) GetPeriodKey() string {
 	if x != nil {
 		return x.PeriodKey
+	}
+	return ""
+}
+
+func (x *AddAdjustmentRequest) GetCreatedBy() int64 {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return 0
+}
+
+func (x *AddAdjustmentRequest) GetAdjustmentType() string {
+	if x != nil {
+		return x.AdjustmentType
 	}
 	return ""
 }
@@ -1763,13 +1779,14 @@ func (*DeleteAdjustmentResponse) Descriptor() ([]byte, []int) {
 }
 
 type UpdateAdjustmentRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Amount        string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Currency      string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Amount         string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Description    string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Currency       string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	AdjustmentType string                 `protobuf:"bytes,5,opt,name=adjustment_type,json=adjustmentType,proto3" json:"adjustment_type,omitempty"` // pre-calculation or post-calculation
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *UpdateAdjustmentRequest) Reset() {
@@ -1826,6 +1843,13 @@ func (x *UpdateAdjustmentRequest) GetDescription() string {
 func (x *UpdateAdjustmentRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *UpdateAdjustmentRequest) GetAdjustmentType() string {
+	if x != nil {
+		return x.AdjustmentType
 	}
 	return ""
 }
@@ -4580,13 +4604,14 @@ type ListAdjustmentsResponse_AdjustmentItem struct {
 	OperatorName string `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	Currency     string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Amount information
-	Amount        string `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`           // Amount as string to preserve precision
-	Description   string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` // Description of the adjustment
-	Id            int64  `protobuf:"varint,7,opt,name=id,proto3" json:"id,omitempty"`
-	CreatedAt     int64  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	CreatedBy     string `protobuf:"bytes,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"` // creator display name
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Amount         string `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`           // Amount as string to preserve precision
+	Description    string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` // Description of the adjustment
+	Id             int64  `protobuf:"varint,7,opt,name=id,proto3" json:"id,omitempty"`
+	CreatedAt      int64  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedBy      string `protobuf:"bytes,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`                 // creator display name
+	AdjustmentType string `protobuf:"bytes,10,opt,name=adjustment_type,json=adjustmentType,proto3" json:"adjustment_type,omitempty"` // pre-calculation or post-calculation
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListAdjustmentsResponse_AdjustmentItem) Reset() {
@@ -4678,6 +4703,13 @@ func (x *ListAdjustmentsResponse_AdjustmentItem) GetCreatedAt() int64 {
 func (x *ListAdjustmentsResponse_AdjustmentItem) GetCreatedBy() string {
 	if x != nil {
 		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetAdjustmentType() string {
+	if x != nil {
+		return x.AdjustmentType
 	}
 	return ""
 }
@@ -5639,7 +5671,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\bsubtotal\x18\x01 \x01(\tR\bsubtotal\x12;\n" +
 	"\x1arevenue_share_system_total\x18\x02 \x01(\tR\x17revenueShareSystemTotal\x12?\n" +
 	"\x1crevenue_share_operator_total\x18\x03 \x01(\tR\x19revenueShareOperatorTotal\x12&\n" +
-	"\x0fest_costs_total\x18\x04 \x01(\tR\restCostsTotal\"\xc5\x02\n" +
+	"\x0fest_costs_total\x18\x04 \x01(\tR\restCostsTotal\"\x8d\x03\n" +
 	"\x14AddAdjustmentRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x120\n" +
 	"\x14retailer_operator_id\x18\x02 \x01(\x03R\x12retailerOperatorId\x12.\n" +
@@ -5651,7 +5683,11 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x06amount\x18\a \x01(\tR\x06amount\x12 \n" +
 	"\vdescription\x18\b \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
-	"period_key\x18\t \x01(\tR\tperiodKey\"\x17\n" +
+	"period_key\x18\t \x01(\tR\tperiodKey\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\n" +
+	" \x01(\x03R\tcreatedBy\x12'\n" +
+	"\x0fadjustment_type\x18\v \x01(\tR\x0eadjustmentType\"\x17\n" +
 	"\x15AddAdjustmentResponse\"p\n" +
 	"\x1cListAdjustmentConfigsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
@@ -5692,14 +5728,14 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_period_key\"\xf1\x03\n" +
+	"\v_period_key\"\x9a\x04\n" +
 	"\x17ListAdjustmentsResponse\x12W\n" +
 	"\x05items\x18\x01 \x03(\v2A.api.backoffice.service.v1.ListAdjustmentsResponse.AdjustmentItemR\x05items\x12\x1a\n" +
 	"\bsubtotal\x18\x02 \x01(\tR\bsubtotal\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\x8e\x02\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xb7\x02\n" +
 	"\x0eAdjustmentItem\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -5712,19 +5748,22 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\t \x01(\tR\tcreatedBy\"U\n" +
+	"created_by\x18\t \x01(\tR\tcreatedBy\x12'\n" +
+	"\x0fadjustment_type\x18\n" +
+	" \x01(\tR\x0eadjustmentType\"U\n" +
 	"\x1dCreateAdjustmentConfigRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\" \n" +
 	"\x1eCreateAdjustmentConfigResponse\")\n" +
 	"\x17DeleteAdjustmentRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1a\n" +
-	"\x18DeleteAdjustmentResponse\"\x7f\n" +
+	"\x18DeleteAdjustmentResponse\"\xa8\x01\n" +
 	"\x17UpdateAdjustmentRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\tR\x06amount\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1a\n" +
-	"\bcurrency\x18\x04 \x01(\tR\bcurrency\"\x1a\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12'\n" +
+	"\x0fadjustment_type\x18\x05 \x01(\tR\x0eadjustmentType\"\x1a\n" +
 	"\x18UpdateAdjustmentResponse\"4\n" +
 	"\x13SendInvoicesRequest\x12\x1d\n" +
 	"\n" +
