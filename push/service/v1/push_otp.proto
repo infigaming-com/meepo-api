@@ -353,10 +353,12 @@ message OTPProviderBindingInfo {
   int64 updated_at = 9;
   // Inline provider info for convenience (populated by the server on read operations)
   OTPProviderInfo provider = 10;
-  // Backoffice account ID of the user who created this binding (0 = unknown/legacy)
-  int64 created_by_account_id = 11;
-  // Display name of the creator (denormalized for convenience)
-  string created_by_account_name = 12;
+  // Operator ID of the creator's level (0 = unknown/legacy)
+  int64 created_by_operator_id = 11;
+  // Operator name of the creator's level
+  string created_by_operator_name = 12;
+  // Operator type of the creator's level (system, retailer, company, operator)
+  string created_by_operator_type = 13;
 }
 
 // CreateOTPProviderBindingRequest binds a provider to an operator+country for routing.
@@ -387,10 +389,12 @@ message CreateOTPProviderBindingRequest {
   int32 priority = 5;
   // Phone number prefix filter. e.g., ["+5511", "+5521"]. Empty = matches all numbers.
   repeated string phone_prefixes = 6;
-  // Backoffice account ID of the user creating this binding
-  int64 created_by_account_id = 7;
-  // Display name of the creator
-  string created_by_account_name = 8;
+  // Operator ID of the creator's level
+  int64 created_by_operator_id = 7;
+  // Operator name of the creator's level
+  string created_by_operator_name = 8;
+  // Operator type of the creator's level (system, retailer, company, operator)
+  string created_by_operator_type = 9;
 }
 
 message CreateOTPProviderBindingResponse {
