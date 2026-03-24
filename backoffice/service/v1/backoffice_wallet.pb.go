@@ -78,9 +78,10 @@ func (x *GetWalletsRequest) GetCurrencies() []string {
 }
 
 type GetWalletCreditsRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	UserId          int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	TransactionType *string                `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"` // credit or debit
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// "credit" or "debit"
+	TransactionType *string                `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
 	Currency        *string                `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
 	StartTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime         *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
@@ -982,17 +983,19 @@ func (x *ListWalletCurrenciesRequest) GetTargetOperatorContext() *common.Operato
 }
 
 type UpdateWalletCurrencyRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	Currency              string                  `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Hidden                *bool                   `protobuf:"varint,3,opt,name=hidden,proto3,oneof" json:"hidden,omitempty"`
-	Type                  *string                 `protobuf:"bytes,4,opt,name=type,proto3,oneof" json:"type,omitempty"`
-	Symbol                *string                 `protobuf:"bytes,5,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
-	Icon                  *string                 `protobuf:"bytes,6,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
-	DecimalPlaces         *int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
-	CurrencyDecimalPlaces *int32                  `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3,oneof" json:"currency_decimal_places,omitempty"`
-	ThousandsSeparator    *string                 `protobuf:"bytes,9,opt,name=thousands_separator,json=thousandsSeparator,proto3,oneof" json:"thousands_separator,omitempty"` // placeholder for future use
-	DecimalSeparator      *string                 `protobuf:"bytes,10,opt,name=decimal_separator,json=decimalSeparator,proto3,oneof" json:"decimal_separator,omitempty"`      // placeholder for future use
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled               *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Hidden                *bool                  `protobuf:"varint,3,opt,name=hidden,proto3,oneof" json:"hidden,omitempty"`
+	Type                  *string                `protobuf:"bytes,4,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Symbol                *string                `protobuf:"bytes,5,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
+	Icon                  *string                `protobuf:"bytes,6,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
+	DecimalPlaces         *int32                 `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
+	CurrencyDecimalPlaces *int32                 `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3,oneof" json:"currency_decimal_places,omitempty"`
+	// Placeholder for future use
+	ThousandsSeparator *string `protobuf:"bytes,9,opt,name=thousands_separator,json=thousandsSeparator,proto3,oneof" json:"thousands_separator,omitempty"`
+	// Placeholder for future use
+	DecimalSeparator      *string                 `protobuf:"bytes,10,opt,name=decimal_separator,json=decimalSeparator,proto3,oneof" json:"decimal_separator,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,11,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -1109,10 +1112,12 @@ type ListOperatorBalancesRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,2,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Page                   *int32                         `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // default 1
-	PageSize               *int32                         `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"` // default 20
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Default 1
+	Page *int32 `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	// Default 20
+	PageSize      *int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListOperatorBalancesRequest) Reset() {
@@ -1396,9 +1401,10 @@ type OperatorSwapRequest struct {
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	Currency              string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	TargetCurrency        string                  `protobuf:"bytes,4,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
-	CashAmount            string                  `protobuf:"bytes,5,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"` // cash amount of the operator's balance currency
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Cash amount in the operator's balance currency
+	CashAmount    string `protobuf:"bytes,5,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OperatorSwapRequest) Reset() {
@@ -2523,13 +2529,15 @@ func (x *SetDepositRewardSequencesRequest) GetDailyRewardSequences() []*v1.Rewar
 }
 
 type DeleteDepositRewardSequencesRequest struct {
-	state                  protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext  *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Currency               string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	WelcomeRewardSequences []*v1.RewardSequence    `protobuf:"bytes,3,rep,name=welcome_reward_sequences,json=welcomeRewardSequences,proto3" json:"welcome_reward_sequences,omitempty"` // the sequences to delete
-	DailyRewardSequences   []*v1.RewardSequence    `protobuf:"bytes,4,rep,name=daily_reward_sequences,json=dailyRewardSequences,proto3" json:"daily_reward_sequences,omitempty"`       // the sequences to delete
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Currency              string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// The sequences to delete
+	WelcomeRewardSequences []*v1.RewardSequence `protobuf:"bytes,3,rep,name=welcome_reward_sequences,json=welcomeRewardSequences,proto3" json:"welcome_reward_sequences,omitempty"`
+	// The sequences to delete
+	DailyRewardSequences []*v1.RewardSequence `protobuf:"bytes,4,rep,name=daily_reward_sequences,json=dailyRewardSequences,proto3" json:"daily_reward_sequences,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DeleteDepositRewardSequencesRequest) Reset() {
@@ -2997,14 +3005,16 @@ func (x *ListCustomerRecordsRequest) GetOperatorContextFilters() *common.Operato
 }
 
 type ExportCustomerRecordsRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	UserId                 *int64                         `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	TransactionId          *int64                         `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
-	TransactionType        *string                        `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
-	Format                 string                         `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone               string                         `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	StartTime       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	UserId          *int64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	TransactionId   *int64                 `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
+	TransactionType *string                `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
+	// "csv", "excel", or "pdf"
+	Format string `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`
+	// e.g. "UTC+0", "UTC+8"
+	TimeZone               string                         `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -3301,14 +3311,16 @@ func (x *ListFICAThresholdTransactionsRequest) GetTargetOperatorContext() *commo
 }
 
 type ExportFICAThresholdTransactionsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	StartTime             *timestamppb.Timestamp  `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime               *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	TransactionType       *string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
-	Currency              *string                 `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	KycLevel              *int32                  `protobuf:"varint,5,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
-	Format                string                  `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone              string                  `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	StartTime       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	TransactionType *string                `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
+	Currency        *string                `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	KycLevel        *int32                 `protobuf:"varint,5,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
+	// "csv", "excel", or "pdf"
+	Format string `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`
+	// e.g. "UTC+0", "UTC+8"
+	TimeZone              string                  `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -3401,16 +3413,17 @@ func (x *ExportFICAThresholdTransactionsRequest) GetTargetOperatorContext() *com
 }
 
 type ManualCreditRequest struct {
-	state                          protoimpl.MessageState `protogen:"open.v1"`
-	UserId                         int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency                       string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	TransactionType                string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"` // manual_credit_cash, manual_credit_bonus
-	CashAmount                     string                 `protobuf:"bytes,4,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	CashTurnoverThreshold          string                 `protobuf:"bytes,5,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
-	OperatorBonusAmount            string                 `protobuf:"bytes,6,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
-	OperatorBonusTurnoverThreshold string                 `protobuf:"bytes,7,opt,name=operator_bonus_turnover_threshold,json=operatorBonusTurnoverThreshold,proto3" json:"operator_bonus_turnover_threshold,omitempty"`
-	OperatorBonusWithdrawLimit     string                 `protobuf:"bytes,8,opt,name=operator_bonus_withdraw_limit,json=operatorBonusWithdrawLimit,proto3" json:"operator_bonus_withdraw_limit,omitempty"`
-	Comment                        string                 `protobuf:"bytes,9,opt,name=comment,proto3" json:"comment,omitempty"`
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// "manual_credit_cash" or "manual_credit_bonus"
+	TransactionType                string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	CashAmount                     string `protobuf:"bytes,4,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	CashTurnoverThreshold          string `protobuf:"bytes,5,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
+	OperatorBonusAmount            string `protobuf:"bytes,6,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
+	OperatorBonusTurnoverThreshold string `protobuf:"bytes,7,opt,name=operator_bonus_turnover_threshold,json=operatorBonusTurnoverThreshold,proto3" json:"operator_bonus_turnover_threshold,omitempty"`
+	OperatorBonusWithdrawLimit     string `protobuf:"bytes,8,opt,name=operator_bonus_withdraw_limit,json=operatorBonusWithdrawLimit,proto3" json:"operator_bonus_withdraw_limit,omitempty"`
+	Comment                        string `protobuf:"bytes,9,opt,name=comment,proto3" json:"comment,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -3509,12 +3522,13 @@ func (x *ManualCreditRequest) GetComment() string {
 }
 
 type ManualDebitRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	UserId          int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency        string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	TransactionType string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"` // manual_debit_cash, manual_debit_bonus
-	Amount          string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
-	Comment         string                 `protobuf:"bytes,5,opt,name=comment,proto3" json:"comment,omitempty"`
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// "manual_debit_cash" or "manual_debit_bonus"
+	TransactionType string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	Amount          string `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	Comment         string `protobuf:"bytes,5,opt,name=comment,proto3" json:"comment,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3677,13 +3691,15 @@ func (x *ListManualJournalEntriesRequest) GetOperatorContextFilters() *common.Op
 }
 
 type ExportManualJournalEntriesRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	UserId                 *int64                         `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	Currency               *string                        `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Format                 string                         `protobuf:"bytes,5,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone               string                         `protobuf:"bytes,6,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime   *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	UserId    *int64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	Currency  *string                `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	// "csv", "excel", or "pdf"
+	Format string `protobuf:"bytes,5,opt,name=format,proto3" json:"format,omitempty"`
+	// e.g. "UTC+0", "UTC+8"
+	TimeZone               string                         `protobuf:"bytes,6,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,7,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -3975,9 +3991,10 @@ type UpdatePromoCodeCampaignStatusRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	CampaignId            int64                   `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	Status                string                  `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // active | paused | disabled
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// "active", "paused", or "disabled"
+	Status        string `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdatePromoCodeCampaignStatusRequest) Reset() {
@@ -4035,14 +4052,16 @@ func (x *UpdatePromoCodeCampaignStatusRequest) GetStatus() string {
 type ListPromoCodeCampaignsRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Status                *string                 `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"`                     // active | paused | disabled
-	CodeType              *string                 `protobuf:"bytes,3,opt,name=code_type,json=codeType,proto3,oneof" json:"code_type,omitempty"` // one_time | universal
-	StartTime             *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime               *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page                  *int32                  `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// "active", "paused", or "disabled"
+	Status *string `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	// "one_time" or "universal"
+	CodeType      *string                `protobuf:"bytes,3,opt,name=code_type,json=codeType,proto3,oneof" json:"code_type,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page          *int32                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListPromoCodeCampaignsRequest) Reset() {
@@ -4385,8 +4404,9 @@ type ManualAdjustCreditTurnoverFieldRequest struct {
 	// transaction_type: "adjust_cash_turnover", "adjust_cash_turnover_threshold", "adjust_operator_bonus_turnover", "adjust_operator_bonus_turnover_threshold"
 	TransactionType string `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	// direction: "add", "subtract"
-	Direction     string `protobuf:"bytes,5,opt,name=direction,proto3" json:"direction,omitempty"`
-	Value         string `protobuf:"bytes,6,opt,name=value,proto3" json:"value,omitempty"` // Adjustment value (positive number)
+	Direction string `protobuf:"bytes,5,opt,name=direction,proto3" json:"direction,omitempty"`
+	// Adjustment value (positive number)
+	Value         string `protobuf:"bytes,6,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

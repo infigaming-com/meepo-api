@@ -25,15 +25,19 @@ message BalanceUpdateEvent {
 	string transaction_type = 2;
 	int64 user_id = 3;
 	common.OperatorContext operator_context = 4;
-	string currency = 5; // settlement currency
+	// Settlement currency
+	string currency = 5;
 	string reporting_currency = 6;
-	string before_balance = 7; // cash + operator bonus + provider bonus
+	// cash + operator bonus + provider bonus
+	string before_balance = 7;
 	string before_balance_usd = 8;
 	string before_balance_reporting_currency = 9;
-	string after_balance = 10; // cash + operator bonus + provider bonus
+	// cash + operator bonus + provider bonus
+	string after_balance = 10;
 	string after_balance_usd = 11;
 	string after_balance_reporting_currency = 12;
-	string amount = 13; // cash + operator bonus + provider bonus
+	// cash + operator bonus + provider bonus
+	string amount = 13;
 	string amount_usd = 14;
 	string amount_reporting_currency = 15;
 	int64 created_at = 16;
@@ -64,7 +68,8 @@ message BalanceUpdateEvent {
 	string provider_bonus_amount = 41;
 	string provider_bonus_amount_usd = 42;
 	string provider_bonus_amount_reporting_currency = 43;
-	int32 count_of_transactions = 44; // valid if transaction_type is "payment_deposit" or "payment_withdraw_settle" or "payment_withdraw_manual_payout"
+	// Valid if transaction_type is "payment_deposit", "payment_withdraw_settle", or "payment_withdraw_manual_payout"
+	int32 count_of_transactions = 44;
 }
 
 message OperatorBalanceUpdateEvent {
@@ -107,7 +112,8 @@ message UpdateResponsibleGamblingConfigEvent {
 	int64 target_user_id = 1;
 	int64 initiator_user_id = 2;
 	api.common.OperatorContext initiator_operator_context = 3;
-	string action = 4; // set, delete
+	// "set" or "delete"
+	string action = 4;
 	string currency = 5;
 	Config before_config = 6;
 	Config after_config = 7;

@@ -69,6 +69,7 @@ const OperationBackofficeWalletUpdateWalletConfig = "/api.backoffice.service.v1.
 const OperationBackofficeWalletUpdateWalletCurrency = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletCurrency"
 
 type BackofficeWalletHTTPServer interface {
+	// AddWalletCurrency Add a new currency to the wallet configuration
 	AddWalletCurrency(context.Context, *AddWalletCurrencyRequest) (*AddWalletCurrencyResponse, error)
 	// CreatePromoCodeCampaign CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*v1.CreatePromoCodeCampaignResponse, error)
@@ -86,9 +87,11 @@ type BackofficeWalletHTTPServer interface {
 	GenerateOneTimePromoCodes(context.Context, *GenerateOneTimePromoCodesRequest) (*v1.GenerateOneTimePromoCodesResponse, error)
 	// GenerateUniversalPromoCodes GenerateUniversalPromoCodes generates codes for a universal campaign
 	GenerateUniversalPromoCodes(context.Context, *GenerateUniversalPromoCodesRequest) (*v1.GenerateUniversalPromoCodesResponse, error)
+	// GetAppDownloadRewardConfig Get app download reward config for a target operator
 	GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*v1.GetAppDownloadRewardConfigResponse, error)
 	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
+	// GetExchangeRates Get exchange rates for specified currencies
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
 	// GetFICAThresholdConfig GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
 	GetFICAThresholdConfig(context.Context, *GetFICAThresholdConfigRequest) (*v1.GetFICAThresholdConfigResponse, error)
@@ -96,8 +99,11 @@ type BackofficeWalletHTTPServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
+	// GetWalletCreditTransactions Get credit transaction details by credit ID
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
+	// GetWalletCredits Get wallet credit/debit transaction history for a user
 	GetWalletCredits(context.Context, *GetWalletCreditsRequest) (*GetWalletCreditsResponse, error)
+	// GetWallets Get wallet balances for a user
 	GetWallets(context.Context, *GetWalletsRequest) (*v1.GetWalletsResponse, error)
 	// ListCustomerRecords ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error)
@@ -137,6 +143,7 @@ type BackofficeWalletHTTPServer interface {
 	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
 	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
+	// SetAppDownloadRewardConfig Set app download reward config for a target operator
 	SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*v1.SetAppDownloadRewardConfigResponse, error)
 	// SetDepositRewardSequences SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
 	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
@@ -150,9 +157,11 @@ type BackofficeWalletHTTPServer interface {
 	UpdatePromoCodeCampaign(context.Context, *UpdatePromoCodeCampaignRequest) (*v1.UpdatePromoCodeCampaignResponse, error)
 	// UpdatePromoCodeCampaignStatus UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
 	UpdatePromoCodeCampaignStatus(context.Context, *UpdatePromoCodeCampaignStatusRequest) (*v1.UpdatePromoCodeCampaignStatusResponse, error)
+	// UpdateWallet Update wallet settings (e.g. enable/disable a currency for a user)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
 	// UpdateWalletConfig UpdateWalletConfig updates the wallet config based on operator context
 	UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*v1.UpdateWalletConfigResponse, error)
+	// UpdateWalletCurrency Update wallet currency settings (visibility, icon, decimal places, etc.)
 	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateOperatorCurrencyResponse, error)
 }
 
@@ -1242,6 +1251,7 @@ func _BackofficeWallet_ManualAdjustCreditTurnoverField0_HTTP_Handler(srv Backoff
 }
 
 type BackofficeWalletHTTPClient interface {
+	// AddWalletCurrency Add a new currency to the wallet configuration
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
 	// CreatePromoCodeCampaign CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(ctx context.Context, req *CreatePromoCodeCampaignRequest, opts ...http.CallOption) (rsp *v1.CreatePromoCodeCampaignResponse, err error)
@@ -1259,9 +1269,11 @@ type BackofficeWalletHTTPClient interface {
 	GenerateOneTimePromoCodes(ctx context.Context, req *GenerateOneTimePromoCodesRequest, opts ...http.CallOption) (rsp *v1.GenerateOneTimePromoCodesResponse, err error)
 	// GenerateUniversalPromoCodes GenerateUniversalPromoCodes generates codes for a universal campaign
 	GenerateUniversalPromoCodes(ctx context.Context, req *GenerateUniversalPromoCodesRequest, opts ...http.CallOption) (rsp *v1.GenerateUniversalPromoCodesResponse, err error)
+	// GetAppDownloadRewardConfig Get app download reward config for a target operator
 	GetAppDownloadRewardConfig(ctx context.Context, req *GetAppDownloadRewardConfigRequest, opts ...http.CallOption) (rsp *v1.GetAppDownloadRewardConfigResponse, err error)
 	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(ctx context.Context, req *GetDepositRewardConfigRequest, opts ...http.CallOption) (rsp *v1.GetDepositRewardConfigResponse, err error)
+	// GetExchangeRates Get exchange rates for specified currencies
 	GetExchangeRates(ctx context.Context, req *GetExchangeRatesRequest, opts ...http.CallOption) (rsp *GetExchangeRatesResponse, err error)
 	// GetFICAThresholdConfig GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
 	GetFICAThresholdConfig(ctx context.Context, req *GetFICAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.GetFICAThresholdConfigResponse, err error)
@@ -1269,8 +1281,11 @@ type BackofficeWalletHTTPClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, req *GetGamificationCurrencyConfigRequest, opts ...http.CallOption) (rsp *v1.GetGamificationCurrencyConfigResponse, err error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(ctx context.Context, req *GetOperatorBalanceRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalanceResponse, err error)
+	// GetWalletCreditTransactions Get credit transaction details by credit ID
 	GetWalletCreditTransactions(ctx context.Context, req *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (rsp *GetWalletCreditTransactionsResponse, err error)
+	// GetWalletCredits Get wallet credit/debit transaction history for a user
 	GetWalletCredits(ctx context.Context, req *GetWalletCreditsRequest, opts ...http.CallOption) (rsp *GetWalletCreditsResponse, err error)
+	// GetWallets Get wallet balances for a user
 	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *v1.GetWalletsResponse, err error)
 	// ListCustomerRecords ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ListCustomerRecords(ctx context.Context, req *ListCustomerRecordsRequest, opts ...http.CallOption) (rsp *v1.ListCustomerRecordsResponse, err error)
@@ -1310,6 +1325,7 @@ type BackofficeWalletHTTPClient interface {
 	OperatorSwap(ctx context.Context, req *OperatorSwapRequest, opts ...http.CallOption) (rsp *OperatorSwapResponse, err error)
 	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(ctx context.Context, req *OperatorTransferRequest, opts ...http.CallOption) (rsp *OperatorTransferResponse, err error)
+	// SetAppDownloadRewardConfig Set app download reward config for a target operator
 	SetAppDownloadRewardConfig(ctx context.Context, req *SetAppDownloadRewardConfigRequest, opts ...http.CallOption) (rsp *v1.SetAppDownloadRewardConfigResponse, err error)
 	// SetDepositRewardSequences SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
 	SetDepositRewardSequences(ctx context.Context, req *SetDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.SetDepositRewardSequencesResponse, err error)
@@ -1323,9 +1339,11 @@ type BackofficeWalletHTTPClient interface {
 	UpdatePromoCodeCampaign(ctx context.Context, req *UpdatePromoCodeCampaignRequest, opts ...http.CallOption) (rsp *v1.UpdatePromoCodeCampaignResponse, err error)
 	// UpdatePromoCodeCampaignStatus UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
 	UpdatePromoCodeCampaignStatus(ctx context.Context, req *UpdatePromoCodeCampaignStatusRequest, opts ...http.CallOption) (rsp *v1.UpdatePromoCodeCampaignStatusResponse, err error)
+	// UpdateWallet Update wallet settings (e.g. enable/disable a currency for a user)
 	UpdateWallet(ctx context.Context, req *UpdateWalletRequest, opts ...http.CallOption) (rsp *UpdateWalletResponse, err error)
 	// UpdateWalletConfig UpdateWalletConfig updates the wallet config based on operator context
 	UpdateWalletConfig(ctx context.Context, req *UpdateWalletConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateWalletConfigResponse, err error)
+	// UpdateWalletCurrency Update wallet currency settings (visibility, icon, decimal places, etc.)
 	UpdateWalletCurrency(ctx context.Context, req *UpdateWalletCurrencyRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorCurrencyResponse, err error)
 }
 
@@ -1337,6 +1355,7 @@ func NewBackofficeWalletHTTPClient(client *http.Client) BackofficeWalletHTTPClie
 	return &BackofficeWalletHTTPClientImpl{client}
 }
 
+// AddWalletCurrency Add a new currency to the wallet configuration
 func (c *BackofficeWalletHTTPClientImpl) AddWalletCurrency(ctx context.Context, in *AddWalletCurrencyRequest, opts ...http.CallOption) (*AddWalletCurrencyResponse, error) {
 	var out AddWalletCurrencyResponse
 	pattern := "/v1/backoffice/wallet/currencies/add"
@@ -1462,6 +1481,7 @@ func (c *BackofficeWalletHTTPClientImpl) GenerateUniversalPromoCodes(ctx context
 	return &out, nil
 }
 
+// GetAppDownloadRewardConfig Get app download reward config for a target operator
 func (c *BackofficeWalletHTTPClientImpl) GetAppDownloadRewardConfig(ctx context.Context, in *GetAppDownloadRewardConfigRequest, opts ...http.CallOption) (*v1.GetAppDownloadRewardConfigResponse, error) {
 	var out v1.GetAppDownloadRewardConfigResponse
 	pattern := "/v1/backoffice/wallet/app-download-reward/config/get"
@@ -1489,6 +1509,7 @@ func (c *BackofficeWalletHTTPClientImpl) GetDepositRewardConfig(ctx context.Cont
 	return &out, nil
 }
 
+// GetExchangeRates Get exchange rates for specified currencies
 func (c *BackofficeWalletHTTPClientImpl) GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...http.CallOption) (*GetExchangeRatesResponse, error) {
 	var out GetExchangeRatesResponse
 	pattern := "/v1/backoffice/wallet/exchange-rates/get"
@@ -1544,6 +1565,7 @@ func (c *BackofficeWalletHTTPClientImpl) GetOperatorBalance(ctx context.Context,
 	return &out, nil
 }
 
+// GetWalletCreditTransactions Get credit transaction details by credit ID
 func (c *BackofficeWalletHTTPClientImpl) GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (*GetWalletCreditTransactionsResponse, error) {
 	var out GetWalletCreditTransactionsResponse
 	pattern := "/v1/backoffice/wallet/credit-transactions/get"
@@ -1557,6 +1579,7 @@ func (c *BackofficeWalletHTTPClientImpl) GetWalletCreditTransactions(ctx context
 	return &out, nil
 }
 
+// GetWalletCredits Get wallet credit/debit transaction history for a user
 func (c *BackofficeWalletHTTPClientImpl) GetWalletCredits(ctx context.Context, in *GetWalletCreditsRequest, opts ...http.CallOption) (*GetWalletCreditsResponse, error) {
 	var out GetWalletCreditsResponse
 	pattern := "/v1/backoffice/wallet/credits/get"
@@ -1570,6 +1593,7 @@ func (c *BackofficeWalletHTTPClientImpl) GetWalletCredits(ctx context.Context, i
 	return &out, nil
 }
 
+// GetWallets Get wallet balances for a user
 func (c *BackofficeWalletHTTPClientImpl) GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...http.CallOption) (*v1.GetWalletsResponse, error) {
 	var out v1.GetWalletsResponse
 	pattern := "/v1/backoffice/wallet/get"
@@ -1849,6 +1873,7 @@ func (c *BackofficeWalletHTTPClientImpl) OperatorTransfer(ctx context.Context, i
 	return &out, nil
 }
 
+// SetAppDownloadRewardConfig Set app download reward config for a target operator
 func (c *BackofficeWalletHTTPClientImpl) SetAppDownloadRewardConfig(ctx context.Context, in *SetAppDownloadRewardConfigRequest, opts ...http.CallOption) (*v1.SetAppDownloadRewardConfigResponse, error) {
 	var out v1.SetAppDownloadRewardConfigResponse
 	pattern := "/v1/backoffice/wallet/app-download-reward/config/set"
@@ -1946,6 +1971,7 @@ func (c *BackofficeWalletHTTPClientImpl) UpdatePromoCodeCampaignStatus(ctx conte
 	return &out, nil
 }
 
+// UpdateWallet Update wallet settings (e.g. enable/disable a currency for a user)
 func (c *BackofficeWalletHTTPClientImpl) UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...http.CallOption) (*UpdateWalletResponse, error) {
 	var out UpdateWalletResponse
 	pattern := "/v1/backoffice/wallet/update"
@@ -1973,6 +1999,7 @@ func (c *BackofficeWalletHTTPClientImpl) UpdateWalletConfig(ctx context.Context,
 	return &out, nil
 }
 
+// UpdateWalletCurrency Update wallet currency settings (visibility, icon, decimal places, etc.)
 func (c *BackofficeWalletHTTPClientImpl) UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...http.CallOption) (*v1.UpdateOperatorCurrencyResponse, error) {
 	var out v1.UpdateOperatorCurrencyResponse
 	pattern := "/v1/backoffice/wallet/currencies/update"

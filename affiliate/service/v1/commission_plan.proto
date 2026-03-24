@@ -68,9 +68,12 @@ message CommissionPlan {
     int64 commission_plan_id = 1;
     string title = 2;
     string status = 3;
-    string source = 4; // system/retailer/company/operator
-    repeated string types = 5; // cpa/revshare/cpl/cpc/flat_fee, multiple types are allowed
-    int32 assigned_count = 6; // not supported yet
+    // "system", "retailer", "company", or "operator"
+    string source = 4;
+    // "cpa", "revshare", "cpl", "cpc", "flat_fee" (multiple allowed)
+    repeated string types = 5;
+    // Not supported yet
+    int32 assigned_count = 6;
     string base_currency = 7;
     string source_operator_name = 8;
 }
@@ -79,14 +82,16 @@ message DeleteCommissionPlanRequest {
     int64 user_id = 1;
     api.common.OperatorContext operator_context = 2;
     int64 commission_plan_id = 3;
-    optional int64 alternative_commission_plan_id = 4; // not supported yet
+    // Not supported yet
+    optional int64 alternative_commission_plan_id = 4;
 }
 
 message DeleteCommissionPlanResponse {}
 
 message ListAllCommissionPlansRequest {
     api.common.OperatorContext target_operator_context = 1;
-    repeated string countries = 2; // not supported yet
+    // Not supported yet
+    repeated string countries = 2;
     optional string status = 3;
     api.common.OperatorContext initiator_operator_context = 4;
 }
@@ -107,8 +112,10 @@ message ListAffiliateCommissionPlansResponse {
         int64 commission_plan_id = 1;
         string title = 2;
         string status = 3;
-        string source = 4; // system/retailer/company/operator
-        repeated string types = 5; // cpa/revshare/cpl/cpc/flat_fee, multiple types are allowed
+        // "system", "retailer", "company", or "operator"
+        string source = 4;
+        // "cpa", "revshare", "cpl", "cpc", "flat_fee" (multiple allowed)
+        repeated string types = 5;
         string base_currency = 6;
         string source_operator_name = 7;
         CommissionPlanConfig plan_config = 8;
@@ -129,7 +136,8 @@ message CommissionPlanConfig {
 
 message CPAConfig {
     bool enabled = 1;
-    string commission_type = 2; // flat/flat_by_countries/progressive/progressive_by_countries
+    // "flat", "flat_by_countries", "progressive", or "progressive_by_countries"
+    string commission_type = 2;
     optional FlatCommission flat = 3;
     optional FlatByCountriesCommission flat_by_countries = 4;
     optional ProgressiveCommission progressive = 5;
@@ -153,7 +161,8 @@ message CountryCommissionGroup {
 }
 
 message ProgressiveCommission {
-    string metric = 1; // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
+    // "ftd_amount", "ftd_count_in_period", "total_deposits", or "deposits_amount"
+    string metric = 1;
     repeated ProgressiveCommissionRange ranges = 2;
 }
 
@@ -164,7 +173,8 @@ message ProgressiveCommissionRange {
 }
 
 message ProgressiveByCountriesCommission {
-    string metric = 1; // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
+    // "ftd_amount", "ftd_count_in_period", "total_deposits", or "deposits_amount"
+    string metric = 1;
     repeated CountryProgressiveGroup country_groups = 2;
     repeated ProgressiveCommissionRange other_countries_ranges = 3;
 }
@@ -182,7 +192,8 @@ message Qualification {
     optional string min_bets_amount = 5;
     optional int32 time_limit_after_registration_days = 6;
     optional int32 time_limit_after_ftd_days = 7;
-    optional string allowed_player_statuses = 8; // not available yet
+    // Not available yet
+    optional string allowed_player_statuses = 8;
 }
 
 message AdvancedOptions {
@@ -191,8 +202,10 @@ message AdvancedOptions {
 
 message RevShareConfig {
     bool enabled = 1;
-    string based_on = 2; // ggr/ngr
-    string negative_carryover = 3; // discard/carry_to_next_period
+    // "ggr" or "ngr"
+    string based_on = 2;
+    // "discard" or "carry_to_next_period"
+    string negative_carryover = 3;
     string commission_type = 4;
     optional FlatRateCommission flat = 5;
     optional FlatByCountriesRateCommission flat_by_countries = 6;
@@ -222,7 +235,8 @@ message ProgressiveRateCommission {
 
 message RateRange {
     string from = 1;
-    optional string to = 2; // nil indicates no upper limit
+    // nil indicates no upper limit
+    optional string to = 2;
     string rate = 3;
 }
 
@@ -250,14 +264,16 @@ message CPLConfig {
 
 message CPCConfig {
     bool enabled = 1;
-    string commission_type = 2; // flat/flat_by_countries
+    // "flat" or "flat_by_countries"
+    string commission_type = 2;
     optional FlatCommission flat = 3;
     optional FlatByCountriesCommission flat_by_countries = 4;
 }
 
 message FlatFeeConfig {
     bool enabled = 1;
-    string period = 2; // one_time/monthly/yearly
+    // "one_time", "monthly", or "yearly"
+    string period = 2;
     string amount = 3;
     google.protobuf.Timestamp start_time = 4;
 }

@@ -78,50 +78,95 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeAffiliateClient interface {
+	// Create a new affiliate commission plan
 	CreateCommissionPlan(ctx context.Context, in *CreateCommissionPlanRequest, opts ...grpc.CallOption) (*v1.CreateCommissionPlanResponse, error)
+	// Update an existing commission plan
 	UpdateCommissionPlan(ctx context.Context, in *UpdateCommissionPlanRequest, opts ...grpc.CallOption) (*v1.UpdateCommissionPlanResponse, error)
+	// Get a commission plan by ID
 	GetCommissionPlan(ctx context.Context, in *GetCommissionPlanRequest, opts ...grpc.CallOption) (*v1.GetCommissionPlanResponse, error)
+	// List commission plans with pagination and filters
 	ListCommissionPlans(ctx context.Context, in *ListCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListCommissionPlansResponse, error)
+	// Delete a commission plan
 	DeleteCommissionPlan(ctx context.Context, in *DeleteCommissionPlanRequest, opts ...grpc.CallOption) (*v1.DeleteCommissionPlanResponse, error)
+	// List all commission plans across the operator hierarchy
 	ListAllCommissionPlans(ctx context.Context, in *ListAllCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListAllCommissionPlansResponse, error)
+	// List commission plans assigned to a specific affiliate
 	ListAffiliateCommissionPlans(ctx context.Context, in *ListAffiliateCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListAffiliateCommissionPlansResponse, error)
+	// Create a new affiliate account
 	CreateAffiliate(ctx context.Context, in *CreateAffiliateRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateResponse, error)
+	// Update an existing affiliate's details
 	UpdateAffiliate(ctx context.Context, in *UpdateAffiliateRequest, opts ...grpc.CallOption) (*v1.UpdateAffiliateResponse, error)
+	// List affiliates with pagination and filters
 	ListAffiliates(ctx context.Context, in *ListAffiliatesRequest, opts ...grpc.CallOption) (*v1.ListAffiliatesResponse, error)
+	// Delete an affiliate (soft delete)
 	DeleteAffiliate(ctx context.Context, in *DeleteAffiliateRequest, opts ...grpc.CallOption) (*v1.DeleteAffiliateResponse, error)
+	// Get detailed information about a specific affiliate
 	GetAffiliateDetails(ctx context.Context, in *GetAffiliateDetailsRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDetailsResponse, error)
+	// Reset an affiliate's password
 	ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...grpc.CallOption) (*v1.ResetAffiliatePasswordResponse, error)
+	// Send account credentials email to an affiliate
 	SendAffiliateAccountEmail(ctx context.Context, in *SendAffiliateAccountEmailRequest, opts ...grpc.CallOption) (*SendAffiliateAccountEmailResponse, error)
+	// Create a new affiliate campaign
 	CreateCampaign(ctx context.Context, in *CreateCampaignRequest, opts ...grpc.CallOption) (*v1.CreateCampaignResponse, error)
+	// Update an existing affiliate campaign
 	UpdateCampaign(ctx context.Context, in *UpdateCampaignRequest, opts ...grpc.CallOption) (*v1.UpdateCampaignResponse, error)
+	// List affiliate campaigns with pagination and filters
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*v1.ListCampaignsResponse, error)
+	// List campaigns belonging to a specific affiliate
 	ListAffiliateCampaigns(ctx context.Context, in *ListAffiliateCampaignsRequest, opts ...grpc.CallOption) (*v1.ListCampaignsResponse, error)
+	// Delete an affiliate campaign
 	DeleteCampaign(ctx context.Context, in *DeleteCampaignRequest, opts ...grpc.CallOption) (*v1.DeleteCampaignResponse, error)
+	// Create a new affiliate postback
 	CreatePostback(ctx context.Context, in *CreatePostbackRequest, opts ...grpc.CallOption) (*v1.CreatePostbackResponse, error)
+	// Update an existing affiliate postback
 	UpdatePostback(ctx context.Context, in *UpdatePostbackRequest, opts ...grpc.CallOption) (*v1.UpdatePostbackResponse, error)
+	// Delete an affiliate postback
 	DeletePostback(ctx context.Context, in *DeletePostbackRequest, opts ...grpc.CallOption) (*v1.DeletePostbackResponse, error)
+	// List affiliate postbacks with pagination and status filter
 	ListPostbacks(ctx context.Context, in *ListPostbacksRequest, opts ...grpc.CallOption) (*v1.ListPostbacksResponse, error)
+	// List affiliate postback execution logs
 	ListPostbackLogs(ctx context.Context, in *ListPostbackLogsRequest, opts ...grpc.CallOption) (*v1.ListPostbackLogsResponse, error)
+	// List affiliate tracking domains for a target operator
 	ListAffiliateDomains(ctx context.Context, in *ListAffiliateDomainsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateDomainsResponse, error)
+	// Create or update an affiliate tracking domain
 	SetAffiliateDomain(ctx context.Context, in *SetAffiliateDomainRequest, opts ...grpc.CallOption) (*v1.SetAffiliateDomainResponse, error)
+	// List affiliate events (registrations, deposits, etc.) with filters
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*v1.ListEventsResponse, error)
+	// List affiliate commissions with pagination and filters
 	ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*v1.ListCommissionsResponse, error)
+	// List users acquired through affiliates
 	ListAffiliateUsers(ctx context.Context, in *ListAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ListUsersResponse, error)
+	// Export affiliate users to CSV, Excel, or PDF
 	ExportAffiliateUsers(ctx context.Context, in *ExportAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ExportUsersResponse, error)
+	// List affiliate billing records
 	ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateBillsResponse, error)
+	// Get affiliate operator-level settings
 	GetAffiliateOperatorSettings(ctx context.Context, in *GetAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorSettingsResponse, error)
+	// Update affiliate operator-level settings
 	UpdateAffiliateOperatorSettings(ctx context.Context, in *UpdateAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorSettingsResponse, error)
+	// Create or update a referral plan for a target operator
 	SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*v1.SetReferralPlanResponse, error)
+	// Get referral plan for a target operator and currency
 	GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...grpc.CallOption) (*v1.GetReferralPlanResponse, error)
+	// Create a new landing page template
 	CreateLandingTemplate(ctx context.Context, in *CreateLandingTemplateRequest, opts ...grpc.CallOption) (*v1.CreateLandingTemplateResponse, error)
+	// Update an existing landing page template
 	UpdateLandingTemplate(ctx context.Context, in *UpdateLandingTemplateRequest, opts ...grpc.CallOption) (*v1.UpdateLandingTemplateResponse, error)
+	// Delete a landing page template
 	DeleteLandingTemplate(ctx context.Context, in *DeleteLandingTemplateRequest, opts ...grpc.CallOption) (*v1.DeleteLandingTemplateResponse, error)
+	// List landing page templates for a target operator
 	ListLandingTemplates(ctx context.Context, in *ListLandingTemplatesRequest, opts ...grpc.CallOption) (*v1.ListLandingTemplatesResponse, error)
+	// List landing page templates associated with a specific campaign
 	ListLandingTemplatesByCampaign(ctx context.Context, in *ListLandingTemplatesByCampaignRequest, opts ...grpc.CallOption) (*v1.ListLandingTemplatesByCampaignResponse, error)
+	// Get aggregate affiliate dashboard metrics for a time range
 	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDashboardResponse, error)
+	// Get affiliate trend data grouped by day, week, or month
 	GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*v1.GetAffiliateTrendResponse, error)
+	// Create a sub-account for an affiliate
 	CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateSubAccountResponse, error)
+	// List sub-accounts of an affiliate
 	ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSubAccountsResponse, error)
+	// Update an affiliate sub-account (enable/disable, reset password, 2FA)
 	UpdateAffiliateSubAccount(ctx context.Context, in *UpdateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*UpdateAffiliateSubAccountResponse, error)
 	// Create a new operator-level global postback configuration
 	CreateGlobalPostback(ctx context.Context, in *CreateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.CreateGlobalPostbackResponse, error)
@@ -671,50 +716,95 @@ func (c *backofficeAffiliateClient) SimulateGlobalPostback(ctx context.Context, 
 // All implementations must embed UnimplementedBackofficeAffiliateServer
 // for forward compatibility.
 type BackofficeAffiliateServer interface {
+	// Create a new affiliate commission plan
 	CreateCommissionPlan(context.Context, *CreateCommissionPlanRequest) (*v1.CreateCommissionPlanResponse, error)
+	// Update an existing commission plan
 	UpdateCommissionPlan(context.Context, *UpdateCommissionPlanRequest) (*v1.UpdateCommissionPlanResponse, error)
+	// Get a commission plan by ID
 	GetCommissionPlan(context.Context, *GetCommissionPlanRequest) (*v1.GetCommissionPlanResponse, error)
+	// List commission plans with pagination and filters
 	ListCommissionPlans(context.Context, *ListCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error)
+	// Delete a commission plan
 	DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*v1.DeleteCommissionPlanResponse, error)
+	// List all commission plans across the operator hierarchy
 	ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*v1.ListAllCommissionPlansResponse, error)
+	// List commission plans assigned to a specific affiliate
 	ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListAffiliateCommissionPlansResponse, error)
+	// Create a new affiliate account
 	CreateAffiliate(context.Context, *CreateAffiliateRequest) (*v1.CreateAffiliateResponse, error)
+	// Update an existing affiliate's details
 	UpdateAffiliate(context.Context, *UpdateAffiliateRequest) (*v1.UpdateAffiliateResponse, error)
+	// List affiliates with pagination and filters
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*v1.ListAffiliatesResponse, error)
+	// Delete an affiliate (soft delete)
 	DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*v1.DeleteAffiliateResponse, error)
+	// Get detailed information about a specific affiliate
 	GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*v1.GetAffiliateDetailsResponse, error)
+	// Reset an affiliate's password
 	ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*v1.ResetAffiliatePasswordResponse, error)
+	// Send account credentials email to an affiliate
 	SendAffiliateAccountEmail(context.Context, *SendAffiliateAccountEmailRequest) (*SendAffiliateAccountEmailResponse, error)
+	// Create a new affiliate campaign
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error)
+	// Update an existing affiliate campaign
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*v1.UpdateCampaignResponse, error)
+	// List affiliate campaigns with pagination and filters
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*v1.ListCampaignsResponse, error)
+	// List campaigns belonging to a specific affiliate
 	ListAffiliateCampaigns(context.Context, *ListAffiliateCampaignsRequest) (*v1.ListCampaignsResponse, error)
+	// Delete an affiliate campaign
 	DeleteCampaign(context.Context, *DeleteCampaignRequest) (*v1.DeleteCampaignResponse, error)
+	// Create a new affiliate postback
 	CreatePostback(context.Context, *CreatePostbackRequest) (*v1.CreatePostbackResponse, error)
+	// Update an existing affiliate postback
 	UpdatePostback(context.Context, *UpdatePostbackRequest) (*v1.UpdatePostbackResponse, error)
+	// Delete an affiliate postback
 	DeletePostback(context.Context, *DeletePostbackRequest) (*v1.DeletePostbackResponse, error)
+	// List affiliate postbacks with pagination and status filter
 	ListPostbacks(context.Context, *ListPostbacksRequest) (*v1.ListPostbacksResponse, error)
+	// List affiliate postback execution logs
 	ListPostbackLogs(context.Context, *ListPostbackLogsRequest) (*v1.ListPostbackLogsResponse, error)
+	// List affiliate tracking domains for a target operator
 	ListAffiliateDomains(context.Context, *ListAffiliateDomainsRequest) (*v1.ListAffiliateDomainsResponse, error)
+	// Create or update an affiliate tracking domain
 	SetAffiliateDomain(context.Context, *SetAffiliateDomainRequest) (*v1.SetAffiliateDomainResponse, error)
+	// List affiliate events (registrations, deposits, etc.) with filters
 	ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error)
+	// List affiliate commissions with pagination and filters
 	ListCommissions(context.Context, *ListCommissionsRequest) (*v1.ListCommissionsResponse, error)
+	// List users acquired through affiliates
 	ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error)
+	// Export affiliate users to CSV, Excel, or PDF
 	ExportAffiliateUsers(context.Context, *ExportAffiliateUsersRequest) (*v1.ExportUsersResponse, error)
+	// List affiliate billing records
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error)
+	// Get affiliate operator-level settings
 	GetAffiliateOperatorSettings(context.Context, *GetAffiliateOperatorSettingsRequest) (*v1.GetOperatorSettingsResponse, error)
+	// Update affiliate operator-level settings
 	UpdateAffiliateOperatorSettings(context.Context, *UpdateAffiliateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error)
+	// Create or update a referral plan for a target operator
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error)
+	// Get referral plan for a target operator and currency
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error)
+	// Create a new landing page template
 	CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*v1.CreateLandingTemplateResponse, error)
+	// Update an existing landing page template
 	UpdateLandingTemplate(context.Context, *UpdateLandingTemplateRequest) (*v1.UpdateLandingTemplateResponse, error)
+	// Delete a landing page template
 	DeleteLandingTemplate(context.Context, *DeleteLandingTemplateRequest) (*v1.DeleteLandingTemplateResponse, error)
+	// List landing page templates for a target operator
 	ListLandingTemplates(context.Context, *ListLandingTemplatesRequest) (*v1.ListLandingTemplatesResponse, error)
+	// List landing page templates associated with a specific campaign
 	ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*v1.ListLandingTemplatesByCampaignResponse, error)
+	// Get aggregate affiliate dashboard metrics for a time range
 	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*v1.GetAffiliateDashboardResponse, error)
+	// Get affiliate trend data grouped by day, week, or month
 	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error)
+	// Create a sub-account for an affiliate
 	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error)
+	// List sub-accounts of an affiliate
 	ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*v1.ListAffiliateSubAccountsResponse, error)
+	// Update an affiliate sub-account (enable/disable, reset password, 2FA)
 	UpdateAffiliateSubAccount(context.Context, *UpdateAffiliateSubAccountRequest) (*UpdateAffiliateSubAccountResponse, error)
 	// Create a new operator-level global postback configuration
 	CreateGlobalPostback(context.Context, *CreateGlobalPostbackRequest) (*v1.CreateGlobalPostbackResponse, error)

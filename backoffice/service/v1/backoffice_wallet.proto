@@ -13,12 +13,14 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeWallet {
+	// Get wallet balances for a user
 	rpc GetWallets(GetWalletsRequest) returns (wallet.service.v1.GetWalletsResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/get"
             body: "*"
         };
     }
+	// Get wallet credit/debit transaction history for a user
 	rpc GetWalletCredits(GetWalletCreditsRequest) returns (GetWalletCreditsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/credits/get"
@@ -32,12 +34,14 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+    // Get credit transaction details by credit ID
     rpc GetWalletCreditTransactions(GetWalletCreditTransactionsRequest) returns (GetWalletCreditTransactionsResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/credit-transactions/get"
             body: "*"
         };
     }
+    // Update wallet settings (e.g. enable/disable a currency for a user)
     rpc UpdateWallet(UpdateWalletRequest) returns (UpdateWalletResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/update"
@@ -45,6 +49,7 @@ service BackofficeWallet {
         };
     }
 
+	// Add a new currency to the wallet configuration
 	rpc AddWalletCurrency(AddWalletCurrencyRequest) returns (AddWalletCurrencyResponse) {
 		option (google.api.http) = {
             post: "/v1/backoffice/wallet/currencies/add"
@@ -59,6 +64,7 @@ service BackofficeWallet {
             body: "*"
         };
     }
+	// Update wallet currency settings (visibility, icon, decimal places, etc.)
 	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (wallet.service.v1.UpdateOperatorCurrencyResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/currencies/update"
@@ -73,6 +79,7 @@ service BackofficeWallet {
 		};
 	}
 
+	// Get exchange rates for specified currencies
 	rpc GetExchangeRates(GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/exchange-rates/get"
@@ -157,12 +164,14 @@ service BackofficeWallet {
 		};
 	}
 
+	// Set app download reward config for a target operator
 	rpc SetAppDownloadRewardConfig(SetAppDownloadRewardConfigRequest) returns (wallet.service.v1.SetAppDownloadRewardConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/app-download-reward/config/set"
 			body: "*"
 		};
 	}
+	// Get app download reward config for a target operator
 	rpc GetAppDownloadRewardConfig(GetAppDownloadRewardConfigRequest) returns (wallet.service.v1.GetAppDownloadRewardConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/app-download-reward/config/get"
@@ -370,7 +379,8 @@ message GetWalletsRequest {
 
 message GetWalletCreditsRequest {
 	int64 user_id = 1;
-	optional string transaction_type = 2;	// credit or debit
+	// "credit" or "debit"
+	optional string transaction_type = 2;
 	optional string currency = 3;
 	optional google.protobuf.Timestamp start_time = 4;
 	optional google.protobuf.Timestamp end_time = 5;
@@ -535,16 +545,20 @@ message UpdateWalletCurrencyRequest {
 	optional string icon = 6;
 	optional int32 decimal_places = 7;
 	optional int32 currency_decimal_places = 8;
-	optional string thousands_separator = 9; // placeholder for future use
-	optional string decimal_separator = 10; // placeholder for future use
+	// Placeholder for future use
+	optional string thousands_separator = 9;
+	// Placeholder for future use
+	optional string decimal_separator = 10;
 	api.common.OperatorContext target_operator_context = 11;
 }
 
 message ListOperatorBalancesRequest {
 	api.common.OperatorContextFilters operator_context_filters = 1;
 	repeated string currencies = 2;
-	optional int32 page = 3; // default 1
-	optional int32 page_size = 4; // default 20
+	// Default 1
+	optional int32 page = 3;
+	// Default 20
+	optional int32 page_size = 4;
 }
 
 message GetExchangeRatesRequest {
@@ -574,7 +588,8 @@ message OperatorSwapRequest {
 	api.common.OperatorContext target_operator_context = 2;
 	string currency = 3;
 	string target_currency = 4;
-	string cash_amount = 5; // cash amount of the operator's balance currency
+	// Cash amount in the operator's balance currency
+	string cash_amount = 5;
 }
 
 message OperatorSwapResponse {
@@ -691,8 +706,10 @@ message SetDepositRewardSequencesRequest {
 message DeleteDepositRewardSequencesRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
-	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 3; // the sequences to delete
-	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 4; // the sequences to delete
+	// The sequences to delete
+	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 3;
+	// The sequences to delete
+	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 4;
 }
 
 message GetDepositRewardConfigRequest {
@@ -743,8 +760,10 @@ message ExportCustomerRecordsRequest {
 	optional int64 user_id = 3;
 	optional int64 transaction_id = 4;
 	optional string transaction_type = 5;
-	string format = 6; // accepted values: csv, excel, pdf
-	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	// "csv", "excel", or "pdf"
+	string format = 6;
+	// e.g. "UTC+0", "UTC+8"
+	string time_zone = 7;
 	api.common.OperatorContextFilters operator_context_filters = 8;
 }
 
@@ -775,15 +794,18 @@ message ExportFICAThresholdTransactionsRequest {
 	optional string transaction_type = 3;
 	optional string currency = 4;
 	optional int32 kyc_level = 5;
-	string format = 6; // accepted values: csv, excel, pdf
-	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	// "csv", "excel", or "pdf"
+	string format = 6;
+	// e.g. "UTC+0", "UTC+8"
+	string time_zone = 7;
 	api.common.OperatorContext target_operator_context = 8;
 }
 
 message ManualCreditRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	string transaction_type = 3; // manual_credit_cash, manual_credit_bonus
+	// "manual_credit_cash" or "manual_credit_bonus"
+	string transaction_type = 3;
 	string cash_amount = 4;
 	string cash_turnover_threshold = 5;
 	string operator_bonus_amount = 6;
@@ -795,7 +817,8 @@ message ManualCreditRequest {
 message ManualDebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	string transaction_type = 3; // manual_debit_cash, manual_debit_bonus
+	// "manual_debit_cash" or "manual_debit_bonus"
+	string transaction_type = 3;
 	string amount = 4;
 	string comment = 5;
 }
@@ -815,8 +838,10 @@ message ExportManualJournalEntriesRequest {
 	optional google.protobuf.Timestamp end_time = 2;
 	optional int64 user_id = 3;
 	optional string currency = 4;
-	string format = 5; // accepted values: csv, excel, pdf
-	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+	// "csv", "excel", or "pdf"
+	string format = 5;
+	// e.g. "UTC+0", "UTC+8"
+	string time_zone = 6;
 	api.common.OperatorContextFilters operator_context_filters = 7;
 }
 
@@ -852,14 +877,17 @@ message UpdatePromoCodeCampaignRequest {
 message UpdatePromoCodeCampaignStatusRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	int64 campaign_id = 2;
-	string status = 3;                   // active | paused | disabled
+	// "active", "paused", or "disabled"
+	string status = 3;
 }
 
 // List Campaigns
 message ListPromoCodeCampaignsRequest {
 	api.common.OperatorContext target_operator_context = 1;
-	optional string status = 2;          // active | paused | disabled
-	optional string code_type = 3;       // one_time | universal
+	// "active", "paused", or "disabled"
+	optional string status = 2;
+	// "one_time" or "universal"
+	optional string code_type = 3;
 	optional google.protobuf.Timestamp start_time = 4;
 	optional google.protobuf.Timestamp end_time = 5;
 	optional int32 page = 6;
@@ -904,7 +932,8 @@ message ManualAdjustCreditTurnoverFieldRequest {
 	string transaction_type = 4;
 	// direction: "add", "subtract"
 	string direction = 5;
-	string value = 6; // Adjustment value (positive number)
+	// Adjustment value (positive number)
+	string value = 6;
 }
 
 // ============================================

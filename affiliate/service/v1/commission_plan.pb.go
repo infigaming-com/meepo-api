@@ -576,15 +576,18 @@ func (x *ListCommissionPlansResponse) GetPageSize() int32 {
 }
 
 type CommissionPlan struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	CommissionPlanId   int64                  `protobuf:"varint,1,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
-	Title              string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Status             string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
-	Source             string                 `protobuf:"bytes,4,opt,name=source,proto3" json:"source,omitempty"`                                     // system/retailer/company/operator
-	Types              []string               `protobuf:"bytes,5,rep,name=types,proto3" json:"types,omitempty"`                                       // cpa/revshare/cpl/cpc/flat_fee, multiple types are allowed
-	AssignedCount      int32                  `protobuf:"varint,6,opt,name=assigned_count,json=assignedCount,proto3" json:"assigned_count,omitempty"` // not supported yet
-	BaseCurrency       string                 `protobuf:"bytes,7,opt,name=base_currency,json=baseCurrency,proto3" json:"base_currency,omitempty"`
-	SourceOperatorName string                 `protobuf:"bytes,8,opt,name=source_operator_name,json=sourceOperatorName,proto3" json:"source_operator_name,omitempty"`
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CommissionPlanId int64                  `protobuf:"varint,1,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
+	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Status           string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	// "system", "retailer", "company", or "operator"
+	Source string `protobuf:"bytes,4,opt,name=source,proto3" json:"source,omitempty"`
+	// "cpa", "revshare", "cpl", "cpc", "flat_fee" (multiple allowed)
+	Types []string `protobuf:"bytes,5,rep,name=types,proto3" json:"types,omitempty"`
+	// Not supported yet
+	AssignedCount      int32  `protobuf:"varint,6,opt,name=assigned_count,json=assignedCount,proto3" json:"assigned_count,omitempty"`
+	BaseCurrency       string `protobuf:"bytes,7,opt,name=base_currency,json=baseCurrency,proto3" json:"base_currency,omitempty"`
+	SourceOperatorName string `protobuf:"bytes,8,opt,name=source_operator_name,json=sourceOperatorName,proto3" json:"source_operator_name,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -676,11 +679,12 @@ func (x *CommissionPlan) GetSourceOperatorName() string {
 }
 
 type DeleteCommissionPlanRequest struct {
-	state                       protoimpl.MessageState  `protogen:"open.v1"`
-	UserId                      int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorContext             *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	CommissionPlanId            int64                   `protobuf:"varint,3,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
-	AlternativeCommissionPlanId *int64                  `protobuf:"varint,4,opt,name=alternative_commission_plan_id,json=alternativeCommissionPlanId,proto3,oneof" json:"alternative_commission_plan_id,omitempty"` // not supported yet
+	state            protoimpl.MessageState  `protogen:"open.v1"`
+	UserId           int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext  *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	CommissionPlanId int64                   `protobuf:"varint,3,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
+	// Not supported yet
+	AlternativeCommissionPlanId *int64 `protobuf:"varint,4,opt,name=alternative_commission_plan_id,json=alternativeCommissionPlanId,proto3,oneof" json:"alternative_commission_plan_id,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -780,9 +784,10 @@ func (*DeleteCommissionPlanResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListAllCommissionPlansRequest struct {
-	state                    protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Countries                []string                `protobuf:"bytes,2,rep,name=countries,proto3" json:"countries,omitempty"` // not supported yet
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// Not supported yet
+	Countries                []string                `protobuf:"bytes,2,rep,name=countries,proto3" json:"countries,omitempty"`
 	Status                   *string                 `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	unknownFields            protoimpl.UnknownFields
@@ -1104,9 +1109,10 @@ func (x *CommissionPlanConfig) GetFlatFee() *FlatFeeConfig {
 }
 
 type CPAConfig struct {
-	state                  protoimpl.MessageState            `protogen:"open.v1"`
-	Enabled                bool                              `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	CommissionType         string                            `protobuf:"bytes,2,opt,name=commission_type,json=commissionType,proto3" json:"commission_type,omitempty"` // flat/flat_by_countries/progressive/progressive_by_countries
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// "flat", "flat_by_countries", "progressive", or "progressive_by_countries"
+	CommissionType         string                            `protobuf:"bytes,2,opt,name=commission_type,json=commissionType,proto3" json:"commission_type,omitempty"`
 	Flat                   *FlatCommission                   `protobuf:"bytes,3,opt,name=flat,proto3,oneof" json:"flat,omitempty"`
 	FlatByCountries        *FlatByCountriesCommission        `protobuf:"bytes,4,opt,name=flat_by_countries,json=flatByCountries,proto3,oneof" json:"flat_by_countries,omitempty"`
 	Progressive            *ProgressiveCommission            `protobuf:"bytes,5,opt,name=progressive,proto3,oneof" json:"progressive,omitempty"`
@@ -1352,8 +1358,9 @@ func (x *CountryCommissionGroup) GetCommission() string {
 }
 
 type ProgressiveCommission struct {
-	state         protoimpl.MessageState        `protogen:"open.v1"`
-	Metric        string                        `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"` // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// "ftd_amount", "ftd_count_in_period", "total_deposits", or "deposits_amount"
+	Metric        string                        `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"`
 	Ranges        []*ProgressiveCommissionRange `protobuf:"bytes,2,rep,name=ranges,proto3" json:"ranges,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1464,8 +1471,9 @@ func (x *ProgressiveCommissionRange) GetCommission() string {
 }
 
 type ProgressiveByCountriesCommission struct {
-	state                protoimpl.MessageState        `protogen:"open.v1"`
-	Metric               string                        `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"` // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// "ftd_amount", "ftd_count_in_period", "total_deposits", or "deposits_amount"
+	Metric               string                        `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"`
 	CountryGroups        []*CountryProgressiveGroup    `protobuf:"bytes,2,rep,name=country_groups,json=countryGroups,proto3" json:"country_groups,omitempty"`
 	OtherCountriesRanges []*ProgressiveCommissionRange `protobuf:"bytes,3,rep,name=other_countries_ranges,json=otherCountriesRanges,proto3" json:"other_countries_ranges,omitempty"`
 	unknownFields        protoimpl.UnknownFields
@@ -1584,9 +1592,10 @@ type Qualification struct {
 	MinBetsAmount                  *string                `protobuf:"bytes,5,opt,name=min_bets_amount,json=minBetsAmount,proto3,oneof" json:"min_bets_amount,omitempty"`
 	TimeLimitAfterRegistrationDays *int32                 `protobuf:"varint,6,opt,name=time_limit_after_registration_days,json=timeLimitAfterRegistrationDays,proto3,oneof" json:"time_limit_after_registration_days,omitempty"`
 	TimeLimitAfterFtdDays          *int32                 `protobuf:"varint,7,opt,name=time_limit_after_ftd_days,json=timeLimitAfterFtdDays,proto3,oneof" json:"time_limit_after_ftd_days,omitempty"`
-	AllowedPlayerStatuses          *string                `protobuf:"bytes,8,opt,name=allowed_player_statuses,json=allowedPlayerStatuses,proto3,oneof" json:"allowed_player_statuses,omitempty"` // not available yet
-	unknownFields                  protoimpl.UnknownFields
-	sizeCache                      protoimpl.SizeCache
+	// Not available yet
+	AllowedPlayerStatuses *string `protobuf:"bytes,8,opt,name=allowed_player_statuses,json=allowedPlayerStatuses,proto3,oneof" json:"allowed_player_statuses,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Qualification) Reset() {
@@ -1720,10 +1729,12 @@ func (x *AdvancedOptions) GetHoldPeriodDays() int32 {
 }
 
 type RevShareConfig struct {
-	state                  protoimpl.MessageState                `protogen:"open.v1"`
-	Enabled                bool                                  `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	BasedOn                string                                `protobuf:"bytes,2,opt,name=based_on,json=basedOn,proto3" json:"based_on,omitempty"`                               // ggr/ngr
-	NegativeCarryover      string                                `protobuf:"bytes,3,opt,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"` // discard/carry_to_next_period
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// "ggr" or "ngr"
+	BasedOn string `protobuf:"bytes,2,opt,name=based_on,json=basedOn,proto3" json:"based_on,omitempty"`
+	// "discard" or "carry_to_next_period"
+	NegativeCarryover      string                                `protobuf:"bytes,3,opt,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"`
 	CommissionType         string                                `protobuf:"bytes,4,opt,name=commission_type,json=commissionType,proto3" json:"commission_type,omitempty"`
 	Flat                   *FlatRateCommission                   `protobuf:"bytes,5,opt,name=flat,proto3,oneof" json:"flat,omitempty"`
 	FlatByCountries        *FlatByCountriesRateCommission        `protobuf:"bytes,6,opt,name=flat_by_countries,json=flatByCountries,proto3,oneof" json:"flat_by_countries,omitempty"`
@@ -2028,10 +2039,11 @@ func (x *ProgressiveRateCommission) GetRanges() []*RateRange {
 }
 
 type RateRange struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	From          string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
-	To            *string                `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"` // nil indicates no upper limit
-	Rate          string                 `protobuf:"bytes,3,opt,name=rate,proto3" json:"rate,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	From  string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	// nil indicates no upper limit
+	To            *string `protobuf:"bytes,2,opt,name=to,proto3,oneof" json:"to,omitempty"`
+	Rate          string  `protobuf:"bytes,3,opt,name=rate,proto3" json:"rate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2293,9 +2305,10 @@ func (x *CPLConfig) GetAdvancedOptions() *AdvancedOptions {
 }
 
 type CPCConfig struct {
-	state           protoimpl.MessageState     `protogen:"open.v1"`
-	Enabled         bool                       `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	CommissionType  string                     `protobuf:"bytes,2,opt,name=commission_type,json=commissionType,proto3" json:"commission_type,omitempty"` // flat/flat_by_countries
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// "flat" or "flat_by_countries"
+	CommissionType  string                     `protobuf:"bytes,2,opt,name=commission_type,json=commissionType,proto3" json:"commission_type,omitempty"`
 	Flat            *FlatCommission            `protobuf:"bytes,3,opt,name=flat,proto3,oneof" json:"flat,omitempty"`
 	FlatByCountries *FlatByCountriesCommission `protobuf:"bytes,4,opt,name=flat_by_countries,json=flatByCountries,proto3,oneof" json:"flat_by_countries,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -2361,9 +2374,10 @@ func (x *CPCConfig) GetFlatByCountries() *FlatByCountriesCommission {
 }
 
 type FlatFeeConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Enabled       bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Period        string                 `protobuf:"bytes,2,opt,name=period,proto3" json:"period,omitempty"` // one_time/monthly/yearly
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// "one_time", "monthly", or "yearly"
+	Period        string                 `protobuf:"bytes,2,opt,name=period,proto3" json:"period,omitempty"`
 	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
 	StartTime     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2429,15 +2443,17 @@ func (x *FlatFeeConfig) GetStartTime() *timestamppb.Timestamp {
 }
 
 type ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	CommissionPlanId   int64                  `protobuf:"varint,1,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
-	Title              string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Status             string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
-	Source             string                 `protobuf:"bytes,4,opt,name=source,proto3" json:"source,omitempty"` // system/retailer/company/operator
-	Types              []string               `protobuf:"bytes,5,rep,name=types,proto3" json:"types,omitempty"`   // cpa/revshare/cpl/cpc/flat_fee, multiple types are allowed
-	BaseCurrency       string                 `protobuf:"bytes,6,opt,name=base_currency,json=baseCurrency,proto3" json:"base_currency,omitempty"`
-	SourceOperatorName string                 `protobuf:"bytes,7,opt,name=source_operator_name,json=sourceOperatorName,proto3" json:"source_operator_name,omitempty"`
-	PlanConfig         *CommissionPlanConfig  `protobuf:"bytes,8,opt,name=plan_config,json=planConfig,proto3" json:"plan_config,omitempty"`
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CommissionPlanId int64                  `protobuf:"varint,1,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
+	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Status           string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	// "system", "retailer", "company", or "operator"
+	Source string `protobuf:"bytes,4,opt,name=source,proto3" json:"source,omitempty"`
+	// "cpa", "revshare", "cpl", "cpc", "flat_fee" (multiple allowed)
+	Types              []string              `protobuf:"bytes,5,rep,name=types,proto3" json:"types,omitempty"`
+	BaseCurrency       string                `protobuf:"bytes,6,opt,name=base_currency,json=baseCurrency,proto3" json:"base_currency,omitempty"`
+	SourceOperatorName string                `protobuf:"bytes,7,opt,name=source_operator_name,json=sourceOperatorName,proto3" json:"source_operator_name,omitempty"`
+	PlanConfig         *CommissionPlanConfig `protobuf:"bytes,8,opt,name=plan_config,json=planConfig,proto3" json:"plan_config,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }

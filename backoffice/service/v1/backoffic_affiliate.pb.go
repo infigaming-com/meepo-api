@@ -290,9 +290,10 @@ func (x *ListCommissionPlansRequest) GetStatus() string {
 }
 
 type DeleteCommissionPlanRequest struct {
-	state                       protoimpl.MessageState `protogen:"open.v1"`
-	CommissionPlanId            int64                  `protobuf:"varint,1,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
-	AlternativeCommissionPlanId *int64                 `protobuf:"varint,2,opt,name=alternative_commission_plan_id,json=alternativeCommissionPlanId,proto3,oneof" json:"alternative_commission_plan_id,omitempty"` // not supported yet
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CommissionPlanId int64                  `protobuf:"varint,1,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
+	// Not supported yet
+	AlternativeCommissionPlanId *int64 `protobuf:"varint,2,opt,name=alternative_commission_plan_id,json=alternativeCommissionPlanId,proto3,oneof" json:"alternative_commission_plan_id,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -344,10 +345,11 @@ func (x *DeleteCommissionPlanRequest) GetAlternativeCommissionPlanId() int64 {
 type ListAllCommissionPlansRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Countries             []string                `protobuf:"bytes,2,rep,name=countries,proto3" json:"countries,omitempty"` // not supported yet
-	Status                *string                 `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Not supported yet
+	Countries     []string `protobuf:"bytes,2,rep,name=countries,proto3" json:"countries,omitempty"`
+	Status        *string  `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListAllCommissionPlansRequest) Reset() {
@@ -558,17 +560,21 @@ func (x *UpdateAffiliateRequest) GetAffiliateId() int64 {
 }
 
 type ListAffiliatesRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	Countries             []string                `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"`
-	TrafficSourceIds      []string                `protobuf:"bytes,2,rep,name=traffic_source_ids,json=trafficSourceIds,proto3" json:"traffic_source_ids,omitempty"` // not implemented
-	TeammateIds           []string                `protobuf:"bytes,3,rep,name=teammate_ids,json=teammateIds,proto3" json:"teammate_ids,omitempty"`                  // not implemented
-	Status                string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                                               // pending, active, inactive
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Countries []string               `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"`
+	// Not implemented
+	TrafficSourceIds []string `protobuf:"bytes,2,rep,name=traffic_source_ids,json=trafficSourceIds,proto3" json:"traffic_source_ids,omitempty"`
+	// Not implemented
+	TeammateIds []string `protobuf:"bytes,3,rep,name=teammate_ids,json=teammateIds,proto3" json:"teammate_ids,omitempty"`
+	// "pending", "active", or "inactive"
+	Status                string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	Page                  *int32                  `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize              *int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Pagination            *bool                   `protobuf:"varint,8,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"` // if nil, pagination is true
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// If nil, pagination is true
+	Pagination    *bool `protobuf:"varint,8,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListAffiliatesRequest) Reset() {
@@ -1268,14 +1274,17 @@ func (x *DeleteCampaignRequest) GetTargetAffiliateId() int64 {
 }
 
 type CreatePostbackRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	PostbackName      string                 `protobuf:"bytes,1,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	Status            string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // active/inactive
-	CampaignIds       []int64                `protobuf:"varint,3,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
-	ActionType        string                 `protobuf:"bytes,4,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"` // register, deposit, first_deposit, withdrawal, game_start, game_bet
-	PostbackUrl       string                 `protobuf:"bytes,5,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
-	RequestMethod     string                 `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET/POST
-	TargetAffiliateId *int64                 `protobuf:"varint,7,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	PostbackName string                 `protobuf:"bytes,1,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	// "active" or "inactive"
+	Status      string  `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	CampaignIds []int64 `protobuf:"varint,3,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+	ActionType  string `protobuf:"bytes,4,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	PostbackUrl string `protobuf:"bytes,5,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// "GET" or "POST"
+	RequestMethod     string `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
+	TargetAffiliateId *int64 `protobuf:"varint,7,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1360,15 +1369,18 @@ func (x *CreatePostbackRequest) GetTargetAffiliateId() int64 {
 }
 
 type UpdatePostbackRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	PostbackId        int64                  `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
-	PostbackName      string                 `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	Status            string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // active/inactive
-	CampaignIds       []int64                `protobuf:"varint,4,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
-	ActionType        string                 `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"` // register, deposit, first_deposit, withdrawal, game_start, game_bet
-	PostbackUrl       string                 `protobuf:"bytes,6,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
-	RequestMethod     string                 `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET/POST
-	TargetAffiliateId *int64                 `protobuf:"varint,8,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	PostbackId   int64                  `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
+	PostbackName string                 `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	// "active" or "inactive"
+	Status      string  `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	CampaignIds []int64 `protobuf:"varint,4,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+	ActionType  string `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	PostbackUrl string `protobuf:"bytes,6,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// "GET" or "POST"
+	RequestMethod     string `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
+	TargetAffiliateId *int64 `protobuf:"varint,8,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1512,9 +1524,10 @@ func (x *DeletePostbackRequest) GetTargetAffiliateId() int64 {
 }
 
 type ListPostbacksRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	AffiliateId            *int64                         `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
-	Status                 *string                        `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"` // active/inactive
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateId *int64                 `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
+	// "active" or "inactive"
+	Status                 *string                        `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	Page                   *int32                         `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize               *int32                         `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,5,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
@@ -1932,17 +1945,20 @@ func (x *ListEventsRequest) GetEventId() int64 {
 }
 
 type ListCommissionsRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	CommissionPlanIds      []int64                        `protobuf:"varint,1,rep,packed,name=commission_plan_ids,json=commissionPlanIds,proto3" json:"commission_plan_ids,omitempty"` // OR logic: filter by commission plan IDs, match if ID is any of these values
-	UserId                 *int64                         `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	AffiliateId            *int64                         `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
-	CommissionSubtypes     []string                       `protobuf:"bytes,4,rep,name=commission_subtypes,json=commissionSubtypes,proto3" json:"commission_subtypes,omitempty"` // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
-	Countries              []string                       `protobuf:"bytes,5,rep,name=countries,proto3" json:"countries,omitempty"`
-	CommissionId           *int64                         `protobuf:"varint,6,opt,name=commission_id,json=commissionId,proto3,oneof" json:"commission_id,omitempty"`
-	BillId                 *int64                         `protobuf:"varint,7,opt,name=bill_id,json=billId,proto3,oneof" json:"bill_id,omitempty"`
-	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	Status                 *string                        `protobuf:"bytes,10,opt,name=status,proto3,oneof" json:"status,omitempty"` // pending/approved/rejected
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// OR logic: filter by commission plan IDs, match if ID is any of these values
+	CommissionPlanIds []int64 `protobuf:"varint,1,rep,packed,name=commission_plan_ids,json=commissionPlanIds,proto3" json:"commission_plan_ids,omitempty"`
+	UserId            *int64  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	AffiliateId       *int64  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
+	// "cpa", "revshare", "cpl", "cpc", "flat_fee" (multiple allowed)
+	CommissionSubtypes []string               `protobuf:"bytes,4,rep,name=commission_subtypes,json=commissionSubtypes,proto3" json:"commission_subtypes,omitempty"`
+	Countries          []string               `protobuf:"bytes,5,rep,name=countries,proto3" json:"countries,omitempty"`
+	CommissionId       *int64                 `protobuf:"varint,6,opt,name=commission_id,json=commissionId,proto3,oneof" json:"commission_id,omitempty"`
+	BillId             *int64                 `protobuf:"varint,7,opt,name=bill_id,json=billId,proto3,oneof" json:"bill_id,omitempty"`
+	StartTime          *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime            *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	// "pending", "approved", or "rejected"
+	Status                 *string                        `protobuf:"bytes,10,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	Page                   *int32                         `protobuf:"varint,11,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize               *int32                         `protobuf:"varint,12,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,13,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
@@ -2188,10 +2204,12 @@ type ExportAffiliateUsersRequest struct {
 	RegistrationStartTime  *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=registration_start_time,json=registrationStartTime,proto3" json:"registration_start_time,omitempty"`
 	RegistrationEndTime    *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=registration_end_time,json=registrationEndTime,proto3" json:"registration_end_time,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,7,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Format                 string                         `protobuf:"bytes,8,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone               string                         `protobuf:"bytes,9,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// "csv", "excel", or "pdf"
+	Format string `protobuf:"bytes,8,opt,name=format,proto3" json:"format,omitempty"`
+	// e.g. "UTC+0", "UTC+8"
+	TimeZone      string `protobuf:"bytes,9,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ExportAffiliateUsersRequest) Reset() {
@@ -2483,10 +2501,12 @@ type SetReferralPlanRequest struct {
 	Enabled               *bool                   `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	MaxTier               *int32                  `protobuf:"varint,5,opt,name=max_tier,json=maxTier,proto3,oneof" json:"max_tier,omitempty"`
 	PlanConfig            *v1.ReferralPlanConfig  `protobuf:"bytes,6,opt,name=plan_config,json=planConfig,proto3,oneof" json:"plan_config,omitempty"`
-	PaymentChannelRate    *string                 `protobuf:"bytes,7,opt,name=payment_channel_rate,json=paymentChannelRate,proto3,oneof" json:"payment_channel_rate,omitempty"`   // represent as a percentage, e.g. "35" for 35%
-	ThirdPartyGameRate    *string                 `protobuf:"bytes,8,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3,oneof" json:"third_party_game_rate,omitempty"` // represent as a percentage, e.g. "35" for 35%
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Percentage string, e.g. "35" for 35%
+	PaymentChannelRate *string `protobuf:"bytes,7,opt,name=payment_channel_rate,json=paymentChannelRate,proto3,oneof" json:"payment_channel_rate,omitempty"`
+	// Percentage string, e.g. "35" for 35%
+	ThirdPartyGameRate *string `protobuf:"bytes,8,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3,oneof" json:"third_party_game_rate,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *SetReferralPlanRequest) Reset() {
@@ -2680,10 +2700,11 @@ func (x *GetAffiliateDashboardRequest) GetEndTime() *timestamppb.Timestamp {
 }
 
 type GetAffiliateTrendRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	GroupBy       string                 `protobuf:"bytes,3,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"` // "day", "week", "month"
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime   *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	// "day", "week", or "month"
+	GroupBy       string `protobuf:"bytes,3,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3954,11 +3975,12 @@ func (x *SimulateGlobalPostbackRequest) GetMacroValues() map[string]string {
 }
 
 type CreateCampaignRequest_Campaign struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	CampaignName  string                 `protobuf:"bytes,2,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	ChannelType   string                 `protobuf:"bytes,3,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"` // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
-	ChannelConfig *v1.ChannelConfig      `protobuf:"bytes,4,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Domain       string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	CampaignName string                 `protobuf:"bytes,2,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	// "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+	ChannelType   string            `protobuf:"bytes,3,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
+	ChannelConfig *v1.ChannelConfig `protobuf:"bytes,4,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

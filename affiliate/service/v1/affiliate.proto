@@ -266,13 +266,16 @@ message AffiliateInfo {
     string lastname = 10;
     string phone = 11;
     repeated ContactType contact_types = 12;
-    string country = 13; // country code
+    // country code
+    string country = 13;
     string region = 14;
     string city = 15;
     string post_code = 16;
     string street = 17;
-    repeated int64 traffic_source_ids = 18; // not implemented
-    repeated int64 teammate_ids = 19; // not implemented
+    // not implemented
+    repeated int64 traffic_source_ids = 18;
+    // not implemented
+    repeated int64 teammate_ids = 19;
     string internal_info = 20;
 }
 
@@ -299,14 +302,18 @@ message UpdateAffiliateResponse {
 
 message ListAffiliatesRequest {
     repeated string countries = 1;
-    repeated string traffic_source_ids = 2; // not implemented
-    repeated string teammate_ids = 3; // not implemented
-    string status = 4; // pending, active, inactive
+    // not implemented
+    repeated string traffic_source_ids = 2;
+    // not implemented
+    repeated string teammate_ids = 3;
+    // "pending", "active", or "inactive"
+    string status = 4;
     optional int32 page = 5;
     optional int32 page_size = 6;
     api.common.OperatorContext target_operator_context = 7;
     api.common.OperatorContext initiator_operator_context = 8;
-    optional bool pagination = 9; // if nil, pagination is true
+    // if nil, pagination is true
+    optional bool pagination = 9;
 }
 
 message ListAffiliatesResponse {
@@ -319,10 +326,12 @@ message ListAffiliatesResponse {
         string retailer_operator_name = 6;
         string company_operator_name = 7;
         string operator_name = 8;
-        repeated string traffic_source_names = 9; // not implemented
+        // not implemented
+        repeated string traffic_source_names = 9;
         string status = 10;
         repeated string commission_plan_names = 11;
-        repeated string teammate_names = 12; // not implemented
+        // not implemented
+        repeated string teammate_names = 12;
         string last_login_ip = 13;
         string balance_usd = 14;
         string balance_reporting_currency = 15;
@@ -359,7 +368,8 @@ message GetAffiliateDetailsResponse {
             string affiliate_firstname = 2;
             string affiliate_lastname = 3;
             string affiliate_company_name = 4;
-            string sub_affiliate_commission_rate = 5; // percentage
+            // percentage
+            string sub_affiliate_commission_rate = 5;
         }
         message CommissionPlan {
             int64 commission_plan_id = 1;
@@ -371,24 +381,30 @@ message GetAffiliateDetailsResponse {
         repeated CommissionPlan commission_plans = 4;
         string invoice_period = 5;
         string photo_url = 6;
-        bool active = 7; // online status, not implemented
+        // online status, not implemented
+        bool active = 7;
         string last_login_ip = 8;
         google.protobuf.Timestamp last_login_at = 9;
         string firstname = 10;
         string lastname = 11;
         string phone = 12;
         repeated ContactType contact_types = 13;
-        string country = 14; // country code
+        // country code
+        string country = 14;
         string region = 15;
         string city = 16;
         string post_code = 17;
         string street = 18;
-        repeated int64 traffic_source_ids = 19; // not implemented
-        repeated int64 teammate_ids = 20; // not implemented
+        // not implemented
+        repeated int64 traffic_source_ids = 19;
+        // not implemented
+        repeated int64 teammate_ids = 20;
         string internal_info = 21;
-        optional Referrer referrer = 22; // referred by who, not implemented
+        // referred by who, not implemented
+        optional Referrer referrer = 22;
         string pending_balance_usd = 23;
-        string pending_balance_reporting_currency = 24; // pending bill amount
+        // pending bill amount
+        string pending_balance_reporting_currency = 24;
         string email = 25;
         bool two_fa_enabled = 26;
     }
@@ -409,10 +425,11 @@ message ResetAffiliatePasswordResponse {}
 message Campaign {
     string domain = 1;
     string campaign_name = 2;
-    string channel_type = 3; // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
+    // "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+    string channel_type = 3;
     ChannelConfig channel_config = 4;
     Params params = 5;
-    EventMappings event_mappings = 6;    
+    EventMappings event_mappings = 6;
 }
 
 message Params {
@@ -489,7 +506,8 @@ message CreateCampaignRequest {
     message Campaign {
         string domain = 1;
         string campaign_name = 2;
-        string channel_type = 3; // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
+        // "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+        string channel_type = 3;
         ChannelConfig channel_config = 4;
     }
     Campaign campaign = 1;
@@ -540,7 +558,8 @@ message ListCampaignsResponse {
         string company_operator_name = 6;
         string operator_name = 7;
         string campaign_name = 8;
-        string event_mappings_status = 9; // configured/not_configured/not_required
+        // "configured", "not_configured", or "not_required"
+        string event_mappings_status = 9;
         int32 event_mappings_count = 10;
         bool enabled = 11;
         Campaign campaign = 12;
@@ -568,8 +587,10 @@ message DeleteCampaignResponse {
 // -------------- Landing Template Types --------------
 
 message ClickAction {
-    string action_type = 1; // OPEN_REGISTRATION, GO_TO_MAIN_SITE, CUSTOM_URL
-    optional string custom_url = 2; // required when action_type is CUSTOM_URL
+    // "OPEN_REGISTRATION", "GO_TO_MAIN_SITE", or "CUSTOM_URL"
+    string action_type = 1;
+    // required when action_type is CUSTOM_URL
+    optional string custom_url = 2;
 }
 
 message LandingPageSettings {
@@ -716,11 +737,14 @@ message ListEventsResponse {
 
 message CreatePostbackRequest {
     string postback_name = 1;
-    string status = 2; // active/inactive
+    // "active" or "inactive"
+    string status = 2;
     repeated int64 campaign_ids = 3;
-    string action_type = 4; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    // "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+    string action_type = 4;
     string postback_url = 5;
-    string request_method = 6; // GET/POST
+    // "GET" or "POST"
+    string request_method = 6;
     int64 initiator_user_id = 7;
     int32 initiator_user_role_id = 8;
     api.common.OperatorContext initiator_operator_context = 9;
@@ -734,11 +758,14 @@ message CreatePostbackResponse {
 message UpdatePostbackRequest {
     int64 postback_id = 1;
     string postback_name = 2;
-    string status = 3; // active/inactive
+    // "active" or "inactive"
+    string status = 3;
     repeated int64 campaign_ids = 4;
-    string action_type = 5; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    // "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+    string action_type = 5;
     string postback_url = 6;
-    string request_method = 7; // GET/POST
+    // "GET" or "POST"
+    string request_method = 7;
     int64 initiator_user_id = 8;
     int32 initiator_user_role_id = 9;
     api.common.OperatorContext initiator_operator_context = 10;
@@ -761,7 +788,8 @@ message DeletePostbackResponse {
 
 message ListPostbacksRequest {
     optional int64 affiliate_id = 1;
-    optional string status = 2; // active/inactive
+    // "active" or "inactive"
+    optional string status = 2;
     optional int32 page = 3;
     optional int32 page_size = 4;
     int64 initiator_user_id = 5;
@@ -779,7 +807,8 @@ message ListPostbacksResponse {
         }
         int64 postback_id = 1;
         string postback_name = 2;
-        string status = 3; // active/inactive
+        // "active" or "inactive"
+        string status = 3;
         int64 affiliate_id = 4;
         string affiliate_name = 5;
         int64 retailer_operator_id = 6;
@@ -789,9 +818,11 @@ message ListPostbacksResponse {
         int64 operator_id = 10;
         string operator_name = 11;
         repeated Campaign campaigns = 12;
-        string action_type = 13; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+        // "register", "deposit", "first_deposit", "withdrawal", "game_start", or "game_bet"
+        string action_type = 13;
         string postback_url = 14;
-        string request_method = 15; // GET/POST
+        // "GET" or "POST"
+        string request_method = 15;
     }
     repeated Postback postbacks = 1;
     int32 total = 2;
@@ -820,15 +851,24 @@ message ListPostbackLogsResponse {
         int64 log_id = 1;
         int64 postback_id = 2;
         string postback_name = 3;
-        string postback_url = 4;           // Final URL after macro replacement
-        string action_type = 5;            // User action: register, deposit, etc.
-        string request_method = 6;         // GET/POST
-        int32 http_status_code = 7;        // HTTP response status code
-        string reason = 8;                 // Success or error message
-        bool success = 9;                  // true if HTTP 2xx
-        int32 attempt_number = 10;         // 1, 2, or 3
-        int64 event_id = 11;               // Related event ID
-        int64 user_id = 12;                // User that triggered the event
+        // Final URL after macro replacement
+        string postback_url = 4;
+        // User action: register, deposit, etc.
+        string action_type = 5;
+        // GET/POST
+        string request_method = 6;
+        // HTTP response status code
+        int32 http_status_code = 7;
+        // Success or error message
+        string reason = 8;
+        // true if HTTP 2xx
+        bool success = 9;
+        // 1, 2, or 3
+        int32 attempt_number = 10;
+        // Related event ID
+        int64 event_id = 11;
+        // User that triggered the event
+        int64 user_id = 12;
         int64 affiliate_id = 13;
         string affiliate_name = 14;
         int64 retailer_operator_id = 15;
@@ -838,9 +878,12 @@ message ListPostbackLogsResponse {
         int64 operator_id = 19;
         string operator_name = 20;
         google.protobuf.Timestamp created_at = 21;
-        string response_body = 22;     // Response body from third-party server (max 2KB)
-        string response_headers = 23;  // Response headers as JSON string
-        int64 latency_ms = 24;         // Request latency in milliseconds
+        // Response body from third-party server (max 2KB)
+        string response_body = 22;
+        // Response headers as JSON string
+        string response_headers = 23;
+        // Request latency in milliseconds
+        int64 latency_ms = 24;
     }
     repeated PostbackLog logs = 1;
     int32 total = 2;
@@ -873,8 +916,10 @@ message ListAffiliateDomainsResponse {
             string affiliate_company_name = 3;
         }
         string domain = 1;
-        bool available_to_all = 2;          // only visible to operator
-        repeated Affiliate affiliates = 3;   // only visible to operator
+        // only visible to operator
+        bool available_to_all = 2;
+        // only visible to operator
+        repeated Affiliate affiliates = 3;
         int64 operator_id = 4;
         int64 company_operator_id = 6;
         int64 retailer_operator_id = 7;
@@ -901,16 +946,19 @@ message SetAffiliateDomainResponse {}
 // -------------- Commission --------------
 
 message ListCommissionsRequest {
-    repeated int64 commission_plan_ids = 1; // OR logic: filter by commission plan IDs, match if ID is any of these values
+    // OR logic: filter by commission plan IDs, match if ID is any of these values
+    repeated int64 commission_plan_ids = 1;
     optional int64 user_id = 2;
     optional int64 affiliate_id = 3;
-    repeated string commission_subtypes = 4; // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
+    // "cpa", "revshare", "cpl", "cpc", or "flat_fee", multiple subtypes are allowed
+    repeated string commission_subtypes = 4;
     repeated string countries = 5;
     optional int64 commission_id = 6;
     optional int64 bill_id = 7;
     google.protobuf.Timestamp start_time = 8;
     google.protobuf.Timestamp end_time = 9;
-    optional string status = 10; // pending/approved/rejected
+    // "pending", "approved", or "rejected"
+    optional string status = 10;
     optional int32 page = 11;
     optional int32 page_size = 12;
     int64 initiator_user_id = 13;
@@ -924,12 +972,15 @@ message ListCommissionsResponse {
         int64 commission_id = 1;
         string country = 2;
         google.protobuf.Timestamp created_at = 3;
-        string status = 4; // pending/approved/rejected
+        // "pending", "approved", or "rejected"
+        string status = 4;
         bool paid = 5;
         int64 commission_plan_id = 6;
         string commission_plan_name = 7;
-        string commission_type = 8; // cpa/revshare/cpl/cpc/flat_fee 
-        string commission_subtype = 9; // flat/flat_by_countries/progressive/progressive_by_countries
+        // "cpa", "revshare", "cpl", "cpc", or "flat_fee"
+        string commission_type = 8;
+        // "flat", "flat_by_countries", "progressive", or "progressive_by_countries"
+        string commission_subtype = 9;
         string reporting_currency = 10;
         string revenue_usd = 11;
         string revenue_reporting_currency = 12;
@@ -993,8 +1044,10 @@ message ListUsersResponse {
         int32 withdrawal_count = 17;
         string withdrawal_amount_usd = 18;
         string withdrawal_amount_reporting_currency = 19;
-        string deposit_minus_withdrawal_amount_usd = 20; // deposit_amount - withdrawal_amount
-        string deposit_minus_withdrawal_amount_reporting_currency = 21; // deposit_amount - withdrawal_amount
+        // deposit_amount - withdrawal_amount
+        string deposit_minus_withdrawal_amount_usd = 20;
+        // deposit_amount - withdrawal_amount
+        string deposit_minus_withdrawal_amount_reporting_currency = 21;
         int32 bet_count = 22;
         string bet_amount_usd = 23;
         string bet_amount_reporting_currency = 24;
@@ -1006,7 +1059,8 @@ message ListUsersResponse {
         string ngr_reporting_currency = 30;
         string commission_usd = 31;
         string commission_reporting_currency = 32;
-        string roi = 33; // percentage, ngr / commission
+        // percentage, ngr / commission
+        string roi = 33;
     }
     repeated User users = 1;
     int32 total = 2;
@@ -1025,8 +1079,10 @@ message ExportUsersRequest {
     int64 initiator_role_id = 8;
     api.common.OperatorContext initiator_operator_context = 9;
     api.common.OperatorContextFilters operator_context_filters = 10;
-    string format = 11; // accepted values: csv, excel, pdf
-    string time_zone = 12; // e.g. UTC+0, UTC+8, etc.
+    // accepted values: csv, excel, pdf
+    string format = 11;
+    // e.g. UTC+0, UTC+8, etc.
+    string time_zone = 12;
 }
 
 message ExportUsersResponse {
@@ -1054,18 +1110,25 @@ message ListAffiliateBillsResponse {
             message BillItem {
                 string commission_plan_name = 1;
                 int64 commission_plan_id = 2;
-                string commission_subtype = 3; // cpa/revshare/cpl/cpc/flat_fee
+                // "cpa", "revshare", "cpl", "cpc", or "flat_fee"
+                string commission_subtype = 3;
                 int32 quantity = 4;
-                string price_usd = 5; // amount / quantity
-                string price_reporting_currency = 6; // amount / quantity
-                string amount_usd = 7; // amount
-                string amount_reporting_currency = 8; // amount
+                // amount / quantity
+                string price_usd = 5;
+                // amount / quantity
+                string price_reporting_currency = 6;
+                // amount
+                string amount_usd = 7;
+                // amount
+                string amount_reporting_currency = 8;
             }
             repeated BillItem bill_items = 1;
             string total_amount_usd = 2;
             string total_amount_reporting_currency = 3;
-            string vat_amount_usd = 4; // placeholder
-            string vat_amount_reporting_currency = 5; // placeholder
+            // placeholder
+            string vat_amount_usd = 4;
+            // placeholder
+            string vat_amount_reporting_currency = 5;
         }
         int64 affiliate_id = 1;
         string affiliate_name = 2;
@@ -1075,7 +1138,8 @@ message ListAffiliateBillsResponse {
         string operator_name = 6;
         int64 bill_id = 7;
         google.protobuf.Timestamp updated_at = 8;
-        string status = 9; // paid/unpaid
+        // "paid" or "unpaid"
+        string status = 9;
         string amount_usd = 10;
         string amount_reporting_currency = 11;
         google.protobuf.Timestamp period_start_time = 12;
@@ -1093,22 +1157,28 @@ message ListAffiliateBillsResponse {
 
 message GetUserPromoConditionInfoRequest {
     int64 user_id = 1;
-    int32 invitation_time_range_days = 2;  // Time range in days for counting qualified referrals, 0 = no limit
+    // Time range in days for counting qualified referrals, 0 = no limit
+    int32 invitation_time_range_days = 2;
 }
 
 message GetUserPromoConditionInfoResponse {
     // Referrer info
-    int64 tier1_user_id = 1;               // Direct referrer user ID, 0 = no referrer
-    string tier1_referral_code = 2;        // Direct referrer's referral code
+    // Direct referrer user ID, 0 = no referrer
+    int64 tier1_user_id = 1;
+    // Direct referrer's referral code
+    string tier1_referral_code = 2;
 
     // Qualified referral count
-    int32 qualified_referral_count = 3;    // Count of tier1 referrals with has_met_conversion_conditions=true
+    // Count of tier1 referrals with has_met_conversion_conditions=true
+    int32 qualified_referral_count = 3;
 
     // User's affiliate info
-    int64 affiliate_id = 4;                // User's affiliate_id, 0 = not an affiliate
+    // User's affiliate_id, 0 = not an affiliate
+    int64 affiliate_id = 4;
 
     // Conversion conditions
-    bool has_met_conversion_conditions = 5; // true if user has met conversion conditions
+    // true if user has met conversion conditions
+    bool has_met_conversion_conditions = 5;
 }
 
 
@@ -1120,9 +1190,12 @@ message GetOperatorSettingsRequest {
 }
 
 message OperatorSettings {
-    string payment_channel_rate = 1; // represent as a percentage, e.g. "35" for 35%
-    string third_party_game_rate = 2; // represent as a percentage, e.g. "35" for 35%
-    optional string referral_loss_rev_share_mode = 3; // "cross_currency_hedging" or "independent_by_currency"
+    // represent as a percentage, e.g. "35" for 35%
+    string payment_channel_rate = 1;
+    // represent as a percentage, e.g. "35" for 35%
+    string third_party_game_rate = 2;
+    // "cross_currency_hedging" or "independent_by_currency"
+    optional string referral_loss_rev_share_mode = 3;
 }
 
 message GetOperatorSettingsResponse {
@@ -1210,7 +1283,8 @@ message GetAffiliateTrendRequest {
   int64 affiliate_id = 1;
   google.protobuf.Timestamp start_time = 2;
   google.protobuf.Timestamp end_time = 3;
-  string group_by = 4;  // "day", "week", "month"
+  // "day", "week", or "month"
+  string group_by = 4;
   api.common.OperatorContext initiator_operator_context = 5;
 }
 
@@ -1382,7 +1456,8 @@ message GetGlobalPostbackResponse {
 
 message ListGlobalPostbacksRequest {
     api.common.OperatorContext target_operator_context = 1;
-    optional string status = 2;            // "active" / "inactive" (empty = all)
+    // "active" or "inactive" (empty = all)
+    optional string status = 2;
     optional int32 page = 3;
     optional int32 page_size = 4;
     int64 initiator_user_id = 5;
@@ -1420,8 +1495,10 @@ message ListGlobalPostbacksResponse {
 
 message ListGlobalPostbackLogsRequest {
     api.common.OperatorContext target_operator_context = 1;
-    optional int64 start_time = 2;         // Unix milliseconds
-    optional int64 end_time = 3;           // Unix milliseconds
+    // Unix milliseconds
+    optional int64 start_time = 2;
+    // Unix milliseconds
+    optional int64 end_time = 3;
     optional int32 page = 4;
     optional int32 page_size = 5;
     int64 initiator_user_id = 6;
@@ -1435,24 +1512,37 @@ message ListGlobalPostbackLogsResponse {
         int64 log_id = 1;
         int64 global_postback_id = 2;
         string postback_name = 3;
-        string postback_url = 4;           // Final URL after macro replacement
-        string post_body = 5;              // Final POST body after macro replacement
+        // Final URL after macro replacement
+        string postback_url = 4;
+        // Final POST body after macro replacement
+        string post_body = 5;
         string action_type = 6;
-        string request_method = 7;         // GET / POST
+        // "GET" or "POST"
+        string request_method = 7;
         int32 http_status_code = 8;
         string reason = 9;
         bool success = 10;
-        int32 attempt_number = 11;         // 1, 2, or 3
-        int64 user_id = 12;               // User that triggered the event
-        string traffic_source = 13;        // aff / ref / direct_reg
-        int64 affiliate_id = 14;           // Affiliate user ID (> 0 when traffic=aff)
-        int64 referrer_user_id = 15;       // Referrer user ID (> 0 when traffic=ref)
-        string event_unique_key = 16;      // Idempotency key (e.g. game_bet:123456)
+        // 1, 2, or 3
+        int32 attempt_number = 11;
+        // User that triggered the event
+        int64 user_id = 12;
+        // "aff", "ref", or "direct_reg"
+        string traffic_source = 13;
+        // Affiliate user ID (> 0 when traffic=aff)
+        int64 affiliate_id = 14;
+        // Referrer user ID (> 0 when traffic=ref)
+        int64 referrer_user_id = 15;
+        // Idempotency key (e.g. "game_bet:123456")
+        string event_unique_key = 16;
         int64 operator_id = 17;
-        string response_body = 18;         // Response body from third-party server (max 2KB)
-        string response_headers = 19;      // Response headers as JSON string
-        int64 latency_ms = 20;            // Request latency in milliseconds
-        int64 created_at = 21;            // Unix milliseconds
+        // Response body from third-party server (max 2KB)
+        string response_body = 18;
+        // Response headers as JSON string
+        string response_headers = 19;
+        // Request latency in milliseconds
+        int64 latency_ms = 20;
+        // Unix milliseconds
+        int64 created_at = 21;
     }
     repeated GlobalPostbackLog logs = 1;
     int32 total = 2;

@@ -119,53 +119,58 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 }
 
 type BalanceUpdateEvent struct {
-	state                                protoimpl.MessageState  `protogen:"open.v1"`
-	TransactionId                        int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	TransactionType                      string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	UserId                               int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorContext                      *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currency                             string                  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"` // settlement currency
-	ReportingCurrency                    string                  `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	BeforeBalance                        string                  `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"` // cash + operator bonus + provider bonus
-	BeforeBalanceUsd                     string                  `protobuf:"bytes,8,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
-	BeforeBalanceReportingCurrency       string                  `protobuf:"bytes,9,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
-	AfterBalance                         string                  `protobuf:"bytes,10,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"` // cash + operator bonus + provider bonus
-	AfterBalanceUsd                      string                  `protobuf:"bytes,11,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
-	AfterBalanceReportingCurrency        string                  `protobuf:"bytes,12,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
-	Amount                               string                  `protobuf:"bytes,13,opt,name=amount,proto3" json:"amount,omitempty"` // cash + operator bonus + provider bonus
-	AmountUsd                            string                  `protobuf:"bytes,14,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
-	AmountReportingCurrency              string                  `protobuf:"bytes,15,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
-	CreatedAt                            int64                   `protobuf:"varint,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	BeforeCash                           string                  `protobuf:"bytes,17,opt,name=before_cash,json=beforeCash,proto3" json:"before_cash,omitempty"`
-	BeforeCashUsd                        string                  `protobuf:"bytes,18,opt,name=before_cash_usd,json=beforeCashUsd,proto3" json:"before_cash_usd,omitempty"`
-	BeforeCashReportingCurrency          string                  `protobuf:"bytes,19,opt,name=before_cash_reporting_currency,json=beforeCashReportingCurrency,proto3" json:"before_cash_reporting_currency,omitempty"`
-	BeforeOperatorBonus                  string                  `protobuf:"bytes,20,opt,name=before_operator_bonus,json=beforeOperatorBonus,proto3" json:"before_operator_bonus,omitempty"`
-	BeforeOperatorBonusUsd               string                  `protobuf:"bytes,21,opt,name=before_operator_bonus_usd,json=beforeOperatorBonusUsd,proto3" json:"before_operator_bonus_usd,omitempty"`
-	BeforeOperatorBonusReportingCurrency string                  `protobuf:"bytes,22,opt,name=before_operator_bonus_reporting_currency,json=beforeOperatorBonusReportingCurrency,proto3" json:"before_operator_bonus_reporting_currency,omitempty"`
-	BeforeProviderBonus                  string                  `protobuf:"bytes,23,opt,name=before_provider_bonus,json=beforeProviderBonus,proto3" json:"before_provider_bonus,omitempty"`
-	BeforeProviderBonusUsd               string                  `protobuf:"bytes,24,opt,name=before_provider_bonus_usd,json=beforeProviderBonusUsd,proto3" json:"before_provider_bonus_usd,omitempty"`
-	BeforeProviderBonusReportingCurrency string                  `protobuf:"bytes,25,opt,name=before_provider_bonus_reporting_currency,json=beforeProviderBonusReportingCurrency,proto3" json:"before_provider_bonus_reporting_currency,omitempty"`
-	AfterCash                            string                  `protobuf:"bytes,26,opt,name=after_cash,json=afterCash,proto3" json:"after_cash,omitempty"`
-	AfterCashUsd                         string                  `protobuf:"bytes,27,opt,name=after_cash_usd,json=afterCashUsd,proto3" json:"after_cash_usd,omitempty"`
-	AfterCashReportingCurrency           string                  `protobuf:"bytes,28,opt,name=after_cash_reporting_currency,json=afterCashReportingCurrency,proto3" json:"after_cash_reporting_currency,omitempty"`
-	AfterOperatorBonus                   string                  `protobuf:"bytes,29,opt,name=after_operator_bonus,json=afterOperatorBonus,proto3" json:"after_operator_bonus,omitempty"`
-	AfterOperatorBonusUsd                string                  `protobuf:"bytes,30,opt,name=after_operator_bonus_usd,json=afterOperatorBonusUsd,proto3" json:"after_operator_bonus_usd,omitempty"`
-	AfterOperatorBonusReportingCurrency  string                  `protobuf:"bytes,31,opt,name=after_operator_bonus_reporting_currency,json=afterOperatorBonusReportingCurrency,proto3" json:"after_operator_bonus_reporting_currency,omitempty"`
-	AfterProviderBonus                   string                  `protobuf:"bytes,32,opt,name=after_provider_bonus,json=afterProviderBonus,proto3" json:"after_provider_bonus,omitempty"`
-	AfterProviderBonusUsd                string                  `protobuf:"bytes,33,opt,name=after_provider_bonus_usd,json=afterProviderBonusUsd,proto3" json:"after_provider_bonus_usd,omitempty"`
-	AfterProviderBonusReportingCurrency  string                  `protobuf:"bytes,34,opt,name=after_provider_bonus_reporting_currency,json=afterProviderBonusReportingCurrency,proto3" json:"after_provider_bonus_reporting_currency,omitempty"`
-	CashAmount                           string                  `protobuf:"bytes,35,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	CashAmountUsd                        string                  `protobuf:"bytes,36,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
-	CashAmountReportingCurrency          string                  `protobuf:"bytes,37,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
-	OperatorBonusAmount                  string                  `protobuf:"bytes,38,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
-	OperatorBonusAmountUsd               string                  `protobuf:"bytes,39,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
-	OperatorBonusAmountReportingCurrency string                  `protobuf:"bytes,40,opt,name=operator_bonus_amount_reporting_currency,json=operatorBonusAmountReportingCurrency,proto3" json:"operator_bonus_amount_reporting_currency,omitempty"`
-	ProviderBonusAmount                  string                  `protobuf:"bytes,41,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
-	ProviderBonusAmountUsd               string                  `protobuf:"bytes,42,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
-	ProviderBonusAmountReportingCurrency string                  `protobuf:"bytes,43,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
-	CountOfTransactions                  int32                   `protobuf:"varint,44,opt,name=count_of_transactions,json=countOfTransactions,proto3" json:"count_of_transactions,omitempty"` // valid if transaction_type is "payment_deposit" or "payment_withdraw_settle" or "payment_withdraw_manual_payout"
-	unknownFields                        protoimpl.UnknownFields
-	sizeCache                            protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId   int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionType string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	UserId          int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// Settlement currency
+	Currency          string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	ReportingCurrency string `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	// cash + operator bonus + provider bonus
+	BeforeBalance                  string `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string `protobuf:"bytes,8,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string `protobuf:"bytes,9,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	// cash + operator bonus + provider bonus
+	AfterBalance                  string `protobuf:"bytes,10,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd               string `protobuf:"bytes,11,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency string `protobuf:"bytes,12,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	// cash + operator bonus + provider bonus
+	Amount                               string `protobuf:"bytes,13,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                            string `protobuf:"bytes,14,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency              string `protobuf:"bytes,15,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	CreatedAt                            int64  `protobuf:"varint,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	BeforeCash                           string `protobuf:"bytes,17,opt,name=before_cash,json=beforeCash,proto3" json:"before_cash,omitempty"`
+	BeforeCashUsd                        string `protobuf:"bytes,18,opt,name=before_cash_usd,json=beforeCashUsd,proto3" json:"before_cash_usd,omitempty"`
+	BeforeCashReportingCurrency          string `protobuf:"bytes,19,opt,name=before_cash_reporting_currency,json=beforeCashReportingCurrency,proto3" json:"before_cash_reporting_currency,omitempty"`
+	BeforeOperatorBonus                  string `protobuf:"bytes,20,opt,name=before_operator_bonus,json=beforeOperatorBonus,proto3" json:"before_operator_bonus,omitempty"`
+	BeforeOperatorBonusUsd               string `protobuf:"bytes,21,opt,name=before_operator_bonus_usd,json=beforeOperatorBonusUsd,proto3" json:"before_operator_bonus_usd,omitempty"`
+	BeforeOperatorBonusReportingCurrency string `protobuf:"bytes,22,opt,name=before_operator_bonus_reporting_currency,json=beforeOperatorBonusReportingCurrency,proto3" json:"before_operator_bonus_reporting_currency,omitempty"`
+	BeforeProviderBonus                  string `protobuf:"bytes,23,opt,name=before_provider_bonus,json=beforeProviderBonus,proto3" json:"before_provider_bonus,omitempty"`
+	BeforeProviderBonusUsd               string `protobuf:"bytes,24,opt,name=before_provider_bonus_usd,json=beforeProviderBonusUsd,proto3" json:"before_provider_bonus_usd,omitempty"`
+	BeforeProviderBonusReportingCurrency string `protobuf:"bytes,25,opt,name=before_provider_bonus_reporting_currency,json=beforeProviderBonusReportingCurrency,proto3" json:"before_provider_bonus_reporting_currency,omitempty"`
+	AfterCash                            string `protobuf:"bytes,26,opt,name=after_cash,json=afterCash,proto3" json:"after_cash,omitempty"`
+	AfterCashUsd                         string `protobuf:"bytes,27,opt,name=after_cash_usd,json=afterCashUsd,proto3" json:"after_cash_usd,omitempty"`
+	AfterCashReportingCurrency           string `protobuf:"bytes,28,opt,name=after_cash_reporting_currency,json=afterCashReportingCurrency,proto3" json:"after_cash_reporting_currency,omitempty"`
+	AfterOperatorBonus                   string `protobuf:"bytes,29,opt,name=after_operator_bonus,json=afterOperatorBonus,proto3" json:"after_operator_bonus,omitempty"`
+	AfterOperatorBonusUsd                string `protobuf:"bytes,30,opt,name=after_operator_bonus_usd,json=afterOperatorBonusUsd,proto3" json:"after_operator_bonus_usd,omitempty"`
+	AfterOperatorBonusReportingCurrency  string `protobuf:"bytes,31,opt,name=after_operator_bonus_reporting_currency,json=afterOperatorBonusReportingCurrency,proto3" json:"after_operator_bonus_reporting_currency,omitempty"`
+	AfterProviderBonus                   string `protobuf:"bytes,32,opt,name=after_provider_bonus,json=afterProviderBonus,proto3" json:"after_provider_bonus,omitempty"`
+	AfterProviderBonusUsd                string `protobuf:"bytes,33,opt,name=after_provider_bonus_usd,json=afterProviderBonusUsd,proto3" json:"after_provider_bonus_usd,omitempty"`
+	AfterProviderBonusReportingCurrency  string `protobuf:"bytes,34,opt,name=after_provider_bonus_reporting_currency,json=afterProviderBonusReportingCurrency,proto3" json:"after_provider_bonus_reporting_currency,omitempty"`
+	CashAmount                           string `protobuf:"bytes,35,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	CashAmountUsd                        string `protobuf:"bytes,36,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
+	CashAmountReportingCurrency          string `protobuf:"bytes,37,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
+	OperatorBonusAmount                  string `protobuf:"bytes,38,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
+	OperatorBonusAmountUsd               string `protobuf:"bytes,39,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
+	OperatorBonusAmountReportingCurrency string `protobuf:"bytes,40,opt,name=operator_bonus_amount_reporting_currency,json=operatorBonusAmountReportingCurrency,proto3" json:"operator_bonus_amount_reporting_currency,omitempty"`
+	ProviderBonusAmount                  string `protobuf:"bytes,41,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
+	ProviderBonusAmountUsd               string `protobuf:"bytes,42,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
+	ProviderBonusAmountReportingCurrency string `protobuf:"bytes,43,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	// Valid if transaction_type is "payment_deposit", "payment_withdraw_settle", or "payment_withdraw_manual_payout"
+	CountOfTransactions int32 `protobuf:"varint,44,opt,name=count_of_transactions,json=countOfTransactions,proto3" json:"count_of_transactions,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *BalanceUpdateEvent) Reset() {
@@ -663,17 +668,18 @@ func (x *OperatorBalanceUpdateEvent) GetCreatedAt() int64 {
 }
 
 type UpdateResponsibleGamblingConfigEvent struct {
-	state                    protoimpl.MessageState                       `protogen:"open.v1"`
-	TargetUserId             int64                                        `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
-	InitiatorUserId          int64                                        `protobuf:"varint,2,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	InitiatorOperatorContext *common.OperatorContext                      `protobuf:"bytes,3,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	Action                   string                                       `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"` // set, delete
-	Currency                 string                                       `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	BeforeConfig             *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,6,opt,name=before_config,json=beforeConfig,proto3" json:"before_config,omitempty"`
-	AfterConfig              *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,7,opt,name=after_config,json=afterConfig,proto3" json:"after_config,omitempty"`
-	UpdatedAt                int64                                        `protobuf:"varint,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                    protoimpl.MessageState  `protogen:"open.v1"`
+	TargetUserId             int64                   `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
+	InitiatorUserId          int64                   `protobuf:"varint,2,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	// "set" or "delete"
+	Action        string                                       `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"`
+	Currency      string                                       `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	BeforeConfig  *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,6,opt,name=before_config,json=beforeConfig,proto3" json:"before_config,omitempty"`
+	AfterConfig   *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,7,opt,name=after_config,json=afterConfig,proto3" json:"after_config,omitempty"`
+	UpdatedAt     int64                                        `protobuf:"varint,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateResponsibleGamblingConfigEvent) Reset() {

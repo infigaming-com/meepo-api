@@ -16,12 +16,18 @@ message SetReferralPlanRequest {
     api.common.OperatorContext target_operator_context = 2;
     int64 initiator_user_id = 3;
     string currency = 4;
-    optional bool follow_parent = 5; // if target operator follows parent's (or system's) referral plan
-    optional bool enabled = 6; // target operator's referral plan's enabled
-    optional int32 max_tier = 7; // target operator's referral plan's max_tier
-    optional ReferralPlanConfig plan_config = 8; // target operator's referral plan's plan_config
-    optional string payment_channel_rate = 9; // represent as a percentage, e.g. "35" for 35%
-    optional string third_party_game_rate = 10; // represent as a percentage, e.g. "35" for 35%
+    // Whether target operator follows parent's (or system's) referral plan
+    optional bool follow_parent = 5;
+    // Target operator's referral plan enabled state
+    optional bool enabled = 6;
+    // Target operator's referral plan max tier
+    optional int32 max_tier = 7;
+    // Target operator's referral plan config
+    optional ReferralPlanConfig plan_config = 8;
+    // Percentage string, e.g. "35" for 35%
+    optional string payment_channel_rate = 9;
+    // Percentage string, e.g. "35" for 35%
+    optional string third_party_game_rate = 10;
 }
 
 message SetReferralPlanResponse {}
@@ -66,7 +72,8 @@ message GetUserReferralStatsRequest {
 
 message GetUserReferralStatsResponse {
     message ReferralRewards {
-        string available_referral_reward_amount = 1; // for this currency
+        // Amount for this currency
+        string available_referral_reward_amount = 1;
         string available_commission_reward_amount = 2;
         string total_received_referral_reward_amount = 3;
         string total_received_commission_reward_amount = 4;
@@ -81,9 +88,12 @@ message GetUserReferralStatsResponse {
         string total_received_loss_revenue_share_reward_amount = 11;
     }
     message ReferralProgress {
-        map<int32, int32> conversion_count = 1; // map of tier number (1-10) to conversion count
-        map<int32, string> deposit_amount = 2; // map of tier number (1-10) to deposit amount
-        map<int32, string> wagering_amount = 3; // map of tier number (1-10) to wagering amount, focus on game bet and game bet rollback
+        // Map of tier number (1-10) to conversion count
+        map<int32, int32> conversion_count = 1;
+        // Map of tier number (1-10) to deposit amount
+        map<int32, string> deposit_amount = 2;
+        // Map of tier number (1-10) to wagering amount (game bet and game bet rollback)
+        map<int32, string> wagering_amount = 3;
     }
     // Referral codes created by the user
     repeated ReferralCode referral_codes = 1;
@@ -97,13 +107,17 @@ message ReferralCode {
     string user_name = 2;
     string referral_code = 3;
     string created_at = 4;
-    int64 referral_user_count = 5; // number of users who have used this referral code
-    string earning_amount_usd = 6; // amount of money earned by the user who has used this referral code
-    string earning_amount_reporting_currency = 7; // amount of money earned by the user who has used this referral code in reporting currency
+    // Number of users who registered with this referral code
+    int64 referral_user_count = 5;
+    // Earnings in USD from this referral code
+    string earning_amount_usd = 6;
+    // Earnings in reporting currency from this referral code
+    string earning_amount_reporting_currency = 7;
 }
 
 message CreateUserReferralCodeRequest {
-    optional string referral_code = 1; // nil means backend will randomly generate a new code
+    // nil means backend will randomly generate a new code
+    optional string referral_code = 1;
 }
 
 message CreateUserReferralCodeResponse {
@@ -112,7 +126,8 @@ message CreateUserReferralCodeResponse {
 
 message ListUserReferralRewardsRequest {
     string currency = 1;
-    string reward_type = 2; // conversion_reward/deposit_cashback_reward/wagering_commission_reward/loss_revenue_share_reward
+    // "conversion_reward", "deposit_cashback_reward", "wagering_commission_reward", or "loss_revenue_share_reward"
+    string reward_type = 2;
     optional string referral_code = 3;
     optional int64 user_id = 4;
     optional int32 tier = 5;
@@ -160,7 +175,8 @@ message GetUserLossRevenueShareStatsRequest {
     string currency = 1;
     optional string referral_code = 3;
     optional int64 user_id = 4;
-    optional int32 tier = 5; // for filter referred stats, other fields remain the same
+    // Filter referred stats by tier; other fields remain the same
+    optional int32 tier = 5;
     optional google.protobuf.Timestamp conversion_start_time = 6;
     optional google.protobuf.Timestamp conversion_end_time = 7;
     optional int32 page = 8;
@@ -179,18 +195,27 @@ message GetUserLossRevenueShareStatsResponse {
         string admin_fee_amount_in_period = 8;
         google.protobuf.Timestamp conversion_time = 9;
     }
-    string unpaid_reward_amount = 1; // now only calculate for user's tier 1
+    // Currently only calculated for user's tier 1
+    string unpaid_reward_amount = 1;
     string unclaimed_reward_amount = 2;
     string claimed_reward_amount = 3;
-    map<int32, string> ggr_amount_in_period = 4; // map of tier number (1-10) to ggr amount in the period
-    map<int32, string> ngr_amount_in_period = 5; // map of tier number (1-10) to ngr amount in the period
-    map<int32, string> bonus2cash_amount_in_period = 6; // map of tier number (1-10) to bonus2cash amount in the period
+    // Map of tier number (1-10) to GGR amount in the period
+    map<int32, string> ggr_amount_in_period = 4;
+    // Map of tier number (1-10) to NGR amount in the period
+    map<int32, string> ngr_amount_in_period = 5;
+    // Map of tier number (1-10) to bonus2cash amount in the period
+    map<int32, string> bonus2cash_amount_in_period = 6;
     repeated ReferredStat referred_stats = 7;
-    int32 team_size = 8; // number of users in the team
-    int32 total = 9; // for referred stats
-    int32 page = 10; // for referred stats
-    int32 page_size = 11; // for referred stats
-    map<int32, string> admin_fee_amount_in_period = 12; // map of tier number (1-10) to admin fee amount = (NGR/GGR) * admin_rate / 100
+    // Number of users in the team
+    int32 team_size = 8;
+    // Total count for referred stats pagination
+    int32 total = 9;
+    // Page number for referred stats
+    int32 page = 10;
+    // Page size for referred stats
+    int32 page_size = 11;
+    // Map of tier number (1-10) to admin fee amount = (NGR/GGR) * admin_rate / 100
+    map<int32, string> admin_fee_amount_in_period = 12;
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -202,8 +227,10 @@ message ReferralPlan {
     bool enabled = 1;
     int32 max_tier = 2;
     ReferralPlanConfig plan_config = 3;
-    string payment_channel_rate = 4; // represent as a percentage, e.g. "35" for 35%
-    string third_party_game_rate = 5; // represent as a percentage, e.g. "35" for 35%
+    // Percentage string, e.g. "35" for 35%
+    string payment_channel_rate = 4;
+    // Percentage string, e.g. "35" for 35%
+    string third_party_game_rate = 5;
 }
 
 // Referral plan configuration
@@ -244,7 +271,8 @@ message ConversionTierRewards {
 
 message ConversionTierReward {
     string from = 1;
-    optional string to = 2; // nil indicates no upper limit
+    // nil indicates no upper limit
+    optional string to = 2;
     string reward_amount = 3;
 }
 
@@ -274,7 +302,8 @@ message DepositCashbackTierRewardConfig {
 
 message DepositCashbackTierReward {
     string from = 1;
-    optional string to = 2; // nil indicates no upper limit
+    // nil indicates no upper limit
+    optional string to = 2;
     string cashback_percentage = 3;
 }
 
@@ -284,10 +313,12 @@ message DepositCashbackTierReward {
 
 message WageringCommission {
     bool enabled = 1;
-    string max_game_house_edge = 2; // represent as a percentage, e.g. "35" for 35%
+    // Percentage string, e.g. "35" for 35%
+    string max_game_house_edge = 2;
     // Map of tier number (1-10) to tier rewards
     map<int32, WageringCommissionTierRewards> tier_rewards = 3;
-    string period = 4; // real_time/daily/weekly/monthly
+    // "real_time", "daily", "weekly", or "monthly"
+    string period = 4;
 }
 
 message WageringCommissionTierRewards {
@@ -296,8 +327,10 @@ message WageringCommissionTierRewards {
 
 message WageringCommissionTierReward {
     string from = 1;
-    optional string to = 2; // nil indicates no upper limit
-    string rate = 3; // represent as a percentage, e.g. "35" for 35%
+    // nil indicates no upper limit
+    optional string to = 2;
+    // Percentage string, e.g. "35" for 35%
+    string rate = 3;
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -306,11 +339,14 @@ message WageringCommissionTierReward {
 
 message LossRevenueShare {
     bool enabled = 1;
-    string based_on = 2; // ggr/ngr
-    string negative_carryover = 3; // discard/carry_to_next_period
+    // "ggr" or "ngr"
+    string based_on = 2;
+    // "discard" or "carry_to_next_period"
+    string negative_carryover = 3;
     // Map of tier number (1-10) to tier rewards
     map<int32, LossRevenueShareTierRewards> tier_rewards = 4;
-    string period = 5; // weekly/monthly
+    // "weekly" or "monthly"
+    string period = 5;
 }
 
 message LossRevenueShareTierRewards {
@@ -319,49 +355,69 @@ message LossRevenueShareTierRewards {
 
 message LossRevenueShareTierReward {
     string from = 1;
-    optional string to = 2; // nil indicates no upper limit
-    string rate = 3; // represent as a percentage, e.g. "35" for 35%
+    // nil indicates no upper limit
+    optional string to = 2;
+    // Percentage string, e.g. "35" for 35%
+    string rate = 3;
 }
 
 // --- Multi-currency reward APIs ---
 
 message GetUserReferralRewardsAllCurrenciesRequest {
-    string target_currency = 1; // target currency for exchange rate conversion display
+    // Target currency for exchange rate conversion display
+    string target_currency = 1;
 }
 
 message GetUserReferralRewardsAllCurrenciesResponse {
     message CurrencyReward {
-        string currency = 1;                  // source currency
-        string amount = 2;                    // total claimable amount in source currency
-        string converted_amount = 3;          // amount converted to target_currency
-        string exchange_rate = 4;             // exchange rate: 1 source = X target
-        int32 commission_count = 5;           // number of claimable commissions
-        // breakdown by reward type
-        string referral_amount = 6;           // conversion_reward subtotal
-        string commission_amount = 7;         // deposit_cashback + wagering_commission subtotal
-        string loss_rev_share_amount = 8;     // loss_rev_share subtotal (defensive: only included when >= 0)
-        bool loss_rev_share_excluded = 9;     // true if loss_rev_share sum < 0 and excluded
+        // Source currency
+        string currency = 1;
+        // Total claimable amount in source currency
+        string amount = 2;
+        // Amount converted to target_currency
+        string converted_amount = 3;
+        // Exchange rate: 1 source = X target
+        string exchange_rate = 4;
+        // Number of claimable commissions
+        int32 commission_count = 5;
+        // Breakdown by reward type:
+        // conversion_reward subtotal
+        string referral_amount = 6;
+        // deposit_cashback + wagering_commission subtotal
+        string commission_amount = 7;
+        // loss_rev_share subtotal (only included when >= 0)
+        string loss_rev_share_amount = 8;
+        // true if loss_rev_share sum < 0 and excluded
+        bool loss_rev_share_excluded = 9;
     }
     repeated CurrencyReward currency_rewards = 1;
-    string total_converted_amount = 2;        // total of all currencies converted to target
+    // Total of all currencies converted to target
+    string total_converted_amount = 2;
     string target_currency = 3;
-    int64 snapshot_time = 4;                  // snapshot timestamp(ms), pass to Claim
+    // Snapshot timestamp in milliseconds, pass to Claim
+    int64 snapshot_time = 4;
 }
 
 message ClaimUserReferralRewardsAllCurrenciesRequest {
-    string target_currency = 1;               // currency to receive the converted total
-    int64 snapshot_time = 2;                  // snapshot timestamp from Get, ensures claim scope matches preview
+    // Currency to receive the converted total
+    string target_currency = 1;
+    // Snapshot timestamp from Get, ensures claim scope matches preview
+    int64 snapshot_time = 2;
 }
 
 message ClaimUserReferralRewardsAllCurrenciesResponse {
     message ClaimedCurrencyDetail {
         string source_currency = 1;
-        string source_amount = 2;             // amount in source currency
-        string converted_amount = 3;          // amount converted to target currency
-        string exchange_rate = 4;             // exchange rate used
+        // Amount in source currency
+        string source_amount = 2;
+        // Amount converted to target currency
+        string converted_amount = 3;
+        // Exchange rate used
+        string exchange_rate = 4;
         int32 commission_count = 5;
     }
     repeated ClaimedCurrencyDetail claimed_details = 1;
-    string total_credited_amount = 2;         // total credited to wallet in target currency
+    // Total credited to wallet in target currency
+    string total_credited_amount = 2;
     string target_currency = 3;
 }
