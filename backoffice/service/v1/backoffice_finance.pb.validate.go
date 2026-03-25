@@ -1515,8 +1515,6 @@ func (m *AddAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for PeriodKey
 
-	// no validation rules for CreatedBy
-
 	// no validation rules for AdjustmentType
 
 	if len(errors) > 0 {
@@ -3110,11 +3108,19 @@ func (m *UpdateAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for Id
 
+	// no validation rules for Item
+
+	// no validation rules for OperatorId
+
+	// no validation rules for AppliedDate
+
+	// no validation rules for Currency
+
 	// no validation rules for Amount
 
 	// no validation rules for Description
 
-	// no validation rules for Currency
+	// no validation rules for PeriodKey
 
 	// no validation rules for AdjustmentType
 

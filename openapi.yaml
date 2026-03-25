@@ -14233,8 +14233,6 @@ components:
                     type: string
                 periodKey:
                     type: string
-                createdBy:
-                    type: string
                 adjustmentType:
                     type: string
         api.backoffice.service.v1.AddAdjustmentResponse:
@@ -23887,11 +23885,19 @@ components:
             properties:
                 id:
                     type: string
+                item:
+                    type: string
+                operatorId:
+                    type: string
+                appliedDate:
+                    type: string
+                currency:
+                    type: string
                 amount:
                     type: string
                 description:
                     type: string
-                currency:
+                periodKey:
                     type: string
                 adjustmentType:
                     type: string
