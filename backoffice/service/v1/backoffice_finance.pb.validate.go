@@ -1499,11 +1499,34 @@ func (m *AddAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for Item
 
-	// no validation rules for RetailerOperatorId
-
-	// no validation rules for CompanyOperatorId
-
-	// no validation rules for OperatorId
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddAdjustmentRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddAdjustmentRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddAdjustmentRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for AppliedDate
 
@@ -1514,8 +1537,6 @@ func (m *AddAdjustmentRequest) validate(all bool) error {
 	// no validation rules for Description
 
 	// no validation rules for PeriodKey
-
-	// no validation rules for CreatedBy
 
 	// no validation rules for AdjustmentType
 
@@ -3110,11 +3131,46 @@ func (m *UpdateAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for Id
 
+	// no validation rules for Item
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateAdjustmentRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateAdjustmentRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateAdjustmentRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for AppliedDate
+
+	// no validation rules for Currency
+
 	// no validation rules for Amount
 
 	// no validation rules for Description
 
-	// no validation rules for Currency
+	// no validation rules for PeriodKey
 
 	// no validation rules for AdjustmentType
 
@@ -7447,6 +7503,39 @@ func (m *ListAdjustmentsResponse_AdjustmentItem) validate(all bool) error {
 	// no validation rules for CreatedBy
 
 	// no validation rules for AdjustmentType
+
+	// no validation rules for AppliedDate
+
+	// no validation rules for PeriodKey
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAdjustmentsResponse_AdjustmentItemValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAdjustmentsResponse_AdjustmentItemValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAdjustmentsResponse_AdjustmentItemValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return ListAdjustmentsResponse_AdjustmentItemMultiError(errors)
