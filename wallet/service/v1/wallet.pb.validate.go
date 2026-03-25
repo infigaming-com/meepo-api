@@ -25650,6 +25650,479 @@ var _ interface {
 	ErrorName() string
 } = BatchTransactionResultValidationError{}
 
+// Validate checks the field values on ListOperatorWithdrawableAmountsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListOperatorWithdrawableAmountsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListOperatorWithdrawableAmountsRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListOperatorWithdrawableAmountsRequestMultiError, or nil if none found.
+func (m *ListOperatorWithdrawableAmountsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOperatorWithdrawableAmountsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOperatorWithdrawableAmountsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOperatorWithdrawableAmountsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOperatorWithdrawableAmountsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOperatorWithdrawableAmountsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOperatorWithdrawableAmountsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOperatorWithdrawableAmountsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if m.DisablePagination != nil {
+		// no validation rules for DisablePagination
+	}
+
+	if len(errors) > 0 {
+		return ListOperatorWithdrawableAmountsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOperatorWithdrawableAmountsRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ListOperatorWithdrawableAmountsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListOperatorWithdrawableAmountsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOperatorWithdrawableAmountsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOperatorWithdrawableAmountsRequestMultiError) AllErrors() []error { return m }
+
+// ListOperatorWithdrawableAmountsRequestValidationError is the validation
+// error returned by ListOperatorWithdrawableAmountsRequest.Validate if the
+// designated constraints aren't met.
+type ListOperatorWithdrawableAmountsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOperatorWithdrawableAmountsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOperatorWithdrawableAmountsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOperatorWithdrawableAmountsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOperatorWithdrawableAmountsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOperatorWithdrawableAmountsRequestValidationError) ErrorName() string {
+	return "ListOperatorWithdrawableAmountsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOperatorWithdrawableAmountsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOperatorWithdrawableAmountsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOperatorWithdrawableAmountsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOperatorWithdrawableAmountsRequestValidationError{}
+
+// Validate checks the field values on OperatorWithdrawableAmount with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *OperatorWithdrawableAmount) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OperatorWithdrawableAmount with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OperatorWithdrawableAmountMultiError, or nil if none found.
+func (m *OperatorWithdrawableAmount) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OperatorWithdrawableAmount) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OperatorWithdrawableAmountValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OperatorWithdrawableAmountValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OperatorWithdrawableAmountValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for OperatorName
+
+	// no validation rules for OperatorMode
+
+	// no validation rules for CustodyUsd
+
+	// no validation rules for EstCostUsd
+
+	// no validation rules for EstRsToSysUsd
+
+	// no validation rules for LockedForPendingInvoicesUsd
+
+	// no validation rules for TransferableAmountUsd
+
+	// no validation rules for WithdrawableAmountUsd
+
+	if len(errors) > 0 {
+		return OperatorWithdrawableAmountMultiError(errors)
+	}
+
+	return nil
+}
+
+// OperatorWithdrawableAmountMultiError is an error wrapping multiple
+// validation errors returned by OperatorWithdrawableAmount.ValidateAll() if
+// the designated constraints aren't met.
+type OperatorWithdrawableAmountMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OperatorWithdrawableAmountMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OperatorWithdrawableAmountMultiError) AllErrors() []error { return m }
+
+// OperatorWithdrawableAmountValidationError is the validation error returned
+// by OperatorWithdrawableAmount.Validate if the designated constraints aren't met.
+type OperatorWithdrawableAmountValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OperatorWithdrawableAmountValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OperatorWithdrawableAmountValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OperatorWithdrawableAmountValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OperatorWithdrawableAmountValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OperatorWithdrawableAmountValidationError) ErrorName() string {
+	return "OperatorWithdrawableAmountValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OperatorWithdrawableAmountValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOperatorWithdrawableAmount.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OperatorWithdrawableAmountValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OperatorWithdrawableAmountValidationError{}
+
+// Validate checks the field values on ListOperatorWithdrawableAmountsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListOperatorWithdrawableAmountsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListOperatorWithdrawableAmountsResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListOperatorWithdrawableAmountsResponseMultiError, or nil if none found.
+func (m *ListOperatorWithdrawableAmountsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOperatorWithdrawableAmountsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOperatorWithdrawableAmountsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOperatorWithdrawableAmountsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOperatorWithdrawableAmountsResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListOperatorWithdrawableAmountsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOperatorWithdrawableAmountsResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ListOperatorWithdrawableAmountsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListOperatorWithdrawableAmountsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOperatorWithdrawableAmountsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOperatorWithdrawableAmountsResponseMultiError) AllErrors() []error { return m }
+
+// ListOperatorWithdrawableAmountsResponseValidationError is the validation
+// error returned by ListOperatorWithdrawableAmountsResponse.Validate if the
+// designated constraints aren't met.
+type ListOperatorWithdrawableAmountsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOperatorWithdrawableAmountsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOperatorWithdrawableAmountsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOperatorWithdrawableAmountsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOperatorWithdrawableAmountsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOperatorWithdrawableAmountsResponseValidationError) ErrorName() string {
+	return "ListOperatorWithdrawableAmountsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOperatorWithdrawableAmountsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOperatorWithdrawableAmountsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOperatorWithdrawableAmountsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOperatorWithdrawableAmountsResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

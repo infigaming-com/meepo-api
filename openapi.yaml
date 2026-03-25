@@ -8356,6 +8356,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.OperatorTransferResponse'
+    /v1/backoffice/wallet/operator/withdrawable-amounts/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+            operationId: BackofficeWallet_ListOperatorWithdrawableAmounts
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse'
     /v1/backoffice/wallet/promo-code/campaign/create:
         post:
             tags:
@@ -20575,6 +20594,22 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    description: Default 1
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Default 20
+                    format: int32
+                disablePagination:
+                    type: boolean
+                    description: when true, return all results without pagination
         api.backoffice.service.v1.ListOperatorsByAdminEmailRequest:
             type: object
             properties:
@@ -32987,6 +33022,22 @@ components:
                     type: string
                 turnoverThreshold:
                     type: string
+        api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorWithdrawableAmount'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse:
             type: object
             properties:
@@ -33129,6 +33180,32 @@ components:
                 maximumBonusBetLimit:
                     type: string
                 wageringUnlockPriority:
+                    type: string
+        api.wallet.service.v1.OperatorWithdrawableAmount:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
+                operatorMode:
+                    type: string
+                    description: Individual / Co-Operation
+                custodyUsd:
+                    type: string
+                estCostUsd:
+                    type: string
+                estRsToSysUsd:
+                    type: string
+                lockedForPendingInvoicesUsd:
+                    type: string
+                transferableAmountUsd:
+                    type: string
+                withdrawableAmountUsd:
                     type: string
         api.wallet.service.v1.PromoCodeBonusMoneyConfig:
             type: object

@@ -326,6 +326,9 @@ service Wallet {
 
 	// ListUserFreeRewards returns free spin and free bet details for a user
 	rpc ListUserFreeRewards(ListUserFreeRewardsRequest) returns (ListUserFreeRewardsResponse) {}
+
+	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+	rpc ListOperatorWithdrawableAmounts(ListOperatorWithdrawableAmountsRequest) returns (ListOperatorWithdrawableAmountsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -2369,4 +2372,41 @@ message BatchTransactionResult {
 	string cash_amount_reporting_currency = 8;
 	string operator_bonus_amount_reporting_currency = 9;
 	string provider_bonus_amount_reporting_currency = 10;
+}
+
+// ============================================
+// Operator Withdrawable Amount
+// ============================================
+
+message ListOperatorWithdrawableAmountsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;
+	// default 1
+	optional int32 page = 3;
+	// default 20
+	optional int32 page_size = 4;
+	// when true, return all results without pagination
+	optional bool disable_pagination = 5;
+}
+
+message OperatorWithdrawableAmount {
+	api.common.OperatorContext operator_context = 1;
+	string retailer_operator_name = 2;
+	string company_operator_name = 3;
+	string operator_name = 4;
+	// Individual / Co-Operation
+	string operator_mode = 5;
+	string custody_usd = 6;
+	string est_cost_usd = 7;
+	string est_rs_to_sys_usd = 8;
+	string locked_for_pending_invoices_usd = 9;
+	string transferable_amount_usd = 10;
+	string withdrawable_amount_usd = 11;
+}
+
+message ListOperatorWithdrawableAmountsResponse {
+	repeated OperatorWithdrawableAmount items = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }

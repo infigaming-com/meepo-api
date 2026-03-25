@@ -103,6 +103,7 @@ const (
 	Wallet_BatchGetUserFinancialMetrics_FullMethodName        = "/api.wallet.service.v1.Wallet/BatchGetUserFinancialMetrics"
 	Wallet_ManualAdjustCreditTurnoverField_FullMethodName     = "/api.wallet.service.v1.Wallet/ManualAdjustCreditTurnoverField"
 	Wallet_ListUserFreeRewards_FullMethodName                 = "/api.wallet.service.v1.Wallet/ListUserFreeRewards"
+	Wallet_ListOperatorWithdrawableAmounts_FullMethodName     = "/api.wallet.service.v1.Wallet/ListOperatorWithdrawableAmounts"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -268,6 +269,8 @@ type WalletClient interface {
 	ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*ManualAdjustCreditTurnoverFieldResponse, error)
 	// ListUserFreeRewards returns free spin and free bet details for a user
 	ListUserFreeRewards(ctx context.Context, in *ListUserFreeRewardsRequest, opts ...grpc.CallOption) (*ListUserFreeRewardsResponse, error)
+	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+	ListOperatorWithdrawableAmounts(ctx context.Context, in *ListOperatorWithdrawableAmountsRequest, opts ...grpc.CallOption) (*ListOperatorWithdrawableAmountsResponse, error)
 }
 
 type walletClient struct {
@@ -1118,6 +1121,16 @@ func (c *walletClient) ListUserFreeRewards(ctx context.Context, in *ListUserFree
 	return out, nil
 }
 
+func (c *walletClient) ListOperatorWithdrawableAmounts(ctx context.Context, in *ListOperatorWithdrawableAmountsRequest, opts ...grpc.CallOption) (*ListOperatorWithdrawableAmountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorWithdrawableAmountsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListOperatorWithdrawableAmounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -1281,6 +1294,8 @@ type WalletServer interface {
 	ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*ManualAdjustCreditTurnoverFieldResponse, error)
 	// ListUserFreeRewards returns free spin and free bet details for a user
 	ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*ListUserFreeRewardsResponse, error)
+	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+	ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*ListOperatorWithdrawableAmountsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1542,6 +1557,9 @@ func (UnimplementedWalletServer) ManualAdjustCreditTurnoverField(context.Context
 }
 func (UnimplementedWalletServer) ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*ListUserFreeRewardsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUserFreeRewards not implemented")
+}
+func (UnimplementedWalletServer) ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*ListOperatorWithdrawableAmountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperatorWithdrawableAmounts not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -3076,6 +3094,24 @@ func _Wallet_ListUserFreeRewards_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ListOperatorWithdrawableAmounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorWithdrawableAmountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListOperatorWithdrawableAmounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListOperatorWithdrawableAmounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListOperatorWithdrawableAmounts(ctx, req.(*ListOperatorWithdrawableAmountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3418,6 +3454,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserFreeRewards",
 			Handler:    _Wallet_ListUserFreeRewards_Handler,
+		},
+		{
+			MethodName: "ListOperatorWithdrawableAmounts",
+			Handler:    _Wallet_ListOperatorWithdrawableAmounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -43,6 +43,7 @@ const OperationBackofficeWalletListFICAThresholdTransactions = "/api.backoffice.
 const OperationBackofficeWalletListManualJournalEntries = "/api.backoffice.service.v1.BackofficeWallet/ListManualJournalEntries"
 const OperationBackofficeWalletListOperatorBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 const OperationBackofficeWalletListOperatorBalances = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
+const OperationBackofficeWalletListOperatorWithdrawableAmounts = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorWithdrawableAmounts"
 const OperationBackofficeWalletListPromoCodeCampaignDetails = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaignDetails"
 const OperationBackofficeWalletListPromoCodeCampaigns = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaigns"
 const OperationBackofficeWalletListUniversalCodeUsages = "/api.backoffice.service.v1.BackofficeWallet/ListUniversalCodeUsages"
@@ -115,6 +116,8 @@ type BackofficeWalletHTTPServer interface {
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// ListOperatorBalances ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
+	// ListOperatorWithdrawableAmounts ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+	ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*v1.ListOperatorWithdrawableAmountsResponse, error)
 	// ListPromoCodeCampaignDetails ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
 	ListPromoCodeCampaignDetails(context.Context, *ListPromoCodeCampaignDetailsRequest) (*v1.ListPromoCodeCampaignDetailsResponse, error)
 	// ListPromoCodeCampaigns ListPromoCodeCampaigns lists all promo code campaigns
@@ -214,6 +217,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/manual/journal-entries/list", _BackofficeWallet_ListManualJournalEntries0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/manual/journal-entries/export", _BackofficeWallet_ExportManualJournalEntries0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/credit/manual_adjust", _BackofficeWallet_ManualAdjustCreditTurnoverField0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/withdrawable-amounts/list", _BackofficeWallet_ListOperatorWithdrawableAmounts0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -1250,6 +1254,28 @@ func _BackofficeWallet_ManualAdjustCreditTurnoverField0_HTTP_Handler(srv Backoff
 	}
 }
 
+func _BackofficeWallet_ListOperatorWithdrawableAmounts0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListOperatorWithdrawableAmountsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletListOperatorWithdrawableAmounts)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListOperatorWithdrawableAmounts(ctx, req.(*ListOperatorWithdrawableAmountsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListOperatorWithdrawableAmountsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeWalletHTTPClient interface {
 	// AddWalletCurrency Add a new currency to the wallet configuration
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
@@ -1297,6 +1323,8 @@ type BackofficeWalletHTTPClient interface {
 	ListOperatorBalanceTransactions(ctx context.Context, req *ListOperatorBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListOperatorBalanceTransactionsResponse, err error)
 	// ListOperatorBalances ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorBalancesResponse, err error)
+	// ListOperatorWithdrawableAmounts ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+	ListOperatorWithdrawableAmounts(ctx context.Context, req *ListOperatorWithdrawableAmountsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorWithdrawableAmountsResponse, err error)
 	// ListPromoCodeCampaignDetails ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
 	ListPromoCodeCampaignDetails(ctx context.Context, req *ListPromoCodeCampaignDetailsRequest, opts ...http.CallOption) (rsp *v1.ListPromoCodeCampaignDetailsResponse, err error)
 	// ListPromoCodeCampaigns ListPromoCodeCampaigns lists all promo code campaigns
@@ -1669,6 +1697,20 @@ func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalances(ctx context.Contex
 	pattern := "/v1/backoffice/wallet/operator/balances/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListOperatorBalances))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListOperatorWithdrawableAmounts ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+func (c *BackofficeWalletHTTPClientImpl) ListOperatorWithdrawableAmounts(ctx context.Context, in *ListOperatorWithdrawableAmountsRequest, opts ...http.CallOption) (*v1.ListOperatorWithdrawableAmountsResponse, error) {
+	var out v1.ListOperatorWithdrawableAmountsResponse
+	pattern := "/v1/backoffice/wallet/operator/withdrawable-amounts/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletListOperatorWithdrawableAmounts))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
