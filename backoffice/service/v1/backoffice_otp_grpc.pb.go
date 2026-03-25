@@ -311,6 +311,23 @@ type BackofficeOTPClient interface {
 	// specific OTP Provider (created via CreateOTPProvider). Each template is scoped
 	// to a business scenario (template_type) such as login, registration, or withdrawal.
 	//
+	// ## Prerequisites (Three-layer setup)
+	//
+	// OTP sending requires three layers to be configured in order:
+	//
+	//  1. **Provider** (CreateOTPProvider) — the third-party account (e.g., EngageLab).
+	//     Stores encrypted credentials, supported countries, and channel strategy (sms, whatsapp|sms, etc).
+	//
+	//  2. **Binding** (CreateOTPProviderBinding) — routes a Provider to an Operator+Country.
+	//     Controls which provider handles OTP for a given operator in a given country.
+	//     Supports priority ordering and phone-prefix filtering.
+	//
+	//  3. **Template** (this API) — the message content for a specific business scenario.
+	//     Each template references a Provider and defines the external_template_id,
+	//     brand_name, language, and extra variables used when sending.
+	//
+	// All three must exist before SendOTP can work for a given operator+country+scenario.
+	//
 	// ## What is external_template_id?
 	// This is the template ID assigned by the third-party provider (e.g., EngageLab).
 	// You must first create the template on the provider's platform, then copy the ID here.
@@ -334,6 +351,36 @@ type BackofficeOTPClient interface {
 	// | `code` | auto | OTP verification code, auto-injected by EngageLab. |
 	// | `brand_name` | `brand_name` field | Brand name displayed in the message. |
 	// | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
+	//
+	// ## Template Resolution at Send Time
+	//
+	// When SendOTP is called, the system resolves the template using a multi-level fallback chain:
+	//
+	// For each operator level (operator → company → retailer → system), it tries:
+	//  1. (operator_level, country, template_type, language)
+	//  2. (operator_level, country, template_type, "en")           — language fallback
+	//  3. (operator_level, "global", template_type, language)      — country fallback
+	//  4. (operator_level, "global", template_type, "en")          — both fallbacks
+	//
+	// The first match is used. Only templates with enabled=true AND review_status
+	// in (LOCAL_ONLY, APPROVED) are eligible.
+	//
+	// This means a company-level template can serve all child operators that don't
+	// have their own template, and a "global" country template serves as fallback
+	// for countries without a specific template.
+	//
+	// ## Review Status
+	//
+	// | Status | Value | Meaning |
+	// |--------|-------|---------|
+	// | LOCAL_ONLY | 1 | SMS templates — no external approval needed, usable immediately |
+	// | PENDING | 2 | Submitted to provider for review (e.g., WhatsApp templates) |
+	// | APPROVED | 3 | Provider approved — can be used for sending |
+	// | REJECTED | 4 | Provider rejected — cannot be used, check provider console for reason |
+	//
+	// After creating a WhatsApp template, call SyncOTPTemplateStatus periodically
+	// until the status changes from PENDING to APPROVED or REJECTED.
+	// SMS templates are automatically set to LOCAL_ONLY and work immediately.
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
 	//
@@ -892,6 +939,23 @@ type BackofficeOTPServer interface {
 	// specific OTP Provider (created via CreateOTPProvider). Each template is scoped
 	// to a business scenario (template_type) such as login, registration, or withdrawal.
 	//
+	// ## Prerequisites (Three-layer setup)
+	//
+	// OTP sending requires three layers to be configured in order:
+	//
+	//  1. **Provider** (CreateOTPProvider) — the third-party account (e.g., EngageLab).
+	//     Stores encrypted credentials, supported countries, and channel strategy (sms, whatsapp|sms, etc).
+	//
+	//  2. **Binding** (CreateOTPProviderBinding) — routes a Provider to an Operator+Country.
+	//     Controls which provider handles OTP for a given operator in a given country.
+	//     Supports priority ordering and phone-prefix filtering.
+	//
+	//  3. **Template** (this API) — the message content for a specific business scenario.
+	//     Each template references a Provider and defines the external_template_id,
+	//     brand_name, language, and extra variables used when sending.
+	//
+	// All three must exist before SendOTP can work for a given operator+country+scenario.
+	//
 	// ## What is external_template_id?
 	// This is the template ID assigned by the third-party provider (e.g., EngageLab).
 	// You must first create the template on the provider's platform, then copy the ID here.
@@ -915,6 +979,36 @@ type BackofficeOTPServer interface {
 	// | `code` | auto | OTP verification code, auto-injected by EngageLab. |
 	// | `brand_name` | `brand_name` field | Brand name displayed in the message. |
 	// | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
+	//
+	// ## Template Resolution at Send Time
+	//
+	// When SendOTP is called, the system resolves the template using a multi-level fallback chain:
+	//
+	// For each operator level (operator → company → retailer → system), it tries:
+	//  1. (operator_level, country, template_type, language)
+	//  2. (operator_level, country, template_type, "en")           — language fallback
+	//  3. (operator_level, "global", template_type, language)      — country fallback
+	//  4. (operator_level, "global", template_type, "en")          — both fallbacks
+	//
+	// The first match is used. Only templates with enabled=true AND review_status
+	// in (LOCAL_ONLY, APPROVED) are eligible.
+	//
+	// This means a company-level template can serve all child operators that don't
+	// have their own template, and a "global" country template serves as fallback
+	// for countries without a specific template.
+	//
+	// ## Review Status
+	//
+	// | Status | Value | Meaning |
+	// |--------|-------|---------|
+	// | LOCAL_ONLY | 1 | SMS templates — no external approval needed, usable immediately |
+	// | PENDING | 2 | Submitted to provider for review (e.g., WhatsApp templates) |
+	// | APPROVED | 3 | Provider approved — can be used for sending |
+	// | REJECTED | 4 | Provider rejected — cannot be used, check provider console for reason |
+	//
+	// After creating a WhatsApp template, call SyncOTPTemplateStatus periodically
+	// until the status changes from PENDING to APPROVED or REJECTED.
+	// SMS templates are automatically set to LOCAL_ONLY and work immediately.
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
 	//
