@@ -185,7 +185,7 @@ message UpdatePromoCodeCampaignRequest {
 	api.common.OperatorContext target_operator_context = 2;
 	int64 campaign_id = 3;
 	string name = 4;
-	int32 max_usage_limit = 5;
+	reserved 5; // was max_usage_limit - immutable after creation
 	google.protobuf.Timestamp start_time = 6;
 	google.protobuf.Timestamp end_time = 7;
 	PromoCodeConditions reward_conditions = 8;
