@@ -2122,3 +2122,51 @@ func IsGetOperatorAccountSettingsFailed(err error) bool {
 func ErrorGetOperatorAccountSettingsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_OPERATOR_ACCOUNT_SETTINGS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsExceedsWithdrawableAmount(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EXCEEDS_WITHDRAWABLE_AMOUNT.String() && e.Code == 500
+}
+
+func ErrorExceedsWithdrawableAmount(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EXCEEDS_WITHDRAWABLE_AMOUNT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsExceedsTransferableAmount(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EXCEEDS_TRANSFERABLE_AMOUNT.String() && e.Code == 500
+}
+
+func ErrorExceedsTransferableAmount(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EXCEEDS_TRANSFERABLE_AMOUNT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorFinancialObligationsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_FINANCIAL_OBLIGATIONS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorFinancialObligationsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_FINANCIAL_OBLIGATIONS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPdfExportRowLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PDF_EXPORT_ROW_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorPdfExportRowLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PDF_EXPORT_ROW_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}

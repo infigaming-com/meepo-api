@@ -201,6 +201,10 @@ const (
 	ErrorReason_DEPOSIT_NOT_ALLOWED                                             ErrorReason = 30173
 	ErrorReason_WITHDRAW_NOT_ALLOWED                                            ErrorReason = 30174
 	ErrorReason_GET_OPERATOR_ACCOUNT_SETTINGS_FAILED                            ErrorReason = 30175
+	ErrorReason_EXCEEDS_WITHDRAWABLE_AMOUNT                                     ErrorReason = 30176
+	ErrorReason_EXCEEDS_TRANSFERABLE_AMOUNT                                     ErrorReason = 30177
+	ErrorReason_GET_OPERATOR_FINANCIAL_OBLIGATIONS_FAILED                       ErrorReason = 30178
+	ErrorReason_PDF_EXPORT_ROW_LIMIT_EXCEEDED                                   ErrorReason = 30179
 )
 
 // Enum value maps for ErrorReason.
@@ -382,6 +386,10 @@ var (
 		30173: "DEPOSIT_NOT_ALLOWED",
 		30174: "WITHDRAW_NOT_ALLOWED",
 		30175: "GET_OPERATOR_ACCOUNT_SETTINGS_FAILED",
+		30176: "EXCEEDS_WITHDRAWABLE_AMOUNT",
+		30177: "EXCEEDS_TRANSFERABLE_AMOUNT",
+		30178: "GET_OPERATOR_FINANCIAL_OBLIGATIONS_FAILED",
+		30179: "PDF_EXPORT_ROW_LIMIT_EXCEEDED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -560,6 +568,10 @@ var (
 		"DEPOSIT_NOT_ALLOWED":                                             30173,
 		"WITHDRAW_NOT_ALLOWED":                                            30174,
 		"GET_OPERATOR_ACCOUNT_SETTINGS_FAILED":                            30175,
+		"EXCEEDS_WITHDRAWABLE_AMOUNT":                                     30176,
+		"EXCEEDS_TRANSFERABLE_AMOUNT":                                     30177,
+		"GET_OPERATOR_FINANCIAL_OBLIGATIONS_FAILED":                       30178,
+		"PDF_EXPORT_ROW_LIMIT_EXCEEDED":                                   30179,
 	}
 )
 
@@ -594,7 +606,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8a5\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xa66\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -771,7 +783,11 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"%GET_APP_DOWNLOAD_REWARD_STATUS_FAILED\x10\xdc\xeb\x01\x12\x19\n" +
 	"\x13DEPOSIT_NOT_ALLOWED\x10\xdd\xeb\x01\x12\x1a\n" +
 	"\x14WITHDRAW_NOT_ALLOWED\x10\xde\xeb\x01\x12*\n" +
-	"$GET_OPERATOR_ACCOUNT_SETTINGS_FAILED\x10\xdf\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"$GET_OPERATOR_ACCOUNT_SETTINGS_FAILED\x10\xdf\xeb\x01\x12!\n" +
+	"\x1bEXCEEDS_WITHDRAWABLE_AMOUNT\x10\xe0\xeb\x01\x12!\n" +
+	"\x1bEXCEEDS_TRANSFERABLE_AMOUNT\x10\xe1\xeb\x01\x12/\n" +
+	")GET_OPERATOR_FINANCIAL_OBLIGATIONS_FAILED\x10\xe2\xeb\x01\x12#\n" +
+	"\x1dPDF_EXPORT_ROW_LIMIT_EXCEEDED\x10\xe3\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

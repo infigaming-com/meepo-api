@@ -406,3 +406,15 @@ func IsWithdrawRestrictedByAccountSettings(err error) bool {
 func ErrorWithdrawRestrictedByAccountSettings(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS.String(), fmt.Sprintf(format, args...))
 }
+
+func IsExceedsWithdrawableAmount(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EXCEEDS_WITHDRAWABLE_AMOUNT.String() && e.Code == 500
+}
+
+func ErrorExceedsWithdrawableAmount(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EXCEEDS_WITHDRAWABLE_AMOUNT.String(), fmt.Sprintf(format, args...))
+}

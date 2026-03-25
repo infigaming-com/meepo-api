@@ -67,6 +67,7 @@ const (
 	BackofficeWallet_ListManualJournalEntries_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/ListManualJournalEntries"
 	BackofficeWallet_ExportManualJournalEntries_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
 	BackofficeWallet_ManualAdjustCreditTurnoverField_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ManualAdjustCreditTurnoverField"
+	BackofficeWallet_ListOperatorWithdrawableAmounts_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorWithdrawableAmounts"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -167,6 +168,8 @@ type BackofficeWalletClient interface {
 	ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ExportManualJournalEntriesResponse, error)
 	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
 	ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*v1.ManualAdjustCreditTurnoverFieldResponse, error)
+	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+	ListOperatorWithdrawableAmounts(ctx context.Context, in *ListOperatorWithdrawableAmountsRequest, opts ...grpc.CallOption) (*v1.ListOperatorWithdrawableAmountsResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -647,6 +650,16 @@ func (c *backofficeWalletClient) ManualAdjustCreditTurnoverField(ctx context.Con
 	return out, nil
 }
 
+func (c *backofficeWalletClient) ListOperatorWithdrawableAmounts(ctx context.Context, in *ListOperatorWithdrawableAmountsRequest, opts ...grpc.CallOption) (*v1.ListOperatorWithdrawableAmountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListOperatorWithdrawableAmountsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListOperatorWithdrawableAmounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -745,6 +758,8 @@ type BackofficeWalletServer interface {
 	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error)
 	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
 	ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*v1.ManualAdjustCreditTurnoverFieldResponse, error)
+	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+	ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*v1.ListOperatorWithdrawableAmountsResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -895,6 +910,9 @@ func (UnimplementedBackofficeWalletServer) ExportManualJournalEntries(context.Co
 }
 func (UnimplementedBackofficeWalletServer) ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*v1.ManualAdjustCreditTurnoverFieldResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ManualAdjustCreditTurnoverField not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*v1.ListOperatorWithdrawableAmountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperatorWithdrawableAmounts not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -1763,6 +1781,24 @@ func _BackofficeWallet_ManualAdjustCreditTurnoverField_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_ListOperatorWithdrawableAmounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorWithdrawableAmountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListOperatorWithdrawableAmounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListOperatorWithdrawableAmounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListOperatorWithdrawableAmounts(ctx, req.(*ListOperatorWithdrawableAmountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1957,6 +1993,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ManualAdjustCreditTurnoverField",
 			Handler:    _BackofficeWallet_ManualAdjustCreditTurnoverField_Handler,
+		},
+		{
+			MethodName: "ListOperatorWithdrawableAmounts",
+			Handler:    _BackofficeWallet_ListOperatorWithdrawableAmounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

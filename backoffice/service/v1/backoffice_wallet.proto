@@ -370,6 +370,14 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
+	rpc ListOperatorWithdrawableAmounts(ListOperatorWithdrawableAmountsRequest) returns (wallet.service.v1.ListOperatorWithdrawableAmountsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/withdrawable-amounts/list"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -955,4 +963,18 @@ message SetAppDownloadRewardConfigRequest {
 message GetAppDownloadRewardConfigRequest {
 	// The target operator whose config is being queried.
 	api.common.OperatorContext target_operator_context = 1;
+}
+
+// ============================================
+// Operator Withdrawable Amount
+// ============================================
+
+message ListOperatorWithdrawableAmountsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	// Default 1
+	optional int32 page = 2;
+	// Default 20
+	optional int32 page_size = 3;
+	// when true, return all results without pagination
+	optional bool disable_pagination = 4;
 }
