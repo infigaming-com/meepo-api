@@ -874,7 +874,7 @@ message UpdatePromoCodeCampaignRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	int64 campaign_id = 2;
 	string name = 3;
-	int32 max_usage_limit = 4;
+	reserved 4; // was max_usage_limit - immutable after creation
 	google.protobuf.Timestamp start_time = 5;
 	google.protobuf.Timestamp end_time = 6;
 	wallet.service.v1.PromoCodeConditions reward_conditions = 7;

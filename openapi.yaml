@@ -24471,9 +24471,6 @@ components:
                     type: string
                 name:
                     type: string
-                maxUsageLimit:
-                    type: integer
-                    format: int32
                 startTime:
                     type: string
                     format: date-time

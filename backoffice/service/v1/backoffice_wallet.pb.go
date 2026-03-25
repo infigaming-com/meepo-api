@@ -3891,7 +3891,6 @@ type UpdatePromoCodeCampaignRequest struct {
 	TargetOperatorContext *common.OperatorContext    `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	CampaignId            int64                      `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
 	Name                  string                     `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	MaxUsageLimit         int32                      `protobuf:"varint,4,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`
 	StartTime             *timestamppb.Timestamp     `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime               *timestamppb.Timestamp     `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	RewardConditions      *v1.PromoCodeConditions    `protobuf:"bytes,7,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"`
@@ -3949,13 +3948,6 @@ func (x *UpdatePromoCodeCampaignRequest) GetName() string {
 		return x.Name
 	}
 	return ""
-}
-
-func (x *UpdatePromoCodeCampaignRequest) GetMaxUsageLimit() int32 {
-	if x != nil {
-		return x.MaxUsageLimit
-	}
-	return 0
 }
 
 func (x *UpdatePromoCodeCampaignRequest) GetStartTime() *timestamppb.Timestamp {
@@ -5437,18 +5429,17 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12W\n" +
 	"\x11reward_conditions\x18\a \x01(\v2*.api.wallet.service.v1.PromoCodeConditionsR\x10rewardConditions\x12T\n" +
-	"\x0ereward_configs\x18\b \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigs\"\xf3\x03\n" +
+	"\x0ereward_configs\x18\b \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigs\"\xd1\x03\n" +
 	"\x1eUpdatePromoCodeCampaignRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03R\n" +
 	"campaignId\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12&\n" +
-	"\x0fmax_usage_limit\x18\x04 \x01(\x05R\rmaxUsageLimit\x129\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x129\n" +
 	"\n" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12W\n" +
 	"\x11reward_conditions\x18\a \x01(\v2*.api.wallet.service.v1.PromoCodeConditionsR\x10rewardConditions\x12T\n" +
-	"\x0ereward_configs\x18\b \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigs\"\xb4\x01\n" +
+	"\x0ereward_configs\x18\b \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigsJ\x04\b\x04\x10\x05\"\xb4\x01\n" +
 	"$UpdatePromoCodeCampaignStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03R\n" +

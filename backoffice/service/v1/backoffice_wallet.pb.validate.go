@@ -7853,8 +7853,6 @@ func (m *UpdatePromoCodeCampaignRequest) validate(all bool) error {
 
 	// no validation rules for Name
 
-	// no validation rules for MaxUsageLimit
-
 	if all {
 		switch v := interface{}(m.GetStartTime()).(type) {
 		case interface{ ValidateAll() error }:
