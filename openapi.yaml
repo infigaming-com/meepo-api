@@ -20610,6 +20610,10 @@ components:
                 disablePagination:
                     type: boolean
                     description: when true, return all results without pagination
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: 'optional: query a specific operator''s data; if omitted, uses the initiator''s own context'
         api.backoffice.service.v1.ListOperatorsByAdminEmailRequest:
             type: object
             properties:

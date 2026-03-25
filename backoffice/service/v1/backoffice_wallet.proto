@@ -977,4 +977,6 @@ message ListOperatorWithdrawableAmountsRequest {
 	optional int32 page_size = 3;
 	// when true, return all results without pagination
 	optional bool disable_pagination = 4;
+	// optional: query a specific operator's data; if omitted, uses the initiator's own context
+	api.common.OperatorContext target_operator_context = 5;
 }
