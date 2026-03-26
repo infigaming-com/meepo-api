@@ -46,6 +46,7 @@ const (
 	BackofficeFinance_ExportTaxReports_FullMethodName                = "/api.backoffice.service.v1.BackofficeFinance/ExportTaxReports"
 	BackofficeFinance_UpdateTaxReport_FullMethodName                 = "/api.backoffice.service.v1.BackofficeFinance/UpdateTaxReport"
 	BackofficeFinance_ListRevenueShareRateConfigs_FullMethodName     = "/api.backoffice.service.v1.BackofficeFinance/ListRevenueShareRateConfigs"
+	BackofficeFinance_ListPaymentChannelFees_FullMethodName          = "/api.backoffice.service.v1.BackofficeFinance/ListPaymentChannelFees"
 )
 
 // BackofficeFinanceClient is the client API for BackofficeFinance service.
@@ -78,6 +79,7 @@ type BackofficeFinanceClient interface {
 	ExportTaxReports(ctx context.Context, in *ExportTaxReportsRequest, opts ...grpc.CallOption) (*v1.ExportTaxReportsResponse, error)
 	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
 	ListRevenueShareRateConfigs(ctx context.Context, in *ListRevenueShareRateConfigsRequest, opts ...grpc.CallOption) (*ListRevenueShareRateConfigsResponse, error)
+	ListPaymentChannelFees(ctx context.Context, in *ListPaymentChannelFeesRequest, opts ...grpc.CallOption) (*ListPaymentChannelFeesResponse, error)
 }
 
 type backofficeFinanceClient struct {
@@ -348,6 +350,16 @@ func (c *backofficeFinanceClient) ListRevenueShareRateConfigs(ctx context.Contex
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) ListPaymentChannelFees(ctx context.Context, in *ListPaymentChannelFeesRequest, opts ...grpc.CallOption) (*ListPaymentChannelFeesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPaymentChannelFeesResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListPaymentChannelFees_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeFinanceServer is the server API for BackofficeFinance service.
 // All implementations must embed UnimplementedBackofficeFinanceServer
 // for forward compatibility.
@@ -378,6 +390,7 @@ type BackofficeFinanceServer interface {
 	ExportTaxReports(context.Context, *ExportTaxReportsRequest) (*v1.ExportTaxReportsResponse, error)
 	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
 	ListRevenueShareRateConfigs(context.Context, *ListRevenueShareRateConfigsRequest) (*ListRevenueShareRateConfigsResponse, error)
+	ListPaymentChannelFees(context.Context, *ListPaymentChannelFeesRequest) (*ListPaymentChannelFeesResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
 }
 
@@ -465,6 +478,9 @@ func (UnimplementedBackofficeFinanceServer) UpdateTaxReport(context.Context, *Up
 }
 func (UnimplementedBackofficeFinanceServer) ListRevenueShareRateConfigs(context.Context, *ListRevenueShareRateConfigsRequest) (*ListRevenueShareRateConfigsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListRevenueShareRateConfigs not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ListPaymentChannelFees(context.Context, *ListPaymentChannelFeesRequest) (*ListPaymentChannelFeesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPaymentChannelFees not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) mustEmbedUnimplementedBackofficeFinanceServer() {}
 func (UnimplementedBackofficeFinanceServer) testEmbeddedByValue()                           {}
@@ -955,6 +971,24 @@ func _BackofficeFinance_ListRevenueShareRateConfigs_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_ListPaymentChannelFees_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPaymentChannelFeesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ListPaymentChannelFees(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ListPaymentChannelFees_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ListPaymentChannelFees(ctx, req.(*ListPaymentChannelFeesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeFinance_ServiceDesc is the grpc.ServiceDesc for BackofficeFinance service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1065,6 +1099,10 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListRevenueShareRateConfigs",
 			Handler:    _BackofficeFinance_ListRevenueShareRateConfigs_Handler,
+		},
+		{
+			MethodName: "ListPaymentChannelFees",
+			Handler:    _BackofficeFinance_ListPaymentChannelFees_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

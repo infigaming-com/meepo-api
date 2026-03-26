@@ -51,6 +51,7 @@ const (
 	Operator_DeleteAdjustment_FullMethodName                = "/api.operator.service.v1.Operator/DeleteAdjustment"
 	Operator_ListRevenueShareRateConfigs_FullMethodName     = "/api.operator.service.v1.Operator/ListRevenueShareRateConfigs"
 	Operator_ListCustodyOverview_FullMethodName             = "/api.operator.service.v1.Operator/ListCustodyOverview"
+	Operator_ListPaymentChannelFees_FullMethodName          = "/api.operator.service.v1.Operator/ListPaymentChannelFees"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -96,6 +97,7 @@ type OperatorClient interface {
 	DeleteAdjustment(ctx context.Context, in *DeleteAdjustmentRequest, opts ...grpc.CallOption) (*DeleteAdjustmentResponse, error)
 	ListRevenueShareRateConfigs(ctx context.Context, in *ListRevenueShareRateConfigsRequest, opts ...grpc.CallOption) (*ListRevenueShareRateConfigsResponse, error)
 	ListCustodyOverview(ctx context.Context, in *ListCustodyOverviewRequest, opts ...grpc.CallOption) (*ListCustodyOverviewResponse, error)
+	ListPaymentChannelFees(ctx context.Context, in *ListPaymentChannelFeesRequest, opts ...grpc.CallOption) (*ListPaymentChannelFeesResponse, error)
 }
 
 type operatorClient struct {
@@ -426,6 +428,16 @@ func (c *operatorClient) ListCustodyOverview(ctx context.Context, in *ListCustod
 	return out, nil
 }
 
+func (c *operatorClient) ListPaymentChannelFees(ctx context.Context, in *ListPaymentChannelFeesRequest, opts ...grpc.CallOption) (*ListPaymentChannelFeesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPaymentChannelFeesResponse)
+	err := c.cc.Invoke(ctx, Operator_ListPaymentChannelFees_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -469,6 +481,7 @@ type OperatorServer interface {
 	DeleteAdjustment(context.Context, *DeleteAdjustmentRequest) (*DeleteAdjustmentResponse, error)
 	ListRevenueShareRateConfigs(context.Context, *ListRevenueShareRateConfigsRequest) (*ListRevenueShareRateConfigsResponse, error)
 	ListCustodyOverview(context.Context, *ListCustodyOverviewRequest) (*ListCustodyOverviewResponse, error)
+	ListPaymentChannelFees(context.Context, *ListPaymentChannelFeesRequest) (*ListPaymentChannelFeesResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -574,6 +587,9 @@ func (UnimplementedOperatorServer) ListRevenueShareRateConfigs(context.Context, 
 }
 func (UnimplementedOperatorServer) ListCustodyOverview(context.Context, *ListCustodyOverviewRequest) (*ListCustodyOverviewResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListCustodyOverview not implemented")
+}
+func (UnimplementedOperatorServer) ListPaymentChannelFees(context.Context, *ListPaymentChannelFeesRequest) (*ListPaymentChannelFeesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPaymentChannelFees not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -1172,6 +1188,24 @@ func _Operator_ListCustodyOverview_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_ListPaymentChannelFees_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPaymentChannelFeesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).ListPaymentChannelFees(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_ListPaymentChannelFees_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).ListPaymentChannelFees(ctx, req.(*ListPaymentChannelFeesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1306,6 +1340,10 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCustodyOverview",
 			Handler:    _Operator_ListCustodyOverview_Handler,
+		},
+		{
+			MethodName: "ListPaymentChannelFees",
+			Handler:    _Operator_ListPaymentChannelFees_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
