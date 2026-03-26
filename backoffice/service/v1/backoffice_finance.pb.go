@@ -3665,9 +3665,8 @@ func (x *ListRevenueShareRateConfigsResponse) GetConfigs() []*ListRevenueShareRa
 type GetPaymentChannelFeeSummaryRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	StartTime              int64                          `protobuf:"varint,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime                int64                          `protobuf:"varint,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	InvoiceId              *int64                         `protobuf:"varint,4,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
+	PeriodKey              *string                        `protobuf:"bytes,2,opt,name=period_key,json=periodKey,proto3,oneof" json:"period_key,omitempty"`
+	InvoiceId              *int64                         `protobuf:"varint,3,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -3709,18 +3708,11 @@ func (x *GetPaymentChannelFeeSummaryRequest) GetOperatorContextFilters() *common
 	return nil
 }
 
-func (x *GetPaymentChannelFeeSummaryRequest) GetStartTime() int64 {
-	if x != nil {
-		return x.StartTime
+func (x *GetPaymentChannelFeeSummaryRequest) GetPeriodKey() string {
+	if x != nil && x.PeriodKey != nil {
+		return *x.PeriodKey
 	}
-	return 0
-}
-
-func (x *GetPaymentChannelFeeSummaryRequest) GetEndTime() int64 {
-	if x != nil {
-		return x.EndTime
-	}
-	return 0
+	return ""
 }
 
 func (x *GetPaymentChannelFeeSummaryRequest) GetInvoiceId() int64 {
@@ -6321,14 +6313,14 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\n" +
 	"final_rate\x18\a \x01(\tR\tfinalRate\x12 \n" +
 	"\vdescription\x18\b \x01(\tR\vdescription\x12\x18\n" +
-	"\aenabled\x18\t \x01(\bR\aenabled\"\xef\x01\n" +
+	"\aenabled\x18\t \x01(\bR\aenabled\"\xe8\x01\n" +
 	"\"GetPaymentChannelFeeSummaryRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1d\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\"\n" +
 	"\n" +
-	"start_time\x18\x02 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\x03 \x01(\x03R\aendTime\x12\"\n" +
+	"period_key\x18\x02 \x01(\tH\x00R\tperiodKey\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x04 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01B\r\n" +
+	"invoice_id\x18\x03 \x01(\x03H\x01R\tinvoiceId\x88\x01\x01B\r\n" +
+	"\v_period_keyB\r\n" +
 	"\v_invoice_id\"\x90\x01\n" +
 	"#GetPaymentChannelFeeSummaryResponse\x12F\n" +
 	"\x05items\x18\x01 \x03(\v20.api.backoffice.service.v1.PaymentChannelFeeItemR\x05items\x12!\n" +

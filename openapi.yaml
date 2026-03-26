@@ -17533,9 +17533,7 @@ components:
             properties:
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                startTime:
-                    type: string
-                endTime:
+                periodKey:
                     type: string
                 invoiceId:
                     type: string

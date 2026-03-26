@@ -6593,9 +6593,9 @@ func (m *GetPaymentChannelFeeSummaryRequest) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for StartTime
-
-	// no validation rules for EndTime
+	if m.PeriodKey != nil {
+		// no validation rules for PeriodKey
+	}
 
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId

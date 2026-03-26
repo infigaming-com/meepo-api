@@ -852,9 +852,8 @@ message ListRevenueShareRateConfigsResponse {
 }
 message GetPaymentChannelFeeSummaryRequest {
 	api.common.OperatorContext operator_context = 1;
-	int64 start_time = 2;
-	int64 end_time = 3;
-	optional int64 invoice_id = 4;
+	optional string period_key = 2;
+	optional int64 invoice_id = 3;
 }
 
 message GetPaymentChannelFeeSummaryResponse {
