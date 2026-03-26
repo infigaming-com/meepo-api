@@ -297,12 +297,13 @@ message GetInvoiceDetailResponse {
 		string feature_subscription = 8;
 		string revenue_share_system = 9;
 		string revenue_share_operator = 10;
-		string adjustments = 11;
-		
+		string adjustments = 11; // pre-calculation adjustments total
+
 		// Financial summary
 		string total_amount = 12; // Total invoice amount
 		string amount_paid = 13; // Amount already paid
 		string due_amount = 14; // Remaining amount due
+		string post_calc_adjustments = 21; // post-calculation adjustments total
 
 		// Retailer information
 		int64 retailer_operator_id = 15;

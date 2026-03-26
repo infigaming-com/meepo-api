@@ -284,8 +284,8 @@ message GetInvoiceDetailResponse {
 		string feature_subscription = 8;
 		string revenue_share_system = 9;
 		string revenue_share_operator = 10;
-		string adjustments = 11;
-		
+		string adjustments = 11; // pre-calculation adjustments total
+
 		// Financial summary
 		string total_amount = 12; // Total invoice amount
 		string amount_paid = 13; // Amount already paid
@@ -298,10 +298,11 @@ message GetInvoiceDetailResponse {
 		// Company information
 		int64 company_operator_id = 17;
 		string company_operator_name = 18;
-		
+
 		// Operator information
 		int64 operator_id = 19;
 		string operator_name = 20;
+		string post_calc_adjustments = 21; // post-calculation adjustments total
 	}
 	
 	InvoiceDetail invoice = 1;

@@ -6728,6 +6728,8 @@ func (m *GetInvoiceDetailResponse_InvoiceDetail) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for PostCalcAdjustments
+
 	if len(errors) > 0 {
 		return GetInvoiceDetailResponse_InvoiceDetailMultiError(errors)
 	}

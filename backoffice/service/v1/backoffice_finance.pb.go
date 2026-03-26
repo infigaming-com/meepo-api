@@ -3816,7 +3816,7 @@ type GetInvoiceDetailResponse_InvoiceDetail struct {
 	FeatureSubscription      string `protobuf:"bytes,8,opt,name=feature_subscription,json=featureSubscription,proto3" json:"feature_subscription,omitempty"`
 	RevenueShareSystem       string `protobuf:"bytes,9,opt,name=revenue_share_system,json=revenueShareSystem,proto3" json:"revenue_share_system,omitempty"`
 	RevenueShareOperator     string `protobuf:"bytes,10,opt,name=revenue_share_operator,json=revenueShareOperator,proto3" json:"revenue_share_operator,omitempty"`
-	Adjustments              string `protobuf:"bytes,11,opt,name=adjustments,proto3" json:"adjustments,omitempty"`
+	Adjustments              string `protobuf:"bytes,11,opt,name=adjustments,proto3" json:"adjustments,omitempty"` // pre-calculation adjustments total
 	// Financial summary
 	TotalAmount string `protobuf:"bytes,12,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"` // Total invoice amount
 	AmountPaid  string `protobuf:"bytes,13,opt,name=amount_paid,json=amountPaid,proto3" json:"amount_paid,omitempty"`    // Amount already paid
@@ -3828,10 +3828,11 @@ type GetInvoiceDetailResponse_InvoiceDetail struct {
 	CompanyOperatorId   int64  `protobuf:"varint,17,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
 	CompanyOperatorName string `protobuf:"bytes,18,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	// Operator information
-	OperatorId    int64  `protobuf:"varint,19,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	OperatorName  string `protobuf:"bytes,20,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	OperatorId          int64  `protobuf:"varint,19,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName        string `protobuf:"bytes,20,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	PostCalcAdjustments string `protobuf:"bytes,21,opt,name=post_calc_adjustments,json=postCalcAdjustments,proto3" json:"post_calc_adjustments,omitempty"` // post-calculation adjustments total
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *GetInvoiceDetailResponse_InvoiceDetail) Reset() {
@@ -4000,6 +4001,13 @@ func (x *GetInvoiceDetailResponse_InvoiceDetail) GetOperatorId() int64 {
 func (x *GetInvoiceDetailResponse_InvoiceDetail) GetOperatorName() string {
 	if x != nil {
 		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetPostCalcAdjustments() string {
+	if x != nil {
+		return x.PostCalcAdjustments
 	}
 	return ""
 }
@@ -5545,9 +5553,9 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"8\n" +
 	"\x17GetInvoiceDetailRequest\x12\x1d\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\"\xd6\b\n" +
+	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\"\x8a\t\n" +
 	"\x18GetInvoiceDetailResponse\x12[\n" +
-	"\ainvoice\x18\x01 \x01(\v2A.api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetailR\ainvoice\x1a\xdc\a\n" +
+	"\ainvoice\x18\x01 \x01(\v2A.api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetailR\ainvoice\x1a\x90\b\n" +
 	"\rInvoiceDetail\x12\x1d\n" +
 	"\n" +
 	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\x12v\n" +
@@ -5573,7 +5581,8 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x15company_operator_name\x18\x12 \x01(\tR\x13companyOperatorName\x12\x1f\n" +
 	"\voperator_id\x18\x13 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
-	"\roperator_name\x18\x14 \x01(\tR\foperatorName\"E\n" +
+	"\roperator_name\x18\x14 \x01(\tR\foperatorName\x122\n" +
+	"\x15post_calc_adjustments\x18\x15 \x01(\tR\x13postCalcAdjustments\"E\n" +
 	"\rPaymentStatus\x12\x17\n" +
 	"\x13PAYMENT_STATUS_PAID\x10\x00\x12\x1b\n" +
 	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"\xb7\x02\n" +

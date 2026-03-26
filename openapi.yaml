@@ -17202,6 +17202,8 @@ components:
                     description: Operator information
                 operatorName:
                     type: string
+                postCalcAdjustments:
+                    type: string
         api.backoffice.service.v1.GetInvoiceSummaryRequest:
             type: object
             properties:
