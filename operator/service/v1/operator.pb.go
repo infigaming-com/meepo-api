@@ -4668,11 +4668,12 @@ type GetInvoiceDetailResponse_InvoiceDetail struct {
 	FeatureSubscription      string `protobuf:"bytes,8,opt,name=feature_subscription,json=featureSubscription,proto3" json:"feature_subscription,omitempty"`
 	RevenueShareSystem       string `protobuf:"bytes,9,opt,name=revenue_share_system,json=revenueShareSystem,proto3" json:"revenue_share_system,omitempty"`
 	RevenueShareOperator     string `protobuf:"bytes,10,opt,name=revenue_share_operator,json=revenueShareOperator,proto3" json:"revenue_share_operator,omitempty"`
-	Adjustments              string `protobuf:"bytes,11,opt,name=adjustments,proto3" json:"adjustments,omitempty"`
+	Adjustments              string `protobuf:"bytes,11,opt,name=adjustments,proto3" json:"adjustments,omitempty"` // pre-calculation adjustments total
 	// Financial summary
-	TotalAmount string `protobuf:"bytes,12,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"` // Total invoice amount
-	AmountPaid  string `protobuf:"bytes,13,opt,name=amount_paid,json=amountPaid,proto3" json:"amount_paid,omitempty"`    // Amount already paid
-	DueAmount   string `protobuf:"bytes,14,opt,name=due_amount,json=dueAmount,proto3" json:"due_amount,omitempty"`       // Remaining amount due
+	TotalAmount         string `protobuf:"bytes,12,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`                           // Total invoice amount
+	AmountPaid          string `protobuf:"bytes,13,opt,name=amount_paid,json=amountPaid,proto3" json:"amount_paid,omitempty"`                              // Amount already paid
+	DueAmount           string `protobuf:"bytes,14,opt,name=due_amount,json=dueAmount,proto3" json:"due_amount,omitempty"`                                 // Remaining amount due
+	PostCalcAdjustments string `protobuf:"bytes,21,opt,name=post_calc_adjustments,json=postCalcAdjustments,proto3" json:"post_calc_adjustments,omitempty"` // post-calculation adjustments total
 	// Retailer information
 	RetailerOperatorId   int64  `protobuf:"varint,15,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
 	RetailerOperatorName string `protobuf:"bytes,16,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
@@ -4810,6 +4811,13 @@ func (x *GetInvoiceDetailResponse_InvoiceDetail) GetAmountPaid() string {
 func (x *GetInvoiceDetailResponse_InvoiceDetail) GetDueAmount() string {
 	if x != nil {
 		return x.DueAmount
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetPostCalcAdjustments() string {
+	if x != nil {
+		return x.PostCalcAdjustments
 	}
 	return ""
 }
@@ -6281,9 +6289,9 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"8\n" +
 	"\x17GetInvoiceDetailRequest\x12\x1d\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\"\xd2\b\n" +
+	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\"\x86\t\n" +
 	"\x18GetInvoiceDetailResponse\x12Y\n" +
-	"\ainvoice\x18\x01 \x01(\v2?.api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetailR\ainvoice\x1a\xda\a\n" +
+	"\ainvoice\x18\x01 \x01(\v2?.api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetailR\ainvoice\x1a\x8e\b\n" +
 	"\rInvoiceDetail\x12\x1d\n" +
 	"\n" +
 	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\x12t\n" +
@@ -6302,7 +6310,8 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\vamount_paid\x18\r \x01(\tR\n" +
 	"amountPaid\x12\x1d\n" +
 	"\n" +
-	"due_amount\x18\x0e \x01(\tR\tdueAmount\x120\n" +
+	"due_amount\x18\x0e \x01(\tR\tdueAmount\x122\n" +
+	"\x15post_calc_adjustments\x18\x15 \x01(\tR\x13postCalcAdjustments\x120\n" +
 	"\x14retailer_operator_id\x18\x0f \x01(\x03R\x12retailerOperatorId\x124\n" +
 	"\x16retailer_operator_name\x18\x10 \x01(\tR\x14retailerOperatorName\x12.\n" +
 	"\x13company_operator_id\x18\x11 \x01(\x03R\x11companyOperatorId\x122\n" +

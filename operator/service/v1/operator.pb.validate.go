@@ -8941,6 +8941,8 @@ func (m *GetInvoiceDetailResponse_InvoiceDetail) validate(all bool) error {
 
 	// no validation rules for DueAmount
 
+	// no validation rules for PostCalcAdjustments
+
 	// no validation rules for RetailerOperatorId
 
 	// no validation rules for RetailerOperatorName
