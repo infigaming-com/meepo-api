@@ -192,6 +192,12 @@ service BackofficeFinance {
 		};
 	}
 
+	rpc GetPaymentChannelFeeSummary(GetPaymentChannelFeeSummaryRequest) returns (GetPaymentChannelFeeSummaryResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/payment-channel-fee/summary"
+			body: "*"
+		};
+	}
 }
 
 message ListInvoicesRequest {
@@ -615,6 +621,8 @@ message GetBalanceSummaryResponse {
 
 message GetBalancesSummaryRequest {
 	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
 }
 
 message GetBalancesSummaryResponse {
@@ -903,4 +911,31 @@ message ListRevenueShareRateConfigsResponse {
 		bool enabled = 9;
 	}
 	repeated RevenueShareRateConfig configs = 1;
+}
+
+message GetPaymentChannelFeeSummaryRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	int64 start_time = 2;
+	int64 end_time = 3;
+	optional int64 invoice_id = 4;
+}
+
+message GetPaymentChannelFeeSummaryResponse {
+	repeated PaymentChannelFeeItem items = 1;
+	string subtotal_usd = 2;
+}
+
+message PaymentChannelFeeItem {
+	int64 operator_id = 1;
+	string operator_name = 2;
+	string psp = 3;
+	string payment_method = 4;
+	string currency = 5;
+	string network = 6;
+	string type = 7;
+	int64 transaction_count = 8;
+	string total_amount = 9;
+	string service_fee = 10;
+	string fx_rate = 11;
+	string amount_usd = 12;
 }

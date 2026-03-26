@@ -3551,6 +3551,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListMonthlyRevenueShareResponse'
+    /v1/backoffice/finance/payment-channel-fee/summary:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_GetPaymentChannelFeeSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentChannelFeeSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentChannelFeeSummaryResponse'
     /v1/backoffice/finance/revenue-share-rate-configs/list:
         post:
             tags:
@@ -16828,6 +16846,12 @@ components:
             properties:
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetBalancesSummaryResponse:
             type: object
             properties:
@@ -17503,6 +17527,26 @@ components:
                 todayReportingCurrency:
                     type: string
                 yesterdayReportingCurrency:
+                    type: string
+        api.backoffice.service.v1.GetPaymentChannelFeeSummaryRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                startTime:
+                    type: string
+                endTime:
+                    type: string
+                invoiceId:
+                    type: string
+        api.backoffice.service.v1.GetPaymentChannelFeeSummaryResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.PaymentChannelFeeItem'
+                subtotalUsd:
                     type: string
         api.backoffice.service.v1.GetPaymentMethodListRequest:
             type: object
@@ -22851,6 +22895,33 @@ components:
                 Pause an active campaign. Transitions status from ACTIVE → PAUSED.
                  New triggers are no longer processed. In-flight executions continue to completion.
                  A paused campaign can be re-activated via `ActivateCrmCampaign`.
+        api.backoffice.service.v1.PaymentChannelFeeItem:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                psp:
+                    type: string
+                paymentMethod:
+                    type: string
+                currency:
+                    type: string
+                network:
+                    type: string
+                type:
+                    type: string
+                transactionCount:
+                    type: string
+                totalAmount:
+                    type: string
+                serviceFee:
+                    type: string
+                fxRate:
+                    type: string
+                amountUsd:
+                    type: string
         api.backoffice.service.v1.PaymentData_Data:
             type: object
             properties:

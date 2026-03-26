@@ -109,6 +109,9 @@ service Operator {
 
 	rpc ListCustodyOverview(ListCustodyOverviewRequest) returns (ListCustodyOverviewResponse) {
 	}
+
+	rpc GetPaymentChannelFeeSummary(GetPaymentChannelFeeSummaryRequest) returns (GetPaymentChannelFeeSummaryResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -846,4 +849,30 @@ message ListRevenueShareRateConfigsResponse {
 		bool enabled = 9;
 	}
 	repeated RevenueShareRateConfig configs = 1;
+}
+message GetPaymentChannelFeeSummaryRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 start_time = 2;
+	int64 end_time = 3;
+	optional int64 invoice_id = 4;
+}
+
+message GetPaymentChannelFeeSummaryResponse {
+	repeated PaymentChannelFeeItem items = 1;
+	string subtotal_usd = 2;
+}
+
+message PaymentChannelFeeItem {
+	int64 operator_id = 1;
+	string operator_name = 2;
+	string psp = 3;
+	string payment_method = 4;
+	string currency = 5;
+	string network = 6;
+	string type = 7;
+	int64 transaction_count = 8;
+	string total_amount = 9;
+	string service_fee = 10;
+	string fx_rate = 11;
+	string amount_usd = 12;
 }
