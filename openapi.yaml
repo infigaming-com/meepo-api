@@ -3551,16 +3551,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListMonthlyRevenueShareResponse'
-    /v1/backoffice/finance/payment-channel-fee/summary:
+    /v1/backoffice/finance/payment-channel-fees/list:
         post:
             tags:
                 - BackofficeFinance
-            operationId: BackofficeFinance_GetPaymentChannelFeeSummary
+            operationId: BackofficeFinance_ListPaymentChannelFees
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentChannelFeeSummaryRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPaymentChannelFeesRequest'
                 required: true
             responses:
                 "200":
@@ -3568,7 +3568,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentChannelFeeSummaryResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListPaymentChannelFeesResponse'
     /v1/backoffice/finance/revenue-share-rate-configs/list:
         post:
             tags:
@@ -17528,24 +17528,6 @@ components:
                     type: string
                 yesterdayReportingCurrency:
                     type: string
-        api.backoffice.service.v1.GetPaymentChannelFeeSummaryRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                periodKey:
-                    type: string
-                invoiceId:
-                    type: string
-        api.backoffice.service.v1.GetPaymentChannelFeeSummaryResponse:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.PaymentChannelFeeItem'
-                subtotalUsd:
-                    type: string
         api.backoffice.service.v1.GetPaymentMethodListRequest:
             type: object
             properties:
@@ -20742,6 +20724,39 @@ components:
                     type: integer
                     format: int32
                 suspendedCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListPaymentChannelFeesRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                periodKey:
+                    type: string
+                invoiceId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListPaymentChannelFeesResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.PaymentChannelFeeItem'
+                subtotalUsd:
+                    type: string
+                totalCount:
                     type: integer
                     format: int32
                 page:

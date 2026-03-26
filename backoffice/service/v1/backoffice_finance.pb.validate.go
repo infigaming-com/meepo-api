@@ -6541,23 +6541,22 @@ var _ interface {
 	ErrorName() string
 } = ListRevenueShareRateConfigsResponseValidationError{}
 
-// Validate checks the field values on GetPaymentChannelFeeSummaryRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetPaymentChannelFeeSummaryRequest) Validate() error {
+// Validate checks the field values on ListPaymentChannelFeesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListPaymentChannelFeesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetPaymentChannelFeeSummaryRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetPaymentChannelFeeSummaryRequestMultiError, or nil if none found.
-func (m *GetPaymentChannelFeeSummaryRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListPaymentChannelFeesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListPaymentChannelFeesRequestMultiError, or nil if none found.
+func (m *ListPaymentChannelFeesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetPaymentChannelFeeSummaryRequest) validate(all bool) error {
+func (m *ListPaymentChannelFeesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -6568,7 +6567,7 @@ func (m *GetPaymentChannelFeeSummaryRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetPaymentChannelFeeSummaryRequestValidationError{
+				errors = append(errors, ListPaymentChannelFeesRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -6576,7 +6575,7 @@ func (m *GetPaymentChannelFeeSummaryRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetPaymentChannelFeeSummaryRequestValidationError{
+				errors = append(errors, ListPaymentChannelFeesRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -6585,7 +6584,7 @@ func (m *GetPaymentChannelFeeSummaryRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetPaymentChannelFeeSummaryRequestValidationError{
+			return ListPaymentChannelFeesRequestValidationError{
 				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -6601,21 +6600,28 @@ func (m *GetPaymentChannelFeeSummaryRequest) validate(all bool) error {
 		// no validation rules for InvoiceId
 	}
 
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
 	if len(errors) > 0 {
-		return GetPaymentChannelFeeSummaryRequestMultiError(errors)
+		return ListPaymentChannelFeesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetPaymentChannelFeeSummaryRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// GetPaymentChannelFeeSummaryRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetPaymentChannelFeeSummaryRequestMultiError []error
+// ListPaymentChannelFeesRequestMultiError is an error wrapping multiple
+// validation errors returned by ListPaymentChannelFeesRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListPaymentChannelFeesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetPaymentChannelFeeSummaryRequestMultiError) Error() string {
+func (m ListPaymentChannelFeesRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -6624,12 +6630,12 @@ func (m GetPaymentChannelFeeSummaryRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetPaymentChannelFeeSummaryRequestMultiError) AllErrors() []error { return m }
+func (m ListPaymentChannelFeesRequestMultiError) AllErrors() []error { return m }
 
-// GetPaymentChannelFeeSummaryRequestValidationError is the validation error
-// returned by GetPaymentChannelFeeSummaryRequest.Validate if the designated
+// ListPaymentChannelFeesRequestValidationError is the validation error
+// returned by ListPaymentChannelFeesRequest.Validate if the designated
 // constraints aren't met.
-type GetPaymentChannelFeeSummaryRequestValidationError struct {
+type ListPaymentChannelFeesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -6637,24 +6643,24 @@ type GetPaymentChannelFeeSummaryRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetPaymentChannelFeeSummaryRequestValidationError) Field() string { return e.field }
+func (e ListPaymentChannelFeesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetPaymentChannelFeeSummaryRequestValidationError) Reason() string { return e.reason }
+func (e ListPaymentChannelFeesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetPaymentChannelFeeSummaryRequestValidationError) Cause() error { return e.cause }
+func (e ListPaymentChannelFeesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetPaymentChannelFeeSummaryRequestValidationError) Key() bool { return e.key }
+func (e ListPaymentChannelFeesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetPaymentChannelFeeSummaryRequestValidationError) ErrorName() string {
-	return "GetPaymentChannelFeeSummaryRequestValidationError"
+func (e ListPaymentChannelFeesRequestValidationError) ErrorName() string {
+	return "ListPaymentChannelFeesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetPaymentChannelFeeSummaryRequestValidationError) Error() string {
+func (e ListPaymentChannelFeesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -6666,14 +6672,14 @@ func (e GetPaymentChannelFeeSummaryRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetPaymentChannelFeeSummaryRequest.%s: %s%s",
+		"invalid %sListPaymentChannelFeesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetPaymentChannelFeeSummaryRequestValidationError{}
+var _ error = ListPaymentChannelFeesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -6681,25 +6687,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetPaymentChannelFeeSummaryRequestValidationError{}
+} = ListPaymentChannelFeesRequestValidationError{}
 
-// Validate checks the field values on GetPaymentChannelFeeSummaryResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetPaymentChannelFeeSummaryResponse) Validate() error {
+// Validate checks the field values on ListPaymentChannelFeesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListPaymentChannelFeesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetPaymentChannelFeeSummaryResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetPaymentChannelFeeSummaryResponseMultiError, or nil if none found.
-func (m *GetPaymentChannelFeeSummaryResponse) ValidateAll() error {
+// ValidateAll checks the field values on ListPaymentChannelFeesResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListPaymentChannelFeesResponseMultiError, or nil if none found.
+func (m *ListPaymentChannelFeesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetPaymentChannelFeeSummaryResponse) validate(all bool) error {
+func (m *ListPaymentChannelFeesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -6713,7 +6718,7 @@ func (m *GetPaymentChannelFeeSummaryResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetPaymentChannelFeeSummaryResponseValidationError{
+					errors = append(errors, ListPaymentChannelFeesResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -6721,7 +6726,7 @@ func (m *GetPaymentChannelFeeSummaryResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, GetPaymentChannelFeeSummaryResponseValidationError{
+					errors = append(errors, ListPaymentChannelFeesResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -6730,7 +6735,7 @@ func (m *GetPaymentChannelFeeSummaryResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return GetPaymentChannelFeeSummaryResponseValidationError{
+				return ListPaymentChannelFeesResponseValidationError{
 					field:  fmt.Sprintf("Items[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -6742,21 +6747,26 @@ func (m *GetPaymentChannelFeeSummaryResponse) validate(all bool) error {
 
 	// no validation rules for SubtotalUsd
 
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
 	if len(errors) > 0 {
-		return GetPaymentChannelFeeSummaryResponseMultiError(errors)
+		return ListPaymentChannelFeesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetPaymentChannelFeeSummaryResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// GetPaymentChannelFeeSummaryResponse.ValidateAll() if the designated
-// constraints aren't met.
-type GetPaymentChannelFeeSummaryResponseMultiError []error
+// ListPaymentChannelFeesResponseMultiError is an error wrapping multiple
+// validation errors returned by ListPaymentChannelFeesResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListPaymentChannelFeesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetPaymentChannelFeeSummaryResponseMultiError) Error() string {
+func (m ListPaymentChannelFeesResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -6765,12 +6775,12 @@ func (m GetPaymentChannelFeeSummaryResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetPaymentChannelFeeSummaryResponseMultiError) AllErrors() []error { return m }
+func (m ListPaymentChannelFeesResponseMultiError) AllErrors() []error { return m }
 
-// GetPaymentChannelFeeSummaryResponseValidationError is the validation error
-// returned by GetPaymentChannelFeeSummaryResponse.Validate if the designated
+// ListPaymentChannelFeesResponseValidationError is the validation error
+// returned by ListPaymentChannelFeesResponse.Validate if the designated
 // constraints aren't met.
-type GetPaymentChannelFeeSummaryResponseValidationError struct {
+type ListPaymentChannelFeesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -6778,24 +6788,24 @@ type GetPaymentChannelFeeSummaryResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetPaymentChannelFeeSummaryResponseValidationError) Field() string { return e.field }
+func (e ListPaymentChannelFeesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetPaymentChannelFeeSummaryResponseValidationError) Reason() string { return e.reason }
+func (e ListPaymentChannelFeesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetPaymentChannelFeeSummaryResponseValidationError) Cause() error { return e.cause }
+func (e ListPaymentChannelFeesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetPaymentChannelFeeSummaryResponseValidationError) Key() bool { return e.key }
+func (e ListPaymentChannelFeesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetPaymentChannelFeeSummaryResponseValidationError) ErrorName() string {
-	return "GetPaymentChannelFeeSummaryResponseValidationError"
+func (e ListPaymentChannelFeesResponseValidationError) ErrorName() string {
+	return "ListPaymentChannelFeesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetPaymentChannelFeeSummaryResponseValidationError) Error() string {
+func (e ListPaymentChannelFeesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -6807,14 +6817,14 @@ func (e GetPaymentChannelFeeSummaryResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetPaymentChannelFeeSummaryResponse.%s: %s%s",
+		"invalid %sListPaymentChannelFeesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetPaymentChannelFeeSummaryResponseValidationError{}
+var _ error = ListPaymentChannelFeesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -6822,7 +6832,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetPaymentChannelFeeSummaryResponseValidationError{}
+} = ListPaymentChannelFeesResponseValidationError{}
 
 // Validate checks the field values on PaymentChannelFeeItem with the rules
 // defined in the proto definition for this message. If any rules are

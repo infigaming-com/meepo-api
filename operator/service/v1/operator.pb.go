@@ -4318,30 +4318,32 @@ func (x *ListRevenueShareRateConfigsResponse) GetConfigs() []*ListRevenueShareRa
 	return nil
 }
 
-type GetPaymentChannelFeeSummaryRequest struct {
+type ListPaymentChannelFeesRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	PeriodKey              *string                        `protobuf:"bytes,3,opt,name=period_key,json=periodKey,proto3,oneof" json:"period_key,omitempty"`
 	InvoiceId              *int64                         `protobuf:"varint,4,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
+	Page                   *int32                         `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *GetPaymentChannelFeeSummaryRequest) Reset() {
-	*x = GetPaymentChannelFeeSummaryRequest{}
+func (x *ListPaymentChannelFeesRequest) Reset() {
+	*x = ListPaymentChannelFeesRequest{}
 	mi := &file_operator_service_v1_operator_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPaymentChannelFeeSummaryRequest) String() string {
+func (x *ListPaymentChannelFeesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPaymentChannelFeeSummaryRequest) ProtoMessage() {}
+func (*ListPaymentChannelFeesRequest) ProtoMessage() {}
 
-func (x *GetPaymentChannelFeeSummaryRequest) ProtoReflect() protoreflect.Message {
+func (x *ListPaymentChannelFeesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_operator_service_v1_operator_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4353,61 +4355,78 @@ func (x *GetPaymentChannelFeeSummaryRequest) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPaymentChannelFeeSummaryRequest.ProtoReflect.Descriptor instead.
-func (*GetPaymentChannelFeeSummaryRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListPaymentChannelFeesRequest.ProtoReflect.Descriptor instead.
+func (*ListPaymentChannelFeesRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{66}
 }
 
-func (x *GetPaymentChannelFeeSummaryRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *ListPaymentChannelFeesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
 	}
 	return nil
 }
 
-func (x *GetPaymentChannelFeeSummaryRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListPaymentChannelFeesRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *GetPaymentChannelFeeSummaryRequest) GetPeriodKey() string {
+func (x *ListPaymentChannelFeesRequest) GetPeriodKey() string {
 	if x != nil && x.PeriodKey != nil {
 		return *x.PeriodKey
 	}
 	return ""
 }
 
-func (x *GetPaymentChannelFeeSummaryRequest) GetInvoiceId() int64 {
+func (x *ListPaymentChannelFeesRequest) GetInvoiceId() int64 {
 	if x != nil && x.InvoiceId != nil {
 		return *x.InvoiceId
 	}
 	return 0
 }
 
-type GetPaymentChannelFeeSummaryResponse struct {
+func (x *ListPaymentChannelFeesRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListPaymentChannelFeesRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ListPaymentChannelFeesResponse struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
 	Items         []*PaymentChannelFeeItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	SubtotalUsd   string                   `protobuf:"bytes,2,opt,name=subtotal_usd,json=subtotalUsd,proto3" json:"subtotal_usd,omitempty"`
+	TotalCount    int32                    `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	Page          int32                    `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                    `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPaymentChannelFeeSummaryResponse) Reset() {
-	*x = GetPaymentChannelFeeSummaryResponse{}
+func (x *ListPaymentChannelFeesResponse) Reset() {
+	*x = ListPaymentChannelFeesResponse{}
 	mi := &file_operator_service_v1_operator_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPaymentChannelFeeSummaryResponse) String() string {
+func (x *ListPaymentChannelFeesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPaymentChannelFeeSummaryResponse) ProtoMessage() {}
+func (*ListPaymentChannelFeesResponse) ProtoMessage() {}
 
-func (x *GetPaymentChannelFeeSummaryResponse) ProtoReflect() protoreflect.Message {
+func (x *ListPaymentChannelFeesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_operator_service_v1_operator_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4419,23 +4438,44 @@ func (x *GetPaymentChannelFeeSummaryResponse) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPaymentChannelFeeSummaryResponse.ProtoReflect.Descriptor instead.
-func (*GetPaymentChannelFeeSummaryResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListPaymentChannelFeesResponse.ProtoReflect.Descriptor instead.
+func (*ListPaymentChannelFeesResponse) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{67}
 }
 
-func (x *GetPaymentChannelFeeSummaryResponse) GetItems() []*PaymentChannelFeeItem {
+func (x *ListPaymentChannelFeesResponse) GetItems() []*PaymentChannelFeeItem {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-func (x *GetPaymentChannelFeeSummaryResponse) GetSubtotalUsd() string {
+func (x *ListPaymentChannelFeesResponse) GetSubtotalUsd() string {
 	if x != nil {
 		return x.SubtotalUsd
 	}
 	return ""
+}
+
+func (x *ListPaymentChannelFeesResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListPaymentChannelFeesResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListPaymentChannelFeesResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 type PaymentChannelFeeItem struct {
@@ -7028,19 +7068,28 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
 	"final_rate\x18\a \x01(\tR\tfinalRate\x12 \n" +
 	"\vdescription\x18\b \x01(\tR\vdescription\x12\x18\n" +
-	"\aenabled\x18\t \x01(\bR\aenabled\"\xb0\x02\n" +
-	"\"GetPaymentChannelFeeSummaryRequest\x12\\\n" +
+	"\aenabled\x18\t \x01(\bR\aenabled\"\xfd\x02\n" +
+	"\x1dListPaymentChannelFeesRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\"\n" +
 	"\n" +
 	"period_key\x18\x03 \x01(\tH\x00R\tperiodKey\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x04 \x01(\x03H\x01R\tinvoiceId\x88\x01\x01B\r\n" +
+	"invoice_id\x18\x04 \x01(\x03H\x01R\tinvoiceId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x03R\bpageSize\x88\x01\x01B\r\n" +
 	"\v_period_keyB\r\n" +
-	"\v_invoice_id\"\x8e\x01\n" +
-	"#GetPaymentChannelFeeSummaryResponse\x12D\n" +
+	"\v_invoice_idB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xdb\x01\n" +
+	"\x1eListPaymentChannelFeesResponse\x12D\n" +
 	"\x05items\x18\x01 \x03(\v2..api.operator.service.v1.PaymentChannelFeeItemR\x05items\x12!\n" +
-	"\fsubtotal_usd\x18\x02 \x01(\tR\vsubtotalUsd\"\x89\x03\n" +
+	"\fsubtotal_usd\x18\x02 \x01(\tR\vsubtotalUsd\x12\x1f\n" +
+	"\vtotal_count\x18\x03 \x01(\x05R\n" +
+	"totalCount\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\x89\x03\n" +
 	"\x15PaymentChannelFeeItem\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
@@ -7057,7 +7106,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"serviceFee\x12\x17\n" +
 	"\afx_rate\x18\v \x01(\tR\x06fxRate\x12\x1d\n" +
 	"\n" +
-	"amount_usd\x18\f \x01(\tR\tamountUsd2\x8f\"\n" +
+	"amount_usd\x18\f \x01(\tR\tamountUsd2\x80\"\n" +
 	"\bOperator\x12j\n" +
 	"\vAddOperator\x12+.api.operator.service.v1.AddOperatorRequest\x1a,.api.operator.service.v1.AddOperatorResponse\"\x00\x12s\n" +
 	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x00\x12j\n" +
@@ -7090,8 +7139,8 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x1dRecalculateDailyRevenueShares\x12=.api.operator.service.v1.RecalculateDailyRevenueSharesRequest\x1a>.api.operator.service.v1.RecalculateDailyRevenueSharesResponse\"\x00\x12y\n" +
 	"\x10DeleteAdjustment\x120.api.operator.service.v1.DeleteAdjustmentRequest\x1a1.api.operator.service.v1.DeleteAdjustmentResponse\"\x00\x12\x9a\x01\n" +
 	"\x1bListRevenueShareRateConfigs\x12;.api.operator.service.v1.ListRevenueShareRateConfigsRequest\x1a<.api.operator.service.v1.ListRevenueShareRateConfigsResponse\"\x00\x12\x82\x01\n" +
-	"\x13ListCustodyOverview\x123.api.operator.service.v1.ListCustodyOverviewRequest\x1a4.api.operator.service.v1.ListCustodyOverviewResponse\"\x00\x12\x9a\x01\n" +
-	"\x1bGetPaymentChannelFeeSummary\x12;.api.operator.service.v1.GetPaymentChannelFeeSummaryRequest\x1a<.api.operator.service.v1.GetPaymentChannelFeeSummaryResponse\"\x00BW\n" +
+	"\x13ListCustodyOverview\x123.api.operator.service.v1.ListCustodyOverviewRequest\x1a4.api.operator.service.v1.ListCustodyOverviewResponse\"\x00\x12\x8b\x01\n" +
+	"\x16ListPaymentChannelFees\x126.api.operator.service.v1.ListPaymentChannelFeesRequest\x1a7.api.operator.service.v1.ListPaymentChannelFeesResponse\"\x00BW\n" +
 	"\x17api.operator.service.v1P\x01Z:github.com/infigaming-com/meepo-api/operator/service/v1;v1b\x06proto3"
 
 var (
@@ -7179,8 +7228,8 @@ var file_operator_service_v1_operator_proto_goTypes = []any{
 	(*RecalculateDailyRevenueSharesResponse)(nil),                      // 67: api.operator.service.v1.RecalculateDailyRevenueSharesResponse
 	(*ListRevenueShareRateConfigsRequest)(nil),                         // 68: api.operator.service.v1.ListRevenueShareRateConfigsRequest
 	(*ListRevenueShareRateConfigsResponse)(nil),                        // 69: api.operator.service.v1.ListRevenueShareRateConfigsResponse
-	(*GetPaymentChannelFeeSummaryRequest)(nil),                         // 70: api.operator.service.v1.GetPaymentChannelFeeSummaryRequest
-	(*GetPaymentChannelFeeSummaryResponse)(nil),                        // 71: api.operator.service.v1.GetPaymentChannelFeeSummaryResponse
+	(*ListPaymentChannelFeesRequest)(nil),                              // 70: api.operator.service.v1.ListPaymentChannelFeesRequest
+	(*ListPaymentChannelFeesResponse)(nil),                             // 71: api.operator.service.v1.ListPaymentChannelFeesResponse
 	(*PaymentChannelFeeItem)(nil),                                      // 72: api.operator.service.v1.PaymentChannelFeeItem
 	(*GetOperatorResponse_Operator)(nil),                               // 73: api.operator.service.v1.GetOperatorResponse.Operator
 	(*GetOperatorsByIdsResponse_Operator)(nil),                         // 74: api.operator.service.v1.GetOperatorsByIdsResponse.Operator
@@ -7242,9 +7291,9 @@ var file_operator_service_v1_operator_proto_depIdxs = []int32{
 	86, // 38: api.operator.service.v1.ListBalancesSummaryResponse.balances:type_name -> api.operator.service.v1.ListBalancesSummaryResponse.BalanceSummary
 	89, // 39: api.operator.service.v1.RecalculateDailyRevenueSharesRequest.operator_context:type_name -> api.common.OperatorContext
 	87, // 40: api.operator.service.v1.ListRevenueShareRateConfigsResponse.configs:type_name -> api.operator.service.v1.ListRevenueShareRateConfigsResponse.RevenueShareRateConfig
-	88, // 41: api.operator.service.v1.GetPaymentChannelFeeSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	89, // 42: api.operator.service.v1.GetPaymentChannelFeeSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	72, // 43: api.operator.service.v1.GetPaymentChannelFeeSummaryResponse.items:type_name -> api.operator.service.v1.PaymentChannelFeeItem
+	88, // 41: api.operator.service.v1.ListPaymentChannelFeesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	89, // 42: api.operator.service.v1.ListPaymentChannelFeesRequest.operator_context:type_name -> api.common.OperatorContext
+	72, // 43: api.operator.service.v1.ListPaymentChannelFeesResponse.items:type_name -> api.operator.service.v1.PaymentChannelFeeItem
 	1,  // 44: api.operator.service.v1.ListInvoicesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
 	2,  // 45: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
 	89, // 46: api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem.target_operator_context:type_name -> api.common.OperatorContext
@@ -7280,7 +7329,7 @@ var file_operator_service_v1_operator_proto_depIdxs = []int32{
 	46, // 76: api.operator.service.v1.Operator.DeleteAdjustment:input_type -> api.operator.service.v1.DeleteAdjustmentRequest
 	68, // 77: api.operator.service.v1.Operator.ListRevenueShareRateConfigs:input_type -> api.operator.service.v1.ListRevenueShareRateConfigsRequest
 	57, // 78: api.operator.service.v1.Operator.ListCustodyOverview:input_type -> api.operator.service.v1.ListCustodyOverviewRequest
-	70, // 79: api.operator.service.v1.Operator.GetPaymentChannelFeeSummary:input_type -> api.operator.service.v1.GetPaymentChannelFeeSummaryRequest
+	70, // 79: api.operator.service.v1.Operator.ListPaymentChannelFees:input_type -> api.operator.service.v1.ListPaymentChannelFeesRequest
 	5,  // 80: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
 	7,  // 81: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
 	9,  // 82: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
@@ -7313,7 +7362,7 @@ var file_operator_service_v1_operator_proto_depIdxs = []int32{
 	47, // 109: api.operator.service.v1.Operator.DeleteAdjustment:output_type -> api.operator.service.v1.DeleteAdjustmentResponse
 	69, // 110: api.operator.service.v1.Operator.ListRevenueShareRateConfigs:output_type -> api.operator.service.v1.ListRevenueShareRateConfigsResponse
 	58, // 111: api.operator.service.v1.Operator.ListCustodyOverview:output_type -> api.operator.service.v1.ListCustodyOverviewResponse
-	71, // 112: api.operator.service.v1.Operator.GetPaymentChannelFeeSummary:output_type -> api.operator.service.v1.GetPaymentChannelFeeSummaryResponse
+	71, // 112: api.operator.service.v1.Operator.ListPaymentChannelFees:output_type -> api.operator.service.v1.ListPaymentChannelFeesResponse
 	80, // [80:113] is the sub-list for method output_type
 	47, // [47:80] is the sub-list for method input_type
 	47, // [47:47] is the sub-list for extension type_name
