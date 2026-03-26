@@ -362,6 +362,16 @@ type VipRewardClaimableEvent struct {
 	RewardType string `json:"reward_type"` // "upgrade_base", "upgrade_incremental", "upgrade", "rakeback_instant", "rakeback_daily", etc.
 }
 
+// VipUpdateTopic is published when a user's VIP level changes
+const VipUpdateTopic = "vip.update"
+
+type VipUpdateEvent struct {
+	UserID      int64 `json:"user_id"`
+	OldVipLevel int32 `json:"old_vip_level"`
+	NewVipLevel int32 `json:"new_vip_level"`
+	UpdatedAt   int64 `json:"updated_at"`
+}
+
 // ------------------------------------------------------------
 // Reward granted events
 // ------------------------------------------------------------
