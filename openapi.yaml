@@ -14215,16 +14215,10 @@ components:
             properties:
                 item:
                     type: string
-                    description: Basic information
-                retailerOperatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                operatorId:
-                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 appliedDate:
                     type: string
-                    description: Financial information
                 currency:
                     type: string
                 amount:
@@ -18575,7 +18569,6 @@ components:
             properties:
                 item:
                     type: string
-                    description: Basic information
                 operatorId:
                     type: string
                 operatorName:
@@ -18584,7 +18577,6 @@ components:
                     type: string
                 amount:
                     type: string
-                    description: Amount information
                 description:
                     type: string
                 id:
@@ -18595,6 +18587,12 @@ components:
                     type: string
                 adjustmentType:
                     type: string
+                appliedDate:
+                    type: string
+                periodKey:
+                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListAffiliateBillsRequest:
             type: object
             properties:
@@ -23887,8 +23885,8 @@ components:
                     type: string
                 item:
                     type: string
-                operatorId:
-                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 appliedDate:
                     type: string
                 currency:

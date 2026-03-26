@@ -468,19 +468,15 @@ message ListMonthlyRevenueShareResponse {
 }
 
 message AddAdjustmentRequest {
-	// Basic information
-	string item = 1; // Adjustment item type
-	int64 retailer_operator_id = 2; // Retailer ID
-	int64 company_operator_id = 3; // Company ID
-	int64 operator_id = 4; // Operator ID
-	
-	// Financial information
-	string applied_date = 5; // Applied date
-	string currency = 6; // Currency code (e.g., "USDT", "USD")
-	string amount = 7; // Adjustment amount as string to preserve precision
-	string description = 8; // Description of the adjustment
-	string period_key = 9; // Period key
-	int64 created_by = 10; // Backoffice user ID of the creator
+	string item = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string applied_date = 3;
+	string currency = 4;
+	string amount = 5;
+	string description = 6;
+	string period_key = 7;
+	int64 created_by = 8;
+	string adjustment_type = 9;
 }
 
 message AddAdjustmentResponse {
@@ -489,13 +485,13 @@ message AddAdjustmentResponse {
 message UpdateAdjustmentRequest {
 	int64 id = 1;
 	string item = 2;
-	int64 operator_id = 3;
+	api.common.OperatorContext target_operator_context = 3;
 	string applied_date = 4;
 	string currency = 5;
 	string amount = 6;
 	string description = 7;
 	string period_key = 8;
-	string adjustment_type = 9; // pre-calculation or post-calculation
+	string adjustment_type = 9;
 }
 
 message UpdateAdjustmentResponse {
@@ -561,8 +557,11 @@ message ListAdjustmentsResponse {
 		string description = 6;
 		int64 id = 7;
 		int64 created_at = 8;
-		string created_by = 9; // creator display name
-		string adjustment_type = 10; // pre-calculation or post-calculation
+		string created_by = 9;
+		string adjustment_type = 10;
+		string applied_date = 11;
+		string period_key = 12;
+		api.common.OperatorContext target_operator_context = 13;
 	}
 	
 	repeated AdjustmentItem items = 1;
