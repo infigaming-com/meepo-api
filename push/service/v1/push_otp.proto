@@ -107,6 +107,7 @@ enum OTPTemplateType {
   OTP_TEMPLATE_TYPE_LOGIN_OTP = 2;
   OTP_TEMPLATE_TYPE_PASSWORD_RESET = 3;
   OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM = 4;
+  OTP_TEMPLATE_TYPE_PHONE_VERIFICATION = 5;
 }
 
 // OTPTemplateReviewStatus represents the approval state of a template on the external provider.

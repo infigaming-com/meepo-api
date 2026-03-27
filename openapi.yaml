@@ -15419,6 +15419,7 @@ components:
                         - OTP_TEMPLATE_TYPE_LOGIN_OTP
                         - OTP_TEMPLATE_TYPE_PASSWORD_RESET
                         - OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
+                        - OTP_TEMPLATE_TYPE_PHONE_VERIFICATION
                     type: string
                     description: |-
                         Business scenario this template serves:
@@ -20441,6 +20442,7 @@ components:
                         - OTP_TEMPLATE_TYPE_LOGIN_OTP
                         - OTP_TEMPLATE_TYPE_PASSWORD_RESET
                         - OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
+                        - OTP_TEMPLATE_TYPE_PHONE_VERIFICATION
                     type: string
                     description: Filter by business scenario (optional)
                     format: enum
@@ -28441,6 +28443,7 @@ components:
                         - OTP_TEMPLATE_TYPE_LOGIN_OTP
                         - OTP_TEMPLATE_TYPE_PASSWORD_RESET
                         - OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
+                        - OTP_TEMPLATE_TYPE_PHONE_VERIFICATION
                     type: string
                     description: Business scenario this template serves
                     format: enum
