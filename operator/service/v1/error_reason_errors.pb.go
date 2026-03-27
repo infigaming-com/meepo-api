@@ -118,3 +118,27 @@ func IsAdjustmentConfigAlreadyExists(err error) bool {
 func ErrorAdjustmentConfigAlreadyExists(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ADJUSTMENT_CONFIG_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvoiceInsufficientBalance(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVOICE_INSUFFICIENT_BALANCE.String() && e.Code == 500
+}
+
+func ErrorInvoiceInsufficientBalance(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVOICE_INSUFFICIENT_BALANCE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvoiceNotPayable(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVOICE_NOT_PAYABLE.String() && e.Code == 500
+}
+
+func ErrorInvoiceNotPayable(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVOICE_NOT_PAYABLE.String(), fmt.Sprintf(format, args...))
+}
