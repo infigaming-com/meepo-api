@@ -30211,6 +30211,8 @@ components:
                     type: string
                 registrationUrl:
                     type: string
+                defaultCurrency:
+                    type: string
             description: InitiateOAuthLoginRequest - initiate OAuth login via redirect flow
         api.user.service.v1.InitiateOAuthLoginResponse:
             type: object
@@ -30620,6 +30622,9 @@ components:
                 registrationUrl:
                     type: string
                     description: 'Optional: URL where user registered (for affiliate tracking)'
+                defaultCurrency:
+                    type: string
+                    description: 'Optional: default currency for the new user.'
             description: OAuthRequest contains the information needed for OAuth authentication.
         api.user.service.v1.OperatorAccountGameSettings:
             type: object
@@ -31126,6 +31131,12 @@ components:
                 hash:
                     type: string
                     description: Hash for verifying the authentication data.
+                registrationUrl:
+                    type: string
+                    description: Registration URL containing affiliate/campaign tracking information.
+                defaultCurrency:
+                    type: string
+                    description: 'Optional: default currency for the new user.'
             description: TelegramAuthRequest contains the information from Telegram's login widget.
         api.user.service.v1.TelegramMiniAppAuthRequest:
             type: object
@@ -31133,6 +31144,12 @@ components:
                 initData:
                     type: string
                     description: Telegram Mini App initData (URL-encoded query string from WebApp.initData).
+                registrationUrl:
+                    type: string
+                    description: Registration URL containing affiliate/campaign tracking information.
+                defaultCurrency:
+                    type: string
+                    description: 'Optional: default currency for the new user.'
             description: TelegramMiniAppAuthRequest contains the initData from Telegram Mini App.
         api.user.service.v1.UnbindOAuthAccountRequest:
             type: object

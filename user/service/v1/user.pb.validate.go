@@ -886,6 +886,10 @@ func (m *OAuthRequest) validate(all bool) error {
 		// no validation rules for RegistrationUrl
 	}
 
+	if m.DefaultCurrency != nil {
+		// no validation rules for DefaultCurrency
+	}
+
 	if len(errors) > 0 {
 		return OAuthRequestMultiError(errors)
 	}
@@ -999,6 +1003,14 @@ func (m *TelegramAuthRequest) validate(all bool) error {
 
 	// no validation rules for Hash
 
+	if m.RegistrationUrl != nil {
+		// no validation rules for RegistrationUrl
+	}
+
+	if m.DefaultCurrency != nil {
+		// no validation rules for DefaultCurrency
+	}
+
 	if len(errors) > 0 {
 		return TelegramAuthRequestMultiError(errors)
 	}
@@ -1102,6 +1114,14 @@ func (m *TelegramMiniAppAuthRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for InitData
+
+	if m.RegistrationUrl != nil {
+		// no validation rules for RegistrationUrl
+	}
+
+	if m.DefaultCurrency != nil {
+		// no validation rules for DefaultCurrency
+	}
 
 	if len(errors) > 0 {
 		return TelegramMiniAppAuthRequestMultiError(errors)
@@ -30270,6 +30290,10 @@ func (m *OAuthLoginV2Request) validate(all bool) error {
 		// no validation rules for RegistrationUrl
 	}
 
+	if m.DefaultCurrency != nil {
+		// no validation rules for DefaultCurrency
+	}
+
 	if len(errors) > 0 {
 		return OAuthLoginV2RequestMultiError(errors)
 	}
@@ -31179,6 +31203,10 @@ func (m *InitiateOAuthLoginRequest) validate(all bool) error {
 
 	if m.RegistrationUrl != nil {
 		// no validation rules for RegistrationUrl
+	}
+
+	if m.DefaultCurrency != nil {
+		// no validation rules for DefaultCurrency
 	}
 
 	if len(errors) > 0 {
