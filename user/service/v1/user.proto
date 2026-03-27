@@ -796,6 +796,8 @@ message OAuthRequest {
 	string token = 2;
 	// Optional: URL where user registered (for affiliate tracking)
 	optional string registration_url = 3;
+	// Optional: default currency for the new user.
+	optional string default_currency = 4;
 }
 
 // TelegramAuthRequest contains the information from Telegram's login widget.
@@ -814,12 +816,20 @@ message TelegramAuthRequest {
 	int64 auth_date = 6;
 	// Hash for verifying the authentication data.
 	string hash = 7;
+	// Registration URL containing affiliate/campaign tracking information.
+	optional string registration_url = 8;
+	// Optional: default currency for the new user.
+	optional string default_currency = 9;
 }
 
 // TelegramMiniAppAuthRequest contains the initData from Telegram Mini App.
 message TelegramMiniAppAuthRequest {
 	// Telegram Mini App initData (URL-encoded query string from WebApp.initData).
 	string init_data = 1;
+	// Registration URL containing affiliate/campaign tracking information.
+	optional string registration_url = 2;
+	// Optional: default currency for the new user.
+	optional string default_currency = 3;
 }
 
 // RefreshTokenRequest contains the refresh token for obtaining a new access token.
@@ -2461,6 +2471,7 @@ message OAuthLoginV2Request {
 	api.common.OperatorContext operator_context = 3;
 	HttpRequestInfo http_request_info = 4;
 	optional string registration_url = 5;  // Optional: URL where user registered (for affiliate tracking)
+	optional string default_currency = 6;  // Optional: default currency for the new user
 }
 
 // OAuthAccountInfo - bound OAuth account info
@@ -2511,6 +2522,7 @@ message InitiateOAuthLoginRequest {
 	string frontend_redirect_uri = 2;      // URL to redirect user after OAuth callback
 	string client_state = 3;               // Optional: client state to preserve across redirect
 	optional string registration_url = 4;  // Optional: URL where user registered (for affiliate tracking)
+	optional string default_currency = 5;  // Optional: default currency for the new user
 }
 
 // InitiateOAuthLoginResponse - returns authorization URL for redirect

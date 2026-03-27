@@ -991,6 +991,8 @@ type OAuthRequest struct {
 	Token string `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
 	// Optional: URL where user registered (for affiliate tracking)
 	RegistrationUrl *string `protobuf:"bytes,3,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"`
+	// Optional: default currency for the new user.
+	DefaultCurrency *string `protobuf:"bytes,4,opt,name=default_currency,json=defaultCurrency,proto3,oneof" json:"default_currency,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1046,6 +1048,13 @@ func (x *OAuthRequest) GetRegistrationUrl() string {
 	return ""
 }
 
+func (x *OAuthRequest) GetDefaultCurrency() string {
+	if x != nil && x.DefaultCurrency != nil {
+		return *x.DefaultCurrency
+	}
+	return ""
+}
+
 // TelegramAuthRequest contains the information from Telegram's login widget.
 type TelegramAuthRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1062,9 +1071,13 @@ type TelegramAuthRequest struct {
 	// Unix timestamp when the authentication was performed.
 	AuthDate int64 `protobuf:"varint,6,opt,name=auth_date,json=authDate,proto3" json:"auth_date,omitempty"`
 	// Hash for verifying the authentication data.
-	Hash          string `protobuf:"bytes,7,opt,name=hash,proto3" json:"hash,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Hash string `protobuf:"bytes,7,opt,name=hash,proto3" json:"hash,omitempty"`
+	// Registration URL containing affiliate/campaign tracking information.
+	RegistrationUrl *string `protobuf:"bytes,8,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"`
+	// Optional: default currency for the new user.
+	DefaultCurrency *string `protobuf:"bytes,9,opt,name=default_currency,json=defaultCurrency,proto3,oneof" json:"default_currency,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *TelegramAuthRequest) Reset() {
@@ -1146,13 +1159,31 @@ func (x *TelegramAuthRequest) GetHash() string {
 	return ""
 }
 
+func (x *TelegramAuthRequest) GetRegistrationUrl() string {
+	if x != nil && x.RegistrationUrl != nil {
+		return *x.RegistrationUrl
+	}
+	return ""
+}
+
+func (x *TelegramAuthRequest) GetDefaultCurrency() string {
+	if x != nil && x.DefaultCurrency != nil {
+		return *x.DefaultCurrency
+	}
+	return ""
+}
+
 // TelegramMiniAppAuthRequest contains the initData from Telegram Mini App.
 type TelegramMiniAppAuthRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Telegram Mini App initData (URL-encoded query string from WebApp.initData).
-	InitData      string `protobuf:"bytes,1,opt,name=init_data,json=initData,proto3" json:"init_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	InitData string `protobuf:"bytes,1,opt,name=init_data,json=initData,proto3" json:"init_data,omitempty"`
+	// Registration URL containing affiliate/campaign tracking information.
+	RegistrationUrl *string `protobuf:"bytes,2,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"`
+	// Optional: default currency for the new user.
+	DefaultCurrency *string `protobuf:"bytes,3,opt,name=default_currency,json=defaultCurrency,proto3,oneof" json:"default_currency,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *TelegramMiniAppAuthRequest) Reset() {
@@ -1188,6 +1219,20 @@ func (*TelegramMiniAppAuthRequest) Descriptor() ([]byte, []int) {
 func (x *TelegramMiniAppAuthRequest) GetInitData() string {
 	if x != nil {
 		return x.InitData
+	}
+	return ""
+}
+
+func (x *TelegramMiniAppAuthRequest) GetRegistrationUrl() string {
+	if x != nil && x.RegistrationUrl != nil {
+		return *x.RegistrationUrl
+	}
+	return ""
+}
+
+func (x *TelegramMiniAppAuthRequest) GetDefaultCurrency() string {
+	if x != nil && x.DefaultCurrency != nil {
+		return *x.DefaultCurrency
 	}
 	return ""
 }
@@ -14495,6 +14540,7 @@ type OAuthLoginV2Request struct {
 	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	HttpRequestInfo *HttpRequestInfo        `protobuf:"bytes,4,opt,name=http_request_info,json=httpRequestInfo,proto3" json:"http_request_info,omitempty"`
 	RegistrationUrl *string                 `protobuf:"bytes,5,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"` // Optional: URL where user registered (for affiliate tracking)
+	DefaultCurrency *string                 `protobuf:"bytes,6,opt,name=default_currency,json=defaultCurrency,proto3,oneof" json:"default_currency,omitempty"` // Optional: default currency for the new user
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -14560,6 +14606,13 @@ func (x *OAuthLoginV2Request) GetHttpRequestInfo() *HttpRequestInfo {
 func (x *OAuthLoginV2Request) GetRegistrationUrl() string {
 	if x != nil && x.RegistrationUrl != nil {
 		return *x.RegistrationUrl
+	}
+	return ""
+}
+
+func (x *OAuthLoginV2Request) GetDefaultCurrency() string {
+	if x != nil && x.DefaultCurrency != nil {
+		return *x.DefaultCurrency
 	}
 	return ""
 }
@@ -14931,6 +14984,7 @@ type InitiateOAuthLoginRequest struct {
 	FrontendRedirectUri string                 `protobuf:"bytes,2,opt,name=frontend_redirect_uri,json=frontendRedirectUri,proto3" json:"frontend_redirect_uri,omitempty"` // URL to redirect user after OAuth callback
 	ClientState         string                 `protobuf:"bytes,3,opt,name=client_state,json=clientState,proto3" json:"client_state,omitempty"`                           // Optional: client state to preserve across redirect
 	RegistrationUrl     *string                `protobuf:"bytes,4,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"`         // Optional: URL where user registered (for affiliate tracking)
+	DefaultCurrency     *string                `protobuf:"bytes,5,opt,name=default_currency,json=defaultCurrency,proto3,oneof" json:"default_currency,omitempty"`         // Optional: default currency for the new user
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -14989,6 +15043,13 @@ func (x *InitiateOAuthLoginRequest) GetClientState() string {
 func (x *InitiateOAuthLoginRequest) GetRegistrationUrl() string {
 	if x != nil && x.RegistrationUrl != nil {
 		return *x.RegistrationUrl
+	}
+	return ""
+}
+
+func (x *InitiateOAuthLoginRequest) GetDefaultCurrency() string {
+	if x != nil && x.DefaultCurrency != nil {
+		return *x.DefaultCurrency
 	}
 	return ""
 }
@@ -18445,12 +18506,14 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12P\n" +
-	"\x11http_request_info\x18\x05 \x01(\v2$.api.user.service.v1.HttpRequestInfoR\x0fhttpRequestInfo\"\xb4\x01\n" +
+	"\x11http_request_info\x18\x05 \x01(\v2$.api.user.service.v1.HttpRequestInfoR\x0fhttpRequestInfo\"\xf9\x01\n" +
 	"\fOAuthRequest\x12I\n" +
 	"\x0eoauth_provider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\roauthProvider\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12.\n" +
-	"\x10registration_url\x18\x03 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01B\x13\n" +
-	"\x11_registration_url\"\xcb\x01\n" +
+	"\x10registration_url\x18\x03 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01\x12.\n" +
+	"\x10default_currency\x18\x04 \x01(\tH\x01R\x0fdefaultCurrency\x88\x01\x01B\x13\n" +
+	"\x11_registration_urlB\x13\n" +
+	"\x11_default_currency\"\xd5\x02\n" +
 	"\x13TelegramAuthRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
 	"\n" +
@@ -18459,9 +18522,17 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\busername\x18\x04 \x01(\tR\busername\x12\x1b\n" +
 	"\tphoto_url\x18\x05 \x01(\tR\bphotoUrl\x12\x1b\n" +
 	"\tauth_date\x18\x06 \x01(\x03R\bauthDate\x12\x12\n" +
-	"\x04hash\x18\a \x01(\tR\x04hash\"9\n" +
+	"\x04hash\x18\a \x01(\tR\x04hash\x12.\n" +
+	"\x10registration_url\x18\b \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01\x12.\n" +
+	"\x10default_currency\x18\t \x01(\tH\x01R\x0fdefaultCurrency\x88\x01\x01B\x13\n" +
+	"\x11_registration_urlB\x13\n" +
+	"\x11_default_currency\"\xc3\x01\n" +
 	"\x1aTelegramMiniAppAuthRequest\x12\x1b\n" +
-	"\tinit_data\x18\x01 \x01(\tR\binitData\":\n" +
+	"\tinit_data\x18\x01 \x01(\tR\binitData\x12.\n" +
+	"\x10registration_url\x18\x02 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01\x12.\n" +
+	"\x10default_currency\x18\x03 \x01(\tH\x01R\x0fdefaultCurrency\x88\x01\x01B\x13\n" +
+	"\x11_registration_urlB\x13\n" +
+	"\x11_default_currency\":\n" +
 	"\x13RefreshTokenRequest\x12#\n" +
 	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"\xb1\x01\n" +
 	"\fAuthResponse\x12!\n" +
@@ -19732,15 +19803,17 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0fsupports_js_sdk\x18\a \x01(\bR\rsupportsJsSdk\"#\n" +
 	"!GetAvailableOAuthProvidersRequest\"o\n" +
 	"\"GetAvailableOAuthProvidersResponse\x12I\n" +
-	"\tproviders\x18\x01 \x03(\v2+.api.user.service.v1.AvailableOAuthProviderR\tproviders\"\xd5\x02\n" +
+	"\tproviders\x18\x01 \x03(\v2+.api.user.service.v1.AvailableOAuthProviderR\tproviders\"\x9a\x03\n" +
 	"\x13OAuthLoginV2Request\x12>\n" +
 	"\bprovider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\bprovider\x12\x1f\n" +
 	"\voauth_token\x18\x02 \x01(\tR\n" +
 	"oauthToken\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12P\n" +
 	"\x11http_request_info\x18\x04 \x01(\v2$.api.user.service.v1.HttpRequestInfoR\x0fhttpRequestInfo\x12.\n" +
-	"\x10registration_url\x18\x05 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01B\x13\n" +
-	"\x11_registration_url\"\x87\x02\n" +
+	"\x10registration_url\x18\x05 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01\x12.\n" +
+	"\x10default_currency\x18\x06 \x01(\tH\x01R\x0fdefaultCurrency\x88\x01\x01B\x13\n" +
+	"\x11_registration_urlB\x13\n" +
+	"\x11_default_currency\"\x87\x02\n" +
 	"\x10OAuthAccountInfo\x12>\n" +
 	"\bprovider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\bprovider\x12(\n" +
 	"\x10provider_user_id\x18\x02 \x01(\tR\x0eproviderUserId\x12\x14\n" +
@@ -19762,13 +19835,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1dListBoundOAuthAccountsRequest\"\x86\x01\n" +
 	"\x1eListBoundOAuthAccountsResponse\x12A\n" +
 	"\baccounts\x18\x01 \x03(\v2%.api.user.service.v1.OAuthAccountInfoR\baccounts\x12!\n" +
-	"\fhas_password\x18\x02 \x01(\bR\vhasPassword\"\xf7\x01\n" +
+	"\fhas_password\x18\x02 \x01(\bR\vhasPassword\"\xbc\x02\n" +
 	"\x19InitiateOAuthLoginRequest\x12>\n" +
 	"\bprovider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\bprovider\x122\n" +
 	"\x15frontend_redirect_uri\x18\x02 \x01(\tR\x13frontendRedirectUri\x12!\n" +
 	"\fclient_state\x18\x03 \x01(\tR\vclientState\x12.\n" +
-	"\x10registration_url\x18\x04 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01B\x13\n" +
-	"\x11_registration_url\"_\n" +
+	"\x10registration_url\x18\x04 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01\x12.\n" +
+	"\x10default_currency\x18\x05 \x01(\tH\x01R\x0fdefaultCurrency\x88\x01\x01B\x13\n" +
+	"\x11_registration_urlB\x13\n" +
+	"\x11_default_currency\"_\n" +
 	"\x1aInitiateOAuthLoginResponse\x12+\n" +
 	"\x11authorization_url\x18\x01 \x01(\tR\x10authorizationUrl\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\"\xb4\x01\n" +
@@ -20882,6 +20957,8 @@ func file_user_service_v1_user_proto_init() {
 	}
 	file_user_service_v1_user_proto_msgTypes[1].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[5].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[6].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[7].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[39].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[41].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[43].OneofWrappers = []any{}
