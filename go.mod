@@ -1,6 +1,6 @@
 module github.com/infigaming-com/meepo-api
 
-go 1.24.6
+go 1.25.8
 
 require (
 	github.com/go-kratos/kratos/v2 v2.8.4
