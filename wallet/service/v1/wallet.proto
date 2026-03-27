@@ -2385,8 +2385,8 @@ message ListOperatorWithdrawableAmountsRequest {
 	optional int32 page = 3;
 	// default 20
 	optional int32 page_size = 4;
-	// when true, return all results without pagination
-	optional bool disable_pagination = 5;
+	// if nil, pagination is true
+	optional bool pagination = 5;
 }
 
 message OperatorWithdrawableAmount {

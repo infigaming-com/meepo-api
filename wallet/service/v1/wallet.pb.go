@@ -13869,10 +13869,10 @@ type ListOperatorWithdrawableAmountsRequest struct {
 	Page *int32 `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	// default 20
 	PageSize *int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	// when true, return all results without pagination
-	DisablePagination *bool `protobuf:"varint,5,opt,name=disable_pagination,json=disablePagination,proto3,oneof" json:"disable_pagination,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// if nil, pagination is true
+	Pagination    *bool `protobuf:"varint,5,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListOperatorWithdrawableAmountsRequest) Reset() {
@@ -13933,9 +13933,9 @@ func (x *ListOperatorWithdrawableAmountsRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListOperatorWithdrawableAmountsRequest) GetDisablePagination() bool {
-	if x != nil && x.DisablePagination != nil {
-		return *x.DisablePagination
+func (x *ListOperatorWithdrawableAmountsRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
 	}
 	return false
 }
@@ -18714,17 +18714,19 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ecash_amount_reporting_currency\x18\b \x01(\tR\x1bcashAmountReportingCurrency\x12V\n" +
 	"(operator_bonus_amount_reporting_currency\x18\t \x01(\tR$operatorBonusAmountReportingCurrency\x12V\n" +
 	"(provider_bonus_amount_reporting_currency\x18\n" +
-	" \x01(\tR$providerBonusAmountReportingCurrency\"\xeb\x02\n" +
+	" \x01(\tR$providerBonusAmountReportingCurrency\"\xd4\x02\n" +
 	"&ListOperatorWithdrawableAmountsRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\x04page\x18\x03 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x122\n" +
-	"\x12disable_pagination\x18\x05 \x01(\bH\x02R\x11disablePagination\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12#\n" +
+	"\n" +
+	"pagination\x18\x05 \x01(\bH\x02R\n" +
+	"pagination\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_sizeB\x15\n" +
-	"\x13_disable_pagination\"\xbb\x04\n" +
+	"_page_sizeB\r\n" +
+	"\v_pagination\"\xbb\x04\n" +
 	"\x1aOperatorWithdrawableAmount\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
 	"\x16retailer_operator_name\x18\x02 \x01(\tR\x14retailerOperatorName\x122\n" +

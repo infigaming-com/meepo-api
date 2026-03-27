@@ -20676,9 +20676,9 @@ components:
                     type: integer
                     description: Default 20
                     format: int32
-                disablePagination:
+                pagination:
                     type: boolean
-                    description: when true, return all results without pagination
+                    description: if nil, pagination is true
                 targetOperatorContext:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'

@@ -4593,8 +4593,8 @@ type ListOperatorWithdrawableAmountsRequest struct {
 	Page *int32 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	// Default 20
 	PageSize *int32 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	// when true, return all results without pagination
-	DisablePagination *bool `protobuf:"varint,4,opt,name=disable_pagination,json=disablePagination,proto3,oneof" json:"disable_pagination,omitempty"`
+	// if nil, pagination is true
+	Pagination *bool `protobuf:"varint,4,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
 	// optional: query a specific operator's data; if omitted, uses the initiator's own context
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
@@ -4652,9 +4652,9 @@ func (x *ListOperatorWithdrawableAmountsRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListOperatorWithdrawableAmountsRequest) GetDisablePagination() bool {
-	if x != nil && x.DisablePagination != nil {
-		return *x.DisablePagination
+func (x *ListOperatorWithdrawableAmountsRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
 	}
 	return false
 }
@@ -5505,17 +5505,19 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\aconfigs\x18\x03 \x03(\v22.api.wallet.service.v1.AppDownloadRewardConfigItemR\aconfigsB\x10\n" +
 	"\x0e_follow_parent\"x\n" +
 	"!GetAppDownloadRewardConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xf8\x02\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xe1\x02\n" +
 	"&ListOperatorWithdrawableAmountsRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x122\n" +
-	"\x12disable_pagination\x18\x04 \x01(\bH\x02R\x11disablePagination\x88\x01\x01\x12S\n" +
+	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12#\n" +
+	"\n" +
+	"pagination\x18\x04 \x01(\bH\x02R\n" +
+	"pagination\x88\x01\x01\x12S\n" +
 	"\x17target_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_sizeB\x15\n" +
-	"\x13_disable_pagination2\xc7K\n" +
+	"_page_sizeB\r\n" +
+	"\v_pagination2\xc7K\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
