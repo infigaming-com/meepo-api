@@ -34,6 +34,7 @@ const (
 	BackofficeFinance_DeleteAdjustment_FullMethodName                = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustment"
 	BackofficeFinance_UpdateAdjustment_FullMethodName                = "/api.backoffice.service.v1.BackofficeFinance/UpdateAdjustment"
 	BackofficeFinance_SendInvoices_FullMethodName                    = "/api.backoffice.service.v1.BackofficeFinance/SendInvoices"
+	BackofficeFinance_PayInvoice_FullMethodName                      = "/api.backoffice.service.v1.BackofficeFinance/PayInvoice"
 	BackofficeFinance_GetInvoiceSummary_FullMethodName               = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceSummary"
 	BackofficeFinance_GetBalanceSummary_FullMethodName               = "/api.backoffice.service.v1.BackofficeFinance/GetBalanceSummary"
 	BackofficeFinance_GetBalancesSummary_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/GetBalancesSummary"
@@ -67,6 +68,7 @@ type BackofficeFinanceClient interface {
 	DeleteAdjustment(ctx context.Context, in *DeleteAdjustmentRequest, opts ...grpc.CallOption) (*DeleteAdjustmentResponse, error)
 	UpdateAdjustment(ctx context.Context, in *UpdateAdjustmentRequest, opts ...grpc.CallOption) (*UpdateAdjustmentResponse, error)
 	SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error)
+	PayInvoice(ctx context.Context, in *PayInvoiceRequest, opts ...grpc.CallOption) (*PayInvoiceResponse, error)
 	GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error)
 	GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error)
 	GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error)
@@ -230,6 +232,16 @@ func (c *backofficeFinanceClient) SendInvoices(ctx context.Context, in *SendInvo
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) PayInvoice(ctx context.Context, in *PayInvoiceRequest, opts ...grpc.CallOption) (*PayInvoiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PayInvoiceResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_PayInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeFinanceClient) GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetInvoiceSummaryResponse)
@@ -378,6 +390,7 @@ type BackofficeFinanceServer interface {
 	DeleteAdjustment(context.Context, *DeleteAdjustmentRequest) (*DeleteAdjustmentResponse, error)
 	UpdateAdjustment(context.Context, *UpdateAdjustmentRequest) (*UpdateAdjustmentResponse, error)
 	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
+	PayInvoice(context.Context, *PayInvoiceRequest) (*PayInvoiceResponse, error)
 	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
 	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
 	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
@@ -442,6 +455,9 @@ func (UnimplementedBackofficeFinanceServer) UpdateAdjustment(context.Context, *U
 }
 func (UnimplementedBackofficeFinanceServer) SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendInvoices not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) PayInvoice(context.Context, *PayInvoiceRequest) (*PayInvoiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PayInvoice not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetInvoiceSummary not implemented")
@@ -755,6 +771,24 @@ func _BackofficeFinance_SendInvoices_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_PayInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PayInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).PayInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_PayInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).PayInvoice(ctx, req.(*PayInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeFinance_GetInvoiceSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetInvoiceSummaryRequest)
 	if err := dec(in); err != nil {
@@ -1051,6 +1085,10 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendInvoices",
 			Handler:    _BackofficeFinance_SendInvoices_Handler,
+		},
+		{
+			MethodName: "PayInvoice",
+			Handler:    _BackofficeFinance_PayInvoice_Handler,
 		},
 		{
 			MethodName: "GetInvoiceSummary",

@@ -3479,6 +3479,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetInvoiceDetailResponse'
+    /v1/backoffice/finance/invoice/pay:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_PayInvoice
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PayInvoiceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.PayInvoiceResponse'
     /v1/backoffice/finance/invoices/list:
         post:
             tags:
@@ -22908,6 +22926,20 @@ components:
                 Pause an active campaign. Transitions status from ACTIVE → PAUSED.
                  New triggers are no longer processed. In-flight executions continue to completion.
                  A paused campaign can be re-activated via `ActivateCrmCampaign`.
+        api.backoffice.service.v1.PayInvoiceRequest:
+            type: object
+            properties:
+                invoiceId:
+                    type: string
+        api.backoffice.service.v1.PayInvoiceResponse:
+            type: object
+            properties:
+                invoiceId:
+                    type: string
+                amountPaid:
+                    type: string
+                paymentDate:
+                    type: string
         api.backoffice.service.v1.PaymentChannelFeeItem:
             type: object
             properties:

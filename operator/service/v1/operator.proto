@@ -78,6 +78,9 @@ service Operator {
 	rpc SendInvoices(SendInvoicesRequest) returns (SendInvoicesResponse) {
 	}
 
+	rpc PayInvoice(PayInvoiceRequest) returns (PayInvoiceResponse) {
+	}
+
 	rpc GetInvoiceSummary(GetInvoiceSummaryRequest) returns (GetInvoiceSummaryResponse) {
 	}
 
@@ -599,6 +602,16 @@ message SendInvoicesRequest {
 }
 
 message SendInvoicesResponse {
+}
+
+message PayInvoiceRequest {
+	int64 invoice_id = 1;
+}
+
+message PayInvoiceResponse {
+	int64 invoice_id = 1;
+	string amount_paid = 2;
+	string payment_date = 3;
 }
 
 message GetInvoiceSummaryRequest {
