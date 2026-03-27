@@ -25740,8 +25740,8 @@ func (m *ListOperatorWithdrawableAmountsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
-	if m.DisablePagination != nil {
-		// no validation rules for DisablePagination
+	if m.Pagination != nil {
+		// no validation rules for Pagination
 	}
 
 	if len(errors) > 0 {
