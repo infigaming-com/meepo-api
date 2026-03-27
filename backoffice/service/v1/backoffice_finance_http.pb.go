@@ -42,6 +42,7 @@ const OperationBackofficeFinanceListPaymentChannelFees = "/api.backoffice.servic
 const OperationBackofficeFinanceListRevenueShareRateConfigs = "/api.backoffice.service.v1.BackofficeFinance/ListRevenueShareRateConfigs"
 const OperationBackofficeFinanceListTaxReports = "/api.backoffice.service.v1.BackofficeFinance/ListTaxReports"
 const OperationBackofficeFinanceListThirdPartyFees = "/api.backoffice.service.v1.BackofficeFinance/ListThirdPartyFees"
+const OperationBackofficeFinancePayInvoice = "/api.backoffice.service.v1.BackofficeFinance/PayInvoice"
 const OperationBackofficeFinanceSendInvoices = "/api.backoffice.service.v1.BackofficeFinance/SendInvoices"
 const OperationBackofficeFinanceUpdateAdjustment = "/api.backoffice.service.v1.BackofficeFinance/UpdateAdjustment"
 const OperationBackofficeFinanceUpdateAdjustmentConfig = "/api.backoffice.service.v1.BackofficeFinance/UpdateAdjustmentConfig"
@@ -71,6 +72,7 @@ type BackofficeFinanceHTTPServer interface {
 	ListRevenueShareRateConfigs(context.Context, *ListRevenueShareRateConfigsRequest) (*ListRevenueShareRateConfigsResponse, error)
 	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
 	ListThirdPartyFees(context.Context, *ListThirdPartyFeesRequest) (*ListThirdPartyFeesResponse, error)
+	PayInvoice(context.Context, *PayInvoiceRequest) (*PayInvoiceResponse, error)
 	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
 	UpdateAdjustment(context.Context, *UpdateAdjustmentRequest) (*UpdateAdjustmentResponse, error)
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error)
@@ -94,6 +96,7 @@ func RegisterBackofficeFinanceHTTPServer(s *http.Server, srv BackofficeFinanceHT
 	r.POST("/v1/backoffice/finance/adjustment/delete", _BackofficeFinance_DeleteAdjustment0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/adjustments/update", _BackofficeFinance_UpdateAdjustment0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/invoices/send", _BackofficeFinance_SendInvoices0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/invoice/pay", _BackofficeFinance_PayInvoice0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/invoices/summary", _BackofficeFinance_GetInvoiceSummary0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/balance/summary", _BackofficeFinance_GetBalanceSummary0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/balances/summary", _BackofficeFinance_GetBalancesSummary0_HTTP_Handler(srv))
@@ -417,6 +420,28 @@ func _BackofficeFinance_SendInvoices0_HTTP_Handler(srv BackofficeFinanceHTTPServ
 	}
 }
 
+func _BackofficeFinance_PayInvoice0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in PayInvoiceRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinancePayInvoice)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.PayInvoice(ctx, req.(*PayInvoiceRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*PayInvoiceResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeFinance_GetInvoiceSummary0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetInvoiceSummaryRequest
@@ -726,6 +751,7 @@ type BackofficeFinanceHTTPClient interface {
 	ListRevenueShareRateConfigs(ctx context.Context, req *ListRevenueShareRateConfigsRequest, opts ...http.CallOption) (rsp *ListRevenueShareRateConfigsResponse, err error)
 	ListTaxReports(ctx context.Context, req *ListTaxReportsRequest, opts ...http.CallOption) (rsp *ListTaxReportsResponse, err error)
 	ListThirdPartyFees(ctx context.Context, req *ListThirdPartyFeesRequest, opts ...http.CallOption) (rsp *ListThirdPartyFeesResponse, err error)
+	PayInvoice(ctx context.Context, req *PayInvoiceRequest, opts ...http.CallOption) (rsp *PayInvoiceResponse, err error)
 	SendInvoices(ctx context.Context, req *SendInvoicesRequest, opts ...http.CallOption) (rsp *SendInvoicesResponse, err error)
 	UpdateAdjustment(ctx context.Context, req *UpdateAdjustmentRequest, opts ...http.CallOption) (rsp *UpdateAdjustmentResponse, err error)
 	UpdateAdjustmentConfig(ctx context.Context, req *UpdateAdjustmentConfigRequest, opts ...http.CallOption) (rsp *UpdateAdjustmentConfigResponse, err error)
@@ -1019,6 +1045,19 @@ func (c *BackofficeFinanceHTTPClientImpl) ListThirdPartyFees(ctx context.Context
 	pattern := "/v1/backoffice/finance/third-party-fees/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeFinanceListThirdPartyFees))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) PayInvoice(ctx context.Context, in *PayInvoiceRequest, opts ...http.CallOption) (*PayInvoiceResponse, error) {
+	var out PayInvoiceResponse
+	pattern := "/v1/backoffice/finance/invoice/pay"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinancePayInvoice))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -108,6 +108,13 @@ service BackofficeFinance {
 		};
 	}
 
+	rpc PayInvoice(PayInvoiceRequest) returns (PayInvoiceResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/invoice/pay"
+			body: "*"
+		};
+	}
+
 	rpc GetInvoiceSummary(GetInvoiceSummaryRequest) returns (GetInvoiceSummaryResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/finance/invoices/summary"
@@ -580,6 +587,16 @@ message SendInvoicesRequest {
 }
 
 message SendInvoicesResponse {
+}
+
+message PayInvoiceRequest {
+	int64 invoice_id = 1;
+}
+
+message PayInvoiceResponse {
+	int64 invoice_id = 1;
+	string amount_paid = 2;
+	string payment_date = 3;
 }
 
 message GetInvoiceSummaryRequest {
