@@ -5445,6 +5445,8 @@ func (m *VipMemberWithLevelName) validate(all bool) error {
 
 	// no validation rules for CurrentLevelName
 
+	// no validation rules for CurrentLevel
+
 	if len(errors) > 0 {
 		return VipMemberWithLevelNameMultiError(errors)
 	}

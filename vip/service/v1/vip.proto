@@ -479,10 +479,11 @@ message BatchGetVipMembersRequest {
   repeated int64 user_ids = 1;
 }
 
-// VIP membership info with level name
+// VIP membership info with level name and number
 message VipMemberWithLevelName {
   VipMember vip_member = 1;
   string current_level_name = 2;
+  int32 current_level = 3; // absolute level number (e.g. 1, 5, 11), 0 means unranked
 }
 
 // Batch get user VIP membership info response

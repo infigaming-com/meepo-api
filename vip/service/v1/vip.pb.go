@@ -3369,11 +3369,12 @@ func (x *BatchGetVipMembersRequest) GetUserIds() []int64 {
 	return nil
 }
 
-// VIP membership info with level name
+// VIP membership info with level name and number
 type VipMemberWithLevelName struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	VipMember        *VipMember             `protobuf:"bytes,1,opt,name=vip_member,json=vipMember,proto3" json:"vip_member,omitempty"`
 	CurrentLevelName string                 `protobuf:"bytes,2,opt,name=current_level_name,json=currentLevelName,proto3" json:"current_level_name,omitempty"`
+	CurrentLevel     int32                  `protobuf:"varint,3,opt,name=current_level,json=currentLevel,proto3" json:"current_level,omitempty"` // absolute level number (e.g. 1, 5, 11), 0 means unranked
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -3420,6 +3421,13 @@ func (x *VipMemberWithLevelName) GetCurrentLevelName() string {
 		return x.CurrentLevelName
 	}
 	return ""
+}
+
+func (x *VipMemberWithLevelName) GetCurrentLevel() int32 {
+	if x != nil {
+		return x.CurrentLevel
+	}
+	return 0
 }
 
 // Batch get user VIP membership info response
@@ -4293,11 +4301,12 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"6\n" +
 	"\x19BatchGetVipMembersRequest\x12\x19\n" +
-	"\buser_ids\x18\x01 \x03(\x03R\auserIds\"\x84\x01\n" +
+	"\buser_ids\x18\x01 \x03(\x03R\auserIds\"\xa9\x01\n" +
 	"\x16VipMemberWithLevelName\x12<\n" +
 	"\n" +
 	"vip_member\x18\x01 \x01(\v2\x1d.api.vip.service.v1.VipMemberR\tvipMember\x12,\n" +
-	"\x12current_level_name\x18\x02 \x01(\tR\x10currentLevelName\"i\n" +
+	"\x12current_level_name\x18\x02 \x01(\tR\x10currentLevelName\x12#\n" +
+	"\rcurrent_level\x18\x03 \x01(\x05R\fcurrentLevel\"i\n" +
 	"\x1aBatchGetVipMembersResponse\x12K\n" +
 	"\vvip_members\x18\x01 \x03(\v2*.api.vip.service.v1.VipMemberWithLevelNameR\n" +
 	"vipMembers\"}\n" +
