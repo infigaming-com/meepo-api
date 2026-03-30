@@ -518,6 +518,8 @@ message DepositCallbackRequest {
   string timestamp = 12 [json_name="timestamp"];
   // Random string to ensure each request is unique
   string nonce = 13 [json_name="nonce"];
+  // On-chain transaction hash (for crypto transactions)
+  string tx_hash = 14 [json_name="txHash"];
 }
 
 // Response for deposit callback
@@ -556,6 +558,8 @@ message WithdrawCallbackRequest {
   string timestamp = 11 [json_name="timestamp"];
   // Random string to ensure each request is unique
   string nonce = 12 [json_name="nonce"];
+  // On-chain transaction hash (for crypto transactions)
+  string tx_hash = 13 [json_name="txHash"];
 }
 
 // Response for withdraw callback
@@ -683,6 +687,8 @@ message TransactionInfo {
   google.protobuf.Struct payer = 36;
   // Payee information (JSONB data)
   google.protobuf.Struct payee = 37;
+  // On-chain transaction hash (for crypto transactions)
+  string tx_hash = 38;
 }
 
 message TransactionDetail {
