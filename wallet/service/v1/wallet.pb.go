@@ -13311,7 +13311,17 @@ type GetCompanyFinancialSummaryResponse struct {
 	// Total amount withdrawn from sub-operators by backoffice (settled operator_payment_withdraw_freeze), absolute value in USD
 	CompanyWithdrawUsd string `protobuf:"bytes,5,opt,name=company_withdraw_usd,json=companyWithdrawUsd,proto3" json:"company_withdraw_usd,omitempty"`
 	// Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
-	TransferUsd   string `protobuf:"bytes,6,opt,name=transfer_usd,json=transferUsd,proto3" json:"transfer_usd,omitempty"`
+	TransferUsd string `protobuf:"bytes,6,opt,name=transfer_usd,json=transferUsd,proto3" json:"transfer_usd,omitempty"`
+	// Pending amount frozen from sub-operators when their players withdraw but not yet settled (operator_user_withdraw_freeze with no status), absolute value in USD
+	PendingPlayerWithdrawUsd string `protobuf:"bytes,7,opt,name=pending_player_withdraw_usd,json=pendingPlayerWithdrawUsd,proto3" json:"pending_player_withdraw_usd,omitempty"`
+	// Pending amount frozen from sub-operators by company-initiated withdrawals but not yet settled (operator_payment_withdraw_freeze with no status), absolute value in USD
+	PendingCompanyWithdrawUsd string `protobuf:"bytes,8,opt,name=pending_company_withdraw_usd,json=pendingCompanyWithdrawUsd,proto3" json:"pending_company_withdraw_usd,omitempty"`
+	// Pending amount frozen from sub-operators by system balance freeze but not yet settled (operator_balance_freeze with no status), absolute value in USD
+	PendingBalanceFreezeUsd string `protobuf:"bytes,9,opt,name=pending_balance_freeze_usd,json=pendingBalanceFreezeUsd,proto3" json:"pending_balance_freeze_usd,omitempty"`
+	// Settled amount frozen from sub-operators by system balance freeze (operator_balance_freeze with status settled), absolute value in USD
+	SettledBalanceFreezeUsd string `protobuf:"bytes,10,opt,name=settled_balance_freeze_usd,json=settledBalanceFreezeUsd,proto3" json:"settled_balance_freeze_usd,omitempty"`
+	// Net swap amount across all sub-operators (operator_balance_swap), representing swap fee loss in USD
+	SwapFeeUsd    string `protobuf:"bytes,11,opt,name=swap_fee_usd,json=swapFeeUsd,proto3" json:"swap_fee_usd,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -13384,6 +13394,41 @@ func (x *GetCompanyFinancialSummaryResponse) GetCompanyWithdrawUsd() string {
 func (x *GetCompanyFinancialSummaryResponse) GetTransferUsd() string {
 	if x != nil {
 		return x.TransferUsd
+	}
+	return ""
+}
+
+func (x *GetCompanyFinancialSummaryResponse) GetPendingPlayerWithdrawUsd() string {
+	if x != nil {
+		return x.PendingPlayerWithdrawUsd
+	}
+	return ""
+}
+
+func (x *GetCompanyFinancialSummaryResponse) GetPendingCompanyWithdrawUsd() string {
+	if x != nil {
+		return x.PendingCompanyWithdrawUsd
+	}
+	return ""
+}
+
+func (x *GetCompanyFinancialSummaryResponse) GetPendingBalanceFreezeUsd() string {
+	if x != nil {
+		return x.PendingBalanceFreezeUsd
+	}
+	return ""
+}
+
+func (x *GetCompanyFinancialSummaryResponse) GetSettledBalanceFreezeUsd() string {
+	if x != nil {
+		return x.SettledBalanceFreezeUsd
+	}
+	return ""
+}
+
+func (x *GetCompanyFinancialSummaryResponse) GetSwapFeeUsd() string {
+	if x != nil {
+		return x.SwapFeeUsd
 	}
 	return ""
 }
@@ -18661,14 +18706,21 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"start_time\x18\x02 \x01(\x03H\x00R\tstartTime\x88\x01\x01\x12\x1e\n" +
 	"\bend_time\x18\x03 \x01(\x03H\x01R\aendTime\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xb9\x02\n" +
+	"\t_end_time\"\xd5\x04\n" +
 	"\"GetCompanyFinancialSummaryResponse\x12.\n" +
 	"\x13custody_balance_usd\x18\x01 \x01(\tR\x11custodyBalanceUsd\x122\n" +
 	"\x15internal_deposits_usd\x18\x02 \x01(\tR\x13internalDepositsUsd\x12*\n" +
 	"\x11user_deposits_usd\x18\x03 \x01(\tR\x0fuserDepositsUsd\x12.\n" +
 	"\x13player_withdraw_usd\x18\x04 \x01(\tR\x11playerWithdrawUsd\x120\n" +
 	"\x14company_withdraw_usd\x18\x05 \x01(\tR\x12companyWithdrawUsd\x12!\n" +
-	"\ftransfer_usd\x18\x06 \x01(\tR\vtransferUsd\"\xd4\x03\n" +
+	"\ftransfer_usd\x18\x06 \x01(\tR\vtransferUsd\x12=\n" +
+	"\x1bpending_player_withdraw_usd\x18\a \x01(\tR\x18pendingPlayerWithdrawUsd\x12?\n" +
+	"\x1cpending_company_withdraw_usd\x18\b \x01(\tR\x19pendingCompanyWithdrawUsd\x12;\n" +
+	"\x1apending_balance_freeze_usd\x18\t \x01(\tR\x17pendingBalanceFreezeUsd\x12;\n" +
+	"\x1asettled_balance_freeze_usd\x18\n" +
+	" \x01(\tR\x17settledBalanceFreezeUsd\x12 \n" +
+	"\fswap_fee_usd\x18\v \x01(\tR\n" +
+	"swapFeeUsd\"\xd4\x03\n" +
 	"\x1cGameBatchBetAndSettleRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
