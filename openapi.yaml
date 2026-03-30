@@ -24535,6 +24535,8 @@ components:
                     type: boolean
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                globalTickerEnabled:
+                    type: boolean
         api.backoffice.service.v1.UpdateBetTickerConfigRequest_Item:
             type: object
             properties:
@@ -28615,6 +28617,8 @@ components:
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.ListBetTickerConfigResponse_Item'
                 enable:
+                    type: boolean
+                globalTickerEnabled:
                     type: boolean
         api.push.service.v1.ListBetTickerConfigResponse_Item:
             type: object

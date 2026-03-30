@@ -4664,6 +4664,7 @@ type UpdateBetTickerConfigRequest struct {
 	List                  []*UpdateBetTickerConfigRequest_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	Enable                bool                                 `protobuf:"varint,2,opt,name=enable,proto3" json:"enable,omitempty"`
 	TargetOperatorContext *common.OperatorContext              `protobuf:"bytes,3,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	GlobalTickerEnabled   *bool                                `protobuf:"varint,4,opt,name=global_ticker_enabled,json=globalTickerEnabled,proto3,oneof" json:"global_ticker_enabled,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -4717,6 +4718,13 @@ func (x *UpdateBetTickerConfigRequest) GetTargetOperatorContext() *common.Operat
 		return x.TargetOperatorContext
 	}
 	return nil
+}
+
+func (x *UpdateBetTickerConfigRequest) GetGlobalTickerEnabled() bool {
+	if x != nil && x.GlobalTickerEnabled != nil {
+		return *x.GlobalTickerEnabled
+	}
+	return false
 }
 
 type ListBetTickerConfigRequest struct {
@@ -6496,11 +6504,12 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"orderIndex\x12\x16\n" +
 	"\x06sticky\x18\f \x01(\bR\x06sticky\x12\x1b\n" +
 	"\tfree_spin\x18\r \x01(\bR\bfreeSpin\x12\x10\n" +
-	"\x03rtp\x18\x0e \x01(\tR\x03rtp\"\xae\x03\n" +
+	"\x03rtp\x18\x0e \x01(\tR\x03rtp\"\x81\x04\n" +
 	"\x1cUpdateBetTickerConfigRequest\x12P\n" +
 	"\x04list\x18\x01 \x03(\v2<.api.backoffice.service.v1.UpdateBetTickerConfigRequest.ItemR\x04list\x12\x16\n" +
 	"\x06enable\x18\x02 \x01(\bR\x06enable\x12S\n" +
-	"\x17target_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x1a\xce\x01\n" +
+	"\x17target_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x127\n" +
+	"\x15global_ticker_enabled\x18\x04 \x01(\bH\x00R\x13globalTickerEnabled\x88\x01\x01\x1a\xce\x01\n" +
 	"\x04Item\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12F\n" +
 	"\aall_bet\x18\x02 \x01(\v2(.api.push.service.v1.BettingFilterConfigH\x00R\x06allBet\x88\x01\x01\x12J\n" +
@@ -6508,7 +6517,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
 	"\b_all_betB\f\n" +
 	"\n" +
-	"_high_wins\"q\n" +
+	"_high_winsB\x18\n" +
+	"\x16_global_ticker_enabled\"q\n" +
 	"\x1aListBetTickerConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext2\xa0Q\n" +
 	"\x0eBackofficeGame\x12\xa1\x01\n" +
@@ -6942,6 +6952,7 @@ func file_backoffice_service_v1_backoffice_game_proto_init() {
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[42].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[45].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[64].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[66].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[70].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[72].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[80].OneofWrappers = []any{}

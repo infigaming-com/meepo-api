@@ -9109,6 +9109,10 @@ func (m *UpdateBetTickerConfigRequest) validate(all bool) error {
 		}
 	}
 
+	if m.GlobalTickerEnabled != nil {
+		// no validation rules for GlobalTickerEnabled
+	}
+
 	if len(errors) > 0 {
 		return UpdateBetTickerConfigRequestMultiError(errors)
 	}
