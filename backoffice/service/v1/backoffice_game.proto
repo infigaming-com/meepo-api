@@ -324,6 +324,110 @@ service BackofficeGame {
 			body: "*"
 		};
 	}
+
+	// ============== Game Group (RTP Variants) APIs ==============
+
+	rpc ListGameGroups(game.service.v1.ListGameGroupsRequest) returns (game.service.v1.ListGameGroupsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/groups/list"
+			body: "*"
+		};
+	}
+
+	rpc GetGameGroup(game.service.v1.GetGameGroupRequest) returns (game.service.v1.GetGameGroupResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/groups/get"
+			body: "*"
+		};
+	}
+
+	rpc CreateGameGroup(game.service.v1.CreateGameGroupRequest) returns (game.service.v1.CreateGameGroupResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/groups/create"
+			body: "*"
+		};
+	}
+
+	rpc UpdateGameGroup(game.service.v1.UpdateGameGroupRequest) returns (game.service.v1.UpdateGameGroupResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/groups/update"
+			body: "*"
+		};
+	}
+
+	rpc DeleteGameGroup(game.service.v1.DeleteGameGroupRequest) returns (game.service.v1.DeleteGameGroupResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/groups/delete"
+			body: "*"
+		};
+	}
+
+	rpc AddGameGroupVariant(game.service.v1.AddGameGroupVariantRequest) returns (game.service.v1.AddGameGroupVariantResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/groups/variants/add"
+			body: "*"
+		};
+	}
+
+	rpc UpdateGameGroupVariant(game.service.v1.UpdateGameGroupVariantRequest) returns (game.service.v1.UpdateGameGroupVariantResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/groups/variants/update"
+			body: "*"
+		};
+	}
+
+	rpc RemoveGameGroupVariant(game.service.v1.RemoveGameGroupVariantRequest) returns (game.service.v1.RemoveGameGroupVariantResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/groups/variants/remove"
+			body: "*"
+		};
+	}
+
+	// ============== RTP Strategy APIs ==============
+
+	rpc ListRTPStrategies(game.service.v1.ListRTPStrategiesRequest) returns (game.service.v1.ListRTPStrategiesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/rtp-strategies/list"
+			body: "*"
+		};
+	}
+
+	rpc CreateRTPStrategy(game.service.v1.CreateRTPStrategyRequest) returns (game.service.v1.CreateRTPStrategyResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/rtp-strategies/create"
+			body: "*"
+		};
+	}
+
+	rpc UpdateRTPStrategy(game.service.v1.UpdateRTPStrategyRequest) returns (game.service.v1.UpdateRTPStrategyResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/rtp-strategies/update"
+			body: "*"
+		};
+	}
+
+	rpc DeleteRTPStrategy(game.service.v1.DeleteRTPStrategyRequest) returns (game.service.v1.DeleteRTPStrategyResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/rtp-strategies/delete"
+			body: "*"
+		};
+	}
+
+	// ============== P2: Auto-detect & Debug ==============
+
+	rpc SuggestGameGroups(game.service.v1.SuggestGameGroupsRequest) returns (game.service.v1.SuggestGameGroupsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/groups/suggest"
+			body: "*"
+		};
+	}
+
+	rpc PreviewRTPRouting(game.service.v1.PreviewRTPRoutingRequest) returns (game.service.v1.PreviewRTPRoutingResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/rtp-routing/preview"
+			body: "*"
+		};
+	}
 }
 
 

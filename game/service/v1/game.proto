@@ -343,6 +343,14 @@ service Game {
 	rpc DeleteRTPStrategy(DeleteRTPStrategyRequest) returns (DeleteRTPStrategyResponse) {
 	}
 
+	// Suggest game groups by detecting games with similar names from the same provider
+	rpc SuggestGameGroups(SuggestGameGroupsRequest) returns (SuggestGameGroupsResponse) {
+	}
+
+	// Preview RTP routing: given a user and game, show which variant would be selected
+	rpc PreviewRTPRouting(PreviewRTPRoutingRequest) returns (PreviewRTPRoutingResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -2510,3 +2518,41 @@ message DeleteRTPStrategyRequest {
 }
 
 message DeleteRTPStrategyResponse {}
+
+// ============== P2: Auto-detect & Debug Messages ==============
+
+message SuggestGameGroupsRequest {
+	optional string provider_id = 1; // filter by provider, empty = all
+}
+
+message SuggestGameGroupsResponse {
+	repeated SuggestedGameGroup suggestions = 1;
+}
+
+message SuggestedGameGroup {
+	string provider_id = 1;
+	string base_name = 2;               // e.g. "2 Wild 2 Die"
+	repeated SuggestedVariant variants = 3;
+}
+
+message SuggestedVariant {
+	string game_id = 1;   // e.g. "hacksaw:2Wild2Die94"
+	string game_name = 2; // e.g. "2 Wild 2 Die 94%"
+}
+
+message PreviewRTPRoutingRequest {
+	int64 user_id = 1;
+	string game_id = 2;
+	int64 operator_id = 3;
+}
+
+message PreviewRTPRoutingResponse {
+	string original_game_id = 1;
+	string resolved_game_id = 2;
+	bool routed = 3;                    // true if resolved != original
+	int64 game_group_id = 4;
+	string matched_rtp_tier = 5;
+	int64 matched_segment_id = 6;
+	int64 matched_strategy_id = 7;
+	repeated int64 user_segment_ids = 8; // segments the user belongs to
+}
