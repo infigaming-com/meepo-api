@@ -97,6 +97,7 @@ message UpdateBetTickerConfigRequest {
 	repeated Item list = 1;
 	bool enable = 2;
 	int64 operator_id = 3;
+	optional bool global_ticker_enabled = 4;
 }
 
 message UpdateBetTickerConfigResponse {}
@@ -113,6 +114,7 @@ message ListBetTickerConfigResponse {
 	}
 	repeated Item list = 1;
 	bool enable = 2;
+	bool global_ticker_enabled = 3;
 }
 
 // ============== Web Push Messages ==============

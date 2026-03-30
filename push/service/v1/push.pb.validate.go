@@ -945,6 +945,10 @@ func (m *UpdateBetTickerConfigRequest) validate(all bool) error {
 
 	// no validation rules for OperatorId
 
+	if m.GlobalTickerEnabled != nil {
+		// no validation rules for GlobalTickerEnabled
+	}
+
 	if len(errors) > 0 {
 		return UpdateBetTickerConfigRequestMultiError(errors)
 	}
@@ -1290,6 +1294,8 @@ func (m *ListBetTickerConfigResponse) validate(all bool) error {
 	}
 
 	// no validation rules for Enable
+
+	// no validation rules for GlobalTickerEnabled
 
 	if len(errors) > 0 {
 		return ListBetTickerConfigResponseMultiError(errors)

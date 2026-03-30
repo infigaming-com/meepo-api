@@ -1016,6 +1016,7 @@ message UpdateBetTickerConfigRequest {
 	repeated Item list = 1;
 	bool enable = 2;
 	api.common.OperatorContext target_operator_context = 3;
+	optional bool global_ticker_enabled = 4;
 }
 
 message ListBetTickerConfigRequest {

@@ -4093,6 +4093,168 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.ListFreespinsProvidersResponse'
+    /v1/backoffice/game/groups/create:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_CreateGameGroup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.CreateGameGroupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.CreateGameGroupResponse'
+    /v1/backoffice/game/groups/delete:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_DeleteGameGroup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.DeleteGameGroupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.DeleteGameGroupResponse'
+    /v1/backoffice/game/groups/get:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_GetGameGroup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.GetGameGroupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.GetGameGroupResponse'
+    /v1/backoffice/game/groups/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListGameGroups
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListGameGroupsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListGameGroupsResponse'
+    /v1/backoffice/game/groups/suggest:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_SuggestGameGroups
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.SuggestGameGroupsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.SuggestGameGroupsResponse'
+    /v1/backoffice/game/groups/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateGameGroup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.UpdateGameGroupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.UpdateGameGroupResponse'
+    /v1/backoffice/game/groups/variants/add:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_AddGameGroupVariant
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.AddGameGroupVariantRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.AddGameGroupVariantResponse'
+    /v1/backoffice/game/groups/variants/remove:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_RemoveGameGroupVariant
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.RemoveGameGroupVariantRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.RemoveGameGroupVariantResponse'
+    /v1/backoffice/game/groups/variants/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateGameGroupVariant
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.UpdateGameGroupVariantRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.UpdateGameGroupVariantResponse'
     /v1/backoffice/game/list:
         post:
             tags:
@@ -4191,6 +4353,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersResponse'
+    /v1/backoffice/game/rtp-routing/preview:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_PreviewRTPRouting
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.PreviewRTPRoutingRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.PreviewRTPRoutingResponse'
+    /v1/backoffice/game/rtp-strategies/create:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_CreateRTPStrategy
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.CreateRTPStrategyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.CreateRTPStrategyResponse'
+    /v1/backoffice/game/rtp-strategies/delete:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_DeleteRTPStrategy
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.DeleteRTPStrategyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.DeleteRTPStrategyResponse'
+    /v1/backoffice/game/rtp-strategies/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListRTPStrategies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListRTPStrategiesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListRTPStrategiesResponse'
+    /v1/backoffice/game/rtp-strategies/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateRTPStrategy
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.UpdateRTPStrategyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.UpdateRTPStrategyResponse'
     /v1/backoffice/game/sport-events/export:
         post:
             tags:
@@ -16860,6 +17112,9 @@ components:
                     type: string
                 withdrawDisabled:
                     type: boolean
+                custodyEstCosts:
+                    type: string
+                    description: 'Custody card: est costs from co-operation operators'
         api.backoffice.service.v1.GetBalancesSummaryRequest:
             type: object
             properties:
@@ -24197,6 +24452,8 @@ components:
                     type: boolean
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                globalTickerEnabled:
+                    type: boolean
         api.backoffice.service.v1.UpdateBetTickerConfigRequest_Item:
             type: object
             properties:
@@ -26266,6 +26523,24 @@ components:
                     type: boolean
                 extra:
                     type: string
+        api.game.service.v1.AddGameGroupVariantRequest:
+            type: object
+            properties:
+                gameGroupId:
+                    type: string
+                gameId:
+                    type: string
+                rtpTier:
+                    type: string
+                rtpValue:
+                    type: string
+                isDefault:
+                    type: boolean
+        api.game.service.v1.AddGameGroupVariantResponse:
+            type: object
+            properties:
+                variant:
+                    $ref: '#/components/schemas/api.game.service.v1.GameGroupVariantInfo'
         api.game.service.v1.BackofficeBatchUpdateTagGamesRequest:
             type: object
             properties:
@@ -26459,6 +26734,47 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+        api.game.service.v1.CreateGameGroupRequest:
+            type: object
+            properties:
+                displayName:
+                    type: string
+                providerId:
+                    type: string
+                baseGameId:
+                    type: string
+                enabled:
+                    type: boolean
+                variants:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.GameGroupVariantInfo'
+        api.game.service.v1.CreateGameGroupResponse:
+            type: object
+            properties:
+                group:
+                    $ref: '#/components/schemas/api.game.service.v1.GameGroupInfo'
+        api.game.service.v1.CreateRTPStrategyRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                operatorId:
+                    type: string
+                segmentId:
+                    type: string
+                rtpTier:
+                    type: string
+                priority:
+                    type: integer
+                    format: int32
+                enabled:
+                    type: boolean
+        api.game.service.v1.CreateRTPStrategyResponse:
+            type: object
+            properties:
+                strategy:
+                    $ref: '#/components/schemas/api.game.service.v1.RTPStrategyInfo'
         api.game.service.v1.CreateSessionRequest:
             type: object
             properties:
@@ -26477,6 +26793,22 @@ components:
             properties:
                 gameUrl:
                     type: string
+        api.game.service.v1.DeleteGameGroupRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.game.service.v1.DeleteGameGroupResponse:
+            type: object
+            properties: {}
+        api.game.service.v1.DeleteRTPStrategyRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.game.service.v1.DeleteRTPStrategyResponse:
+            type: object
+            properties: {}
         api.game.service.v1.ExportBetsResponse:
             type: object
             properties:
@@ -26701,6 +27033,36 @@ components:
                 country:
                     type: string
                     description: 'country: user''s country (2-letter ISO code, e.g. "US"), used for show_blocked filtering'
+        api.game.service.v1.GameGroupInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                displayName:
+                    type: string
+                providerId:
+                    type: string
+                baseGameId:
+                    type: string
+                enabled:
+                    type: boolean
+                variants:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.GameGroupVariantInfo'
+        api.game.service.v1.GameGroupVariantInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                gameId:
+                    type: string
+                rtpTier:
+                    type: string
+                rtpValue:
+                    type: string
+                isDefault:
+                    type: boolean
         api.game.service.v1.GameInfo:
             type: object
             properties:
@@ -26967,6 +27329,16 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.game.service.v1.GetBetByIdResponse_Action'
+        api.game.service.v1.GetGameGroupRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.game.service.v1.GetGameGroupResponse:
+            type: object
+            properties:
+                group:
+                    $ref: '#/components/schemas/api.game.service.v1.GameGroupInfo'
         api.game.service.v1.GetGameRequest:
             type: object
             properties:
@@ -27328,6 +27700,35 @@ components:
                     type: string
                 freespinsSupported:
                     type: boolean
+        api.game.service.v1.ListGameGroupsRequest:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                enabled:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListGameGroupsResponse:
+            type: object
+            properties:
+                groups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.GameGroupInfo'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.game.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -27516,6 +27917,33 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.game.service.v1.ListRTPStrategiesRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListRTPStrategiesResponse:
+            type: object
+            properties:
+                strategies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.RTPStrategyInfo'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.game.service.v1.ListStakeVarianceBetsResponse:
             type: object
             properties:
@@ -27709,6 +28137,62 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.game.service.v1.Transactions'
+        api.game.service.v1.PreviewRTPRoutingRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                gameId:
+                    type: string
+                operatorId:
+                    type: string
+        api.game.service.v1.PreviewRTPRoutingResponse:
+            type: object
+            properties:
+                originalGameId:
+                    type: string
+                resolvedGameId:
+                    type: string
+                routed:
+                    type: boolean
+                gameGroupId:
+                    type: string
+                matchedRtpTier:
+                    type: string
+                matchedSegmentId:
+                    type: string
+                matchedStrategyId:
+                    type: string
+                userSegmentIds:
+                    type: array
+                    items:
+                        type: string
+        api.game.service.v1.RTPStrategyInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                operatorId:
+                    type: string
+                segmentId:
+                    type: string
+                rtpTier:
+                    type: string
+                priority:
+                    type: integer
+                    format: int32
+                enabled:
+                    type: boolean
+        api.game.service.v1.RemoveGameGroupVariantRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.game.service.v1.RemoveGameGroupVariantResponse:
+            type: object
+            properties: {}
         api.game.service.v1.RollbackAction:
             type: object
             properties:
@@ -27771,6 +28255,36 @@ components:
                 processed_at:
                     type: number
                     format: double
+        api.game.service.v1.SuggestGameGroupsRequest:
+            type: object
+            properties:
+                providerId:
+                    type: string
+        api.game.service.v1.SuggestGameGroupsResponse:
+            type: object
+            properties:
+                suggestions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.SuggestedGameGroup'
+        api.game.service.v1.SuggestedGameGroup:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                baseName:
+                    type: string
+                variants:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.SuggestedVariant'
+        api.game.service.v1.SuggestedVariant:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                gameName:
+                    type: string
         api.game.service.v1.Transactions:
             type: object
             properties:
@@ -27783,6 +28297,57 @@ components:
                     format: double
                 bonus_amount:
                     type: string
+        api.game.service.v1.UpdateGameGroupRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                displayName:
+                    type: string
+                enabled:
+                    type: boolean
+                baseGameId:
+                    type: string
+        api.game.service.v1.UpdateGameGroupResponse:
+            type: object
+            properties:
+                group:
+                    $ref: '#/components/schemas/api.game.service.v1.GameGroupInfo'
+        api.game.service.v1.UpdateGameGroupVariantRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                rtpTier:
+                    type: string
+                rtpValue:
+                    type: string
+                isDefault:
+                    type: boolean
+        api.game.service.v1.UpdateGameGroupVariantResponse:
+            type: object
+            properties:
+                variant:
+                    $ref: '#/components/schemas/api.game.service.v1.GameGroupVariantInfo'
+        api.game.service.v1.UpdateRTPStrategyRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                rtpTier:
+                    type: string
+                priority:
+                    type: integer
+                    format: int32
+                enabled:
+                    type: boolean
+        api.game.service.v1.UpdateRTPStrategyResponse:
+            type: object
+            properties:
+                strategy:
+                    $ref: '#/components/schemas/api.game.service.v1.RTPStrategyInfo'
         api.game.service.v1.UrlInfo:
             type: object
             properties:
@@ -27969,6 +28534,8 @@ components:
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.ListBetTickerConfigResponse_Item'
                 enable:
+                    type: boolean
+                globalTickerEnabled:
                     type: boolean
         api.push.service.v1.ListBetTickerConfigResponse_Item:
             type: object
