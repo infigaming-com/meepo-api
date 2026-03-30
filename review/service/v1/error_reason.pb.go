@@ -59,9 +59,9 @@ const (
 	ErrorReason_WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING ErrorReason = 70030
 	ErrorReason_WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS     ErrorReason = 70031
 	// Deprecated: Marked as deprecated in review/service/v1/error_reason.proto.
-	ErrorReason_EXCEEDS_WITHDRAWABLE_AMOUNT              ErrorReason = 70032
-	ErrorReason_OPERATOR_WITHDRAWABLE_INSUFFICIENT       ErrorReason = 70033
-	ErrorReason_OPERATOR_CURRENCY_LIQUIDITY_INSUFFICIENT ErrorReason = 70034
+	ErrorReason_EXCEEDS_WITHDRAWABLE_AMOUNT            ErrorReason = 70032
+	ErrorReason_OPERATOR_WITHDRAWABLE_INSUFFICIENT     ErrorReason = 70033
+	ErrorReason_OPERATOR_CURRENCY_BALANCE_INSUFFICIENT ErrorReason = 70034
 )
 
 // Enum value maps for ErrorReason.
@@ -102,7 +102,7 @@ var (
 		70031: "WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS",
 		70032: "EXCEEDS_WITHDRAWABLE_AMOUNT",
 		70033: "OPERATOR_WITHDRAWABLE_INSUFFICIENT",
-		70034: "OPERATOR_CURRENCY_LIQUIDITY_INSUFFICIENT",
+		70034: "OPERATOR_CURRENCY_BALANCE_INSUFFICIENT",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                 0,
@@ -140,7 +140,7 @@ var (
 		"WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS":     70031,
 		"EXCEEDS_WITHDRAWABLE_AMOUNT":                 70032,
 		"OPERATOR_WITHDRAWABLE_INSUFFICIENT":          70033,
-		"OPERATOR_CURRENCY_LIQUIDITY_INSUFFICIENT":    70034,
+		"OPERATOR_CURRENCY_BALANCE_INSUFFICIENT":      70034,
 	}
 )
 
@@ -175,7 +175,7 @@ var File_review_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xc7\t\n" +
+	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xc5\t\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCONVERT_STRUCT_TO_JSON_FAILED\x10\xf0\xa2\x04\x12#\n" +
@@ -211,8 +211,8 @@ const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"+WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING\x10\x8e\xa3\x04\x12-\n" +
 	"'WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS\x10\x8f\xa3\x04\x12%\n" +
 	"\x1bEXCEEDS_WITHDRAWABLE_AMOUNT\x10\x90\xa3\x04\x1a\x02\b\x01\x12(\n" +
-	"\"OPERATOR_WITHDRAWABLE_INSUFFICIENT\x10\x91\xa3\x04\x12.\n" +
-	"(OPERATOR_CURRENCY_LIQUIDITY_INSUFFICIENT\x10\x92\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\"OPERATOR_WITHDRAWABLE_INSUFFICIENT\x10\x91\xa3\x04\x12,\n" +
+	"&OPERATOR_CURRENCY_BALANCE_INSUFFICIENT\x10\x92\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (
