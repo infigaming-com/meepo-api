@@ -54,6 +54,7 @@ const (
 	Wallet_GetOperatorBalance_FullMethodName                  = "/api.wallet.service.v1.Wallet/GetOperatorBalance"
 	Wallet_ListOperatorBalanceTransactions_FullMethodName     = "/api.wallet.service.v1.Wallet/ListOperatorBalanceTransactions"
 	Wallet_OperatorDebit_FullMethodName                       = "/api.wallet.service.v1.Wallet/OperatorDebit"
+	Wallet_OperatorBalanceAdjust_FullMethodName               = "/api.wallet.service.v1.Wallet/OperatorBalanceAdjust"
 	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
 	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
 	Wallet_GetCompanyFinancialSummary_FullMethodName          = "/api.wallet.service.v1.Wallet/GetCompanyFinancialSummary"
@@ -171,6 +172,9 @@ type WalletClient interface {
 	ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorBalanceTransactionsResponse, error)
 	// OperatorDebit is used to debit cash from an operator's balance
 	OperatorDebit(ctx context.Context, in *OperatorDebitRequest, opts ...grpc.CallOption) (*OperatorDebitResponse, error)
+	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
+	OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...grpc.CallOption) (*OperatorBalanceAdjustResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
@@ -628,6 +632,16 @@ func (c *walletClient) OperatorDebit(ctx context.Context, in *OperatorDebitReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(OperatorDebitResponse)
 	err := c.cc.Invoke(ctx, Wallet_OperatorDebit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...grpc.CallOption) (*OperatorBalanceAdjustResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OperatorBalanceAdjustResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorBalanceAdjust_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1208,6 +1222,9 @@ type WalletServer interface {
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// OperatorDebit is used to debit cash from an operator's balance
 	OperatorDebit(context.Context, *OperatorDebitRequest) (*OperatorDebitResponse, error)
+	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
+	OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
@@ -1425,6 +1442,9 @@ func (UnimplementedWalletServer) ListOperatorBalanceTransactions(context.Context
 }
 func (UnimplementedWalletServer) OperatorDebit(context.Context, *OperatorDebitRequest) (*OperatorDebitResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method OperatorDebit not implemented")
+}
+func (UnimplementedWalletServer) OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method OperatorBalanceAdjust not implemented")
 }
 func (UnimplementedWalletServer) UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorBalance not implemented")
@@ -2226,6 +2246,24 @@ func _Wallet_OperatorDebit_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).OperatorDebit(ctx, req.(*OperatorDebitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_OperatorBalanceAdjust_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorBalanceAdjustRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).OperatorBalanceAdjust(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_OperatorBalanceAdjust_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).OperatorBalanceAdjust(ctx, req.(*OperatorBalanceAdjustRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3294,6 +3332,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OperatorDebit",
 			Handler:    _Wallet_OperatorDebit_Handler,
+		},
+		{
+			MethodName: "OperatorBalanceAdjust",
+			Handler:    _Wallet_OperatorBalanceAdjust_Handler,
 		},
 		{
 			MethodName: "UpdateOperatorBalance",

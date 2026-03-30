@@ -431,14 +431,14 @@ func ErrorOperatorWithdrawableInsufficient(format string, args ...interface{}) *
 	return errors.New(500, ErrorReason_OPERATOR_WITHDRAWABLE_INSUFFICIENT.String(), fmt.Sprintf(format, args...))
 }
 
-func IsOperatorCurrencyLiquidityInsufficient(err error) bool {
+func IsOperatorCurrencyBalanceInsufficient(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_CURRENCY_LIQUIDITY_INSUFFICIENT.String() && e.Code == 500
+	return e.Reason == ErrorReason_OPERATOR_CURRENCY_BALANCE_INSUFFICIENT.String() && e.Code == 500
 }
 
-func ErrorOperatorCurrencyLiquidityInsufficient(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_OPERATOR_CURRENCY_LIQUIDITY_INSUFFICIENT.String(), fmt.Sprintf(format, args...))
+func ErrorOperatorCurrencyBalanceInsufficient(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CURRENCY_BALANCE_INSUFFICIENT.String(), fmt.Sprintf(format, args...))
 }

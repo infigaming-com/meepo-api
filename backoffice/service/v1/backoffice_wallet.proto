@@ -121,6 +121,13 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+	rpc OperatorBalanceAdjust(OperatorBalanceAdjustRequest) returns (OperatorBalanceAdjustResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/balance-adjust"
+			body: "*"
+		};
+	}
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	rpc ListOperatorBalanceTransactions(ListOperatorBalanceTransactionsRequest) returns (ListOperatorBalanceTransactionsResponse) {
 		option (google.api.http) = {
@@ -650,6 +657,22 @@ message OperatorBalanceSettleResponse {
 	string cash_amount = 3;
 	string cash_amount_usd = 4;
 	string cash_amount_reporting_currency = 5;
+}
+
+message OperatorBalanceAdjustRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	// "operator_manual_credit" or "operator_manual_debit"
+	string transaction_type = 3;
+	// amount must be positive; direction determined by transaction_type
+	string cash_amount = 4;
+	string memo = 5;
+}
+
+message OperatorBalanceAdjustResponse {
+	int64 transaction_id = 1;
+	// resulting balance after adjustment
+	string cash = 2;
 }
 
 message ListOperatorBalanceTransactionsRequest {

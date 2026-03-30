@@ -35,6 +35,7 @@ const (
 	BackofficeWallet_OperatorBalanceFreeze_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceFreeze"
 	BackofficeWallet_OperatorBalanceRollback_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceRollback"
 	BackofficeWallet_OperatorBalanceSettle_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
+	BackofficeWallet_OperatorBalanceAdjust_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceAdjust"
 	BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 	BackofficeWallet_UpdateOperatorBalance_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 	BackofficeWallet_GetOperatorBalance_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
@@ -104,6 +105,8 @@ type BackofficeWalletClient interface {
 	OperatorBalanceRollback(ctx context.Context, in *OperatorBalanceRollbackRequest, opts ...grpc.CallOption) (*OperatorBalanceRollbackResponse, error)
 	// OperatorSettle settles frozen cash of an operator
 	OperatorBalanceSettle(ctx context.Context, in *OperatorBalanceSettleRequest, opts ...grpc.CallOption) (*OperatorBalanceSettleResponse, error)
+	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+	OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...grpc.CallOption) (*OperatorBalanceAdjustResponse, error)
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorBalanceTransactionsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
@@ -324,6 +327,16 @@ func (c *backofficeWalletClient) OperatorBalanceSettle(ctx context.Context, in *
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(OperatorBalanceSettleResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_OperatorBalanceSettle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...grpc.CallOption) (*OperatorBalanceAdjustResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OperatorBalanceAdjustResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_OperatorBalanceAdjust_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -694,6 +707,8 @@ type BackofficeWalletServer interface {
 	OperatorBalanceRollback(context.Context, *OperatorBalanceRollbackRequest) (*OperatorBalanceRollbackResponse, error)
 	// OperatorSettle settles frozen cash of an operator
 	OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error)
+	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+	OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error)
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
@@ -814,6 +829,9 @@ func (UnimplementedBackofficeWalletServer) OperatorBalanceRollback(context.Conte
 }
 func (UnimplementedBackofficeWalletServer) OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method OperatorBalanceSettle not implemented")
+}
+func (UnimplementedBackofficeWalletServer) OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method OperatorBalanceAdjust not implemented")
 }
 func (UnimplementedBackofficeWalletServer) ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorBalanceTransactions not implemented")
@@ -1201,6 +1219,24 @@ func _BackofficeWallet_OperatorBalanceSettle_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeWalletServer).OperatorBalanceSettle(ctx, req.(*OperatorBalanceSettleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_OperatorBalanceAdjust_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorBalanceAdjustRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).OperatorBalanceAdjust(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_OperatorBalanceAdjust_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).OperatorBalanceAdjust(ctx, req.(*OperatorBalanceAdjustRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1865,6 +1901,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OperatorBalanceSettle",
 			Handler:    _BackofficeWallet_OperatorBalanceSettle_Handler,
+		},
+		{
+			MethodName: "OperatorBalanceAdjust",
+			Handler:    _BackofficeWallet_OperatorBalanceAdjust_Handler,
 		},
 		{
 			MethodName: "ListOperatorBalanceTransactions",

@@ -350,7 +350,7 @@ message PrecheckWithdrawApprovalResponse {
 }
 
 message WithdrawApprovalCheck {
-	// check type: "operator_withdrawable", "currency_liquidity"
+	// check type: "operator_withdrawable", "operator_currency_balance_insufficient"
 	string check_type = 1;
 	bool passed = 2;
 	string reason = 3;

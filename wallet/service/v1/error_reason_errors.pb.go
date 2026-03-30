@@ -2170,3 +2170,15 @@ func IsPdfExportRowLimitExceeded(err error) bool {
 func ErrorPdfExportRowLimitExceeded(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PDF_EXPORT_ROW_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidOperatorBalanceAdjustment(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_BALANCE_ADJUSTMENT.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorBalanceAdjustment(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_BALANCE_ADJUSTMENT.String(), fmt.Sprintf(format, args...))
+}

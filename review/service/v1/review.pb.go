@@ -1381,7 +1381,7 @@ func (x *PrecheckWithdrawApprovalResponse) GetChecks() []*WithdrawApprovalCheck 
 
 type WithdrawApprovalCheck struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// check type: "operator_withdrawable", "currency_liquidity"
+	// check type: "operator_withdrawable", "operator_currency_balance_insufficient"
 	CheckType string `protobuf:"bytes,1,opt,name=check_type,json=checkType,proto3" json:"check_type,omitempty"`
 	Passed    bool   `protobuf:"varint,2,opt,name=passed,proto3" json:"passed,omitempty"`
 	Reason    string `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`

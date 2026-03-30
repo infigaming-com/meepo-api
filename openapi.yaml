@@ -8556,6 +8556,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListManualJournalEntriesResponse'
+    /v1/backoffice/wallet/operator/balance-adjust:
+        post:
+            tags:
+                - BackofficeWallet
+            description: OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+            operationId: BackofficeWallet_OperatorBalanceAdjust
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceAdjustRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceAdjustResponse'
     /v1/backoffice/wallet/operator/balance-freeze:
         post:
             tags:
@@ -22982,6 +23001,29 @@ components:
                     type: string
                 comment:
                     type: string
+        api.backoffice.service.v1.OperatorBalanceAdjustRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                transactionType:
+                    type: string
+                    description: '"operator_manual_credit" or "operator_manual_debit"'
+                cashAmount:
+                    type: string
+                    description: amount must be positive; direction determined by transaction_type
+                memo:
+                    type: string
+        api.backoffice.service.v1.OperatorBalanceAdjustResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                cash:
+                    type: string
+                    description: resulting balance after adjustment
         api.backoffice.service.v1.OperatorBalanceFreezeRequest:
             type: object
             properties:
