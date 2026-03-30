@@ -2430,12 +2430,12 @@ message GetOperatorWithdrawCheckInfoRequest {
 }
 
 message GetOperatorWithdrawCheckInfoResponse {
-	// max withdrawable amount in USD (custody - estCost - estRsToSys - lockedForPendingInvoices)
-	string max_withdrawable_usd = 1;
-	// total pending freeze in USD (user withdraw + operator payment withdraw, absolute value)
-	string pending_freeze_usd = 2;
-	// operator balance in the specified currency
-	string custody_balance = 3;
-	// pending freeze in the specified currency (absolute value)
-	string pending_freeze = 4;
+	// operator withdrawable amount in USD (custody - estCost - estRsToSys - lockedForPendingInvoices)
+	string withdrawable_amount_usd = 1;
+	// total pending freeze amount across all currencies in USD (user withdraw + operator payment withdraw, absolute value)
+	string total_pending_freeze_amount_usd = 2;
+	// operator balance in the requested currency
+	string balance_in_currency = 3;
+	// pending freeze amount in the requested currency (absolute value)
+	string pending_freeze_amount_in_currency = 4;
 }

@@ -26292,13 +26292,13 @@ func (m *GetOperatorWithdrawCheckInfoResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for MaxWithdrawableUsd
+	// no validation rules for WithdrawableAmountUsd
 
-	// no validation rules for PendingFreezeUsd
+	// no validation rules for TotalPendingFreezeAmountUsd
 
-	// no validation rules for CustodyBalance
+	// no validation rules for BalanceInCurrency
 
-	// no validation rules for PendingFreeze
+	// no validation rules for PendingFreezeAmountInCurrency
 
 	if len(errors) > 0 {
 		return GetOperatorWithdrawCheckInfoResponseMultiError(errors)

@@ -14232,16 +14232,16 @@ func (x *GetOperatorWithdrawCheckInfoRequest) GetCurrency() string {
 
 type GetOperatorWithdrawCheckInfoResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// max withdrawable amount in USD (custody - estCost - estRsToSys - lockedForPendingInvoices)
-	MaxWithdrawableUsd string `protobuf:"bytes,1,opt,name=max_withdrawable_usd,json=maxWithdrawableUsd,proto3" json:"max_withdrawable_usd,omitempty"`
-	// total pending freeze in USD (user withdraw + operator payment withdraw, absolute value)
-	PendingFreezeUsd string `protobuf:"bytes,2,opt,name=pending_freeze_usd,json=pendingFreezeUsd,proto3" json:"pending_freeze_usd,omitempty"`
-	// operator balance in the specified currency
-	CustodyBalance string `protobuf:"bytes,3,opt,name=custody_balance,json=custodyBalance,proto3" json:"custody_balance,omitempty"`
-	// pending freeze in the specified currency (absolute value)
-	PendingFreeze string `protobuf:"bytes,4,opt,name=pending_freeze,json=pendingFreeze,proto3" json:"pending_freeze,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// operator withdrawable amount in USD (custody - estCost - estRsToSys - lockedForPendingInvoices)
+	WithdrawableAmountUsd string `protobuf:"bytes,1,opt,name=withdrawable_amount_usd,json=withdrawableAmountUsd,proto3" json:"withdrawable_amount_usd,omitempty"`
+	// total pending freeze amount across all currencies in USD (user withdraw + operator payment withdraw, absolute value)
+	TotalPendingFreezeAmountUsd string `protobuf:"bytes,2,opt,name=total_pending_freeze_amount_usd,json=totalPendingFreezeAmountUsd,proto3" json:"total_pending_freeze_amount_usd,omitempty"`
+	// operator balance in the requested currency
+	BalanceInCurrency string `protobuf:"bytes,3,opt,name=balance_in_currency,json=balanceInCurrency,proto3" json:"balance_in_currency,omitempty"`
+	// pending freeze amount in the requested currency (absolute value)
+	PendingFreezeAmountInCurrency string `protobuf:"bytes,4,opt,name=pending_freeze_amount_in_currency,json=pendingFreezeAmountInCurrency,proto3" json:"pending_freeze_amount_in_currency,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *GetOperatorWithdrawCheckInfoResponse) Reset() {
@@ -14274,30 +14274,30 @@ func (*GetOperatorWithdrawCheckInfoResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{176}
 }
 
-func (x *GetOperatorWithdrawCheckInfoResponse) GetMaxWithdrawableUsd() string {
+func (x *GetOperatorWithdrawCheckInfoResponse) GetWithdrawableAmountUsd() string {
 	if x != nil {
-		return x.MaxWithdrawableUsd
+		return x.WithdrawableAmountUsd
 	}
 	return ""
 }
 
-func (x *GetOperatorWithdrawCheckInfoResponse) GetPendingFreezeUsd() string {
+func (x *GetOperatorWithdrawCheckInfoResponse) GetTotalPendingFreezeAmountUsd() string {
 	if x != nil {
-		return x.PendingFreezeUsd
+		return x.TotalPendingFreezeAmountUsd
 	}
 	return ""
 }
 
-func (x *GetOperatorWithdrawCheckInfoResponse) GetCustodyBalance() string {
+func (x *GetOperatorWithdrawCheckInfoResponse) GetBalanceInCurrency() string {
 	if x != nil {
-		return x.CustodyBalance
+		return x.BalanceInCurrency
 	}
 	return ""
 }
 
-func (x *GetOperatorWithdrawCheckInfoResponse) GetPendingFreeze() string {
+func (x *GetOperatorWithdrawCheckInfoResponse) GetPendingFreezeAmountInCurrency() string {
 	if x != nil {
-		return x.PendingFreeze
+		return x.PendingFreezeAmountInCurrency
 	}
 	return ""
 }
@@ -18925,12 +18925,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x89\x01\n" +
 	"#GetOperatorWithdrawCheckInfoRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\xd6\x01\n" +
-	"$GetOperatorWithdrawCheckInfoResponse\x120\n" +
-	"\x14max_withdrawable_usd\x18\x01 \x01(\tR\x12maxWithdrawableUsd\x12,\n" +
-	"\x12pending_freeze_usd\x18\x02 \x01(\tR\x10pendingFreezeUsd\x12'\n" +
-	"\x0fcustody_balance\x18\x03 \x01(\tR\x0ecustodyBalance\x12%\n" +
-	"\x0epending_freeze\x18\x04 \x01(\tR\rpendingFreeze2\xce`\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\x9e\x02\n" +
+	"$GetOperatorWithdrawCheckInfoResponse\x126\n" +
+	"\x17withdrawable_amount_usd\x18\x01 \x01(\tR\x15withdrawableAmountUsd\x12D\n" +
+	"\x1ftotal_pending_freeze_amount_usd\x18\x02 \x01(\tR\x1btotalPendingFreezeAmountUsd\x12.\n" +
+	"\x13balance_in_currency\x18\x03 \x01(\tR\x11balanceInCurrency\x12H\n" +
+	"!pending_freeze_amount_in_currency\x18\x04 \x01(\tR\x1dpendingFreezeAmountInCurrency2\xce`\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
