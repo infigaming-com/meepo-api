@@ -3758,6 +3758,10 @@ func (m *ListCampaignsRequest) validate(all bool) error {
 
 	}
 
+	if m.Pagination != nil {
+		// no validation rules for Pagination
+	}
+
 	if len(errors) > 0 {
 		return ListCampaignsRequestMultiError(errors)
 	}

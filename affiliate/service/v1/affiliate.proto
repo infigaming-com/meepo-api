@@ -551,6 +551,8 @@ message ListCampaignsRequest {
     optional api.common.OperatorContext target_operator_context = 12;
     // Filter by multiple affiliate IDs (mutually exclusive with affiliate_id)
     repeated int64 affiliate_ids = 13;
+    // If false, returns all results without pagination; nil defaults to true
+    optional bool pagination = 14;
 }
 
 message ListCampaignsResponse {
