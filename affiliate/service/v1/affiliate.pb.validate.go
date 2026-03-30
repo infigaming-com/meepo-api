@@ -3725,6 +3725,39 @@ func (m *ListCampaignsRequest) validate(all bool) error {
 		// no validation rules for TargetAffiliateId
 	}
 
+	if m.TargetOperatorContext != nil {
+
+		if all {
+			switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListCampaignsRequestValidationError{
+						field:  "TargetOperatorContext",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListCampaignsRequestValidationError{
+						field:  "TargetOperatorContext",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListCampaignsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return ListCampaignsRequestMultiError(errors)
 	}
@@ -10441,6 +10474,8 @@ func (m *GetUserPromoConditionInfoResponse) validate(all bool) error {
 	// no validation rules for AffiliateId
 
 	// no validation rules for HasMetConversionConditions
+
+	// no validation rules for CampaignId
 
 	if len(errors) > 0 {
 		return GetUserPromoConditionInfoResponseMultiError(errors)
