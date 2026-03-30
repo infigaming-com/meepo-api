@@ -19301,6 +19301,10 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 targetAffiliateId:
                     type: string
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for filtering campaigns under a specific operator
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties:
@@ -32021,6 +32025,14 @@ components:
                     type: array
                     items:
                         type: string
+                campaignIds:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Campaign IDs filter (more specific than affiliate_ids)
+                         If specified, only users from these campaigns can use the promo code
+                         If empty, falls back to affiliate_ids check
             description: Affiliate condition for promo code campaign
         api.wallet.service.v1.AppDownloadBonusMoneyConfig:
             type: object
