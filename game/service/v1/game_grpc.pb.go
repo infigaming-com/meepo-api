@@ -106,6 +106,8 @@ const (
 	Game_CreateRTPStrategy_FullMethodName                 = "/api.game.service.v1.Game/CreateRTPStrategy"
 	Game_UpdateRTPStrategy_FullMethodName                 = "/api.game.service.v1.Game/UpdateRTPStrategy"
 	Game_DeleteRTPStrategy_FullMethodName                 = "/api.game.service.v1.Game/DeleteRTPStrategy"
+	Game_SuggestGameGroups_FullMethodName                 = "/api.game.service.v1.Game/SuggestGameGroups"
+	Game_PreviewRTPRouting_FullMethodName                 = "/api.game.service.v1.Game/PreviewRTPRouting"
 )
 
 // GameClient is the client API for Game service.
@@ -220,6 +222,10 @@ type GameClient interface {
 	CreateRTPStrategy(ctx context.Context, in *CreateRTPStrategyRequest, opts ...grpc.CallOption) (*CreateRTPStrategyResponse, error)
 	UpdateRTPStrategy(ctx context.Context, in *UpdateRTPStrategyRequest, opts ...grpc.CallOption) (*UpdateRTPStrategyResponse, error)
 	DeleteRTPStrategy(ctx context.Context, in *DeleteRTPStrategyRequest, opts ...grpc.CallOption) (*DeleteRTPStrategyResponse, error)
+	// Suggest game groups by detecting games with similar names from the same provider
+	SuggestGameGroups(ctx context.Context, in *SuggestGameGroupsRequest, opts ...grpc.CallOption) (*SuggestGameGroupsResponse, error)
+	// Preview RTP routing: given a user and game, show which variant would be selected
+	PreviewRTPRouting(ctx context.Context, in *PreviewRTPRoutingRequest, opts ...grpc.CallOption) (*PreviewRTPRoutingResponse, error)
 }
 
 type gameClient struct {
@@ -1100,6 +1106,26 @@ func (c *gameClient) DeleteRTPStrategy(ctx context.Context, in *DeleteRTPStrateg
 	return out, nil
 }
 
+func (c *gameClient) SuggestGameGroups(ctx context.Context, in *SuggestGameGroupsRequest, opts ...grpc.CallOption) (*SuggestGameGroupsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SuggestGameGroupsResponse)
+	err := c.cc.Invoke(ctx, Game_SuggestGameGroups_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) PreviewRTPRouting(ctx context.Context, in *PreviewRTPRoutingRequest, opts ...grpc.CallOption) (*PreviewRTPRoutingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PreviewRTPRoutingResponse)
+	err := c.cc.Invoke(ctx, Game_PreviewRTPRouting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -1212,6 +1238,10 @@ type GameServer interface {
 	CreateRTPStrategy(context.Context, *CreateRTPStrategyRequest) (*CreateRTPStrategyResponse, error)
 	UpdateRTPStrategy(context.Context, *UpdateRTPStrategyRequest) (*UpdateRTPStrategyResponse, error)
 	DeleteRTPStrategy(context.Context, *DeleteRTPStrategyRequest) (*DeleteRTPStrategyResponse, error)
+	// Suggest game groups by detecting games with similar names from the same provider
+	SuggestGameGroups(context.Context, *SuggestGameGroupsRequest) (*SuggestGameGroupsResponse, error)
+	// Preview RTP routing: given a user and game, show which variant would be selected
+	PreviewRTPRouting(context.Context, *PreviewRTPRoutingRequest) (*PreviewRTPRoutingResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -1482,6 +1512,12 @@ func (UnimplementedGameServer) UpdateRTPStrategy(context.Context, *UpdateRTPStra
 }
 func (UnimplementedGameServer) DeleteRTPStrategy(context.Context, *DeleteRTPStrategyRequest) (*DeleteRTPStrategyResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteRTPStrategy not implemented")
+}
+func (UnimplementedGameServer) SuggestGameGroups(context.Context, *SuggestGameGroupsRequest) (*SuggestGameGroupsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SuggestGameGroups not implemented")
+}
+func (UnimplementedGameServer) PreviewRTPRouting(context.Context, *PreviewRTPRoutingRequest) (*PreviewRTPRoutingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PreviewRTPRouting not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -3070,6 +3106,42 @@ func _Game_DeleteRTPStrategy_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_SuggestGameGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuggestGameGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).SuggestGameGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_SuggestGameGroups_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).SuggestGameGroups(ctx, req.(*SuggestGameGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_PreviewRTPRouting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreviewRTPRoutingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).PreviewRTPRouting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_PreviewRTPRouting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).PreviewRTPRouting(ctx, req.(*PreviewRTPRoutingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3424,6 +3496,14 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteRTPStrategy",
 			Handler:    _Game_DeleteRTPStrategy_Handler,
+		},
+		{
+			MethodName: "SuggestGameGroups",
+			Handler:    _Game_SuggestGameGroups_Handler,
+		},
+		{
+			MethodName: "PreviewRTPRouting",
+			Handler:    _Game_PreviewRTPRouting_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
