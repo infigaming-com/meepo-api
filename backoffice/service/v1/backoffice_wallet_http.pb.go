@@ -53,6 +53,7 @@ const OperationBackofficeWalletListWalletResponsibleGamblingConfigs = "/api.back
 const OperationBackofficeWalletManualAdjustCreditTurnoverField = "/api.backoffice.service.v1.BackofficeWallet/ManualAdjustCreditTurnoverField"
 const OperationBackofficeWalletManualCredit = "/api.backoffice.service.v1.BackofficeWallet/ManualCredit"
 const OperationBackofficeWalletManualDebit = "/api.backoffice.service.v1.BackofficeWallet/ManualDebit"
+const OperationBackofficeWalletOperatorBalanceAdjust = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceAdjust"
 const OperationBackofficeWalletOperatorBalanceFreeze = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceFreeze"
 const OperationBackofficeWalletOperatorBalanceRollback = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceRollback"
 const OperationBackofficeWalletOperatorBalanceSettle = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
@@ -136,6 +137,8 @@ type BackofficeWalletHTTPServer interface {
 	ManualCredit(context.Context, *ManualCreditRequest) (*v1.CreditResponse, error)
 	// ManualDebit ManualDebit
 	ManualDebit(context.Context, *ManualDebitRequest) (*v1.DebitResponse, error)
+	// OperatorBalanceAdjust OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+	OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error)
 	// OperatorBalanceFreeze OperatorFreeze freezes cash of an operator
 	OperatorBalanceFreeze(context.Context, *OperatorBalanceFreezeRequest) (*OperatorBalanceFreezeResponse, error)
 	// OperatorBalanceRollback OperatorRollback rolls back frozen cash of an operator
@@ -185,6 +188,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/operator/balance-freeze", _BackofficeWallet_OperatorBalanceFreeze0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance-rollback", _BackofficeWallet_OperatorBalanceRollback0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance-settle", _BackofficeWallet_OperatorBalanceSettle0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/balance-adjust", _BackofficeWallet_OperatorBalanceAdjust0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/transactions/list", _BackofficeWallet_ListOperatorBalanceTransactions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance/update", _BackofficeWallet_UpdateOperatorBalance0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance/get", _BackofficeWallet_GetOperatorBalance0_HTTP_Handler(srv))
@@ -546,6 +550,28 @@ func _BackofficeWallet_OperatorBalanceSettle0_HTTP_Handler(srv BackofficeWalletH
 			return err
 		}
 		reply := out.(*OperatorBalanceSettleResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_OperatorBalanceAdjust0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in OperatorBalanceAdjustRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletOperatorBalanceAdjust)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.OperatorBalanceAdjust(ctx, req.(*OperatorBalanceAdjustRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*OperatorBalanceAdjustResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1343,6 +1369,8 @@ type BackofficeWalletHTTPClient interface {
 	ManualCredit(ctx context.Context, req *ManualCreditRequest, opts ...http.CallOption) (rsp *v1.CreditResponse, err error)
 	// ManualDebit ManualDebit
 	ManualDebit(ctx context.Context, req *ManualDebitRequest, opts ...http.CallOption) (rsp *v1.DebitResponse, err error)
+	// OperatorBalanceAdjust OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+	OperatorBalanceAdjust(ctx context.Context, req *OperatorBalanceAdjustRequest, opts ...http.CallOption) (rsp *OperatorBalanceAdjustResponse, err error)
 	// OperatorBalanceFreeze OperatorFreeze freezes cash of an operator
 	OperatorBalanceFreeze(ctx context.Context, req *OperatorBalanceFreezeRequest, opts ...http.CallOption) (rsp *OperatorBalanceFreezeResponse, err error)
 	// OperatorBalanceRollback OperatorRollback rolls back frozen cash of an operator
@@ -1837,6 +1865,20 @@ func (c *BackofficeWalletHTTPClientImpl) ManualDebit(ctx context.Context, in *Ma
 	pattern := "/v1/backoffice/wallet/manual/debit"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletManualDebit))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// OperatorBalanceAdjust OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+func (c *BackofficeWalletHTTPClientImpl) OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...http.CallOption) (*OperatorBalanceAdjustResponse, error) {
+	var out OperatorBalanceAdjustResponse
+	pattern := "/v1/backoffice/wallet/operator/balance-adjust"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorBalanceAdjust))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

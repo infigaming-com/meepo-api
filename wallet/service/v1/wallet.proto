@@ -128,6 +128,10 @@ service Wallet {
 	// OperatorDebit is used to debit cash from an operator's balance
 	rpc OperatorDebit (OperatorDebitRequest) returns (OperatorDebitResponse) {}
 
+	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
+	// cash_amount is signed: positive = credit, negative = debit
+	rpc OperatorBalanceAdjust (OperatorBalanceAdjustRequest) returns (OperatorBalanceAdjustResponse) {}
+
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	rpc UpdateOperatorBalance(UpdateOperatorBalanceRequest) returns (UpdateOperatorBalanceResponse) {}
 
@@ -1268,6 +1272,22 @@ message OperatorDebitRequest {
 
 message OperatorDebitResponse {
 	int64 transaction_id = 1;
+	string cash = 2;
+}
+
+message OperatorBalanceAdjustRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	string reporting_currency = 3;
+	string transaction_type = 4;
+	// signed amount: positive = credit, negative = debit
+	string cash_amount = 5;
+	string memo = 6;
+}
+
+message OperatorBalanceAdjustResponse {
+	int64 transaction_id = 1;
+	// resulting balance after adjustment
 	string cash = 2;
 }
 
