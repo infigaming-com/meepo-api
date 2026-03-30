@@ -1620,8 +1620,10 @@ type ListCampaignsRequest struct {
 	// Target operator context for filtering campaigns under a specific operator
 	// If nil, falls back to operator_context_filters behavior
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,12,opt,name=target_operator_context,json=targetOperatorContext,proto3,oneof" json:"target_operator_context,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Filter by multiple affiliate IDs (mutually exclusive with affiliate_id)
+	AffiliateIds  []int64 `protobuf:"varint,13,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListCampaignsRequest) Reset() {
@@ -1734,6 +1736,13 @@ func (x *ListCampaignsRequest) GetTargetAffiliateId() int64 {
 func (x *ListCampaignsRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *ListCampaignsRequest) GetAffiliateIds() []int64 {
+	if x != nil {
+		return x.AffiliateIds
 	}
 	return nil
 }
@@ -11371,7 +11380,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\b_enabledB\x16\n" +
 	"\x14_target_affiliate_idB\x18\n" +
 	"\x16_landing_page_settings\"\x18\n" +
-	"\x16UpdateCampaignResponse\"\xad\x06\n" +
+	"\x16UpdateCampaignResponse\"\xd2\x06\n" +
 	"\x14ListCampaignsRequest\x12(\n" +
 	"\rcampaign_name\x18\x01 \x01(\tH\x00R\fcampaignName\x88\x01\x01\x12$\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03H\x01R\n" +
@@ -11386,7 +11395,8 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x11initiator_role_id\x18\n" +
 	" \x01(\x03R\x0finitiatorRoleId\x123\n" +
 	"\x13target_affiliate_id\x18\v \x01(\x03H\aR\x11targetAffiliateId\x88\x01\x01\x12X\n" +
-	"\x17target_operator_context\x18\f \x01(\v2\x1b.api.common.OperatorContextH\bR\x15targetOperatorContext\x88\x01\x01B\x10\n" +
+	"\x17target_operator_context\x18\f \x01(\v2\x1b.api.common.OperatorContextH\bR\x15targetOperatorContext\x88\x01\x01\x12#\n" +
+	"\raffiliate_ids\x18\r \x03(\x03R\faffiliateIdsB\x10\n" +
 	"\x0e_campaign_nameB\x0e\n" +
 	"\f_campaign_idB\x0f\n" +
 	"\r_affiliate_idB\n" +

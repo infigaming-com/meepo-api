@@ -549,6 +549,8 @@ message ListCampaignsRequest {
     // Target operator context for filtering campaigns under a specific operator
     // If nil, falls back to operator_context_filters behavior
     optional api.common.OperatorContext target_operator_context = 12;
+    // Filter by multiple affiliate IDs (mutually exclusive with affiliate_id)
+    repeated int64 affiliate_ids = 13;
 }
 
 message ListCampaignsResponse {

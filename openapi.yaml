@@ -19310,6 +19310,11 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: Target operator context for filtering campaigns under a specific operator
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
+                    description: Filter by multiple affiliate IDs (mutually exclusive with affiliate_id)
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties:
