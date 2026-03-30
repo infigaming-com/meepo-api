@@ -33999,6 +33999,9 @@ components:
                 nonce:
                     type: string
                     description: Random string to ensure each request is unique
+                txHash:
+                    type: string
+                    description: On-chain transaction hash (for crypto transactions)
             description: |-
                 Request for deposit callback
                  Used by payment gateways to notify about deposit status changes
@@ -34867,6 +34870,9 @@ components:
                 payee:
                     type: object
                     description: Payee information (JSONB data)
+                txHash:
+                    type: string
+                    description: On-chain transaction hash (for crypto transactions)
             description: |-
                 Transaction information
                  Detailed information about a specific transaction
@@ -34930,6 +34936,9 @@ components:
                 nonce:
                     type: string
                     description: Random string to ensure each request is unique
+                txHash:
+                    type: string
+                    description: On-chain transaction hash (for crypto transactions)
             description: |-
                 Request for withdraw callback
                  Used by payment gateways to notify about withdrawal status changes

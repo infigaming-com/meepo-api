@@ -2720,7 +2720,9 @@ type DepositCallbackRequest struct {
 	// Request timestamp to prevent replay attacks
 	Timestamp string `protobuf:"bytes,12,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	// Random string to ensure each request is unique
-	Nonce         string `protobuf:"bytes,13,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	Nonce string `protobuf:"bytes,13,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	// On-chain transaction hash (for crypto transactions)
+	TxHash        string `protobuf:"bytes,14,opt,name=tx_hash,json=txHash,proto3" json:"tx_hash,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2846,6 +2848,13 @@ func (x *DepositCallbackRequest) GetNonce() string {
 	return ""
 }
 
+func (x *DepositCallbackRequest) GetTxHash() string {
+	if x != nil {
+		return x.TxHash
+	}
+	return ""
+}
+
 // Response for deposit callback
 // Confirms receipt of callback notification
 type DepositCallbackResponse struct {
@@ -2929,7 +2938,9 @@ type WithdrawCallbackRequest struct {
 	// Request timestamp to prevent replay attacks
 	Timestamp string `protobuf:"bytes,11,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	// Random string to ensure each request is unique
-	Nonce         string `protobuf:"bytes,12,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	Nonce string `protobuf:"bytes,12,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	// On-chain transaction hash (for crypto transactions)
+	TxHash        string `protobuf:"bytes,13,opt,name=tx_hash,json=txHash,proto3" json:"tx_hash,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3044,6 +3055,13 @@ func (x *WithdrawCallbackRequest) GetTimestamp() string {
 func (x *WithdrawCallbackRequest) GetNonce() string {
 	if x != nil {
 		return x.Nonce
+	}
+	return ""
+}
+
+func (x *WithdrawCallbackRequest) GetTxHash() string {
+	if x != nil {
+		return x.TxHash
 	}
 	return ""
 }
@@ -3167,7 +3185,9 @@ type TransactionInfo struct {
 	// Payer information (JSONB data)
 	Payer *structpb.Struct `protobuf:"bytes,36,opt,name=payer,proto3" json:"payer,omitempty"`
 	// Payee information (JSONB data)
-	Payee         *structpb.Struct `protobuf:"bytes,37,opt,name=payee,proto3" json:"payee,omitempty"`
+	Payee *structpb.Struct `protobuf:"bytes,37,opt,name=payee,proto3" json:"payee,omitempty"`
+	// On-chain transaction hash (for crypto transactions)
+	TxHash        string `protobuf:"bytes,38,opt,name=tx_hash,json=txHash,proto3" json:"tx_hash,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3459,6 +3479,13 @@ func (x *TransactionInfo) GetPayee() *structpb.Struct {
 		return x.Payee
 	}
 	return nil
+}
+
+func (x *TransactionInfo) GetTxHash() string {
+	if x != nil {
+		return x.TxHash
+	}
+	return ""
 }
 
 type TransactionDetail struct {
@@ -7079,7 +7106,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xa2\x03\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xbb\x03\n" +
 	"\x16DepositCallbackRequest\x12(\n" +
 	"\x11pa_transaction_no\x18\x01 \x01(\x03R\rtransactionNo\x12(\n" +
 	"\x10gateway_order_no\x18\x02 \x01(\tR\x0egatewayOrderNo\x12'\n" +
@@ -7095,10 +7122,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" \x01(\tR\tchannelID\x12\x12\n" +
 	"\x04sign\x18\v \x01(\tR\x04sign\x12\x1c\n" +
 	"\ttimestamp\x18\f \x01(\tR\ttimestamp\x12\x14\n" +
-	"\x05nonce\x18\r \x01(\tR\x05nonce\"M\n" +
+	"\x05nonce\x18\r \x01(\tR\x05nonce\x12\x17\n" +
+	"\atx_hash\x18\x0e \x01(\tR\x06txHash\"M\n" +
 	"\x17DepositCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\x86\x03\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\x9f\x03\n" +
 	"\x17WithdrawCallbackRequest\x12(\n" +
 	"\x11pa_transaction_no\x18\x01 \x01(\x03R\rtransactionNo\x12(\n" +
 	"\x10gateway_order_no\x18\x02 \x01(\tR\x0egatewayOrderNo\x12'\n" +
@@ -7114,10 +7142,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x04sign\x18\n" +
 	" \x01(\tR\x04sign\x12\x1c\n" +
 	"\ttimestamp\x18\v \x01(\tR\ttimestamp\x12\x14\n" +
-	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
+	"\x05nonce\x18\f \x01(\tR\x05nonce\x12\x17\n" +
+	"\atx_hash\x18\r \x01(\tR\x06txHash\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xbc\f\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xd5\f\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
@@ -7161,7 +7190,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x12processing_fee_usd\x18\" \x01(\tR\x10processingFeeUsd\x12\x19\n" +
 	"\bpsp_name\x18# \x01(\tR\apspName\x12-\n" +
 	"\x05payer\x18$ \x01(\v2\x17.google.protobuf.StructR\x05payer\x12-\n" +
-	"\x05payee\x18% \x01(\v2\x17.google.protobuf.StructR\x05payee\"\x9c\x01\n" +
+	"\x05payee\x18% \x01(\v2\x17.google.protobuf.StructR\x05payee\x12\x17\n" +
+	"\atx_hash\x18& \x01(\tR\x06txHash\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
 	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xa6\a\n" +
