@@ -3509,6 +3509,8 @@ func (m *DepositCallbackRequest) validate(all bool) error {
 
 	// no validation rules for Nonce
 
+	// no validation rules for TxHash
+
 	if len(errors) > 0 {
 		return DepositCallbackRequestMultiError(errors)
 	}
@@ -3740,6 +3742,8 @@ func (m *WithdrawCallbackRequest) validate(all bool) error {
 	// no validation rules for Timestamp
 
 	// no validation rules for Nonce
+
+	// no validation rules for TxHash
 
 	if len(errors) > 0 {
 		return WithdrawCallbackRequestMultiError(errors)
@@ -4130,6 +4134,8 @@ func (m *TransactionInfo) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for TxHash
 
 	if len(errors) > 0 {
 		return TransactionInfoMultiError(errors)
