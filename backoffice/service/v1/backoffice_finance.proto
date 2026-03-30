@@ -634,6 +634,8 @@ message GetBalanceSummaryResponse {
 	string max_withdrawable = 15;
 	string pending_invoices = 16;
 	bool withdraw_disabled = 17;
+	// Custody card: est costs from co-operation operators
+	string custody_est_costs = 18;
 }
 
 message GetBalancesSummaryRequest {
