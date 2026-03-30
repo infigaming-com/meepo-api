@@ -3063,8 +3063,18 @@ type GetBalanceSummaryResponse struct {
 	WithdrawDisabled          bool   `protobuf:"varint,17,opt,name=withdraw_disabled,json=withdrawDisabled,proto3" json:"withdraw_disabled,omitempty"`
 	// Custody card: est costs from co-operation operators
 	CustodyEstCosts string `protobuf:"bytes,18,opt,name=custody_est_costs,json=custodyEstCosts,proto3" json:"custody_est_costs,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Pending player withdrawals (frozen but not yet settled)
+	PendingPlayerWithdrawals string `protobuf:"bytes,19,opt,name=pending_player_withdrawals,json=pendingPlayerWithdrawals,proto3" json:"pending_player_withdrawals,omitempty"`
+	// Pending company withdrawals (frozen but not yet settled)
+	PendingCompanyWithdrawals string `protobuf:"bytes,20,opt,name=pending_company_withdrawals,json=pendingCompanyWithdrawals,proto3" json:"pending_company_withdrawals,omitempty"`
+	// Pending balance freeze (frozen but not yet settled)
+	PendingBalanceFreeze string `protobuf:"bytes,21,opt,name=pending_balance_freeze,json=pendingBalanceFreeze,proto3" json:"pending_balance_freeze,omitempty"`
+	// Settled balance freeze
+	SettledBalanceFreeze string `protobuf:"bytes,22,opt,name=settled_balance_freeze,json=settledBalanceFreeze,proto3" json:"settled_balance_freeze,omitempty"`
+	// Net swap fee loss
+	SwapFee       string `protobuf:"bytes,23,opt,name=swap_fee,json=swapFee,proto3" json:"swap_fee,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetBalanceSummaryResponse) Reset() {
@@ -3219,6 +3229,41 @@ func (x *GetBalanceSummaryResponse) GetWithdrawDisabled() bool {
 func (x *GetBalanceSummaryResponse) GetCustodyEstCosts() string {
 	if x != nil {
 		return x.CustodyEstCosts
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetPendingPlayerWithdrawals() string {
+	if x != nil {
+		return x.PendingPlayerWithdrawals
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetPendingCompanyWithdrawals() string {
+	if x != nil {
+		return x.PendingCompanyWithdrawals
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetPendingBalanceFreeze() string {
+	if x != nil {
+		return x.PendingBalanceFreeze
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetSettledBalanceFreeze() string {
+	if x != nil {
+		return x.SettledBalanceFreeze
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetSwapFee() string {
+	if x != nil {
+		return x.SwapFee
 	}
 	return ""
 }
@@ -6990,7 +7035,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x0ebilling_period\x18\x03 \x01(\tR\rbillingPeriod\"\xc0\x01\n" +
 	"\x18GetBalanceSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xc0\x06\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xc5\b\n" +
 	"\x19GetBalanceSummaryResponse\x12'\n" +
 	"\x0fcompany_balance\x18\x01 \x01(\tR\x0ecompanyBalance\x12.\n" +
 	"\x13est_settlement_cost\x18\x02 \x01(\tR\x11estSettlementCost\x12*\n" +
@@ -7011,7 +7056,12 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x10max_withdrawable\x18\x0f \x01(\tR\x0fmaxWithdrawable\x12)\n" +
 	"\x10pending_invoices\x18\x10 \x01(\tR\x0fpendingInvoices\x12+\n" +
 	"\x11withdraw_disabled\x18\x11 \x01(\bR\x10withdrawDisabled\x12*\n" +
-	"\x11custody_est_costs\x18\x12 \x01(\tR\x0fcustodyEstCosts\"\x93\x02\n" +
+	"\x11custody_est_costs\x18\x12 \x01(\tR\x0fcustodyEstCosts\x12<\n" +
+	"\x1apending_player_withdrawals\x18\x13 \x01(\tR\x18pendingPlayerWithdrawals\x12>\n" +
+	"\x1bpending_company_withdrawals\x18\x14 \x01(\tR\x19pendingCompanyWithdrawals\x124\n" +
+	"\x16pending_balance_freeze\x18\x15 \x01(\tR\x14pendingBalanceFreeze\x124\n" +
+	"\x16settled_balance_freeze\x18\x16 \x01(\tR\x14settledBalanceFreeze\x12\x19\n" +
+	"\bswap_fee\x18\x17 \x01(\tR\aswapFee\"\x93\x02\n" +
 	"\x19GetBalancesSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
