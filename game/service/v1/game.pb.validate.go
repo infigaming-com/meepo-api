@@ -26490,6 +26490,1072 @@ var _ interface {
 	ErrorName() string
 } = RemoveGameGroupVariantResponseValidationError{}
 
+// Validate checks the field values on RTPStrategyInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RTPStrategyInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RTPStrategyInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RTPStrategyInfoMultiError, or nil if none found.
+func (m *RTPStrategyInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RTPStrategyInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Name
+
+	// no validation rules for OperatorId
+
+	// no validation rules for SegmentId
+
+	// no validation rules for RtpTier
+
+	// no validation rules for Priority
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return RTPStrategyInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// RTPStrategyInfoMultiError is an error wrapping multiple validation errors
+// returned by RTPStrategyInfo.ValidateAll() if the designated constraints
+// aren't met.
+type RTPStrategyInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RTPStrategyInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RTPStrategyInfoMultiError) AllErrors() []error { return m }
+
+// RTPStrategyInfoValidationError is the validation error returned by
+// RTPStrategyInfo.Validate if the designated constraints aren't met.
+type RTPStrategyInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RTPStrategyInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RTPStrategyInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RTPStrategyInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RTPStrategyInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RTPStrategyInfoValidationError) ErrorName() string { return "RTPStrategyInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e RTPStrategyInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRTPStrategyInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RTPStrategyInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RTPStrategyInfoValidationError{}
+
+// Validate checks the field values on ListRTPStrategiesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListRTPStrategiesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRTPStrategiesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListRTPStrategiesRequestMultiError, or nil if none found.
+func (m *ListRTPStrategiesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRTPStrategiesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListRTPStrategiesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRTPStrategiesRequestMultiError is an error wrapping multiple validation
+// errors returned by ListRTPStrategiesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListRTPStrategiesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRTPStrategiesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRTPStrategiesRequestMultiError) AllErrors() []error { return m }
+
+// ListRTPStrategiesRequestValidationError is the validation error returned by
+// ListRTPStrategiesRequest.Validate if the designated constraints aren't met.
+type ListRTPStrategiesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRTPStrategiesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRTPStrategiesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRTPStrategiesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRTPStrategiesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRTPStrategiesRequestValidationError) ErrorName() string {
+	return "ListRTPStrategiesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRTPStrategiesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRTPStrategiesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRTPStrategiesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRTPStrategiesRequestValidationError{}
+
+// Validate checks the field values on ListRTPStrategiesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListRTPStrategiesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRTPStrategiesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListRTPStrategiesResponseMultiError, or nil if none found.
+func (m *ListRTPStrategiesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRTPStrategiesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetStrategies() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListRTPStrategiesResponseValidationError{
+						field:  fmt.Sprintf("Strategies[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListRTPStrategiesResponseValidationError{
+						field:  fmt.Sprintf("Strategies[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListRTPStrategiesResponseValidationError{
+					field:  fmt.Sprintf("Strategies[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListRTPStrategiesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRTPStrategiesResponseMultiError is an error wrapping multiple validation
+// errors returned by ListRTPStrategiesResponse.ValidateAll() if the
+// designated constraints aren't met.
+type ListRTPStrategiesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRTPStrategiesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRTPStrategiesResponseMultiError) AllErrors() []error { return m }
+
+// ListRTPStrategiesResponseValidationError is the validation error returned by
+// ListRTPStrategiesResponse.Validate if the designated constraints aren't met.
+type ListRTPStrategiesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRTPStrategiesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRTPStrategiesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRTPStrategiesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRTPStrategiesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRTPStrategiesResponseValidationError) ErrorName() string {
+	return "ListRTPStrategiesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRTPStrategiesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRTPStrategiesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRTPStrategiesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRTPStrategiesResponseValidationError{}
+
+// Validate checks the field values on CreateRTPStrategyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateRTPStrategyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateRTPStrategyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateRTPStrategyRequestMultiError, or nil if none found.
+func (m *CreateRTPStrategyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateRTPStrategyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for OperatorId
+
+	// no validation rules for SegmentId
+
+	// no validation rules for RtpTier
+
+	// no validation rules for Priority
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return CreateRTPStrategyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateRTPStrategyRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateRTPStrategyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateRTPStrategyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateRTPStrategyRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateRTPStrategyRequestMultiError) AllErrors() []error { return m }
+
+// CreateRTPStrategyRequestValidationError is the validation error returned by
+// CreateRTPStrategyRequest.Validate if the designated constraints aren't met.
+type CreateRTPStrategyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateRTPStrategyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateRTPStrategyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateRTPStrategyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateRTPStrategyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateRTPStrategyRequestValidationError) ErrorName() string {
+	return "CreateRTPStrategyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateRTPStrategyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateRTPStrategyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateRTPStrategyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateRTPStrategyRequestValidationError{}
+
+// Validate checks the field values on CreateRTPStrategyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateRTPStrategyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateRTPStrategyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateRTPStrategyResponseMultiError, or nil if none found.
+func (m *CreateRTPStrategyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateRTPStrategyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetStrategy()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateRTPStrategyResponseValidationError{
+					field:  "Strategy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateRTPStrategyResponseValidationError{
+					field:  "Strategy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStrategy()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateRTPStrategyResponseValidationError{
+				field:  "Strategy",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateRTPStrategyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateRTPStrategyResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateRTPStrategyResponse.ValidateAll() if the
+// designated constraints aren't met.
+type CreateRTPStrategyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateRTPStrategyResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateRTPStrategyResponseMultiError) AllErrors() []error { return m }
+
+// CreateRTPStrategyResponseValidationError is the validation error returned by
+// CreateRTPStrategyResponse.Validate if the designated constraints aren't met.
+type CreateRTPStrategyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateRTPStrategyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateRTPStrategyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateRTPStrategyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateRTPStrategyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateRTPStrategyResponseValidationError) ErrorName() string {
+	return "CreateRTPStrategyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateRTPStrategyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateRTPStrategyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateRTPStrategyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateRTPStrategyResponseValidationError{}
+
+// Validate checks the field values on UpdateRTPStrategyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateRTPStrategyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateRTPStrategyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateRTPStrategyRequestMultiError, or nil if none found.
+func (m *UpdateRTPStrategyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateRTPStrategyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if m.Name != nil {
+		// no validation rules for Name
+	}
+
+	if m.RtpTier != nil {
+		// no validation rules for RtpTier
+	}
+
+	if m.Priority != nil {
+		// no validation rules for Priority
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if len(errors) > 0 {
+		return UpdateRTPStrategyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateRTPStrategyRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateRTPStrategyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateRTPStrategyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateRTPStrategyRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateRTPStrategyRequestMultiError) AllErrors() []error { return m }
+
+// UpdateRTPStrategyRequestValidationError is the validation error returned by
+// UpdateRTPStrategyRequest.Validate if the designated constraints aren't met.
+type UpdateRTPStrategyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateRTPStrategyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateRTPStrategyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateRTPStrategyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateRTPStrategyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateRTPStrategyRequestValidationError) ErrorName() string {
+	return "UpdateRTPStrategyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateRTPStrategyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateRTPStrategyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateRTPStrategyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateRTPStrategyRequestValidationError{}
+
+// Validate checks the field values on UpdateRTPStrategyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateRTPStrategyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateRTPStrategyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateRTPStrategyResponseMultiError, or nil if none found.
+func (m *UpdateRTPStrategyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateRTPStrategyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetStrategy()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateRTPStrategyResponseValidationError{
+					field:  "Strategy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateRTPStrategyResponseValidationError{
+					field:  "Strategy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStrategy()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateRTPStrategyResponseValidationError{
+				field:  "Strategy",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateRTPStrategyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateRTPStrategyResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateRTPStrategyResponse.ValidateAll() if the
+// designated constraints aren't met.
+type UpdateRTPStrategyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateRTPStrategyResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateRTPStrategyResponseMultiError) AllErrors() []error { return m }
+
+// UpdateRTPStrategyResponseValidationError is the validation error returned by
+// UpdateRTPStrategyResponse.Validate if the designated constraints aren't met.
+type UpdateRTPStrategyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateRTPStrategyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateRTPStrategyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateRTPStrategyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateRTPStrategyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateRTPStrategyResponseValidationError) ErrorName() string {
+	return "UpdateRTPStrategyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateRTPStrategyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateRTPStrategyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateRTPStrategyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateRTPStrategyResponseValidationError{}
+
+// Validate checks the field values on DeleteRTPStrategyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteRTPStrategyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteRTPStrategyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteRTPStrategyRequestMultiError, or nil if none found.
+func (m *DeleteRTPStrategyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteRTPStrategyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteRTPStrategyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteRTPStrategyRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteRTPStrategyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteRTPStrategyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteRTPStrategyRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteRTPStrategyRequestMultiError) AllErrors() []error { return m }
+
+// DeleteRTPStrategyRequestValidationError is the validation error returned by
+// DeleteRTPStrategyRequest.Validate if the designated constraints aren't met.
+type DeleteRTPStrategyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteRTPStrategyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteRTPStrategyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteRTPStrategyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteRTPStrategyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteRTPStrategyRequestValidationError) ErrorName() string {
+	return "DeleteRTPStrategyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteRTPStrategyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteRTPStrategyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteRTPStrategyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteRTPStrategyRequestValidationError{}
+
+// Validate checks the field values on DeleteRTPStrategyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteRTPStrategyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteRTPStrategyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteRTPStrategyResponseMultiError, or nil if none found.
+func (m *DeleteRTPStrategyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteRTPStrategyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteRTPStrategyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteRTPStrategyResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteRTPStrategyResponse.ValidateAll() if the
+// designated constraints aren't met.
+type DeleteRTPStrategyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteRTPStrategyResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteRTPStrategyResponseMultiError) AllErrors() []error { return m }
+
+// DeleteRTPStrategyResponseValidationError is the validation error returned by
+// DeleteRTPStrategyResponse.Validate if the designated constraints aren't met.
+type DeleteRTPStrategyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteRTPStrategyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteRTPStrategyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteRTPStrategyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteRTPStrategyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteRTPStrategyResponseValidationError) ErrorName() string {
+	return "DeleteRTPStrategyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteRTPStrategyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteRTPStrategyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteRTPStrategyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteRTPStrategyResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
