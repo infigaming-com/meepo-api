@@ -94,6 +94,14 @@ const (
 	Game_BackofficeListGamesUnderTag_FullMethodName       = "/api.game.service.v1.Game/BackofficeListGamesUnderTag"
 	Game_GetProviderStats_FullMethodName                  = "/api.game.service.v1.Game/GetProviderStats"
 	Game_GetUserNgr_FullMethodName                        = "/api.game.service.v1.Game/GetUserNgr"
+	Game_ListGameGroups_FullMethodName                    = "/api.game.service.v1.Game/ListGameGroups"
+	Game_GetGameGroup_FullMethodName                      = "/api.game.service.v1.Game/GetGameGroup"
+	Game_CreateGameGroup_FullMethodName                   = "/api.game.service.v1.Game/CreateGameGroup"
+	Game_UpdateGameGroup_FullMethodName                   = "/api.game.service.v1.Game/UpdateGameGroup"
+	Game_DeleteGameGroup_FullMethodName                   = "/api.game.service.v1.Game/DeleteGameGroup"
+	Game_AddGameGroupVariant_FullMethodName               = "/api.game.service.v1.Game/AddGameGroupVariant"
+	Game_UpdateGameGroupVariant_FullMethodName            = "/api.game.service.v1.Game/UpdateGameGroupVariant"
+	Game_RemoveGameGroupVariant_FullMethodName            = "/api.game.service.v1.Game/RemoveGameGroupVariant"
 )
 
 // GameClient is the client API for Game service.
@@ -196,6 +204,14 @@ type GameClient interface {
 	GetProviderStats(ctx context.Context, in *GetProviderStatsRequest, opts ...grpc.CallOption) (*GetProviderStatsResponse, error)
 	// Get user NGR (Net Gaming Revenue) for a specific time range
 	GetUserNgr(ctx context.Context, in *GetUserNgrRequest, opts ...grpc.CallOption) (*GetUserNgrResponse, error)
+	ListGameGroups(ctx context.Context, in *ListGameGroupsRequest, opts ...grpc.CallOption) (*ListGameGroupsResponse, error)
+	GetGameGroup(ctx context.Context, in *GetGameGroupRequest, opts ...grpc.CallOption) (*GetGameGroupResponse, error)
+	CreateGameGroup(ctx context.Context, in *CreateGameGroupRequest, opts ...grpc.CallOption) (*CreateGameGroupResponse, error)
+	UpdateGameGroup(ctx context.Context, in *UpdateGameGroupRequest, opts ...grpc.CallOption) (*UpdateGameGroupResponse, error)
+	DeleteGameGroup(ctx context.Context, in *DeleteGameGroupRequest, opts ...grpc.CallOption) (*DeleteGameGroupResponse, error)
+	AddGameGroupVariant(ctx context.Context, in *AddGameGroupVariantRequest, opts ...grpc.CallOption) (*AddGameGroupVariantResponse, error)
+	UpdateGameGroupVariant(ctx context.Context, in *UpdateGameGroupVariantRequest, opts ...grpc.CallOption) (*UpdateGameGroupVariantResponse, error)
+	RemoveGameGroupVariant(ctx context.Context, in *RemoveGameGroupVariantRequest, opts ...grpc.CallOption) (*RemoveGameGroupVariantResponse, error)
 }
 
 type gameClient struct {
@@ -956,6 +972,86 @@ func (c *gameClient) GetUserNgr(ctx context.Context, in *GetUserNgrRequest, opts
 	return out, nil
 }
 
+func (c *gameClient) ListGameGroups(ctx context.Context, in *ListGameGroupsRequest, opts ...grpc.CallOption) (*ListGameGroupsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListGameGroupsResponse)
+	err := c.cc.Invoke(ctx, Game_ListGameGroups_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) GetGameGroup(ctx context.Context, in *GetGameGroupRequest, opts ...grpc.CallOption) (*GetGameGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGameGroupResponse)
+	err := c.cc.Invoke(ctx, Game_GetGameGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) CreateGameGroup(ctx context.Context, in *CreateGameGroupRequest, opts ...grpc.CallOption) (*CreateGameGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateGameGroupResponse)
+	err := c.cc.Invoke(ctx, Game_CreateGameGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateGameGroup(ctx context.Context, in *UpdateGameGroupRequest, opts ...grpc.CallOption) (*UpdateGameGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateGameGroupResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateGameGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) DeleteGameGroup(ctx context.Context, in *DeleteGameGroupRequest, opts ...grpc.CallOption) (*DeleteGameGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteGameGroupResponse)
+	err := c.cc.Invoke(ctx, Game_DeleteGameGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) AddGameGroupVariant(ctx context.Context, in *AddGameGroupVariantRequest, opts ...grpc.CallOption) (*AddGameGroupVariantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddGameGroupVariantResponse)
+	err := c.cc.Invoke(ctx, Game_AddGameGroupVariant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateGameGroupVariant(ctx context.Context, in *UpdateGameGroupVariantRequest, opts ...grpc.CallOption) (*UpdateGameGroupVariantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateGameGroupVariantResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateGameGroupVariant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) RemoveGameGroupVariant(ctx context.Context, in *RemoveGameGroupVariantRequest, opts ...grpc.CallOption) (*RemoveGameGroupVariantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveGameGroupVariantResponse)
+	err := c.cc.Invoke(ctx, Game_RemoveGameGroupVariant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -1056,6 +1152,14 @@ type GameServer interface {
 	GetProviderStats(context.Context, *GetProviderStatsRequest) (*GetProviderStatsResponse, error)
 	// Get user NGR (Net Gaming Revenue) for a specific time range
 	GetUserNgr(context.Context, *GetUserNgrRequest) (*GetUserNgrResponse, error)
+	ListGameGroups(context.Context, *ListGameGroupsRequest) (*ListGameGroupsResponse, error)
+	GetGameGroup(context.Context, *GetGameGroupRequest) (*GetGameGroupResponse, error)
+	CreateGameGroup(context.Context, *CreateGameGroupRequest) (*CreateGameGroupResponse, error)
+	UpdateGameGroup(context.Context, *UpdateGameGroupRequest) (*UpdateGameGroupResponse, error)
+	DeleteGameGroup(context.Context, *DeleteGameGroupRequest) (*DeleteGameGroupResponse, error)
+	AddGameGroupVariant(context.Context, *AddGameGroupVariantRequest) (*AddGameGroupVariantResponse, error)
+	UpdateGameGroupVariant(context.Context, *UpdateGameGroupVariantRequest) (*UpdateGameGroupVariantResponse, error)
+	RemoveGameGroupVariant(context.Context, *RemoveGameGroupVariantRequest) (*RemoveGameGroupVariantResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -1290,6 +1394,30 @@ func (UnimplementedGameServer) GetProviderStats(context.Context, *GetProviderSta
 }
 func (UnimplementedGameServer) GetUserNgr(context.Context, *GetUserNgrRequest) (*GetUserNgrResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserNgr not implemented")
+}
+func (UnimplementedGameServer) ListGameGroups(context.Context, *ListGameGroupsRequest) (*ListGameGroupsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListGameGroups not implemented")
+}
+func (UnimplementedGameServer) GetGameGroup(context.Context, *GetGameGroupRequest) (*GetGameGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGameGroup not implemented")
+}
+func (UnimplementedGameServer) CreateGameGroup(context.Context, *CreateGameGroupRequest) (*CreateGameGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateGameGroup not implemented")
+}
+func (UnimplementedGameServer) UpdateGameGroup(context.Context, *UpdateGameGroupRequest) (*UpdateGameGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateGameGroup not implemented")
+}
+func (UnimplementedGameServer) DeleteGameGroup(context.Context, *DeleteGameGroupRequest) (*DeleteGameGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteGameGroup not implemented")
+}
+func (UnimplementedGameServer) AddGameGroupVariant(context.Context, *AddGameGroupVariantRequest) (*AddGameGroupVariantResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddGameGroupVariant not implemented")
+}
+func (UnimplementedGameServer) UpdateGameGroupVariant(context.Context, *UpdateGameGroupVariantRequest) (*UpdateGameGroupVariantResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateGameGroupVariant not implemented")
+}
+func (UnimplementedGameServer) RemoveGameGroupVariant(context.Context, *RemoveGameGroupVariantRequest) (*RemoveGameGroupVariantResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveGameGroupVariant not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -2662,6 +2790,150 @@ func _Game_GetUserNgr_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_ListGameGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGameGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListGameGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListGameGroups_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListGameGroups(ctx, req.(*ListGameGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_GetGameGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGameGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetGameGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetGameGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetGameGroup(ctx, req.(*GetGameGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_CreateGameGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGameGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).CreateGameGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_CreateGameGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).CreateGameGroup(ctx, req.(*CreateGameGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateGameGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGameGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateGameGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateGameGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateGameGroup(ctx, req.(*UpdateGameGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_DeleteGameGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteGameGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).DeleteGameGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_DeleteGameGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).DeleteGameGroup(ctx, req.(*DeleteGameGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_AddGameGroupVariant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddGameGroupVariantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).AddGameGroupVariant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_AddGameGroupVariant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).AddGameGroupVariant(ctx, req.(*AddGameGroupVariantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateGameGroupVariant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGameGroupVariantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateGameGroupVariant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateGameGroupVariant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateGameGroupVariant(ctx, req.(*UpdateGameGroupVariantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_RemoveGameGroupVariant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveGameGroupVariantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).RemoveGameGroupVariant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_RemoveGameGroupVariant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).RemoveGameGroupVariant(ctx, req.(*RemoveGameGroupVariantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2968,6 +3240,38 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserNgr",
 			Handler:    _Game_GetUserNgr_Handler,
+		},
+		{
+			MethodName: "ListGameGroups",
+			Handler:    _Game_ListGameGroups_Handler,
+		},
+		{
+			MethodName: "GetGameGroup",
+			Handler:    _Game_GetGameGroup_Handler,
+		},
+		{
+			MethodName: "CreateGameGroup",
+			Handler:    _Game_CreateGameGroup_Handler,
+		},
+		{
+			MethodName: "UpdateGameGroup",
+			Handler:    _Game_UpdateGameGroup_Handler,
+		},
+		{
+			MethodName: "DeleteGameGroup",
+			Handler:    _Game_DeleteGameGroup_Handler,
+		},
+		{
+			MethodName: "AddGameGroupVariant",
+			Handler:    _Game_AddGameGroupVariant_Handler,
+		},
+		{
+			MethodName: "UpdateGameGroupVariant",
+			Handler:    _Game_UpdateGameGroupVariant_Handler,
+		},
+		{
+			MethodName: "RemoveGameGroupVariant",
+			Handler:    _Game_RemoveGameGroupVariant_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

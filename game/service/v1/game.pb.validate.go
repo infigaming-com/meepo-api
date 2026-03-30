@@ -24314,6 +24314,2182 @@ var _ interface {
 	ErrorName() string
 } = UserNgrItemValidationError{}
 
+// Validate checks the field values on GameGroupInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GameGroupInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GameGroupInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in GameGroupInfoMultiError, or
+// nil if none found.
+func (m *GameGroupInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GameGroupInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for DisplayName
+
+	// no validation rules for ProviderId
+
+	// no validation rules for BaseGameId
+
+	// no validation rules for Enabled
+
+	for idx, item := range m.GetVariants() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GameGroupInfoValidationError{
+						field:  fmt.Sprintf("Variants[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GameGroupInfoValidationError{
+						field:  fmt.Sprintf("Variants[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GameGroupInfoValidationError{
+					field:  fmt.Sprintf("Variants[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GameGroupInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// GameGroupInfoMultiError is an error wrapping multiple validation errors
+// returned by GameGroupInfo.ValidateAll() if the designated constraints
+// aren't met.
+type GameGroupInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GameGroupInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GameGroupInfoMultiError) AllErrors() []error { return m }
+
+// GameGroupInfoValidationError is the validation error returned by
+// GameGroupInfo.Validate if the designated constraints aren't met.
+type GameGroupInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GameGroupInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GameGroupInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GameGroupInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GameGroupInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GameGroupInfoValidationError) ErrorName() string { return "GameGroupInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GameGroupInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGameGroupInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GameGroupInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GameGroupInfoValidationError{}
+
+// Validate checks the field values on GameGroupVariantInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GameGroupVariantInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GameGroupVariantInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GameGroupVariantInfoMultiError, or nil if none found.
+func (m *GameGroupVariantInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GameGroupVariantInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for GameId
+
+	// no validation rules for RtpTier
+
+	// no validation rules for RtpValue
+
+	// no validation rules for IsDefault
+
+	if len(errors) > 0 {
+		return GameGroupVariantInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// GameGroupVariantInfoMultiError is an error wrapping multiple validation
+// errors returned by GameGroupVariantInfo.ValidateAll() if the designated
+// constraints aren't met.
+type GameGroupVariantInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GameGroupVariantInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GameGroupVariantInfoMultiError) AllErrors() []error { return m }
+
+// GameGroupVariantInfoValidationError is the validation error returned by
+// GameGroupVariantInfo.Validate if the designated constraints aren't met.
+type GameGroupVariantInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GameGroupVariantInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GameGroupVariantInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GameGroupVariantInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GameGroupVariantInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GameGroupVariantInfoValidationError) ErrorName() string {
+	return "GameGroupVariantInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GameGroupVariantInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGameGroupVariantInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GameGroupVariantInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GameGroupVariantInfoValidationError{}
+
+// Validate checks the field values on ListGameGroupsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListGameGroupsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGameGroupsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListGameGroupsRequestMultiError, or nil if none found.
+func (m *ListGameGroupsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGameGroupsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if m.ProviderId != nil {
+		// no validation rules for ProviderId
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if len(errors) > 0 {
+		return ListGameGroupsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGameGroupsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListGameGroupsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListGameGroupsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGameGroupsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGameGroupsRequestMultiError) AllErrors() []error { return m }
+
+// ListGameGroupsRequestValidationError is the validation error returned by
+// ListGameGroupsRequest.Validate if the designated constraints aren't met.
+type ListGameGroupsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGameGroupsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGameGroupsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGameGroupsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGameGroupsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGameGroupsRequestValidationError) ErrorName() string {
+	return "ListGameGroupsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGameGroupsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGameGroupsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGameGroupsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGameGroupsRequestValidationError{}
+
+// Validate checks the field values on ListGameGroupsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListGameGroupsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGameGroupsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListGameGroupsResponseMultiError, or nil if none found.
+func (m *ListGameGroupsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGameGroupsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetGroups() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListGameGroupsResponseValidationError{
+						field:  fmt.Sprintf("Groups[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListGameGroupsResponseValidationError{
+						field:  fmt.Sprintf("Groups[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListGameGroupsResponseValidationError{
+					field:  fmt.Sprintf("Groups[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListGameGroupsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGameGroupsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListGameGroupsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListGameGroupsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGameGroupsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGameGroupsResponseMultiError) AllErrors() []error { return m }
+
+// ListGameGroupsResponseValidationError is the validation error returned by
+// ListGameGroupsResponse.Validate if the designated constraints aren't met.
+type ListGameGroupsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGameGroupsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGameGroupsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGameGroupsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGameGroupsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGameGroupsResponseValidationError) ErrorName() string {
+	return "ListGameGroupsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGameGroupsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGameGroupsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGameGroupsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGameGroupsResponseValidationError{}
+
+// Validate checks the field values on GetGameGroupRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetGameGroupRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetGameGroupRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetGameGroupRequestMultiError, or nil if none found.
+func (m *GetGameGroupRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetGameGroupRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return GetGameGroupRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetGameGroupRequestMultiError is an error wrapping multiple validation
+// errors returned by GetGameGroupRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetGameGroupRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetGameGroupRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetGameGroupRequestMultiError) AllErrors() []error { return m }
+
+// GetGameGroupRequestValidationError is the validation error returned by
+// GetGameGroupRequest.Validate if the designated constraints aren't met.
+type GetGameGroupRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetGameGroupRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetGameGroupRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetGameGroupRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetGameGroupRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetGameGroupRequestValidationError) ErrorName() string {
+	return "GetGameGroupRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetGameGroupRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetGameGroupRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetGameGroupRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetGameGroupRequestValidationError{}
+
+// Validate checks the field values on GetGameGroupResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetGameGroupResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetGameGroupResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetGameGroupResponseMultiError, or nil if none found.
+func (m *GetGameGroupResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetGameGroupResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetGroup()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetGameGroupResponseValidationError{
+					field:  "Group",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetGameGroupResponseValidationError{
+					field:  "Group",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetGroup()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetGameGroupResponseValidationError{
+				field:  "Group",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetGameGroupResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetGameGroupResponseMultiError is an error wrapping multiple validation
+// errors returned by GetGameGroupResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetGameGroupResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetGameGroupResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetGameGroupResponseMultiError) AllErrors() []error { return m }
+
+// GetGameGroupResponseValidationError is the validation error returned by
+// GetGameGroupResponse.Validate if the designated constraints aren't met.
+type GetGameGroupResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetGameGroupResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetGameGroupResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetGameGroupResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetGameGroupResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetGameGroupResponseValidationError) ErrorName() string {
+	return "GetGameGroupResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetGameGroupResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetGameGroupResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetGameGroupResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetGameGroupResponseValidationError{}
+
+// Validate checks the field values on CreateGameGroupRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateGameGroupRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateGameGroupRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateGameGroupRequestMultiError, or nil if none found.
+func (m *CreateGameGroupRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateGameGroupRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for DisplayName
+
+	// no validation rules for ProviderId
+
+	// no validation rules for BaseGameId
+
+	// no validation rules for Enabled
+
+	for idx, item := range m.GetVariants() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CreateGameGroupRequestValidationError{
+						field:  fmt.Sprintf("Variants[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CreateGameGroupRequestValidationError{
+						field:  fmt.Sprintf("Variants[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CreateGameGroupRequestValidationError{
+					field:  fmt.Sprintf("Variants[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return CreateGameGroupRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateGameGroupRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateGameGroupRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateGameGroupRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateGameGroupRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateGameGroupRequestMultiError) AllErrors() []error { return m }
+
+// CreateGameGroupRequestValidationError is the validation error returned by
+// CreateGameGroupRequest.Validate if the designated constraints aren't met.
+type CreateGameGroupRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateGameGroupRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateGameGroupRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateGameGroupRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateGameGroupRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateGameGroupRequestValidationError) ErrorName() string {
+	return "CreateGameGroupRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateGameGroupRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateGameGroupRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateGameGroupRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateGameGroupRequestValidationError{}
+
+// Validate checks the field values on CreateGameGroupResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateGameGroupResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateGameGroupResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateGameGroupResponseMultiError, or nil if none found.
+func (m *CreateGameGroupResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateGameGroupResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetGroup()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateGameGroupResponseValidationError{
+					field:  "Group",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateGameGroupResponseValidationError{
+					field:  "Group",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetGroup()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateGameGroupResponseValidationError{
+				field:  "Group",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateGameGroupResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateGameGroupResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateGameGroupResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateGameGroupResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateGameGroupResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateGameGroupResponseMultiError) AllErrors() []error { return m }
+
+// CreateGameGroupResponseValidationError is the validation error returned by
+// CreateGameGroupResponse.Validate if the designated constraints aren't met.
+type CreateGameGroupResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateGameGroupResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateGameGroupResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateGameGroupResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateGameGroupResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateGameGroupResponseValidationError) ErrorName() string {
+	return "CreateGameGroupResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateGameGroupResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateGameGroupResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateGameGroupResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateGameGroupResponseValidationError{}
+
+// Validate checks the field values on UpdateGameGroupRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGameGroupRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGameGroupRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateGameGroupRequestMultiError, or nil if none found.
+func (m *UpdateGameGroupRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGameGroupRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if m.DisplayName != nil {
+		// no validation rules for DisplayName
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if m.BaseGameId != nil {
+		// no validation rules for BaseGameId
+	}
+
+	if len(errors) > 0 {
+		return UpdateGameGroupRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGameGroupRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateGameGroupRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateGameGroupRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGameGroupRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGameGroupRequestMultiError) AllErrors() []error { return m }
+
+// UpdateGameGroupRequestValidationError is the validation error returned by
+// UpdateGameGroupRequest.Validate if the designated constraints aren't met.
+type UpdateGameGroupRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGameGroupRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGameGroupRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGameGroupRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGameGroupRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGameGroupRequestValidationError) ErrorName() string {
+	return "UpdateGameGroupRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGameGroupRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGameGroupRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGameGroupRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGameGroupRequestValidationError{}
+
+// Validate checks the field values on UpdateGameGroupResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGameGroupResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGameGroupResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateGameGroupResponseMultiError, or nil if none found.
+func (m *UpdateGameGroupResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGameGroupResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetGroup()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateGameGroupResponseValidationError{
+					field:  "Group",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateGameGroupResponseValidationError{
+					field:  "Group",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetGroup()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateGameGroupResponseValidationError{
+				field:  "Group",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateGameGroupResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGameGroupResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateGameGroupResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateGameGroupResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGameGroupResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGameGroupResponseMultiError) AllErrors() []error { return m }
+
+// UpdateGameGroupResponseValidationError is the validation error returned by
+// UpdateGameGroupResponse.Validate if the designated constraints aren't met.
+type UpdateGameGroupResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGameGroupResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGameGroupResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGameGroupResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGameGroupResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGameGroupResponseValidationError) ErrorName() string {
+	return "UpdateGameGroupResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGameGroupResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGameGroupResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGameGroupResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGameGroupResponseValidationError{}
+
+// Validate checks the field values on DeleteGameGroupRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteGameGroupRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteGameGroupRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteGameGroupRequestMultiError, or nil if none found.
+func (m *DeleteGameGroupRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteGameGroupRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteGameGroupRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteGameGroupRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteGameGroupRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteGameGroupRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteGameGroupRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteGameGroupRequestMultiError) AllErrors() []error { return m }
+
+// DeleteGameGroupRequestValidationError is the validation error returned by
+// DeleteGameGroupRequest.Validate if the designated constraints aren't met.
+type DeleteGameGroupRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteGameGroupRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteGameGroupRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteGameGroupRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteGameGroupRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteGameGroupRequestValidationError) ErrorName() string {
+	return "DeleteGameGroupRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteGameGroupRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteGameGroupRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteGameGroupRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteGameGroupRequestValidationError{}
+
+// Validate checks the field values on DeleteGameGroupResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteGameGroupResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteGameGroupResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteGameGroupResponseMultiError, or nil if none found.
+func (m *DeleteGameGroupResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteGameGroupResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteGameGroupResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteGameGroupResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteGameGroupResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteGameGroupResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteGameGroupResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteGameGroupResponseMultiError) AllErrors() []error { return m }
+
+// DeleteGameGroupResponseValidationError is the validation error returned by
+// DeleteGameGroupResponse.Validate if the designated constraints aren't met.
+type DeleteGameGroupResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteGameGroupResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteGameGroupResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteGameGroupResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteGameGroupResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteGameGroupResponseValidationError) ErrorName() string {
+	return "DeleteGameGroupResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteGameGroupResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteGameGroupResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteGameGroupResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteGameGroupResponseValidationError{}
+
+// Validate checks the field values on AddGameGroupVariantRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddGameGroupVariantRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddGameGroupVariantRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddGameGroupVariantRequestMultiError, or nil if none found.
+func (m *AddGameGroupVariantRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddGameGroupVariantRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GameGroupId
+
+	// no validation rules for GameId
+
+	// no validation rules for RtpTier
+
+	// no validation rules for RtpValue
+
+	// no validation rules for IsDefault
+
+	if len(errors) > 0 {
+		return AddGameGroupVariantRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddGameGroupVariantRequestMultiError is an error wrapping multiple
+// validation errors returned by AddGameGroupVariantRequest.ValidateAll() if
+// the designated constraints aren't met.
+type AddGameGroupVariantRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddGameGroupVariantRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddGameGroupVariantRequestMultiError) AllErrors() []error { return m }
+
+// AddGameGroupVariantRequestValidationError is the validation error returned
+// by AddGameGroupVariantRequest.Validate if the designated constraints aren't met.
+type AddGameGroupVariantRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddGameGroupVariantRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddGameGroupVariantRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddGameGroupVariantRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddGameGroupVariantRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddGameGroupVariantRequestValidationError) ErrorName() string {
+	return "AddGameGroupVariantRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddGameGroupVariantRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddGameGroupVariantRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddGameGroupVariantRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddGameGroupVariantRequestValidationError{}
+
+// Validate checks the field values on AddGameGroupVariantResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddGameGroupVariantResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddGameGroupVariantResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddGameGroupVariantResponseMultiError, or nil if none found.
+func (m *AddGameGroupVariantResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddGameGroupVariantResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetVariant()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddGameGroupVariantResponseValidationError{
+					field:  "Variant",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddGameGroupVariantResponseValidationError{
+					field:  "Variant",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetVariant()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddGameGroupVariantResponseValidationError{
+				field:  "Variant",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AddGameGroupVariantResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddGameGroupVariantResponseMultiError is an error wrapping multiple
+// validation errors returned by AddGameGroupVariantResponse.ValidateAll() if
+// the designated constraints aren't met.
+type AddGameGroupVariantResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddGameGroupVariantResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddGameGroupVariantResponseMultiError) AllErrors() []error { return m }
+
+// AddGameGroupVariantResponseValidationError is the validation error returned
+// by AddGameGroupVariantResponse.Validate if the designated constraints
+// aren't met.
+type AddGameGroupVariantResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddGameGroupVariantResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddGameGroupVariantResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddGameGroupVariantResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddGameGroupVariantResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddGameGroupVariantResponseValidationError) ErrorName() string {
+	return "AddGameGroupVariantResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddGameGroupVariantResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddGameGroupVariantResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddGameGroupVariantResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddGameGroupVariantResponseValidationError{}
+
+// Validate checks the field values on UpdateGameGroupVariantRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGameGroupVariantRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGameGroupVariantRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateGameGroupVariantRequestMultiError, or nil if none found.
+func (m *UpdateGameGroupVariantRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGameGroupVariantRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if m.RtpTier != nil {
+		// no validation rules for RtpTier
+	}
+
+	if m.RtpValue != nil {
+		// no validation rules for RtpValue
+	}
+
+	if m.IsDefault != nil {
+		// no validation rules for IsDefault
+	}
+
+	if len(errors) > 0 {
+		return UpdateGameGroupVariantRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGameGroupVariantRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateGameGroupVariantRequest.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateGameGroupVariantRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGameGroupVariantRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGameGroupVariantRequestMultiError) AllErrors() []error { return m }
+
+// UpdateGameGroupVariantRequestValidationError is the validation error
+// returned by UpdateGameGroupVariantRequest.Validate if the designated
+// constraints aren't met.
+type UpdateGameGroupVariantRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGameGroupVariantRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGameGroupVariantRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGameGroupVariantRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGameGroupVariantRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGameGroupVariantRequestValidationError) ErrorName() string {
+	return "UpdateGameGroupVariantRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGameGroupVariantRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGameGroupVariantRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGameGroupVariantRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGameGroupVariantRequestValidationError{}
+
+// Validate checks the field values on UpdateGameGroupVariantResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGameGroupVariantResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGameGroupVariantResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateGameGroupVariantResponseMultiError, or nil if none found.
+func (m *UpdateGameGroupVariantResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGameGroupVariantResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetVariant()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateGameGroupVariantResponseValidationError{
+					field:  "Variant",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateGameGroupVariantResponseValidationError{
+					field:  "Variant",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetVariant()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateGameGroupVariantResponseValidationError{
+				field:  "Variant",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateGameGroupVariantResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGameGroupVariantResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateGameGroupVariantResponse.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateGameGroupVariantResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGameGroupVariantResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGameGroupVariantResponseMultiError) AllErrors() []error { return m }
+
+// UpdateGameGroupVariantResponseValidationError is the validation error
+// returned by UpdateGameGroupVariantResponse.Validate if the designated
+// constraints aren't met.
+type UpdateGameGroupVariantResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGameGroupVariantResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGameGroupVariantResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGameGroupVariantResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGameGroupVariantResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGameGroupVariantResponseValidationError) ErrorName() string {
+	return "UpdateGameGroupVariantResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGameGroupVariantResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGameGroupVariantResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGameGroupVariantResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGameGroupVariantResponseValidationError{}
+
+// Validate checks the field values on RemoveGameGroupVariantRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RemoveGameGroupVariantRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RemoveGameGroupVariantRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// RemoveGameGroupVariantRequestMultiError, or nil if none found.
+func (m *RemoveGameGroupVariantRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RemoveGameGroupVariantRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return RemoveGameGroupVariantRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RemoveGameGroupVariantRequestMultiError is an error wrapping multiple
+// validation errors returned by RemoveGameGroupVariantRequest.ValidateAll()
+// if the designated constraints aren't met.
+type RemoveGameGroupVariantRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RemoveGameGroupVariantRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RemoveGameGroupVariantRequestMultiError) AllErrors() []error { return m }
+
+// RemoveGameGroupVariantRequestValidationError is the validation error
+// returned by RemoveGameGroupVariantRequest.Validate if the designated
+// constraints aren't met.
+type RemoveGameGroupVariantRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RemoveGameGroupVariantRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RemoveGameGroupVariantRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RemoveGameGroupVariantRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RemoveGameGroupVariantRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RemoveGameGroupVariantRequestValidationError) ErrorName() string {
+	return "RemoveGameGroupVariantRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RemoveGameGroupVariantRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRemoveGameGroupVariantRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RemoveGameGroupVariantRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RemoveGameGroupVariantRequestValidationError{}
+
+// Validate checks the field values on RemoveGameGroupVariantResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RemoveGameGroupVariantResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RemoveGameGroupVariantResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// RemoveGameGroupVariantResponseMultiError, or nil if none found.
+func (m *RemoveGameGroupVariantResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RemoveGameGroupVariantResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return RemoveGameGroupVariantResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// RemoveGameGroupVariantResponseMultiError is an error wrapping multiple
+// validation errors returned by RemoveGameGroupVariantResponse.ValidateAll()
+// if the designated constraints aren't met.
+type RemoveGameGroupVariantResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RemoveGameGroupVariantResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RemoveGameGroupVariantResponseMultiError) AllErrors() []error { return m }
+
+// RemoveGameGroupVariantResponseValidationError is the validation error
+// returned by RemoveGameGroupVariantResponse.Validate if the designated
+// constraints aren't met.
+type RemoveGameGroupVariantResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RemoveGameGroupVariantResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RemoveGameGroupVariantResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RemoveGameGroupVariantResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RemoveGameGroupVariantResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RemoveGameGroupVariantResponseValidationError) ErrorName() string {
+	return "RemoveGameGroupVariantResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RemoveGameGroupVariantResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRemoveGameGroupVariantResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RemoveGameGroupVariantResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RemoveGameGroupVariantResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

@@ -303,6 +303,32 @@ service Game {
 	rpc GetUserNgr(GetUserNgrRequest) returns (GetUserNgrResponse) {
 	}
 
+	// ============== Game Group (RTP Variants) APIs ==============
+
+	rpc ListGameGroups(ListGameGroupsRequest) returns (ListGameGroupsResponse) {
+	}
+
+	rpc GetGameGroup(GetGameGroupRequest) returns (GetGameGroupResponse) {
+	}
+
+	rpc CreateGameGroup(CreateGameGroupRequest) returns (CreateGameGroupResponse) {
+	}
+
+	rpc UpdateGameGroup(UpdateGameGroupRequest) returns (UpdateGameGroupResponse) {
+	}
+
+	rpc DeleteGameGroup(DeleteGameGroupRequest) returns (DeleteGameGroupResponse) {
+	}
+
+	rpc AddGameGroupVariant(AddGameGroupVariantRequest) returns (AddGameGroupVariantResponse) {
+	}
+
+	rpc UpdateGameGroupVariant(UpdateGameGroupVariantRequest) returns (UpdateGameGroupVariantResponse) {
+	}
+
+	rpc RemoveGameGroupVariant(RemoveGameGroupVariantRequest) returns (RemoveGameGroupVariantResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -2316,3 +2342,101 @@ message UserNgrItem {
 	string ngr_usd = 3;                                // NGR (USD)
 	string ngr_reporting_currency = 4;                 // NGR (reporting currency)
 }
+// ============== Game Group (RTP Variants) Messages ==============
+
+message GameGroupInfo {
+	int64 id = 1;
+	string display_name = 2;
+	string provider_id = 3;
+	string base_game_id = 4;
+	bool enabled = 5;
+	repeated GameGroupVariantInfo variants = 6;
+}
+
+message GameGroupVariantInfo {
+	int64 id = 1;
+	string game_id = 2;
+	string rtp_tier = 3;
+	string rtp_value = 4;
+	bool is_default = 5;
+}
+
+message ListGameGroupsRequest {
+	optional string provider_id = 1;
+	optional bool enabled = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ListGameGroupsResponse {
+	repeated GameGroupInfo groups = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message GetGameGroupRequest {
+	int64 id = 1;
+}
+
+message GetGameGroupResponse {
+	GameGroupInfo group = 1;
+}
+
+message CreateGameGroupRequest {
+	string display_name = 1;
+	string provider_id = 2;
+	string base_game_id = 3;
+	bool enabled = 4;
+	repeated GameGroupVariantInfo variants = 5;
+}
+
+message CreateGameGroupResponse {
+	GameGroupInfo group = 1;
+}
+
+message UpdateGameGroupRequest {
+	int64 id = 1;
+	optional string display_name = 2;
+	optional bool enabled = 3;
+	optional string base_game_id = 4;
+}
+
+message UpdateGameGroupResponse {
+	GameGroupInfo group = 1;
+}
+
+message DeleteGameGroupRequest {
+	int64 id = 1;
+}
+
+message DeleteGameGroupResponse {}
+
+message AddGameGroupVariantRequest {
+	int64 game_group_id = 1;
+	string game_id = 2;
+	string rtp_tier = 3;
+	string rtp_value = 4;
+	bool is_default = 5;
+}
+
+message AddGameGroupVariantResponse {
+	GameGroupVariantInfo variant = 1;
+}
+
+message UpdateGameGroupVariantRequest {
+	int64 id = 1;
+	optional string rtp_tier = 2;
+	optional string rtp_value = 3;
+	optional bool is_default = 4;
+}
+
+message UpdateGameGroupVariantResponse {
+	GameGroupVariantInfo variant = 1;
+}
+
+message RemoveGameGroupVariantRequest {
+	int64 id = 1;
+}
+
+message RemoveGameGroupVariantResponse {}
