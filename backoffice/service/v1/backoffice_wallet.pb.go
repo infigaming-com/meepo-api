@@ -1969,9 +1969,11 @@ type OperatorBalanceAdjustRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Currency        string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	// signed amount: positive = credit, negative = debit
-	CashAmount    string `protobuf:"bytes,3,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	Memo          string `protobuf:"bytes,4,opt,name=memo,proto3" json:"memo,omitempty"`
+	// "operator_manual_credit" or "operator_manual_debit"
+	TransactionType string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	// amount must be positive; direction determined by transaction_type
+	CashAmount    string `protobuf:"bytes,4,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	Memo          string `protobuf:"bytes,5,opt,name=memo,proto3" json:"memo,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2016,6 +2018,13 @@ func (x *OperatorBalanceAdjustRequest) GetOperatorContext() *common.OperatorCont
 func (x *OperatorBalanceAdjustRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *OperatorBalanceAdjustRequest) GetTransactionType() string {
+	if x != nil {
+		return x.TransactionType
 	}
 	return ""
 }
@@ -5345,13 +5354,14 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\vcash_amount\x18\x03 \x01(\tR\n" +
 	"cashAmount\x12&\n" +
 	"\x0fcash_amount_usd\x18\x04 \x01(\tR\rcashAmountUsd\x12C\n" +
-	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xb7\x01\n" +
+	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xe2\x01\n" +
 	"\x1cOperatorBalanceAdjustRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
-	"\vcash_amount\x18\x03 \x01(\tR\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
+	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12\x1f\n" +
+	"\vcash_amount\x18\x04 \x01(\tR\n" +
 	"cashAmount\x12\x12\n" +
-	"\x04memo\x18\x04 \x01(\tR\x04memo\"Z\n" +
+	"\x04memo\x18\x05 \x01(\tR\x04memo\"Z\n" +
 	"\x1dOperatorBalanceAdjustResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\"\xc3\x04\n" +

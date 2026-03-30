@@ -172,7 +172,7 @@ type WalletClient interface {
 	// OperatorDebit is used to debit cash from an operator's balance
 	OperatorDebit(ctx context.Context, in *OperatorDebitRequest, opts ...grpc.CallOption) (*OperatorDebitResponse, error)
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
-	// cash_amount is signed: positive = credit, negative = debit
+	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
 	OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...grpc.CallOption) (*OperatorBalanceAdjustResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
@@ -1210,7 +1210,7 @@ type WalletServer interface {
 	// OperatorDebit is used to debit cash from an operator's balance
 	OperatorDebit(context.Context, *OperatorDebitRequest) (*OperatorDebitResponse, error)
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
-	// cash_amount is signed: positive = credit, negative = debit
+	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
 	OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)

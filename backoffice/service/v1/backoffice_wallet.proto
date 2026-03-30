@@ -662,9 +662,11 @@ message OperatorBalanceSettleResponse {
 message OperatorBalanceAdjustRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
-	// signed amount: positive = credit, negative = debit
-	string cash_amount = 3;
-	string memo = 4;
+	// "operator_manual_credit" or "operator_manual_debit"
+	string transaction_type = 3;
+	// amount must be positive; direction determined by transaction_type
+	string cash_amount = 4;
+	string memo = 5;
 }
 
 message OperatorBalanceAdjustResponse {

@@ -6217,8 +6217,9 @@ type OperatorBalanceAdjustRequest struct {
 	OperatorContext   *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Currency          string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	ReportingCurrency string                  `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	TransactionType   string                  `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	// signed amount: positive = credit, negative = debit
+	// "operator_manual_credit" or "operator_manual_debit"
+	TransactionType string `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	// amount must be positive; direction determined by transaction_type
 	CashAmount    string `protobuf:"bytes,5,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
 	Memo          string `protobuf:"bytes,6,opt,name=memo,proto3" json:"memo,omitempty"`
 	unknownFields protoimpl.UnknownFields

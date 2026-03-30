@@ -22969,9 +22969,12 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
                     type: string
+                transactionType:
+                    type: string
+                    description: '"operator_manual_credit" or "operator_manual_debit"'
                 cashAmount:
                     type: string
-                    description: 'signed amount: positive = credit, negative = debit'
+                    description: amount must be positive; direction determined by transaction_type
                 memo:
                     type: string
         api.backoffice.service.v1.OperatorBalanceAdjustResponse:

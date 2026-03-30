@@ -129,7 +129,7 @@ service Wallet {
 	rpc OperatorDebit (OperatorDebitRequest) returns (OperatorDebitResponse) {}
 
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
-	// cash_amount is signed: positive = credit, negative = debit
+	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
 	rpc OperatorBalanceAdjust (OperatorBalanceAdjustRequest) returns (OperatorBalanceAdjustResponse) {}
 
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
@@ -1279,8 +1279,9 @@ message OperatorBalanceAdjustRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	string reporting_currency = 3;
+	// "operator_manual_credit" or "operator_manual_debit"
 	string transaction_type = 4;
-	// signed amount: positive = credit, negative = debit
+	// amount must be positive; direction determined by transaction_type
 	string cash_amount = 5;
 	string memo = 6;
 }

@@ -3600,6 +3600,8 @@ func (m *OperatorBalanceAdjustRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for TransactionType
+
 	// no validation rules for CashAmount
 
 	// no validation rules for Memo
