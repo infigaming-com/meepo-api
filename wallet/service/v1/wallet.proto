@@ -333,6 +333,9 @@ service Wallet {
 
 	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	rpc ListOperatorWithdrawableAmounts(ListOperatorWithdrawableAmountsRequest) returns (ListOperatorWithdrawableAmountsResponse) {}
+
+	// GetOperatorWithdrawCheckInfo returns operator financial health data for withdraw approval checks
+	rpc GetOperatorWithdrawCheckInfo(GetOperatorWithdrawCheckInfoRequest) returns (GetOperatorWithdrawCheckInfoResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -2326,6 +2329,16 @@ message GetCompanyFinancialSummaryResponse {
 	string company_withdraw_usd = 5;
 	// Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
 	string transfer_usd = 6;
+	// Pending amount frozen from sub-operators when their players withdraw but not yet settled (operator_user_withdraw_freeze with no status), absolute value in USD
+	string pending_player_withdraw_usd = 7;
+	// Pending amount frozen from sub-operators by company-initiated withdrawals but not yet settled (operator_payment_withdraw_freeze with no status), absolute value in USD
+	string pending_company_withdraw_usd = 8;
+	// Pending amount frozen from sub-operators by system balance freeze but not yet settled (operator_balance_freeze with no status), absolute value in USD
+	string pending_balance_freeze_usd = 9;
+	// Settled amount frozen from sub-operators by system balance freeze (operator_balance_freeze with status settled), absolute value in USD
+	string settled_balance_freeze_usd = 10;
+	// Net swap amount across all sub-operators (operator_balance_swap), representing swap fee loss in USD
+	string swap_fee_usd = 11;
 }
 
 // ============================================================================
@@ -2430,4 +2443,20 @@ message ListOperatorWithdrawableAmountsResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message GetOperatorWithdrawCheckInfoRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+}
+
+message GetOperatorWithdrawCheckInfoResponse {
+	// operator withdrawable amount in USD (custody - estCost - estRsToSys - lockedForPendingInvoices)
+	string withdrawable_amount_usd = 1;
+	// total pending freeze amount across all currencies in USD (user withdraw + operator payment withdraw, absolute value)
+	string total_pending_freeze_amount_usd = 2;
+	// operator balance in the requested currency
+	string balance_in_currency = 3;
+	// pending freeze amount in the requested currency (absolute value)
+	string pending_freeze_amount_in_currency = 4;
 }

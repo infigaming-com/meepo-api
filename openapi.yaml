@@ -7276,6 +7276,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.ListTicketsResponse'
+    /v1/backoffice/review/operator/tickets/precheck:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_PrecheckOperatorWithdrawApproval
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PrecheckWithdrawApprovalRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.PrecheckWithdrawApprovalResponse'
     /v1/backoffice/review/operator/withdraw:
         post:
             tags:
@@ -7366,6 +7384,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.ListTicketsResponse'
+    /v1/backoffice/review/tickets/precheck:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_PrecheckUserWithdrawApproval
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PrecheckWithdrawApprovalRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.PrecheckWithdrawApprovalResponse'
     /v1/backoffice/review/tickets/review:
         post:
             tags:
@@ -17131,6 +17167,9 @@ components:
                     type: string
                 withdrawDisabled:
                     type: boolean
+                custodyEstCosts:
+                    type: string
+                    description: 'Custody card: est costs from co-operation operators'
         api.backoffice.service.v1.GetBalancesSummaryRequest:
             type: object
             properties:
@@ -23310,6 +23349,11 @@ components:
                 apexDomain:
                     type: string
                 domain:
+                    type: string
+        api.backoffice.service.v1.PrecheckWithdrawApprovalRequest:
+            type: object
+            properties:
+                ticketId:
                     type: string
         api.backoffice.service.v1.PurgeCloudflareCacheRequest:
             type: object
@@ -30072,6 +30116,30 @@ components:
                     format: int32
                 operatorMode:
                     type: string
+        api.review.service.v1.PrecheckWithdrawApprovalResponse:
+            type: object
+            properties:
+                canApprove:
+                    type: boolean
+                checks:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.review.service.v1.WithdrawApprovalCheck'
+        api.review.service.v1.WithdrawApprovalCheck:
+            type: object
+            properties:
+                checkType:
+                    type: string
+                    description: 'check type: "operator_withdrawable", "currency_liquidity"'
+                passed:
+                    type: boolean
+                reason:
+                    type: string
+                limitValue:
+                    type: string
+                    description: raw values used for the check
+                requestValue:
+                    type: string
         api.user.service.v1.AddOperatorApexDomainResponse:
             type: object
             properties:
@@ -34601,6 +34669,9 @@ components:
                 nonce:
                     type: string
                     description: Random string to ensure each request is unique
+                txHash:
+                    type: string
+                    description: On-chain transaction hash (for crypto transactions)
             description: |-
                 Request for deposit callback
                  Used by payment gateways to notify about deposit status changes
@@ -35469,6 +35540,9 @@ components:
                 payee:
                     type: object
                     description: Payee information (JSONB data)
+                txHash:
+                    type: string
+                    description: On-chain transaction hash (for crypto transactions)
             description: |-
                 Transaction information
                  Detailed information about a specific transaction
@@ -35532,6 +35606,9 @@ components:
                 nonce:
                     type: string
                     description: Random string to ensure each request is unique
+                txHash:
+                    type: string
+                    description: On-chain transaction hash (for crypto transactions)
             description: |-
                 Request for withdraw callback
                  Used by payment gateways to notify about withdrawal status changes

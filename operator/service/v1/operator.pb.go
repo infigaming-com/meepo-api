@@ -3061,8 +3061,10 @@ type GetBalanceSummaryResponse struct {
 	MaxWithdrawable           string `protobuf:"bytes,15,opt,name=max_withdrawable,json=maxWithdrawable,proto3" json:"max_withdrawable,omitempty"`
 	PendingInvoices           string `protobuf:"bytes,16,opt,name=pending_invoices,json=pendingInvoices,proto3" json:"pending_invoices,omitempty"`
 	WithdrawDisabled          bool   `protobuf:"varint,17,opt,name=withdraw_disabled,json=withdrawDisabled,proto3" json:"withdraw_disabled,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	// Custody card: est costs from co-operation operators
+	CustodyEstCosts string `protobuf:"bytes,18,opt,name=custody_est_costs,json=custodyEstCosts,proto3" json:"custody_est_costs,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetBalanceSummaryResponse) Reset() {
@@ -3212,6 +3214,13 @@ func (x *GetBalanceSummaryResponse) GetWithdrawDisabled() bool {
 		return x.WithdrawDisabled
 	}
 	return false
+}
+
+func (x *GetBalanceSummaryResponse) GetCustodyEstCosts() string {
+	if x != nil {
+		return x.CustodyEstCosts
+	}
+	return ""
 }
 
 type GetBalancesSummaryRequest struct {
@@ -6981,7 +6990,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x0ebilling_period\x18\x03 \x01(\tR\rbillingPeriod\"\xc0\x01\n" +
 	"\x18GetBalanceSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x94\x06\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xc0\x06\n" +
 	"\x19GetBalanceSummaryResponse\x12'\n" +
 	"\x0fcompany_balance\x18\x01 \x01(\tR\x0ecompanyBalance\x12.\n" +
 	"\x13est_settlement_cost\x18\x02 \x01(\tR\x11estSettlementCost\x12*\n" +
@@ -7001,7 +7010,8 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x17locked_late_payment_fee\x18\x0e \x01(\tR\x14lockedLatePaymentFee\x12)\n" +
 	"\x10max_withdrawable\x18\x0f \x01(\tR\x0fmaxWithdrawable\x12)\n" +
 	"\x10pending_invoices\x18\x10 \x01(\tR\x0fpendingInvoices\x12+\n" +
-	"\x11withdraw_disabled\x18\x11 \x01(\bR\x10withdrawDisabled\"\x93\x02\n" +
+	"\x11withdraw_disabled\x18\x11 \x01(\bR\x10withdrawDisabled\x12*\n" +
+	"\x11custody_est_costs\x18\x12 \x01(\tR\x0fcustodyEstCosts\"\x93\x02\n" +
 	"\x19GetBalancesSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
