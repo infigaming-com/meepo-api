@@ -102,6 +102,10 @@ const (
 	Game_AddGameGroupVariant_FullMethodName               = "/api.game.service.v1.Game/AddGameGroupVariant"
 	Game_UpdateGameGroupVariant_FullMethodName            = "/api.game.service.v1.Game/UpdateGameGroupVariant"
 	Game_RemoveGameGroupVariant_FullMethodName            = "/api.game.service.v1.Game/RemoveGameGroupVariant"
+	Game_ListRTPStrategies_FullMethodName                 = "/api.game.service.v1.Game/ListRTPStrategies"
+	Game_CreateRTPStrategy_FullMethodName                 = "/api.game.service.v1.Game/CreateRTPStrategy"
+	Game_UpdateRTPStrategy_FullMethodName                 = "/api.game.service.v1.Game/UpdateRTPStrategy"
+	Game_DeleteRTPStrategy_FullMethodName                 = "/api.game.service.v1.Game/DeleteRTPStrategy"
 )
 
 // GameClient is the client API for Game service.
@@ -212,6 +216,10 @@ type GameClient interface {
 	AddGameGroupVariant(ctx context.Context, in *AddGameGroupVariantRequest, opts ...grpc.CallOption) (*AddGameGroupVariantResponse, error)
 	UpdateGameGroupVariant(ctx context.Context, in *UpdateGameGroupVariantRequest, opts ...grpc.CallOption) (*UpdateGameGroupVariantResponse, error)
 	RemoveGameGroupVariant(ctx context.Context, in *RemoveGameGroupVariantRequest, opts ...grpc.CallOption) (*RemoveGameGroupVariantResponse, error)
+	ListRTPStrategies(ctx context.Context, in *ListRTPStrategiesRequest, opts ...grpc.CallOption) (*ListRTPStrategiesResponse, error)
+	CreateRTPStrategy(ctx context.Context, in *CreateRTPStrategyRequest, opts ...grpc.CallOption) (*CreateRTPStrategyResponse, error)
+	UpdateRTPStrategy(ctx context.Context, in *UpdateRTPStrategyRequest, opts ...grpc.CallOption) (*UpdateRTPStrategyResponse, error)
+	DeleteRTPStrategy(ctx context.Context, in *DeleteRTPStrategyRequest, opts ...grpc.CallOption) (*DeleteRTPStrategyResponse, error)
 }
 
 type gameClient struct {
@@ -1052,6 +1060,46 @@ func (c *gameClient) RemoveGameGroupVariant(ctx context.Context, in *RemoveGameG
 	return out, nil
 }
 
+func (c *gameClient) ListRTPStrategies(ctx context.Context, in *ListRTPStrategiesRequest, opts ...grpc.CallOption) (*ListRTPStrategiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRTPStrategiesResponse)
+	err := c.cc.Invoke(ctx, Game_ListRTPStrategies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) CreateRTPStrategy(ctx context.Context, in *CreateRTPStrategyRequest, opts ...grpc.CallOption) (*CreateRTPStrategyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateRTPStrategyResponse)
+	err := c.cc.Invoke(ctx, Game_CreateRTPStrategy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateRTPStrategy(ctx context.Context, in *UpdateRTPStrategyRequest, opts ...grpc.CallOption) (*UpdateRTPStrategyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateRTPStrategyResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateRTPStrategy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) DeleteRTPStrategy(ctx context.Context, in *DeleteRTPStrategyRequest, opts ...grpc.CallOption) (*DeleteRTPStrategyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteRTPStrategyResponse)
+	err := c.cc.Invoke(ctx, Game_DeleteRTPStrategy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -1160,6 +1208,10 @@ type GameServer interface {
 	AddGameGroupVariant(context.Context, *AddGameGroupVariantRequest) (*AddGameGroupVariantResponse, error)
 	UpdateGameGroupVariant(context.Context, *UpdateGameGroupVariantRequest) (*UpdateGameGroupVariantResponse, error)
 	RemoveGameGroupVariant(context.Context, *RemoveGameGroupVariantRequest) (*RemoveGameGroupVariantResponse, error)
+	ListRTPStrategies(context.Context, *ListRTPStrategiesRequest) (*ListRTPStrategiesResponse, error)
+	CreateRTPStrategy(context.Context, *CreateRTPStrategyRequest) (*CreateRTPStrategyResponse, error)
+	UpdateRTPStrategy(context.Context, *UpdateRTPStrategyRequest) (*UpdateRTPStrategyResponse, error)
+	DeleteRTPStrategy(context.Context, *DeleteRTPStrategyRequest) (*DeleteRTPStrategyResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -1418,6 +1470,18 @@ func (UnimplementedGameServer) UpdateGameGroupVariant(context.Context, *UpdateGa
 }
 func (UnimplementedGameServer) RemoveGameGroupVariant(context.Context, *RemoveGameGroupVariantRequest) (*RemoveGameGroupVariantResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveGameGroupVariant not implemented")
+}
+func (UnimplementedGameServer) ListRTPStrategies(context.Context, *ListRTPStrategiesRequest) (*ListRTPStrategiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListRTPStrategies not implemented")
+}
+func (UnimplementedGameServer) CreateRTPStrategy(context.Context, *CreateRTPStrategyRequest) (*CreateRTPStrategyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateRTPStrategy not implemented")
+}
+func (UnimplementedGameServer) UpdateRTPStrategy(context.Context, *UpdateRTPStrategyRequest) (*UpdateRTPStrategyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateRTPStrategy not implemented")
+}
+func (UnimplementedGameServer) DeleteRTPStrategy(context.Context, *DeleteRTPStrategyRequest) (*DeleteRTPStrategyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteRTPStrategy not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -2934,6 +2998,78 @@ func _Game_RemoveGameGroupVariant_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_ListRTPStrategies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRTPStrategiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListRTPStrategies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListRTPStrategies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListRTPStrategies(ctx, req.(*ListRTPStrategiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_CreateRTPStrategy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRTPStrategyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).CreateRTPStrategy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_CreateRTPStrategy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).CreateRTPStrategy(ctx, req.(*CreateRTPStrategyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateRTPStrategy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRTPStrategyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateRTPStrategy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateRTPStrategy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateRTPStrategy(ctx, req.(*UpdateRTPStrategyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_DeleteRTPStrategy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRTPStrategyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).DeleteRTPStrategy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_DeleteRTPStrategy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).DeleteRTPStrategy(ctx, req.(*DeleteRTPStrategyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3272,6 +3408,22 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveGameGroupVariant",
 			Handler:    _Game_RemoveGameGroupVariant_Handler,
+		},
+		{
+			MethodName: "ListRTPStrategies",
+			Handler:    _Game_ListRTPStrategies_Handler,
+		},
+		{
+			MethodName: "CreateRTPStrategy",
+			Handler:    _Game_CreateRTPStrategy_Handler,
+		},
+		{
+			MethodName: "UpdateRTPStrategy",
+			Handler:    _Game_UpdateRTPStrategy_Handler,
+		},
+		{
+			MethodName: "DeleteRTPStrategy",
+			Handler:    _Game_DeleteRTPStrategy_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
