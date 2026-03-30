@@ -65,6 +65,20 @@ const (
 	BackofficeGame_BackofficeBatchUpdateTagGames_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/BackofficeBatchUpdateTagGames"
 	BackofficeGame_BackofficeListProvidersUnderTag_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/BackofficeListProvidersUnderTag"
 	BackofficeGame_BackofficeListGamesUnderTag_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/BackofficeListGamesUnderTag"
+	BackofficeGame_ListGameGroups_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListGameGroups"
+	BackofficeGame_GetGameGroup_FullMethodName                    = "/api.backoffice.service.v1.BackofficeGame/GetGameGroup"
+	BackofficeGame_CreateGameGroup_FullMethodName                 = "/api.backoffice.service.v1.BackofficeGame/CreateGameGroup"
+	BackofficeGame_UpdateGameGroup_FullMethodName                 = "/api.backoffice.service.v1.BackofficeGame/UpdateGameGroup"
+	BackofficeGame_DeleteGameGroup_FullMethodName                 = "/api.backoffice.service.v1.BackofficeGame/DeleteGameGroup"
+	BackofficeGame_AddGameGroupVariant_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/AddGameGroupVariant"
+	BackofficeGame_UpdateGameGroupVariant_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/UpdateGameGroupVariant"
+	BackofficeGame_RemoveGameGroupVariant_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/RemoveGameGroupVariant"
+	BackofficeGame_ListRTPStrategies_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/ListRTPStrategies"
+	BackofficeGame_CreateRTPStrategy_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/CreateRTPStrategy"
+	BackofficeGame_UpdateRTPStrategy_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/UpdateRTPStrategy"
+	BackofficeGame_DeleteRTPStrategy_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/DeleteRTPStrategy"
+	BackofficeGame_SuggestGameGroups_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/SuggestGameGroups"
+	BackofficeGame_PreviewRTPRouting_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/PreviewRTPRouting"
 )
 
 // BackofficeGameClient is the client API for BackofficeGame service.
@@ -135,6 +149,20 @@ type BackofficeGameClient interface {
 	BackofficeListProvidersUnderTag(ctx context.Context, in *BackofficeListProvidersUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListProvidersUnderTagResponse, error)
 	// List games under a tag (paginated, with filters)
 	BackofficeListGamesUnderTag(ctx context.Context, in *BackofficeListGamesUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListGamesUnderTagResponse, error)
+	ListGameGroups(ctx context.Context, in *v1.ListGameGroupsRequest, opts ...grpc.CallOption) (*v1.ListGameGroupsResponse, error)
+	GetGameGroup(ctx context.Context, in *v1.GetGameGroupRequest, opts ...grpc.CallOption) (*v1.GetGameGroupResponse, error)
+	CreateGameGroup(ctx context.Context, in *v1.CreateGameGroupRequest, opts ...grpc.CallOption) (*v1.CreateGameGroupResponse, error)
+	UpdateGameGroup(ctx context.Context, in *v1.UpdateGameGroupRequest, opts ...grpc.CallOption) (*v1.UpdateGameGroupResponse, error)
+	DeleteGameGroup(ctx context.Context, in *v1.DeleteGameGroupRequest, opts ...grpc.CallOption) (*v1.DeleteGameGroupResponse, error)
+	AddGameGroupVariant(ctx context.Context, in *v1.AddGameGroupVariantRequest, opts ...grpc.CallOption) (*v1.AddGameGroupVariantResponse, error)
+	UpdateGameGroupVariant(ctx context.Context, in *v1.UpdateGameGroupVariantRequest, opts ...grpc.CallOption) (*v1.UpdateGameGroupVariantResponse, error)
+	RemoveGameGroupVariant(ctx context.Context, in *v1.RemoveGameGroupVariantRequest, opts ...grpc.CallOption) (*v1.RemoveGameGroupVariantResponse, error)
+	ListRTPStrategies(ctx context.Context, in *v1.ListRTPStrategiesRequest, opts ...grpc.CallOption) (*v1.ListRTPStrategiesResponse, error)
+	CreateRTPStrategy(ctx context.Context, in *v1.CreateRTPStrategyRequest, opts ...grpc.CallOption) (*v1.CreateRTPStrategyResponse, error)
+	UpdateRTPStrategy(ctx context.Context, in *v1.UpdateRTPStrategyRequest, opts ...grpc.CallOption) (*v1.UpdateRTPStrategyResponse, error)
+	DeleteRTPStrategy(ctx context.Context, in *v1.DeleteRTPStrategyRequest, opts ...grpc.CallOption) (*v1.DeleteRTPStrategyResponse, error)
+	SuggestGameGroups(ctx context.Context, in *v1.SuggestGameGroupsRequest, opts ...grpc.CallOption) (*v1.SuggestGameGroupsResponse, error)
+	PreviewRTPRouting(ctx context.Context, in *v1.PreviewRTPRoutingRequest, opts ...grpc.CallOption) (*v1.PreviewRTPRoutingResponse, error)
 }
 
 type backofficeGameClient struct {
@@ -585,6 +613,146 @@ func (c *backofficeGameClient) BackofficeListGamesUnderTag(ctx context.Context, 
 	return out, nil
 }
 
+func (c *backofficeGameClient) ListGameGroups(ctx context.Context, in *v1.ListGameGroupsRequest, opts ...grpc.CallOption) (*v1.ListGameGroupsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListGameGroupsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListGameGroups_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) GetGameGroup(ctx context.Context, in *v1.GetGameGroupRequest, opts ...grpc.CallOption) (*v1.GetGameGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetGameGroupResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_GetGameGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) CreateGameGroup(ctx context.Context, in *v1.CreateGameGroupRequest, opts ...grpc.CallOption) (*v1.CreateGameGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreateGameGroupResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_CreateGameGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) UpdateGameGroup(ctx context.Context, in *v1.UpdateGameGroupRequest, opts ...grpc.CallOption) (*v1.UpdateGameGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateGameGroupResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_UpdateGameGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) DeleteGameGroup(ctx context.Context, in *v1.DeleteGameGroupRequest, opts ...grpc.CallOption) (*v1.DeleteGameGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteGameGroupResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_DeleteGameGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) AddGameGroupVariant(ctx context.Context, in *v1.AddGameGroupVariantRequest, opts ...grpc.CallOption) (*v1.AddGameGroupVariantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.AddGameGroupVariantResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_AddGameGroupVariant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) UpdateGameGroupVariant(ctx context.Context, in *v1.UpdateGameGroupVariantRequest, opts ...grpc.CallOption) (*v1.UpdateGameGroupVariantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateGameGroupVariantResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_UpdateGameGroupVariant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) RemoveGameGroupVariant(ctx context.Context, in *v1.RemoveGameGroupVariantRequest, opts ...grpc.CallOption) (*v1.RemoveGameGroupVariantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.RemoveGameGroupVariantResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_RemoveGameGroupVariant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListRTPStrategies(ctx context.Context, in *v1.ListRTPStrategiesRequest, opts ...grpc.CallOption) (*v1.ListRTPStrategiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListRTPStrategiesResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListRTPStrategies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) CreateRTPStrategy(ctx context.Context, in *v1.CreateRTPStrategyRequest, opts ...grpc.CallOption) (*v1.CreateRTPStrategyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreateRTPStrategyResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_CreateRTPStrategy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) UpdateRTPStrategy(ctx context.Context, in *v1.UpdateRTPStrategyRequest, opts ...grpc.CallOption) (*v1.UpdateRTPStrategyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateRTPStrategyResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_UpdateRTPStrategy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) DeleteRTPStrategy(ctx context.Context, in *v1.DeleteRTPStrategyRequest, opts ...grpc.CallOption) (*v1.DeleteRTPStrategyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteRTPStrategyResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_DeleteRTPStrategy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) SuggestGameGroups(ctx context.Context, in *v1.SuggestGameGroupsRequest, opts ...grpc.CallOption) (*v1.SuggestGameGroupsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SuggestGameGroupsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_SuggestGameGroups_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) PreviewRTPRouting(ctx context.Context, in *v1.PreviewRTPRoutingRequest, opts ...grpc.CallOption) (*v1.PreviewRTPRoutingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.PreviewRTPRoutingResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_PreviewRTPRouting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeGameServer is the server API for BackofficeGame service.
 // All implementations must embed UnimplementedBackofficeGameServer
 // for forward compatibility.
@@ -653,6 +821,20 @@ type BackofficeGameServer interface {
 	BackofficeListProvidersUnderTag(context.Context, *BackofficeListProvidersUnderTagRequest) (*BackofficeListProvidersUnderTagResponse, error)
 	// List games under a tag (paginated, with filters)
 	BackofficeListGamesUnderTag(context.Context, *BackofficeListGamesUnderTagRequest) (*BackofficeListGamesUnderTagResponse, error)
+	ListGameGroups(context.Context, *v1.ListGameGroupsRequest) (*v1.ListGameGroupsResponse, error)
+	GetGameGroup(context.Context, *v1.GetGameGroupRequest) (*v1.GetGameGroupResponse, error)
+	CreateGameGroup(context.Context, *v1.CreateGameGroupRequest) (*v1.CreateGameGroupResponse, error)
+	UpdateGameGroup(context.Context, *v1.UpdateGameGroupRequest) (*v1.UpdateGameGroupResponse, error)
+	DeleteGameGroup(context.Context, *v1.DeleteGameGroupRequest) (*v1.DeleteGameGroupResponse, error)
+	AddGameGroupVariant(context.Context, *v1.AddGameGroupVariantRequest) (*v1.AddGameGroupVariantResponse, error)
+	UpdateGameGroupVariant(context.Context, *v1.UpdateGameGroupVariantRequest) (*v1.UpdateGameGroupVariantResponse, error)
+	RemoveGameGroupVariant(context.Context, *v1.RemoveGameGroupVariantRequest) (*v1.RemoveGameGroupVariantResponse, error)
+	ListRTPStrategies(context.Context, *v1.ListRTPStrategiesRequest) (*v1.ListRTPStrategiesResponse, error)
+	CreateRTPStrategy(context.Context, *v1.CreateRTPStrategyRequest) (*v1.CreateRTPStrategyResponse, error)
+	UpdateRTPStrategy(context.Context, *v1.UpdateRTPStrategyRequest) (*v1.UpdateRTPStrategyResponse, error)
+	DeleteRTPStrategy(context.Context, *v1.DeleteRTPStrategyRequest) (*v1.DeleteRTPStrategyResponse, error)
+	SuggestGameGroups(context.Context, *v1.SuggestGameGroupsRequest) (*v1.SuggestGameGroupsResponse, error)
+	PreviewRTPRouting(context.Context, *v1.PreviewRTPRoutingRequest) (*v1.PreviewRTPRoutingResponse, error)
 	mustEmbedUnimplementedBackofficeGameServer()
 }
 
@@ -794,6 +976,48 @@ func (UnimplementedBackofficeGameServer) BackofficeListProvidersUnderTag(context
 }
 func (UnimplementedBackofficeGameServer) BackofficeListGamesUnderTag(context.Context, *BackofficeListGamesUnderTagRequest) (*BackofficeListGamesUnderTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BackofficeListGamesUnderTag not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListGameGroups(context.Context, *v1.ListGameGroupsRequest) (*v1.ListGameGroupsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListGameGroups not implemented")
+}
+func (UnimplementedBackofficeGameServer) GetGameGroup(context.Context, *v1.GetGameGroupRequest) (*v1.GetGameGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGameGroup not implemented")
+}
+func (UnimplementedBackofficeGameServer) CreateGameGroup(context.Context, *v1.CreateGameGroupRequest) (*v1.CreateGameGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateGameGroup not implemented")
+}
+func (UnimplementedBackofficeGameServer) UpdateGameGroup(context.Context, *v1.UpdateGameGroupRequest) (*v1.UpdateGameGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateGameGroup not implemented")
+}
+func (UnimplementedBackofficeGameServer) DeleteGameGroup(context.Context, *v1.DeleteGameGroupRequest) (*v1.DeleteGameGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteGameGroup not implemented")
+}
+func (UnimplementedBackofficeGameServer) AddGameGroupVariant(context.Context, *v1.AddGameGroupVariantRequest) (*v1.AddGameGroupVariantResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddGameGroupVariant not implemented")
+}
+func (UnimplementedBackofficeGameServer) UpdateGameGroupVariant(context.Context, *v1.UpdateGameGroupVariantRequest) (*v1.UpdateGameGroupVariantResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateGameGroupVariant not implemented")
+}
+func (UnimplementedBackofficeGameServer) RemoveGameGroupVariant(context.Context, *v1.RemoveGameGroupVariantRequest) (*v1.RemoveGameGroupVariantResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveGameGroupVariant not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListRTPStrategies(context.Context, *v1.ListRTPStrategiesRequest) (*v1.ListRTPStrategiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListRTPStrategies not implemented")
+}
+func (UnimplementedBackofficeGameServer) CreateRTPStrategy(context.Context, *v1.CreateRTPStrategyRequest) (*v1.CreateRTPStrategyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateRTPStrategy not implemented")
+}
+func (UnimplementedBackofficeGameServer) UpdateRTPStrategy(context.Context, *v1.UpdateRTPStrategyRequest) (*v1.UpdateRTPStrategyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateRTPStrategy not implemented")
+}
+func (UnimplementedBackofficeGameServer) DeleteRTPStrategy(context.Context, *v1.DeleteRTPStrategyRequest) (*v1.DeleteRTPStrategyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteRTPStrategy not implemented")
+}
+func (UnimplementedBackofficeGameServer) SuggestGameGroups(context.Context, *v1.SuggestGameGroupsRequest) (*v1.SuggestGameGroupsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SuggestGameGroups not implemented")
+}
+func (UnimplementedBackofficeGameServer) PreviewRTPRouting(context.Context, *v1.PreviewRTPRoutingRequest) (*v1.PreviewRTPRoutingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PreviewRTPRouting not implemented")
 }
 func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}
 func (UnimplementedBackofficeGameServer) testEmbeddedByValue()                        {}
@@ -1608,6 +1832,258 @@ func _BackofficeGame_BackofficeListGamesUnderTag_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeGame_ListGameGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.ListGameGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListGameGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListGameGroups_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListGameGroups(ctx, req.(*v1.ListGameGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_GetGameGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.GetGameGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).GetGameGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_GetGameGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).GetGameGroup(ctx, req.(*v1.GetGameGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_CreateGameGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.CreateGameGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).CreateGameGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_CreateGameGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).CreateGameGroup(ctx, req.(*v1.CreateGameGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_UpdateGameGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.UpdateGameGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).UpdateGameGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_UpdateGameGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).UpdateGameGroup(ctx, req.(*v1.UpdateGameGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_DeleteGameGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.DeleteGameGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).DeleteGameGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_DeleteGameGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).DeleteGameGroup(ctx, req.(*v1.DeleteGameGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_AddGameGroupVariant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.AddGameGroupVariantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).AddGameGroupVariant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_AddGameGroupVariant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).AddGameGroupVariant(ctx, req.(*v1.AddGameGroupVariantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_UpdateGameGroupVariant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.UpdateGameGroupVariantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).UpdateGameGroupVariant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_UpdateGameGroupVariant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).UpdateGameGroupVariant(ctx, req.(*v1.UpdateGameGroupVariantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_RemoveGameGroupVariant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.RemoveGameGroupVariantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).RemoveGameGroupVariant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_RemoveGameGroupVariant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).RemoveGameGroupVariant(ctx, req.(*v1.RemoveGameGroupVariantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListRTPStrategies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.ListRTPStrategiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListRTPStrategies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListRTPStrategies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListRTPStrategies(ctx, req.(*v1.ListRTPStrategiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_CreateRTPStrategy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.CreateRTPStrategyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).CreateRTPStrategy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_CreateRTPStrategy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).CreateRTPStrategy(ctx, req.(*v1.CreateRTPStrategyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_UpdateRTPStrategy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.UpdateRTPStrategyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).UpdateRTPStrategy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_UpdateRTPStrategy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).UpdateRTPStrategy(ctx, req.(*v1.UpdateRTPStrategyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_DeleteRTPStrategy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.DeleteRTPStrategyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).DeleteRTPStrategy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_DeleteRTPStrategy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).DeleteRTPStrategy(ctx, req.(*v1.DeleteRTPStrategyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_SuggestGameGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.SuggestGameGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).SuggestGameGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_SuggestGameGroups_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).SuggestGameGroups(ctx, req.(*v1.SuggestGameGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_PreviewRTPRouting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.PreviewRTPRoutingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).PreviewRTPRouting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_PreviewRTPRouting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).PreviewRTPRouting(ctx, req.(*v1.PreviewRTPRoutingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeGame_ServiceDesc is the grpc.ServiceDesc for BackofficeGame service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1790,6 +2266,62 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BackofficeListGamesUnderTag",
 			Handler:    _BackofficeGame_BackofficeListGamesUnderTag_Handler,
+		},
+		{
+			MethodName: "ListGameGroups",
+			Handler:    _BackofficeGame_ListGameGroups_Handler,
+		},
+		{
+			MethodName: "GetGameGroup",
+			Handler:    _BackofficeGame_GetGameGroup_Handler,
+		},
+		{
+			MethodName: "CreateGameGroup",
+			Handler:    _BackofficeGame_CreateGameGroup_Handler,
+		},
+		{
+			MethodName: "UpdateGameGroup",
+			Handler:    _BackofficeGame_UpdateGameGroup_Handler,
+		},
+		{
+			MethodName: "DeleteGameGroup",
+			Handler:    _BackofficeGame_DeleteGameGroup_Handler,
+		},
+		{
+			MethodName: "AddGameGroupVariant",
+			Handler:    _BackofficeGame_AddGameGroupVariant_Handler,
+		},
+		{
+			MethodName: "UpdateGameGroupVariant",
+			Handler:    _BackofficeGame_UpdateGameGroupVariant_Handler,
+		},
+		{
+			MethodName: "RemoveGameGroupVariant",
+			Handler:    _BackofficeGame_RemoveGameGroupVariant_Handler,
+		},
+		{
+			MethodName: "ListRTPStrategies",
+			Handler:    _BackofficeGame_ListRTPStrategies_Handler,
+		},
+		{
+			MethodName: "CreateRTPStrategy",
+			Handler:    _BackofficeGame_CreateRTPStrategy_Handler,
+		},
+		{
+			MethodName: "UpdateRTPStrategy",
+			Handler:    _BackofficeGame_UpdateRTPStrategy_Handler,
+		},
+		{
+			MethodName: "DeleteRTPStrategy",
+			Handler:    _BackofficeGame_DeleteRTPStrategy_Handler,
+		},
+		{
+			MethodName: "SuggestGameGroups",
+			Handler:    _BackofficeGame_SuggestGameGroups_Handler,
+		},
+		{
+			MethodName: "PreviewRTPRouting",
+			Handler:    _BackofficeGame_PreviewRTPRouting_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
