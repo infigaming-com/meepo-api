@@ -17064,12 +17064,11 @@ components:
                     type: object
                     additionalProperties:
                         type: string
-                    description: map key is currency code (e.g. "BRL"), value is USD-based exchange rate
+                    description: map key is source currency, value is target currency rate
                 ratesWithFee:
                     type: object
                     additionalProperties:
                         $ref: '#/components/schemas/api.backoffice.service.v1.RateWithFee'
-                    description: map key is currency code, value is exchange rate with applicable swap fee
         api.backoffice.service.v1.GetFICAThresholdConfigRequest:
             type: object
             properties:
@@ -23032,12 +23031,8 @@ components:
             properties:
                 exchangeRate:
                     type: string
-                    description: USD-based exchange rate for this currency (same as exchange_rates value)
                 feePercentage:
                     type: string
-                    description: |-
-                        swap fee percentage applied when swapping this currency (e.g. "0.01" = 1%)
-                         uses currency-specific override if configured, otherwise global default
         api.backoffice.service.v1.RefreshOperatorApexDomainRequest:
             type: object
             properties:
