@@ -2305,6 +2305,16 @@ message GetCompanyFinancialSummaryResponse {
 	string company_withdraw_usd = 5;
 	// Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
 	string transfer_usd = 6;
+	// Total amount of pending player withdrawals (operator_user_withdraw_freeze with no status), absolute value in USD
+	string pending_player_withdraw_usd = 7;
+	// Total amount of pending company withdrawals (operator_payment_withdraw_freeze with no status), absolute value in USD
+	string pending_company_withdraw_usd = 8;
+	// Total amount of pending system balance freeze (operator_balance_freeze with no status), absolute value in USD
+	string pending_balance_freeze_usd = 9;
+	// Total amount of settled system balance freeze (operator_balance_freeze with status settled), absolute value in USD
+	string settled_balance_freeze_usd = 10;
+	// Net swap amount across all sub-operators (operator_balance_swap), representing swap fee loss in USD
+	string swap_fee_usd = 11;
 }
 
 // ============================================================================
