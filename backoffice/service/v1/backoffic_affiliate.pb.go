@@ -1050,7 +1050,9 @@ type ListCampaignsRequest struct {
 	// Target operator context for filtering campaigns under a specific operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=target_operator_context,json=targetOperatorContext,proto3,oneof" json:"target_operator_context,omitempty"`
 	// Filter by multiple affiliate IDs (mutually exclusive with affiliate_id)
-	AffiliateIds  []int64 `protobuf:"varint,10,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	AffiliateIds []int64 `protobuf:"varint,10,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	// If false, returns all results without pagination; nil defaults to true
+	Pagination    *bool `protobuf:"varint,11,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1153,6 +1155,13 @@ func (x *ListCampaignsRequest) GetAffiliateIds() []int64 {
 		return x.AffiliateIds
 	}
 	return nil
+}
+
+func (x *ListCampaignsRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
+	}
+	return false
 }
 
 type ListAffiliateCampaignsRequest struct {
@@ -4162,7 +4171,7 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\n" +
 	"\b_enabledB\x16\n" +
 	"\x14_target_affiliate_idB\x18\n" +
-	"\x16_landing_page_settings\"\x84\x05\n" +
+	"\x16_landing_page_settings\"\xb8\x05\n" +
 	"\x14ListCampaignsRequest\x12(\n" +
 	"\rcampaign_name\x18\x01 \x01(\tH\x00R\fcampaignName\x88\x01\x01\x12$\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03H\x01R\n" +
@@ -4175,7 +4184,10 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\x13target_affiliate_id\x18\b \x01(\x03H\x06R\x11targetAffiliateId\x88\x01\x01\x12X\n" +
 	"\x17target_operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextH\aR\x15targetOperatorContext\x88\x01\x01\x12#\n" +
 	"\raffiliate_ids\x18\n" +
-	" \x03(\x03R\faffiliateIdsB\x10\n" +
+	" \x03(\x03R\faffiliateIds\x12#\n" +
+	"\n" +
+	"pagination\x18\v \x01(\bH\bR\n" +
+	"pagination\x88\x01\x01B\x10\n" +
 	"\x0e_campaign_nameB\x0e\n" +
 	"\f_campaign_idB\x0f\n" +
 	"\r_affiliate_idB\n" +
@@ -4185,7 +4197,8 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\n" +
 	"_page_sizeB\x16\n" +
 	"\x14_target_affiliate_idB\x1a\n" +
-	"\x18_target_operator_context\"\xc7\x02\n" +
+	"\x18_target_operator_contextB\r\n" +
+	"\v_pagination\"\xc7\x02\n" +
 	"\x1dListAffiliateCampaignsRequest\x12(\n" +
 	"\rcampaign_name\x18\x01 \x01(\tH\x00R\fcampaignName\x88\x01\x01\x12$\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03H\x01R\n" +

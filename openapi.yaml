@@ -19315,6 +19315,9 @@ components:
                     items:
                         type: string
                     description: Filter by multiple affiliate IDs (mutually exclusive with affiliate_id)
+                pagination:
+                    type: boolean
+                    description: If false, returns all results without pagination; nil defaults to true
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties:

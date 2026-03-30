@@ -1621,7 +1621,9 @@ type ListCampaignsRequest struct {
 	// If nil, falls back to operator_context_filters behavior
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,12,opt,name=target_operator_context,json=targetOperatorContext,proto3,oneof" json:"target_operator_context,omitempty"`
 	// Filter by multiple affiliate IDs (mutually exclusive with affiliate_id)
-	AffiliateIds  []int64 `protobuf:"varint,13,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	AffiliateIds []int64 `protobuf:"varint,13,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	// If false, returns all results without pagination; nil defaults to true
+	Pagination    *bool `protobuf:"varint,14,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1745,6 +1747,13 @@ func (x *ListCampaignsRequest) GetAffiliateIds() []int64 {
 		return x.AffiliateIds
 	}
 	return nil
+}
+
+func (x *ListCampaignsRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
+	}
+	return false
 }
 
 type ListCampaignsResponse struct {
@@ -11380,7 +11389,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\b_enabledB\x16\n" +
 	"\x14_target_affiliate_idB\x18\n" +
 	"\x16_landing_page_settings\"\x18\n" +
-	"\x16UpdateCampaignResponse\"\xd2\x06\n" +
+	"\x16UpdateCampaignResponse\"\x86\a\n" +
 	"\x14ListCampaignsRequest\x12(\n" +
 	"\rcampaign_name\x18\x01 \x01(\tH\x00R\fcampaignName\x88\x01\x01\x12$\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03H\x01R\n" +
@@ -11396,7 +11405,10 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	" \x01(\x03R\x0finitiatorRoleId\x123\n" +
 	"\x13target_affiliate_id\x18\v \x01(\x03H\aR\x11targetAffiliateId\x88\x01\x01\x12X\n" +
 	"\x17target_operator_context\x18\f \x01(\v2\x1b.api.common.OperatorContextH\bR\x15targetOperatorContext\x88\x01\x01\x12#\n" +
-	"\raffiliate_ids\x18\r \x03(\x03R\faffiliateIdsB\x10\n" +
+	"\raffiliate_ids\x18\r \x03(\x03R\faffiliateIds\x12#\n" +
+	"\n" +
+	"pagination\x18\x0e \x01(\bH\tR\n" +
+	"pagination\x88\x01\x01B\x10\n" +
 	"\x0e_campaign_nameB\x0e\n" +
 	"\f_campaign_idB\x0f\n" +
 	"\r_affiliate_idB\n" +
@@ -11407,7 +11419,8 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"_page_sizeB\x14\n" +
 	"\x12_initiator_user_idB\x16\n" +
 	"\x14_target_affiliate_idB\x1a\n" +
-	"\x18_target_operator_context\"\x8c\b\n" +
+	"\x18_target_operator_contextB\r\n" +
+	"\v_pagination\"\x8c\b\n" +
 	"\x15ListCampaignsResponse\x12Z\n" +
 	"\tcampaigns\x18\x01 \x03(\v2<.api.affiliate.service.v1.ListCampaignsResponse.CampaignInfoR\tcampaigns\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
