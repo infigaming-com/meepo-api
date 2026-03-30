@@ -329,6 +329,9 @@ service Wallet {
 
 	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	rpc ListOperatorWithdrawableAmounts(ListOperatorWithdrawableAmountsRequest) returns (ListOperatorWithdrawableAmountsResponse) {}
+
+	// GetOperatorWithdrawCheckInfo returns operator financial health data for withdraw approval checks
+	rpc GetOperatorWithdrawCheckInfo(GetOperatorWithdrawCheckInfoRequest) returns (GetOperatorWithdrawCheckInfoResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -2419,4 +2422,20 @@ message ListOperatorWithdrawableAmountsResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message GetOperatorWithdrawCheckInfoRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+}
+
+message GetOperatorWithdrawCheckInfoResponse {
+	// max withdrawable amount in USD (custody - estCost - estRsToSys - lockedForPendingInvoices)
+	string max_withdrawable_usd = 1;
+	// total pending freeze in USD (user withdraw + operator payment withdraw, absolute value)
+	string pending_freeze_usd = 2;
+	// operator balance in the specified currency
+	string custody_balance = 3;
+	// pending freeze in the specified currency (absolute value)
+	string pending_freeze = 4;
 }

@@ -906,6 +906,50 @@ func (*CancelTicketResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{13}
 }
 
+type PrecheckWithdrawApprovalRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PrecheckWithdrawApprovalRequest) Reset() {
+	*x = PrecheckWithdrawApprovalRequest{}
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PrecheckWithdrawApprovalRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PrecheckWithdrawApprovalRequest) ProtoMessage() {}
+
+func (x *PrecheckWithdrawApprovalRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PrecheckWithdrawApprovalRequest.ProtoReflect.Descriptor instead.
+func (*PrecheckWithdrawApprovalRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *PrecheckWithdrawApprovalRequest) GetTicketId() int64 {
+	if x != nil {
+		return x.TicketId
+	}
+	return 0
+}
+
 type GetTicketByIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
@@ -915,7 +959,7 @@ type GetTicketByIdRequest struct {
 
 func (x *GetTicketByIdRequest) Reset() {
 	*x = GetTicketByIdRequest{}
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -927,7 +971,7 @@ func (x *GetTicketByIdRequest) String() string {
 func (*GetTicketByIdRequest) ProtoMessage() {}
 
 func (x *GetTicketByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -940,7 +984,7 @@ func (x *GetTicketByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketByIdRequest.ProtoReflect.Descriptor instead.
 func (*GetTicketByIdRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{14}
+	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetTicketByIdRequest) GetTicketId() int64 {
@@ -960,7 +1004,7 @@ type GetTicketByIdResponse struct {
 
 func (x *GetTicketByIdResponse) Reset() {
 	*x = GetTicketByIdResponse{}
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -972,7 +1016,7 @@ func (x *GetTicketByIdResponse) String() string {
 func (*GetTicketByIdResponse) ProtoMessage() {}
 
 func (x *GetTicketByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -985,7 +1029,7 @@ func (x *GetTicketByIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketByIdResponse.ProtoReflect.Descriptor instead.
 func (*GetTicketByIdResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{15}
+	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetTicketByIdResponse) GetTicket() *GetTicketByIdResponse_Ticket {
@@ -1033,7 +1077,7 @@ type ListTicketsResponse_Ticket struct {
 
 func (x *ListTicketsResponse_Ticket) Reset() {
 	*x = ListTicketsResponse_Ticket{}
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1045,7 +1089,7 @@ func (x *ListTicketsResponse_Ticket) String() string {
 func (*ListTicketsResponse_Ticket) ProtoMessage() {}
 
 func (x *ListTicketsResponse_Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1254,7 +1298,7 @@ type GetTicketByIdResponse_Ticket struct {
 
 func (x *GetTicketByIdResponse_Ticket) Reset() {
 	*x = GetTicketByIdResponse_Ticket{}
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1266,7 +1310,7 @@ func (x *GetTicketByIdResponse_Ticket) String() string {
 func (*GetTicketByIdResponse_Ticket) ProtoMessage() {}
 
 func (x *GetTicketByIdResponse_Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1279,7 +1323,7 @@ func (x *GetTicketByIdResponse_Ticket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketByIdResponse_Ticket.ProtoReflect.Descriptor instead.
 func (*GetTicketByIdResponse_Ticket) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{15, 0}
+	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{16, 0}
 }
 
 func (x *GetTicketByIdResponse_Ticket) GetId() int64 {
@@ -1463,7 +1507,7 @@ type GetTicketByIdResponse_Comment struct {
 
 func (x *GetTicketByIdResponse_Comment) Reset() {
 	*x = GetTicketByIdResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1475,7 +1519,7 @@ func (x *GetTicketByIdResponse_Comment) String() string {
 func (*GetTicketByIdResponse_Comment) ProtoMessage() {}
 
 func (x *GetTicketByIdResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1488,7 +1532,7 @@ func (x *GetTicketByIdResponse_Comment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketByIdResponse_Comment.ProtoReflect.Descriptor instead.
 func (*GetTicketByIdResponse_Comment) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{15, 1}
+	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{16, 1}
 }
 
 func (x *GetTicketByIdResponse_Comment) GetId() int64 {
@@ -1643,7 +1687,9 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"comment_id\x18\x01 \x01(\x03R\tcommentId\"2\n" +
 	"\x13CancelTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x16\n" +
-	"\x14CancelTicketResponse\"3\n" +
+	"\x14CancelTicketResponse\">\n" +
+	"\x1fPrecheckWithdrawApprovalRequest\x12\x1b\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"3\n" +
 	"\x14GetTicketByIdRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\xa2\n" +
 	"\n" +
@@ -1686,7 +1732,7 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x0eauthor_user_id\x18\x03 \x01(\x03R\fauthorUserId\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\x8a\f\n" +
+	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\xa9\x0f\n" +
 	"\x10BackofficeReview\x12\xb9\x01\n" +
 	"\x16CreateOperatorWithdraw\x128.api.backoffice.service.v1.CreateOperatorWithdrawRequest\x1a1.api.backoffice.service.v1.CreateWithdrawResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/review/operator/withdraw\x12\xbc\x01\n" +
 	"\x17CreateAffiliateWithdraw\x129.api.backoffice.service.v1.CreateAffiliateWithdrawRequest\x1a1.api.backoffice.service.v1.CreateWithdrawResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/review/affiliate/withdraw\x12\x97\x01\n" +
@@ -1697,7 +1743,9 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/review\x12\xa0\x01\n" +
 	"\n" +
 	"AddComment\x12,.api.backoffice.service.v1.AddCommentRequest\x1a-.api.backoffice.service.v1.AddCommentResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/review/tickets/comments/add\x12\xa0\x01\n" +
-	"\fCancelTicket\x12..api.backoffice.service.v1.CancelTicketRequest\x1a/.api.backoffice.service.v1.CancelTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/cancelB[\n" +
+	"\fCancelTicket\x12..api.backoffice.service.v1.CancelTicketRequest\x1a/.api.backoffice.service.v1.CancelTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/cancel\x12\xc6\x01\n" +
+	"\x1cPrecheckUserWithdrawApproval\x12:.api.backoffice.service.v1.PrecheckWithdrawApprovalRequest\x1a7.api.review.service.v1.PrecheckWithdrawApprovalResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/review/tickets/precheck\x12\xd3\x01\n" +
+	" PrecheckOperatorWithdrawApproval\x12:.api.backoffice.service.v1.PrecheckWithdrawApprovalRequest\x1a7.api.review.service.v1.PrecheckWithdrawApprovalResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/review/operator/tickets/precheckB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -1712,49 +1760,51 @@ func file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_review_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_review_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_backoffice_service_v1_backoffice_review_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_backoffice_service_v1_backoffice_review_proto_goTypes = []any{
-	(*CreateOperatorWithdrawRequest)(nil),  // 0: api.backoffice.service.v1.CreateOperatorWithdrawRequest
-	(*CreateAffiliateWithdrawRequest)(nil), // 1: api.backoffice.service.v1.CreateAffiliateWithdrawRequest
-	(*CreateWithdrawResponse)(nil),         // 2: api.backoffice.service.v1.CreateWithdrawResponse
-	(*ListTicketsRequest)(nil),             // 3: api.backoffice.service.v1.ListTicketsRequest
-	(*ListOperatorTicketsRequest)(nil),     // 4: api.backoffice.service.v1.ListOperatorTicketsRequest
-	(*ListTicketsResponse)(nil),            // 5: api.backoffice.service.v1.ListTicketsResponse
-	(*GetTicketRequest)(nil),               // 6: api.backoffice.service.v1.GetTicketRequest
-	(*GetOperatorTicketRequest)(nil),       // 7: api.backoffice.service.v1.GetOperatorTicketRequest
-	(*ReviewTicketRequest)(nil),            // 8: api.backoffice.service.v1.ReviewTicketRequest
-	(*ReviewTicketResponse)(nil),           // 9: api.backoffice.service.v1.ReviewTicketResponse
-	(*AddCommentRequest)(nil),              // 10: api.backoffice.service.v1.AddCommentRequest
-	(*AddCommentResponse)(nil),             // 11: api.backoffice.service.v1.AddCommentResponse
-	(*CancelTicketRequest)(nil),            // 12: api.backoffice.service.v1.CancelTicketRequest
-	(*CancelTicketResponse)(nil),           // 13: api.backoffice.service.v1.CancelTicketResponse
-	(*GetTicketByIdRequest)(nil),           // 14: api.backoffice.service.v1.GetTicketByIdRequest
-	(*GetTicketByIdResponse)(nil),          // 15: api.backoffice.service.v1.GetTicketByIdResponse
-	(*ListTicketsResponse_Ticket)(nil),     // 16: api.backoffice.service.v1.ListTicketsResponse.Ticket
-	(*GetTicketByIdResponse_Ticket)(nil),   // 17: api.backoffice.service.v1.GetTicketByIdResponse.Ticket
-	(*GetTicketByIdResponse_Comment)(nil),  // 18: api.backoffice.service.v1.GetTicketByIdResponse.Comment
-	(*structpb.Struct)(nil),                // 19: google.protobuf.Struct
-	(*common.OperatorContextFilters)(nil),  // 20: api.common.OperatorContextFilters
-	(*timestamppb.Timestamp)(nil),          // 21: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),         // 22: api.common.OperatorContext
-	(*v1.ListTicketsResponse)(nil),         // 23: api.review.service.v1.ListTicketsResponse
-	(*v1.GetTicketResponse)(nil),           // 24: api.review.service.v1.GetTicketResponse
-	(*v1.GetOperatorTicketResponse)(nil),   // 25: api.review.service.v1.GetOperatorTicketResponse
+	(*CreateOperatorWithdrawRequest)(nil),       // 0: api.backoffice.service.v1.CreateOperatorWithdrawRequest
+	(*CreateAffiliateWithdrawRequest)(nil),      // 1: api.backoffice.service.v1.CreateAffiliateWithdrawRequest
+	(*CreateWithdrawResponse)(nil),              // 2: api.backoffice.service.v1.CreateWithdrawResponse
+	(*ListTicketsRequest)(nil),                  // 3: api.backoffice.service.v1.ListTicketsRequest
+	(*ListOperatorTicketsRequest)(nil),          // 4: api.backoffice.service.v1.ListOperatorTicketsRequest
+	(*ListTicketsResponse)(nil),                 // 5: api.backoffice.service.v1.ListTicketsResponse
+	(*GetTicketRequest)(nil),                    // 6: api.backoffice.service.v1.GetTicketRequest
+	(*GetOperatorTicketRequest)(nil),            // 7: api.backoffice.service.v1.GetOperatorTicketRequest
+	(*ReviewTicketRequest)(nil),                 // 8: api.backoffice.service.v1.ReviewTicketRequest
+	(*ReviewTicketResponse)(nil),                // 9: api.backoffice.service.v1.ReviewTicketResponse
+	(*AddCommentRequest)(nil),                   // 10: api.backoffice.service.v1.AddCommentRequest
+	(*AddCommentResponse)(nil),                  // 11: api.backoffice.service.v1.AddCommentResponse
+	(*CancelTicketRequest)(nil),                 // 12: api.backoffice.service.v1.CancelTicketRequest
+	(*CancelTicketResponse)(nil),                // 13: api.backoffice.service.v1.CancelTicketResponse
+	(*PrecheckWithdrawApprovalRequest)(nil),     // 14: api.backoffice.service.v1.PrecheckWithdrawApprovalRequest
+	(*GetTicketByIdRequest)(nil),                // 15: api.backoffice.service.v1.GetTicketByIdRequest
+	(*GetTicketByIdResponse)(nil),               // 16: api.backoffice.service.v1.GetTicketByIdResponse
+	(*ListTicketsResponse_Ticket)(nil),          // 17: api.backoffice.service.v1.ListTicketsResponse.Ticket
+	(*GetTicketByIdResponse_Ticket)(nil),        // 18: api.backoffice.service.v1.GetTicketByIdResponse.Ticket
+	(*GetTicketByIdResponse_Comment)(nil),       // 19: api.backoffice.service.v1.GetTicketByIdResponse.Comment
+	(*structpb.Struct)(nil),                     // 20: google.protobuf.Struct
+	(*common.OperatorContextFilters)(nil),       // 21: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),               // 22: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),              // 23: api.common.OperatorContext
+	(*v1.ListTicketsResponse)(nil),              // 24: api.review.service.v1.ListTicketsResponse
+	(*v1.GetTicketResponse)(nil),                // 25: api.review.service.v1.GetTicketResponse
+	(*v1.GetOperatorTicketResponse)(nil),        // 26: api.review.service.v1.GetOperatorTicketResponse
+	(*v1.PrecheckWithdrawApprovalResponse)(nil), // 27: api.review.service.v1.PrecheckWithdrawApprovalResponse
 }
 var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
-	19, // 0: api.backoffice.service.v1.CreateOperatorWithdrawRequest.request:type_name -> google.protobuf.Struct
-	19, // 1: api.backoffice.service.v1.CreateAffiliateWithdrawRequest.request:type_name -> google.protobuf.Struct
-	20, // 2: api.backoffice.service.v1.ListTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	21, // 3: api.backoffice.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	21, // 4: api.backoffice.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	20, // 5: api.backoffice.service.v1.ListOperatorTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	21, // 6: api.backoffice.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	21, // 7: api.backoffice.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	16, // 8: api.backoffice.service.v1.ListTicketsResponse.tickets:type_name -> api.backoffice.service.v1.ListTicketsResponse.Ticket
-	22, // 9: api.backoffice.service.v1.GetOperatorTicketRequest.operator_context:type_name -> api.common.OperatorContext
-	17, // 10: api.backoffice.service.v1.GetTicketByIdResponse.ticket:type_name -> api.backoffice.service.v1.GetTicketByIdResponse.Ticket
-	18, // 11: api.backoffice.service.v1.GetTicketByIdResponse.comments:type_name -> api.backoffice.service.v1.GetTicketByIdResponse.Comment
-	21, // 12: api.backoffice.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	20, // 0: api.backoffice.service.v1.CreateOperatorWithdrawRequest.request:type_name -> google.protobuf.Struct
+	20, // 1: api.backoffice.service.v1.CreateAffiliateWithdrawRequest.request:type_name -> google.protobuf.Struct
+	21, // 2: api.backoffice.service.v1.ListTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	22, // 3: api.backoffice.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	22, // 4: api.backoffice.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	21, // 5: api.backoffice.service.v1.ListOperatorTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	22, // 6: api.backoffice.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	22, // 7: api.backoffice.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	17, // 8: api.backoffice.service.v1.ListTicketsResponse.tickets:type_name -> api.backoffice.service.v1.ListTicketsResponse.Ticket
+	23, // 9: api.backoffice.service.v1.GetOperatorTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	18, // 10: api.backoffice.service.v1.GetTicketByIdResponse.ticket:type_name -> api.backoffice.service.v1.GetTicketByIdResponse.Ticket
+	19, // 11: api.backoffice.service.v1.GetTicketByIdResponse.comments:type_name -> api.backoffice.service.v1.GetTicketByIdResponse.Comment
+	22, // 12: api.backoffice.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 13: api.backoffice.service.v1.BackofficeReview.CreateOperatorWithdraw:input_type -> api.backoffice.service.v1.CreateOperatorWithdrawRequest
 	1,  // 14: api.backoffice.service.v1.BackofficeReview.CreateAffiliateWithdraw:input_type -> api.backoffice.service.v1.CreateAffiliateWithdrawRequest
 	3,  // 15: api.backoffice.service.v1.BackofficeReview.ListTickets:input_type -> api.backoffice.service.v1.ListTicketsRequest
@@ -1764,17 +1814,21 @@ var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
 	8,  // 19: api.backoffice.service.v1.BackofficeReview.ReviewTicket:input_type -> api.backoffice.service.v1.ReviewTicketRequest
 	10, // 20: api.backoffice.service.v1.BackofficeReview.AddComment:input_type -> api.backoffice.service.v1.AddCommentRequest
 	12, // 21: api.backoffice.service.v1.BackofficeReview.CancelTicket:input_type -> api.backoffice.service.v1.CancelTicketRequest
-	2,  // 22: api.backoffice.service.v1.BackofficeReview.CreateOperatorWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
-	2,  // 23: api.backoffice.service.v1.BackofficeReview.CreateAffiliateWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
-	23, // 24: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	23, // 25: api.backoffice.service.v1.BackofficeReview.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	24, // 26: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	25, // 27: api.backoffice.service.v1.BackofficeReview.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
-	9,  // 28: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
-	11, // 29: api.backoffice.service.v1.BackofficeReview.AddComment:output_type -> api.backoffice.service.v1.AddCommentResponse
-	13, // 30: api.backoffice.service.v1.BackofficeReview.CancelTicket:output_type -> api.backoffice.service.v1.CancelTicketResponse
-	22, // [22:31] is the sub-list for method output_type
-	13, // [13:22] is the sub-list for method input_type
+	14, // 22: api.backoffice.service.v1.BackofficeReview.PrecheckUserWithdrawApproval:input_type -> api.backoffice.service.v1.PrecheckWithdrawApprovalRequest
+	14, // 23: api.backoffice.service.v1.BackofficeReview.PrecheckOperatorWithdrawApproval:input_type -> api.backoffice.service.v1.PrecheckWithdrawApprovalRequest
+	2,  // 24: api.backoffice.service.v1.BackofficeReview.CreateOperatorWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
+	2,  // 25: api.backoffice.service.v1.BackofficeReview.CreateAffiliateWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
+	24, // 26: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	24, // 27: api.backoffice.service.v1.BackofficeReview.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	25, // 28: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	26, // 29: api.backoffice.service.v1.BackofficeReview.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
+	9,  // 30: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
+	11, // 31: api.backoffice.service.v1.BackofficeReview.AddComment:output_type -> api.backoffice.service.v1.AddCommentResponse
+	13, // 32: api.backoffice.service.v1.BackofficeReview.CancelTicket:output_type -> api.backoffice.service.v1.CancelTicketResponse
+	27, // 33: api.backoffice.service.v1.BackofficeReview.PrecheckUserWithdrawApproval:output_type -> api.review.service.v1.PrecheckWithdrawApprovalResponse
+	27, // 34: api.backoffice.service.v1.BackofficeReview.PrecheckOperatorWithdrawApproval:output_type -> api.review.service.v1.PrecheckWithdrawApprovalResponse
+	24, // [24:35] is the sub-list for method output_type
+	13, // [13:24] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
@@ -1793,7 +1847,7 @@ func file_backoffice_service_v1_backoffice_review_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_review_proto_rawDesc), len(file_backoffice_service_v1_backoffice_review_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

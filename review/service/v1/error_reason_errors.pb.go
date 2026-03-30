@@ -418,3 +418,27 @@ func IsExceedsWithdrawableAmount(err error) bool {
 func ErrorExceedsWithdrawableAmount(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_EXCEEDS_WITHDRAWABLE_AMOUNT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorWithdrawableInsufficient(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_WITHDRAWABLE_INSUFFICIENT.String() && e.Code == 500
+}
+
+func ErrorOperatorWithdrawableInsufficient(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_WITHDRAWABLE_INSUFFICIENT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorCurrencyLiquidityInsufficient(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_CURRENCY_LIQUIDITY_INSUFFICIENT.String() && e.Code == 500
+}
+
+func ErrorOperatorCurrencyLiquidityInsufficient(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CURRENCY_LIQUIDITY_INSUFFICIENT.String(), fmt.Sprintf(format, args...))
+}

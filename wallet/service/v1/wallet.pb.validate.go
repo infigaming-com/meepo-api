@@ -26133,6 +26133,255 @@ var _ interface {
 	ErrorName() string
 } = ListOperatorWithdrawableAmountsResponseValidationError{}
 
+// Validate checks the field values on GetOperatorWithdrawCheckInfoRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetOperatorWithdrawCheckInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorWithdrawCheckInfoRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorWithdrawCheckInfoRequestMultiError, or nil if none found.
+func (m *GetOperatorWithdrawCheckInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorWithdrawCheckInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorWithdrawCheckInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorWithdrawCheckInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorWithdrawCheckInfoRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Currency
+
+	if len(errors) > 0 {
+		return GetOperatorWithdrawCheckInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorWithdrawCheckInfoRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOperatorWithdrawCheckInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorWithdrawCheckInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorWithdrawCheckInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorWithdrawCheckInfoRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorWithdrawCheckInfoRequestValidationError is the validation error
+// returned by GetOperatorWithdrawCheckInfoRequest.Validate if the designated
+// constraints aren't met.
+type GetOperatorWithdrawCheckInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorWithdrawCheckInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorWithdrawCheckInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorWithdrawCheckInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorWithdrawCheckInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorWithdrawCheckInfoRequestValidationError) ErrorName() string {
+	return "GetOperatorWithdrawCheckInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorWithdrawCheckInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorWithdrawCheckInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorWithdrawCheckInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorWithdrawCheckInfoRequestValidationError{}
+
+// Validate checks the field values on GetOperatorWithdrawCheckInfoResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorWithdrawCheckInfoResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorWithdrawCheckInfoResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorWithdrawCheckInfoResponseMultiError, or nil if none found.
+func (m *GetOperatorWithdrawCheckInfoResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorWithdrawCheckInfoResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MaxWithdrawableUsd
+
+	// no validation rules for PendingFreezeUsd
+
+	// no validation rules for CustodyBalance
+
+	// no validation rules for PendingFreeze
+
+	if len(errors) > 0 {
+		return GetOperatorWithdrawCheckInfoResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorWithdrawCheckInfoResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOperatorWithdrawCheckInfoResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorWithdrawCheckInfoResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorWithdrawCheckInfoResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorWithdrawCheckInfoResponseMultiError) AllErrors() []error { return m }
+
+// GetOperatorWithdrawCheckInfoResponseValidationError is the validation error
+// returned by GetOperatorWithdrawCheckInfoResponse.Validate if the designated
+// constraints aren't met.
+type GetOperatorWithdrawCheckInfoResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorWithdrawCheckInfoResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorWithdrawCheckInfoResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorWithdrawCheckInfoResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorWithdrawCheckInfoResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorWithdrawCheckInfoResponseValidationError) ErrorName() string {
+	return "GetOperatorWithdrawCheckInfoResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorWithdrawCheckInfoResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorWithdrawCheckInfoResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorWithdrawCheckInfoResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorWithdrawCheckInfoResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
