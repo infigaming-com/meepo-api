@@ -574,13 +574,17 @@ message GetExchangeRatesRequest {
 }
 
 message GetExchangeRatesResponse {
-	// map key is source currency, value is target currency rate
+	// map key is currency code (e.g. "BRL"), value is USD-based exchange rate
 	map<string, string> exchange_rates = 1;
+	// map key is currency code, value is exchange rate with applicable swap fee
 	map<string, RateWithFee> rates_with_fee = 2;
 }
 
 message RateWithFee {
+	// USD-based exchange rate for this currency (same as exchange_rates value)
 	string exchange_rate = 1;
+	// swap fee percentage applied when swapping this currency (e.g. "0.01" = 1%)
+	// uses currency-specific override if configured, otherwise global default
 	string fee_percentage = 2;
 }
 

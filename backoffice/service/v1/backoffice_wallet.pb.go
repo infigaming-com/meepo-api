@@ -1224,8 +1224,9 @@ func (x *GetExchangeRatesRequest) GetCurrencies() []string {
 
 type GetExchangeRatesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// map key is source currency, value is target currency rate
-	ExchangeRates map[string]string       `protobuf:"bytes,1,rep,name=exchange_rates,json=exchangeRates,proto3" json:"exchange_rates,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// map key is currency code (e.g. "BRL"), value is USD-based exchange rate
+	ExchangeRates map[string]string `protobuf:"bytes,1,rep,name=exchange_rates,json=exchangeRates,proto3" json:"exchange_rates,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// map key is currency code, value is exchange rate with applicable swap fee
 	RatesWithFee  map[string]*RateWithFee `protobuf:"bytes,2,rep,name=rates_with_fee,json=ratesWithFee,proto3" json:"rates_with_fee,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1276,9 +1277,12 @@ func (x *GetExchangeRatesResponse) GetRatesWithFee() map[string]*RateWithFee {
 }
 
 type RateWithFee struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ExchangeRate  string                 `protobuf:"bytes,1,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
-	FeePercentage string                 `protobuf:"bytes,2,opt,name=fee_percentage,json=feePercentage,proto3" json:"fee_percentage,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// USD-based exchange rate for this currency (same as exchange_rates value)
+	ExchangeRate string `protobuf:"bytes,1,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	// swap fee percentage applied when swapping this currency (e.g. "0.01" = 1%)
+	// uses currency-specific override if configured, otherwise global default
+	FeePercentage string `protobuf:"bytes,2,opt,name=fee_percentage,json=feePercentage,proto3" json:"fee_percentage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
