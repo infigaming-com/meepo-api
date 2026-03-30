@@ -17064,7 +17064,12 @@ components:
                     type: object
                     additionalProperties:
                         type: string
-                    description: map key is source currency, value is target currency rate
+                    description: key is currency code, value is USD-based exchange rate
+                swapFees:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: key is currency code, value is resolved swap fee percentage (e.g. "0.01" = 1%)
         api.backoffice.service.v1.GetFICAThresholdConfigRequest:
             type: object
             properties:

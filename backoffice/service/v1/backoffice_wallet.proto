@@ -574,8 +574,10 @@ message GetExchangeRatesRequest {
 }
 
 message GetExchangeRatesResponse {
-	// map key is source currency, value is target currency rate
+	// key is currency code, value is USD-based exchange rate
 	map<string, string> exchange_rates = 1;
+	// key is currency code, value is resolved swap fee percentage (e.g. "0.01" = 1%)
+	map<string, string> swap_fees = 2;
 }
 
 message OperatorTransferRequest {

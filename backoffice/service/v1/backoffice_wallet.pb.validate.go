@@ -2195,6 +2195,8 @@ func (m *GetExchangeRatesResponse) validate(all bool) error {
 
 	// no validation rules for ExchangeRates
 
+	// no validation rules for SwapFees
+
 	if len(errors) > 0 {
 		return GetExchangeRatesResponseMultiError(errors)
 	}
