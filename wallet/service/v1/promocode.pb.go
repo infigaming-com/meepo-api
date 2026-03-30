@@ -682,8 +682,12 @@ func (x *ReferrerCondition) GetReferrerIds() []int64 {
 
 // Affiliate condition for promo code campaign
 type AffiliateCondition struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AffiliateIds  []int64                `protobuf:"varint,1,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateIds []int64                `protobuf:"varint,1,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	// Campaign IDs filter (more specific than affiliate_ids)
+	// If specified, only users from these campaigns can use the promo code
+	// If empty, falls back to affiliate_ids check
+	CampaignIds   []int64 `protobuf:"varint,2,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -721,6 +725,13 @@ func (*AffiliateCondition) Descriptor() ([]byte, []int) {
 func (x *AffiliateCondition) GetAffiliateIds() []int64 {
 	if x != nil {
 		return x.AffiliateIds
+	}
+	return nil
+}
+
+func (x *AffiliateCondition) GetCampaignIds() []int64 {
+	if x != nil {
+		return x.CampaignIds
 	}
 	return nil
 }
@@ -3097,9 +3108,10 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\x06amount\x18\x04 \x01(\tR\x06amount\"d\n" +
 	"\x11ReferrerCondition\x12,\n" +
 	"\x12only_valid_allowed\x18\x01 \x01(\bR\x10onlyValidAllowed\x12!\n" +
-	"\freferrer_ids\x18\x02 \x03(\x03R\vreferrerIds\"9\n" +
+	"\freferrer_ids\x18\x02 \x03(\x03R\vreferrerIds\"\\\n" +
 	"\x12AffiliateCondition\x12#\n" +
-	"\raffiliate_ids\x18\x01 \x03(\x03R\faffiliateIds\"k\n" +
+	"\raffiliate_ids\x18\x01 \x03(\x03R\faffiliateIds\x12!\n" +
+	"\fcampaign_ids\x18\x02 \x03(\x03R\vcampaignIds\"k\n" +
 	"\x1bVerificationStatusCondition\x12%\n" +
 	"\x0eemail_verified\x18\x01 \x01(\bR\remailVerified\x12%\n" +
 	"\x0ephone_verified\x18\x02 \x01(\bR\rphoneVerified\"\xc2\x05\n" +

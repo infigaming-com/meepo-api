@@ -546,6 +546,9 @@ message ListCampaignsRequest {
     api.common.OperatorContextFilters operator_context_filters = 9;
     int64 initiator_role_id = 10;
     optional int64 target_affiliate_id = 11;
+    // Target operator context for filtering campaigns under a specific operator
+    // If nil, falls back to operator_context_filters behavior
+    optional api.common.OperatorContext target_operator_context = 12;
 }
 
 message ListCampaignsResponse {
@@ -1179,6 +1182,10 @@ message GetUserPromoConditionInfoResponse {
     // Conversion conditions
     // true if user has met conversion conditions
     bool has_met_conversion_conditions = 5;
+
+    // User's campaign info
+    // User's campaign_id from affiliate_users table, 0 = no campaign
+    int64 campaign_id = 6;
 }
 
 

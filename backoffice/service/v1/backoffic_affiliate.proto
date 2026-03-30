@@ -577,6 +577,8 @@ message ListCampaignsRequest {
     optional int32 page_size = 6;
 	api.common.OperatorContextFilters operator_context_filters = 7;
 	optional int64 target_affiliate_id = 8;
+	// Target operator context for filtering campaigns under a specific operator
+	optional api.common.OperatorContext target_operator_context = 9;
 }
 
 message ListAffiliateCampaignsRequest {
