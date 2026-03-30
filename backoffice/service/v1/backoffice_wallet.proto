@@ -576,6 +576,12 @@ message GetExchangeRatesRequest {
 message GetExchangeRatesResponse {
 	// map key is source currency, value is target currency rate
 	map<string, string> exchange_rates = 1;
+	map<string, RateWithFee> rates_with_fee = 2;
+}
+
+message RateWithFee {
+	string exchange_rate = 1;
+	string fee_percentage = 2;
 }
 
 message OperatorTransferRequest {
