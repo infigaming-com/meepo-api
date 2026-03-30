@@ -1049,8 +1049,10 @@ type ListCampaignsRequest struct {
 	TargetAffiliateId      *int64                         `protobuf:"varint,8,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	// Target operator context for filtering campaigns under a specific operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=target_operator_context,json=targetOperatorContext,proto3,oneof" json:"target_operator_context,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Filter by multiple affiliate IDs (mutually exclusive with affiliate_id)
+	AffiliateIds  []int64 `protobuf:"varint,10,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListCampaignsRequest) Reset() {
@@ -1142,6 +1144,13 @@ func (x *ListCampaignsRequest) GetTargetAffiliateId() int64 {
 func (x *ListCampaignsRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *ListCampaignsRequest) GetAffiliateIds() []int64 {
+	if x != nil {
+		return x.AffiliateIds
 	}
 	return nil
 }
@@ -4153,7 +4162,7 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\n" +
 	"\b_enabledB\x16\n" +
 	"\x14_target_affiliate_idB\x18\n" +
-	"\x16_landing_page_settings\"\xdf\x04\n" +
+	"\x16_landing_page_settings\"\x84\x05\n" +
 	"\x14ListCampaignsRequest\x12(\n" +
 	"\rcampaign_name\x18\x01 \x01(\tH\x00R\fcampaignName\x88\x01\x01\x12$\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03H\x01R\n" +
@@ -4164,7 +4173,9 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01\x12\\\n" +
 	"\x18operator_context_filters\x18\a \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x123\n" +
 	"\x13target_affiliate_id\x18\b \x01(\x03H\x06R\x11targetAffiliateId\x88\x01\x01\x12X\n" +
-	"\x17target_operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextH\aR\x15targetOperatorContext\x88\x01\x01B\x10\n" +
+	"\x17target_operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextH\aR\x15targetOperatorContext\x88\x01\x01\x12#\n" +
+	"\raffiliate_ids\x18\n" +
+	" \x03(\x03R\faffiliateIdsB\x10\n" +
 	"\x0e_campaign_nameB\x0e\n" +
 	"\f_campaign_idB\x0f\n" +
 	"\r_affiliate_idB\n" +
