@@ -69,6 +69,18 @@ service BackofficeReview {
 			body: "*"
 		};
 	}
+	rpc PrecheckUserWithdrawApproval(PrecheckWithdrawApprovalRequest) returns (review.service.v1.PrecheckWithdrawApprovalResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/tickets/precheck"
+			body: "*"
+		};
+	}
+	rpc PrecheckOperatorWithdrawApproval(PrecheckWithdrawApprovalRequest) returns (review.service.v1.PrecheckWithdrawApprovalResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/operator/tickets/precheck"
+			body: "*"
+		};
+	}
 	// rpc GetTicketById(GetTicketByIdRequest) returns (GetTicketByIdResponse) {
 	// 	option (google.api.http) = {
 	// 		post: "/v1/backoffice/review/tickets/get_by_id"
@@ -302,6 +314,10 @@ message CancelTicketRequest {
 }
 
 message CancelTicketResponse {}
+
+message PrecheckWithdrawApprovalRequest {
+	int64 ticket_id = 1;
+}
 
 message GetTicketByIdRequest {
 	int64 ticket_id = 1;

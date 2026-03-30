@@ -2821,6 +2821,393 @@ var _ interface {
 	ErrorName() string
 } = GetOperatorTicketResponseValidationError{}
 
+// Validate checks the field values on PrecheckWithdrawApprovalRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PrecheckWithdrawApprovalRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PrecheckWithdrawApprovalRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// PrecheckWithdrawApprovalRequestMultiError, or nil if none found.
+func (m *PrecheckWithdrawApprovalRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PrecheckWithdrawApprovalRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TicketId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PrecheckWithdrawApprovalRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PrecheckWithdrawApprovalRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PrecheckWithdrawApprovalRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return PrecheckWithdrawApprovalRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PrecheckWithdrawApprovalRequestMultiError is an error wrapping multiple
+// validation errors returned by PrecheckWithdrawApprovalRequest.ValidateAll()
+// if the designated constraints aren't met.
+type PrecheckWithdrawApprovalRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PrecheckWithdrawApprovalRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PrecheckWithdrawApprovalRequestMultiError) AllErrors() []error { return m }
+
+// PrecheckWithdrawApprovalRequestValidationError is the validation error
+// returned by PrecheckWithdrawApprovalRequest.Validate if the designated
+// constraints aren't met.
+type PrecheckWithdrawApprovalRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PrecheckWithdrawApprovalRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PrecheckWithdrawApprovalRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PrecheckWithdrawApprovalRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PrecheckWithdrawApprovalRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PrecheckWithdrawApprovalRequestValidationError) ErrorName() string {
+	return "PrecheckWithdrawApprovalRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PrecheckWithdrawApprovalRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPrecheckWithdrawApprovalRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PrecheckWithdrawApprovalRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PrecheckWithdrawApprovalRequestValidationError{}
+
+// Validate checks the field values on PrecheckWithdrawApprovalResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *PrecheckWithdrawApprovalResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PrecheckWithdrawApprovalResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// PrecheckWithdrawApprovalResponseMultiError, or nil if none found.
+func (m *PrecheckWithdrawApprovalResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PrecheckWithdrawApprovalResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CanApprove
+
+	for idx, item := range m.GetChecks() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PrecheckWithdrawApprovalResponseValidationError{
+						field:  fmt.Sprintf("Checks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PrecheckWithdrawApprovalResponseValidationError{
+						field:  fmt.Sprintf("Checks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PrecheckWithdrawApprovalResponseValidationError{
+					field:  fmt.Sprintf("Checks[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return PrecheckWithdrawApprovalResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PrecheckWithdrawApprovalResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// PrecheckWithdrawApprovalResponse.ValidateAll() if the designated
+// constraints aren't met.
+type PrecheckWithdrawApprovalResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PrecheckWithdrawApprovalResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PrecheckWithdrawApprovalResponseMultiError) AllErrors() []error { return m }
+
+// PrecheckWithdrawApprovalResponseValidationError is the validation error
+// returned by PrecheckWithdrawApprovalResponse.Validate if the designated
+// constraints aren't met.
+type PrecheckWithdrawApprovalResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PrecheckWithdrawApprovalResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PrecheckWithdrawApprovalResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PrecheckWithdrawApprovalResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PrecheckWithdrawApprovalResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PrecheckWithdrawApprovalResponseValidationError) ErrorName() string {
+	return "PrecheckWithdrawApprovalResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PrecheckWithdrawApprovalResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPrecheckWithdrawApprovalResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PrecheckWithdrawApprovalResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PrecheckWithdrawApprovalResponseValidationError{}
+
+// Validate checks the field values on WithdrawApprovalCheck with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *WithdrawApprovalCheck) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on WithdrawApprovalCheck with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// WithdrawApprovalCheckMultiError, or nil if none found.
+func (m *WithdrawApprovalCheck) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *WithdrawApprovalCheck) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CheckType
+
+	// no validation rules for Passed
+
+	// no validation rules for Reason
+
+	// no validation rules for LimitValue
+
+	// no validation rules for RequestValue
+
+	if len(errors) > 0 {
+		return WithdrawApprovalCheckMultiError(errors)
+	}
+
+	return nil
+}
+
+// WithdrawApprovalCheckMultiError is an error wrapping multiple validation
+// errors returned by WithdrawApprovalCheck.ValidateAll() if the designated
+// constraints aren't met.
+type WithdrawApprovalCheckMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WithdrawApprovalCheckMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WithdrawApprovalCheckMultiError) AllErrors() []error { return m }
+
+// WithdrawApprovalCheckValidationError is the validation error returned by
+// WithdrawApprovalCheck.Validate if the designated constraints aren't met.
+type WithdrawApprovalCheckValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WithdrawApprovalCheckValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WithdrawApprovalCheckValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WithdrawApprovalCheckValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WithdrawApprovalCheckValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WithdrawApprovalCheckValidationError) ErrorName() string {
+	return "WithdrawApprovalCheckValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e WithdrawApprovalCheckValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWithdrawApprovalCheck.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WithdrawApprovalCheckValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WithdrawApprovalCheckValidationError{}
+
 // Validate checks the field values on ListTicketsResponse_Ticket with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

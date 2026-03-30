@@ -33,6 +33,11 @@ service Review {
 	rpc ListOperatorTickets(ListOperatorTicketsRequest) returns (ListTicketsResponse) {}
 	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {}
 	rpc GetOperatorTicket(GetOperatorTicketRequest) returns (GetOperatorTicketResponse) {}
+
+	// PrecheckUserWithdrawApproval checks if a user/affiliate withdraw ticket can be safely approved
+	rpc PrecheckUserWithdrawApproval(PrecheckWithdrawApprovalRequest) returns (PrecheckWithdrawApprovalResponse) {}
+	// PrecheckOperatorWithdrawApproval checks if an operator withdraw ticket can be safely approved
+	rpc PrecheckOperatorWithdrawApproval(PrecheckWithdrawApprovalRequest) returns (PrecheckWithdrawApprovalResponse) {}
 }
 
 message CreateWithdrawRequest {
@@ -332,4 +337,24 @@ message GetOperatorTicketResponse {
 	WalletBalanceInfo wallet_balance_info = 4;
 	WalletTransactionInfo wallet_transaction_info = 5;
 	WalletTransactionSummary wallet_transaction_summary = 6;
+}
+
+message PrecheckWithdrawApprovalRequest {
+	int64 ticket_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message PrecheckWithdrawApprovalResponse {
+	bool can_approve = 1;
+	repeated WithdrawApprovalCheck checks = 2;
+}
+
+message WithdrawApprovalCheck {
+	// check type: "operator_withdrawable", "currency_liquidity"
+	string check_type = 1;
+	bool passed = 2;
+	string reason = 3;
+	// raw values used for the check
+	string limit_value = 4;
+	string request_value = 5;
 }
