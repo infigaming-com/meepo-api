@@ -13312,13 +13312,13 @@ type GetCompanyFinancialSummaryResponse struct {
 	CompanyWithdrawUsd string `protobuf:"bytes,5,opt,name=company_withdraw_usd,json=companyWithdrawUsd,proto3" json:"company_withdraw_usd,omitempty"`
 	// Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
 	TransferUsd string `protobuf:"bytes,6,opt,name=transfer_usd,json=transferUsd,proto3" json:"transfer_usd,omitempty"`
-	// Total amount of pending player withdrawals (operator_user_withdraw_freeze with no status), absolute value in USD
+	// Pending amount frozen from sub-operators when their players withdraw but not yet settled (operator_user_withdraw_freeze with no status), absolute value in USD
 	PendingPlayerWithdrawUsd string `protobuf:"bytes,7,opt,name=pending_player_withdraw_usd,json=pendingPlayerWithdrawUsd,proto3" json:"pending_player_withdraw_usd,omitempty"`
-	// Total amount of pending company withdrawals (operator_payment_withdraw_freeze with no status), absolute value in USD
+	// Pending amount frozen from sub-operators by company-initiated withdrawals but not yet settled (operator_payment_withdraw_freeze with no status), absolute value in USD
 	PendingCompanyWithdrawUsd string `protobuf:"bytes,8,opt,name=pending_company_withdraw_usd,json=pendingCompanyWithdrawUsd,proto3" json:"pending_company_withdraw_usd,omitempty"`
-	// Total amount of pending system balance freeze (operator_balance_freeze with no status), absolute value in USD
+	// Pending amount frozen from sub-operators by system balance freeze but not yet settled (operator_balance_freeze with no status), absolute value in USD
 	PendingBalanceFreezeUsd string `protobuf:"bytes,9,opt,name=pending_balance_freeze_usd,json=pendingBalanceFreezeUsd,proto3" json:"pending_balance_freeze_usd,omitempty"`
-	// Total amount of settled system balance freeze (operator_balance_freeze with status settled), absolute value in USD
+	// Settled amount frozen from sub-operators by system balance freeze (operator_balance_freeze with status settled), absolute value in USD
 	SettledBalanceFreezeUsd string `protobuf:"bytes,10,opt,name=settled_balance_freeze_usd,json=settledBalanceFreezeUsd,proto3" json:"settled_balance_freeze_usd,omitempty"`
 	// Net swap amount across all sub-operators (operator_balance_swap), representing swap fee loss in USD
 	SwapFeeUsd    string `protobuf:"bytes,11,opt,name=swap_fee_usd,json=swapFeeUsd,proto3" json:"swap_fee_usd,omitempty"`
