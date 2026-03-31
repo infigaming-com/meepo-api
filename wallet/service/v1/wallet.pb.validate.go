@@ -26553,6 +26553,10 @@ func (m *GetOperatorWithdrawCheckInfoResponse) validate(all bool) error {
 
 	// no validation rules for PendingFreezeAmountInCurrency
 
+	// no validation rules for CurrencyDecimalPlaces
+
+	// no validation rules for UsdDecimalPlaces
+
 	if len(errors) > 0 {
 		return GetOperatorWithdrawCheckInfoResponseMultiError(errors)
 	}

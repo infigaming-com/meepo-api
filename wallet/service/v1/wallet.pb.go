@@ -14397,8 +14397,12 @@ type GetOperatorWithdrawCheckInfoResponse struct {
 	BalanceInCurrency string `protobuf:"bytes,3,opt,name=balance_in_currency,json=balanceInCurrency,proto3" json:"balance_in_currency,omitempty"`
 	// pending freeze amount in the requested currency (absolute value)
 	PendingFreezeAmountInCurrency string `protobuf:"bytes,4,opt,name=pending_freeze_amount_in_currency,json=pendingFreezeAmountInCurrency,proto3" json:"pending_freeze_amount_in_currency,omitempty"`
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
+	// decimal places for the requested currency (from system-level config)
+	CurrencyDecimalPlaces int32 `protobuf:"varint,5,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3" json:"currency_decimal_places,omitempty"`
+	// decimal places for USD (from system-level config)
+	UsdDecimalPlaces int32 `protobuf:"varint,6,opt,name=usd_decimal_places,json=usdDecimalPlaces,proto3" json:"usd_decimal_places,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *GetOperatorWithdrawCheckInfoResponse) Reset() {
@@ -14457,6 +14461,20 @@ func (x *GetOperatorWithdrawCheckInfoResponse) GetPendingFreezeAmountInCurrency(
 		return x.PendingFreezeAmountInCurrency
 	}
 	return ""
+}
+
+func (x *GetOperatorWithdrawCheckInfoResponse) GetCurrencyDecimalPlaces() int32 {
+	if x != nil {
+		return x.CurrencyDecimalPlaces
+	}
+	return 0
+}
+
+func (x *GetOperatorWithdrawCheckInfoResponse) GetUsdDecimalPlaces() int32 {
+	if x != nil {
+		return x.UsdDecimalPlaces
+	}
+	return 0
 }
 
 type GetUserBalancesResponse_Balance struct {
@@ -19095,12 +19113,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x89\x01\n" +
 	"#GetOperatorWithdrawCheckInfoRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\x9e\x02\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\x84\x03\n" +
 	"$GetOperatorWithdrawCheckInfoResponse\x126\n" +
 	"\x17withdrawable_amount_usd\x18\x01 \x01(\tR\x15withdrawableAmountUsd\x12D\n" +
 	"\x1ftotal_pending_freeze_amount_usd\x18\x02 \x01(\tR\x1btotalPendingFreezeAmountUsd\x12.\n" +
 	"\x13balance_in_currency\x18\x03 \x01(\tR\x11balanceInCurrency\x12H\n" +
-	"!pending_freeze_amount_in_currency\x18\x04 \x01(\tR\x1dpendingFreezeAmountInCurrency2\xd5a\n" +
+	"!pending_freeze_amount_in_currency\x18\x04 \x01(\tR\x1dpendingFreezeAmountInCurrency\x126\n" +
+	"\x17currency_decimal_places\x18\x05 \x01(\x05R\x15currencyDecimalPlaces\x12,\n" +
+	"\x12usd_decimal_places\x18\x06 \x01(\x05R\x10usdDecimalPlaces2\xd5a\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
