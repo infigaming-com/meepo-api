@@ -20,6 +20,13 @@ service BackofficeOperator {
 		};
 	}
 
+	rpc VerifyOperatorEmail(VerifyOperatorEmailRequest) returns (VerifyOperatorEmailResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/email/verify"
+			body: "*"
+		};
+	}
+
 	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/create"
@@ -248,6 +255,13 @@ message ListAllOperatorsResponse {
 	}
 	repeated Operator operators = 1;
 }
+
+message VerifyOperatorEmailRequest {
+	string email = 1;
+	string verification_code = 2;
+}
+
+message VerifyOperatorEmailResponse {}
 
 message CreateOperatorRequest {
 	string mode = 1;

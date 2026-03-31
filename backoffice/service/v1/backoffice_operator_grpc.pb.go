@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	BackofficeOperator_ListAllOperators_FullMethodName                     = "/api.backoffice.service.v1.BackofficeOperator/ListAllOperators"
+	BackofficeOperator_VerifyOperatorEmail_FullMethodName                  = "/api.backoffice.service.v1.BackofficeOperator/VerifyOperatorEmail"
 	BackofficeOperator_CreateOperator_FullMethodName                       = "/api.backoffice.service.v1.BackofficeOperator/CreateOperator"
 	BackofficeOperator_GetCurrentOperatorDetails_FullMethodName            = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
 	BackofficeOperator_ListOperatorsByParentOperatorId_FullMethodName      = "/api.backoffice.service.v1.BackofficeOperator/ListOperatorsByParentOperatorId"
@@ -56,6 +57,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeOperatorClient interface {
 	ListAllOperators(ctx context.Context, in *ListAllOperatorsRequest, opts ...grpc.CallOption) (*ListAllOperatorsResponse, error)
+	VerifyOperatorEmail(ctx context.Context, in *VerifyOperatorEmailRequest, opts ...grpc.CallOption) (*VerifyOperatorEmailResponse, error)
 	CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...grpc.CallOption) (*CreateOperatorResponse, error)
 	// GetCurrentOperatorDetails returns the current operator details.
 	GetCurrentOperatorDetails(ctx context.Context, in *GetCurrentOperatorDetailsRequest, opts ...grpc.CallOption) (*GetCurrentOperatorDetailsResponse, error)
@@ -114,6 +116,16 @@ func (c *backofficeOperatorClient) ListAllOperators(ctx context.Context, in *Lis
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAllOperatorsResponse)
 	err := c.cc.Invoke(ctx, BackofficeOperator_ListAllOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) VerifyOperatorEmail(ctx context.Context, in *VerifyOperatorEmailRequest, opts ...grpc.CallOption) (*VerifyOperatorEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VerifyOperatorEmailResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_VerifyOperatorEmail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -405,6 +417,7 @@ func (c *backofficeOperatorClient) UpdateOperatorName(ctx context.Context, in *U
 // for forward compatibility.
 type BackofficeOperatorServer interface {
 	ListAllOperators(context.Context, *ListAllOperatorsRequest) (*ListAllOperatorsResponse, error)
+	VerifyOperatorEmail(context.Context, *VerifyOperatorEmailRequest) (*VerifyOperatorEmailResponse, error)
 	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
 	// GetCurrentOperatorDetails returns the current operator details.
 	GetCurrentOperatorDetails(context.Context, *GetCurrentOperatorDetailsRequest) (*GetCurrentOperatorDetailsResponse, error)
@@ -461,6 +474,9 @@ type UnimplementedBackofficeOperatorServer struct{}
 
 func (UnimplementedBackofficeOperatorServer) ListAllOperators(context.Context, *ListAllOperatorsRequest) (*ListAllOperatorsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAllOperators not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) VerifyOperatorEmail(context.Context, *VerifyOperatorEmailRequest) (*VerifyOperatorEmailResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method VerifyOperatorEmail not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOperator not implemented")
@@ -581,6 +597,24 @@ func _BackofficeOperator_ListAllOperators_Handler(srv interface{}, ctx context.C
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeOperatorServer).ListAllOperators(ctx, req.(*ListAllOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_VerifyOperatorEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyOperatorEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).VerifyOperatorEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_VerifyOperatorEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).VerifyOperatorEmail(ctx, req.(*VerifyOperatorEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1099,6 +1133,10 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAllOperators",
 			Handler:    _BackofficeOperator_ListAllOperators_Handler,
+		},
+		{
+			MethodName: "VerifyOperatorEmail",
+			Handler:    _BackofficeOperator_VerifyOperatorEmail_Handler,
 		},
 		{
 			MethodName: "CreateOperator",
