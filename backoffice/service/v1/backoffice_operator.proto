@@ -270,7 +270,8 @@ message CreateOperatorRequest {
 	string reporting_currency = 4;
 	string backoffice_timezone = 5;
 	string operator_admin_email = 6;
-	string verification_code = 7;
+	reserved 7;
+	reserved "verification_code";
 	repeated string supported_languages = 8;
 	repeated string supported_currencies = 9; // Contains Fiat and Crypto currencies
 	string template_name = 10;

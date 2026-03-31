@@ -209,7 +209,6 @@ type CreateOperatorRequest struct {
 	ReportingCurrency   string                 `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	BackofficeTimezone  string                 `protobuf:"bytes,5,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
 	OperatorAdminEmail  string                 `protobuf:"bytes,6,opt,name=operator_admin_email,json=operatorAdminEmail,proto3" json:"operator_admin_email,omitempty"`
-	VerificationCode    string                 `protobuf:"bytes,7,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`
 	SupportedLanguages  []string               `protobuf:"bytes,8,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
 	SupportedCurrencies []string               `protobuf:"bytes,9,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"` // Contains Fiat and Crypto currencies
 	TemplateName        string                 `protobuf:"bytes,10,opt,name=template_name,json=templateName,proto3" json:"template_name,omitempty"`
@@ -285,13 +284,6 @@ func (x *CreateOperatorRequest) GetBackofficeTimezone() string {
 func (x *CreateOperatorRequest) GetOperatorAdminEmail() string {
 	if x != nil {
 		return x.OperatorAdminEmail
-	}
-	return ""
-}
-
-func (x *CreateOperatorRequest) GetVerificationCode() string {
-	if x != nil {
-		return x.VerificationCode
 	}
 	return ""
 }
@@ -2631,19 +2623,18 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x1aVerifyOperatorEmailRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12+\n" +
 	"\x11verification_code\x18\x02 \x01(\tR\x10verificationCode\"\x1d\n" +
-	"\x1bVerifyOperatorEmailResponse\"\xbb\x03\n" +
+	"\x1bVerifyOperatorEmailResponse\"\xa7\x03\n" +
 	"\x15CreateOperatorRequest\x12\x12\n" +
 	"\x04mode\x18\x01 \x01(\tR\x04mode\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12!\n" +
 	"\foperator_key\x18\x03 \x01(\tR\voperatorKey\x12-\n" +
 	"\x12reporting_currency\x18\x04 \x01(\tR\x11reportingCurrency\x12/\n" +
 	"\x13backoffice_timezone\x18\x05 \x01(\tR\x12backofficeTimezone\x120\n" +
-	"\x14operator_admin_email\x18\x06 \x01(\tR\x12operatorAdminEmail\x12+\n" +
-	"\x11verification_code\x18\a \x01(\tR\x10verificationCode\x12/\n" +
+	"\x14operator_admin_email\x18\x06 \x01(\tR\x12operatorAdminEmail\x12/\n" +
 	"\x13supported_languages\x18\b \x03(\tR\x12supportedLanguages\x121\n" +
 	"\x14supported_currencies\x18\t \x03(\tR\x13supportedCurrencies\x12#\n" +
 	"\rtemplate_name\x18\n" +
-	" \x01(\tR\ftemplateName\"\xb7\x01\n" +
+	" \x01(\tR\ftemplateNameJ\x04\b\a\x10\bR\x11verification_code\"\xb7\x01\n" +
 	"\x16CreateOperatorResponse\x12\x1c\n" +
 	"\tsubdomain\x18\x01 \x01(\tR\tsubdomain\x121\n" +
 	"\x14backoffice_subdomain\x18\x02 \x01(\tR\x13backofficeSubdomain\x120\n" +
