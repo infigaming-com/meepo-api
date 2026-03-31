@@ -15814,8 +15814,6 @@ components:
                     type: string
                 operatorAdminEmail:
                     type: string
-                verificationCode:
-                    type: string
                 supportedLanguages:
                     type: array
                     items:
