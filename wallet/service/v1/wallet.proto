@@ -2463,4 +2463,8 @@ message GetOperatorWithdrawCheckInfoResponse {
 	string balance_in_currency = 3;
 	// pending freeze amount in the requested currency (absolute value)
 	string pending_freeze_amount_in_currency = 4;
+	// decimal places for the requested currency (from system-level config)
+	int32 currency_decimal_places = 5;
+	// decimal places for USD (from system-level config)
+	int32 usd_decimal_places = 6;
 }
