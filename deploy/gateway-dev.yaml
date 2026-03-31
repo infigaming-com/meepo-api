@@ -42,6 +42,18 @@ spec:
       certificateRefs:
       - name: hicasino-xyz-tls
         namespace: meepo-dev
+  - name: meepoadmin-site-https
+    protocol: HTTPS
+    port: 443
+    hostname: "dify.meepoadmin.site"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: meepoadmin-site-tls
+        namespace: meepo-dev
   addresses:
   - type: NamedAddress
     value: gke-meepo-dev-ingress-ip
