@@ -17153,7 +17153,7 @@ components:
                     type: string
                 playerWithdrawals:
                     type: string
-                companyWithdrawals:
+                custodyCompanyWithdrawals:
                     type: string
                 transferAmount:
                     type: string
@@ -17173,9 +17173,9 @@ components:
                 pendingPlayerWithdrawals:
                     type: string
                     description: Pending player withdrawals (frozen but not yet settled)
-                pendingCompanyWithdrawals:
+                custodyPendingCompanyWithdrawals:
                     type: string
-                    description: Pending company withdrawals (frozen but not yet settled)
+                    description: Pending company withdrawals on sub-operators (frozen but not yet settled)
                 pendingBalanceFreeze:
                     type: string
                     description: Pending balance freeze (frozen but not yet settled)
@@ -17185,6 +17185,12 @@ components:
                 swapFee:
                     type: string
                     description: Net swap fee loss
+                companyPendingWithdraw:
+                    type: string
+                    description: Pending amount from company's own wallet for payment withdrawals
+                companyPendingAffiliateWithdraw:
+                    type: string
+                    description: Pending amount from company's own wallet for affiliate withdrawals
         api.backoffice.service.v1.GetBalancesSummaryRequest:
             type: object
             properties:
