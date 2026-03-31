@@ -652,6 +652,16 @@ message GetBalanceSummaryResponse {
 	bool withdraw_disabled = 17;
 	// Custody card: est costs from co-operation operators
 	string custody_est_costs = 18;
+	// Pending player withdrawals (frozen but not yet settled)
+	string pending_player_withdrawals = 19;
+	// Pending company withdrawals (frozen but not yet settled)
+	string pending_company_withdrawals = 20;
+	// Pending balance freeze (frozen but not yet settled)
+	string pending_balance_freeze = 21;
+	// Settled balance freeze
+	string settled_balance_freeze = 22;
+	// Net swap fee loss
+	string swap_fee = 23;
 }
 
 message GetBalancesSummaryRequest {

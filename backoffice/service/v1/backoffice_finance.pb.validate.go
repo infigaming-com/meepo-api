@@ -4175,6 +4175,16 @@ func (m *GetBalanceSummaryResponse) validate(all bool) error {
 
 	// no validation rules for CustodyEstCosts
 
+	// no validation rules for PendingPlayerWithdrawals
+
+	// no validation rules for PendingCompanyWithdrawals
+
+	// no validation rules for PendingBalanceFreeze
+
+	// no validation rules for SettledBalanceFreeze
+
+	// no validation rules for SwapFee
+
 	if len(errors) > 0 {
 		return GetBalanceSummaryResponseMultiError(errors)
 	}
