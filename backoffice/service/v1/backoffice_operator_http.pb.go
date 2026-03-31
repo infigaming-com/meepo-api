@@ -49,6 +49,7 @@ const OperationBackofficeOperatorUpdateOperatorAccountSettings = "/api.backoffic
 const OperationBackofficeOperatorUpdateOperatorName = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorName"
 const OperationBackofficeOperatorUpdateOperatorNotificationChannels = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorNotificationChannels"
 const OperationBackofficeOperatorUpdateOperatorStatus = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
+const OperationBackofficeOperatorVerifyOperatorEmail = "/api.backoffice.service.v1.BackofficeOperator/VerifyOperatorEmail"
 
 type BackofficeOperatorHTTPServer interface {
 	// AddOperatorBackofficeByoSubdomain AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
@@ -96,11 +97,13 @@ type BackofficeOperatorHTTPServer interface {
 	UpdateOperatorNotificationChannels(context.Context, *UpdateOperatorNotificationChannelsRequest) (*v1.UpdateOperatorNotificationChannelsResponse, error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*v1.UpdateOperatorStatusResponse, error)
+	VerifyOperatorEmail(context.Context, *VerifyOperatorEmailRequest) (*VerifyOperatorEmailResponse, error)
 }
 
 func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperatorHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/operator/list/all", _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/email/verify", _BackofficeOperator_VerifyOperatorEmail0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/create", _BackofficeOperator_CreateOperator0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/current", _BackofficeOperator_GetCurrentOperatorDetails0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/list/by-parent", _BackofficeOperator_ListOperatorsByParentOperatorId0_HTTP_Handler(srv))
@@ -149,6 +152,28 @@ func _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv BackofficeOperatorHT
 			return err
 		}
 		reply := out.(*ListAllOperatorsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_VerifyOperatorEmail0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in VerifyOperatorEmailRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorVerifyOperatorEmail)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.VerifyOperatorEmail(ctx, req.(*VerifyOperatorEmailRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*VerifyOperatorEmailResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -815,6 +840,7 @@ type BackofficeOperatorHTTPClient interface {
 	UpdateOperatorNotificationChannels(ctx context.Context, req *UpdateOperatorNotificationChannelsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorNotificationChannelsResponse, err error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(ctx context.Context, req *UpdateOperatorStatusRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorStatusResponse, err error)
+	VerifyOperatorEmail(ctx context.Context, req *VerifyOperatorEmailRequest, opts ...http.CallOption) (rsp *VerifyOperatorEmailResponse, err error)
 }
 
 type BackofficeOperatorHTTPClientImpl struct {
@@ -1210,6 +1236,19 @@ func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorStatus(ctx context.Cont
 	pattern := "/v1/backoffice/operator/status/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorUpdateOperatorStatus))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) VerifyOperatorEmail(ctx context.Context, in *VerifyOperatorEmailRequest, opts ...http.CallOption) (*VerifyOperatorEmailResponse, error) {
+	var out VerifyOperatorEmailResponse
+	pattern := "/v1/backoffice/operator/email/verify"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorVerifyOperatorEmail))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

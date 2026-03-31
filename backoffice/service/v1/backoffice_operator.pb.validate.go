@@ -277,6 +277,215 @@ var _ interface {
 	ErrorName() string
 } = ListAllOperatorsResponseValidationError{}
 
+// Validate checks the field values on VerifyOperatorEmailRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *VerifyOperatorEmailRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on VerifyOperatorEmailRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// VerifyOperatorEmailRequestMultiError, or nil if none found.
+func (m *VerifyOperatorEmailRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *VerifyOperatorEmailRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Email
+
+	// no validation rules for VerificationCode
+
+	if len(errors) > 0 {
+		return VerifyOperatorEmailRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// VerifyOperatorEmailRequestMultiError is an error wrapping multiple
+// validation errors returned by VerifyOperatorEmailRequest.ValidateAll() if
+// the designated constraints aren't met.
+type VerifyOperatorEmailRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m VerifyOperatorEmailRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m VerifyOperatorEmailRequestMultiError) AllErrors() []error { return m }
+
+// VerifyOperatorEmailRequestValidationError is the validation error returned
+// by VerifyOperatorEmailRequest.Validate if the designated constraints aren't met.
+type VerifyOperatorEmailRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifyOperatorEmailRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifyOperatorEmailRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifyOperatorEmailRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifyOperatorEmailRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifyOperatorEmailRequestValidationError) ErrorName() string {
+	return "VerifyOperatorEmailRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifyOperatorEmailRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifyOperatorEmailRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifyOperatorEmailRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifyOperatorEmailRequestValidationError{}
+
+// Validate checks the field values on VerifyOperatorEmailResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *VerifyOperatorEmailResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on VerifyOperatorEmailResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// VerifyOperatorEmailResponseMultiError, or nil if none found.
+func (m *VerifyOperatorEmailResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *VerifyOperatorEmailResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return VerifyOperatorEmailResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// VerifyOperatorEmailResponseMultiError is an error wrapping multiple
+// validation errors returned by VerifyOperatorEmailResponse.ValidateAll() if
+// the designated constraints aren't met.
+type VerifyOperatorEmailResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m VerifyOperatorEmailResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m VerifyOperatorEmailResponseMultiError) AllErrors() []error { return m }
+
+// VerifyOperatorEmailResponseValidationError is the validation error returned
+// by VerifyOperatorEmailResponse.Validate if the designated constraints
+// aren't met.
+type VerifyOperatorEmailResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifyOperatorEmailResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifyOperatorEmailResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifyOperatorEmailResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifyOperatorEmailResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifyOperatorEmailResponseValidationError) ErrorName() string {
+	return "VerifyOperatorEmailResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifyOperatorEmailResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifyOperatorEmailResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifyOperatorEmailResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifyOperatorEmailResponseValidationError{}
+
 // Validate checks the field values on CreateOperatorRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
