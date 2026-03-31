@@ -643,7 +643,7 @@ message GetBalanceSummaryResponse {
 	string user_deposits = 8;
 	string total_deposits = 9;
 	string player_withdrawals = 10;
-	string company_withdrawals = 11;
+	string custody_company_withdrawals = 11;
 	string transfer_amount = 12;
 	string locked_outstanding_invoices = 13;
 	string locked_late_payment_fee = 14;
@@ -654,14 +654,18 @@ message GetBalanceSummaryResponse {
 	string custody_est_costs = 18;
 	// Pending player withdrawals (frozen but not yet settled)
 	string pending_player_withdrawals = 19;
-	// Pending company withdrawals (frozen but not yet settled)
-	string pending_company_withdrawals = 20;
+	// Pending company withdrawals on sub-operators (frozen but not yet settled)
+	string custody_pending_company_withdrawals = 20;
 	// Pending balance freeze (frozen but not yet settled)
 	string pending_balance_freeze = 21;
 	// Settled balance freeze
 	string settled_balance_freeze = 22;
 	// Net swap fee loss
 	string swap_fee = 23;
+	// Pending amount from company's own wallet for payment withdrawals
+	string company_pending_withdraw = 24;
+	// Pending amount from company's own wallet for affiliate withdrawals
+	string company_pending_affiliate_withdraw = 25;
 }
 
 message GetBalancesSummaryRequest {

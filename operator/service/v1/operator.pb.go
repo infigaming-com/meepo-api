@@ -3054,7 +3054,7 @@ type GetBalanceSummaryResponse struct {
 	UserDeposits              string `protobuf:"bytes,8,opt,name=user_deposits,json=userDeposits,proto3" json:"user_deposits,omitempty"`
 	TotalDeposits             string `protobuf:"bytes,9,opt,name=total_deposits,json=totalDeposits,proto3" json:"total_deposits,omitempty"`
 	PlayerWithdrawals         string `protobuf:"bytes,10,opt,name=player_withdrawals,json=playerWithdrawals,proto3" json:"player_withdrawals,omitempty"`
-	CompanyWithdrawals        string `protobuf:"bytes,11,opt,name=company_withdrawals,json=companyWithdrawals,proto3" json:"company_withdrawals,omitempty"`
+	CustodyCompanyWithdrawals string `protobuf:"bytes,11,opt,name=custody_company_withdrawals,json=custodyCompanyWithdrawals,proto3" json:"custody_company_withdrawals,omitempty"`
 	TransferAmount            string `protobuf:"bytes,12,opt,name=transfer_amount,json=transferAmount,proto3" json:"transfer_amount,omitempty"`
 	LockedOutstandingInvoices string `protobuf:"bytes,13,opt,name=locked_outstanding_invoices,json=lockedOutstandingInvoices,proto3" json:"locked_outstanding_invoices,omitempty"`
 	LockedLatePaymentFee      string `protobuf:"bytes,14,opt,name=locked_late_payment_fee,json=lockedLatePaymentFee,proto3" json:"locked_late_payment_fee,omitempty"`
@@ -3065,16 +3065,20 @@ type GetBalanceSummaryResponse struct {
 	CustodyEstCosts string `protobuf:"bytes,18,opt,name=custody_est_costs,json=custodyEstCosts,proto3" json:"custody_est_costs,omitempty"`
 	// Pending player withdrawals (frozen but not yet settled)
 	PendingPlayerWithdrawals string `protobuf:"bytes,19,opt,name=pending_player_withdrawals,json=pendingPlayerWithdrawals,proto3" json:"pending_player_withdrawals,omitempty"`
-	// Pending company withdrawals (frozen but not yet settled)
-	PendingCompanyWithdrawals string `protobuf:"bytes,20,opt,name=pending_company_withdrawals,json=pendingCompanyWithdrawals,proto3" json:"pending_company_withdrawals,omitempty"`
+	// Pending company withdrawals on sub-operators (frozen but not yet settled)
+	CustodyPendingCompanyWithdrawals string `protobuf:"bytes,20,opt,name=custody_pending_company_withdrawals,json=custodyPendingCompanyWithdrawals,proto3" json:"custody_pending_company_withdrawals,omitempty"`
 	// Pending balance freeze (frozen but not yet settled)
 	PendingBalanceFreeze string `protobuf:"bytes,21,opt,name=pending_balance_freeze,json=pendingBalanceFreeze,proto3" json:"pending_balance_freeze,omitempty"`
 	// Settled balance freeze
 	SettledBalanceFreeze string `protobuf:"bytes,22,opt,name=settled_balance_freeze,json=settledBalanceFreeze,proto3" json:"settled_balance_freeze,omitempty"`
 	// Net swap fee loss
-	SwapFee       string `protobuf:"bytes,23,opt,name=swap_fee,json=swapFee,proto3" json:"swap_fee,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	SwapFee string `protobuf:"bytes,23,opt,name=swap_fee,json=swapFee,proto3" json:"swap_fee,omitempty"`
+	// Pending amount from company's own wallet for payment withdrawals
+	CompanyPendingWithdraw string `protobuf:"bytes,24,opt,name=company_pending_withdraw,json=companyPendingWithdraw,proto3" json:"company_pending_withdraw,omitempty"`
+	// Pending amount from company's own wallet for affiliate withdrawals
+	CompanyPendingAffiliateWithdraw string `protobuf:"bytes,25,opt,name=company_pending_affiliate_withdraw,json=companyPendingAffiliateWithdraw,proto3" json:"company_pending_affiliate_withdraw,omitempty"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *GetBalanceSummaryResponse) Reset() {
@@ -3177,9 +3181,9 @@ func (x *GetBalanceSummaryResponse) GetPlayerWithdrawals() string {
 	return ""
 }
 
-func (x *GetBalanceSummaryResponse) GetCompanyWithdrawals() string {
+func (x *GetBalanceSummaryResponse) GetCustodyCompanyWithdrawals() string {
 	if x != nil {
-		return x.CompanyWithdrawals
+		return x.CustodyCompanyWithdrawals
 	}
 	return ""
 }
@@ -3240,9 +3244,9 @@ func (x *GetBalanceSummaryResponse) GetPendingPlayerWithdrawals() string {
 	return ""
 }
 
-func (x *GetBalanceSummaryResponse) GetPendingCompanyWithdrawals() string {
+func (x *GetBalanceSummaryResponse) GetCustodyPendingCompanyWithdrawals() string {
 	if x != nil {
-		return x.PendingCompanyWithdrawals
+		return x.CustodyPendingCompanyWithdrawals
 	}
 	return ""
 }
@@ -3264,6 +3268,20 @@ func (x *GetBalanceSummaryResponse) GetSettledBalanceFreeze() string {
 func (x *GetBalanceSummaryResponse) GetSwapFee() string {
 	if x != nil {
 		return x.SwapFee
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCompanyPendingWithdraw() string {
+	if x != nil {
+		return x.CompanyPendingWithdraw
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCompanyPendingAffiliateWithdraw() string {
+	if x != nil {
+		return x.CompanyPendingAffiliateWithdraw
 	}
 	return ""
 }
@@ -7035,7 +7053,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x0ebilling_period\x18\x03 \x01(\tR\rbillingPeriod\"\xc0\x01\n" +
 	"\x18GetBalanceSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xc5\b\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xea\t\n" +
 	"\x19GetBalanceSummaryResponse\x12'\n" +
 	"\x0fcompany_balance\x18\x01 \x01(\tR\x0ecompanyBalance\x12.\n" +
 	"\x13est_settlement_cost\x18\x02 \x01(\tR\x11estSettlementCost\x12*\n" +
@@ -7048,8 +7066,8 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\ruser_deposits\x18\b \x01(\tR\fuserDeposits\x12%\n" +
 	"\x0etotal_deposits\x18\t \x01(\tR\rtotalDeposits\x12-\n" +
 	"\x12player_withdrawals\x18\n" +
-	" \x01(\tR\x11playerWithdrawals\x12/\n" +
-	"\x13company_withdrawals\x18\v \x01(\tR\x12companyWithdrawals\x12'\n" +
+	" \x01(\tR\x11playerWithdrawals\x12>\n" +
+	"\x1bcustody_company_withdrawals\x18\v \x01(\tR\x19custodyCompanyWithdrawals\x12'\n" +
 	"\x0ftransfer_amount\x18\f \x01(\tR\x0etransferAmount\x12>\n" +
 	"\x1blocked_outstanding_invoices\x18\r \x01(\tR\x19lockedOutstandingInvoices\x125\n" +
 	"\x17locked_late_payment_fee\x18\x0e \x01(\tR\x14lockedLatePaymentFee\x12)\n" +
@@ -7057,11 +7075,13 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x10pending_invoices\x18\x10 \x01(\tR\x0fpendingInvoices\x12+\n" +
 	"\x11withdraw_disabled\x18\x11 \x01(\bR\x10withdrawDisabled\x12*\n" +
 	"\x11custody_est_costs\x18\x12 \x01(\tR\x0fcustodyEstCosts\x12<\n" +
-	"\x1apending_player_withdrawals\x18\x13 \x01(\tR\x18pendingPlayerWithdrawals\x12>\n" +
-	"\x1bpending_company_withdrawals\x18\x14 \x01(\tR\x19pendingCompanyWithdrawals\x124\n" +
+	"\x1apending_player_withdrawals\x18\x13 \x01(\tR\x18pendingPlayerWithdrawals\x12M\n" +
+	"#custody_pending_company_withdrawals\x18\x14 \x01(\tR custodyPendingCompanyWithdrawals\x124\n" +
 	"\x16pending_balance_freeze\x18\x15 \x01(\tR\x14pendingBalanceFreeze\x124\n" +
 	"\x16settled_balance_freeze\x18\x16 \x01(\tR\x14settledBalanceFreeze\x12\x19\n" +
-	"\bswap_fee\x18\x17 \x01(\tR\aswapFee\"\x93\x02\n" +
+	"\bswap_fee\x18\x17 \x01(\tR\aswapFee\x128\n" +
+	"\x18company_pending_withdraw\x18\x18 \x01(\tR\x16companyPendingWithdraw\x12K\n" +
+	"\"company_pending_affiliate_withdraw\x18\x19 \x01(\tR\x1fcompanyPendingAffiliateWithdraw\"\x93\x02\n" +
 	"\x19GetBalancesSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +

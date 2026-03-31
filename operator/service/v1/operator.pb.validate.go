@@ -6303,7 +6303,7 @@ func (m *GetBalanceSummaryResponse) validate(all bool) error {
 
 	// no validation rules for PlayerWithdrawals
 
-	// no validation rules for CompanyWithdrawals
+	// no validation rules for CustodyCompanyWithdrawals
 
 	// no validation rules for TransferAmount
 
@@ -6321,13 +6321,17 @@ func (m *GetBalanceSummaryResponse) validate(all bool) error {
 
 	// no validation rules for PendingPlayerWithdrawals
 
-	// no validation rules for PendingCompanyWithdrawals
+	// no validation rules for CustodyPendingCompanyWithdrawals
 
 	// no validation rules for PendingBalanceFreeze
 
 	// no validation rules for SettledBalanceFreeze
 
 	// no validation rules for SwapFee
+
+	// no validation rules for CompanyPendingWithdraw
+
+	// no validation rules for CompanyPendingAffiliateWithdraw
 
 	if len(errors) > 0 {
 		return GetBalanceSummaryResponseMultiError(errors)
