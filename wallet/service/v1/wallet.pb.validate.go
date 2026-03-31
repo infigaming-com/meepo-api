@@ -25014,19 +25014,23 @@ func (m *GetCompanyFinancialSummaryResponse) validate(all bool) error {
 
 	// no validation rules for PlayerWithdrawUsd
 
-	// no validation rules for CompanyWithdrawUsd
+	// no validation rules for CustodyCompanyWithdrawUsd
 
 	// no validation rules for TransferUsd
 
 	// no validation rules for PendingPlayerWithdrawUsd
 
-	// no validation rules for PendingCompanyWithdrawUsd
+	// no validation rules for CustodyPendingCompanyWithdrawUsd
 
 	// no validation rules for PendingBalanceFreezeUsd
 
 	// no validation rules for SettledBalanceFreezeUsd
 
 	// no validation rules for SwapFeeUsd
+
+	// no validation rules for CompanyPendingWithdrawUsd
+
+	// no validation rules for CompanyPendingAffiliateWithdrawUsd
 
 	if len(errors) > 0 {
 		return GetCompanyFinancialSummaryResponseMultiError(errors)

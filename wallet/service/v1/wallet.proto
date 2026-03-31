@@ -2325,20 +2325,24 @@ message GetCompanyFinancialSummaryResponse {
 	string user_deposits_usd = 3;
 	// Total amount debited from sub-operators when their players withdraw (settled operator_user_withdraw_freeze), absolute value in USD
 	string player_withdraw_usd = 4;
-	// Total amount withdrawn from sub-operators by backoffice (settled operator_payment_withdraw_freeze), absolute value in USD
-	string company_withdraw_usd = 5;
+	// Settled amount withdrawn from sub-operators by company (settled operator_payment_withdraw_freeze on sub-operators), absolute value in USD
+	string custody_company_withdraw_usd = 5;
 	// Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
 	string transfer_usd = 6;
 	// Pending amount frozen from sub-operators when their players withdraw but not yet settled (operator_user_withdraw_freeze with no status), absolute value in USD
 	string pending_player_withdraw_usd = 7;
-	// Pending amount frozen from sub-operators by company-initiated withdrawals but not yet settled (operator_payment_withdraw_freeze with no status), absolute value in USD
-	string pending_company_withdraw_usd = 8;
+	// Pending amount frozen from sub-operators by company-initiated withdrawals but not yet settled (operator_payment_withdraw_freeze with no status on sub-operators), absolute value in USD
+	string custody_pending_company_withdraw_usd = 8;
 	// Pending amount frozen from sub-operators by system balance freeze but not yet settled (operator_balance_freeze with no status), absolute value in USD
 	string pending_balance_freeze_usd = 9;
 	// Settled amount frozen from sub-operators by system balance freeze (operator_balance_freeze with status settled), absolute value in USD
 	string settled_balance_freeze_usd = 10;
 	// Net swap amount across all sub-operators (operator_balance_swap), representing swap fee loss in USD
 	string swap_fee_usd = 11;
+	// Pending amount frozen from company's own wallet for payment withdrawals (operator_payment_withdraw_freeze with no status on company operator), absolute value in USD
+	string company_pending_withdraw_usd = 12;
+	// Pending amount frozen from company's own wallet for affiliate withdrawals (operator_affiliate_withdraw_freeze with no status on company operator), absolute value in USD
+	string company_pending_affiliate_withdraw_usd = 13;
 }
 
 // ============================================================================

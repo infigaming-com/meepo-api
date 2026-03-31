@@ -17170,6 +17170,21 @@ components:
                 custodyEstCosts:
                     type: string
                     description: 'Custody card: est costs from co-operation operators'
+                pendingPlayerWithdrawals:
+                    type: string
+                    description: Pending player withdrawals (frozen but not yet settled)
+                pendingCompanyWithdrawals:
+                    type: string
+                    description: Pending company withdrawals (frozen but not yet settled)
+                pendingBalanceFreeze:
+                    type: string
+                    description: Pending balance freeze (frozen but not yet settled)
+                settledBalanceFreeze:
+                    type: string
+                    description: Settled balance freeze
+                swapFee:
+                    type: string
+                    description: Net swap fee loss
         api.backoffice.service.v1.GetBalancesSummaryRequest:
             type: object
             properties:
@@ -30134,7 +30149,7 @@ components:
             properties:
                 checkType:
                     type: string
-                    description: 'check type: "operator_withdrawable", "currency_liquidity"'
+                    description: 'check type: "operator_withdrawable", "operator_currency_balance_insufficient"'
                 passed:
                     type: boolean
                 reason:
