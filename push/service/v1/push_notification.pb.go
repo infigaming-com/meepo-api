@@ -141,6 +141,8 @@ const (
 	MessageType_MESSAGE_TYPE_LARGE_BET MessageType = 4
 	// Win exceeding a configured threshold
 	MessageType_MESSAGE_TYPE_LARGE_WIN MessageType = 5
+	// KYC Level 3 identity verification submitted for review
+	MessageType_MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION MessageType = 6
 )
 
 // Enum value maps for MessageType.
@@ -152,14 +154,16 @@ var (
 		3: "MESSAGE_TYPE_LARGE_DEPOSIT",
 		4: "MESSAGE_TYPE_LARGE_BET",
 		5: "MESSAGE_TYPE_LARGE_WIN",
+		6: "MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION",
 	}
 	MessageType_value = map[string]int32{
-		"MESSAGE_TYPE_UNSPECIFIED":           0,
-		"MESSAGE_TYPE_WITHDRAW_NOTIFICATION": 1,
-		"MESSAGE_TYPE_DEPOSIT_NOTIFICATION":  2,
-		"MESSAGE_TYPE_LARGE_DEPOSIT":         3,
-		"MESSAGE_TYPE_LARGE_BET":             4,
-		"MESSAGE_TYPE_LARGE_WIN":             5,
+		"MESSAGE_TYPE_UNSPECIFIED":            0,
+		"MESSAGE_TYPE_WITHDRAW_NOTIFICATION":  1,
+		"MESSAGE_TYPE_DEPOSIT_NOTIFICATION":   2,
+		"MESSAGE_TYPE_LARGE_DEPOSIT":          3,
+		"MESSAGE_TYPE_LARGE_BET":              4,
+		"MESSAGE_TYPE_LARGE_WIN":              5,
+		"MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION": 6,
 	}
 )
 

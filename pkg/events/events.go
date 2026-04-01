@@ -341,6 +341,21 @@ type UserStatusUpdateEvent struct {
 
 const UserStatusUpdateTopic = "user.status.update"
 
+const UserIdentitySubmitTopic = "user.identity.submit"
+
+// UserIdentitySubmitEvent is published when a user submits identity documents for KYC Level 3 verification.
+type UserIdentitySubmitEvent struct {
+	UserID             int64  `json:"user_id"`
+	OperatorID         int64  `json:"operator_id"`
+	CompanyOperatorID  int64  `json:"company_operator_id"`
+	RetailerOperatorID int64  `json:"retailer_operator_id"`
+	SystemOperatorID   int64  `json:"system_operator_id"`
+	OperatorName       string `json:"operator_name"`
+	IdType             string `json:"id_type"`
+	IdNumber           string `json:"id_number"`
+	CreatedAt          int64  `json:"created_at"`
+}
+
 // OperatorArchiveEvent is published when an operator is archived.
 // Downstream services should clean up their own operator-specific data.
 type OperatorArchiveEvent struct {
