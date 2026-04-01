@@ -12079,6 +12079,8 @@ type FreeSpinDetail struct {
 	MaxWithdrawalMultiplier string `protobuf:"bytes,9,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
 	// Validity duration for winnings reward in milliseconds
 	RewardValidity int64 `protobuf:"varint,10,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`
+	// Free spin validity (ms), 0 = no expiration. Applies to all rewards uniformly.
+	FreeSpinValidity int64 `protobuf:"varint,19,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"`
 	// Total winnings aggregated across all reward items
 	// In settlement currency
 	TotalWinnings                  string `protobuf:"bytes,11,opt,name=total_winnings,json=totalWinnings,proto3" json:"total_winnings,omitempty"`
@@ -12197,6 +12199,13 @@ func (x *FreeSpinDetail) GetRewardValidity() int64 {
 	return 0
 }
 
+func (x *FreeSpinDetail) GetFreeSpinValidity() int64 {
+	if x != nil {
+		return x.FreeSpinValidity
+	}
+	return 0
+}
+
 func (x *FreeSpinDetail) GetTotalWinnings() string {
 	if x != nil {
 		return x.TotalWinnings
@@ -12269,9 +12278,6 @@ type FreeSpinRewardDetail struct {
 	UsedCount int32 `protobuf:"varint,5,opt,name=used_count,json=usedCount,proto3" json:"used_count,omitempty"`
 	// Remaining count (spin_count - used_count)
 	RemainingCount int32 `protobuf:"varint,6,opt,name=remaining_count,json=remainingCount,proto3" json:"remaining_count,omitempty"`
-	// Expiration
-	// Configured validity duration in milliseconds
-	FreeSpinValidity int64 `protobuf:"varint,7,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"`
 	// Calculated expiration timestamp in milliseconds, 0 means never expires
 	ExpiredAt int64 `protobuf:"varint,8,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
 	// Winnings for this specific game
@@ -12351,13 +12357,6 @@ func (x *FreeSpinRewardDetail) GetUsedCount() int32 {
 func (x *FreeSpinRewardDetail) GetRemainingCount() int32 {
 	if x != nil {
 		return x.RemainingCount
-	}
-	return 0
-}
-
-func (x *FreeSpinRewardDetail) GetFreeSpinValidity() int64 {
-	if x != nil {
-		return x.FreeSpinValidity
 	}
 	return 0
 }
@@ -18880,7 +18879,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1bListUserFreeRewardsResponse\x12D\n" +
 	"\n" +
 	"free_spins\x18\x01 \x03(\v2%.api.wallet.service.v1.FreeSpinDetailR\tfreeSpins\x12A\n" +
-	"\tfree_bets\x18\x02 \x03(\v2$.api.wallet.service.v1.FreeBetDetailR\bfreeBets\"\x80\x06\n" +
+	"\tfree_bets\x18\x02 \x03(\v2$.api.wallet.service.v1.FreeBetDetailR\bfreeBets\"\xae\x06\n" +
 	"\x0eFreeSpinDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vsource_type\x18\x02 \x01(\tR\n" +
@@ -18894,7 +18893,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x14wagering_requirement\x18\b \x01(\x05R\x13wageringRequirement\x12:\n" +
 	"\x19max_withdrawal_multiplier\x18\t \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
 	"\x0freward_validity\x18\n" +
-	" \x01(\x03R\x0erewardValidity\x12%\n" +
+	" \x01(\x03R\x0erewardValidity\x12,\n" +
+	"\x12free_spin_validity\x18\x13 \x01(\x03R\x10freeSpinValidity\x12%\n" +
 	"\x0etotal_winnings\x18\v \x01(\tR\rtotalWinnings\x12,\n" +
 	"\x12total_winnings_usd\x18\f \x01(\tR\x10totalWinningsUsd\x12I\n" +
 	"!total_winnings_reporting_currency\x18\r \x01(\tR\x1etotalWinningsReportingCurrency\x12E\n" +
@@ -18904,7 +18904,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\x10 \x01(\x03R\tupdatedAt\x12#\n" +
 	"\rrounds_played\x18\x11 \x01(\x05R\froundsPlayed\x12!\n" +
-	"\ftotal_rounds\x18\x12 \x01(\x05R\vtotalRounds\"\x99\x03\n" +
+	"\ftotal_rounds\x18\x12 \x01(\x05R\vtotalRounds\"\x85\x03\n" +
 	"\x14FreeSpinRewardDetail\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12\x17\n" +
@@ -18914,14 +18914,13 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"spin_count\x18\x04 \x01(\x05R\tspinCount\x12\x1d\n" +
 	"\n" +
 	"used_count\x18\x05 \x01(\x05R\tusedCount\x12'\n" +
-	"\x0fremaining_count\x18\x06 \x01(\x05R\x0eremainingCount\x12,\n" +
-	"\x12free_spin_validity\x18\a \x01(\x03R\x10freeSpinValidity\x12\x1d\n" +
+	"\x0fremaining_count\x18\x06 \x01(\x05R\x0eremainingCount\x12\x1d\n" +
 	"\n" +
 	"expired_at\x18\b \x01(\x03R\texpiredAt\x12\x1a\n" +
 	"\bwinnings\x18\t \x01(\tR\bwinnings\x12!\n" +
 	"\fwinnings_usd\x18\n" +
 	" \x01(\tR\vwinningsUsd\x12>\n" +
-	"\x1bwinnings_reporting_currency\x18\v \x01(\tR\x19winningsReportingCurrency\"\x85\x05\n" +
+	"\x1bwinnings_reporting_currency\x18\v \x01(\tR\x19winningsReportingCurrencyJ\x04\b\a\x10\bR\x12free_spin_validity\"\x85\x05\n" +
 	"\rFreeBetDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vsource_type\x18\x02 \x01(\tR\n" +

@@ -26,12 +26,15 @@ message FreeSpinConfig {
 	// Winning reward validity (ms)
 	int64 reward_validity = 7;
 	repeated FreeSpinReward rewards = 8;
+	// Free spin validity (ms), 0 = no expiration. Applies to all rewards uniformly.
+	int64 free_spin_validity = 9;
 	message FreeSpinReward {
 		string provider_id = 1;
 		string game_id = 2;
 		int32 level = 3;
-		// ms, 0 = no expiration
-		int64 free_spin_validity = 4;
+		// Field 4 was free_spin_validity, moved to FreeSpinConfig.free_spin_validity
+		reserved 4;
+		reserved "free_spin_validity";
 	}
 }
 

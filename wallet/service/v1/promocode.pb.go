@@ -37,8 +37,10 @@ type FreeSpinConfig struct {
 	// Winning reward validity (ms)
 	RewardValidity int64                            `protobuf:"varint,7,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`
 	Rewards        []*FreeSpinConfig_FreeSpinReward `protobuf:"bytes,8,rep,name=rewards,proto3" json:"rewards,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Free spin validity (ms), 0 = no expiration. Applies to all rewards uniformly.
+	FreeSpinValidity int64 `protobuf:"varint,9,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *FreeSpinConfig) Reset() {
@@ -125,6 +127,13 @@ func (x *FreeSpinConfig) GetRewards() []*FreeSpinConfig_FreeSpinReward {
 		return x.Rewards
 	}
 	return nil
+}
+
+func (x *FreeSpinConfig) GetFreeSpinValidity() int64 {
+	if x != nil {
+		return x.FreeSpinValidity
+	}
+	return 0
 }
 
 // Free bet config for deposit reward or promo code
@@ -2836,14 +2845,12 @@ func (x *ConditionValidationResult) GetSatisfied() bool {
 }
 
 type FreeSpinConfig_FreeSpinReward struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	ProviderId string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
-	GameId     string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	Level      int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
-	// ms, 0 = no expiration
-	FreeSpinValidity int64 `protobuf:"varint,4,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId    string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	GameId        string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	Level         int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FreeSpinConfig_FreeSpinReward) Reset() {
@@ -2893,13 +2900,6 @@ func (x *FreeSpinConfig_FreeSpinReward) GetGameId() string {
 func (x *FreeSpinConfig_FreeSpinReward) GetLevel() int32 {
 	if x != nil {
 		return x.Level
-	}
-	return 0
-}
-
-func (x *FreeSpinConfig_FreeSpinReward) GetFreeSpinValidity() int64 {
-	if x != nil {
-		return x.FreeSpinValidity
 	}
 	return 0
 }
@@ -3039,7 +3039,7 @@ var File_wallet_service_v1_promocode_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\n" +
-	"!wallet/service/v1/promocode.proto\x12\x15api.wallet.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xff\x03\n" +
+	"!wallet/service/v1/promocode.proto\x12\x15api.wallet.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\x98\x04\n" +
 	"\x0eFreeSpinConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
@@ -3050,13 +3050,13 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\x14wagering_requirement\x18\x05 \x01(\x05R\x13wageringRequirement\x12:\n" +
 	"\x19max_withdrawal_multiplier\x18\x06 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
 	"\x0freward_validity\x18\a \x01(\x03R\x0erewardValidity\x12N\n" +
-	"\arewards\x18\b \x03(\v24.api.wallet.service.v1.FreeSpinConfig.FreeSpinRewardR\arewards\x1a\x8e\x01\n" +
+	"\arewards\x18\b \x03(\v24.api.wallet.service.v1.FreeSpinConfig.FreeSpinRewardR\arewards\x12,\n" +
+	"\x12free_spin_validity\x18\t \x01(\x03R\x10freeSpinValidity\x1az\n" +
 	"\x0eFreeSpinReward\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12\x17\n" +
 	"\agame_id\x18\x02 \x01(\tR\x06gameId\x12\x14\n" +
-	"\x05level\x18\x03 \x01(\x05R\x05level\x12,\n" +
-	"\x12free_spin_validity\x18\x04 \x01(\x03R\x10freeSpinValidity\"\xe8\x03\n" +
+	"\x05level\x18\x03 \x01(\x05R\x05levelJ\x04\b\x04\x10\x05R\x12free_spin_validity\"\xe8\x03\n" +
 	"\rFreeBetConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +

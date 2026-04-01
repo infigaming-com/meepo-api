@@ -399,17 +399,17 @@ type FreeSpinGranted struct {
 	SpinCount               int32                   `json:"spin_count"`  // shared spin count for all games
 	WageringRequirement     int32                   `json:"wagering_requirement"`
 	MaxWithdrawalMultiplier string                  `json:"max_withdrawal_multiplier"`
-	RewardValidity          int64                   `json:"reward_validity"` // winning reward validity (ms)
+	RewardValidity          int64                   `json:"reward_validity"`    // winning reward validity (ms)
+	FreeSpinValidity        int64                   `json:"free_spin_validity"` // free spin validity (ms), 0 = no expiration
+	ExpiredAt               int64                   `json:"expired_at"`         // absolute expiry time (ms), 0 = no expiration
 	Rewards                 []FreeSpinGrantedReward `json:"rewards"`
 }
 
 // FreeSpinGrantedReward contains per-game free spin reward details
 type FreeSpinGrantedReward struct {
-	ProviderId       string `json:"provider_id"`
-	GameId           string `json:"game_id"`
-	Level            int32  `json:"level"`
-	FreeSpinValidity int64  `json:"free_spin_validity"` // validity of the free spin itself (ms)
-	ExpiredAt        int64  `json:"expired_at"`         // absolute expiry time (ms)
+	ProviderId string `json:"provider_id"`
+	GameId     string `json:"game_id"`
+	Level      int32  `json:"level"`
 }
 
 // FreeBetGranted contains the granted free bet config and per-template reward details

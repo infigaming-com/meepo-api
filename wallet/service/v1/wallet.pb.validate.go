@@ -22661,6 +22661,8 @@ func (m *FreeSpinDetail) validate(all bool) error {
 
 	// no validation rules for RewardValidity
 
+	// no validation rules for FreeSpinValidity
+
 	// no validation rules for TotalWinnings
 
 	// no validation rules for TotalWinningsUsd
@@ -22820,8 +22822,6 @@ func (m *FreeSpinRewardDetail) validate(all bool) error {
 	// no validation rules for UsedCount
 
 	// no validation rules for RemainingCount
-
-	// no validation rules for FreeSpinValidity
 
 	// no validation rules for ExpiredAt
 
