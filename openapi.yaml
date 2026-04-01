@@ -28775,6 +28775,7 @@ components:
                         - MESSAGE_TYPE_LARGE_DEPOSIT
                         - MESSAGE_TYPE_LARGE_BET
                         - MESSAGE_TYPE_LARGE_WIN
+                        - MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION
                     type: string
                     description: Filter by message type (omit to list all types)
                     format: enum
@@ -28904,6 +28905,7 @@ components:
                         - MESSAGE_TYPE_LARGE_DEPOSIT
                         - MESSAGE_TYPE_LARGE_BET
                         - MESSAGE_TYPE_LARGE_WIN
+                        - MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION
                     type: string
                     description: Enum value (e.g., MESSAGE_TYPE_LARGE_DEPOSIT = 3)
                     format: enum
@@ -28968,6 +28970,7 @@ components:
                         - MESSAGE_TYPE_LARGE_DEPOSIT
                         - MESSAGE_TYPE_LARGE_BET
                         - MESSAGE_TYPE_LARGE_WIN
+                        - MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION
                     type: string
                     description: Event type that triggers this rule (e.g., MESSAGE_TYPE_LARGE_DEPOSIT)
                     format: enum
@@ -29017,6 +29020,7 @@ components:
                         - MESSAGE_TYPE_LARGE_DEPOSIT
                         - MESSAGE_TYPE_LARGE_BET
                         - MESSAGE_TYPE_LARGE_WIN
+                        - MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION
                     type: string
                     description: Event type that triggers this rule
                     format: enum

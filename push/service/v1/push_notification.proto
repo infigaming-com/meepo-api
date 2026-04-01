@@ -63,6 +63,8 @@ enum MessageType {
   MESSAGE_TYPE_LARGE_BET = 4;
   // Win exceeding a configured threshold
   MESSAGE_TYPE_LARGE_WIN = 5;
+  // KYC Level 3 identity verification submitted for review
+  MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION = 6;
 }
 
 // ============ Channel Messages ============
