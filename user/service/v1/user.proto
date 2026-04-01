@@ -1179,6 +1179,8 @@ message ListUsersResponse {
 		bool mfa_enabled = 30;
 		string last_login_ip = 31;
 		string role_creator_name = 32;
+		string affiliation = 33;   // operator name the account belongs to
+		string creator = 34;       // creator username, e.g. "system:jimmy"
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -1372,6 +1374,8 @@ message CreateRoleRequest {
 	repeated Permission permissions = 2;
 	int64 user_id = 3;
 	common.OperatorContext operator_context = 4;
+	string description = 5;
+	string scope = 6;
 }
 
 message Permission {
@@ -1385,13 +1389,19 @@ message ListRolesRequest {
 	optional int32 page = 1;
 	optional int32 page_size = 2;
 	common.OperatorContext operator_context = 3;
+	optional string scope = 4;
 }
 
 message Role {
 	int64 role_id = 1;
 	string name = 2;
 	repeated Permission permissions = 3;
-	string creator_name = 4;
+	string creator_name = 4;  // affiliation: operator name
+	string description = 5;
+	string scope = 6;         // system/retailer/company/operator
+	bool enabled = 7;
+	int32 account_count = 8;
+	string creator = 9;       // creator username, e.g. "system:jimmy"
 }
 
 message ListRolesResponse {
@@ -1432,6 +1442,8 @@ message UpdateRoleRequest {
 	repeated Permission permissions = 3;
 	common.OperatorContext operator_context = 4;
 	int64 user_id = 5;
+	string description = 6;
+	optional bool enabled = 7;
 }
 
 message UpdateRoleResponse {}

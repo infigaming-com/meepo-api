@@ -213,6 +213,7 @@ message AddAccountRequest {
 	string mobile = 3;
 	string password = 4;
 	int64 role_id = 5;
+	api.common.OperatorContext target_operator_context = 6;
 }
 
 message AddAccountResponse {}
@@ -383,6 +384,12 @@ message Role {
     string name = 1;
     int64 role_id = 2;
     repeated Permission permissions = 3;
+    string description = 4;
+    string scope = 5;
+    bool enabled = 6;
+    int32 account_count = 7;
+    string affiliation = 8;  // operator name the role belongs to
+    string creator = 9;      // creator username, e.g. "system:jimmy"
 }
 
 message Permission {
@@ -419,6 +426,8 @@ message ListAccountsResponse {
         bool mfa_enabled = 11;
         string last_login_ip = 12;
         google.protobuf.Timestamp last_login_at = 13;
+        string affiliation = 14;  // operator name the account belongs to
+        string creator = 15;      // creator username, e.g. "system:jimmy"
     }
     repeated Account accounts = 1;
     int32 total = 2;
@@ -431,6 +440,9 @@ message ListAccountsResponse {
 message CreateRoleRequest {
     string name = 1;
     repeated Permission permissions = 2;
+    string description = 3;
+    string scope = 4;
+    api.common.OperatorContext target_operator_context = 5;
 }
 
 message CreateRoleResponse {}
@@ -438,6 +450,8 @@ message CreateRoleResponse {}
 message ListRolesRequest {
     optional int32 page = 1;
     optional int32 page_size = 2;
+    optional string scope = 3;
+    api.common.OperatorContext target_operator_context = 4;
 }
 
 message ListRolesResponse {
@@ -451,6 +465,8 @@ message UpdateRoleRequest {
     int64 role_id = 1;
     string name = 2;
     repeated Permission permissions = 3;
+    string description = 4;
+    optional bool enabled = 5;
 }
 
 message UpdateRoleResponse {}
