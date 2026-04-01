@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: oracle-routes
+  namespace: oracle-dev
+spec:
+  parentRefs:
+  - name: meepo-gateway
+    namespace: meepo-dev
+  hostnames:
+  - "dev.hicasino.xyz"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/markets"
+    backendRefs:
+    - name: oracle-service-svc
+      namespace: oracle-dev
+      port: 8000
+      weight: 1
