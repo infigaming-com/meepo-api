@@ -33163,6 +33163,9 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig_FreeSpinReward'
+                freeSpinValidity:
+                    type: string
+                    description: Free spin validity (ms), 0 = no expiration. Applies to all rewards uniformly.
             description: Free spin config for deposit reward or promo code
         api.wallet.service.v1.FreeSpinConfig_FreeSpinReward:
             type: object
@@ -33174,9 +33177,6 @@ components:
                 level:
                     type: integer
                     format: int32
-                freeSpinValidity:
-                    type: string
-                    description: ms, 0 = no expiration
         api.wallet.service.v1.FreeSpinDetail:
             type: object
             properties:
@@ -33211,6 +33211,9 @@ components:
                 rewardValidity:
                     type: string
                     description: Validity duration for winnings reward in milliseconds
+                freeSpinValidity:
+                    type: string
+                    description: Free spin validity (ms), 0 = no expiration. Applies to all rewards uniformly.
                 totalWinnings:
                     type: string
                     description: |-
@@ -33267,11 +33270,6 @@ components:
                     type: integer
                     description: Remaining count (spin_count - used_count)
                     format: int32
-                freeSpinValidity:
-                    type: string
-                    description: |-
-                        Expiration
-                         Configured validity duration in milliseconds
                 expiredAt:
                     type: string
                     description: Calculated expiration timestamp in milliseconds, 0 means never expires

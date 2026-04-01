@@ -105,6 +105,8 @@ func (m *FreeSpinConfig) validate(all bool) error {
 
 	}
 
+	// no validation rules for FreeSpinValidity
+
 	if len(errors) > 0 {
 		return FreeSpinConfigMultiError(errors)
 	}
@@ -6000,8 +6002,6 @@ func (m *FreeSpinConfig_FreeSpinReward) validate(all bool) error {
 	// no validation rules for GameId
 
 	// no validation rules for Level
-
-	// no validation rules for FreeSpinValidity
 
 	if len(errors) > 0 {
 		return FreeSpinConfig_FreeSpinRewardMultiError(errors)

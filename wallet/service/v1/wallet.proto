@@ -2102,6 +2102,8 @@ message FreeSpinDetail {
 	string max_withdrawal_multiplier = 9;
 	// Validity duration for winnings reward in milliseconds
 	int64 reward_validity = 10;
+	// Free spin validity (ms), 0 = no expiration. Applies to all rewards uniformly.
+	int64 free_spin_validity = 19;
 
 	// Total winnings aggregated across all reward items
 	// In settlement currency
@@ -2140,8 +2142,9 @@ message FreeSpinRewardDetail {
 	int32 remaining_count = 6;
 
 	// Expiration
-	// Configured validity duration in milliseconds
-	int64 free_spin_validity = 7;
+	// Field 7 was free_spin_validity, moved to FreeSpinDetail.free_spin_validity
+	reserved 7;
+	reserved "free_spin_validity";
 	// Calculated expiration timestamp in milliseconds, 0 means never expires
 	int64 expired_at = 8;
 
