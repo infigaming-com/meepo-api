@@ -8830,6 +8830,10 @@ func (m *CreateRoleRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Description
+
+	// no validation rules for Scope
+
 	if len(errors) > 0 {
 		return CreateRoleRequestMultiError(errors)
 	}
@@ -9172,6 +9176,10 @@ func (m *ListRolesRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.Scope != nil {
+		// no validation rules for Scope
+	}
+
 	if len(errors) > 0 {
 		return ListRolesRequestMultiError(errors)
 	}
@@ -9310,6 +9318,16 @@ func (m *Role) validate(all bool) error {
 	}
 
 	// no validation rules for CreatorName
+
+	// no validation rules for Description
+
+	// no validation rules for Scope
+
+	// no validation rules for Enabled
+
+	// no validation rules for AccountCount
+
+	// no validation rules for Creator
 
 	if len(errors) > 0 {
 		return RoleMultiError(errors)
@@ -9852,6 +9870,12 @@ func (m *UpdateRoleRequest) validate(all bool) error {
 	}
 
 	// no validation rules for UserId
+
+	// no validation rules for Description
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
 
 	if len(errors) > 0 {
 		return UpdateRoleRequestMultiError(errors)
@@ -34950,6 +34974,10 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 	// no validation rules for LastLoginIp
 
 	// no validation rules for RoleCreatorName
+
+	// no validation rules for Affiliation
+
+	// no validation rules for Creator
 
 	if len(errors) > 0 {
 		return ListUsersResponse_UserMultiError(errors)

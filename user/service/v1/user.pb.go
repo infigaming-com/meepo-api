@@ -5078,6 +5078,8 @@ type CreateRoleRequest struct {
 	Permissions     []*Permission           `protobuf:"bytes,2,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	UserId          int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Description     string                  `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Scope           string                  `protobuf:"bytes,6,opt,name=scope,proto3" json:"scope,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -5138,6 +5140,20 @@ func (x *CreateRoleRequest) GetOperatorContext() *common.OperatorContext {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *CreateRoleRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *CreateRoleRequest) GetScope() string {
+	if x != nil {
+		return x.Scope
+	}
+	return ""
 }
 
 type Permission struct {
@@ -5233,6 +5249,7 @@ type ListRolesRequest struct {
 	Page            *int32                  `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize        *int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Scope           *string                 `protobuf:"bytes,4,opt,name=scope,proto3,oneof" json:"scope,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -5288,12 +5305,24 @@ func (x *ListRolesRequest) GetOperatorContext() *common.OperatorContext {
 	return nil
 }
 
+func (x *ListRolesRequest) GetScope() string {
+	if x != nil && x.Scope != nil {
+		return *x.Scope
+	}
+	return ""
+}
+
 type Role struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RoleId        int64                  `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Permissions   []*Permission          `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	CreatorName   string                 `protobuf:"bytes,4,opt,name=creator_name,json=creatorName,proto3" json:"creator_name,omitempty"`
+	CreatorName   string                 `protobuf:"bytes,4,opt,name=creator_name,json=creatorName,proto3" json:"creator_name,omitempty"` // affiliation: operator name
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Scope         string                 `protobuf:"bytes,6,opt,name=scope,proto3" json:"scope,omitempty"` // system/retailer/company/operator
+	Enabled       bool                   `protobuf:"varint,7,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	AccountCount  int32                  `protobuf:"varint,8,opt,name=account_count,json=accountCount,proto3" json:"account_count,omitempty"`
+	Creator       string                 `protobuf:"bytes,9,opt,name=creator,proto3" json:"creator,omitempty"` // creator username, e.g. "system:jimmy"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5352,6 +5381,41 @@ func (x *Role) GetPermissions() []*Permission {
 func (x *Role) GetCreatorName() string {
 	if x != nil {
 		return x.CreatorName
+	}
+	return ""
+}
+
+func (x *Role) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *Role) GetScope() string {
+	if x != nil {
+		return x.Scope
+	}
+	return ""
+}
+
+func (x *Role) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *Role) GetAccountCount() int32 {
+	if x != nil {
+		return x.AccountCount
+	}
+	return 0
+}
+
+func (x *Role) GetCreator() string {
+	if x != nil {
+		return x.Creator
 	}
 	return ""
 }
@@ -5607,6 +5671,8 @@ type UpdateRoleRequest struct {
 	Permissions     []*Permission           `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	UserId          int64                   `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Description     string                  `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Enabled         *bool                   `protobuf:"varint,7,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -5674,6 +5740,20 @@ func (x *UpdateRoleRequest) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *UpdateRoleRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateRoleRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
 }
 
 type UpdateRoleResponse struct {
@@ -16648,6 +16728,8 @@ type ListUsersResponse_User struct {
 	MfaEnabled      bool                   `protobuf:"varint,30,opt,name=mfa_enabled,json=mfaEnabled,proto3" json:"mfa_enabled,omitempty"`
 	LastLoginIp     string                 `protobuf:"bytes,31,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
 	RoleCreatorName string                 `protobuf:"bytes,32,opt,name=role_creator_name,json=roleCreatorName,proto3" json:"role_creator_name,omitempty"`
+	Affiliation     string                 `protobuf:"bytes,33,opt,name=affiliation,proto3" json:"affiliation,omitempty"` // operator name the account belongs to
+	Creator         string                 `protobuf:"bytes,34,opt,name=creator,proto3" json:"creator,omitempty"`         // creator username, e.g. "system:jimmy"
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -16902,6 +16984,20 @@ func (x *ListUsersResponse_User) GetLastLoginIp() string {
 func (x *ListUsersResponse_User) GetRoleCreatorName() string {
 	if x != nil {
 		return x.RoleCreatorName
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetAffiliation() string {
+	if x != nil {
+		return x.Affiliation
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetCreator() string {
+	if x != nil {
+		return x.Creator
 	}
 	return ""
 }
@@ -18783,14 +18879,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10_registration_ipB\v\n" +
 	"\t_login_ipB\x16\n" +
 	"\x14_registration_sourceB\r\n" +
-	"\v_agent_type\"\xb7\v\n" +
+	"\v_agent_type\"\xf3\v\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xcb\t\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\x87\n" +
+	"\n" +
 	"\x04User\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\x02 \x01(\tR\x13companyOperatorName\x124\n" +
@@ -18827,7 +18924,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\vmfa_enabled\x18\x1e \x01(\bR\n" +
 	"mfaEnabled\x12\"\n" +
 	"\rlast_login_ip\x18\x1f \x01(\tR\vlastLoginIp\x12*\n" +
-	"\x11role_creator_name\x18  \x01(\tR\x0froleCreatorName\"\x99\f\n" +
+	"\x11role_creator_name\x18  \x01(\tR\x0froleCreatorName\x12 \n" +
+	"\vaffiliation\x18! \x01(\tR\vaffiliation\x12\x18\n" +
+	"\acreator\x18\" \x01(\tR\acreator\"\x99\f\n" +
 	"\x12ExportUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12W\n" +
 	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
@@ -19018,29 +19117,38 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x03new\x18\x02 \x01(\tR\x03new\x12\x10\n" +
 	"\x03old\x18\x03 \x01(\tR\x03old\x12\x0e\n" +
 	"\x02ip\x18\x04 \x01(\tR\x02ip\x12\x1a\n" +
-	"\breviewer\x18\x05 \x01(\tR\breviewer\"\xcb\x01\n" +
+	"\breviewer\x18\x05 \x01(\tR\breviewer\"\x83\x02\n" +
 	"\x11CreateRoleRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12A\n" +
 	"\vpermissions\x18\x02 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\">\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x14\n" +
+	"\x05scope\x18\x06 \x01(\tR\x05scope\">\n" +
 	"\n" +
 	"Permission\x12\x16\n" +
 	"\x06module\x18\x01 \x01(\tR\x06module\x12\x18\n" +
 	"\aactions\x18\x02 \x03(\tR\aactions\"\x14\n" +
-	"\x12CreateRoleResponse\"\xac\x01\n" +
+	"\x12CreateRoleResponse\"\xd1\x01\n" +
 	"\x10ListRolesRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\a\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x19\n" +
+	"\x05scope\x18\x04 \x01(\tH\x02R\x05scope\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x99\x01\n" +
+	"_page_sizeB\b\n" +
+	"\x06_scope\"\xaa\x02\n" +
 	"\x04Role\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12A\n" +
 	"\vpermissions\x18\x03 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\x12!\n" +
-	"\fcreator_name\x18\x04 \x01(\tR\vcreatorName\"\x8b\x01\n" +
+	"\fcreator_name\x18\x04 \x01(\tR\vcreatorName\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x14\n" +
+	"\x05scope\x18\x06 \x01(\tR\x05scope\x12\x18\n" +
+	"\aenabled\x18\a \x01(\bR\aenabled\x12#\n" +
+	"\raccount_count\x18\b \x01(\x05R\faccountCount\x12\x18\n" +
+	"\acreator\x18\t \x01(\tR\acreator\"\x8b\x01\n" +
 	"\x11ListRolesResponse\x12/\n" +
 	"\x05roles\x18\x01 \x03(\v2\x19.api.user.service.v1.RoleR\x05roles\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -19066,13 +19174,17 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x1c\n" +
 	"\tsubdomain\x18\x02 \x01(\tR\tsubdomain\x121\n" +
-	"\x14backoffice_subdomain\x18\x03 \x01(\tR\x13backofficeSubdomain\"\xe4\x01\n" +
+	"\x14backoffice_subdomain\x18\x03 \x01(\tR\x13backofficeSubdomain\"\xb1\x02\n" +
 	"\x11UpdateRoleRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12A\n" +
 	"\vpermissions\x18\x03 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\x03R\x06userId\"\x14\n" +
+	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12 \n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x1d\n" +
+	"\aenabled\x18\a \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
+	"\n" +
+	"\b_enabled\"\x14\n" +
 	"\x12UpdateRoleResponse\")\n" +
 	"\x0eGetRoleRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\"@\n" +
@@ -20969,6 +21081,7 @@ func file_user_service_v1_user_proto_init() {
 	file_user_service_v1_user_proto_msgTypes[63].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[68].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[71].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[73].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[91].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[103].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[114].OneofWrappers = []any{}

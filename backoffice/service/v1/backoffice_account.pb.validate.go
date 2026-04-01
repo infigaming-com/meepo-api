@@ -67,6 +67,35 @@ func (m *AddAccountRequest) validate(all bool) error {
 
 	// no validation rules for RoleId
 
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddAccountRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddAccountRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddAccountRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return AddAccountRequestMultiError(errors)
 	}
@@ -4182,6 +4211,18 @@ func (m *Role) validate(all bool) error {
 
 	}
 
+	// no validation rules for Description
+
+	// no validation rules for Scope
+
+	// no validation rules for Enabled
+
+	// no validation rules for AccountCount
+
+	// no validation rules for Affiliation
+
+	// no validation rules for Creator
+
 	if len(errors) > 0 {
 		return RoleMultiError(errors)
 	}
@@ -4727,6 +4768,39 @@ func (m *CreateRoleRequest) validate(all bool) error {
 
 	}
 
+	// no validation rules for Description
+
+	// no validation rules for Scope
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateRoleRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateRoleRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateRoleRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return CreateRoleRequestMultiError(errors)
 	}
@@ -4931,12 +5005,45 @@ func (m *ListRolesRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListRolesRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListRolesRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListRolesRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.Scope != nil {
+		// no validation rules for Scope
 	}
 
 	if len(errors) > 0 {
@@ -5217,6 +5324,12 @@ func (m *UpdateRoleRequest) validate(all bool) error {
 			}
 		}
 
+	}
+
+	// no validation rules for Description
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {
@@ -6830,6 +6943,10 @@ func (m *ListAccountsResponse_Account) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for Affiliation
+
+	// no validation rules for Creator
 
 	if len(errors) > 0 {
 		return ListAccountsResponse_AccountMultiError(errors)
