@@ -34174,6 +34174,9 @@ components:
                     type: string
                 withdrawableAmountUsd:
                     type: string
+                userBalanceUsd:
+                    type: string
+                    description: total user wallet balances under this operator in USD
         api.wallet.service.v1.PromoCodeBonusMoneyConfig:
             type: object
             properties:
