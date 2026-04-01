@@ -157,12 +157,12 @@ var (
 		6: "MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION",
 	}
 	MessageType_value = map[string]int32{
-		"MESSAGE_TYPE_UNSPECIFIED":            0,
-		"MESSAGE_TYPE_WITHDRAW_NOTIFICATION":  1,
-		"MESSAGE_TYPE_DEPOSIT_NOTIFICATION":   2,
-		"MESSAGE_TYPE_LARGE_DEPOSIT":          3,
-		"MESSAGE_TYPE_LARGE_BET":              4,
-		"MESSAGE_TYPE_LARGE_WIN":              5,
+		"MESSAGE_TYPE_UNSPECIFIED":             0,
+		"MESSAGE_TYPE_WITHDRAW_NOTIFICATION":   1,
+		"MESSAGE_TYPE_DEPOSIT_NOTIFICATION":    2,
+		"MESSAGE_TYPE_LARGE_DEPOSIT":           3,
+		"MESSAGE_TYPE_LARGE_BET":               4,
+		"MESSAGE_TYPE_LARGE_WIN":               5,
 		"MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION": 6,
 	}
 )
@@ -2276,14 +2276,15 @@ const file_push_service_v1_push_notification_proto_rawDesc = "" +
 	"\bRuleType\x12\x19\n" +
 	"\x15RULE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11RULE_TYPE_GENERIC\x10\x01\x12 \n" +
-	"\x1cRULE_TYPE_CURRENCY_THRESHOLD\x10\x02*\xd2\x01\n" +
+	"\x1cRULE_TYPE_CURRENCY_THRESHOLD\x10\x02*\xfc\x01\n" +
 	"\vMessageType\x12\x1c\n" +
 	"\x18MESSAGE_TYPE_UNSPECIFIED\x10\x00\x12&\n" +
 	"\"MESSAGE_TYPE_WITHDRAW_NOTIFICATION\x10\x01\x12%\n" +
 	"!MESSAGE_TYPE_DEPOSIT_NOTIFICATION\x10\x02\x12\x1e\n" +
 	"\x1aMESSAGE_TYPE_LARGE_DEPOSIT\x10\x03\x12\x1a\n" +
 	"\x16MESSAGE_TYPE_LARGE_BET\x10\x04\x12\x1a\n" +
-	"\x16MESSAGE_TYPE_LARGE_WIN\x10\x052\xc9\n" +
+	"\x16MESSAGE_TYPE_LARGE_WIN\x10\x05\x12(\n" +
+	"$MESSAGE_TYPE_KYC_REVIEW_NOTIFICATION\x10\x062\xc9\n" +
 	"\n" +
 	"\x10PushNotification\x12\x8c\x01\n" +
 	"\x19CreateNotificationChannel\x125.api.push.service.v1.CreateNotificationChannelRequest\x1a6.api.push.service.v1.CreateNotificationChannelResponse\"\x00\x12\x89\x01\n" +

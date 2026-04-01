@@ -40,3 +40,11 @@ index.html
 
 .claude/
 CLAUDE.md
+
+# Enigma pipeline artifacts (not for commit)
+artifacts/
+CLAUDE.md
+task_plan.md
+findings.md
+progress.md
+.git-credentials

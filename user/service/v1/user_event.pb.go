@@ -454,6 +454,115 @@ func (x *UserStatusUpdateEvent) GetUpdatedAt() int64 {
 	return 0
 }
 
+// UserIdentitySubmitEvent is emitted when a user submits identity documents for KYC Level 3 verification.
+type UserIdentitySubmitEvent struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	UserId             int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorId         int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId   int64                  `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorName       string                 `protobuf:"bytes,6,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	IdType             string                 `protobuf:"bytes,7,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"` // e.g. "passport", "south_african_id"
+	IdNumber           string                 `protobuf:"bytes,8,opt,name=id_number,json=idNumber,proto3" json:"id_number,omitempty"`
+	CreatedAt          int64                  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *UserIdentitySubmitEvent) Reset() {
+	*x = UserIdentitySubmitEvent{}
+	mi := &file_user_service_v1_user_event_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserIdentitySubmitEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserIdentitySubmitEvent) ProtoMessage() {}
+
+func (x *UserIdentitySubmitEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_event_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserIdentitySubmitEvent.ProtoReflect.Descriptor instead.
+func (*UserIdentitySubmitEvent) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UserIdentitySubmitEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserIdentitySubmitEvent) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *UserIdentitySubmitEvent) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *UserIdentitySubmitEvent) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *UserIdentitySubmitEvent) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *UserIdentitySubmitEvent) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *UserIdentitySubmitEvent) GetIdType() string {
+	if x != nil {
+		return x.IdType
+	}
+	return ""
+}
+
+func (x *UserIdentitySubmitEvent) GetIdNumber() string {
+	if x != nil {
+		return x.IdNumber
+	}
+	return ""
+}
+
+func (x *UserIdentitySubmitEvent) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
 var File_user_service_v1_user_event_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_event_proto_rawDesc = "" +
@@ -501,7 +610,19 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\told_value\x18\x04 \x01(\tR\boldValue\x12\x1b\n" +
 	"\tnew_value\x18\x05 \x01(\tR\bnewValue\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\x03R\tupdatedAt2]\n" +
+	"updated_at\x18\x06 \x01(\x03R\tupdatedAt\"\xdd\x02\n" +
+	"\x17UserIdentitySubmitEvent\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x03 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12#\n" +
+	"\roperator_name\x18\x06 \x01(\tR\foperatorName\x12\x17\n" +
+	"\aid_type\x18\a \x01(\tR\x06idType\x12\x1b\n" +
+	"\tid_number\x18\b \x01(\tR\bidNumber\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\t \x01(\x03R\tcreatedAt2]\n" +
 	"\tUserEvent\x12P\n" +
 	"\x05Event\x12!.api.user.service.v1.EventRequest\x1a\".api.user.service.v1.EventResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
@@ -518,17 +639,18 @@ func file_user_service_v1_user_event_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_user_event_proto_rawDescData
 }
 
-var file_user_service_v1_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_user_service_v1_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_user_service_v1_user_event_proto_goTypes = []any{
-	(*EventRequest)(nil),           // 0: api.user.service.v1.EventRequest
-	(*EventResponse)(nil),          // 1: api.user.service.v1.EventResponse
-	(*AddUserEvent)(nil),           // 2: api.user.service.v1.AddUserEvent
-	(*AddOperatorEvent)(nil),       // 3: api.user.service.v1.AddOperatorEvent
-	(*UserStatusUpdateEvent)(nil),  // 4: api.user.service.v1.UserStatusUpdateEvent
-	(*common.OperatorContext)(nil), // 5: api.common.OperatorContext
+	(*EventRequest)(nil),            // 0: api.user.service.v1.EventRequest
+	(*EventResponse)(nil),           // 1: api.user.service.v1.EventResponse
+	(*AddUserEvent)(nil),            // 2: api.user.service.v1.AddUserEvent
+	(*AddOperatorEvent)(nil),        // 3: api.user.service.v1.AddOperatorEvent
+	(*UserStatusUpdateEvent)(nil),   // 4: api.user.service.v1.UserStatusUpdateEvent
+	(*UserIdentitySubmitEvent)(nil), // 5: api.user.service.v1.UserIdentitySubmitEvent
+	(*common.OperatorContext)(nil),  // 6: api.common.OperatorContext
 }
 var file_user_service_v1_user_event_proto_depIdxs = []int32{
-	5, // 0: api.user.service.v1.UserStatusUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	6, // 0: api.user.service.v1.UserStatusUpdateEvent.operator_context:type_name -> api.common.OperatorContext
 	0, // 1: api.user.service.v1.UserEvent.Event:input_type -> api.user.service.v1.EventRequest
 	1, // 2: api.user.service.v1.UserEvent.Event:output_type -> api.user.service.v1.EventResponse
 	2, // [2:3] is the sub-list for method output_type
@@ -550,7 +672,7 @@ func file_user_service_v1_user_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_event_proto_rawDesc), len(file_user_service_v1_user_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
