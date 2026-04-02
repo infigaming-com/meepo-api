@@ -19,18 +19,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Review_CreateWithdraw_FullMethodName                   = "/api.review.service.v1.Review/CreateWithdraw"
-	Review_CreateAffiliateWithdraw_FullMethodName          = "/api.review.service.v1.Review/CreateAffiliateWithdraw"
-	Review_CreateOperatorWithdraw_FullMethodName           = "/api.review.service.v1.Review/CreateOperatorWithdraw"
-	Review_ReviewTicket_FullMethodName                     = "/api.review.service.v1.Review/ReviewTicket"
-	Review_AddComment_FullMethodName                       = "/api.review.service.v1.Review/AddComment"
-	Review_CancelTicket_FullMethodName                     = "/api.review.service.v1.Review/CancelTicket"
-	Review_ListTickets_FullMethodName                      = "/api.review.service.v1.Review/ListTickets"
-	Review_ListOperatorTickets_FullMethodName              = "/api.review.service.v1.Review/ListOperatorTickets"
-	Review_GetTicket_FullMethodName                        = "/api.review.service.v1.Review/GetTicket"
-	Review_GetOperatorTicket_FullMethodName                = "/api.review.service.v1.Review/GetOperatorTicket"
-	Review_PrecheckUserWithdrawApproval_FullMethodName     = "/api.review.service.v1.Review/PrecheckUserWithdrawApproval"
-	Review_PrecheckOperatorWithdrawApproval_FullMethodName = "/api.review.service.v1.Review/PrecheckOperatorWithdrawApproval"
+	Review_CreateWithdraw_FullMethodName               = "/api.review.service.v1.Review/CreateWithdraw"
+	Review_CreateAffiliateWithdraw_FullMethodName      = "/api.review.service.v1.Review/CreateAffiliateWithdraw"
+	Review_CreateOperatorWithdraw_FullMethodName       = "/api.review.service.v1.Review/CreateOperatorWithdraw"
+	Review_ReviewTicket_FullMethodName                 = "/api.review.service.v1.Review/ReviewTicket"
+	Review_AddComment_FullMethodName                   = "/api.review.service.v1.Review/AddComment"
+	Review_CancelTicket_FullMethodName                 = "/api.review.service.v1.Review/CancelTicket"
+	Review_ListTickets_FullMethodName                  = "/api.review.service.v1.Review/ListTickets"
+	Review_ListOperatorTickets_FullMethodName          = "/api.review.service.v1.Review/ListOperatorTickets"
+	Review_GetTicket_FullMethodName                    = "/api.review.service.v1.Review/GetTicket"
+	Review_GetOperatorTicket_FullMethodName            = "/api.review.service.v1.Review/GetOperatorTicket"
+	Review_PrecheckUserWithdrawApproval_FullMethodName = "/api.review.service.v1.Review/PrecheckUserWithdrawApproval"
 )
 
 // ReviewClient is the client API for Review service.
@@ -53,8 +52,6 @@ type ReviewClient interface {
 	GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*GetOperatorTicketResponse, error)
 	// PrecheckUserWithdrawApproval checks if a user/affiliate withdraw ticket can be safely approved
 	PrecheckUserWithdrawApproval(ctx context.Context, in *PrecheckWithdrawApprovalRequest, opts ...grpc.CallOption) (*PrecheckWithdrawApprovalResponse, error)
-	// PrecheckOperatorWithdrawApproval checks if an operator withdraw ticket can be safely approved
-	PrecheckOperatorWithdrawApproval(ctx context.Context, in *PrecheckWithdrawApprovalRequest, opts ...grpc.CallOption) (*PrecheckWithdrawApprovalResponse, error)
 }
 
 type reviewClient struct {
@@ -175,16 +172,6 @@ func (c *reviewClient) PrecheckUserWithdrawApproval(ctx context.Context, in *Pre
 	return out, nil
 }
 
-func (c *reviewClient) PrecheckOperatorWithdrawApproval(ctx context.Context, in *PrecheckWithdrawApprovalRequest, opts ...grpc.CallOption) (*PrecheckWithdrawApprovalResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PrecheckWithdrawApprovalResponse)
-	err := c.cc.Invoke(ctx, Review_PrecheckOperatorWithdrawApproval_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ReviewServer is the server API for Review service.
 // All implementations must embed UnimplementedReviewServer
 // for forward compatibility.
@@ -205,8 +192,6 @@ type ReviewServer interface {
 	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*GetOperatorTicketResponse, error)
 	// PrecheckUserWithdrawApproval checks if a user/affiliate withdraw ticket can be safely approved
 	PrecheckUserWithdrawApproval(context.Context, *PrecheckWithdrawApprovalRequest) (*PrecheckWithdrawApprovalResponse, error)
-	// PrecheckOperatorWithdrawApproval checks if an operator withdraw ticket can be safely approved
-	PrecheckOperatorWithdrawApproval(context.Context, *PrecheckWithdrawApprovalRequest) (*PrecheckWithdrawApprovalResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
 
@@ -249,9 +234,6 @@ func (UnimplementedReviewServer) GetOperatorTicket(context.Context, *GetOperator
 }
 func (UnimplementedReviewServer) PrecheckUserWithdrawApproval(context.Context, *PrecheckWithdrawApprovalRequest) (*PrecheckWithdrawApprovalResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method PrecheckUserWithdrawApproval not implemented")
-}
-func (UnimplementedReviewServer) PrecheckOperatorWithdrawApproval(context.Context, *PrecheckWithdrawApprovalRequest) (*PrecheckWithdrawApprovalResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method PrecheckOperatorWithdrawApproval not implemented")
 }
 func (UnimplementedReviewServer) mustEmbedUnimplementedReviewServer() {}
 func (UnimplementedReviewServer) testEmbeddedByValue()                {}
@@ -472,24 +454,6 @@ func _Review_PrecheckUserWithdrawApproval_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Review_PrecheckOperatorWithdrawApproval_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrecheckWithdrawApprovalRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ReviewServer).PrecheckOperatorWithdrawApproval(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Review_PrecheckOperatorWithdrawApproval_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReviewServer).PrecheckOperatorWithdrawApproval(ctx, req.(*PrecheckWithdrawApprovalRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Review_ServiceDesc is the grpc.ServiceDesc for Review service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -540,10 +504,6 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PrecheckUserWithdrawApproval",
 			Handler:    _Review_PrecheckUserWithdrawApproval_Handler,
-		},
-		{
-			MethodName: "PrecheckOperatorWithdrawApproval",
-			Handler:    _Review_PrecheckOperatorWithdrawApproval_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -7294,24 +7294,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.ListTicketsResponse'
-    /v1/backoffice/review/operator/tickets/precheck:
-        post:
-            tags:
-                - BackofficeReview
-            operationId: BackofficeReview_PrecheckOperatorWithdrawApproval
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.PrecheckWithdrawApprovalRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.PrecheckWithdrawApprovalResponse'
     /v1/backoffice/review/operator/withdraw:
         post:
             tags:

@@ -36,8 +36,6 @@ service Review {
 
 	// PrecheckUserWithdrawApproval checks if a user/affiliate withdraw ticket can be safely approved
 	rpc PrecheckUserWithdrawApproval(PrecheckWithdrawApprovalRequest) returns (PrecheckWithdrawApprovalResponse) {}
-	// PrecheckOperatorWithdrawApproval checks if an operator withdraw ticket can be safely approved
-	rpc PrecheckOperatorWithdrawApproval(PrecheckWithdrawApprovalRequest) returns (PrecheckWithdrawApprovalResponse) {}
 }
 
 message CreateWithdrawRequest {
