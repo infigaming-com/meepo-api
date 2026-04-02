@@ -650,6 +650,12 @@ message GetBalanceSummaryResponse {
 	string company_pending_withdraw = 24;
 	// Pending amount from company's own wallet for affiliate withdrawals
 	string company_pending_affiliate_withdraw = 25;
+	// Total manual credit to sub-operators in USD
+	string manual_credit = 26;
+	// Total manual debit from sub-operators in USD
+	string manual_debit = 27;
+	// Bankroll amount in USD (placeholder)
+	string bankroll = 28;
 }
 
 message GetBalancesSummaryRequest {
