@@ -75,12 +75,6 @@ service BackofficeReview {
 			body: "*"
 		};
 	}
-	rpc PrecheckOperatorWithdrawApproval(PrecheckWithdrawApprovalRequest) returns (review.service.v1.PrecheckWithdrawApprovalResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/review/operator/tickets/precheck"
-			body: "*"
-		};
-	}
 	// rpc GetTicketById(GetTicketByIdRequest) returns (GetTicketByIdResponse) {
 	// 	option (google.api.http) = {
 	// 		post: "/v1/backoffice/review/tickets/get_by_id"

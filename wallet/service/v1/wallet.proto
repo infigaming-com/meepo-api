@@ -537,28 +537,26 @@ message FreezeRequest {
 	string reporting_currency = 3;
 	// Valid freeze transaction types:
 	//   - "payment_withdraw_freeze"   - Payment withdraw freeze transaction
+	//   - "affiliate_payment_withdraw_freeze" - Affiliate payment withdraw freeze
 	string transaction_type = 4;
 	int64 transaction_id = 5;
 	string cash = 6;
 	api.common.OperatorContext operator_context = 7;
-	ChannelInfo channel_info = 8;
 }
 
 message FreezeResponse {
 	int64 transaction_id = 1;
-	// amount of the operator's freeze
-	string operator_freeze_amount = 2;
-	string operator_freeze_currency = 3;
-	int64 operator_freeze_transaction_id = 4;
+	// freeze amount (actual amount frozen from user balance)
+	string freeze_amount = 2;
 }
 
 message SettleRequest {
 	// Valid settle transaction types:
 	//   - "payment_withdraw_settle"   - Payment withdraw settle transaction
+	//   - "affiliate_payment_withdraw_settle" - Affiliate payment withdraw settle
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
-	ChannelInfo channel_info = 4;
 }
 
 message SettleResponse {
@@ -2346,6 +2344,12 @@ message GetCompanyFinancialSummaryResponse {
 	string company_pending_withdraw_usd = 12;
 	// Pending amount frozen from company's own wallet for affiliate withdrawals (operator_affiliate_withdraw_freeze with no status on company operator), absolute value in USD
 	string company_pending_affiliate_withdraw_usd = 13;
+	// Total manual credit to sub-operators (operator_manual_credit), absolute value in USD
+	string manual_credit_usd = 14;
+	// Total manual debit from sub-operators (operator_manual_debit), absolute value in USD
+	string manual_debit_usd = 15;
+	// Bankroll amount in USD (placeholder, not implemented yet)
+	string bankroll_usd = 16;
 }
 
 // ============================================================================
@@ -2443,6 +2447,12 @@ message OperatorWithdrawableAmount {
 	string locked_for_pending_invoices_usd = 9;
 	string transferable_amount_usd = 10;
 	string withdrawable_amount_usd = 11;
+	// total user wallet balances under this operator in USD
+	string user_balance_usd = 12;
+	// total pending user/affiliate withdrawal freeze amounts in USD
+	string user_pending_withdraw_usd = 13;
+	// pending freeze from operator_balance_transaction in USD
+	string operator_pending_freeze_usd = 14;
 }
 
 message ListOperatorWithdrawableAmountsResponse {
@@ -2458,16 +2468,31 @@ message GetOperatorWithdrawCheckInfoRequest {
 }
 
 message GetOperatorWithdrawCheckInfoResponse {
-	// operator withdrawable amount in USD (custody - estCost - estRsToSys - lockedForPendingInvoices)
-	string withdrawable_amount_usd = 1;
-	// total pending freeze amount across all currencies in USD (user withdraw + operator payment withdraw, absolute value)
-	string total_pending_freeze_amount_usd = 2;
+	// Raw components (USD) - callers compute MW formula from these building blocks
+	// operator total balance across all currencies in USD
+	string custody_usd = 1;
+	// estimated cost in USD (includes RevShare)
+	string est_cost_usd = 2;
+	// amount locked for pending invoices in USD
+	string locked_for_pending_invoices_usd = 3;
+	// pending freeze from operator_balance_transaction in USD (absolute value)
+	string operator_pending_freeze_usd = 4;
+	// total user wallet balances under this operator in USD
+	string user_balance_usd = 5;
+	// total pending user/affiliate withdrawal freeze amounts in USD (frozen from user wallets but not yet from operator custody)
+	string user_pending_withdraw_usd = 10;
+
+	// Currency-specific data
 	// operator balance in the requested currency
-	string balance_in_currency = 3;
-	// pending freeze amount in the requested currency (absolute value)
-	string pending_freeze_amount_in_currency = 4;
+	string operator_balance_in_currency = 6;
+	// pending freeze from operator_balance_transaction in the requested currency (absolute value)
+	string operator_pending_freeze_in_currency = 7;
+	// pending user/affiliate withdrawal freeze amounts in the requested currency
+	string user_pending_withdraw_in_currency = 11;
+
+	// Metadata
 	// decimal places for the requested currency (from system-level config)
-	int32 currency_decimal_places = 5;
+	int32 currency_decimal_places = 8;
 	// decimal places for USD (from system-level config)
-	int32 usd_decimal_places = 6;
+	int32 usd_decimal_places = 9;
 }

@@ -3356,7 +3356,8 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x06reason\x18\x03 \x01(\tR\x06reason\x12\x1f\n" +
 	"\vlimit_value\x18\x04 \x01(\tR\n" +
 	"limitValue\x12#\n" +
-	"\rrequest_value\x18\x05 \x01(\tR\frequestValue2\xc0\v\n" +
+	"\rrequest_value\x18\x05 \x01(\tR\frequestValue2\xa8\n" +
+	"\n" +
 	"\x06Review\x12\x8d\x01\n" +
 	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12\x81\x01\n" +
 	"\x17CreateAffiliateWithdraw\x125.api.review.service.v1.CreateAffiliateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x00\x12\x7f\n" +
@@ -3369,8 +3370,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x13ListOperatorTickets\x121.api.review.service.v1.ListOperatorTicketsRequest\x1a*.api.review.service.v1.ListTicketsResponse\"\x00\x12`\n" +
 	"\tGetTicket\x12'.api.review.service.v1.GetTicketRequest\x1a(.api.review.service.v1.GetTicketResponse\"\x00\x12x\n" +
 	"\x11GetOperatorTicket\x12/.api.review.service.v1.GetOperatorTicketRequest\x1a0.api.review.service.v1.GetOperatorTicketResponse\"\x00\x12\x91\x01\n" +
-	"\x1cPrecheckUserWithdrawApproval\x126.api.review.service.v1.PrecheckWithdrawApprovalRequest\x1a7.api.review.service.v1.PrecheckWithdrawApprovalResponse\"\x00\x12\x95\x01\n" +
-	" PrecheckOperatorWithdrawApproval\x126.api.review.service.v1.PrecheckWithdrawApprovalRequest\x1a7.api.review.service.v1.PrecheckWithdrawApprovalResponse\"\x00BS\n" +
+	"\x1cPrecheckUserWithdrawApproval\x126.api.review.service.v1.PrecheckWithdrawApprovalRequest\x1a7.api.review.service.v1.PrecheckWithdrawApprovalResponse\"\x00BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (
@@ -3482,21 +3482,19 @@ var file_review_service_v1_review_proto_depIdxs = []int32{
 	13, // 51: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
 	15, // 52: api.review.service.v1.Review.GetOperatorTicket:input_type -> api.review.service.v1.GetOperatorTicketRequest
 	17, // 53: api.review.service.v1.Review.PrecheckUserWithdrawApproval:input_type -> api.review.service.v1.PrecheckWithdrawApprovalRequest
-	17, // 54: api.review.service.v1.Review.PrecheckOperatorWithdrawApproval:input_type -> api.review.service.v1.PrecheckWithdrawApprovalRequest
-	3,  // 55: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	3,  // 56: api.review.service.v1.Review.CreateAffiliateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	3,  // 57: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	5,  // 58: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
-	7,  // 59: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
-	9,  // 60: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
-	12, // 61: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	12, // 62: api.review.service.v1.Review.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	14, // 63: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	16, // 64: api.review.service.v1.Review.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
-	18, // 65: api.review.service.v1.Review.PrecheckUserWithdrawApproval:output_type -> api.review.service.v1.PrecheckWithdrawApprovalResponse
-	18, // 66: api.review.service.v1.Review.PrecheckOperatorWithdrawApproval:output_type -> api.review.service.v1.PrecheckWithdrawApprovalResponse
-	55, // [55:67] is the sub-list for method output_type
-	43, // [43:55] is the sub-list for method input_type
+	3,  // 54: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	3,  // 55: api.review.service.v1.Review.CreateAffiliateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	3,  // 56: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	5,  // 57: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
+	7,  // 58: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
+	9,  // 59: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
+	12, // 60: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	12, // 61: api.review.service.v1.Review.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	14, // 62: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	16, // 63: api.review.service.v1.Review.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
+	18, // 64: api.review.service.v1.Review.PrecheckUserWithdrawApproval:output_type -> api.review.service.v1.PrecheckWithdrawApprovalResponse
+	54, // [54:65] is the sub-list for method output_type
+	43, // [43:54] is the sub-list for method input_type
 	43, // [43:43] is the sub-list for extension type_name
 	43, // [43:43] is the sub-list for extension extendee
 	0,  // [0:43] is the sub-list for field type_name

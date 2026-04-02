@@ -1992,35 +1992,6 @@ func (m *FreezeRequest) validate(all bool) error {
 		}
 	}
 
-	if all {
-		switch v := interface{}(m.GetChannelInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FreezeRequestValidationError{
-					field:  "ChannelInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, FreezeRequestValidationError{
-					field:  "ChannelInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetChannelInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return FreezeRequestValidationError{
-				field:  "ChannelInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return FreezeRequestMultiError(errors)
 	}
@@ -2123,11 +2094,7 @@ func (m *FreezeResponse) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
-	// no validation rules for OperatorFreezeAmount
-
-	// no validation rules for OperatorFreezeCurrency
-
-	// no validation rules for OperatorFreezeTransactionId
+	// no validation rules for FreezeAmount
 
 	if len(errors) > 0 {
 		return FreezeResponseMultiError(errors)
@@ -2234,35 +2201,6 @@ func (m *SettleRequest) validate(all bool) error {
 	// no validation rules for TransactionId
 
 	// no validation rules for OriginalTransactionId
-
-	if all {
-		switch v := interface{}(m.GetChannelInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SettleRequestValidationError{
-					field:  "ChannelInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, SettleRequestValidationError{
-					field:  "ChannelInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetChannelInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SettleRequestValidationError{
-				field:  "ChannelInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return SettleRequestMultiError(errors)
@@ -25032,6 +24970,12 @@ func (m *GetCompanyFinancialSummaryResponse) validate(all bool) error {
 
 	// no validation rules for CompanyPendingAffiliateWithdrawUsd
 
+	// no validation rules for ManualCreditUsd
+
+	// no validation rules for ManualDebitUsd
+
+	// no validation rules for BankrollUsd
+
 	if len(errors) > 0 {
 		return GetCompanyFinancialSummaryResponseMultiError(errors)
 	}
@@ -26160,6 +26104,12 @@ func (m *OperatorWithdrawableAmount) validate(all bool) error {
 
 	// no validation rules for WithdrawableAmountUsd
 
+	// no validation rules for UserBalanceUsd
+
+	// no validation rules for UserPendingWithdrawUsd
+
+	// no validation rules for OperatorPendingFreezeUsd
+
 	if len(errors) > 0 {
 		return OperatorWithdrawableAmountMultiError(errors)
 	}
@@ -26545,13 +26495,23 @@ func (m *GetOperatorWithdrawCheckInfoResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for WithdrawableAmountUsd
+	// no validation rules for CustodyUsd
 
-	// no validation rules for TotalPendingFreezeAmountUsd
+	// no validation rules for EstCostUsd
 
-	// no validation rules for BalanceInCurrency
+	// no validation rules for LockedForPendingInvoicesUsd
 
-	// no validation rules for PendingFreezeAmountInCurrency
+	// no validation rules for OperatorPendingFreezeUsd
+
+	// no validation rules for UserBalanceUsd
+
+	// no validation rules for UserPendingWithdrawUsd
+
+	// no validation rules for OperatorBalanceInCurrency
+
+	// no validation rules for OperatorPendingFreezeInCurrency
+
+	// no validation rules for UserPendingWithdrawInCurrency
 
 	// no validation rules for CurrencyDecimalPlaces
 

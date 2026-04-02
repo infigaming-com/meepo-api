@@ -1732,7 +1732,7 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x0eauthor_user_id\x18\x03 \x01(\x03R\fauthorUserId\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\xa9\x0f\n" +
+	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\xd3\r\n" +
 	"\x10BackofficeReview\x12\xb9\x01\n" +
 	"\x16CreateOperatorWithdraw\x128.api.backoffice.service.v1.CreateOperatorWithdrawRequest\x1a1.api.backoffice.service.v1.CreateWithdrawResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/review/operator/withdraw\x12\xbc\x01\n" +
 	"\x17CreateAffiliateWithdraw\x129.api.backoffice.service.v1.CreateAffiliateWithdrawRequest\x1a1.api.backoffice.service.v1.CreateWithdrawResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/review/affiliate/withdraw\x12\x97\x01\n" +
@@ -1744,8 +1744,7 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\n" +
 	"AddComment\x12,.api.backoffice.service.v1.AddCommentRequest\x1a-.api.backoffice.service.v1.AddCommentResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/review/tickets/comments/add\x12\xa0\x01\n" +
 	"\fCancelTicket\x12..api.backoffice.service.v1.CancelTicketRequest\x1a/.api.backoffice.service.v1.CancelTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/cancel\x12\xc6\x01\n" +
-	"\x1cPrecheckUserWithdrawApproval\x12:.api.backoffice.service.v1.PrecheckWithdrawApprovalRequest\x1a7.api.review.service.v1.PrecheckWithdrawApprovalResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/review/tickets/precheck\x12\xd3\x01\n" +
-	" PrecheckOperatorWithdrawApproval\x12:.api.backoffice.service.v1.PrecheckWithdrawApprovalRequest\x1a7.api.review.service.v1.PrecheckWithdrawApprovalResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/review/operator/tickets/precheckB[\n" +
+	"\x1cPrecheckUserWithdrawApproval\x12:.api.backoffice.service.v1.PrecheckWithdrawApprovalRequest\x1a7.api.review.service.v1.PrecheckWithdrawApprovalResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/review/tickets/precheckB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -1815,20 +1814,18 @@ var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
 	10, // 20: api.backoffice.service.v1.BackofficeReview.AddComment:input_type -> api.backoffice.service.v1.AddCommentRequest
 	12, // 21: api.backoffice.service.v1.BackofficeReview.CancelTicket:input_type -> api.backoffice.service.v1.CancelTicketRequest
 	14, // 22: api.backoffice.service.v1.BackofficeReview.PrecheckUserWithdrawApproval:input_type -> api.backoffice.service.v1.PrecheckWithdrawApprovalRequest
-	14, // 23: api.backoffice.service.v1.BackofficeReview.PrecheckOperatorWithdrawApproval:input_type -> api.backoffice.service.v1.PrecheckWithdrawApprovalRequest
-	2,  // 24: api.backoffice.service.v1.BackofficeReview.CreateOperatorWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
-	2,  // 25: api.backoffice.service.v1.BackofficeReview.CreateAffiliateWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
-	24, // 26: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	24, // 27: api.backoffice.service.v1.BackofficeReview.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	25, // 28: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	26, // 29: api.backoffice.service.v1.BackofficeReview.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
-	9,  // 30: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
-	11, // 31: api.backoffice.service.v1.BackofficeReview.AddComment:output_type -> api.backoffice.service.v1.AddCommentResponse
-	13, // 32: api.backoffice.service.v1.BackofficeReview.CancelTicket:output_type -> api.backoffice.service.v1.CancelTicketResponse
-	27, // 33: api.backoffice.service.v1.BackofficeReview.PrecheckUserWithdrawApproval:output_type -> api.review.service.v1.PrecheckWithdrawApprovalResponse
-	27, // 34: api.backoffice.service.v1.BackofficeReview.PrecheckOperatorWithdrawApproval:output_type -> api.review.service.v1.PrecheckWithdrawApprovalResponse
-	24, // [24:35] is the sub-list for method output_type
-	13, // [13:24] is the sub-list for method input_type
+	2,  // 23: api.backoffice.service.v1.BackofficeReview.CreateOperatorWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
+	2,  // 24: api.backoffice.service.v1.BackofficeReview.CreateAffiliateWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
+	24, // 25: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	24, // 26: api.backoffice.service.v1.BackofficeReview.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	25, // 27: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	26, // 28: api.backoffice.service.v1.BackofficeReview.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
+	9,  // 29: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
+	11, // 30: api.backoffice.service.v1.BackofficeReview.AddComment:output_type -> api.backoffice.service.v1.AddCommentResponse
+	13, // 31: api.backoffice.service.v1.BackofficeReview.CancelTicket:output_type -> api.backoffice.service.v1.CancelTicketResponse
+	27, // 32: api.backoffice.service.v1.BackofficeReview.PrecheckUserWithdrawApproval:output_type -> api.review.service.v1.PrecheckWithdrawApprovalResponse
+	23, // [23:33] is the sub-list for method output_type
+	13, // [13:23] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
