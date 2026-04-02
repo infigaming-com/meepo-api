@@ -17197,6 +17197,15 @@ components:
                 companyPendingAffiliateWithdraw:
                     type: string
                     description: Pending amount from company's own wallet for affiliate withdrawals
+                manualCredit:
+                    type: string
+                    description: Total manual credit to sub-operators in USD
+                manualDebit:
+                    type: string
+                    description: Total manual debit from sub-operators in USD
+                bankroll:
+                    type: string
+                    description: Bankroll amount in USD (placeholder)
         api.backoffice.service.v1.GetBalancesSummaryRequest:
             type: object
             properties:
