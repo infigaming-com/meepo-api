@@ -34165,6 +34165,15 @@ components:
                 operatorPendingFreezeUsd:
                     type: string
                     description: pending freeze from operator_balance_transaction in USD
+                manualCreditUsd:
+                    type: string
+                    description: manual credit to operator balance in USD
+                manualDebitUsd:
+                    type: string
+                    description: manual debit from operator balance in USD
+                bankrollUsd:
+                    type: string
+                    description: bankroll amount in USD (placeholder, not implemented yet)
         api.wallet.service.v1.PromoCodeBonusMoneyConfig:
             type: object
             properties:
