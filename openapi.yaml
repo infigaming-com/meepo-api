@@ -31441,6 +31441,9 @@ components:
                 noWithdrawWithoutDeposit:
                     type: boolean
                     description: When enabled, users who have never made a deposit will not be allowed to withdraw.
+                buyCryptoDisabled:
+                    type: boolean
+                    description: 'When enabled, hides "Buy Crypto" option on client deposit page. Default: false (Buy Crypto shown).'
         api.user.service.v1.OperatorAccountSecuritySettings:
             type: object
             properties:

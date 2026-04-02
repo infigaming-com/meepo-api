@@ -14031,6 +14031,8 @@ func (m *OperatorAccountPaymentSettings) validate(all bool) error {
 
 	// no validation rules for NoWithdrawWithoutDeposit
 
+	// no validation rules for BuyCryptoDisabled
+
 	if len(errors) > 0 {
 		return OperatorAccountPaymentSettingsMultiError(errors)
 	}
