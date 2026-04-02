@@ -2443,6 +2443,10 @@ message OperatorWithdrawableAmount {
 	string withdrawable_amount_usd = 11;
 	// total user wallet balances under this operator in USD
 	string user_balance_usd = 12;
+	// total pending user/affiliate withdrawal freeze amounts in USD
+	string user_pending_withdraw_usd = 13;
+	// pending freeze from operator_balance_transaction in USD
+	string operator_pending_freeze_usd = 14;
 }
 
 message ListOperatorWithdrawableAmountsResponse {
@@ -2469,12 +2473,16 @@ message GetOperatorWithdrawCheckInfoResponse {
 	string operator_pending_freeze_usd = 4;
 	// total user wallet balances under this operator in USD
 	string user_balance_usd = 5;
+	// total pending user/affiliate withdrawal freeze amounts in USD (frozen from user wallets but not yet from operator custody)
+	string user_pending_withdraw_usd = 10;
 
 	// Currency-specific data
 	// operator balance in the requested currency
 	string operator_balance_in_currency = 6;
 	// pending freeze from operator_balance_transaction in the requested currency (absolute value)
 	string operator_pending_freeze_in_currency = 7;
+	// pending user/affiliate withdrawal freeze amounts in the requested currency
+	string user_pending_withdraw_in_currency = 11;
 
 	// Metadata
 	// decimal places for the requested currency (from system-level config)

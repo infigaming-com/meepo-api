@@ -26100,6 +26100,10 @@ func (m *OperatorWithdrawableAmount) validate(all bool) error {
 
 	// no validation rules for UserBalanceUsd
 
+	// no validation rules for UserPendingWithdrawUsd
+
+	// no validation rules for OperatorPendingFreezeUsd
+
 	if len(errors) > 0 {
 		return OperatorWithdrawableAmountMultiError(errors)
 	}
@@ -26495,9 +26499,13 @@ func (m *GetOperatorWithdrawCheckInfoResponse) validate(all bool) error {
 
 	// no validation rules for UserBalanceUsd
 
+	// no validation rules for UserPendingWithdrawUsd
+
 	// no validation rules for OperatorBalanceInCurrency
 
 	// no validation rules for OperatorPendingFreezeInCurrency
+
+	// no validation rules for UserPendingWithdrawInCurrency
 
 	// no validation rules for CurrencyDecimalPlaces
 
