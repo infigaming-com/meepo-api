@@ -24970,6 +24970,12 @@ func (m *GetCompanyFinancialSummaryResponse) validate(all bool) error {
 
 	// no validation rules for CompanyPendingAffiliateWithdrawUsd
 
+	// no validation rules for ManualCreditUsd
+
+	// no validation rules for ManualDebitUsd
+
+	// no validation rules for BankrollUsd
+
 	if len(errors) > 0 {
 		return GetCompanyFinancialSummaryResponseMultiError(errors)
 	}
@@ -26103,12 +26109,6 @@ func (m *OperatorWithdrawableAmount) validate(all bool) error {
 	// no validation rules for UserPendingWithdrawUsd
 
 	// no validation rules for OperatorPendingFreezeUsd
-
-	// no validation rules for ManualCreditUsd
-
-	// no validation rules for ManualDebitUsd
-
-	// no validation rules for BankrollUsd
 
 	if len(errors) > 0 {
 		return OperatorWithdrawableAmountMultiError(errors)

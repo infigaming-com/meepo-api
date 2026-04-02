@@ -2344,6 +2344,12 @@ message GetCompanyFinancialSummaryResponse {
 	string company_pending_withdraw_usd = 12;
 	// Pending amount frozen from company's own wallet for affiliate withdrawals (operator_affiliate_withdraw_freeze with no status on company operator), absolute value in USD
 	string company_pending_affiliate_withdraw_usd = 13;
+	// Total manual credit to sub-operators (operator_manual_credit), absolute value in USD
+	string manual_credit_usd = 14;
+	// Total manual debit from sub-operators (operator_manual_debit), absolute value in USD
+	string manual_debit_usd = 15;
+	// Bankroll amount in USD (placeholder, not implemented yet)
+	string bankroll_usd = 16;
 }
 
 // ============================================================================
@@ -2447,12 +2453,6 @@ message OperatorWithdrawableAmount {
 	string user_pending_withdraw_usd = 13;
 	// pending freeze from operator_balance_transaction in USD
 	string operator_pending_freeze_usd = 14;
-	// manual credit to operator balance in USD
-	string manual_credit_usd = 15;
-	// manual debit from operator balance in USD
-	string manual_debit_usd = 16;
-	// bankroll amount in USD (placeholder, not implemented yet)
-	string bankroll_usd = 17;
 }
 
 message ListOperatorWithdrawableAmountsResponse {

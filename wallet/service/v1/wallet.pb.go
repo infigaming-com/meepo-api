@@ -13434,8 +13434,14 @@ type GetCompanyFinancialSummaryResponse struct {
 	CompanyPendingWithdrawUsd string `protobuf:"bytes,12,opt,name=company_pending_withdraw_usd,json=companyPendingWithdrawUsd,proto3" json:"company_pending_withdraw_usd,omitempty"`
 	// Pending amount frozen from company's own wallet for affiliate withdrawals (operator_affiliate_withdraw_freeze with no status on company operator), absolute value in USD
 	CompanyPendingAffiliateWithdrawUsd string `protobuf:"bytes,13,opt,name=company_pending_affiliate_withdraw_usd,json=companyPendingAffiliateWithdrawUsd,proto3" json:"company_pending_affiliate_withdraw_usd,omitempty"`
-	unknownFields                      protoimpl.UnknownFields
-	sizeCache                          protoimpl.SizeCache
+	// Total manual credit to sub-operators (operator_manual_credit), absolute value in USD
+	ManualCreditUsd string `protobuf:"bytes,14,opt,name=manual_credit_usd,json=manualCreditUsd,proto3" json:"manual_credit_usd,omitempty"`
+	// Total manual debit from sub-operators (operator_manual_debit), absolute value in USD
+	ManualDebitUsd string `protobuf:"bytes,15,opt,name=manual_debit_usd,json=manualDebitUsd,proto3" json:"manual_debit_usd,omitempty"`
+	// Bankroll amount in USD (placeholder, not implemented yet)
+	BankrollUsd   string `protobuf:"bytes,16,opt,name=bankroll_usd,json=bankrollUsd,proto3" json:"bankroll_usd,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetCompanyFinancialSummaryResponse) Reset() {
@@ -13555,6 +13561,27 @@ func (x *GetCompanyFinancialSummaryResponse) GetCompanyPendingWithdrawUsd() stri
 func (x *GetCompanyFinancialSummaryResponse) GetCompanyPendingAffiliateWithdrawUsd() string {
 	if x != nil {
 		return x.CompanyPendingAffiliateWithdrawUsd
+	}
+	return ""
+}
+
+func (x *GetCompanyFinancialSummaryResponse) GetManualCreditUsd() string {
+	if x != nil {
+		return x.ManualCreditUsd
+	}
+	return ""
+}
+
+func (x *GetCompanyFinancialSummaryResponse) GetManualDebitUsd() string {
+	if x != nil {
+		return x.ManualDebitUsd
+	}
+	return ""
+}
+
+func (x *GetCompanyFinancialSummaryResponse) GetBankrollUsd() string {
+	if x != nil {
+		return x.BankrollUsd
 	}
 	return ""
 }
@@ -14131,14 +14158,8 @@ type OperatorWithdrawableAmount struct {
 	UserPendingWithdrawUsd string `protobuf:"bytes,13,opt,name=user_pending_withdraw_usd,json=userPendingWithdrawUsd,proto3" json:"user_pending_withdraw_usd,omitempty"`
 	// pending freeze from operator_balance_transaction in USD
 	OperatorPendingFreezeUsd string `protobuf:"bytes,14,opt,name=operator_pending_freeze_usd,json=operatorPendingFreezeUsd,proto3" json:"operator_pending_freeze_usd,omitempty"`
-	// manual credit to operator balance in USD
-	ManualCreditUsd string `protobuf:"bytes,15,opt,name=manual_credit_usd,json=manualCreditUsd,proto3" json:"manual_credit_usd,omitempty"`
-	// manual debit from operator balance in USD
-	ManualDebitUsd string `protobuf:"bytes,16,opt,name=manual_debit_usd,json=manualDebitUsd,proto3" json:"manual_debit_usd,omitempty"`
-	// bankroll amount in USD (placeholder, not implemented yet)
-	BankrollUsd   string `protobuf:"bytes,17,opt,name=bankroll_usd,json=bankrollUsd,proto3" json:"bankroll_usd,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *OperatorWithdrawableAmount) Reset() {
@@ -14265,27 +14286,6 @@ func (x *OperatorWithdrawableAmount) GetUserPendingWithdrawUsd() string {
 func (x *OperatorWithdrawableAmount) GetOperatorPendingFreezeUsd() string {
 	if x != nil {
 		return x.OperatorPendingFreezeUsd
-	}
-	return ""
-}
-
-func (x *OperatorWithdrawableAmount) GetManualCreditUsd() string {
-	if x != nil {
-		return x.ManualCreditUsd
-	}
-	return ""
-}
-
-func (x *OperatorWithdrawableAmount) GetManualDebitUsd() string {
-	if x != nil {
-		return x.ManualDebitUsd
-	}
-	return ""
-}
-
-func (x *OperatorWithdrawableAmount) GetBankrollUsd() string {
-	if x != nil {
-		return x.BankrollUsd
 	}
 	return ""
 }
@@ -19083,7 +19083,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"start_time\x18\x02 \x01(\x03H\x00R\tstartTime\x88\x01\x01\x12\x1e\n" +
 	"\bend_time\x18\x03 \x01(\x03H\x01R\aendTime\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\x88\x06\n" +
+	"\t_end_time\"\x81\a\n" +
 	"\"GetCompanyFinancialSummaryResponse\x12.\n" +
 	"\x13custody_balance_usd\x18\x01 \x01(\tR\x11custodyBalanceUsd\x122\n" +
 	"\x15internal_deposits_usd\x18\x02 \x01(\tR\x13internalDepositsUsd\x12*\n" +
@@ -19099,7 +19099,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\fswap_fee_usd\x18\v \x01(\tR\n" +
 	"swapFeeUsd\x12?\n" +
 	"\x1ccompany_pending_withdraw_usd\x18\f \x01(\tR\x19companyPendingWithdrawUsd\x12R\n" +
-	"&company_pending_affiliate_withdraw_usd\x18\r \x01(\tR\"companyPendingAffiliateWithdrawUsd\"\xd4\x03\n" +
+	"&company_pending_affiliate_withdraw_usd\x18\r \x01(\tR\"companyPendingAffiliateWithdrawUsd\x12*\n" +
+	"\x11manual_credit_usd\x18\x0e \x01(\tR\x0fmanualCreditUsd\x12(\n" +
+	"\x10manual_debit_usd\x18\x0f \x01(\tR\x0emanualDebitUsd\x12!\n" +
+	"\fbankroll_usd\x18\x10 \x01(\tR\vbankrollUsd\"\xd4\x03\n" +
 	"\x1cGameBatchBetAndSettleRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
@@ -19157,7 +19160,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_pagination\"\xd8\x06\n" +
+	"\v_pagination\"\xdf\x05\n" +
 	"\x1aOperatorWithdrawableAmount\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
 	"\x16retailer_operator_name\x18\x02 \x01(\tR\x14retailerOperatorName\x122\n" +
@@ -19175,10 +19178,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x17withdrawable_amount_usd\x18\v \x01(\tR\x15withdrawableAmountUsd\x12(\n" +
 	"\x10user_balance_usd\x18\f \x01(\tR\x0euserBalanceUsd\x129\n" +
 	"\x19user_pending_withdraw_usd\x18\r \x01(\tR\x16userPendingWithdrawUsd\x12=\n" +
-	"\x1boperator_pending_freeze_usd\x18\x0e \x01(\tR\x18operatorPendingFreezeUsd\x12*\n" +
-	"\x11manual_credit_usd\x18\x0f \x01(\tR\x0fmanualCreditUsd\x12(\n" +
-	"\x10manual_debit_usd\x18\x10 \x01(\tR\x0emanualDebitUsd\x12!\n" +
-	"\fbankroll_usd\x18\x11 \x01(\tR\vbankrollUsd\"\xb9\x01\n" +
+	"\x1boperator_pending_freeze_usd\x18\x0e \x01(\tR\x18operatorPendingFreezeUsd\"\xb9\x01\n" +
 	"'ListOperatorWithdrawableAmountsResponse\x12G\n" +
 	"\x05items\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorWithdrawableAmountR\x05items\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
