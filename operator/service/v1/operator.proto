@@ -670,7 +670,7 @@ message GetBalanceSummaryResponse {
 	string manual_credit = 26;
 	// Total manual debit from sub-operators in USD
 	string manual_debit = 27;
-	// Bankroll amount in USD (placeholder)
+	// Total bankroll amount of sub-operators in USD
 	string bankroll = 28;
 }
 

@@ -78,6 +78,7 @@ const (
 	User_CheckOperatorKeyExists_FullMethodName             = "/api.user.service.v1.User/CheckOperatorKeyExists"
 	User_CreateBusiness_FullMethodName                     = "/api.user.service.v1.User/CreateBusiness"
 	User_GetOperatorDetails_FullMethodName                 = "/api.user.service.v1.User/GetOperatorDetails"
+	User_ListOperatorDetailsByIds_FullMethodName           = "/api.user.service.v1.User/ListOperatorDetailsByIds"
 	User_ListOperatorsByParentOperatorId_FullMethodName    = "/api.user.service.v1.User/ListOperatorsByParentOperatorId"
 	User_ListRetailerOperators_FullMethodName              = "/api.user.service.v1.User/ListRetailerOperators"
 	User_ListCompanyOperators_FullMethodName               = "/api.user.service.v1.User/ListCompanyOperators"
@@ -263,6 +264,8 @@ type UserClient interface {
 	CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error)
 	// GetOperatorDetails returns the operator details.
 	GetOperatorDetails(ctx context.Context, in *GetOperatorDetailsRequest, opts ...grpc.CallOption) (*GetOperatorDetailsResponse, error)
+	// ListOperatorDetailsByIds returns operator details for multiple operators in one call.
+	ListOperatorDetailsByIds(ctx context.Context, in *ListOperatorDetailsByIdsRequest, opts ...grpc.CallOption) (*ListOperatorDetailsByIdsResponse, error)
 	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(ctx context.Context, in *ListOperatorsByParentOperatorIdRequest, opts ...grpc.CallOption) (*ListOperatorsByParentOperatorIdResponse, error)
 	// ListRetailers returns a list of retailers by operator context
@@ -962,6 +965,16 @@ func (c *userClient) GetOperatorDetails(ctx context.Context, in *GetOperatorDeta
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorDetailsResponse)
 	err := c.cc.Invoke(ctx, User_GetOperatorDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListOperatorDetailsByIds(ctx context.Context, in *ListOperatorDetailsByIdsRequest, opts ...grpc.CallOption) (*ListOperatorDetailsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorDetailsByIdsResponse)
+	err := c.cc.Invoke(ctx, User_ListOperatorDetailsByIds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1808,6 +1821,8 @@ type UserServer interface {
 	CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error)
 	// GetOperatorDetails returns the operator details.
 	GetOperatorDetails(context.Context, *GetOperatorDetailsRequest) (*GetOperatorDetailsResponse, error)
+	// ListOperatorDetailsByIds returns operator details for multiple operators in one call.
+	ListOperatorDetailsByIds(context.Context, *ListOperatorDetailsByIdsRequest) (*ListOperatorDetailsByIdsResponse, error)
 	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error)
 	// ListRetailers returns a list of retailers by operator context
@@ -2113,6 +2128,9 @@ func (UnimplementedUserServer) CreateBusiness(context.Context, *CreateBusinessRe
 }
 func (UnimplementedUserServer) GetOperatorDetails(context.Context, *GetOperatorDetailsRequest) (*GetOperatorDetailsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorDetails not implemented")
+}
+func (UnimplementedUserServer) ListOperatorDetailsByIds(context.Context, *ListOperatorDetailsByIdsRequest) (*ListOperatorDetailsByIdsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperatorDetailsByIds not implemented")
 }
 func (UnimplementedUserServer) ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorsByParentOperatorId not implemented")
@@ -3376,6 +3394,24 @@ func _User_GetOperatorDetails_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).GetOperatorDetails(ctx, req.(*GetOperatorDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListOperatorDetailsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorDetailsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListOperatorDetailsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListOperatorDetailsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListOperatorDetailsByIds(ctx, req.(*ListOperatorDetailsByIdsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4928,6 +4964,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorDetails",
 			Handler:    _User_GetOperatorDetails_Handler,
+		},
+		{
+			MethodName: "ListOperatorDetailsByIds",
+			Handler:    _User_ListOperatorDetailsByIds_Handler,
 		},
 		{
 			MethodName: "ListOperatorsByParentOperatorId",
