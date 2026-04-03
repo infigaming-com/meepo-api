@@ -10175,6 +10175,8 @@ func (m *ListUnpaidBetsResponse) validate(all bool) error {
 
 	// no validation rules for PageSize
 
+	// no validation rules for TotalAmountUsd
+
 	if len(errors) > 0 {
 		return ListUnpaidBetsResponseMultiError(errors)
 	}

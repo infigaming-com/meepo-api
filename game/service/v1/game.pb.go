@@ -5791,8 +5791,10 @@ type ListUnpaidBetsResponse struct {
 	Total           int32                               `protobuf:"varint,5,opt,name=total,proto3" json:"total,omitempty"`
 	Page            int32                               `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize        int32                               `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Total unpaid bet amount in USD
+	TotalAmountUsd string `protobuf:"bytes,8,opt,name=total_amount_usd,json=totalAmountUsd,proto3" json:"total_amount_usd,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListUnpaidBetsResponse) Reset() {
@@ -5872,6 +5874,13 @@ func (x *ListUnpaidBetsResponse) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
+}
+
+func (x *ListUnpaidBetsResponse) GetTotalAmountUsd() string {
+	if x != nil {
+		return x.TotalAmountUsd
+	}
+	return ""
 }
 
 // Sport Events related messages
@@ -20230,7 +20239,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0f_transaction_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x8c\t\n" +
+	"_page_size\"\xb6\t\n" +
 	"\x16ListUnpaidBetsResponse\x12V\n" +
 	"\vunpaid_bets\x18\x01 \x03(\v25.api.game.service.v1.ListUnpaidBetsResponse.UnpaidBetR\n" +
 	"unpaidBets\x12(\n" +
@@ -20239,7 +20248,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x11unpaid_user_count\x18\x04 \x01(\x05R\x0funpaidUserCount\x12\x14\n" +
 	"\x05total\x18\x05 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xd9\x06\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12(\n" +
+	"\x10total_amount_usd\x18\b \x01(\tR\x0etotalAmountUsd\x1a\xd9\x06\n" +
 	"\tUnpaidBet\x12D\n" +
 	"\x10create_date_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0ecreateDateTime\x12D\n" +
 	"\x10update_date_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0eupdateDateTime\x12\x16\n" +

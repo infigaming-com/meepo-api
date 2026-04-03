@@ -28201,6 +28201,9 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                totalAmountUsd:
+                    type: string
+                    description: Total unpaid bet amount in USD
         api.game.service.v1.ListUnpaidBetsResponse_UnpaidBet:
             type: object
             properties:
