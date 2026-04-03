@@ -8442,6 +8442,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListFICAThresholdTransactionsResponse'
+    /v1/backoffice/wallet/free-rewards/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: List user's free spin and free bet rewards with filters, pagination, and summary
+            operationId: BackofficeWallet_ListUserFreeRewards
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BOListUserFreeRewardsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListUserFreeRewardsBOResponse'
     /v1/backoffice/wallet/gamification/get:
         post:
             tags:
@@ -14800,6 +14819,39 @@ components:
                 audit:
                     type: string
                     description: audit a transaction "approved" or "delined"
+        api.backoffice.service.v1.BOListUserFreeRewardsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                types:
+                    type: array
+                    items:
+                        type: string
+                    description: 'Filter by reward type: "free_spin", "free_bet"'
+                statuses:
+                    type: array
+                    items:
+                        type: string
+                    description: 'Filter by derived status: "active", "used", "expired", "revoked"'
+                sourceTypes:
+                    type: array
+                    items:
+                        type: string
+                    description: 'Filter by source: "deposit_reward", "promo_code", "app_download_reward"'
+                expiringSoon:
+                    type: boolean
+                    description: If true, only return rewards expiring within 7 days
+                page:
+                    type: integer
+                    description: Default 1
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Default 20
+                    format: int32
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.BackofficeAddGamesToTagRequest:
             type: object
             properties:
@@ -33165,6 +33217,104 @@ components:
                     description: Optional extra data
                     format: bytes
             description: Single free bet reward item - from FreeBetRewardItem in JSONB
+        api.wallet.service.v1.FreeRewardBOItem:
+            type: object
+            properties:
+                id:
+                    type: string
+                type:
+                    type: string
+                    description: '"free_spin" or "free_bet"'
+                status:
+                    type: string
+                    description: 'Derived status: "active", "used", "expired", "revoked"'
+                sourceType:
+                    type: string
+                    description: '"deposit_reward", "promo_code", "app_download_reward"'
+                sourceId:
+                    type: string
+                settlementCurrency:
+                    type: string
+                    description: Settlement/deposit currency
+                currency:
+                    type: string
+                    description: Game currency (free_spin) or betting currency (free_bet)
+                totalCount:
+                    type: integer
+                    description: Aggregated counts from rewards JSONB
+                    format: int32
+                remainingCount:
+                    type: integer
+                    format: int32
+                usedCount:
+                    type: integer
+                    format: int32
+                freeSpinRewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinRewardDetail'
+                    description: 'Expandable sub-rows: populated based on type'
+                freeBetRewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetRewardDetail'
+                expireTime:
+                    type: string
+                    description: Earliest non-zero expired_at across all rewards, 0 = never expires
+                totalWinnings:
+                    type: string
+                    description: Total winnings in settlement currency
+                totalWinningsUsd:
+                    type: string
+                rewardType:
+                    type: string
+                    description: |-
+                        Reward config
+                         "cash" or "bonus" — what winnings become
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
+                    type: string
+                    description: Winning reward validity in milliseconds
+                createdAt:
+                    type: string
+                    description: Timestamps
+                updatedAt:
+                    type: string
+                completedAt:
+                    type: string
+                    description: When fully used/expired/revoked (for History tab)
+                revokedAt:
+                    type: string
+                    description: When revoked, 0 = not revoked (reserved for future revoke feature)
+            description: A single free reward grant (either free spin or free bet) for BO display
+        api.wallet.service.v1.FreeRewardSummary:
+            type: object
+            properties:
+                activeFreeSpins:
+                    type: integer
+                    description: Remaining active free spin count
+                    format: int32
+                activeFreeBets:
+                    type: integer
+                    description: Remaining active free bet count
+                    format: int32
+                expiringSoonCount:
+                    type: integer
+                    description: Count of rewards expiring within 7 days
+                    format: int32
+                totalGrantedCount:
+                    type: integer
+                    description: All-time total granted count (spins + bets)
+                    format: int32
+                totalUsedCount:
+                    type: integer
+                    description: All-time total used count
+                    format: int32
+            description: Summary cards for BO free reward page
         api.wallet.service.v1.FreeSpinConfig:
             type: object
             properties:
@@ -34086,6 +34236,26 @@ components:
                 totalCount:
                     type: integer
                     format: int32
+        api.wallet.service.v1.ListUserFreeRewardsBOResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeRewardBOItem'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                summary:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.FreeRewardSummary'
+                    description: Summary stats for the user, NOT affected by list filters
         api.wallet.service.v1.ListUserFreeRewardsResponse:
             type: object
             properties:

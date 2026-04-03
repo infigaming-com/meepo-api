@@ -2182,3 +2182,15 @@ func IsInvalidOperatorBalanceAdjustment(err error) bool {
 func ErrorInvalidOperatorBalanceAdjustment(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_OPERATOR_BALANCE_ADJUSTMENT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsListUserFreeRewardsBoFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_USER_FREE_REWARDS_BO_FAILED.String() && e.Code == 500
+}
+
+func ErrorListUserFreeRewardsBoFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_USER_FREE_REWARDS_BO_FAILED.String(), fmt.Sprintf(format, args...))
+}
