@@ -14425,6 +14425,8 @@ type GetOperatorWithdrawCheckInfoResponse struct {
 	UserBalanceUsd string `protobuf:"bytes,5,opt,name=user_balance_usd,json=userBalanceUsd,proto3" json:"user_balance_usd,omitempty"`
 	// total pending user/affiliate withdrawal freeze amounts in USD (frozen from user wallets but not yet from operator custody)
 	UserPendingWithdrawUsd string `protobuf:"bytes,10,opt,name=user_pending_withdraw_usd,json=userPendingWithdrawUsd,proto3" json:"user_pending_withdraw_usd,omitempty"`
+	// total unpaid bets amount in USD (pending game bets not yet settled)
+	PendingBetsUsd string `protobuf:"bytes,12,opt,name=pending_bets_usd,json=pendingBetsUsd,proto3" json:"pending_bets_usd,omitempty"`
 	// Currency-specific data
 	// operator balance in the requested currency
 	OperatorBalanceInCurrency string `protobuf:"bytes,6,opt,name=operator_balance_in_currency,json=operatorBalanceInCurrency,proto3" json:"operator_balance_in_currency,omitempty"`
@@ -14509,6 +14511,13 @@ func (x *GetOperatorWithdrawCheckInfoResponse) GetUserBalanceUsd() string {
 func (x *GetOperatorWithdrawCheckInfoResponse) GetUserPendingWithdrawUsd() string {
 	if x != nil {
 		return x.UserPendingWithdrawUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorWithdrawCheckInfoResponse) GetPendingBetsUsd() string {
+	if x != nil {
+		return x.PendingBetsUsd
 	}
 	return ""
 }
@@ -19186,7 +19195,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x89\x01\n" +
 	"#GetOperatorWithdrawCheckInfoRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\x92\x05\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\xbc\x05\n" +
 	"$GetOperatorWithdrawCheckInfoResponse\x12\x1f\n" +
 	"\vcustody_usd\x18\x01 \x01(\tR\n" +
 	"custodyUsd\x12 \n" +
@@ -19196,7 +19205,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1boperator_pending_freeze_usd\x18\x04 \x01(\tR\x18operatorPendingFreezeUsd\x12(\n" +
 	"\x10user_balance_usd\x18\x05 \x01(\tR\x0euserBalanceUsd\x129\n" +
 	"\x19user_pending_withdraw_usd\x18\n" +
-	" \x01(\tR\x16userPendingWithdrawUsd\x12?\n" +
+	" \x01(\tR\x16userPendingWithdrawUsd\x12(\n" +
+	"\x10pending_bets_usd\x18\f \x01(\tR\x0ependingBetsUsd\x12?\n" +
 	"\x1coperator_balance_in_currency\x18\x06 \x01(\tR\x19operatorBalanceInCurrency\x12L\n" +
 	"#operator_pending_freeze_in_currency\x18\a \x01(\tR\x1foperatorPendingFreezeInCurrency\x12H\n" +
 	"!user_pending_withdraw_in_currency\x18\v \x01(\tR\x1duserPendingWithdrawInCurrency\x126\n" +
