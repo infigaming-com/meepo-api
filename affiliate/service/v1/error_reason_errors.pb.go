@@ -599,6 +599,18 @@ func ErrorCreateUserReferralCodeFailed(format string, args ...interface{}) *erro
 	return errors.New(500, ErrorReason_CREATE_USER_REFERRAL_CODE_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
+func IsUserReferralCodeAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_REFERRAL_CODE_ALREADY_EXISTS.String() && e.Code == 400
+}
+
+func ErrorUserReferralCodeAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_USER_REFERRAL_CODE_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
 func IsGetUserReferralConfigFailed(err error) bool {
 	if err == nil {
 		return false

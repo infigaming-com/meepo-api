@@ -74,6 +74,7 @@ const (
 	ErrorReason_SET_REFERRAL_PLAN_FAILED                            ErrorReason = 130046
 	ErrorReason_SET_REFERRAL_PLAN_PERMISSION_DENIED                 ErrorReason = 130047
 	ErrorReason_CREATE_USER_REFERRAL_CODE_FAILED                    ErrorReason = 130048
+	ErrorReason_USER_REFERRAL_CODE_ALREADY_EXISTS                   ErrorReason = 130108
 	ErrorReason_GET_USER_REFERRAL_CONFIG_FAILED                     ErrorReason = 130049
 	ErrorReason_PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED ErrorReason = 130050
 	ErrorReason_PROCESS_FLAT_FEE_COMMISSION_FAILED                  ErrorReason = 130051
@@ -190,6 +191,7 @@ var (
 		130046: "SET_REFERRAL_PLAN_FAILED",
 		130047: "SET_REFERRAL_PLAN_PERMISSION_DENIED",
 		130048: "CREATE_USER_REFERRAL_CODE_FAILED",
+		130108: "USER_REFERRAL_CODE_ALREADY_EXISTS",
 		130049: "GET_USER_REFERRAL_CONFIG_FAILED",
 		130050: "PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED",
 		130051: "PROCESS_FLAT_FEE_COMMISSION_FAILED",
@@ -299,6 +301,7 @@ var (
 		"SET_REFERRAL_PLAN_FAILED":                            130046,
 		"SET_REFERRAL_PLAN_PERMISSION_DENIED":                 130047,
 		"CREATE_USER_REFERRAL_CODE_FAILED":                    130048,
+		"USER_REFERRAL_CODE_ALREADY_EXISTS":                   130108,
 		"GET_USER_REFERRAL_CONFIG_FAILED":                     130049,
 		"PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED": 130050,
 		"PROCESS_FLAT_FEE_COMMISSION_FAILED":                  130051,
@@ -391,7 +394,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\x92\x1e\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xc1\x1e\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -441,7 +444,8 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"#GET_REFERRAL_PLAN_PERMISSION_DENIED\x10\xfd\xf7\a\x12\x1e\n" +
 	"\x18SET_REFERRAL_PLAN_FAILED\x10\xfe\xf7\a\x12)\n" +
 	"#SET_REFERRAL_PLAN_PERMISSION_DENIED\x10\xff\xf7\a\x12&\n" +
-	" CREATE_USER_REFERRAL_CODE_FAILED\x10\x80\xf8\a\x12%\n" +
+	" CREATE_USER_REFERRAL_CODE_FAILED\x10\x80\xf8\a\x12-\n" +
+	"!USER_REFERRAL_CODE_ALREADY_EXISTS\x10\xbc\xf8\a\x1a\x04\xa8E\x90\x03\x12%\n" +
 	"\x1fGET_USER_REFERRAL_CONFIG_FAILED\x10\x81\xf8\a\x129\n" +
 	"3PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED\x10\x82\xf8\a\x12(\n" +
 	"\"PROCESS_FLAT_FEE_COMMISSION_FAILED\x10\x83\xf8\a\x12(\n" +

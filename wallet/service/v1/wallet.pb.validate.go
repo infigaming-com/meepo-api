@@ -26507,6 +26507,8 @@ func (m *GetOperatorWithdrawCheckInfoResponse) validate(all bool) error {
 
 	// no validation rules for UserPendingWithdrawUsd
 
+	// no validation rules for PendingBetsUsd
+
 	// no validation rules for OperatorBalanceInCurrency
 
 	// no validation rules for OperatorPendingFreezeInCurrency
