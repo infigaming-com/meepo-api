@@ -20524,6 +20524,9 @@ components:
                     description: Dates
                 dueDate:
                     type: string
+                operatorMode:
+                    type: string
+                    description: 'Operator mode: individual, co-operation'
         api.backoffice.service.v1.ListLandingTemplatesByCampaignRequest:
             type: object
             properties:
