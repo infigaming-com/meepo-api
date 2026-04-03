@@ -1268,6 +1268,8 @@ message ListUnpaidBetsResponse {
 	int32 total = 5;
 	int32 page = 6;
 	int32 page_size = 7;
+	// Total unpaid bet amount in USD
+	string total_amount_usd = 8;
 }
 
 // Sport Events related messages
