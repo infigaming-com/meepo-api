@@ -34181,9 +34181,6 @@ components:
                 userBalanceUsd:
                     type: string
                     description: total user wallet balances under this operator in USD
-                userPendingWithdrawUsd:
-                    type: string
-                    description: total pending user/affiliate withdrawal freeze amounts in USD
                 operatorPendingFreezeUsd:
                     type: string
                     description: pending freeze from operator_balance_transaction in USD
