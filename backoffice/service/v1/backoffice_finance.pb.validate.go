@@ -7244,6 +7244,8 @@ func (m *ListInvoicesResponse_Invoice) validate(all bool) error {
 
 	// no validation rules for DueDate
 
+	// no validation rules for OperatorMode
+
 	if len(errors) > 0 {
 		return ListInvoicesResponse_InvoiceMultiError(errors)
 	}

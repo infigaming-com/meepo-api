@@ -265,10 +265,12 @@ message ListInvoicesResponse {
 		// Dates
 		string invoice_date = 13; // Format: YYYY-MM-DD
 		string due_date = 14; // Format: YYYY-MM-DD
+		// Operator mode: individual, co-operation
+		string operator_mode = 15;
 	}
-	
+
 	repeated Invoice invoices = 1;
-	
+
 	int32 total_count = 2;
 	int32 page = 3;
 	int32 page_size = 4;
