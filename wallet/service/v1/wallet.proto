@@ -2351,7 +2351,7 @@ message GetCompanyFinancialSummaryResponse {
 	string manual_credit_usd = 14;
 	// Total manual debit from sub-operators (operator_manual_debit), absolute value in USD
 	string manual_debit_usd = 15;
-	// Bankroll amount in USD (placeholder, not implemented yet)
+	// Total bankroll amount of sub-operators in USD
 	string bankroll_usd = 16;
 }
 
@@ -2452,10 +2452,10 @@ message OperatorWithdrawableAmount {
 	string withdrawable_amount_usd = 11;
 	// total user wallet balances under this operator in USD
 	string user_balance_usd = 12;
-	// total pending user/affiliate withdrawal freeze amounts in USD
-	string user_pending_withdraw_usd = 13;
 	// pending freeze from operator_balance_transaction in USD
 	string operator_pending_freeze_usd = 14;
+	// bankroll amount in USD (for co-operation mode operators)
+	string bankroll_usd = 15;
 }
 
 message ListOperatorWithdrawableAmountsResponse {
@@ -2482,16 +2482,16 @@ message GetOperatorWithdrawCheckInfoResponse {
 	string operator_pending_freeze_usd = 4;
 	// total user wallet balances under this operator in USD
 	string user_balance_usd = 5;
-	// total pending user/affiliate withdrawal freeze amounts in USD (frozen from user wallets but not yet from operator custody)
-	string user_pending_withdraw_usd = 10;
+	// total unpaid bets amount in USD (pending game bets not yet settled)
+	string pending_bets_usd = 12;
+	// bankroll amount in USD (for co-operation mode operators)
+	string bankroll_usd = 13;
 
 	// Currency-specific data
 	// operator balance in the requested currency
 	string operator_balance_in_currency = 6;
 	// pending freeze from operator_balance_transaction in the requested currency (absolute value)
 	string operator_pending_freeze_in_currency = 7;
-	// pending user/affiliate withdrawal freeze amounts in the requested currency
-	string user_pending_withdraw_in_currency = 11;
 
 	// Metadata
 	// decimal places for the requested currency (from system-level config)

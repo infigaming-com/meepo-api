@@ -4170,8 +4170,10 @@ type ListInvoicesResponse_Invoice struct {
 	AmountPaid    string                                     `protobuf:"bytes,11,opt,name=amount_paid,json=amountPaid,proto3" json:"amount_paid,omitempty"`
 	PaymentStatus ListInvoicesResponse_Invoice_PaymentStatus `protobuf:"varint,12,opt,name=payment_status,json=paymentStatus,proto3,enum=api.backoffice.service.v1.ListInvoicesResponse_Invoice_PaymentStatus" json:"payment_status,omitempty"`
 	// Dates
-	InvoiceDate   string `protobuf:"bytes,13,opt,name=invoice_date,json=invoiceDate,proto3" json:"invoice_date,omitempty"` // Format: YYYY-MM-DD
-	DueDate       string `protobuf:"bytes,14,opt,name=due_date,json=dueDate,proto3" json:"due_date,omitempty"`             // Format: YYYY-MM-DD
+	InvoiceDate string `protobuf:"bytes,13,opt,name=invoice_date,json=invoiceDate,proto3" json:"invoice_date,omitempty"` // Format: YYYY-MM-DD
+	DueDate     string `protobuf:"bytes,14,opt,name=due_date,json=dueDate,proto3" json:"due_date,omitempty"`             // Format: YYYY-MM-DD
+	// Operator mode: individual, co-operation
+	OperatorMode  string `protobuf:"bytes,15,opt,name=operator_mode,json=operatorMode,proto3" json:"operator_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4300,6 +4302,13 @@ func (x *ListInvoicesResponse_Invoice) GetInvoiceDate() string {
 func (x *ListInvoicesResponse_Invoice) GetDueDate() string {
 	if x != nil {
 		return x.DueDate
+	}
+	return ""
+}
+
+func (x *ListInvoicesResponse_Invoice) GetOperatorMode() string {
+	if x != nil {
+		return x.OperatorMode
 	}
 	return ""
 }
@@ -6022,7 +6031,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x0f_payment_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc1\a\n" +
+	"_page_size\"\xe6\a\n" +
 	"\x14ListInvoicesResponse\x12S\n" +
 	"\binvoices\x18\x01 \x03(\v27.api.backoffice.service.v1.ListInvoicesResponse.InvoiceR\binvoices\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -6030,7 +6039,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12(\n" +
 	"\x10total_paid_count\x18\x05 \x01(\x05R\x0etotalPaidCount\x12/\n" +
-	"\x14total_not_paid_count\x18\x06 \x01(\x05R\x11totalNotPaidCount\x1a\xa6\x05\n" +
+	"\x14total_not_paid_count\x18\x06 \x01(\x05R\x11totalNotPaidCount\x1a\xcb\x05\n" +
 	"\aInvoice\x12\x1d\n" +
 	"\n" +
 	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\x12\x1f\n" +
@@ -6050,7 +6059,8 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"amountPaid\x12l\n" +
 	"\x0epayment_status\x18\f \x01(\x0e2E.api.backoffice.service.v1.ListInvoicesResponse.Invoice.PaymentStatusR\rpaymentStatus\x12!\n" +
 	"\finvoice_date\x18\r \x01(\tR\vinvoiceDate\x12\x19\n" +
-	"\bdue_date\x18\x0e \x01(\tR\adueDate\"E\n" +
+	"\bdue_date\x18\x0e \x01(\tR\adueDate\x12#\n" +
+	"\roperator_mode\x18\x0f \x01(\tR\foperatorMode\"E\n" +
 	"\rPaymentStatus\x12\x17\n" +
 	"\x13PAYMENT_STATUS_PAID\x10\x00\x12\x1b\n" +
 	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"8\n" +

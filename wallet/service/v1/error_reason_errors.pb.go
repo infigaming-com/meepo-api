@@ -604,11 +604,11 @@ func IsSystemOperatorCurrencyAlreadyExists(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS.String() && e.Code == 500
+	return e.Reason == ErrorReason_SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS.String() && e.Code == 400
 }
 
 func ErrorSystemOperatorCurrencyAlreadyExists(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+	return errors.New(400, ErrorReason_SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGetParentOperatorIdsFailed(err error) bool {
@@ -796,11 +796,11 @@ func IsRelatedOperatorBalanceTransactionAlreadyExists(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS.String() && e.Code == 500
+	return e.Reason == ErrorReason_RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS.String() && e.Code == 400
 }
 
 func ErrorRelatedOperatorBalanceTransactionAlreadyExists(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+	return errors.New(400, ErrorReason_RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUpdateOperatorBalanceTransactionFailed(err error) bool {
@@ -1252,11 +1252,11 @@ func IsOperatorWithdrawRollbackExists(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_WITHDRAW_ROLLBACK_EXISTS.String() && e.Code == 500
+	return e.Reason == ErrorReason_OPERATOR_WITHDRAW_ROLLBACK_EXISTS.String() && e.Code == 400
 }
 
 func ErrorOperatorWithdrawRollbackExists(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_OPERATOR_WITHDRAW_ROLLBACK_EXISTS.String(), fmt.Sprintf(format, args...))
+	return errors.New(400, ErrorReason_OPERATOR_WITHDRAW_ROLLBACK_EXISTS.String(), fmt.Sprintf(format, args...))
 }
 
 func IsWalletResponsibleGamblingConfigNotFound(err error) bool {
@@ -1564,11 +1564,11 @@ func IsPromoCodeCampaignNameExists(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_NAME_EXISTS.String() && e.Code == 500
+	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_NAME_EXISTS.String() && e.Code == 400
 }
 
 func ErrorPromoCodeCampaignNameExists(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_NAME_EXISTS.String(), fmt.Sprintf(format, args...))
+	return errors.New(400, ErrorReason_PROMO_CODE_CAMPAIGN_NAME_EXISTS.String(), fmt.Sprintf(format, args...))
 }
 
 func IsPromoCodeCampaignInvalidStatusTransition(err error) bool {
@@ -1672,11 +1672,11 @@ func IsPromoCodeAlreadyUsed(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_PROMO_CODE_ALREADY_USED.String() && e.Code == 500
+	return e.Reason == ErrorReason_PROMO_CODE_ALREADY_USED.String() && e.Code == 400
 }
 
 func ErrorPromoCodeAlreadyUsed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_PROMO_CODE_ALREADY_USED.String(), fmt.Sprintf(format, args...))
+	return errors.New(400, ErrorReason_PROMO_CODE_ALREADY_USED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsPromoCodeMaxUsageReached(err error) bool {
@@ -1696,11 +1696,11 @@ func IsPromoCodeUserAlreadyClaimed(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_PROMO_CODE_USER_ALREADY_CLAIMED.String() && e.Code == 500
+	return e.Reason == ErrorReason_PROMO_CODE_USER_ALREADY_CLAIMED.String() && e.Code == 400
 }
 
 func ErrorPromoCodeUserAlreadyClaimed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_PROMO_CODE_USER_ALREADY_CLAIMED.String(), fmt.Sprintf(format, args...))
+	return errors.New(400, ErrorReason_PROMO_CODE_USER_ALREADY_CLAIMED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGeneratePromoCodesFailed(err error) bool {

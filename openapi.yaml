@@ -20576,6 +20576,9 @@ components:
                     description: Dates
                 dueDate:
                     type: string
+                operatorMode:
+                    type: string
+                    description: 'Operator mode: individual, co-operation'
         api.backoffice.service.v1.ListLandingTemplatesByCampaignRequest:
             type: object
             properties:
@@ -28253,6 +28256,9 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                totalAmountUsd:
+                    type: string
+                    description: Total unpaid bet amount in USD
         api.game.service.v1.ListUnpaidBetsResponse_UnpaidBet:
             type: object
             properties:
@@ -31484,6 +31490,9 @@ components:
                 noWithdrawWithoutDeposit:
                     type: boolean
                     description: When enabled, users who have never made a deposit will not be allowed to withdraw.
+                buyCryptoEnabled:
+                    type: boolean
+                    description: 'Whether "Buy Crypto" option is shown on client deposit page. Default (nil/not set): enabled.'
         api.user.service.v1.OperatorAccountSecuritySettings:
             type: object
             properties:
@@ -34342,12 +34351,12 @@ components:
                 userBalanceUsd:
                     type: string
                     description: total user wallet balances under this operator in USD
-                userPendingWithdrawUsd:
-                    type: string
-                    description: total pending user/affiliate withdrawal freeze amounts in USD
                 operatorPendingFreezeUsd:
                     type: string
                     description: pending freeze from operator_balance_transaction in USD
+                bankrollUsd:
+                    type: string
+                    description: bankroll amount in USD (for co-operation mode operators)
         api.wallet.service.v1.PromoCodeBonusMoneyConfig:
             type: object
             properties:
