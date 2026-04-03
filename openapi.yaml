@@ -34181,6 +34181,9 @@ components:
                 operatorPendingFreezeUsd:
                     type: string
                     description: pending freeze from operator_balance_transaction in USD
+                bankrollUsd:
+                    type: string
+                    description: bankroll amount in USD (for co-operation mode operators)
         api.wallet.service.v1.PromoCodeBonusMoneyConfig:
             type: object
             properties:

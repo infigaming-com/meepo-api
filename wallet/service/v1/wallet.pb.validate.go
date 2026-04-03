@@ -26110,6 +26110,8 @@ func (m *OperatorWithdrawableAmount) validate(all bool) error {
 
 	// no validation rules for OperatorPendingFreezeUsd
 
+	// no validation rules for BankrollUsd
+
 	if len(errors) > 0 {
 		return OperatorWithdrawableAmountMultiError(errors)
 	}
@@ -26508,6 +26510,8 @@ func (m *GetOperatorWithdrawCheckInfoResponse) validate(all bool) error {
 	// no validation rules for UserPendingWithdrawUsd
 
 	// no validation rules for PendingBetsUsd
+
+	// no validation rules for BankrollUsd
 
 	// no validation rules for OperatorBalanceInCurrency
 

@@ -281,6 +281,10 @@ service User {
 	rpc GetOperatorDetails(GetOperatorDetailsRequest) returns (GetOperatorDetailsResponse) {
 	}
 
+	// ListOperatorDetailsByIds returns operator details for multiple operators in one call.
+	rpc ListOperatorDetailsByIds(ListOperatorDetailsByIdsRequest) returns (ListOperatorDetailsByIdsResponse) {
+	}
+
 	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	rpc ListOperatorsByParentOperatorId(ListOperatorsByParentOperatorIdRequest) returns (ListOperatorsByParentOperatorIdResponse) {
 	}
@@ -1732,6 +1736,20 @@ message GetOperatorDetailsRequest {
 
 message GetOperatorDetailsResponse {
 	OperatorDetails operator_details = 1;
+}
+
+message ListOperatorDetailsByIdsRequest {
+	// target real operator IDs to fetch details for
+	repeated int64 real_operator_ids = 1;
+	// caller's operator context for permission validation
+	api.common.OperatorContext operator_context = 2;
+	// operator context filters for scoping which operators are accessible
+	api.common.OperatorContextFilters operator_context_filters = 3;
+}
+
+message ListOperatorDetailsByIdsResponse {
+	// map of real_operator_id to OperatorDetails
+	map<int64, OperatorDetails> operator_details = 1;
 }
 
 message ListOperatorsByParentOperatorIdRequest {
