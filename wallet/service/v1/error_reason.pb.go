@@ -609,7 +609,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xd16\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xf56\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -659,8 +659,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1cADD_OPERATOR_CURRENCY_FAILED\x10\xdd\xea\x01\x123\n" +
 	"-GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED\x10\xde\xea\x01\x12\"\n" +
 	"\x1cGET_USER_OPERATOR_IDS_FAILED\x10\xdf\xea\x01\x12(\n" +
-	"\"SYSTEM_OPERATOR_CURRENCY_NOT_FOUND\x10\xe0\xea\x01\x12-\n" +
-	"'SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS\x10\xe1\xea\x01\x12$\n" +
+	"\"SYSTEM_OPERATOR_CURRENCY_NOT_FOUND\x10\xe0\xea\x01\x123\n" +
+	"'SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS\x10\xe1\xea\x01\x1a\x04\xa8E\x90\x03\x12$\n" +
 	"\x1eGET_PARENT_OPERATOR_IDS_FAILED\x10\xe2\xea\x01\x12\"\n" +
 	"\x1cREPORTING_CURRENCY_NOT_FOUND\x10\xe3\xea\x01\x12\"\n" +
 	"\x1cADD_OPERATOR_BALANCES_FAILED\x10\xe4\xea\x01\x12E\n" +
@@ -675,8 +675,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1dINSUFFICIENT_OPERATOR_BALANCE\x10\xed\xea\x01\x122\n" +
 	",PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED\x10\xee\xea\x01\x12-\n" +
 	"'GET_OPERATOR_BALANCE_TRANSACTION_FAILED\x10\xef\xea\x01\x12,\n" +
-	"&OPERATOR_BALANCE_TRANSACTION_NOT_FOUND\x10\xf0\xea\x01\x129\n" +
-	"3RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS\x10\xf1\xea\x01\x120\n" +
+	"&OPERATOR_BALANCE_TRANSACTION_NOT_FOUND\x10\xf0\xea\x01\x12?\n" +
+	"3RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS\x10\xf1\xea\x01\x1a\x04\xa8E\x90\x03\x120\n" +
 	"*UPDATE_OPERATOR_BALANCE_TRANSACTION_FAILED\x10\xf2\xea\x01\x12\x1f\n" +
 	"\x19INVALID_OPERATOR_TRANSFER\x10\xf3\xea\x01\x12\x1b\n" +
 	"\x15INVALID_OPERATOR_SWAP\x10\xf4\xea\x01\x12$\n" +
@@ -713,8 +713,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x15BONUS_TRANSFER_FAILED\x10\x93\xeb\x01\x12 \n" +
 	"\x1aINSUFFICIENT_BONUS_BALANCE\x10\x94\xeb\x01\x12\x1f\n" +
 	"\x19CREDIT_OWNERSHIP_MISMATCH\x10\x95\xeb\x01\x12\x1f\n" +
-	"\x19WITHDRAWAL_LIMIT_EXCEEDED\x10\x96\xeb\x01\x12'\n" +
-	"!OPERATOR_WITHDRAW_ROLLBACK_EXISTS\x10\x97\xeb\x01\x122\n" +
+	"\x19WITHDRAWAL_LIMIT_EXCEEDED\x10\x96\xeb\x01\x12-\n" +
+	"!OPERATOR_WITHDRAW_ROLLBACK_EXISTS\x10\x97\xeb\x01\x1a\x04\xa8E\x90\x03\x122\n" +
 	",WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND\x10\x98\xeb\x01\x123\n" +
 	"-GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x99\xeb\x01\x123\n" +
 	"-SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9a\xeb\x01\x126\n" +
@@ -739,8 +739,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	" UPDATE_USER_DEPOSIT_STATS_FAILED\x10\xad\xeb\x01\x12,\n" +
 	"&LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED\x10\xae\xeb\x01\x12!\n" +
 	"\x1bGET_OPERATOR_DETAILS_FAILED\x10\xaf\xeb\x01\x12#\n" +
-	"\x1dPROMO_CODE_CAMPAIGN_NOT_FOUND\x10\xb0\xeb\x01\x12%\n" +
-	"\x1fPROMO_CODE_CAMPAIGN_NAME_EXISTS\x10\xb1\xeb\x01\x123\n" +
+	"\x1dPROMO_CODE_CAMPAIGN_NOT_FOUND\x10\xb0\xeb\x01\x12+\n" +
+	"\x1fPROMO_CODE_CAMPAIGN_NAME_EXISTS\x10\xb1\xeb\x01\x1a\x04\xa8E\x90\x03\x123\n" +
 	"-PROMO_CODE_CAMPAIGN_INVALID_STATUS_TRANSITION\x10\xb2\xeb\x01\x12$\n" +
 	"\x1ePROMO_CODE_CAMPAIGN_NOT_ACTIVE\x10\xb3\xeb\x01\x12&\n" +
 	" PROMO_CODE_CAMPAIGN_INVALID_NAME\x10\xb4\xeb\x01\x12'\n" +
@@ -748,10 +748,10 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"!UPDATE_PROMO_CODE_CAMPAIGN_FAILED\x10\xb6\xeb\x01\x12&\n" +
 	" LIST_PROMO_CODE_CAMPAIGNS_FAILED\x10\xb7\xeb\x01\x12$\n" +
 	"\x1eGET_PROMO_CODE_CAMPAIGN_FAILED\x10\xb8\xeb\x01\x12\x1a\n" +
-	"\x14PROMO_CODE_NOT_FOUND\x10\xb9\xeb\x01\x12\x1d\n" +
-	"\x17PROMO_CODE_ALREADY_USED\x10\xba\xeb\x01\x12\"\n" +
-	"\x1cPROMO_CODE_MAX_USAGE_REACHED\x10\xbb\xeb\x01\x12%\n" +
-	"\x1fPROMO_CODE_USER_ALREADY_CLAIMED\x10\xbc\xeb\x01\x12!\n" +
+	"\x14PROMO_CODE_NOT_FOUND\x10\xb9\xeb\x01\x12#\n" +
+	"\x17PROMO_CODE_ALREADY_USED\x10\xba\xeb\x01\x1a\x04\xa8E\x90\x03\x12\"\n" +
+	"\x1cPROMO_CODE_MAX_USAGE_REACHED\x10\xbb\xeb\x01\x12+\n" +
+	"\x1fPROMO_CODE_USER_ALREADY_CLAIMED\x10\xbc\xeb\x01\x1a\x04\xa8E\x90\x03\x12!\n" +
 	"\x1bGENERATE_PROMO_CODES_FAILED\x10\xbd\xeb\x01\x12\x1f\n" +
 	"\x19INVALID_PROMO_CODE_FORMAT\x10\xbe\xeb\x01\x12\x1f\n" +
 	"\x19INVALID_PROMO_CODE_LENGTH\x10\xbf\xeb\x01\x12\x1e\n" +
