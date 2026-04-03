@@ -7440,10 +7440,10 @@ type OperatorAccountPaymentSettings struct {
 	MinWithdrawKycLevel int32                  `protobuf:"varint,2,opt,name=min_withdraw_kyc_level,json=minWithdrawKycLevel,proto3" json:"min_withdraw_kyc_level,omitempty"`
 	// When enabled, users who have never made a deposit will not be allowed to withdraw.
 	NoWithdrawWithoutDeposit bool `protobuf:"varint,3,opt,name=no_withdraw_without_deposit,json=noWithdrawWithoutDeposit,proto3" json:"no_withdraw_without_deposit,omitempty"`
-	// When enabled, hides "Buy Crypto" option on client deposit page. Default: false (Buy Crypto shown).
-	BuyCryptoDisabled bool `protobuf:"varint,4,opt,name=buy_crypto_disabled,json=buyCryptoDisabled,proto3" json:"buy_crypto_disabled,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Whether "Buy Crypto" option is shown on client deposit page. Default (nil/not set): enabled.
+	BuyCryptoEnabled *bool `protobuf:"varint,4,opt,name=buy_crypto_enabled,json=buyCryptoEnabled,proto3,oneof" json:"buy_crypto_enabled,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *OperatorAccountPaymentSettings) Reset() {
@@ -7497,9 +7497,9 @@ func (x *OperatorAccountPaymentSettings) GetNoWithdrawWithoutDeposit() bool {
 	return false
 }
 
-func (x *OperatorAccountPaymentSettings) GetBuyCryptoDisabled() bool {
-	if x != nil {
-		return x.BuyCryptoDisabled
+func (x *OperatorAccountPaymentSettings) GetBuyCryptoEnabled() bool {
+	if x != nil && x.BuyCryptoEnabled != nil {
+		return *x.BuyCryptoEnabled
 	}
 	return false
 }
@@ -19323,12 +19323,13 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1bOperatorAccountGameSettings\x125\n" +
 	"\x17no_game_without_deposit\x18\x01 \x01(\bR\x14noGameWithoutDeposit\x12+\n" +
 	"\x12min_game_kyc_level\x18\x02 \x01(\x05R\x0fminGameKycLevel\x128\n" +
-	"\x19no_game_with_zero_balance\x18\x03 \x01(\bR\x15noGameWithZeroBalance\"\xf7\x01\n" +
+	"\x19no_game_with_zero_balance\x18\x03 \x01(\bR\x15noGameWithZeroBalance\"\x91\x02\n" +
 	"\x1eOperatorAccountPaymentSettings\x121\n" +
 	"\x15min_deposit_kyc_level\x18\x01 \x01(\x05R\x12minDepositKycLevel\x123\n" +
 	"\x16min_withdraw_kyc_level\x18\x02 \x01(\x05R\x13minWithdrawKycLevel\x12=\n" +
-	"\x1bno_withdraw_without_deposit\x18\x03 \x01(\bR\x18noWithdrawWithoutDeposit\x12.\n" +
-	"\x13buy_crypto_disabled\x18\x04 \x01(\bR\x11buyCryptoDisabled\"\x96\x03\n" +
+	"\x1bno_withdraw_without_deposit\x18\x03 \x01(\bR\x18noWithdrawWithoutDeposit\x121\n" +
+	"\x12buy_crypto_enabled\x18\x04 \x01(\bH\x00R\x10buyCryptoEnabled\x88\x01\x01B\x15\n" +
+	"\x13_buy_crypto_enabled\"\x96\x03\n" +
 	"\x17OperatorAccountSettings\x12a\n" +
 	"\x11password_settings\x18\x01 \x01(\v24.api.user.service.v1.OperatorAccountPasswordSettingsR\x10passwordSettings\x12a\n" +
 	"\x11security_settings\x18\x02 \x01(\v24.api.user.service.v1.OperatorAccountSecuritySettingsR\x10securitySettings\x12U\n" +
@@ -21094,6 +21095,7 @@ func file_user_service_v1_user_proto_init() {
 	file_user_service_v1_user_proto_msgTypes[73].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[91].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[103].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[108].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[114].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[118].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[128].OneofWrappers = []any{}
