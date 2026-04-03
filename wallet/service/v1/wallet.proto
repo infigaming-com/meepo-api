@@ -2348,7 +2348,7 @@ message GetCompanyFinancialSummaryResponse {
 	string manual_credit_usd = 14;
 	// Total manual debit from sub-operators (operator_manual_debit), absolute value in USD
 	string manual_debit_usd = 15;
-	// Bankroll amount in USD (placeholder, not implemented yet)
+	// Total bankroll amount of sub-operators in USD
 	string bankroll_usd = 16;
 }
 

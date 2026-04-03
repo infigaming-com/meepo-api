@@ -13438,7 +13438,7 @@ type GetCompanyFinancialSummaryResponse struct {
 	ManualCreditUsd string `protobuf:"bytes,14,opt,name=manual_credit_usd,json=manualCreditUsd,proto3" json:"manual_credit_usd,omitempty"`
 	// Total manual debit from sub-operators (operator_manual_debit), absolute value in USD
 	ManualDebitUsd string `protobuf:"bytes,15,opt,name=manual_debit_usd,json=manualDebitUsd,proto3" json:"manual_debit_usd,omitempty"`
-	// Bankroll amount in USD (placeholder, not implemented yet)
+	// Total bankroll amount of sub-operators in USD
 	BankrollUsd   string `protobuf:"bytes,16,opt,name=bankroll_usd,json=bankrollUsd,proto3" json:"bankroll_usd,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
