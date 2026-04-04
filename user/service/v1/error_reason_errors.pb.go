@@ -1539,6 +1539,18 @@ func ErrorEmailDomainInvalid(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_EMAIL_DOMAIN_INVALID.String(), fmt.Sprintf(format, args...))
 }
 
+func IsFailedToSendSms(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAILED_TO_SEND_SMS.String() && e.Code == 500
+}
+
+func ErrorFailedToSendSms(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAILED_TO_SEND_SMS.String(), fmt.Sprintf(format, args...))
+}
+
 // 2FA (Two-Factor Authentication) Errors
 func IsMfaNotEnabled(err error) bool {
 	if err == nil {
