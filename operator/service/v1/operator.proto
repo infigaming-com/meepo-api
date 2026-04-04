@@ -714,6 +714,20 @@ message BalancesSummaryRow {
 	string locked_for_pending_invoices = 13;
 	int64 operator_id = 14;
 	string operator_name = 15;
+	// Wallet financial summary fields
+	string player_withdrawals = 16;
+	string custody_pending_company_withdrawals = 17;
+	string pending_player_withdrawals = 18;
+	string swap_fee = 19;
+	string manual_credit = 20;
+	string manual_debit = 21;
+	string bankroll = 22;
+	string company_pending_withdraw = 23;
+	string company_pending_affiliate_withdraw = 24;
+	string custody_pending_affiliate_withdraw = 25;
+	string custody_affiliate_withdraw = 26;
+	string company_affiliate_withdraw = 27;
+	string company_withdraw = 28;
 }
 
 message ListCustodyOverviewRequest {

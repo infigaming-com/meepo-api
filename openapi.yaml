@@ -15060,6 +15060,33 @@ components:
                     type: string
                 operatorName:
                     type: string
+                playerWithdrawals:
+                    type: string
+                    description: Wallet financial summary fields
+                custodyPendingCompanyWithdrawals:
+                    type: string
+                pendingPlayerWithdrawals:
+                    type: string
+                swapFee:
+                    type: string
+                manualCredit:
+                    type: string
+                manualDebit:
+                    type: string
+                bankroll:
+                    type: string
+                companyPendingWithdraw:
+                    type: string
+                companyPendingAffiliateWithdraw:
+                    type: string
+                custodyPendingAffiliateWithdraw:
+                    type: string
+                custodyAffiliateWithdraw:
+                    type: string
+                companyAffiliateWithdraw:
+                    type: string
+                companyWithdraw:
+                    type: string
         api.backoffice.service.v1.BankAccountListRequest:
             type: object
             properties:
