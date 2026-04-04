@@ -6339,6 +6339,14 @@ func (m *GetBalanceSummaryResponse) validate(all bool) error {
 
 	// no validation rules for Bankroll
 
+	// no validation rules for CustodyPendingAffiliateWithdraw
+
+	// no validation rules for CustodyAffiliateWithdraw
+
+	// no validation rules for CompanyAffiliateWithdraw
+
+	// no validation rules for CompanyWithdraw
+
 	if len(errors) > 0 {
 		return GetBalanceSummaryResponseMultiError(errors)
 	}

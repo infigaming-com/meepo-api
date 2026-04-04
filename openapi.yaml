@@ -17233,6 +17233,18 @@ components:
                 bankroll:
                     type: string
                     description: Bankroll amount in USD (placeholder)
+                custodyPendingAffiliateWithdraw:
+                    type: string
+                    description: Pending affiliate withdraw freeze on sub-operators
+                custodyAffiliateWithdraw:
+                    type: string
+                    description: Settled affiliate withdrawals from sub-operators
+                companyAffiliateWithdraw:
+                    type: string
+                    description: Settled affiliate withdrawals from company's own wallet
+                companyWithdraw:
+                    type: string
+                    description: Settled company's own payment withdrawals
         api.backoffice.service.v1.GetBalancesSummaryRequest:
             type: object
             properties:
