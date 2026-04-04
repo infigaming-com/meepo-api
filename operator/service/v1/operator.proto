@@ -674,6 +674,14 @@ message GetBalanceSummaryResponse {
 	string manual_debit = 27;
 	// Total bankroll amount of sub-operators in USD
 	string bankroll = 28;
+	// Pending affiliate withdraw freeze on sub-operators
+	string custody_pending_affiliate_withdraw = 29;
+	// Settled affiliate withdrawals from sub-operators
+	string custody_affiliate_withdraw = 30;
+	// Settled affiliate withdrawals from company's own wallet
+	string company_affiliate_withdraw = 31;
+	// Settled company's own payment withdrawals
+	string company_withdraw = 32;
 }
 
 message GetBalancesSummaryRequest {

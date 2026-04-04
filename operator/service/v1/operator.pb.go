@@ -3082,9 +3082,17 @@ type GetBalanceSummaryResponse struct {
 	// Total manual debit from sub-operators in USD
 	ManualDebit string `protobuf:"bytes,27,opt,name=manual_debit,json=manualDebit,proto3" json:"manual_debit,omitempty"`
 	// Total bankroll amount of sub-operators in USD
-	Bankroll      string `protobuf:"bytes,28,opt,name=bankroll,proto3" json:"bankroll,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Bankroll string `protobuf:"bytes,28,opt,name=bankroll,proto3" json:"bankroll,omitempty"`
+	// Pending affiliate withdraw freeze on sub-operators
+	CustodyPendingAffiliateWithdraw string `protobuf:"bytes,29,opt,name=custody_pending_affiliate_withdraw,json=custodyPendingAffiliateWithdraw,proto3" json:"custody_pending_affiliate_withdraw,omitempty"`
+	// Settled affiliate withdrawals from sub-operators
+	CustodyAffiliateWithdraw string `protobuf:"bytes,30,opt,name=custody_affiliate_withdraw,json=custodyAffiliateWithdraw,proto3" json:"custody_affiliate_withdraw,omitempty"`
+	// Settled affiliate withdrawals from company's own wallet
+	CompanyAffiliateWithdraw string `protobuf:"bytes,31,opt,name=company_affiliate_withdraw,json=companyAffiliateWithdraw,proto3" json:"company_affiliate_withdraw,omitempty"`
+	// Settled company's own payment withdrawals
+	CompanyWithdraw string `protobuf:"bytes,32,opt,name=company_withdraw,json=companyWithdraw,proto3" json:"company_withdraw,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetBalanceSummaryResponse) Reset() {
@@ -3309,6 +3317,34 @@ func (x *GetBalanceSummaryResponse) GetManualDebit() string {
 func (x *GetBalanceSummaryResponse) GetBankroll() string {
 	if x != nil {
 		return x.Bankroll
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCustodyPendingAffiliateWithdraw() string {
+	if x != nil {
+		return x.CustodyPendingAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCustodyAffiliateWithdraw() string {
+	if x != nil {
+		return x.CustodyAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCompanyAffiliateWithdraw() string {
+	if x != nil {
+		return x.CompanyAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCompanyWithdraw() string {
+	if x != nil {
+		return x.CompanyWithdraw
 	}
 	return ""
 }
@@ -7195,8 +7231,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x0ebilling_period\x18\x03 \x01(\tR\rbillingPeriod\"\xc0\x01\n" +
 	"\x18GetBalanceSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xce\n" +
-	"\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xc2\f\n" +
 	"\x19GetBalanceSummaryResponse\x12'\n" +
 	"\x0fcompany_balance\x18\x01 \x01(\tR\x0ecompanyBalance\x12.\n" +
 	"\x13est_settlement_cost\x18\x02 \x01(\tR\x11estSettlementCost\x12*\n" +
@@ -7227,7 +7262,11 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\"company_pending_affiliate_withdraw\x18\x19 \x01(\tR\x1fcompanyPendingAffiliateWithdraw\x12#\n" +
 	"\rmanual_credit\x18\x1a \x01(\tR\fmanualCredit\x12!\n" +
 	"\fmanual_debit\x18\x1b \x01(\tR\vmanualDebit\x12\x1a\n" +
-	"\bbankroll\x18\x1c \x01(\tR\bbankroll\"\x93\x02\n" +
+	"\bbankroll\x18\x1c \x01(\tR\bbankroll\x12K\n" +
+	"\"custody_pending_affiliate_withdraw\x18\x1d \x01(\tR\x1fcustodyPendingAffiliateWithdraw\x12<\n" +
+	"\x1acustody_affiliate_withdraw\x18\x1e \x01(\tR\x18custodyAffiliateWithdraw\x12<\n" +
+	"\x1acompany_affiliate_withdraw\x18\x1f \x01(\tR\x18companyAffiliateWithdraw\x12)\n" +
+	"\x10company_withdraw\x18  \x01(\tR\x0fcompanyWithdraw\"\x93\x02\n" +
 	"\x19GetBalancesSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
