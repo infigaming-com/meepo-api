@@ -25520,6 +25520,12 @@ func (m *CompanyFinancialSummary) validate(all bool) error {
 
 	// no validation rules for CustodyPendingAffiliateWithdrawUsd
 
+	// no validation rules for CustodyAffiliateWithdrawUsd
+
+	// no validation rules for CompanyAffiliateWithdrawUsd
+
+	// no validation rules for CompanyWithdrawUsd
+
 	if len(errors) > 0 {
 		return CompanyFinancialSummaryMultiError(errors)
 	}
