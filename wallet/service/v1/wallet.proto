@@ -141,6 +141,9 @@ service Wallet {
 	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
 	rpc GetCompanyFinancialSummary(GetCompanyFinancialSummaryRequest) returns (GetCompanyFinancialSummaryResponse) {}
 
+	// ListCompanyFinancialSummaries returns financial summaries for multiple companies in one call
+	rpc ListCompanyFinancialSummaries(ListCompanyFinancialSummariesRequest) returns (ListCompanyFinancialSummariesResponse) {}
+
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	rpc GetOperatorBalanceTransactionsByIds(GetOperatorBalanceTransactionsByIdsRequest) returns (GetOperatorBalanceTransactionsByIdsResponse) {}
 
@@ -2313,43 +2316,63 @@ message GetAppDownloadRewardStatusResponse {
 
 message GetCompanyFinancialSummaryRequest {
 	api.common.OperatorContext operator_context = 1;
-	optional int64 start_time = 2;
-	optional int64 end_time = 3;
+	optional google.protobuf.Timestamp start_time = 2;
+	optional google.protobuf.Timestamp end_time = 3;
 }
 
 message GetCompanyFinancialSummaryResponse {
-	// Total wallet balance of all sub-operators under this company, converted to USD using real-time exchange rates
+	CompanyFinancialSummary summary = 1;
+}
+
+message ListCompanyFinancialSummariesRequest {
+	// company operator IDs to fetch summaries for
+	repeated int64 company_operator_ids = 1;
+	// caller's operator context for permission validation
+	api.common.OperatorContext operator_context = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+}
+
+message ListCompanyFinancialSummariesResponse {
+	// map of company_operator_id to financial summary
+	map<int64, CompanyFinancialSummary> summaries = 1;
+}
+
+message CompanyFinancialSummary {
+	// [NOT time-filtered] Total wallet balance of all sub-operators under this company, converted to USD using real-time exchange rates
 	string custody_balance_usd = 1;
-	// Total amount deposited to sub-operators from backoffice (operator_payment_credit), absolute value in USD
+	// [Time-filtered] Total amount deposited to sub-operators from backoffice (operator_payment_credit), absolute value in USD
 	string internal_deposits_usd = 2;
-	// Total amount credited to sub-operators when their players deposit (operator_user_credit), absolute value in USD
+	// [Time-filtered] Total amount credited to sub-operators when their players deposit (operator_user_credit), absolute value in USD
 	string user_deposits_usd = 3;
-	// Total amount debited from sub-operators when their players withdraw (settled operator_user_withdraw_freeze), absolute value in USD
+	// [Time-filtered] Total amount debited from sub-operators when their players withdraw (settled operator_user_withdraw_freeze), absolute value in USD
 	string player_withdraw_usd = 4;
-	// Settled amount withdrawn from sub-operators by company (settled operator_payment_withdraw_freeze on sub-operators), absolute value in USD
+	// [Time-filtered] Settled amount withdrawn from sub-operators by company (settled operator_payment_withdraw_freeze on sub-operators), absolute value in USD
 	string custody_company_withdraw_usd = 5;
-	// Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
+	// [Time-filtered] Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
 	string transfer_usd = 6;
-	// Pending amount frozen from sub-operators when their players withdraw but not yet settled (operator_user_withdraw_freeze with no status), absolute value in USD
+	// [Time-filtered] Pending amount frozen from sub-operators when their players withdraw but not yet settled (operator_user_withdraw_freeze with no status), absolute value in USD
 	string pending_player_withdraw_usd = 7;
-	// Pending amount frozen from sub-operators by company-initiated withdrawals but not yet settled (operator_payment_withdraw_freeze with no status on sub-operators), absolute value in USD
+	// [Time-filtered] Pending amount frozen from sub-operators by company-initiated withdrawals but not yet settled (operator_payment_withdraw_freeze with no status on sub-operators), absolute value in USD
 	string custody_pending_company_withdraw_usd = 8;
-	// Pending amount frozen from sub-operators by system balance freeze but not yet settled (operator_balance_freeze with no status), absolute value in USD
+	// [Time-filtered] Pending amount frozen from sub-operators by system balance freeze but not yet settled (operator_balance_freeze with no status), absolute value in USD
 	string pending_balance_freeze_usd = 9;
-	// Settled amount frozen from sub-operators by system balance freeze (operator_balance_freeze with status settled), absolute value in USD
+	// [Time-filtered] Settled amount frozen from sub-operators by system balance freeze (operator_balance_freeze with status settled), absolute value in USD
 	string settled_balance_freeze_usd = 10;
-	// Net swap amount across all sub-operators (operator_balance_swap), representing swap fee loss in USD
+	// [Time-filtered] Net swap amount across all sub-operators (operator_balance_swap), representing swap fee loss in USD
 	string swap_fee_usd = 11;
-	// Pending amount frozen from company's own wallet for payment withdrawals (operator_payment_withdraw_freeze with no status on company operator), absolute value in USD
+	// [NOT time-filtered] Pending amount frozen from company's own wallet for payment withdrawals (operator_payment_withdraw_freeze with no status on company operator), absolute value in USD
 	string company_pending_withdraw_usd = 12;
-	// Pending amount frozen from company's own wallet for affiliate withdrawals (operator_affiliate_withdraw_freeze with no status on company operator), absolute value in USD
+	// [NOT time-filtered] Pending amount frozen from company's own wallet for affiliate withdrawals (legacy: operator_affiliate_withdraw_freeze on company operator), absolute value in USD
 	string company_pending_affiliate_withdraw_usd = 13;
-	// Total manual credit to sub-operators (operator_manual_credit), absolute value in USD
+	// [Time-filtered] Total manual credit to sub-operators (operator_manual_credit), absolute value in USD
 	string manual_credit_usd = 14;
-	// Total manual debit from sub-operators (operator_manual_debit), absolute value in USD
+	// [Time-filtered] Total manual debit from sub-operators (operator_manual_debit), absolute value in USD
 	string manual_debit_usd = 15;
-	// Total bankroll amount of sub-operators in USD
+	// [NOT time-filtered] Total bankroll amount of sub-operators in USD
 	string bankroll_usd = 16;
+	// [Time-filtered] Pending amount frozen from sub-operators for affiliate withdrawals (operator_affiliate_withdraw_freeze with no status on sub-operators), absolute value in USD
+	string custody_pending_affiliate_withdraw_usd = 17;
 }
 
 // ============================================================================
