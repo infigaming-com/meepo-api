@@ -3551,6 +3551,652 @@ func (x *ListOTPSendLogsResponse) GetPageSize() int32 {
 	return 0
 }
 
+// SMSChannelRate represents the per-message cost for a specific provider+country+channel combination.
+// Used to track and calculate SMS/WhatsApp/Voice delivery costs.
+type SMSChannelRate struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ProviderId    int64                  `protobuf:"varint,2,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	ProviderName  string                 `protobuf:"bytes,3,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"` // Read-only, populated from join
+	Country       string                 `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`                               // ISO 2-letter code or "global" as fallback
+	Channel       string                 `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel,omitempty"`                               // "sms", "whatsapp", "voice"
+	UnitPrice     string                 `protobuf:"bytes,6,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`          // Decimal string (e.g., "0.05")
+	Currency      string                 `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled       bool                   `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64                  `protobuf:"varint,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SMSChannelRate) Reset() {
+	*x = SMSChannelRate{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SMSChannelRate) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SMSChannelRate) ProtoMessage() {}
+
+func (x *SMSChannelRate) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SMSChannelRate.ProtoReflect.Descriptor instead.
+func (*SMSChannelRate) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *SMSChannelRate) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SMSChannelRate) GetProviderId() int64 {
+	if x != nil {
+		return x.ProviderId
+	}
+	return 0
+}
+
+func (x *SMSChannelRate) GetProviderName() string {
+	if x != nil {
+		return x.ProviderName
+	}
+	return ""
+}
+
+func (x *SMSChannelRate) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *SMSChannelRate) GetChannel() string {
+	if x != nil {
+		return x.Channel
+	}
+	return ""
+}
+
+func (x *SMSChannelRate) GetUnitPrice() string {
+	if x != nil {
+		return x.UnitPrice
+	}
+	return ""
+}
+
+func (x *SMSChannelRate) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *SMSChannelRate) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *SMSChannelRate) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *SMSChannelRate) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+type CreateSMSChannelRateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId    int64                  `protobuf:"varint,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	Country       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	Channel       string                 `protobuf:"bytes,3,opt,name=channel,proto3" json:"channel,omitempty"`
+	UnitPrice     string                 `protobuf:"bytes,4,opt,name=unit_price,json=unitPrice,proto3" json:"unit_price,omitempty"`
+	Currency      string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSMSChannelRateRequest) Reset() {
+	*x = CreateSMSChannelRateRequest{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSMSChannelRateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSMSChannelRateRequest) ProtoMessage() {}
+
+func (x *CreateSMSChannelRateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSMSChannelRateRequest.ProtoReflect.Descriptor instead.
+func (*CreateSMSChannelRateRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *CreateSMSChannelRateRequest) GetProviderId() int64 {
+	if x != nil {
+		return x.ProviderId
+	}
+	return 0
+}
+
+func (x *CreateSMSChannelRateRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *CreateSMSChannelRateRequest) GetChannel() string {
+	if x != nil {
+		return x.Channel
+	}
+	return ""
+}
+
+func (x *CreateSMSChannelRateRequest) GetUnitPrice() string {
+	if x != nil {
+		return x.UnitPrice
+	}
+	return ""
+}
+
+func (x *CreateSMSChannelRateRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+type CreateSMSChannelRateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Rate          *SMSChannelRate        `protobuf:"bytes,1,opt,name=rate,proto3" json:"rate,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSMSChannelRateResponse) Reset() {
+	*x = CreateSMSChannelRateResponse{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSMSChannelRateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSMSChannelRateResponse) ProtoMessage() {}
+
+func (x *CreateSMSChannelRateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSMSChannelRateResponse.ProtoReflect.Descriptor instead.
+func (*CreateSMSChannelRateResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *CreateSMSChannelRateResponse) GetRate() *SMSChannelRate {
+	if x != nil {
+		return x.Rate
+	}
+	return nil
+}
+
+type UpdateSMSChannelRateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UnitPrice     *string                `protobuf:"bytes,2,opt,name=unit_price,json=unitPrice,proto3,oneof" json:"unit_price,omitempty"`
+	Currency      *string                `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Enabled       *bool                  `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateSMSChannelRateRequest) Reset() {
+	*x = UpdateSMSChannelRateRequest{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateSMSChannelRateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateSMSChannelRateRequest) ProtoMessage() {}
+
+func (x *UpdateSMSChannelRateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateSMSChannelRateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateSMSChannelRateRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *UpdateSMSChannelRateRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateSMSChannelRateRequest) GetUnitPrice() string {
+	if x != nil && x.UnitPrice != nil {
+		return *x.UnitPrice
+	}
+	return ""
+}
+
+func (x *UpdateSMSChannelRateRequest) GetCurrency() string {
+	if x != nil && x.Currency != nil {
+		return *x.Currency
+	}
+	return ""
+}
+
+func (x *UpdateSMSChannelRateRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+type UpdateSMSChannelRateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Rate          *SMSChannelRate        `protobuf:"bytes,1,opt,name=rate,proto3" json:"rate,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateSMSChannelRateResponse) Reset() {
+	*x = UpdateSMSChannelRateResponse{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateSMSChannelRateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateSMSChannelRateResponse) ProtoMessage() {}
+
+func (x *UpdateSMSChannelRateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateSMSChannelRateResponse.ProtoReflect.Descriptor instead.
+func (*UpdateSMSChannelRateResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *UpdateSMSChannelRateResponse) GetRate() *SMSChannelRate {
+	if x != nil {
+		return x.Rate
+	}
+	return nil
+}
+
+type DeleteSMSChannelRateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteSMSChannelRateRequest) Reset() {
+	*x = DeleteSMSChannelRateRequest{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteSMSChannelRateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSMSChannelRateRequest) ProtoMessage() {}
+
+func (x *DeleteSMSChannelRateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSMSChannelRateRequest.ProtoReflect.Descriptor instead.
+func (*DeleteSMSChannelRateRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *DeleteSMSChannelRateRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteSMSChannelRateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteSMSChannelRateResponse) Reset() {
+	*x = DeleteSMSChannelRateResponse{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteSMSChannelRateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSMSChannelRateResponse) ProtoMessage() {}
+
+func (x *DeleteSMSChannelRateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSMSChannelRateResponse.ProtoReflect.Descriptor instead.
+func (*DeleteSMSChannelRateResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{48}
+}
+
+type ListSMSChannelRatesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId    *int64                 `protobuf:"varint,1,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`
+	Country       *string                `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	Channel       *string                `protobuf:"bytes,3,opt,name=channel,proto3,oneof" json:"channel,omitempty"`
+	Page          int32                  `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSMSChannelRatesRequest) Reset() {
+	*x = ListSMSChannelRatesRequest{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSMSChannelRatesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSMSChannelRatesRequest) ProtoMessage() {}
+
+func (x *ListSMSChannelRatesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSMSChannelRatesRequest.ProtoReflect.Descriptor instead.
+func (*ListSMSChannelRatesRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *ListSMSChannelRatesRequest) GetProviderId() int64 {
+	if x != nil && x.ProviderId != nil {
+		return *x.ProviderId
+	}
+	return 0
+}
+
+func (x *ListSMSChannelRatesRequest) GetCountry() string {
+	if x != nil && x.Country != nil {
+		return *x.Country
+	}
+	return ""
+}
+
+func (x *ListSMSChannelRatesRequest) GetChannel() string {
+	if x != nil && x.Channel != nil {
+		return *x.Channel
+	}
+	return ""
+}
+
+func (x *ListSMSChannelRatesRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListSMSChannelRatesRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type ListSMSChannelRatesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Rates         []*SMSChannelRate      `protobuf:"bytes,1,rep,name=rates,proto3" json:"rates,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSMSChannelRatesResponse) Reset() {
+	*x = ListSMSChannelRatesResponse{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSMSChannelRatesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSMSChannelRatesResponse) ProtoMessage() {}
+
+func (x *ListSMSChannelRatesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSMSChannelRatesResponse.ProtoReflect.Descriptor instead.
+func (*ListSMSChannelRatesResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *ListSMSChannelRatesResponse) GetRates() []*SMSChannelRate {
+	if x != nil {
+		return x.Rates
+	}
+	return nil
+}
+
+func (x *ListSMSChannelRatesResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type BatchCreateSMSChannelRatesRequest struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Rates         []*CreateSMSChannelRateRequest `protobuf:"bytes,1,rep,name=rates,proto3" json:"rates,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchCreateSMSChannelRatesRequest) Reset() {
+	*x = BatchCreateSMSChannelRatesRequest{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchCreateSMSChannelRatesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchCreateSMSChannelRatesRequest) ProtoMessage() {}
+
+func (x *BatchCreateSMSChannelRatesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchCreateSMSChannelRatesRequest.ProtoReflect.Descriptor instead.
+func (*BatchCreateSMSChannelRatesRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *BatchCreateSMSChannelRatesRequest) GetRates() []*CreateSMSChannelRateRequest {
+	if x != nil {
+		return x.Rates
+	}
+	return nil
+}
+
+type BatchCreateSMSChannelRatesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Rates         []*SMSChannelRate      `protobuf:"bytes,1,rep,name=rates,proto3" json:"rates,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchCreateSMSChannelRatesResponse) Reset() {
+	*x = BatchCreateSMSChannelRatesResponse{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchCreateSMSChannelRatesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchCreateSMSChannelRatesResponse) ProtoMessage() {}
+
+func (x *BatchCreateSMSChannelRatesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchCreateSMSChannelRatesResponse.ProtoReflect.Descriptor instead.
+func (*BatchCreateSMSChannelRatesResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *BatchCreateSMSChannelRatesResponse) GetRates() []*SMSChannelRate {
+	if x != nil {
+		return x.Rates
+	}
+	return nil
+}
+
 var File_push_service_v1_push_otp_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_push_otp_proto_rawDesc = "" +
@@ -3862,7 +4508,67 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\x04logs\x18\x01 \x03(\v2#.api.push.service.v1.OTPSendLogInfoR\x04logs\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize*\x86\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xad\x02\n" +
+	"\x0eSMSChannelRate\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
+	"\vprovider_id\x18\x02 \x01(\x03R\n" +
+	"providerId\x12#\n" +
+	"\rprovider_name\x18\x03 \x01(\tR\fproviderName\x12\x18\n" +
+	"\acountry\x18\x04 \x01(\tR\acountry\x12\x18\n" +
+	"\achannel\x18\x05 \x01(\tR\achannel\x12\x1d\n" +
+	"\n" +
+	"unit_price\x18\x06 \x01(\tR\tunitPrice\x12\x1a\n" +
+	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x18\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\t \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\n" +
+	" \x01(\x03R\tupdatedAt\"\xad\x01\n" +
+	"\x1bCreateSMSChannelRateRequest\x12\x1f\n" +
+	"\vprovider_id\x18\x01 \x01(\x03R\n" +
+	"providerId\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12\x18\n" +
+	"\achannel\x18\x03 \x01(\tR\achannel\x12\x1d\n" +
+	"\n" +
+	"unit_price\x18\x04 \x01(\tR\tunitPrice\x12\x1a\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\"W\n" +
+	"\x1cCreateSMSChannelRateResponse\x127\n" +
+	"\x04rate\x18\x01 \x01(\v2#.api.push.service.v1.SMSChannelRateR\x04rate\"\xb9\x01\n" +
+	"\x1bUpdateSMSChannelRateRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\"\n" +
+	"\n" +
+	"unit_price\x18\x02 \x01(\tH\x00R\tunitPrice\x88\x01\x01\x12\x1f\n" +
+	"\bcurrency\x18\x03 \x01(\tH\x01R\bcurrency\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x02R\aenabled\x88\x01\x01B\r\n" +
+	"\v_unit_priceB\v\n" +
+	"\t_currencyB\n" +
+	"\n" +
+	"\b_enabled\"W\n" +
+	"\x1cUpdateSMSChannelRateResponse\x127\n" +
+	"\x04rate\x18\x01 \x01(\v2#.api.push.service.v1.SMSChannelRateR\x04rate\"-\n" +
+	"\x1bDeleteSMSChannelRateRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1e\n" +
+	"\x1cDeleteSMSChannelRateResponse\"\xd9\x01\n" +
+	"\x1aListSMSChannelRatesRequest\x12$\n" +
+	"\vprovider_id\x18\x01 \x01(\x03H\x00R\n" +
+	"providerId\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\x02 \x01(\tH\x01R\acountry\x88\x01\x01\x12\x1d\n" +
+	"\achannel\x18\x03 \x01(\tH\x02R\achannel\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSizeB\x0e\n" +
+	"\f_provider_idB\n" +
+	"\n" +
+	"\b_countryB\n" +
+	"\n" +
+	"\b_channel\"n\n" +
+	"\x1bListSMSChannelRatesResponse\x129\n" +
+	"\x05rates\x18\x01 \x03(\v2#.api.push.service.v1.SMSChannelRateR\x05rates\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"k\n" +
+	"!BatchCreateSMSChannelRatesRequest\x12F\n" +
+	"\x05rates\x18\x01 \x03(\v20.api.push.service.v1.CreateSMSChannelRateRequestR\x05rates\"_\n" +
+	"\"BatchCreateSMSChannelRatesResponse\x129\n" +
+	"\x05rates\x18\x01 \x03(\v2#.api.push.service.v1.SMSChannelRateR\x05rates*\x86\x01\n" +
 	"\n" +
 	"OTPChannel\x12\x1b\n" +
 	"\x17OTP_CHANNEL_UNSPECIFIED\x10\x00\x12\x13\n" +
@@ -3890,7 +4596,7 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"%OTP_TEMPLATE_REVIEW_STATUS_LOCAL_ONLY\x10\x01\x12&\n" +
 	"\"OTP_TEMPLATE_REVIEW_STATUS_PENDING\x10\x02\x12'\n" +
 	"#OTP_TEMPLATE_REVIEW_STATUS_APPROVED\x10\x03\x12'\n" +
-	"#OTP_TEMPLATE_REVIEW_STATUS_REJECTED\x10\x042\x94\x12\n" +
+	"#OTP_TEMPLATE_REVIEW_STATUS_REJECTED\x10\x042\x9f\x17\n" +
 	"\aPushOTP\x12V\n" +
 	"\aSendOTP\x12#.api.push.service.v1.SendOTPRequest\x1a$.api.push.service.v1.SendOTPResponse\"\x00\x12t\n" +
 	"\x11CreateOTPProvider\x12-.api.push.service.v1.CreateOTPProviderRequest\x1a..api.push.service.v1.CreateOTPProviderResponse\"\x00\x12t\n" +
@@ -3910,7 +4616,12 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\x0eGetOTPTemplate\x12*.api.push.service.v1.GetOTPTemplateRequest\x1a+.api.push.service.v1.GetOTPTemplateResponse\"\x00\x12q\n" +
 	"\x10ListOTPTemplates\x12,.api.push.service.v1.ListOTPTemplatesRequest\x1a-.api.push.service.v1.ListOTPTemplatesResponse\"\x00\x12\x80\x01\n" +
 	"\x15SyncOTPTemplateStatus\x121.api.push.service.v1.SyncOTPTemplateStatusRequest\x1a2.api.push.service.v1.SyncOTPTemplateStatusResponse\"\x00\x12n\n" +
-	"\x0fListOTPSendLogs\x12+.api.push.service.v1.ListOTPSendLogsRequest\x1a,.api.push.service.v1.ListOTPSendLogsResponse\"\x00BO\n" +
+	"\x0fListOTPSendLogs\x12+.api.push.service.v1.ListOTPSendLogsRequest\x1a,.api.push.service.v1.ListOTPSendLogsResponse\"\x00\x12}\n" +
+	"\x14CreateSMSChannelRate\x120.api.push.service.v1.CreateSMSChannelRateRequest\x1a1.api.push.service.v1.CreateSMSChannelRateResponse\"\x00\x12}\n" +
+	"\x14UpdateSMSChannelRate\x120.api.push.service.v1.UpdateSMSChannelRateRequest\x1a1.api.push.service.v1.UpdateSMSChannelRateResponse\"\x00\x12}\n" +
+	"\x14DeleteSMSChannelRate\x120.api.push.service.v1.DeleteSMSChannelRateRequest\x1a1.api.push.service.v1.DeleteSMSChannelRateResponse\"\x00\x12z\n" +
+	"\x13ListSMSChannelRates\x12/.api.push.service.v1.ListSMSChannelRatesRequest\x1a0.api.push.service.v1.ListSMSChannelRatesResponse\"\x00\x12\x8f\x01\n" +
+	"\x1aBatchCreateSMSChannelRates\x126.api.push.service.v1.BatchCreateSMSChannelRatesRequest\x1a7.api.push.service.v1.BatchCreateSMSChannelRatesResponse\"\x00BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (
@@ -3926,60 +4637,71 @@ func file_push_service_v1_push_otp_proto_rawDescGZIP() []byte {
 }
 
 var file_push_service_v1_push_otp_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_push_service_v1_push_otp_proto_msgTypes = make([]protoimpl.MessageInfo, 43)
+var file_push_service_v1_push_otp_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
 var file_push_service_v1_push_otp_proto_goTypes = []any{
-	(OTPChannel)(0),                          // 0: api.push.service.v1.OTPChannel
-	(OTPProviderType)(0),                     // 1: api.push.service.v1.OTPProviderType
-	(OTPSendChannelStrategy)(0),              // 2: api.push.service.v1.OTPSendChannelStrategy
-	(OTPTemplateType)(0),                     // 3: api.push.service.v1.OTPTemplateType
-	(OTPTemplateReviewStatus)(0),             // 4: api.push.service.v1.OTPTemplateReviewStatus
-	(*SendOTPRequest)(nil),                   // 5: api.push.service.v1.SendOTPRequest
-	(*SendOTPResponse)(nil),                  // 6: api.push.service.v1.SendOTPResponse
-	(*OTPProviderInfo)(nil),                  // 7: api.push.service.v1.OTPProviderInfo
-	(*CreateOTPProviderRequest)(nil),         // 8: api.push.service.v1.CreateOTPProviderRequest
-	(*CreateOTPProviderResponse)(nil),        // 9: api.push.service.v1.CreateOTPProviderResponse
-	(*UpdateOTPProviderRequest)(nil),         // 10: api.push.service.v1.UpdateOTPProviderRequest
-	(*UpdateOTPProviderResponse)(nil),        // 11: api.push.service.v1.UpdateOTPProviderResponse
-	(*DeleteOTPProviderRequest)(nil),         // 12: api.push.service.v1.DeleteOTPProviderRequest
-	(*DeleteOTPProviderResponse)(nil),        // 13: api.push.service.v1.DeleteOTPProviderResponse
-	(*GetOTPProviderRequest)(nil),            // 14: api.push.service.v1.GetOTPProviderRequest
-	(*GetOTPProviderResponse)(nil),           // 15: api.push.service.v1.GetOTPProviderResponse
-	(*ListOTPProvidersRequest)(nil),          // 16: api.push.service.v1.ListOTPProvidersRequest
-	(*ListOTPProvidersResponse)(nil),         // 17: api.push.service.v1.ListOTPProvidersResponse
-	(*OTPProviderBindingInfo)(nil),           // 18: api.push.service.v1.OTPProviderBindingInfo
-	(*CreateOTPProviderBindingRequest)(nil),  // 19: api.push.service.v1.CreateOTPProviderBindingRequest
-	(*CreateOTPProviderBindingResponse)(nil), // 20: api.push.service.v1.CreateOTPProviderBindingResponse
-	(*UpdateOTPProviderBindingRequest)(nil),  // 21: api.push.service.v1.UpdateOTPProviderBindingRequest
-	(*UpdateOTPProviderBindingResponse)(nil), // 22: api.push.service.v1.UpdateOTPProviderBindingResponse
-	(*DeleteOTPProviderBindingRequest)(nil),  // 23: api.push.service.v1.DeleteOTPProviderBindingRequest
-	(*DeleteOTPProviderBindingResponse)(nil), // 24: api.push.service.v1.DeleteOTPProviderBindingResponse
-	(*ListOTPProviderBindingsRequest)(nil),   // 25: api.push.service.v1.ListOTPProviderBindingsRequest
-	(*ListOTPProviderBindingsResponse)(nil),  // 26: api.push.service.v1.ListOTPProviderBindingsResponse
-	(*ListOTPBindingCountriesRequest)(nil),   // 27: api.push.service.v1.ListOTPBindingCountriesRequest
-	(*ListOTPBindingCountriesResponse)(nil),  // 28: api.push.service.v1.ListOTPBindingCountriesResponse
-	(*CheckOTPBindingCountryRequest)(nil),    // 29: api.push.service.v1.CheckOTPBindingCountryRequest
-	(*CheckOTPBindingCountryResponse)(nil),   // 30: api.push.service.v1.CheckOTPBindingCountryResponse
-	(*OTPTemplateInfo)(nil),                  // 31: api.push.service.v1.OTPTemplateInfo
-	(*CreateOTPTemplateRequest)(nil),         // 32: api.push.service.v1.CreateOTPTemplateRequest
-	(*CreateOTPTemplateResponse)(nil),        // 33: api.push.service.v1.CreateOTPTemplateResponse
-	(*UpdateOTPTemplateRequest)(nil),         // 34: api.push.service.v1.UpdateOTPTemplateRequest
-	(*UpdateOTPTemplateResponse)(nil),        // 35: api.push.service.v1.UpdateOTPTemplateResponse
-	(*DeleteOTPTemplateRequest)(nil),         // 36: api.push.service.v1.DeleteOTPTemplateRequest
-	(*DeleteOTPTemplateResponse)(nil),        // 37: api.push.service.v1.DeleteOTPTemplateResponse
-	(*GetOTPTemplateRequest)(nil),            // 38: api.push.service.v1.GetOTPTemplateRequest
-	(*GetOTPTemplateResponse)(nil),           // 39: api.push.service.v1.GetOTPTemplateResponse
-	(*ListOTPTemplatesRequest)(nil),          // 40: api.push.service.v1.ListOTPTemplatesRequest
-	(*ListOTPTemplatesResponse)(nil),         // 41: api.push.service.v1.ListOTPTemplatesResponse
-	(*SyncOTPTemplateStatusRequest)(nil),     // 42: api.push.service.v1.SyncOTPTemplateStatusRequest
-	(*SyncOTPTemplateStatusResponse)(nil),    // 43: api.push.service.v1.SyncOTPTemplateStatusResponse
-	(*OTPSendLogInfo)(nil),                   // 44: api.push.service.v1.OTPSendLogInfo
-	(*ListOTPSendLogsRequest)(nil),           // 45: api.push.service.v1.ListOTPSendLogsRequest
-	(*ListOTPSendLogsResponse)(nil),          // 46: api.push.service.v1.ListOTPSendLogsResponse
-	nil,                                      // 47: api.push.service.v1.SendOTPRequest.ExtraParamsEntry
+	(OTPChannel)(0),                            // 0: api.push.service.v1.OTPChannel
+	(OTPProviderType)(0),                       // 1: api.push.service.v1.OTPProviderType
+	(OTPSendChannelStrategy)(0),                // 2: api.push.service.v1.OTPSendChannelStrategy
+	(OTPTemplateType)(0),                       // 3: api.push.service.v1.OTPTemplateType
+	(OTPTemplateReviewStatus)(0),               // 4: api.push.service.v1.OTPTemplateReviewStatus
+	(*SendOTPRequest)(nil),                     // 5: api.push.service.v1.SendOTPRequest
+	(*SendOTPResponse)(nil),                    // 6: api.push.service.v1.SendOTPResponse
+	(*OTPProviderInfo)(nil),                    // 7: api.push.service.v1.OTPProviderInfo
+	(*CreateOTPProviderRequest)(nil),           // 8: api.push.service.v1.CreateOTPProviderRequest
+	(*CreateOTPProviderResponse)(nil),          // 9: api.push.service.v1.CreateOTPProviderResponse
+	(*UpdateOTPProviderRequest)(nil),           // 10: api.push.service.v1.UpdateOTPProviderRequest
+	(*UpdateOTPProviderResponse)(nil),          // 11: api.push.service.v1.UpdateOTPProviderResponse
+	(*DeleteOTPProviderRequest)(nil),           // 12: api.push.service.v1.DeleteOTPProviderRequest
+	(*DeleteOTPProviderResponse)(nil),          // 13: api.push.service.v1.DeleteOTPProviderResponse
+	(*GetOTPProviderRequest)(nil),              // 14: api.push.service.v1.GetOTPProviderRequest
+	(*GetOTPProviderResponse)(nil),             // 15: api.push.service.v1.GetOTPProviderResponse
+	(*ListOTPProvidersRequest)(nil),            // 16: api.push.service.v1.ListOTPProvidersRequest
+	(*ListOTPProvidersResponse)(nil),           // 17: api.push.service.v1.ListOTPProvidersResponse
+	(*OTPProviderBindingInfo)(nil),             // 18: api.push.service.v1.OTPProviderBindingInfo
+	(*CreateOTPProviderBindingRequest)(nil),    // 19: api.push.service.v1.CreateOTPProviderBindingRequest
+	(*CreateOTPProviderBindingResponse)(nil),   // 20: api.push.service.v1.CreateOTPProviderBindingResponse
+	(*UpdateOTPProviderBindingRequest)(nil),    // 21: api.push.service.v1.UpdateOTPProviderBindingRequest
+	(*UpdateOTPProviderBindingResponse)(nil),   // 22: api.push.service.v1.UpdateOTPProviderBindingResponse
+	(*DeleteOTPProviderBindingRequest)(nil),    // 23: api.push.service.v1.DeleteOTPProviderBindingRequest
+	(*DeleteOTPProviderBindingResponse)(nil),   // 24: api.push.service.v1.DeleteOTPProviderBindingResponse
+	(*ListOTPProviderBindingsRequest)(nil),     // 25: api.push.service.v1.ListOTPProviderBindingsRequest
+	(*ListOTPProviderBindingsResponse)(nil),    // 26: api.push.service.v1.ListOTPProviderBindingsResponse
+	(*ListOTPBindingCountriesRequest)(nil),     // 27: api.push.service.v1.ListOTPBindingCountriesRequest
+	(*ListOTPBindingCountriesResponse)(nil),    // 28: api.push.service.v1.ListOTPBindingCountriesResponse
+	(*CheckOTPBindingCountryRequest)(nil),      // 29: api.push.service.v1.CheckOTPBindingCountryRequest
+	(*CheckOTPBindingCountryResponse)(nil),     // 30: api.push.service.v1.CheckOTPBindingCountryResponse
+	(*OTPTemplateInfo)(nil),                    // 31: api.push.service.v1.OTPTemplateInfo
+	(*CreateOTPTemplateRequest)(nil),           // 32: api.push.service.v1.CreateOTPTemplateRequest
+	(*CreateOTPTemplateResponse)(nil),          // 33: api.push.service.v1.CreateOTPTemplateResponse
+	(*UpdateOTPTemplateRequest)(nil),           // 34: api.push.service.v1.UpdateOTPTemplateRequest
+	(*UpdateOTPTemplateResponse)(nil),          // 35: api.push.service.v1.UpdateOTPTemplateResponse
+	(*DeleteOTPTemplateRequest)(nil),           // 36: api.push.service.v1.DeleteOTPTemplateRequest
+	(*DeleteOTPTemplateResponse)(nil),          // 37: api.push.service.v1.DeleteOTPTemplateResponse
+	(*GetOTPTemplateRequest)(nil),              // 38: api.push.service.v1.GetOTPTemplateRequest
+	(*GetOTPTemplateResponse)(nil),             // 39: api.push.service.v1.GetOTPTemplateResponse
+	(*ListOTPTemplatesRequest)(nil),            // 40: api.push.service.v1.ListOTPTemplatesRequest
+	(*ListOTPTemplatesResponse)(nil),           // 41: api.push.service.v1.ListOTPTemplatesResponse
+	(*SyncOTPTemplateStatusRequest)(nil),       // 42: api.push.service.v1.SyncOTPTemplateStatusRequest
+	(*SyncOTPTemplateStatusResponse)(nil),      // 43: api.push.service.v1.SyncOTPTemplateStatusResponse
+	(*OTPSendLogInfo)(nil),                     // 44: api.push.service.v1.OTPSendLogInfo
+	(*ListOTPSendLogsRequest)(nil),             // 45: api.push.service.v1.ListOTPSendLogsRequest
+	(*ListOTPSendLogsResponse)(nil),            // 46: api.push.service.v1.ListOTPSendLogsResponse
+	(*SMSChannelRate)(nil),                     // 47: api.push.service.v1.SMSChannelRate
+	(*CreateSMSChannelRateRequest)(nil),        // 48: api.push.service.v1.CreateSMSChannelRateRequest
+	(*CreateSMSChannelRateResponse)(nil),       // 49: api.push.service.v1.CreateSMSChannelRateResponse
+	(*UpdateSMSChannelRateRequest)(nil),        // 50: api.push.service.v1.UpdateSMSChannelRateRequest
+	(*UpdateSMSChannelRateResponse)(nil),       // 51: api.push.service.v1.UpdateSMSChannelRateResponse
+	(*DeleteSMSChannelRateRequest)(nil),        // 52: api.push.service.v1.DeleteSMSChannelRateRequest
+	(*DeleteSMSChannelRateResponse)(nil),       // 53: api.push.service.v1.DeleteSMSChannelRateResponse
+	(*ListSMSChannelRatesRequest)(nil),         // 54: api.push.service.v1.ListSMSChannelRatesRequest
+	(*ListSMSChannelRatesResponse)(nil),        // 55: api.push.service.v1.ListSMSChannelRatesResponse
+	(*BatchCreateSMSChannelRatesRequest)(nil),  // 56: api.push.service.v1.BatchCreateSMSChannelRatesRequest
+	(*BatchCreateSMSChannelRatesResponse)(nil), // 57: api.push.service.v1.BatchCreateSMSChannelRatesResponse
+	nil, // 58: api.push.service.v1.SendOTPRequest.ExtraParamsEntry
 }
 var file_push_service_v1_push_otp_proto_depIdxs = []int32{
 	3,  // 0: api.push.service.v1.SendOTPRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	47, // 1: api.push.service.v1.SendOTPRequest.extra_params:type_name -> api.push.service.v1.SendOTPRequest.ExtraParamsEntry
+	58, // 1: api.push.service.v1.SendOTPRequest.extra_params:type_name -> api.push.service.v1.SendOTPRequest.ExtraParamsEntry
 	0,  // 2: api.push.service.v1.SendOTPRequest.preferred_channel:type_name -> api.push.service.v1.OTPChannel
 	1,  // 3: api.push.service.v1.OTPProviderInfo.provider_type:type_name -> api.push.service.v1.OTPProviderType
 	2,  // 4: api.push.service.v1.OTPProviderInfo.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
@@ -4002,49 +4724,64 @@ var file_push_service_v1_push_otp_proto_depIdxs = []int32{
 	31, // 21: api.push.service.v1.ListOTPTemplatesResponse.templates:type_name -> api.push.service.v1.OTPTemplateInfo
 	4,  // 22: api.push.service.v1.SyncOTPTemplateStatusResponse.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
 	44, // 23: api.push.service.v1.ListOTPSendLogsResponse.logs:type_name -> api.push.service.v1.OTPSendLogInfo
-	5,  // 24: api.push.service.v1.PushOTP.SendOTP:input_type -> api.push.service.v1.SendOTPRequest
-	8,  // 25: api.push.service.v1.PushOTP.CreateOTPProvider:input_type -> api.push.service.v1.CreateOTPProviderRequest
-	10, // 26: api.push.service.v1.PushOTP.UpdateOTPProvider:input_type -> api.push.service.v1.UpdateOTPProviderRequest
-	12, // 27: api.push.service.v1.PushOTP.DeleteOTPProvider:input_type -> api.push.service.v1.DeleteOTPProviderRequest
-	14, // 28: api.push.service.v1.PushOTP.GetOTPProvider:input_type -> api.push.service.v1.GetOTPProviderRequest
-	16, // 29: api.push.service.v1.PushOTP.ListOTPProviders:input_type -> api.push.service.v1.ListOTPProvidersRequest
-	19, // 30: api.push.service.v1.PushOTP.CreateOTPProviderBinding:input_type -> api.push.service.v1.CreateOTPProviderBindingRequest
-	21, // 31: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:input_type -> api.push.service.v1.UpdateOTPProviderBindingRequest
-	23, // 32: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:input_type -> api.push.service.v1.DeleteOTPProviderBindingRequest
-	25, // 33: api.push.service.v1.PushOTP.ListOTPProviderBindings:input_type -> api.push.service.v1.ListOTPProviderBindingsRequest
-	27, // 34: api.push.service.v1.PushOTP.ListOTPBindingCountries:input_type -> api.push.service.v1.ListOTPBindingCountriesRequest
-	29, // 35: api.push.service.v1.PushOTP.CheckOTPBindingCountry:input_type -> api.push.service.v1.CheckOTPBindingCountryRequest
-	32, // 36: api.push.service.v1.PushOTP.CreateOTPTemplate:input_type -> api.push.service.v1.CreateOTPTemplateRequest
-	34, // 37: api.push.service.v1.PushOTP.UpdateOTPTemplate:input_type -> api.push.service.v1.UpdateOTPTemplateRequest
-	36, // 38: api.push.service.v1.PushOTP.DeleteOTPTemplate:input_type -> api.push.service.v1.DeleteOTPTemplateRequest
-	38, // 39: api.push.service.v1.PushOTP.GetOTPTemplate:input_type -> api.push.service.v1.GetOTPTemplateRequest
-	40, // 40: api.push.service.v1.PushOTP.ListOTPTemplates:input_type -> api.push.service.v1.ListOTPTemplatesRequest
-	42, // 41: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:input_type -> api.push.service.v1.SyncOTPTemplateStatusRequest
-	45, // 42: api.push.service.v1.PushOTP.ListOTPSendLogs:input_type -> api.push.service.v1.ListOTPSendLogsRequest
-	6,  // 43: api.push.service.v1.PushOTP.SendOTP:output_type -> api.push.service.v1.SendOTPResponse
-	9,  // 44: api.push.service.v1.PushOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
-	11, // 45: api.push.service.v1.PushOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
-	13, // 46: api.push.service.v1.PushOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
-	15, // 47: api.push.service.v1.PushOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
-	17, // 48: api.push.service.v1.PushOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
-	20, // 49: api.push.service.v1.PushOTP.CreateOTPProviderBinding:output_type -> api.push.service.v1.CreateOTPProviderBindingResponse
-	22, // 50: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:output_type -> api.push.service.v1.UpdateOTPProviderBindingResponse
-	24, // 51: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:output_type -> api.push.service.v1.DeleteOTPProviderBindingResponse
-	26, // 52: api.push.service.v1.PushOTP.ListOTPProviderBindings:output_type -> api.push.service.v1.ListOTPProviderBindingsResponse
-	28, // 53: api.push.service.v1.PushOTP.ListOTPBindingCountries:output_type -> api.push.service.v1.ListOTPBindingCountriesResponse
-	30, // 54: api.push.service.v1.PushOTP.CheckOTPBindingCountry:output_type -> api.push.service.v1.CheckOTPBindingCountryResponse
-	33, // 55: api.push.service.v1.PushOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
-	35, // 56: api.push.service.v1.PushOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
-	37, // 57: api.push.service.v1.PushOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
-	39, // 58: api.push.service.v1.PushOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
-	41, // 59: api.push.service.v1.PushOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
-	43, // 60: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
-	46, // 61: api.push.service.v1.PushOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
-	43, // [43:62] is the sub-list for method output_type
-	24, // [24:43] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	47, // 24: api.push.service.v1.CreateSMSChannelRateResponse.rate:type_name -> api.push.service.v1.SMSChannelRate
+	47, // 25: api.push.service.v1.UpdateSMSChannelRateResponse.rate:type_name -> api.push.service.v1.SMSChannelRate
+	47, // 26: api.push.service.v1.ListSMSChannelRatesResponse.rates:type_name -> api.push.service.v1.SMSChannelRate
+	48, // 27: api.push.service.v1.BatchCreateSMSChannelRatesRequest.rates:type_name -> api.push.service.v1.CreateSMSChannelRateRequest
+	47, // 28: api.push.service.v1.BatchCreateSMSChannelRatesResponse.rates:type_name -> api.push.service.v1.SMSChannelRate
+	5,  // 29: api.push.service.v1.PushOTP.SendOTP:input_type -> api.push.service.v1.SendOTPRequest
+	8,  // 30: api.push.service.v1.PushOTP.CreateOTPProvider:input_type -> api.push.service.v1.CreateOTPProviderRequest
+	10, // 31: api.push.service.v1.PushOTP.UpdateOTPProvider:input_type -> api.push.service.v1.UpdateOTPProviderRequest
+	12, // 32: api.push.service.v1.PushOTP.DeleteOTPProvider:input_type -> api.push.service.v1.DeleteOTPProviderRequest
+	14, // 33: api.push.service.v1.PushOTP.GetOTPProvider:input_type -> api.push.service.v1.GetOTPProviderRequest
+	16, // 34: api.push.service.v1.PushOTP.ListOTPProviders:input_type -> api.push.service.v1.ListOTPProvidersRequest
+	19, // 35: api.push.service.v1.PushOTP.CreateOTPProviderBinding:input_type -> api.push.service.v1.CreateOTPProviderBindingRequest
+	21, // 36: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:input_type -> api.push.service.v1.UpdateOTPProviderBindingRequest
+	23, // 37: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:input_type -> api.push.service.v1.DeleteOTPProviderBindingRequest
+	25, // 38: api.push.service.v1.PushOTP.ListOTPProviderBindings:input_type -> api.push.service.v1.ListOTPProviderBindingsRequest
+	27, // 39: api.push.service.v1.PushOTP.ListOTPBindingCountries:input_type -> api.push.service.v1.ListOTPBindingCountriesRequest
+	29, // 40: api.push.service.v1.PushOTP.CheckOTPBindingCountry:input_type -> api.push.service.v1.CheckOTPBindingCountryRequest
+	32, // 41: api.push.service.v1.PushOTP.CreateOTPTemplate:input_type -> api.push.service.v1.CreateOTPTemplateRequest
+	34, // 42: api.push.service.v1.PushOTP.UpdateOTPTemplate:input_type -> api.push.service.v1.UpdateOTPTemplateRequest
+	36, // 43: api.push.service.v1.PushOTP.DeleteOTPTemplate:input_type -> api.push.service.v1.DeleteOTPTemplateRequest
+	38, // 44: api.push.service.v1.PushOTP.GetOTPTemplate:input_type -> api.push.service.v1.GetOTPTemplateRequest
+	40, // 45: api.push.service.v1.PushOTP.ListOTPTemplates:input_type -> api.push.service.v1.ListOTPTemplatesRequest
+	42, // 46: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:input_type -> api.push.service.v1.SyncOTPTemplateStatusRequest
+	45, // 47: api.push.service.v1.PushOTP.ListOTPSendLogs:input_type -> api.push.service.v1.ListOTPSendLogsRequest
+	48, // 48: api.push.service.v1.PushOTP.CreateSMSChannelRate:input_type -> api.push.service.v1.CreateSMSChannelRateRequest
+	50, // 49: api.push.service.v1.PushOTP.UpdateSMSChannelRate:input_type -> api.push.service.v1.UpdateSMSChannelRateRequest
+	52, // 50: api.push.service.v1.PushOTP.DeleteSMSChannelRate:input_type -> api.push.service.v1.DeleteSMSChannelRateRequest
+	54, // 51: api.push.service.v1.PushOTP.ListSMSChannelRates:input_type -> api.push.service.v1.ListSMSChannelRatesRequest
+	56, // 52: api.push.service.v1.PushOTP.BatchCreateSMSChannelRates:input_type -> api.push.service.v1.BatchCreateSMSChannelRatesRequest
+	6,  // 53: api.push.service.v1.PushOTP.SendOTP:output_type -> api.push.service.v1.SendOTPResponse
+	9,  // 54: api.push.service.v1.PushOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
+	11, // 55: api.push.service.v1.PushOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
+	13, // 56: api.push.service.v1.PushOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
+	15, // 57: api.push.service.v1.PushOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
+	17, // 58: api.push.service.v1.PushOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
+	20, // 59: api.push.service.v1.PushOTP.CreateOTPProviderBinding:output_type -> api.push.service.v1.CreateOTPProviderBindingResponse
+	22, // 60: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:output_type -> api.push.service.v1.UpdateOTPProviderBindingResponse
+	24, // 61: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:output_type -> api.push.service.v1.DeleteOTPProviderBindingResponse
+	26, // 62: api.push.service.v1.PushOTP.ListOTPProviderBindings:output_type -> api.push.service.v1.ListOTPProviderBindingsResponse
+	28, // 63: api.push.service.v1.PushOTP.ListOTPBindingCountries:output_type -> api.push.service.v1.ListOTPBindingCountriesResponse
+	30, // 64: api.push.service.v1.PushOTP.CheckOTPBindingCountry:output_type -> api.push.service.v1.CheckOTPBindingCountryResponse
+	33, // 65: api.push.service.v1.PushOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
+	35, // 66: api.push.service.v1.PushOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
+	37, // 67: api.push.service.v1.PushOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
+	39, // 68: api.push.service.v1.PushOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
+	41, // 69: api.push.service.v1.PushOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
+	43, // 70: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
+	46, // 71: api.push.service.v1.PushOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
+	49, // 72: api.push.service.v1.PushOTP.CreateSMSChannelRate:output_type -> api.push.service.v1.CreateSMSChannelRateResponse
+	51, // 73: api.push.service.v1.PushOTP.UpdateSMSChannelRate:output_type -> api.push.service.v1.UpdateSMSChannelRateResponse
+	53, // 74: api.push.service.v1.PushOTP.DeleteSMSChannelRate:output_type -> api.push.service.v1.DeleteSMSChannelRateResponse
+	55, // 75: api.push.service.v1.PushOTP.ListSMSChannelRates:output_type -> api.push.service.v1.ListSMSChannelRatesResponse
+	57, // 76: api.push.service.v1.PushOTP.BatchCreateSMSChannelRates:output_type -> api.push.service.v1.BatchCreateSMSChannelRatesResponse
+	53, // [53:77] is the sub-list for method output_type
+	29, // [29:53] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_push_service_v1_push_otp_proto_init() }
@@ -4061,13 +4798,15 @@ func file_push_service_v1_push_otp_proto_init() {
 	file_push_service_v1_push_otp_proto_msgTypes[29].OneofWrappers = []any{}
 	file_push_service_v1_push_otp_proto_msgTypes[35].OneofWrappers = []any{}
 	file_push_service_v1_push_otp_proto_msgTypes[40].OneofWrappers = []any{}
+	file_push_service_v1_push_otp_proto_msgTypes[45].OneofWrappers = []any{}
+	file_push_service_v1_push_otp_proto_msgTypes[49].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_push_service_v1_push_otp_proto_rawDesc), len(file_push_service_v1_push_otp_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   43,
+			NumMessages:   54,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

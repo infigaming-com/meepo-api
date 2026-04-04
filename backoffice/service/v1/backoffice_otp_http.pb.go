@@ -20,13 +20,16 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeOTPBatchCreateSMSChannelRates = "/api.backoffice.service.v1.BackofficeOTP/BatchCreateSMSChannelRates"
 const OperationBackofficeOTPCheckOTPBindingCountry = "/api.backoffice.service.v1.BackofficeOTP/CheckOTPBindingCountry"
 const OperationBackofficeOTPCreateOTPProvider = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPProvider"
 const OperationBackofficeOTPCreateOTPProviderBinding = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPProviderBinding"
 const OperationBackofficeOTPCreateOTPTemplate = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPTemplate"
+const OperationBackofficeOTPCreateSMSChannelRate = "/api.backoffice.service.v1.BackofficeOTP/CreateSMSChannelRate"
 const OperationBackofficeOTPDeleteOTPProvider = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPProvider"
 const OperationBackofficeOTPDeleteOTPProviderBinding = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPProviderBinding"
 const OperationBackofficeOTPDeleteOTPTemplate = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPTemplate"
+const OperationBackofficeOTPDeleteSMSChannelRate = "/api.backoffice.service.v1.BackofficeOTP/DeleteSMSChannelRate"
 const OperationBackofficeOTPGetOTPProvider = "/api.backoffice.service.v1.BackofficeOTP/GetOTPProvider"
 const OperationBackofficeOTPGetOTPTemplate = "/api.backoffice.service.v1.BackofficeOTP/GetOTPTemplate"
 const OperationBackofficeOTPListOTPBindingCountries = "/api.backoffice.service.v1.BackofficeOTP/ListOTPBindingCountries"
@@ -34,12 +37,16 @@ const OperationBackofficeOTPListOTPProviderBindings = "/api.backoffice.service.v
 const OperationBackofficeOTPListOTPProviders = "/api.backoffice.service.v1.BackofficeOTP/ListOTPProviders"
 const OperationBackofficeOTPListOTPSendLogs = "/api.backoffice.service.v1.BackofficeOTP/ListOTPSendLogs"
 const OperationBackofficeOTPListOTPTemplates = "/api.backoffice.service.v1.BackofficeOTP/ListOTPTemplates"
+const OperationBackofficeOTPListSMSChannelRates = "/api.backoffice.service.v1.BackofficeOTP/ListSMSChannelRates"
 const OperationBackofficeOTPSyncOTPTemplateStatus = "/api.backoffice.service.v1.BackofficeOTP/SyncOTPTemplateStatus"
 const OperationBackofficeOTPUpdateOTPProvider = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPProvider"
 const OperationBackofficeOTPUpdateOTPProviderBinding = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPProviderBinding"
 const OperationBackofficeOTPUpdateOTPTemplate = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPTemplate"
+const OperationBackofficeOTPUpdateSMSChannelRate = "/api.backoffice.service.v1.BackofficeOTP/UpdateSMSChannelRate"
 
 type BackofficeOTPHTTPServer interface {
+	// BatchCreateSMSChannelRates BatchCreateSMSChannelRates creates multiple rate entries at once.
+	BatchCreateSMSChannelRates(context.Context, *BatchCreateSMSChannelRatesRequest) (*v1.BatchCreateSMSChannelRatesResponse, error)
 	// CheckOTPBindingCountry CheckOTPBindingCountry checks whether an operator has at least one enabled
 	// provider binding for a specific country.
 	//
@@ -232,6 +239,8 @@ type BackofficeOTPHTTPServer interface {
 	// ## Errors
 	// - OTP_TEMPLATE_ALREADY_EXISTS: UNIQUE constraint violated
 	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error)
+	// CreateSMSChannelRate CreateSMSChannelRate creates a per-message cost entry for a provider+country+channel.
+	CreateSMSChannelRate(context.Context, *CreateSMSChannelRateRequest) (*v1.CreateSMSChannelRateResponse, error)
 	// DeleteOTPProvider DeleteOTPProvider permanently removes an OTP provider.
 	//
 	// WARNING: Deleting a provider that still has bindings or templates bound to it will cause
@@ -258,6 +267,8 @@ type BackofficeOTPHTTPServer interface {
 	// ## Errors
 	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	DeleteOTPTemplate(context.Context, *DeleteOTPTemplateRequest) (*v1.DeleteOTPTemplateResponse, error)
+	// DeleteSMSChannelRate DeleteSMSChannelRate permanently removes a rate entry.
+	DeleteSMSChannelRate(context.Context, *DeleteSMSChannelRateRequest) (*v1.DeleteSMSChannelRateResponse, error)
 	// GetOTPProvider GetOTPProvider retrieves a single OTP provider by ID.
 	//
 	// Returns all provider fields except credentials (has_credentials=true/false is returned instead).
@@ -330,6 +341,8 @@ type BackofficeOTPHTTPServer interface {
 	// Results are scoped to the operator specified in target_operator_context.
 	// Returns paginated results with total count.
 	ListOTPTemplates(context.Context, *ListOTPTemplatesRequest) (*v1.ListOTPTemplatesResponse, error)
+	// ListSMSChannelRates ListSMSChannelRates lists rate entries with optional filters.
+	ListSMSChannelRates(context.Context, *ListSMSChannelRatesRequest) (*v1.ListSMSChannelRatesResponse, error)
 	// SyncOTPTemplateStatus SyncOTPTemplateStatus pulls the latest review status from the external provider.
 	//
 	// Some providers (e.g., EngageLab WhatsApp) require templates to be reviewed and approved
@@ -387,6 +400,8 @@ type BackofficeOTPHTTPServer interface {
 	// ## Errors
 	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	UpdateOTPTemplate(context.Context, *UpdateOTPTemplateRequest) (*v1.UpdateOTPTemplateResponse, error)
+	// UpdateSMSChannelRate UpdateSMSChannelRate partially updates an existing rate entry.
+	UpdateSMSChannelRate(context.Context, *UpdateSMSChannelRateRequest) (*v1.UpdateSMSChannelRateResponse, error)
 }
 
 func RegisterBackofficeOTPHTTPServer(s *http.Server, srv BackofficeOTPHTTPServer) {
@@ -396,6 +411,11 @@ func RegisterBackofficeOTPHTTPServer(s *http.Server, srv BackofficeOTPHTTPServer
 	r.POST("/v1/backoffice/otp/provider/delete", _BackofficeOTP_DeleteOTPProvider0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/provider/get", _BackofficeOTP_GetOTPProvider0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/provider/list", _BackofficeOTP_ListOTPProviders0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/otp/channel-rate/create", _BackofficeOTP_CreateSMSChannelRate0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/otp/channel-rate/update", _BackofficeOTP_UpdateSMSChannelRate0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/otp/channel-rate/delete", _BackofficeOTP_DeleteSMSChannelRate0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/otp/channel-rate/list", _BackofficeOTP_ListSMSChannelRates0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/otp/channel-rate/batch-create", _BackofficeOTP_BatchCreateSMSChannelRates0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/provider-binding/create", _BackofficeOTP_CreateOTPProviderBinding0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/provider-binding/update", _BackofficeOTP_UpdateOTPProviderBinding0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/provider-binding/delete", _BackofficeOTP_DeleteOTPProviderBinding0_HTTP_Handler(srv))
@@ -517,6 +537,116 @@ func _BackofficeOTP_ListOTPProviders0_HTTP_Handler(srv BackofficeOTPHTTPServer) 
 			return err
 		}
 		reply := out.(*v1.ListOTPProvidersResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOTP_CreateSMSChannelRate0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateSMSChannelRateRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOTPCreateSMSChannelRate)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateSMSChannelRate(ctx, req.(*CreateSMSChannelRateRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.CreateSMSChannelRateResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOTP_UpdateSMSChannelRate0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateSMSChannelRateRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOTPUpdateSMSChannelRate)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateSMSChannelRate(ctx, req.(*UpdateSMSChannelRateRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UpdateSMSChannelRateResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOTP_DeleteSMSChannelRate0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteSMSChannelRateRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOTPDeleteSMSChannelRate)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteSMSChannelRate(ctx, req.(*DeleteSMSChannelRateRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.DeleteSMSChannelRateResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOTP_ListSMSChannelRates0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListSMSChannelRatesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOTPListSMSChannelRates)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListSMSChannelRates(ctx, req.(*ListSMSChannelRatesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListSMSChannelRatesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOTP_BatchCreateSMSChannelRates0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in BatchCreateSMSChannelRatesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOTPBatchCreateSMSChannelRates)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.BatchCreateSMSChannelRates(ctx, req.(*BatchCreateSMSChannelRatesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.BatchCreateSMSChannelRatesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -808,6 +938,8 @@ func _BackofficeOTP_ListOTPSendLogs0_HTTP_Handler(srv BackofficeOTPHTTPServer) f
 }
 
 type BackofficeOTPHTTPClient interface {
+	// BatchCreateSMSChannelRates BatchCreateSMSChannelRates creates multiple rate entries at once.
+	BatchCreateSMSChannelRates(ctx context.Context, req *BatchCreateSMSChannelRatesRequest, opts ...http.CallOption) (rsp *v1.BatchCreateSMSChannelRatesResponse, err error)
 	// CheckOTPBindingCountry CheckOTPBindingCountry checks whether an operator has at least one enabled
 	// provider binding for a specific country.
 	//
@@ -1000,6 +1132,8 @@ type BackofficeOTPHTTPClient interface {
 	// ## Errors
 	// - OTP_TEMPLATE_ALREADY_EXISTS: UNIQUE constraint violated
 	CreateOTPTemplate(ctx context.Context, req *CreateOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.CreateOTPTemplateResponse, err error)
+	// CreateSMSChannelRate CreateSMSChannelRate creates a per-message cost entry for a provider+country+channel.
+	CreateSMSChannelRate(ctx context.Context, req *CreateSMSChannelRateRequest, opts ...http.CallOption) (rsp *v1.CreateSMSChannelRateResponse, err error)
 	// DeleteOTPProvider DeleteOTPProvider permanently removes an OTP provider.
 	//
 	// WARNING: Deleting a provider that still has bindings or templates bound to it will cause
@@ -1026,6 +1160,8 @@ type BackofficeOTPHTTPClient interface {
 	// ## Errors
 	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	DeleteOTPTemplate(ctx context.Context, req *DeleteOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.DeleteOTPTemplateResponse, err error)
+	// DeleteSMSChannelRate DeleteSMSChannelRate permanently removes a rate entry.
+	DeleteSMSChannelRate(ctx context.Context, req *DeleteSMSChannelRateRequest, opts ...http.CallOption) (rsp *v1.DeleteSMSChannelRateResponse, err error)
 	// GetOTPProvider GetOTPProvider retrieves a single OTP provider by ID.
 	//
 	// Returns all provider fields except credentials (has_credentials=true/false is returned instead).
@@ -1098,6 +1234,8 @@ type BackofficeOTPHTTPClient interface {
 	// Results are scoped to the operator specified in target_operator_context.
 	// Returns paginated results with total count.
 	ListOTPTemplates(ctx context.Context, req *ListOTPTemplatesRequest, opts ...http.CallOption) (rsp *v1.ListOTPTemplatesResponse, err error)
+	// ListSMSChannelRates ListSMSChannelRates lists rate entries with optional filters.
+	ListSMSChannelRates(ctx context.Context, req *ListSMSChannelRatesRequest, opts ...http.CallOption) (rsp *v1.ListSMSChannelRatesResponse, err error)
 	// SyncOTPTemplateStatus SyncOTPTemplateStatus pulls the latest review status from the external provider.
 	//
 	// Some providers (e.g., EngageLab WhatsApp) require templates to be reviewed and approved
@@ -1155,6 +1293,8 @@ type BackofficeOTPHTTPClient interface {
 	// ## Errors
 	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	UpdateOTPTemplate(ctx context.Context, req *UpdateOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.UpdateOTPTemplateResponse, err error)
+	// UpdateSMSChannelRate UpdateSMSChannelRate partially updates an existing rate entry.
+	UpdateSMSChannelRate(ctx context.Context, req *UpdateSMSChannelRateRequest, opts ...http.CallOption) (rsp *v1.UpdateSMSChannelRateResponse, err error)
 }
 
 type BackofficeOTPHTTPClientImpl struct {
@@ -1163,6 +1303,20 @@ type BackofficeOTPHTTPClientImpl struct {
 
 func NewBackofficeOTPHTTPClient(client *http.Client) BackofficeOTPHTTPClient {
 	return &BackofficeOTPHTTPClientImpl{client}
+}
+
+// BatchCreateSMSChannelRates BatchCreateSMSChannelRates creates multiple rate entries at once.
+func (c *BackofficeOTPHTTPClientImpl) BatchCreateSMSChannelRates(ctx context.Context, in *BatchCreateSMSChannelRatesRequest, opts ...http.CallOption) (*v1.BatchCreateSMSChannelRatesResponse, error) {
+	var out v1.BatchCreateSMSChannelRatesResponse
+	pattern := "/v1/backoffice/otp/channel-rate/batch-create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOTPBatchCreateSMSChannelRates))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 // CheckOTPBindingCountry CheckOTPBindingCountry checks whether an operator has at least one enabled
@@ -1405,6 +1559,20 @@ func (c *BackofficeOTPHTTPClientImpl) CreateOTPTemplate(ctx context.Context, in 
 	return &out, nil
 }
 
+// CreateSMSChannelRate CreateSMSChannelRate creates a per-message cost entry for a provider+country+channel.
+func (c *BackofficeOTPHTTPClientImpl) CreateSMSChannelRate(ctx context.Context, in *CreateSMSChannelRateRequest, opts ...http.CallOption) (*v1.CreateSMSChannelRateResponse, error) {
+	var out v1.CreateSMSChannelRateResponse
+	pattern := "/v1/backoffice/otp/channel-rate/create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOTPCreateSMSChannelRate))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // DeleteOTPProvider DeleteOTPProvider permanently removes an OTP provider.
 //
 // WARNING: Deleting a provider that still has bindings or templates bound to it will cause
@@ -1459,6 +1627,20 @@ func (c *BackofficeOTPHTTPClientImpl) DeleteOTPTemplate(ctx context.Context, in 
 	pattern := "/v1/backoffice/otp/template/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOTPDeleteOTPTemplate))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// DeleteSMSChannelRate DeleteSMSChannelRate permanently removes a rate entry.
+func (c *BackofficeOTPHTTPClientImpl) DeleteSMSChannelRate(ctx context.Context, in *DeleteSMSChannelRateRequest, opts ...http.CallOption) (*v1.DeleteSMSChannelRateResponse, error) {
+	var out v1.DeleteSMSChannelRateResponse
+	pattern := "/v1/backoffice/otp/channel-rate/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOTPDeleteSMSChannelRate))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1623,6 +1805,20 @@ func (c *BackofficeOTPHTTPClientImpl) ListOTPTemplates(ctx context.Context, in *
 	return &out, nil
 }
 
+// ListSMSChannelRates ListSMSChannelRates lists rate entries with optional filters.
+func (c *BackofficeOTPHTTPClientImpl) ListSMSChannelRates(ctx context.Context, in *ListSMSChannelRatesRequest, opts ...http.CallOption) (*v1.ListSMSChannelRatesResponse, error) {
+	var out v1.ListSMSChannelRatesResponse
+	pattern := "/v1/backoffice/otp/channel-rate/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOTPListSMSChannelRates))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // SyncOTPTemplateStatus SyncOTPTemplateStatus pulls the latest review status from the external provider.
 //
 // Some providers (e.g., EngageLab WhatsApp) require templates to be reviewed and approved
@@ -1720,6 +1916,20 @@ func (c *BackofficeOTPHTTPClientImpl) UpdateOTPTemplate(ctx context.Context, in 
 	pattern := "/v1/backoffice/otp/template/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOTPUpdateOTPTemplate))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// UpdateSMSChannelRate UpdateSMSChannelRate partially updates an existing rate entry.
+func (c *BackofficeOTPHTTPClientImpl) UpdateSMSChannelRate(ctx context.Context, in *UpdateSMSChannelRateRequest, opts ...http.CallOption) (*v1.UpdateSMSChannelRateResponse, error) {
+	var out v1.UpdateSMSChannelRateResponse
+	pattern := "/v1/backoffice/otp/channel-rate/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOTPUpdateSMSChannelRate))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Push_SendEmail_FullMethodName               = "/api.push.service.v1.Push/SendEmail"
 	Push_GetNotificationStats_FullMethodName    = "/api.push.service.v1.Push/GetNotificationStats"
+	Push_GetThirdPartyFeeStats_FullMethodName   = "/api.push.service.v1.Push/GetThirdPartyFeeStats"
 	Push_UpdateBetTickerConfig_FullMethodName   = "/api.push.service.v1.Push/UpdateBetTickerConfig"
 	Push_ListBetTickerConfig_FullMethodName     = "/api.push.service.v1.Push/ListBetTickerConfig"
 	Push_SendWebPush_FullMethodName             = "/api.push.service.v1.Push/SendWebPush"
@@ -36,6 +37,8 @@ type PushClient interface {
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
 	GetNotificationStats(ctx context.Context, in *GetNotificationStatsRequest, opts ...grpc.CallOption) (*GetNotificationStatsResponse, error)
+	// Get third-party fee statistics (EMAIL + SMS/WhatsApp/Voice) for billing
+	GetThirdPartyFeeStats(ctx context.Context, in *GetThirdPartyFeeStatsRequest, opts ...grpc.CallOption) (*GetThirdPartyFeeStatsResponse, error)
 	// BetTicker Config APIs
 	UpdateBetTickerConfig(ctx context.Context, in *UpdateBetTickerConfigRequest, opts ...grpc.CallOption) (*UpdateBetTickerConfigResponse, error)
 	ListBetTickerConfig(ctx context.Context, in *ListBetTickerConfigRequest, opts ...grpc.CallOption) (*ListBetTickerConfigResponse, error)
@@ -67,6 +70,16 @@ func (c *pushClient) GetNotificationStats(ctx context.Context, in *GetNotificati
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetNotificationStatsResponse)
 	err := c.cc.Invoke(ctx, Push_GetNotificationStats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushClient) GetThirdPartyFeeStats(ctx context.Context, in *GetThirdPartyFeeStatsRequest, opts ...grpc.CallOption) (*GetThirdPartyFeeStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetThirdPartyFeeStatsResponse)
+	err := c.cc.Invoke(ctx, Push_GetThirdPartyFeeStats_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -131,6 +144,8 @@ type PushServer interface {
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
 	GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error)
+	// Get third-party fee statistics (EMAIL + SMS/WhatsApp/Voice) for billing
+	GetThirdPartyFeeStats(context.Context, *GetThirdPartyFeeStatsRequest) (*GetThirdPartyFeeStatsResponse, error)
 	// BetTicker Config APIs
 	UpdateBetTickerConfig(context.Context, *UpdateBetTickerConfigRequest) (*UpdateBetTickerConfigResponse, error)
 	ListBetTickerConfig(context.Context, *ListBetTickerConfigRequest) (*ListBetTickerConfigResponse, error)
@@ -153,6 +168,9 @@ func (UnimplementedPushServer) SendEmail(context.Context, *SendEmailRequest) (*S
 }
 func (UnimplementedPushServer) GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetNotificationStats not implemented")
+}
+func (UnimplementedPushServer) GetThirdPartyFeeStats(context.Context, *GetThirdPartyFeeStatsRequest) (*GetThirdPartyFeeStatsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetThirdPartyFeeStats not implemented")
 }
 func (UnimplementedPushServer) UpdateBetTickerConfig(context.Context, *UpdateBetTickerConfigRequest) (*UpdateBetTickerConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateBetTickerConfig not implemented")
@@ -222,6 +240,24 @@ func _Push_GetNotificationStats_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PushServer).GetNotificationStats(ctx, req.(*GetNotificationStatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Push_GetThirdPartyFeeStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetThirdPartyFeeStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).GetThirdPartyFeeStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_GetThirdPartyFeeStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).GetThirdPartyFeeStats(ctx, req.(*GetThirdPartyFeeStatsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -330,6 +366,10 @@ var Push_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetNotificationStats",
 			Handler:    _Push_GetNotificationStats_Handler,
+		},
+		{
+			MethodName: "GetThirdPartyFeeStats",
+			Handler:    _Push_GetThirdPartyFeeStats_Handler,
 		},
 		{
 			MethodName: "UpdateBetTickerConfig",

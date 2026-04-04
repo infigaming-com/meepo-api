@@ -771,6 +771,275 @@ var _ interface {
 	ErrorName() string
 } = GetNotificationStatsResponseValidationError{}
 
+// Validate checks the field values on GetThirdPartyFeeStatsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetThirdPartyFeeStatsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetThirdPartyFeeStatsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetThirdPartyFeeStatsRequestMultiError, or nil if none found.
+func (m *GetThirdPartyFeeStatsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetThirdPartyFeeStatsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetThirdPartyFeeStatsRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetThirdPartyFeeStatsRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetThirdPartyFeeStatsRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetThirdPartyFeeStatsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetThirdPartyFeeStatsRequestMultiError is an error wrapping multiple
+// validation errors returned by GetThirdPartyFeeStatsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetThirdPartyFeeStatsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetThirdPartyFeeStatsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetThirdPartyFeeStatsRequestMultiError) AllErrors() []error { return m }
+
+// GetThirdPartyFeeStatsRequestValidationError is the validation error returned
+// by GetThirdPartyFeeStatsRequest.Validate if the designated constraints
+// aren't met.
+type GetThirdPartyFeeStatsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetThirdPartyFeeStatsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetThirdPartyFeeStatsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetThirdPartyFeeStatsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetThirdPartyFeeStatsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetThirdPartyFeeStatsRequestValidationError) ErrorName() string {
+	return "GetThirdPartyFeeStatsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetThirdPartyFeeStatsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetThirdPartyFeeStatsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetThirdPartyFeeStatsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetThirdPartyFeeStatsRequestValidationError{}
+
+// Validate checks the field values on GetThirdPartyFeeStatsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetThirdPartyFeeStatsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetThirdPartyFeeStatsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetThirdPartyFeeStatsResponseMultiError, or nil if none found.
+func (m *GetThirdPartyFeeStatsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetThirdPartyFeeStatsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetThirdPartyFeeStatsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetThirdPartyFeeStatsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetThirdPartyFeeStatsResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetThirdPartyFeeStatsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetThirdPartyFeeStatsResponseMultiError is an error wrapping multiple
+// validation errors returned by GetThirdPartyFeeStatsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetThirdPartyFeeStatsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetThirdPartyFeeStatsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetThirdPartyFeeStatsResponseMultiError) AllErrors() []error { return m }
+
+// GetThirdPartyFeeStatsResponseValidationError is the validation error
+// returned by GetThirdPartyFeeStatsResponse.Validate if the designated
+// constraints aren't met.
+type GetThirdPartyFeeStatsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetThirdPartyFeeStatsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetThirdPartyFeeStatsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetThirdPartyFeeStatsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetThirdPartyFeeStatsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetThirdPartyFeeStatsResponseValidationError) ErrorName() string {
+	return "GetThirdPartyFeeStatsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetThirdPartyFeeStatsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetThirdPartyFeeStatsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetThirdPartyFeeStatsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetThirdPartyFeeStatsResponseValidationError{}
+
 // Validate checks the field values on BettingFilterConfig with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -2159,6 +2428,130 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetNotificationStatsResponse_OperatorNotificationStatsValidationError{}
+
+// Validate checks the field values on
+// GetThirdPartyFeeStatsResponse_FeeStatItem with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetThirdPartyFeeStatsResponse_FeeStatItem) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetThirdPartyFeeStatsResponse_FeeStatItem with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetThirdPartyFeeStatsResponse_FeeStatItemMultiError, or nil if none found.
+func (m *GetThirdPartyFeeStatsResponse_FeeStatItem) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetThirdPartyFeeStatsResponse_FeeStatItem) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for ServiceType
+
+	// no validation rules for ProviderName
+
+	// no validation rules for Country
+
+	// no validation rules for Quantity
+
+	// no validation rules for TotalAmount
+
+	// no validation rules for Currency
+
+	if len(errors) > 0 {
+		return GetThirdPartyFeeStatsResponse_FeeStatItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetThirdPartyFeeStatsResponse_FeeStatItemMultiError is an error wrapping
+// multiple validation errors returned by
+// GetThirdPartyFeeStatsResponse_FeeStatItem.ValidateAll() if the designated
+// constraints aren't met.
+type GetThirdPartyFeeStatsResponse_FeeStatItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetThirdPartyFeeStatsResponse_FeeStatItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetThirdPartyFeeStatsResponse_FeeStatItemMultiError) AllErrors() []error { return m }
+
+// GetThirdPartyFeeStatsResponse_FeeStatItemValidationError is the validation
+// error returned by GetThirdPartyFeeStatsResponse_FeeStatItem.Validate if the
+// designated constraints aren't met.
+type GetThirdPartyFeeStatsResponse_FeeStatItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetThirdPartyFeeStatsResponse_FeeStatItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetThirdPartyFeeStatsResponse_FeeStatItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetThirdPartyFeeStatsResponse_FeeStatItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetThirdPartyFeeStatsResponse_FeeStatItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetThirdPartyFeeStatsResponse_FeeStatItemValidationError) ErrorName() string {
+	return "GetThirdPartyFeeStatsResponse_FeeStatItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetThirdPartyFeeStatsResponse_FeeStatItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetThirdPartyFeeStatsResponse_FeeStatItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetThirdPartyFeeStatsResponse_FeeStatItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetThirdPartyFeeStatsResponse_FeeStatItemValidationError{}
 
 // Validate checks the field values on UpdateBetTickerConfigRequest_Item with
 // the rules defined in the proto definition for this message. If any rules
