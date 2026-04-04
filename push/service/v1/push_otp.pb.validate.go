@@ -5022,3 +5022,1360 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListOTPSendLogsResponseValidationError{}
+
+// Validate checks the field values on SMSChannelRate with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SMSChannelRate) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SMSChannelRate with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in SMSChannelRateMultiError,
+// or nil if none found.
+func (m *SMSChannelRate) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SMSChannelRate) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for ProviderId
+
+	// no validation rules for ProviderName
+
+	// no validation rules for Country
+
+	// no validation rules for Channel
+
+	// no validation rules for UnitPrice
+
+	// no validation rules for Currency
+
+	// no validation rules for Enabled
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
+
+	if len(errors) > 0 {
+		return SMSChannelRateMultiError(errors)
+	}
+
+	return nil
+}
+
+// SMSChannelRateMultiError is an error wrapping multiple validation errors
+// returned by SMSChannelRate.ValidateAll() if the designated constraints
+// aren't met.
+type SMSChannelRateMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SMSChannelRateMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SMSChannelRateMultiError) AllErrors() []error { return m }
+
+// SMSChannelRateValidationError is the validation error returned by
+// SMSChannelRate.Validate if the designated constraints aren't met.
+type SMSChannelRateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SMSChannelRateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SMSChannelRateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SMSChannelRateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SMSChannelRateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SMSChannelRateValidationError) ErrorName() string { return "SMSChannelRateValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SMSChannelRateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSMSChannelRate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SMSChannelRateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SMSChannelRateValidationError{}
+
+// Validate checks the field values on CreateSMSChannelRateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateSMSChannelRateRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateSMSChannelRateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateSMSChannelRateRequestMultiError, or nil if none found.
+func (m *CreateSMSChannelRateRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateSMSChannelRateRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for Country
+
+	// no validation rules for Channel
+
+	// no validation rules for UnitPrice
+
+	// no validation rules for Currency
+
+	if len(errors) > 0 {
+		return CreateSMSChannelRateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateSMSChannelRateRequestMultiError is an error wrapping multiple
+// validation errors returned by CreateSMSChannelRateRequest.ValidateAll() if
+// the designated constraints aren't met.
+type CreateSMSChannelRateRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateSMSChannelRateRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateSMSChannelRateRequestMultiError) AllErrors() []error { return m }
+
+// CreateSMSChannelRateRequestValidationError is the validation error returned
+// by CreateSMSChannelRateRequest.Validate if the designated constraints
+// aren't met.
+type CreateSMSChannelRateRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateSMSChannelRateRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateSMSChannelRateRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateSMSChannelRateRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateSMSChannelRateRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateSMSChannelRateRequestValidationError) ErrorName() string {
+	return "CreateSMSChannelRateRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateSMSChannelRateRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateSMSChannelRateRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateSMSChannelRateRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateSMSChannelRateRequestValidationError{}
+
+// Validate checks the field values on CreateSMSChannelRateResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateSMSChannelRateResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateSMSChannelRateResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateSMSChannelRateResponseMultiError, or nil if none found.
+func (m *CreateSMSChannelRateResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateSMSChannelRateResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetRate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateSMSChannelRateResponseValidationError{
+					field:  "Rate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateSMSChannelRateResponseValidationError{
+					field:  "Rate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateSMSChannelRateResponseValidationError{
+				field:  "Rate",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateSMSChannelRateResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateSMSChannelRateResponseMultiError is an error wrapping multiple
+// validation errors returned by CreateSMSChannelRateResponse.ValidateAll() if
+// the designated constraints aren't met.
+type CreateSMSChannelRateResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateSMSChannelRateResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateSMSChannelRateResponseMultiError) AllErrors() []error { return m }
+
+// CreateSMSChannelRateResponseValidationError is the validation error returned
+// by CreateSMSChannelRateResponse.Validate if the designated constraints
+// aren't met.
+type CreateSMSChannelRateResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateSMSChannelRateResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateSMSChannelRateResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateSMSChannelRateResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateSMSChannelRateResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateSMSChannelRateResponseValidationError) ErrorName() string {
+	return "CreateSMSChannelRateResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateSMSChannelRateResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateSMSChannelRateResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateSMSChannelRateResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateSMSChannelRateResponseValidationError{}
+
+// Validate checks the field values on UpdateSMSChannelRateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateSMSChannelRateRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateSMSChannelRateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateSMSChannelRateRequestMultiError, or nil if none found.
+func (m *UpdateSMSChannelRateRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateSMSChannelRateRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if m.UnitPrice != nil {
+		// no validation rules for UnitPrice
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if len(errors) > 0 {
+		return UpdateSMSChannelRateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateSMSChannelRateRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateSMSChannelRateRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateSMSChannelRateRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateSMSChannelRateRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateSMSChannelRateRequestMultiError) AllErrors() []error { return m }
+
+// UpdateSMSChannelRateRequestValidationError is the validation error returned
+// by UpdateSMSChannelRateRequest.Validate if the designated constraints
+// aren't met.
+type UpdateSMSChannelRateRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateSMSChannelRateRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateSMSChannelRateRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateSMSChannelRateRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateSMSChannelRateRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateSMSChannelRateRequestValidationError) ErrorName() string {
+	return "UpdateSMSChannelRateRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateSMSChannelRateRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateSMSChannelRateRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateSMSChannelRateRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateSMSChannelRateRequestValidationError{}
+
+// Validate checks the field values on UpdateSMSChannelRateResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateSMSChannelRateResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateSMSChannelRateResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateSMSChannelRateResponseMultiError, or nil if none found.
+func (m *UpdateSMSChannelRateResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateSMSChannelRateResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetRate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateSMSChannelRateResponseValidationError{
+					field:  "Rate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateSMSChannelRateResponseValidationError{
+					field:  "Rate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateSMSChannelRateResponseValidationError{
+				field:  "Rate",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateSMSChannelRateResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateSMSChannelRateResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateSMSChannelRateResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateSMSChannelRateResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateSMSChannelRateResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateSMSChannelRateResponseMultiError) AllErrors() []error { return m }
+
+// UpdateSMSChannelRateResponseValidationError is the validation error returned
+// by UpdateSMSChannelRateResponse.Validate if the designated constraints
+// aren't met.
+type UpdateSMSChannelRateResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateSMSChannelRateResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateSMSChannelRateResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateSMSChannelRateResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateSMSChannelRateResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateSMSChannelRateResponseValidationError) ErrorName() string {
+	return "UpdateSMSChannelRateResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateSMSChannelRateResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateSMSChannelRateResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateSMSChannelRateResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateSMSChannelRateResponseValidationError{}
+
+// Validate checks the field values on DeleteSMSChannelRateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteSMSChannelRateRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteSMSChannelRateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteSMSChannelRateRequestMultiError, or nil if none found.
+func (m *DeleteSMSChannelRateRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteSMSChannelRateRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteSMSChannelRateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteSMSChannelRateRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteSMSChannelRateRequest.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteSMSChannelRateRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteSMSChannelRateRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteSMSChannelRateRequestMultiError) AllErrors() []error { return m }
+
+// DeleteSMSChannelRateRequestValidationError is the validation error returned
+// by DeleteSMSChannelRateRequest.Validate if the designated constraints
+// aren't met.
+type DeleteSMSChannelRateRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteSMSChannelRateRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteSMSChannelRateRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteSMSChannelRateRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteSMSChannelRateRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteSMSChannelRateRequestValidationError) ErrorName() string {
+	return "DeleteSMSChannelRateRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteSMSChannelRateRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteSMSChannelRateRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteSMSChannelRateRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteSMSChannelRateRequestValidationError{}
+
+// Validate checks the field values on DeleteSMSChannelRateResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteSMSChannelRateResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteSMSChannelRateResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteSMSChannelRateResponseMultiError, or nil if none found.
+func (m *DeleteSMSChannelRateResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteSMSChannelRateResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteSMSChannelRateResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteSMSChannelRateResponseMultiError is an error wrapping multiple
+// validation errors returned by DeleteSMSChannelRateResponse.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteSMSChannelRateResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteSMSChannelRateResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteSMSChannelRateResponseMultiError) AllErrors() []error { return m }
+
+// DeleteSMSChannelRateResponseValidationError is the validation error returned
+// by DeleteSMSChannelRateResponse.Validate if the designated constraints
+// aren't met.
+type DeleteSMSChannelRateResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteSMSChannelRateResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteSMSChannelRateResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteSMSChannelRateResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteSMSChannelRateResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteSMSChannelRateResponseValidationError) ErrorName() string {
+	return "DeleteSMSChannelRateResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteSMSChannelRateResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteSMSChannelRateResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteSMSChannelRateResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteSMSChannelRateResponseValidationError{}
+
+// Validate checks the field values on ListSMSChannelRatesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSMSChannelRatesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSMSChannelRatesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSMSChannelRatesRequestMultiError, or nil if none found.
+func (m *ListSMSChannelRatesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSMSChannelRatesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if m.ProviderId != nil {
+		// no validation rules for ProviderId
+	}
+
+	if m.Country != nil {
+		// no validation rules for Country
+	}
+
+	if m.Channel != nil {
+		// no validation rules for Channel
+	}
+
+	if len(errors) > 0 {
+		return ListSMSChannelRatesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSMSChannelRatesRequestMultiError is an error wrapping multiple
+// validation errors returned by ListSMSChannelRatesRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListSMSChannelRatesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSMSChannelRatesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSMSChannelRatesRequestMultiError) AllErrors() []error { return m }
+
+// ListSMSChannelRatesRequestValidationError is the validation error returned
+// by ListSMSChannelRatesRequest.Validate if the designated constraints aren't met.
+type ListSMSChannelRatesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSMSChannelRatesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSMSChannelRatesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSMSChannelRatesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSMSChannelRatesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSMSChannelRatesRequestValidationError) ErrorName() string {
+	return "ListSMSChannelRatesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSMSChannelRatesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSMSChannelRatesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSMSChannelRatesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSMSChannelRatesRequestValidationError{}
+
+// Validate checks the field values on ListSMSChannelRatesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSMSChannelRatesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSMSChannelRatesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSMSChannelRatesResponseMultiError, or nil if none found.
+func (m *ListSMSChannelRatesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSMSChannelRatesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetRates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListSMSChannelRatesResponseValidationError{
+						field:  fmt.Sprintf("Rates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListSMSChannelRatesResponseValidationError{
+						field:  fmt.Sprintf("Rates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListSMSChannelRatesResponseValidationError{
+					field:  fmt.Sprintf("Rates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return ListSMSChannelRatesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSMSChannelRatesResponseMultiError is an error wrapping multiple
+// validation errors returned by ListSMSChannelRatesResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListSMSChannelRatesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSMSChannelRatesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSMSChannelRatesResponseMultiError) AllErrors() []error { return m }
+
+// ListSMSChannelRatesResponseValidationError is the validation error returned
+// by ListSMSChannelRatesResponse.Validate if the designated constraints
+// aren't met.
+type ListSMSChannelRatesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSMSChannelRatesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSMSChannelRatesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSMSChannelRatesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSMSChannelRatesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSMSChannelRatesResponseValidationError) ErrorName() string {
+	return "ListSMSChannelRatesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSMSChannelRatesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSMSChannelRatesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSMSChannelRatesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSMSChannelRatesResponseValidationError{}
+
+// Validate checks the field values on BatchCreateSMSChannelRatesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *BatchCreateSMSChannelRatesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BatchCreateSMSChannelRatesRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// BatchCreateSMSChannelRatesRequestMultiError, or nil if none found.
+func (m *BatchCreateSMSChannelRatesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchCreateSMSChannelRatesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetRates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BatchCreateSMSChannelRatesRequestValidationError{
+						field:  fmt.Sprintf("Rates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BatchCreateSMSChannelRatesRequestValidationError{
+						field:  fmt.Sprintf("Rates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BatchCreateSMSChannelRatesRequestValidationError{
+					field:  fmt.Sprintf("Rates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return BatchCreateSMSChannelRatesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchCreateSMSChannelRatesRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// BatchCreateSMSChannelRatesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type BatchCreateSMSChannelRatesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchCreateSMSChannelRatesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchCreateSMSChannelRatesRequestMultiError) AllErrors() []error { return m }
+
+// BatchCreateSMSChannelRatesRequestValidationError is the validation error
+// returned by BatchCreateSMSChannelRatesRequest.Validate if the designated
+// constraints aren't met.
+type BatchCreateSMSChannelRatesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchCreateSMSChannelRatesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BatchCreateSMSChannelRatesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BatchCreateSMSChannelRatesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BatchCreateSMSChannelRatesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BatchCreateSMSChannelRatesRequestValidationError) ErrorName() string {
+	return "BatchCreateSMSChannelRatesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BatchCreateSMSChannelRatesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchCreateSMSChannelRatesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchCreateSMSChannelRatesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchCreateSMSChannelRatesRequestValidationError{}
+
+// Validate checks the field values on BatchCreateSMSChannelRatesResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *BatchCreateSMSChannelRatesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BatchCreateSMSChannelRatesResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// BatchCreateSMSChannelRatesResponseMultiError, or nil if none found.
+func (m *BatchCreateSMSChannelRatesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchCreateSMSChannelRatesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetRates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BatchCreateSMSChannelRatesResponseValidationError{
+						field:  fmt.Sprintf("Rates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BatchCreateSMSChannelRatesResponseValidationError{
+						field:  fmt.Sprintf("Rates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BatchCreateSMSChannelRatesResponseValidationError{
+					field:  fmt.Sprintf("Rates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return BatchCreateSMSChannelRatesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchCreateSMSChannelRatesResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// BatchCreateSMSChannelRatesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BatchCreateSMSChannelRatesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchCreateSMSChannelRatesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchCreateSMSChannelRatesResponseMultiError) AllErrors() []error { return m }
+
+// BatchCreateSMSChannelRatesResponseValidationError is the validation error
+// returned by BatchCreateSMSChannelRatesResponse.Validate if the designated
+// constraints aren't met.
+type BatchCreateSMSChannelRatesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchCreateSMSChannelRatesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BatchCreateSMSChannelRatesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BatchCreateSMSChannelRatesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BatchCreateSMSChannelRatesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BatchCreateSMSChannelRatesResponseValidationError) ErrorName() string {
+	return "BatchCreateSMSChannelRatesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BatchCreateSMSChannelRatesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchCreateSMSChannelRatesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchCreateSMSChannelRatesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchCreateSMSChannelRatesResponseValidationError{}

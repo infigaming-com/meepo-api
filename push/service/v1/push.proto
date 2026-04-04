@@ -13,6 +13,9 @@ service Push {
 	// Returns notification counts grouped by operator ID
 	rpc GetNotificationStats(GetNotificationStatsRequest) returns (GetNotificationStatsResponse) {}
 
+	// Get third-party fee statistics (EMAIL + SMS/WhatsApp/Voice) for billing
+	rpc GetThirdPartyFeeStats(GetThirdPartyFeeStatsRequest) returns (GetThirdPartyFeeStatsResponse) {}
+
 	// BetTicker Config APIs
 	rpc UpdateBetTickerConfig(UpdateBetTickerConfigRequest) returns (UpdateBetTickerConfigResponse) {}
 	rpc ListBetTickerConfig(ListBetTickerConfigRequest) returns (ListBetTickerConfigResponse) {}
@@ -75,6 +78,30 @@ message GetNotificationStatsResponse {
 		int32 count = 4; // Number of notifications for this operator
 	}
 	repeated OperatorNotificationStats operatorStats = 1;
+}
+
+// ============== Third Party Fee Stats ==============
+
+message GetThirdPartyFeeStatsRequest {
+	TimeRange timeRange = 1;
+	repeated int64 operatorIds = 2;
+	repeated int64 companyOperatorIds = 3;
+	repeated int64 retailerOperatorIds = 4;
+}
+
+message GetThirdPartyFeeStatsResponse {
+	message FeeStatItem {
+		int64 operatorId = 1;
+		int64 companyOperatorId = 2;
+		int64 retailerOperatorId = 3;
+		string serviceType = 4;       // "EMAIL", "OTP_SMS", "OTP_WHATSAPP", "OTP_VOICE"
+		string providerName = 5;      // Provider name (for SMS types, empty for EMAIL)
+		string country = 6;           // Country code (for SMS types, empty for EMAIL)
+		int64 quantity = 7;           // Number of messages sent
+		string totalAmount = 8;       // Total cost (decimal string, pre-calculated)
+		string currency = 9;
+	}
+	repeated FeeStatItem items = 1;
 }
 
 // ============== BetTicker Config Messages ==============
