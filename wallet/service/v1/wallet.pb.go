@@ -13601,8 +13601,14 @@ type CompanyFinancialSummary struct {
 	BankrollUsd string `protobuf:"bytes,16,opt,name=bankroll_usd,json=bankrollUsd,proto3" json:"bankroll_usd,omitempty"`
 	// [Time-filtered] Pending amount frozen from sub-operators for affiliate withdrawals (operator_affiliate_withdraw_freeze with no status on sub-operators), absolute value in USD
 	CustodyPendingAffiliateWithdrawUsd string `protobuf:"bytes,17,opt,name=custody_pending_affiliate_withdraw_usd,json=custodyPendingAffiliateWithdrawUsd,proto3" json:"custody_pending_affiliate_withdraw_usd,omitempty"`
-	unknownFields                      protoimpl.UnknownFields
-	sizeCache                          protoimpl.SizeCache
+	// [Time-filtered] Settled affiliate withdrawals from sub-operators (operator_affiliate_withdraw_freeze with status settled on sub-operators), absolute value in USD
+	CustodyAffiliateWithdrawUsd string `protobuf:"bytes,18,opt,name=custody_affiliate_withdraw_usd,json=custodyAffiliateWithdrawUsd,proto3" json:"custody_affiliate_withdraw_usd,omitempty"`
+	// [NOT time-filtered] Settled affiliate withdrawals from company's own wallet (legacy: operator_affiliate_withdraw_freeze with status settled on company operator), absolute value in USD
+	CompanyAffiliateWithdrawUsd string `protobuf:"bytes,19,opt,name=company_affiliate_withdraw_usd,json=companyAffiliateWithdrawUsd,proto3" json:"company_affiliate_withdraw_usd,omitempty"`
+	// [NOT time-filtered] Settled company's own payment withdrawals (operator_payment_withdraw_freeze with status settled on company operator), absolute value in USD
+	CompanyWithdrawUsd string `protobuf:"bytes,20,opt,name=company_withdraw_usd,json=companyWithdrawUsd,proto3" json:"company_withdraw_usd,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *CompanyFinancialSummary) Reset() {
@@ -13750,6 +13756,27 @@ func (x *CompanyFinancialSummary) GetBankrollUsd() string {
 func (x *CompanyFinancialSummary) GetCustodyPendingAffiliateWithdrawUsd() string {
 	if x != nil {
 		return x.CustodyPendingAffiliateWithdrawUsd
+	}
+	return ""
+}
+
+func (x *CompanyFinancialSummary) GetCustodyAffiliateWithdrawUsd() string {
+	if x != nil {
+		return x.CustodyAffiliateWithdrawUsd
+	}
+	return ""
+}
+
+func (x *CompanyFinancialSummary) GetCompanyAffiliateWithdrawUsd() string {
+	if x != nil {
+		return x.CompanyAffiliateWithdrawUsd
+	}
+	return ""
+}
+
+func (x *CompanyFinancialSummary) GetCompanyWithdrawUsd() string {
+	if x != nil {
+		return x.CompanyWithdrawUsd
 	}
 	return ""
 }
@@ -19266,7 +19293,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tsummaries\x18\x01 \x03(\v2K.api.wallet.service.v1.ListCompanyFinancialSummariesResponse.SummariesEntryR\tsummaries\x1al\n" +
 	"\x0eSummariesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x03R\x03key\x12D\n" +
-	"\x05value\x18\x02 \x01(\v2..api.wallet.service.v1.CompanyFinancialSummaryR\x05value:\x028\x01\"\xca\a\n" +
+	"\x05value\x18\x02 \x01(\v2..api.wallet.service.v1.CompanyFinancialSummaryR\x05value:\x028\x01\"\x86\t\n" +
 	"\x17CompanyFinancialSummary\x12.\n" +
 	"\x13custody_balance_usd\x18\x01 \x01(\tR\x11custodyBalanceUsd\x122\n" +
 	"\x15internal_deposits_usd\x18\x02 \x01(\tR\x13internalDepositsUsd\x12*\n" +
@@ -19286,7 +19313,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x11manual_credit_usd\x18\x0e \x01(\tR\x0fmanualCreditUsd\x12(\n" +
 	"\x10manual_debit_usd\x18\x0f \x01(\tR\x0emanualDebitUsd\x12!\n" +
 	"\fbankroll_usd\x18\x10 \x01(\tR\vbankrollUsd\x12R\n" +
-	"&custody_pending_affiliate_withdraw_usd\x18\x11 \x01(\tR\"custodyPendingAffiliateWithdrawUsd\"\xd4\x03\n" +
+	"&custody_pending_affiliate_withdraw_usd\x18\x11 \x01(\tR\"custodyPendingAffiliateWithdrawUsd\x12C\n" +
+	"\x1ecustody_affiliate_withdraw_usd\x18\x12 \x01(\tR\x1bcustodyAffiliateWithdrawUsd\x12C\n" +
+	"\x1ecompany_affiliate_withdraw_usd\x18\x13 \x01(\tR\x1bcompanyAffiliateWithdrawUsd\x120\n" +
+	"\x14company_withdraw_usd\x18\x14 \x01(\tR\x12companyWithdrawUsd\"\xd4\x03\n" +
 	"\x1cGameBatchBetAndSettleRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +

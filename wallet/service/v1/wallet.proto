@@ -2373,6 +2373,12 @@ message CompanyFinancialSummary {
 	string bankroll_usd = 16;
 	// [Time-filtered] Pending amount frozen from sub-operators for affiliate withdrawals (operator_affiliate_withdraw_freeze with no status on sub-operators), absolute value in USD
 	string custody_pending_affiliate_withdraw_usd = 17;
+	// [Time-filtered] Settled affiliate withdrawals from sub-operators (operator_affiliate_withdraw_freeze with status settled on sub-operators), absolute value in USD
+	string custody_affiliate_withdraw_usd = 18;
+	// [NOT time-filtered] Settled affiliate withdrawals from company's own wallet (legacy: operator_affiliate_withdraw_freeze with status settled on company operator), absolute value in USD
+	string company_affiliate_withdraw_usd = 19;
+	// [NOT time-filtered] Settled company's own payment withdrawals (operator_payment_withdraw_freeze with status settled on company operator), absolute value in USD
+	string company_withdraw_usd = 20;
 }
 
 // ============================================================================
