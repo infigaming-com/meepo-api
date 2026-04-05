@@ -34485,10 +34485,23 @@ components:
                     description: total user wallet balances under this operator in USD
                 operatorPendingFreezeUsd:
                     type: string
-                    description: pending freeze from operator_balance_transaction in USD
+                    description: aggregated pending freeze in USD (sum of the 4 breakdown fields below)
                 bankrollUsd:
                     type: string
                     description: bankroll amount in USD (for co-operation mode operators)
+                operatorPendingUserWithdrawFreezeUsd:
+                    type: string
+                    description: breakdown of operator_pending_freeze_usd by transaction type (absolute values)
+                operatorPendingAffiliateWithdrawFreezeUsd:
+                    type: string
+                operatorPendingPaymentWithdrawFreezeUsd:
+                    type: string
+                operatorBalanceFreezeUsd:
+                    type: string
+                    description: operator_balance_freeze (System-initiated manual freeze)
+                pendingBetsUsd:
+                    type: string
+                    description: total unpaid bets amount in USD (pending game bets not yet settled, already deducted from withdrawable_amount_usd)
         api.wallet.service.v1.PromoCodeBonusMoneyConfig:
             type: object
             properties:
