@@ -2478,10 +2478,18 @@ message OperatorWithdrawableAmount {
 	string withdrawable_amount_usd = 11;
 	// total user wallet balances under this operator in USD
 	string user_balance_usd = 12;
-	// pending freeze from operator_balance_transaction in USD
+	// aggregated pending freeze in USD (sum of the 4 breakdown fields below)
 	string operator_pending_freeze_usd = 14;
 	// bankroll amount in USD (for co-operation mode operators)
 	string bankroll_usd = 15;
+	// breakdown of operator_pending_freeze_usd by transaction type (absolute values)
+	string operator_pending_user_withdraw_freeze_usd = 16;
+	string operator_pending_affiliate_withdraw_freeze_usd = 17;
+	string operator_pending_payment_withdraw_freeze_usd = 18;
+	// operator_balance_freeze (System-initiated manual freeze)
+	string operator_balance_freeze_usd = 19;
+	// total unpaid bets amount in USD (pending game bets not yet settled, already deducted from withdrawable_amount_usd)
+	string pending_bets_usd = 20;
 }
 
 message ListOperatorWithdrawableAmountsResponse {
