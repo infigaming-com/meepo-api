@@ -28417,6 +28417,29 @@ components:
                 totalAmountUsd:
                     type: string
                     description: Total unpaid bet amount in USD
+                operatorSummaries:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListUnpaidBetsResponse_OperatorUnpaidSummary'
+                    description: Per-operator aggregated summaries
+        api.game.service.v1.ListUnpaidBetsResponse_OperatorUnpaidSummary:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                unpaidBetCount:
+                    type: integer
+                    format: int32
+                totalAmount:
+                    type: string
+                totalAmountUsd:
+                    type: string
+                unpaidUserCount:
+                    type: integer
+                    format: int32
+            description: Per-operator unpaid bet summary
         api.game.service.v1.ListUnpaidBetsResponse_UnpaidBet:
             type: object
             properties:
