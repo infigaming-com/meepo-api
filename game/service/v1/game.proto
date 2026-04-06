@@ -303,6 +303,11 @@ service Game {
 	rpc GetUserNgr(GetUserNgrRequest) returns (GetUserNgrResponse) {
 	}
 
+	// Get estimated game provider revenue share from pending (unsettled) bets
+	// Assumes all pending bets are lost by the player (payout = 0, GGR = BetAmount)
+	rpc GetPendingBetsEstimatedProviderRS(GetPendingBetsEstimatedProviderRSRequest) returns (GetPendingBetsEstimatedProviderRSResponse) {
+	}
+
 	// ============== Game Group (RTP Variants) APIs ==============
 
 	rpc ListGameGroups(ListGameGroupsRequest) returns (ListGameGroupsResponse) {
@@ -2568,4 +2573,17 @@ message PreviewRTPRoutingResponse {
 	int64 matched_segment_id = 6;
 	int64 matched_strategy_id = 7;
 	repeated int64 user_segment_ids = 8; // segments the user belongs to
+}
+
+// ============== Pending Bets Estimated Provider RS ==============
+
+message GetPendingBetsEstimatedProviderRSRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message GetPendingBetsEstimatedProviderRSResponse {
+	// Total estimated provider RS in reporting currency
+	string total_estimated_provider_rs = 1;
+	// Total estimated provider RS in USD
+	string total_estimated_provider_rs_usd = 2;
 }
