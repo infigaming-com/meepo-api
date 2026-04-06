@@ -5872,6 +5872,101 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.SetSwapFeeSettingsResponse'
+    /v1/backoffice/otp/channel-rate/batch-create:
+        post:
+            tags:
+                - BackofficeOTP
+            description: BatchCreateSMSChannelRates creates multiple rate entries at once.
+            operationId: BackofficeOTP_BatchCreateSMSChannelRates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BatchCreateSMSChannelRatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.BatchCreateSMSChannelRatesResponse'
+    /v1/backoffice/otp/channel-rate/create:
+        post:
+            tags:
+                - BackofficeOTP
+            description: CreateSMSChannelRate creates a per-message cost entry for a provider+country+channel.
+            operationId: BackofficeOTP_CreateSMSChannelRate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateSMSChannelRateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.CreateSMSChannelRateResponse'
+    /v1/backoffice/otp/channel-rate/delete:
+        post:
+            tags:
+                - BackofficeOTP
+            description: DeleteSMSChannelRate permanently removes a rate entry.
+            operationId: BackofficeOTP_DeleteSMSChannelRate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteSMSChannelRateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.DeleteSMSChannelRateResponse'
+    /v1/backoffice/otp/channel-rate/list:
+        post:
+            tags:
+                - BackofficeOTP
+            description: ListSMSChannelRates lists rate entries with optional filters.
+            operationId: BackofficeOTP_ListSMSChannelRates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSMSChannelRatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListSMSChannelRatesResponse'
+    /v1/backoffice/otp/channel-rate/update:
+        post:
+            tags:
+                - BackofficeOTP
+            description: UpdateSMSChannelRate partially updates an existing rate entry.
+            operationId: BackofficeOTP_UpdateSMSChannelRate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSMSChannelRateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateSMSChannelRateResponse'
     /v1/backoffice/otp/provider-binding/check-country:
         post:
             tags:
@@ -15112,6 +15207,33 @@ components:
                     type: string
                 operatorName:
                     type: string
+                playerWithdrawals:
+                    type: string
+                    description: Wallet financial summary fields
+                custodyPendingCompanyWithdrawals:
+                    type: string
+                pendingPlayerWithdrawals:
+                    type: string
+                swapFee:
+                    type: string
+                manualCredit:
+                    type: string
+                manualDebit:
+                    type: string
+                bankroll:
+                    type: string
+                companyPendingWithdraw:
+                    type: string
+                companyPendingAffiliateWithdraw:
+                    type: string
+                custodyPendingAffiliateWithdraw:
+                    type: string
+                custodyAffiliateWithdraw:
+                    type: string
+                companyAffiliateWithdraw:
+                    type: string
+                companyWithdraw:
+                    type: string
         api.backoffice.service.v1.BankAccountListRequest:
             type: object
             properties:
@@ -15133,6 +15255,18 @@ components:
                     type: string
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.BatchCreateSMSChannelRatesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
+                rates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.CreateSMSChannelRateRequest'
+            description: Batch create multiple rate entries.
         api.backoffice.service.v1.Bet:
             type: object
             properties:
@@ -16069,6 +16203,24 @@ components:
         api.backoffice.service.v1.CreateRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.CreateSMSChannelRateRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
+                providerId:
+                    type: string
+                country:
+                    type: string
+                channel:
+                    type: string
+                unitPrice:
+                    type: string
+                currency:
+                    type: string
+            description: Create a per-message cost entry for a provider+country+channel.
         api.backoffice.service.v1.CreateSegmentRequest:
             type: object
             properties:
@@ -16572,6 +16724,16 @@ components:
         api.backoffice.service.v1.DeleteRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteSMSChannelRateRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
+                id:
+                    type: string
+            description: Delete a rate entry by ID.
         api.backoffice.service.v1.DeleteSegmentRequest:
             type: object
             properties:
@@ -17258,6 +17420,18 @@ components:
                 bankroll:
                     type: string
                     description: Bankroll amount in USD (placeholder)
+                custodyPendingAffiliateWithdraw:
+                    type: string
+                    description: Pending affiliate withdraw freeze on sub-operators
+                custodyAffiliateWithdraw:
+                    type: string
+                    description: Settled affiliate withdrawals from sub-operators
+                companyAffiliateWithdraw:
+                    type: string
+                    description: Settled affiliate withdrawals from company's own wallet
+                companyWithdraw:
+                    type: string
+                    description: Settled company's own payment withdrawals
         api.backoffice.service.v1.GetBalancesSummaryRequest:
             type: object
             properties:
@@ -21904,6 +22078,26 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListSMSChannelRatesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
+                providerId:
+                    type: string
+                country:
+                    type: string
+                channel:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: List rate entries with optional filters and pagination.
         api.backoffice.service.v1.ListSegmentsRequest:
             type: object
             properties:
@@ -25116,6 +25310,22 @@ components:
         api.backoffice.service.v1.UpdateRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateSMSChannelRateRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
+                id:
+                    type: string
+                unitPrice:
+                    type: string
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+            description: Partially update an existing rate entry.
         api.backoffice.service.v1.UpdateSegmentRequest:
             type: object
             properties:
@@ -28259,6 +28469,29 @@ components:
                 totalAmountUsd:
                     type: string
                     description: Total unpaid bet amount in USD
+                operatorSummaries:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListUnpaidBetsResponse_OperatorUnpaidSummary'
+                    description: Per-operator aggregated summaries
+        api.game.service.v1.ListUnpaidBetsResponse_OperatorUnpaidSummary:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                unpaidBetCount:
+                    type: integer
+                    format: int32
+                totalAmount:
+                    type: string
+                totalAmountUsd:
+                    type: string
+                unpaidUserCount:
+                    type: integer
+                    format: int32
+            description: Per-operator unpaid bet summary
         api.game.service.v1.ListUnpaidBetsResponse_UnpaidBet:
             type: object
             properties:
@@ -28572,6 +28805,13 @@ components:
                 lobbyUrl:
                     type: string
                     description: URL to redirect user to lobby.
+        api.push.service.v1.BatchCreateSMSChannelRatesResponse:
+            type: object
+            properties:
+                rates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.SMSChannelRate'
         api.push.service.v1.BettingFilterConfig:
             type: object
             properties:
@@ -28659,6 +28899,24 @@ components:
             properties:
                 template:
                     $ref: '#/components/schemas/api.push.service.v1.OTPTemplateInfo'
+        api.push.service.v1.CreateSMSChannelRateRequest:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                country:
+                    type: string
+                channel:
+                    type: string
+                unitPrice:
+                    type: string
+                currency:
+                    type: string
+        api.push.service.v1.CreateSMSChannelRateResponse:
+            type: object
+            properties:
+                rate:
+                    $ref: '#/components/schemas/api.push.service.v1.SMSChannelRate'
         api.push.service.v1.CurrencyCondition:
             type: object
             properties:
@@ -28694,6 +28952,9 @@ components:
             type: object
             properties: {}
         api.push.service.v1.DeleteOTPTemplateResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.DeleteSMSChannelRateResponse:
             type: object
             properties: {}
         api.push.service.v1.GetNotificationChannelRequest:
@@ -28941,6 +29202,16 @@ components:
                     type: integer
                     format: int32
                 pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListSMSChannelRatesResponse:
+            type: object
+            properties:
+                rates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.SMSChannelRate'
+                total:
                     type: integer
                     format: int32
         api.push.service.v1.MessageTypeInfo:
@@ -29323,6 +29594,32 @@ components:
                  specific OTP Provider and scoped to a business scenario (template_type).
                  Templates are resolved per (operator, country, template_type, language) with
                  fallback to "global" country and "en" language.
+        api.push.service.v1.SMSChannelRate:
+            type: object
+            properties:
+                id:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                country:
+                    type: string
+                channel:
+                    type: string
+                unitPrice:
+                    type: string
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: |-
+                SMSChannelRate represents the per-message cost for a specific provider+country+channel combination.
+                 Used to track and calculate SMS/WhatsApp/Voice delivery costs.
         api.push.service.v1.SaveChannelRulesRequest:
             type: object
             properties:
@@ -29448,6 +29745,11 @@ components:
         api.push.service.v1.UpdateOTPTemplateResponse:
             type: object
             properties: {}
+        api.push.service.v1.UpdateSMSChannelRateResponse:
+            type: object
+            properties:
+                rate:
+                    $ref: '#/components/schemas/api.push.service.v1.SMSChannelRate'
         api.report.service.v1.GetDepositSummariesRequest:
             type: object
             properties:
@@ -34348,15 +34650,22 @@ components:
                     type: string
                 withdrawableAmountUsd:
                     type: string
-                userBalanceUsd:
-                    type: string
-                    description: total user wallet balances under this operator in USD
                 operatorPendingFreezeUsd:
                     type: string
-                    description: pending freeze from operator_balance_transaction in USD
+                    description: aggregated pending freeze in USD (sum of the 4 breakdown fields below)
                 bankrollUsd:
                     type: string
                     description: bankroll amount in USD (for co-operation mode operators)
+                operatorPendingUserWithdrawFreezeUsd:
+                    type: string
+                    description: breakdown of operator_pending_freeze_usd by transaction type (absolute values)
+                operatorPendingAffiliateWithdrawFreezeUsd:
+                    type: string
+                operatorPendingPaymentWithdrawFreezeUsd:
+                    type: string
+                operatorBalanceFreezeUsd:
+                    type: string
+                    description: operator_balance_freeze (System-initiated manual freeze)
         api.wallet.service.v1.PromoCodeBonusMoneyConfig:
             type: object
             properties:

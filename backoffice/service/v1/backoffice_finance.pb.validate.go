@@ -4195,6 +4195,14 @@ func (m *GetBalanceSummaryResponse) validate(all bool) error {
 
 	// no validation rules for Bankroll
 
+	// no validation rules for CustodyPendingAffiliateWithdraw
+
+	// no validation rules for CustodyAffiliateWithdraw
+
+	// no validation rules for CompanyAffiliateWithdraw
+
+	// no validation rules for CompanyWithdraw
+
 	if len(errors) > 0 {
 		return GetBalanceSummaryResponseMultiError(errors)
 	}
@@ -4617,6 +4625,32 @@ func (m *BalancesSummaryRow) validate(all bool) error {
 	// no validation rules for OperatorId
 
 	// no validation rules for OperatorName
+
+	// no validation rules for PlayerWithdrawals
+
+	// no validation rules for CustodyPendingCompanyWithdrawals
+
+	// no validation rules for PendingPlayerWithdrawals
+
+	// no validation rules for SwapFee
+
+	// no validation rules for ManualCredit
+
+	// no validation rules for ManualDebit
+
+	// no validation rules for Bankroll
+
+	// no validation rules for CompanyPendingWithdraw
+
+	// no validation rules for CompanyPendingAffiliateWithdraw
+
+	// no validation rules for CustodyPendingAffiliateWithdraw
+
+	// no validation rules for CustodyAffiliateWithdraw
+
+	// no validation rules for CompanyAffiliateWithdraw
+
+	// no validation rules for CompanyWithdraw
 
 	if len(errors) > 0 {
 		return BalancesSummaryRowMultiError(errors)

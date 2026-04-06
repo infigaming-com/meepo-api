@@ -73,6 +73,13 @@ service PushOTP {
 
   // ====== Backoffice: Send logs ======
   rpc ListOTPSendLogs(ListOTPSendLogsRequest) returns (ListOTPSendLogsResponse) {}
+
+  // ====== SMS Channel Rate CRUD ======
+  rpc CreateSMSChannelRate(CreateSMSChannelRateRequest) returns (CreateSMSChannelRateResponse) {}
+  rpc UpdateSMSChannelRate(UpdateSMSChannelRateRequest) returns (UpdateSMSChannelRateResponse) {}
+  rpc DeleteSMSChannelRate(DeleteSMSChannelRateRequest) returns (DeleteSMSChannelRateResponse) {}
+  rpc ListSMSChannelRates(ListSMSChannelRatesRequest) returns (ListSMSChannelRatesResponse) {}
+  rpc BatchCreateSMSChannelRates(BatchCreateSMSChannelRatesRequest) returns (BatchCreateSMSChannelRatesResponse) {}
 }
 
 // ============ Enums ============
@@ -739,4 +746,71 @@ message ListOTPSendLogsResponse {
   int32 total = 2;
   int32 page = 3;
   int32 page_size = 4;
+}
+
+// ============ SMS Channel Rate CRUD ============
+
+// SMSChannelRate represents the per-message cost for a specific provider+country+channel combination.
+// Used to track and calculate SMS/WhatsApp/Voice delivery costs.
+message SMSChannelRate {
+  int64 id = 1;
+  int64 provider_id = 2;
+  string provider_name = 3;       // Read-only, populated from join
+  string country = 4;             // ISO 2-letter code or "global" as fallback
+  string channel = 5;             // "sms", "whatsapp", "voice"
+  string unit_price = 6;          // Decimal string (e.g., "0.05")
+  string currency = 7;
+  bool enabled = 8;
+  int64 created_at = 9;
+  int64 updated_at = 10;
+}
+
+message CreateSMSChannelRateRequest {
+  int64 provider_id = 1;
+  string country = 2;
+  string channel = 3;
+  string unit_price = 4;
+  string currency = 5;
+}
+
+message CreateSMSChannelRateResponse {
+  SMSChannelRate rate = 1;
+}
+
+message UpdateSMSChannelRateRequest {
+  int64 id = 1;
+  optional string unit_price = 2;
+  optional string currency = 3;
+  optional bool enabled = 4;
+}
+
+message UpdateSMSChannelRateResponse {
+  SMSChannelRate rate = 1;
+}
+
+message DeleteSMSChannelRateRequest {
+  int64 id = 1;
+}
+
+message DeleteSMSChannelRateResponse {}
+
+message ListSMSChannelRatesRequest {
+  optional int64 provider_id = 1;
+  optional string country = 2;
+  optional string channel = 3;
+  int32 page = 4;
+  int32 page_size = 5;
+}
+
+message ListSMSChannelRatesResponse {
+  repeated SMSChannelRate rates = 1;
+  int32 total = 2;
+}
+
+message BatchCreateSMSChannelRatesRequest {
+  repeated CreateSMSChannelRateRequest rates = 1;
+}
+
+message BatchCreateSMSChannelRatesResponse {
+  repeated SMSChannelRate rates = 1;
 }

@@ -10177,6 +10177,40 @@ func (m *ListUnpaidBetsResponse) validate(all bool) error {
 
 	// no validation rules for TotalAmountUsd
 
+	for idx, item := range m.GetOperatorSummaries() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUnpaidBetsResponseValidationError{
+						field:  fmt.Sprintf("OperatorSummaries[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUnpaidBetsResponseValidationError{
+						field:  fmt.Sprintf("OperatorSummaries[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUnpaidBetsResponseValidationError{
+					field:  fmt.Sprintf("OperatorSummaries[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return ListUnpaidBetsResponseMultiError(errors)
 	}
@@ -31143,6 +31177,125 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListUnpaidBetsResponse_UnpaidBetValidationError{}
+
+// Validate checks the field values on
+// ListUnpaidBetsResponse_OperatorUnpaidSummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListUnpaidBetsResponse_OperatorUnpaidSummary) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListUnpaidBetsResponse_OperatorUnpaidSummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ListUnpaidBetsResponse_OperatorUnpaidSummaryMultiError, or nil if none found.
+func (m *ListUnpaidBetsResponse_OperatorUnpaidSummary) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUnpaidBetsResponse_OperatorUnpaidSummary) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for UnpaidBetCount
+
+	// no validation rules for TotalAmount
+
+	// no validation rules for TotalAmountUsd
+
+	// no validation rules for UnpaidUserCount
+
+	if len(errors) > 0 {
+		return ListUnpaidBetsResponse_OperatorUnpaidSummaryMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUnpaidBetsResponse_OperatorUnpaidSummaryMultiError is an error wrapping
+// multiple validation errors returned by
+// ListUnpaidBetsResponse_OperatorUnpaidSummary.ValidateAll() if the
+// designated constraints aren't met.
+type ListUnpaidBetsResponse_OperatorUnpaidSummaryMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUnpaidBetsResponse_OperatorUnpaidSummaryMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUnpaidBetsResponse_OperatorUnpaidSummaryMultiError) AllErrors() []error { return m }
+
+// ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError is the
+// validation error returned by
+// ListUnpaidBetsResponse_OperatorUnpaidSummary.Validate if the designated
+// constraints aren't met.
+type ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError) ErrorName() string {
+	return "ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUnpaidBetsResponse_OperatorUnpaidSummary.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUnpaidBetsResponse_OperatorUnpaidSummaryValidationError{}
 
 // Validate checks the field values on ListMultipleBetsResponse_MultipleBet
 // with the rules defined in the proto definition for this message. If any

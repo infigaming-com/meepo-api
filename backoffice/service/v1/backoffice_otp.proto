@@ -179,6 +179,48 @@ service BackofficeOTP {
     };
   }
 
+  // ====== SMS Channel Rate Management ======
+
+  // CreateSMSChannelRate creates a per-message cost entry for a provider+country+channel.
+  rpc CreateSMSChannelRate(CreateSMSChannelRateRequest) returns (api.push.service.v1.CreateSMSChannelRateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/channel-rate/create"
+      body: "*"
+    };
+  }
+
+  // UpdateSMSChannelRate partially updates an existing rate entry.
+  rpc UpdateSMSChannelRate(UpdateSMSChannelRateRequest) returns (api.push.service.v1.UpdateSMSChannelRateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/channel-rate/update"
+      body: "*"
+    };
+  }
+
+  // DeleteSMSChannelRate permanently removes a rate entry.
+  rpc DeleteSMSChannelRate(DeleteSMSChannelRateRequest) returns (api.push.service.v1.DeleteSMSChannelRateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/channel-rate/delete"
+      body: "*"
+    };
+  }
+
+  // ListSMSChannelRates lists rate entries with optional filters.
+  rpc ListSMSChannelRates(ListSMSChannelRatesRequest) returns (api.push.service.v1.ListSMSChannelRatesResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/channel-rate/list"
+      body: "*"
+    };
+  }
+
+  // BatchCreateSMSChannelRates creates multiple rate entries at once.
+  rpc BatchCreateSMSChannelRates(BatchCreateSMSChannelRatesRequest) returns (api.push.service.v1.BatchCreateSMSChannelRatesResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/channel-rate/batch-create"
+      body: "*"
+    };
+  }
+
   // ====== Provider Binding Management ======
 
   // CreateOTPProviderBinding binds a provider to an operator+country for routing.
@@ -810,6 +852,54 @@ message SyncOTPTemplateStatusRequest {
   api.common.OperatorContext target_operator_context = 1;
   // Template ID to sync status for
   int64 id = 2;
+}
+
+// ============ SMS Channel Rate Management ============
+
+// Create a per-message cost entry for a provider+country+channel.
+message CreateSMSChannelRateRequest {
+  // Target operator context for permission check.
+  api.common.OperatorContext target_operator_context = 1;
+  int64 provider_id = 2;
+  string country = 3;
+  string channel = 4;
+  string unit_price = 5;
+  string currency = 6;
+}
+
+// Partially update an existing rate entry.
+message UpdateSMSChannelRateRequest {
+  // Target operator context for permission check.
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  optional string unit_price = 3;
+  optional string currency = 4;
+  optional bool enabled = 5;
+}
+
+// Delete a rate entry by ID.
+message DeleteSMSChannelRateRequest {
+  // Target operator context for permission check.
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// List rate entries with optional filters and pagination.
+message ListSMSChannelRatesRequest {
+  // Target operator context for permission check.
+  api.common.OperatorContext target_operator_context = 1;
+  optional int64 provider_id = 2;
+  optional string country = 3;
+  optional string channel = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
+// Batch create multiple rate entries.
+message BatchCreateSMSChannelRatesRequest {
+  // Target operator context for permission check.
+  api.common.OperatorContext target_operator_context = 1;
+  repeated api.push.service.v1.CreateSMSChannelRateRequest rates = 2;
 }
 
 // ============ Send Logs ============

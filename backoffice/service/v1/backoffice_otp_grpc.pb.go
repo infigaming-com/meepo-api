@@ -20,24 +20,29 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeOTP_CreateOTPProvider_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPProvider"
-	BackofficeOTP_UpdateOTPProvider_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPProvider"
-	BackofficeOTP_DeleteOTPProvider_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPProvider"
-	BackofficeOTP_GetOTPProvider_FullMethodName           = "/api.backoffice.service.v1.BackofficeOTP/GetOTPProvider"
-	BackofficeOTP_ListOTPProviders_FullMethodName         = "/api.backoffice.service.v1.BackofficeOTP/ListOTPProviders"
-	BackofficeOTP_CreateOTPProviderBinding_FullMethodName = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPProviderBinding"
-	BackofficeOTP_UpdateOTPProviderBinding_FullMethodName = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPProviderBinding"
-	BackofficeOTP_DeleteOTPProviderBinding_FullMethodName = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPProviderBinding"
-	BackofficeOTP_ListOTPProviderBindings_FullMethodName  = "/api.backoffice.service.v1.BackofficeOTP/ListOTPProviderBindings"
-	BackofficeOTP_ListOTPBindingCountries_FullMethodName  = "/api.backoffice.service.v1.BackofficeOTP/ListOTPBindingCountries"
-	BackofficeOTP_CheckOTPBindingCountry_FullMethodName   = "/api.backoffice.service.v1.BackofficeOTP/CheckOTPBindingCountry"
-	BackofficeOTP_CreateOTPTemplate_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPTemplate"
-	BackofficeOTP_UpdateOTPTemplate_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPTemplate"
-	BackofficeOTP_DeleteOTPTemplate_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPTemplate"
-	BackofficeOTP_GetOTPTemplate_FullMethodName           = "/api.backoffice.service.v1.BackofficeOTP/GetOTPTemplate"
-	BackofficeOTP_ListOTPTemplates_FullMethodName         = "/api.backoffice.service.v1.BackofficeOTP/ListOTPTemplates"
-	BackofficeOTP_SyncOTPTemplateStatus_FullMethodName    = "/api.backoffice.service.v1.BackofficeOTP/SyncOTPTemplateStatus"
-	BackofficeOTP_ListOTPSendLogs_FullMethodName          = "/api.backoffice.service.v1.BackofficeOTP/ListOTPSendLogs"
+	BackofficeOTP_CreateOTPProvider_FullMethodName          = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPProvider"
+	BackofficeOTP_UpdateOTPProvider_FullMethodName          = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPProvider"
+	BackofficeOTP_DeleteOTPProvider_FullMethodName          = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPProvider"
+	BackofficeOTP_GetOTPProvider_FullMethodName             = "/api.backoffice.service.v1.BackofficeOTP/GetOTPProvider"
+	BackofficeOTP_ListOTPProviders_FullMethodName           = "/api.backoffice.service.v1.BackofficeOTP/ListOTPProviders"
+	BackofficeOTP_CreateSMSChannelRate_FullMethodName       = "/api.backoffice.service.v1.BackofficeOTP/CreateSMSChannelRate"
+	BackofficeOTP_UpdateSMSChannelRate_FullMethodName       = "/api.backoffice.service.v1.BackofficeOTP/UpdateSMSChannelRate"
+	BackofficeOTP_DeleteSMSChannelRate_FullMethodName       = "/api.backoffice.service.v1.BackofficeOTP/DeleteSMSChannelRate"
+	BackofficeOTP_ListSMSChannelRates_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/ListSMSChannelRates"
+	BackofficeOTP_BatchCreateSMSChannelRates_FullMethodName = "/api.backoffice.service.v1.BackofficeOTP/BatchCreateSMSChannelRates"
+	BackofficeOTP_CreateOTPProviderBinding_FullMethodName   = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPProviderBinding"
+	BackofficeOTP_UpdateOTPProviderBinding_FullMethodName   = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPProviderBinding"
+	BackofficeOTP_DeleteOTPProviderBinding_FullMethodName   = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPProviderBinding"
+	BackofficeOTP_ListOTPProviderBindings_FullMethodName    = "/api.backoffice.service.v1.BackofficeOTP/ListOTPProviderBindings"
+	BackofficeOTP_ListOTPBindingCountries_FullMethodName    = "/api.backoffice.service.v1.BackofficeOTP/ListOTPBindingCountries"
+	BackofficeOTP_CheckOTPBindingCountry_FullMethodName     = "/api.backoffice.service.v1.BackofficeOTP/CheckOTPBindingCountry"
+	BackofficeOTP_CreateOTPTemplate_FullMethodName          = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPTemplate"
+	BackofficeOTP_UpdateOTPTemplate_FullMethodName          = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPTemplate"
+	BackofficeOTP_DeleteOTPTemplate_FullMethodName          = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPTemplate"
+	BackofficeOTP_GetOTPTemplate_FullMethodName             = "/api.backoffice.service.v1.BackofficeOTP/GetOTPTemplate"
+	BackofficeOTP_ListOTPTemplates_FullMethodName           = "/api.backoffice.service.v1.BackofficeOTP/ListOTPTemplates"
+	BackofficeOTP_SyncOTPTemplateStatus_FullMethodName      = "/api.backoffice.service.v1.BackofficeOTP/SyncOTPTemplateStatus"
+	BackofficeOTP_ListOTPSendLogs_FullMethodName            = "/api.backoffice.service.v1.BackofficeOTP/ListOTPSendLogs"
 )
 
 // BackofficeOTPClient is the client API for BackofficeOTP service.
@@ -191,6 +196,16 @@ type BackofficeOTPClient interface {
 	// Results are scoped to the operator specified in target_operator_context.
 	// Returns paginated results with total count.
 	ListOTPProviders(ctx context.Context, in *ListOTPProvidersRequest, opts ...grpc.CallOption) (*v1.ListOTPProvidersResponse, error)
+	// CreateSMSChannelRate creates a per-message cost entry for a provider+country+channel.
+	CreateSMSChannelRate(ctx context.Context, in *CreateSMSChannelRateRequest, opts ...grpc.CallOption) (*v1.CreateSMSChannelRateResponse, error)
+	// UpdateSMSChannelRate partially updates an existing rate entry.
+	UpdateSMSChannelRate(ctx context.Context, in *UpdateSMSChannelRateRequest, opts ...grpc.CallOption) (*v1.UpdateSMSChannelRateResponse, error)
+	// DeleteSMSChannelRate permanently removes a rate entry.
+	DeleteSMSChannelRate(ctx context.Context, in *DeleteSMSChannelRateRequest, opts ...grpc.CallOption) (*v1.DeleteSMSChannelRateResponse, error)
+	// ListSMSChannelRates lists rate entries with optional filters.
+	ListSMSChannelRates(ctx context.Context, in *ListSMSChannelRatesRequest, opts ...grpc.CallOption) (*v1.ListSMSChannelRatesResponse, error)
+	// BatchCreateSMSChannelRates creates multiple rate entries at once.
+	BatchCreateSMSChannelRates(ctx context.Context, in *BatchCreateSMSChannelRatesRequest, opts ...grpc.CallOption) (*v1.BatchCreateSMSChannelRatesResponse, error)
 	// CreateOTPProviderBinding binds a provider to an operator+country for routing.
 	//
 	// ## What is a Provider Binding?
@@ -538,6 +553,56 @@ func (c *backofficeOTPClient) ListOTPProviders(ctx context.Context, in *ListOTPP
 	return out, nil
 }
 
+func (c *backofficeOTPClient) CreateSMSChannelRate(ctx context.Context, in *CreateSMSChannelRateRequest, opts ...grpc.CallOption) (*v1.CreateSMSChannelRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreateSMSChannelRateResponse)
+	err := c.cc.Invoke(ctx, BackofficeOTP_CreateSMSChannelRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOTPClient) UpdateSMSChannelRate(ctx context.Context, in *UpdateSMSChannelRateRequest, opts ...grpc.CallOption) (*v1.UpdateSMSChannelRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateSMSChannelRateResponse)
+	err := c.cc.Invoke(ctx, BackofficeOTP_UpdateSMSChannelRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOTPClient) DeleteSMSChannelRate(ctx context.Context, in *DeleteSMSChannelRateRequest, opts ...grpc.CallOption) (*v1.DeleteSMSChannelRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteSMSChannelRateResponse)
+	err := c.cc.Invoke(ctx, BackofficeOTP_DeleteSMSChannelRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOTPClient) ListSMSChannelRates(ctx context.Context, in *ListSMSChannelRatesRequest, opts ...grpc.CallOption) (*v1.ListSMSChannelRatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListSMSChannelRatesResponse)
+	err := c.cc.Invoke(ctx, BackofficeOTP_ListSMSChannelRates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOTPClient) BatchCreateSMSChannelRates(ctx context.Context, in *BatchCreateSMSChannelRatesRequest, opts ...grpc.CallOption) (*v1.BatchCreateSMSChannelRatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.BatchCreateSMSChannelRatesResponse)
+	err := c.cc.Invoke(ctx, BackofficeOTP_BatchCreateSMSChannelRates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeOTPClient) CreateOTPProviderBinding(ctx context.Context, in *CreateOTPProviderBindingRequest, opts ...grpc.CallOption) (*v1.CreateOTPProviderBindingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.CreateOTPProviderBindingResponse)
@@ -819,6 +884,16 @@ type BackofficeOTPServer interface {
 	// Results are scoped to the operator specified in target_operator_context.
 	// Returns paginated results with total count.
 	ListOTPProviders(context.Context, *ListOTPProvidersRequest) (*v1.ListOTPProvidersResponse, error)
+	// CreateSMSChannelRate creates a per-message cost entry for a provider+country+channel.
+	CreateSMSChannelRate(context.Context, *CreateSMSChannelRateRequest) (*v1.CreateSMSChannelRateResponse, error)
+	// UpdateSMSChannelRate partially updates an existing rate entry.
+	UpdateSMSChannelRate(context.Context, *UpdateSMSChannelRateRequest) (*v1.UpdateSMSChannelRateResponse, error)
+	// DeleteSMSChannelRate permanently removes a rate entry.
+	DeleteSMSChannelRate(context.Context, *DeleteSMSChannelRateRequest) (*v1.DeleteSMSChannelRateResponse, error)
+	// ListSMSChannelRates lists rate entries with optional filters.
+	ListSMSChannelRates(context.Context, *ListSMSChannelRatesRequest) (*v1.ListSMSChannelRatesResponse, error)
+	// BatchCreateSMSChannelRates creates multiple rate entries at once.
+	BatchCreateSMSChannelRates(context.Context, *BatchCreateSMSChannelRatesRequest) (*v1.BatchCreateSMSChannelRatesResponse, error)
 	// CreateOTPProviderBinding binds a provider to an operator+country for routing.
 	//
 	// ## What is a Provider Binding?
@@ -1131,6 +1206,21 @@ func (UnimplementedBackofficeOTPServer) GetOTPProvider(context.Context, *GetOTPP
 func (UnimplementedBackofficeOTPServer) ListOTPProviders(context.Context, *ListOTPProvidersRequest) (*v1.ListOTPProvidersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOTPProviders not implemented")
 }
+func (UnimplementedBackofficeOTPServer) CreateSMSChannelRate(context.Context, *CreateSMSChannelRateRequest) (*v1.CreateSMSChannelRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateSMSChannelRate not implemented")
+}
+func (UnimplementedBackofficeOTPServer) UpdateSMSChannelRate(context.Context, *UpdateSMSChannelRateRequest) (*v1.UpdateSMSChannelRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateSMSChannelRate not implemented")
+}
+func (UnimplementedBackofficeOTPServer) DeleteSMSChannelRate(context.Context, *DeleteSMSChannelRateRequest) (*v1.DeleteSMSChannelRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteSMSChannelRate not implemented")
+}
+func (UnimplementedBackofficeOTPServer) ListSMSChannelRates(context.Context, *ListSMSChannelRatesRequest) (*v1.ListSMSChannelRatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSMSChannelRates not implemented")
+}
+func (UnimplementedBackofficeOTPServer) BatchCreateSMSChannelRates(context.Context, *BatchCreateSMSChannelRatesRequest) (*v1.BatchCreateSMSChannelRatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchCreateSMSChannelRates not implemented")
+}
 func (UnimplementedBackofficeOTPServer) CreateOTPProviderBinding(context.Context, *CreateOTPProviderBindingRequest) (*v1.CreateOTPProviderBindingResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOTPProviderBinding not implemented")
 }
@@ -1277,6 +1367,96 @@ func _BackofficeOTP_ListOTPProviders_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeOTPServer).ListOTPProviders(ctx, req.(*ListOTPProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOTP_CreateSMSChannelRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSMSChannelRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOTPServer).CreateSMSChannelRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOTP_CreateSMSChannelRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOTPServer).CreateSMSChannelRate(ctx, req.(*CreateSMSChannelRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOTP_UpdateSMSChannelRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSMSChannelRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOTPServer).UpdateSMSChannelRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOTP_UpdateSMSChannelRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOTPServer).UpdateSMSChannelRate(ctx, req.(*UpdateSMSChannelRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOTP_DeleteSMSChannelRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSMSChannelRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOTPServer).DeleteSMSChannelRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOTP_DeleteSMSChannelRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOTPServer).DeleteSMSChannelRate(ctx, req.(*DeleteSMSChannelRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOTP_ListSMSChannelRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSMSChannelRatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOTPServer).ListSMSChannelRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOTP_ListSMSChannelRates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOTPServer).ListSMSChannelRates(ctx, req.(*ListSMSChannelRatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOTP_BatchCreateSMSChannelRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchCreateSMSChannelRatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOTPServer).BatchCreateSMSChannelRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOTP_BatchCreateSMSChannelRates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOTPServer).BatchCreateSMSChannelRates(ctx, req.(*BatchCreateSMSChannelRatesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1541,6 +1721,26 @@ var BackofficeOTP_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOTPProviders",
 			Handler:    _BackofficeOTP_ListOTPProviders_Handler,
+		},
+		{
+			MethodName: "CreateSMSChannelRate",
+			Handler:    _BackofficeOTP_CreateSMSChannelRate_Handler,
+		},
+		{
+			MethodName: "UpdateSMSChannelRate",
+			Handler:    _BackofficeOTP_UpdateSMSChannelRate_Handler,
+		},
+		{
+			MethodName: "DeleteSMSChannelRate",
+			Handler:    _BackofficeOTP_DeleteSMSChannelRate_Handler,
+		},
+		{
+			MethodName: "ListSMSChannelRates",
+			Handler:    _BackofficeOTP_ListSMSChannelRates_Handler,
+		},
+		{
+			MethodName: "BatchCreateSMSChannelRates",
+			Handler:    _BackofficeOTP_BatchCreateSMSChannelRates_Handler,
 		},
 		{
 			MethodName: "CreateOTPProviderBinding",

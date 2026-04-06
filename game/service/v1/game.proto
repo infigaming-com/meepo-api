@@ -1261,6 +1261,15 @@ message ListUnpaidBetsResponse {
 		string retailer_operator_name = 21;
 		string system_operator_name = 22;
 	}
+	// Per-operator unpaid bet summary
+	message OperatorUnpaidSummary {
+		int64 operator_id = 1;
+		string operator_name = 2;
+		int32 unpaid_bet_count = 3;
+		string total_amount = 4;
+		string total_amount_usd = 5;
+		int32 unpaid_user_count = 6;
+	}
 	repeated UnpaidBet unpaid_bets = 1;
 	int32 unpaid_bet_count = 2;
 	string total_amount = 3;
@@ -1270,6 +1279,8 @@ message ListUnpaidBetsResponse {
 	int32 page_size = 7;
 	// Total unpaid bet amount in USD
 	string total_amount_usd = 8;
+	// Per-operator aggregated summaries
+	repeated OperatorUnpaidSummary operator_summaries = 9;
 }
 
 // Sport Events related messages

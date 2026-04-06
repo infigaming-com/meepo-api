@@ -3082,9 +3082,17 @@ type GetBalanceSummaryResponse struct {
 	// Total manual debit from sub-operators in USD
 	ManualDebit string `protobuf:"bytes,27,opt,name=manual_debit,json=manualDebit,proto3" json:"manual_debit,omitempty"`
 	// Total bankroll amount of sub-operators in USD
-	Bankroll      string `protobuf:"bytes,28,opt,name=bankroll,proto3" json:"bankroll,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Bankroll string `protobuf:"bytes,28,opt,name=bankroll,proto3" json:"bankroll,omitempty"`
+	// Pending affiliate withdraw freeze on sub-operators
+	CustodyPendingAffiliateWithdraw string `protobuf:"bytes,29,opt,name=custody_pending_affiliate_withdraw,json=custodyPendingAffiliateWithdraw,proto3" json:"custody_pending_affiliate_withdraw,omitempty"`
+	// Settled affiliate withdrawals from sub-operators
+	CustodyAffiliateWithdraw string `protobuf:"bytes,30,opt,name=custody_affiliate_withdraw,json=custodyAffiliateWithdraw,proto3" json:"custody_affiliate_withdraw,omitempty"`
+	// Settled affiliate withdrawals from company's own wallet
+	CompanyAffiliateWithdraw string `protobuf:"bytes,31,opt,name=company_affiliate_withdraw,json=companyAffiliateWithdraw,proto3" json:"company_affiliate_withdraw,omitempty"`
+	// Settled company's own payment withdrawals
+	CompanyWithdraw string `protobuf:"bytes,32,opt,name=company_withdraw,json=companyWithdraw,proto3" json:"company_withdraw,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetBalanceSummaryResponse) Reset() {
@@ -3313,6 +3321,34 @@ func (x *GetBalanceSummaryResponse) GetBankroll() string {
 	return ""
 }
 
+func (x *GetBalanceSummaryResponse) GetCustodyPendingAffiliateWithdraw() string {
+	if x != nil {
+		return x.CustodyPendingAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCustodyAffiliateWithdraw() string {
+	if x != nil {
+		return x.CustodyAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCompanyAffiliateWithdraw() string {
+	if x != nil {
+		return x.CompanyAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCompanyWithdraw() string {
+	if x != nil {
+		return x.CompanyWithdraw
+	}
+	return ""
+}
+
 type GetBalancesSummaryRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
@@ -3508,8 +3544,22 @@ type BalancesSummaryRow struct {
 	LockedForPendingInvoices string                 `protobuf:"bytes,13,opt,name=locked_for_pending_invoices,json=lockedForPendingInvoices,proto3" json:"locked_for_pending_invoices,omitempty"`
 	OperatorId               int64                  `protobuf:"varint,14,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName             string                 `protobuf:"bytes,15,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// Wallet financial summary fields
+	PlayerWithdrawals                string `protobuf:"bytes,16,opt,name=player_withdrawals,json=playerWithdrawals,proto3" json:"player_withdrawals,omitempty"`
+	CustodyPendingCompanyWithdrawals string `protobuf:"bytes,17,opt,name=custody_pending_company_withdrawals,json=custodyPendingCompanyWithdrawals,proto3" json:"custody_pending_company_withdrawals,omitempty"`
+	PendingPlayerWithdrawals         string `protobuf:"bytes,18,opt,name=pending_player_withdrawals,json=pendingPlayerWithdrawals,proto3" json:"pending_player_withdrawals,omitempty"`
+	SwapFee                          string `protobuf:"bytes,19,opt,name=swap_fee,json=swapFee,proto3" json:"swap_fee,omitempty"`
+	ManualCredit                     string `protobuf:"bytes,20,opt,name=manual_credit,json=manualCredit,proto3" json:"manual_credit,omitempty"`
+	ManualDebit                      string `protobuf:"bytes,21,opt,name=manual_debit,json=manualDebit,proto3" json:"manual_debit,omitempty"`
+	Bankroll                         string `protobuf:"bytes,22,opt,name=bankroll,proto3" json:"bankroll,omitempty"`
+	CompanyPendingWithdraw           string `protobuf:"bytes,23,opt,name=company_pending_withdraw,json=companyPendingWithdraw,proto3" json:"company_pending_withdraw,omitempty"`
+	CompanyPendingAffiliateWithdraw  string `protobuf:"bytes,24,opt,name=company_pending_affiliate_withdraw,json=companyPendingAffiliateWithdraw,proto3" json:"company_pending_affiliate_withdraw,omitempty"`
+	CustodyPendingAffiliateWithdraw  string `protobuf:"bytes,25,opt,name=custody_pending_affiliate_withdraw,json=custodyPendingAffiliateWithdraw,proto3" json:"custody_pending_affiliate_withdraw,omitempty"`
+	CustodyAffiliateWithdraw         string `protobuf:"bytes,26,opt,name=custody_affiliate_withdraw,json=custodyAffiliateWithdraw,proto3" json:"custody_affiliate_withdraw,omitempty"`
+	CompanyAffiliateWithdraw         string `protobuf:"bytes,27,opt,name=company_affiliate_withdraw,json=companyAffiliateWithdraw,proto3" json:"company_affiliate_withdraw,omitempty"`
+	CompanyWithdraw                  string `protobuf:"bytes,28,opt,name=company_withdraw,json=companyWithdraw,proto3" json:"company_withdraw,omitempty"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *BalancesSummaryRow) Reset() {
@@ -3643,6 +3693,97 @@ func (x *BalancesSummaryRow) GetOperatorId() int64 {
 func (x *BalancesSummaryRow) GetOperatorName() string {
 	if x != nil {
 		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetPlayerWithdrawals() string {
+	if x != nil {
+		return x.PlayerWithdrawals
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetCustodyPendingCompanyWithdrawals() string {
+	if x != nil {
+		return x.CustodyPendingCompanyWithdrawals
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetPendingPlayerWithdrawals() string {
+	if x != nil {
+		return x.PendingPlayerWithdrawals
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetSwapFee() string {
+	if x != nil {
+		return x.SwapFee
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetManualCredit() string {
+	if x != nil {
+		return x.ManualCredit
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetManualDebit() string {
+	if x != nil {
+		return x.ManualDebit
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetBankroll() string {
+	if x != nil {
+		return x.Bankroll
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetCompanyPendingWithdraw() string {
+	if x != nil {
+		return x.CompanyPendingWithdraw
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetCompanyPendingAffiliateWithdraw() string {
+	if x != nil {
+		return x.CompanyPendingAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetCustodyPendingAffiliateWithdraw() string {
+	if x != nil {
+		return x.CustodyPendingAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetCustodyAffiliateWithdraw() string {
+	if x != nil {
+		return x.CustodyAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetCompanyAffiliateWithdraw() string {
+	if x != nil {
+		return x.CompanyAffiliateWithdraw
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetCompanyWithdraw() string {
+	if x != nil {
+		return x.CompanyWithdraw
 	}
 	return ""
 }
@@ -7090,8 +7231,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x0ebilling_period\x18\x03 \x01(\tR\rbillingPeriod\"\xc0\x01\n" +
 	"\x18GetBalanceSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xce\n" +
-	"\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xc2\f\n" +
 	"\x19GetBalanceSummaryResponse\x12'\n" +
 	"\x0fcompany_balance\x18\x01 \x01(\tR\x0ecompanyBalance\x12.\n" +
 	"\x13est_settlement_cost\x18\x02 \x01(\tR\x11estSettlementCost\x12*\n" +
@@ -7122,7 +7262,11 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\"company_pending_affiliate_withdraw\x18\x19 \x01(\tR\x1fcompanyPendingAffiliateWithdraw\x12#\n" +
 	"\rmanual_credit\x18\x1a \x01(\tR\fmanualCredit\x12!\n" +
 	"\fmanual_debit\x18\x1b \x01(\tR\vmanualDebit\x12\x1a\n" +
-	"\bbankroll\x18\x1c \x01(\tR\bbankroll\"\x93\x02\n" +
+	"\bbankroll\x18\x1c \x01(\tR\bbankroll\x12K\n" +
+	"\"custody_pending_affiliate_withdraw\x18\x1d \x01(\tR\x1fcustodyPendingAffiliateWithdraw\x12<\n" +
+	"\x1acustody_affiliate_withdraw\x18\x1e \x01(\tR\x18custodyAffiliateWithdraw\x12<\n" +
+	"\x1acompany_affiliate_withdraw\x18\x1f \x01(\tR\x18companyAffiliateWithdraw\x12)\n" +
+	"\x10company_withdraw\x18  \x01(\tR\x0fcompanyWithdraw\"\x93\x02\n" +
 	"\x19GetBalancesSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
@@ -7141,7 +7285,8 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\vtotal_count\x18\a \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\t \x01(\x05R\bpageSize\"\xcf\x04\n" +
+	"\tpage_size\x18\t \x01(\x05R\bpageSize\"\x85\n" +
+	"\n" +
 	"\x12BalancesSummaryRow\x120\n" +
 	"\x14retailer_operator_id\x18\x01 \x01(\x03R\x12retailerOperatorId\x12#\n" +
 	"\rretailer_name\x18\x02 \x01(\tR\fretailerName\x12.\n" +
@@ -7160,7 +7305,20 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x1blocked_for_pending_invoices\x18\r \x01(\tR\x18lockedForPendingInvoices\x12\x1f\n" +
 	"\voperator_id\x18\x0e \x01(\x03R\n" +
 	"operatorId\x12#\n" +
-	"\roperator_name\x18\x0f \x01(\tR\foperatorName\"\xf2\x01\n" +
+	"\roperator_name\x18\x0f \x01(\tR\foperatorName\x12-\n" +
+	"\x12player_withdrawals\x18\x10 \x01(\tR\x11playerWithdrawals\x12M\n" +
+	"#custody_pending_company_withdrawals\x18\x11 \x01(\tR custodyPendingCompanyWithdrawals\x12<\n" +
+	"\x1apending_player_withdrawals\x18\x12 \x01(\tR\x18pendingPlayerWithdrawals\x12\x19\n" +
+	"\bswap_fee\x18\x13 \x01(\tR\aswapFee\x12#\n" +
+	"\rmanual_credit\x18\x14 \x01(\tR\fmanualCredit\x12!\n" +
+	"\fmanual_debit\x18\x15 \x01(\tR\vmanualDebit\x12\x1a\n" +
+	"\bbankroll\x18\x16 \x01(\tR\bbankroll\x128\n" +
+	"\x18company_pending_withdraw\x18\x17 \x01(\tR\x16companyPendingWithdraw\x12K\n" +
+	"\"company_pending_affiliate_withdraw\x18\x18 \x01(\tR\x1fcompanyPendingAffiliateWithdraw\x12K\n" +
+	"\"custody_pending_affiliate_withdraw\x18\x19 \x01(\tR\x1fcustodyPendingAffiliateWithdraw\x12<\n" +
+	"\x1acustody_affiliate_withdraw\x18\x1a \x01(\tR\x18custodyAffiliateWithdraw\x12<\n" +
+	"\x1acompany_affiliate_withdraw\x18\x1b \x01(\tR\x18companyAffiliateWithdraw\x12)\n" +
+	"\x10company_withdraw\x18\x1c \x01(\tR\x0fcompanyWithdraw\"\xf2\x01\n" +
 	"\x1aListCustodyOverviewRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +

@@ -153,6 +153,7 @@ const (
 	ErrorReason_EMAIL_DOMAIN_BINDING_NOT_FOUND   ErrorReason = 10126
 	ErrorReason_EMAIL_DOMAIN_VERIFICATION_FAILED ErrorReason = 10127
 	ErrorReason_EMAIL_DOMAIN_INVALID             ErrorReason = 10128
+	ErrorReason_FAILED_TO_SEND_SMS               ErrorReason = 10129
 	// 2FA (Two-Factor Authentication) Errors
 	ErrorReason_MFA_NOT_ENABLED             ErrorReason = 10200
 	ErrorReason_MFA_ALREADY_ENABLED         ErrorReason = 10201
@@ -338,6 +339,7 @@ var (
 		10126: "EMAIL_DOMAIN_BINDING_NOT_FOUND",
 		10127: "EMAIL_DOMAIN_VERIFICATION_FAILED",
 		10128: "EMAIL_DOMAIN_INVALID",
+		10129: "FAILED_TO_SEND_SMS",
 		10200: "MFA_NOT_ENABLED",
 		10201: "MFA_ALREADY_ENABLED",
 		10202: "INVALID_2FA_CODE",
@@ -516,6 +518,7 @@ var (
 		"EMAIL_DOMAIN_BINDING_NOT_FOUND":                 10126,
 		"EMAIL_DOMAIN_VERIFICATION_FAILED":               10127,
 		"EMAIL_DOMAIN_INVALID":                           10128,
+		"FAILED_TO_SEND_SMS":                             10129,
 		"MFA_NOT_ENABLED":                                10200,
 		"MFA_ALREADY_ENABLED":                            10201,
 		"INVALID_2FA_CODE":                               10202,
@@ -599,7 +602,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xc3.\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xdc.\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -727,7 +730,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1aEMAIL_DOMAIN_ALREADY_BOUND\x10\x8dO\x12#\n" +
 	"\x1eEMAIL_DOMAIN_BINDING_NOT_FOUND\x10\x8eO\x12%\n" +
 	" EMAIL_DOMAIN_VERIFICATION_FAILED\x10\x8fO\x12\x19\n" +
-	"\x14EMAIL_DOMAIN_INVALID\x10\x90O\x12\x1a\n" +
+	"\x14EMAIL_DOMAIN_INVALID\x10\x90O\x12\x17\n" +
+	"\x12FAILED_TO_SEND_SMS\x10\x91O\x12\x1a\n" +
 	"\x0fMFA_NOT_ENABLED\x10\xd8O\x1a\x04\xa8E\x90\x03\x12\x1e\n" +
 	"\x13MFA_ALREADY_ENABLED\x10\xd9O\x1a\x04\xa8E\x90\x03\x12\x1b\n" +
 	"\x10INVALID_2FA_CODE\x10\xdaO\x1a\x04\xa8E\x91\x03\x12\x1d\n" +

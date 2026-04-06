@@ -19,25 +19,30 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PushOTP_SendOTP_FullMethodName                  = "/api.push.service.v1.PushOTP/SendOTP"
-	PushOTP_CreateOTPProvider_FullMethodName        = "/api.push.service.v1.PushOTP/CreateOTPProvider"
-	PushOTP_UpdateOTPProvider_FullMethodName        = "/api.push.service.v1.PushOTP/UpdateOTPProvider"
-	PushOTP_DeleteOTPProvider_FullMethodName        = "/api.push.service.v1.PushOTP/DeleteOTPProvider"
-	PushOTP_GetOTPProvider_FullMethodName           = "/api.push.service.v1.PushOTP/GetOTPProvider"
-	PushOTP_ListOTPProviders_FullMethodName         = "/api.push.service.v1.PushOTP/ListOTPProviders"
-	PushOTP_CreateOTPProviderBinding_FullMethodName = "/api.push.service.v1.PushOTP/CreateOTPProviderBinding"
-	PushOTP_UpdateOTPProviderBinding_FullMethodName = "/api.push.service.v1.PushOTP/UpdateOTPProviderBinding"
-	PushOTP_DeleteOTPProviderBinding_FullMethodName = "/api.push.service.v1.PushOTP/DeleteOTPProviderBinding"
-	PushOTP_ListOTPProviderBindings_FullMethodName  = "/api.push.service.v1.PushOTP/ListOTPProviderBindings"
-	PushOTP_ListOTPBindingCountries_FullMethodName  = "/api.push.service.v1.PushOTP/ListOTPBindingCountries"
-	PushOTP_CheckOTPBindingCountry_FullMethodName   = "/api.push.service.v1.PushOTP/CheckOTPBindingCountry"
-	PushOTP_CreateOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/CreateOTPTemplate"
-	PushOTP_UpdateOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/UpdateOTPTemplate"
-	PushOTP_DeleteOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/DeleteOTPTemplate"
-	PushOTP_GetOTPTemplate_FullMethodName           = "/api.push.service.v1.PushOTP/GetOTPTemplate"
-	PushOTP_ListOTPTemplates_FullMethodName         = "/api.push.service.v1.PushOTP/ListOTPTemplates"
-	PushOTP_SyncOTPTemplateStatus_FullMethodName    = "/api.push.service.v1.PushOTP/SyncOTPTemplateStatus"
-	PushOTP_ListOTPSendLogs_FullMethodName          = "/api.push.service.v1.PushOTP/ListOTPSendLogs"
+	PushOTP_SendOTP_FullMethodName                    = "/api.push.service.v1.PushOTP/SendOTP"
+	PushOTP_CreateOTPProvider_FullMethodName          = "/api.push.service.v1.PushOTP/CreateOTPProvider"
+	PushOTP_UpdateOTPProvider_FullMethodName          = "/api.push.service.v1.PushOTP/UpdateOTPProvider"
+	PushOTP_DeleteOTPProvider_FullMethodName          = "/api.push.service.v1.PushOTP/DeleteOTPProvider"
+	PushOTP_GetOTPProvider_FullMethodName             = "/api.push.service.v1.PushOTP/GetOTPProvider"
+	PushOTP_ListOTPProviders_FullMethodName           = "/api.push.service.v1.PushOTP/ListOTPProviders"
+	PushOTP_CreateOTPProviderBinding_FullMethodName   = "/api.push.service.v1.PushOTP/CreateOTPProviderBinding"
+	PushOTP_UpdateOTPProviderBinding_FullMethodName   = "/api.push.service.v1.PushOTP/UpdateOTPProviderBinding"
+	PushOTP_DeleteOTPProviderBinding_FullMethodName   = "/api.push.service.v1.PushOTP/DeleteOTPProviderBinding"
+	PushOTP_ListOTPProviderBindings_FullMethodName    = "/api.push.service.v1.PushOTP/ListOTPProviderBindings"
+	PushOTP_ListOTPBindingCountries_FullMethodName    = "/api.push.service.v1.PushOTP/ListOTPBindingCountries"
+	PushOTP_CheckOTPBindingCountry_FullMethodName     = "/api.push.service.v1.PushOTP/CheckOTPBindingCountry"
+	PushOTP_CreateOTPTemplate_FullMethodName          = "/api.push.service.v1.PushOTP/CreateOTPTemplate"
+	PushOTP_UpdateOTPTemplate_FullMethodName          = "/api.push.service.v1.PushOTP/UpdateOTPTemplate"
+	PushOTP_DeleteOTPTemplate_FullMethodName          = "/api.push.service.v1.PushOTP/DeleteOTPTemplate"
+	PushOTP_GetOTPTemplate_FullMethodName             = "/api.push.service.v1.PushOTP/GetOTPTemplate"
+	PushOTP_ListOTPTemplates_FullMethodName           = "/api.push.service.v1.PushOTP/ListOTPTemplates"
+	PushOTP_SyncOTPTemplateStatus_FullMethodName      = "/api.push.service.v1.PushOTP/SyncOTPTemplateStatus"
+	PushOTP_ListOTPSendLogs_FullMethodName            = "/api.push.service.v1.PushOTP/ListOTPSendLogs"
+	PushOTP_CreateSMSChannelRate_FullMethodName       = "/api.push.service.v1.PushOTP/CreateSMSChannelRate"
+	PushOTP_UpdateSMSChannelRate_FullMethodName       = "/api.push.service.v1.PushOTP/UpdateSMSChannelRate"
+	PushOTP_DeleteSMSChannelRate_FullMethodName       = "/api.push.service.v1.PushOTP/DeleteSMSChannelRate"
+	PushOTP_ListSMSChannelRates_FullMethodName        = "/api.push.service.v1.PushOTP/ListSMSChannelRates"
+	PushOTP_BatchCreateSMSChannelRates_FullMethodName = "/api.push.service.v1.PushOTP/BatchCreateSMSChannelRates"
 )
 
 // PushOTPClient is the client API for PushOTP service.
@@ -108,6 +113,12 @@ type PushOTPClient interface {
 	SyncOTPTemplateStatus(ctx context.Context, in *SyncOTPTemplateStatusRequest, opts ...grpc.CallOption) (*SyncOTPTemplateStatusResponse, error)
 	// ====== Backoffice: Send logs ======
 	ListOTPSendLogs(ctx context.Context, in *ListOTPSendLogsRequest, opts ...grpc.CallOption) (*ListOTPSendLogsResponse, error)
+	// ====== SMS Channel Rate CRUD ======
+	CreateSMSChannelRate(ctx context.Context, in *CreateSMSChannelRateRequest, opts ...grpc.CallOption) (*CreateSMSChannelRateResponse, error)
+	UpdateSMSChannelRate(ctx context.Context, in *UpdateSMSChannelRateRequest, opts ...grpc.CallOption) (*UpdateSMSChannelRateResponse, error)
+	DeleteSMSChannelRate(ctx context.Context, in *DeleteSMSChannelRateRequest, opts ...grpc.CallOption) (*DeleteSMSChannelRateResponse, error)
+	ListSMSChannelRates(ctx context.Context, in *ListSMSChannelRatesRequest, opts ...grpc.CallOption) (*ListSMSChannelRatesResponse, error)
+	BatchCreateSMSChannelRates(ctx context.Context, in *BatchCreateSMSChannelRatesRequest, opts ...grpc.CallOption) (*BatchCreateSMSChannelRatesResponse, error)
 }
 
 type pushOTPClient struct {
@@ -308,6 +319,56 @@ func (c *pushOTPClient) ListOTPSendLogs(ctx context.Context, in *ListOTPSendLogs
 	return out, nil
 }
 
+func (c *pushOTPClient) CreateSMSChannelRate(ctx context.Context, in *CreateSMSChannelRateRequest, opts ...grpc.CallOption) (*CreateSMSChannelRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateSMSChannelRateResponse)
+	err := c.cc.Invoke(ctx, PushOTP_CreateSMSChannelRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) UpdateSMSChannelRate(ctx context.Context, in *UpdateSMSChannelRateRequest, opts ...grpc.CallOption) (*UpdateSMSChannelRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateSMSChannelRateResponse)
+	err := c.cc.Invoke(ctx, PushOTP_UpdateSMSChannelRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) DeleteSMSChannelRate(ctx context.Context, in *DeleteSMSChannelRateRequest, opts ...grpc.CallOption) (*DeleteSMSChannelRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteSMSChannelRateResponse)
+	err := c.cc.Invoke(ctx, PushOTP_DeleteSMSChannelRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) ListSMSChannelRates(ctx context.Context, in *ListSMSChannelRatesRequest, opts ...grpc.CallOption) (*ListSMSChannelRatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSMSChannelRatesResponse)
+	err := c.cc.Invoke(ctx, PushOTP_ListSMSChannelRates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) BatchCreateSMSChannelRates(ctx context.Context, in *BatchCreateSMSChannelRatesRequest, opts ...grpc.CallOption) (*BatchCreateSMSChannelRatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchCreateSMSChannelRatesResponse)
+	err := c.cc.Invoke(ctx, PushOTP_BatchCreateSMSChannelRates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PushOTPServer is the server API for PushOTP service.
 // All implementations must embed UnimplementedPushOTPServer
 // for forward compatibility.
@@ -376,6 +437,12 @@ type PushOTPServer interface {
 	SyncOTPTemplateStatus(context.Context, *SyncOTPTemplateStatusRequest) (*SyncOTPTemplateStatusResponse, error)
 	// ====== Backoffice: Send logs ======
 	ListOTPSendLogs(context.Context, *ListOTPSendLogsRequest) (*ListOTPSendLogsResponse, error)
+	// ====== SMS Channel Rate CRUD ======
+	CreateSMSChannelRate(context.Context, *CreateSMSChannelRateRequest) (*CreateSMSChannelRateResponse, error)
+	UpdateSMSChannelRate(context.Context, *UpdateSMSChannelRateRequest) (*UpdateSMSChannelRateResponse, error)
+	DeleteSMSChannelRate(context.Context, *DeleteSMSChannelRateRequest) (*DeleteSMSChannelRateResponse, error)
+	ListSMSChannelRates(context.Context, *ListSMSChannelRatesRequest) (*ListSMSChannelRatesResponse, error)
+	BatchCreateSMSChannelRates(context.Context, *BatchCreateSMSChannelRatesRequest) (*BatchCreateSMSChannelRatesResponse, error)
 	mustEmbedUnimplementedPushOTPServer()
 }
 
@@ -442,6 +509,21 @@ func (UnimplementedPushOTPServer) SyncOTPTemplateStatus(context.Context, *SyncOT
 }
 func (UnimplementedPushOTPServer) ListOTPSendLogs(context.Context, *ListOTPSendLogsRequest) (*ListOTPSendLogsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOTPSendLogs not implemented")
+}
+func (UnimplementedPushOTPServer) CreateSMSChannelRate(context.Context, *CreateSMSChannelRateRequest) (*CreateSMSChannelRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateSMSChannelRate not implemented")
+}
+func (UnimplementedPushOTPServer) UpdateSMSChannelRate(context.Context, *UpdateSMSChannelRateRequest) (*UpdateSMSChannelRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateSMSChannelRate not implemented")
+}
+func (UnimplementedPushOTPServer) DeleteSMSChannelRate(context.Context, *DeleteSMSChannelRateRequest) (*DeleteSMSChannelRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteSMSChannelRate not implemented")
+}
+func (UnimplementedPushOTPServer) ListSMSChannelRates(context.Context, *ListSMSChannelRatesRequest) (*ListSMSChannelRatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSMSChannelRates not implemented")
+}
+func (UnimplementedPushOTPServer) BatchCreateSMSChannelRates(context.Context, *BatchCreateSMSChannelRatesRequest) (*BatchCreateSMSChannelRatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchCreateSMSChannelRates not implemented")
 }
 func (UnimplementedPushOTPServer) mustEmbedUnimplementedPushOTPServer() {}
 func (UnimplementedPushOTPServer) testEmbeddedByValue()                 {}
@@ -806,6 +888,96 @@ func _PushOTP_ListOTPSendLogs_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PushOTP_CreateSMSChannelRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSMSChannelRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).CreateSMSChannelRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_CreateSMSChannelRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).CreateSMSChannelRate(ctx, req.(*CreateSMSChannelRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PushOTP_UpdateSMSChannelRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSMSChannelRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).UpdateSMSChannelRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_UpdateSMSChannelRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).UpdateSMSChannelRate(ctx, req.(*UpdateSMSChannelRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PushOTP_DeleteSMSChannelRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSMSChannelRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).DeleteSMSChannelRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_DeleteSMSChannelRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).DeleteSMSChannelRate(ctx, req.(*DeleteSMSChannelRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PushOTP_ListSMSChannelRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSMSChannelRatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).ListSMSChannelRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_ListSMSChannelRates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).ListSMSChannelRates(ctx, req.(*ListSMSChannelRatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PushOTP_BatchCreateSMSChannelRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchCreateSMSChannelRatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).BatchCreateSMSChannelRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_BatchCreateSMSChannelRates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).BatchCreateSMSChannelRates(ctx, req.(*BatchCreateSMSChannelRatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PushOTP_ServiceDesc is the grpc.ServiceDesc for PushOTP service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -888,6 +1060,26 @@ var PushOTP_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOTPSendLogs",
 			Handler:    _PushOTP_ListOTPSendLogs_Handler,
+		},
+		{
+			MethodName: "CreateSMSChannelRate",
+			Handler:    _PushOTP_CreateSMSChannelRate_Handler,
+		},
+		{
+			MethodName: "UpdateSMSChannelRate",
+			Handler:    _PushOTP_UpdateSMSChannelRate_Handler,
+		},
+		{
+			MethodName: "DeleteSMSChannelRate",
+			Handler:    _PushOTP_DeleteSMSChannelRate_Handler,
+		},
+		{
+			MethodName: "ListSMSChannelRates",
+			Handler:    _PushOTP_ListSMSChannelRates_Handler,
+		},
+		{
+			MethodName: "BatchCreateSMSChannelRates",
+			Handler:    _PushOTP_BatchCreateSMSChannelRates_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

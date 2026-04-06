@@ -58,6 +58,7 @@ const (
 	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
 	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
 	Wallet_GetCompanyFinancialSummary_FullMethodName          = "/api.wallet.service.v1.Wallet/GetCompanyFinancialSummary"
+	Wallet_ListCompanyFinancialSummaries_FullMethodName       = "/api.wallet.service.v1.Wallet/ListCompanyFinancialSummaries"
 	Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName = "/api.wallet.service.v1.Wallet/GetOperatorBalanceTransactionsByIds"
 	Wallet_SetDepositRewardSequences_FullMethodName           = "/api.wallet.service.v1.Wallet/SetDepositRewardSequences"
 	Wallet_DeleteDepositRewardSequences_FullMethodName        = "/api.wallet.service.v1.Wallet/DeleteDepositRewardSequences"
@@ -182,6 +183,8 @@ type WalletClient interface {
 	GetOperatorTransactionSummary(ctx context.Context, in *GetOperatorTransactionSummaryRequest, opts ...grpc.CallOption) (*GetOperatorTransactionSummaryResponse, error)
 	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
 	GetCompanyFinancialSummary(ctx context.Context, in *GetCompanyFinancialSummaryRequest, opts ...grpc.CallOption) (*GetCompanyFinancialSummaryResponse, error)
+	// ListCompanyFinancialSummaries returns financial summaries for multiple companies in one call
+	ListCompanyFinancialSummaries(ctx context.Context, in *ListCompanyFinancialSummariesRequest, opts ...grpc.CallOption) (*ListCompanyFinancialSummariesResponse, error)
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	GetOperatorBalanceTransactionsByIds(ctx context.Context, in *GetOperatorBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
@@ -675,6 +678,16 @@ func (c *walletClient) GetCompanyFinancialSummary(ctx context.Context, in *GetCo
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetCompanyFinancialSummaryResponse)
 	err := c.cc.Invoke(ctx, Wallet_GetCompanyFinancialSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ListCompanyFinancialSummaries(ctx context.Context, in *ListCompanyFinancialSummariesRequest, opts ...grpc.CallOption) (*ListCompanyFinancialSummariesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCompanyFinancialSummariesResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListCompanyFinancialSummaries_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1244,6 +1257,8 @@ type WalletServer interface {
 	GetOperatorTransactionSummary(context.Context, *GetOperatorTransactionSummaryRequest) (*GetOperatorTransactionSummaryResponse, error)
 	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
 	GetCompanyFinancialSummary(context.Context, *GetCompanyFinancialSummaryRequest) (*GetCompanyFinancialSummaryResponse, error)
+	// ListCompanyFinancialSummaries returns financial summaries for multiple companies in one call
+	ListCompanyFinancialSummaries(context.Context, *ListCompanyFinancialSummariesRequest) (*ListCompanyFinancialSummariesResponse, error)
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
@@ -1469,6 +1484,9 @@ func (UnimplementedWalletServer) GetOperatorTransactionSummary(context.Context, 
 }
 func (UnimplementedWalletServer) GetCompanyFinancialSummary(context.Context, *GetCompanyFinancialSummaryRequest) (*GetCompanyFinancialSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetCompanyFinancialSummary not implemented")
+}
+func (UnimplementedWalletServer) ListCompanyFinancialSummaries(context.Context, *ListCompanyFinancialSummariesRequest) (*ListCompanyFinancialSummariesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCompanyFinancialSummaries not implemented")
 }
 func (UnimplementedWalletServer) GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorBalanceTransactionsByIds not implemented")
@@ -2336,6 +2354,24 @@ func _Wallet_GetCompanyFinancialSummary_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GetCompanyFinancialSummary(ctx, req.(*GetCompanyFinancialSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ListCompanyFinancialSummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCompanyFinancialSummariesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListCompanyFinancialSummaries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListCompanyFinancialSummaries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListCompanyFinancialSummaries(ctx, req.(*ListCompanyFinancialSummariesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3384,6 +3420,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCompanyFinancialSummary",
 			Handler:    _Wallet_GetCompanyFinancialSummary_Handler,
+		},
+		{
+			MethodName: "ListCompanyFinancialSummaries",
+			Handler:    _Wallet_ListCompanyFinancialSummaries_Handler,
 		},
 		{
 			MethodName: "GetOperatorBalanceTransactionsByIds",
