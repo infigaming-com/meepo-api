@@ -1032,5 +1032,4 @@ message BOListUserFreeRewardsRequest {
 	optional int32 page = 6;
 	// Default 20
 	optional int32 page_size = 7;
-	api.common.OperatorContext target_operator_context = 8;
 }
