@@ -47,6 +47,7 @@ const OperationBackofficeWalletListOperatorWithdrawableAmounts = "/api.backoffic
 const OperationBackofficeWalletListPromoCodeCampaignDetails = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaignDetails"
 const OperationBackofficeWalletListPromoCodeCampaigns = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaigns"
 const OperationBackofficeWalletListUniversalCodeUsages = "/api.backoffice.service.v1.BackofficeWallet/ListUniversalCodeUsages"
+const OperationBackofficeWalletListUserFreeRewards = "/api.backoffice.service.v1.BackofficeWallet/ListUserFreeRewards"
 const OperationBackofficeWalletListWalletBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
 const OperationBackofficeWalletListWalletCurrencies = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
 const OperationBackofficeWalletListWalletResponsibleGamblingConfigs = "/api.backoffice.service.v1.BackofficeWallet/ListWalletResponsibleGamblingConfigs"
@@ -125,6 +126,8 @@ type BackofficeWalletHTTPServer interface {
 	ListPromoCodeCampaigns(context.Context, *ListPromoCodeCampaignsRequest) (*v1.ListPromoCodeCampaignsResponse, error)
 	// ListUniversalCodeUsages ListUniversalCodeUsages lists the usages of a universal campaign
 	ListUniversalCodeUsages(context.Context, *ListUniversalCodeUsagesRequest) (*v1.ListUniversalCodeUsagesResponse, error)
+	// ListUserFreeRewards List user's free spin and free bet rewards with filters, pagination, and summary
+	ListUserFreeRewards(context.Context, *BOListUserFreeRewardsRequest) (*v1.ListUserFreeRewardsBOResponse, error)
 	// ListWalletBalanceTransactions ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error)
 	// ListWalletCurrencies ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
@@ -222,6 +225,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/manual/journal-entries/export", _BackofficeWallet_ExportManualJournalEntries0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/credit/manual_adjust", _BackofficeWallet_ManualAdjustCreditTurnoverField0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/withdrawable-amounts/list", _BackofficeWallet_ListOperatorWithdrawableAmounts0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/free-rewards/list", _BackofficeWallet_ListUserFreeRewards1_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -1302,6 +1306,28 @@ func _BackofficeWallet_ListOperatorWithdrawableAmounts0_HTTP_Handler(srv Backoff
 	}
 }
 
+func _BackofficeWallet_ListUserFreeRewards1_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in BOListUserFreeRewardsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletListUserFreeRewards)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListUserFreeRewards(ctx, req.(*BOListUserFreeRewardsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListUserFreeRewardsBOResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeWalletHTTPClient interface {
 	// AddWalletCurrency Add a new currency to the wallet configuration
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
@@ -1357,6 +1383,8 @@ type BackofficeWalletHTTPClient interface {
 	ListPromoCodeCampaigns(ctx context.Context, req *ListPromoCodeCampaignsRequest, opts ...http.CallOption) (rsp *v1.ListPromoCodeCampaignsResponse, err error)
 	// ListUniversalCodeUsages ListUniversalCodeUsages lists the usages of a universal campaign
 	ListUniversalCodeUsages(ctx context.Context, req *ListUniversalCodeUsagesRequest, opts ...http.CallOption) (rsp *v1.ListUniversalCodeUsagesResponse, err error)
+	// ListUserFreeRewards List user's free spin and free bet rewards with filters, pagination, and summary
+	ListUserFreeRewards(ctx context.Context, req *BOListUserFreeRewardsRequest, opts ...http.CallOption) (rsp *v1.ListUserFreeRewardsBOResponse, err error)
 	// ListWalletBalanceTransactions ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
 	// ListWalletCurrencies ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
@@ -1781,6 +1809,20 @@ func (c *BackofficeWalletHTTPClientImpl) ListUniversalCodeUsages(ctx context.Con
 	pattern := "/v1/backoffice/wallet/promo-code/universal/usages/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListUniversalCodeUsages))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListUserFreeRewards List user's free spin and free bet rewards with filters, pagination, and summary
+func (c *BackofficeWalletHTTPClientImpl) ListUserFreeRewards(ctx context.Context, in *BOListUserFreeRewardsRequest, opts ...http.CallOption) (*v1.ListUserFreeRewardsBOResponse, error) {
+	var out v1.ListUserFreeRewardsBOResponse
+	pattern := "/v1/backoffice/wallet/free-rewards/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletListUserFreeRewards))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

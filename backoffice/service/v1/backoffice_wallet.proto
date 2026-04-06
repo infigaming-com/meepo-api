@@ -385,6 +385,14 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// List user's free spin and free bet rewards with filters, pagination, and summary
+	rpc ListUserFreeRewards(BOListUserFreeRewardsRequest) returns (wallet.service.v1.ListUserFreeRewardsBOResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/free-rewards/list"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -1004,4 +1012,25 @@ message ListOperatorWithdrawableAmountsRequest {
 	optional bool pagination = 4;
 	// optional: query a specific operator's data; if omitted, uses the initiator's own context
 	api.common.OperatorContext target_operator_context = 5;
+}
+
+// ============================================
+// User Free Rewards
+// ============================================
+
+message BOListUserFreeRewardsRequest {
+	int64 user_id = 1;
+	// Filter by reward type: "free_spin", "free_bet"
+	repeated string types = 2;
+	// Filter by derived status: "active", "used", "expired", "revoked"
+	repeated string statuses = 3;
+	// Filter by source: "deposit_reward", "promo_code", "app_download_reward"
+	repeated string source_types = 4;
+	// If true, only return rewards expiring within 7 days
+	optional bool expiring_soon = 5;
+	// Default 1
+	optional int32 page = 6;
+	// Default 20
+	optional int32 page_size = 7;
+	api.common.OperatorContext target_operator_context = 8;
 }

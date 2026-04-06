@@ -69,6 +69,7 @@ const (
 	BackofficeWallet_ExportManualJournalEntries_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
 	BackofficeWallet_ManualAdjustCreditTurnoverField_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ManualAdjustCreditTurnoverField"
 	BackofficeWallet_ListOperatorWithdrawableAmounts_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorWithdrawableAmounts"
+	BackofficeWallet_ListUserFreeRewards_FullMethodName                   = "/api.backoffice.service.v1.BackofficeWallet/ListUserFreeRewards"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -173,6 +174,8 @@ type BackofficeWalletClient interface {
 	ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*v1.ManualAdjustCreditTurnoverFieldResponse, error)
 	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	ListOperatorWithdrawableAmounts(ctx context.Context, in *ListOperatorWithdrawableAmountsRequest, opts ...grpc.CallOption) (*v1.ListOperatorWithdrawableAmountsResponse, error)
+	// List user's free spin and free bet rewards with filters, pagination, and summary
+	ListUserFreeRewards(ctx context.Context, in *BOListUserFreeRewardsRequest, opts ...grpc.CallOption) (*v1.ListUserFreeRewardsBOResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -673,6 +676,16 @@ func (c *backofficeWalletClient) ListOperatorWithdrawableAmounts(ctx context.Con
 	return out, nil
 }
 
+func (c *backofficeWalletClient) ListUserFreeRewards(ctx context.Context, in *BOListUserFreeRewardsRequest, opts ...grpc.CallOption) (*v1.ListUserFreeRewardsBOResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListUserFreeRewardsBOResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListUserFreeRewards_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -775,6 +788,8 @@ type BackofficeWalletServer interface {
 	ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*v1.ManualAdjustCreditTurnoverFieldResponse, error)
 	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*v1.ListOperatorWithdrawableAmountsResponse, error)
+	// List user's free spin and free bet rewards with filters, pagination, and summary
+	ListUserFreeRewards(context.Context, *BOListUserFreeRewardsRequest) (*v1.ListUserFreeRewardsBOResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -931,6 +946,9 @@ func (UnimplementedBackofficeWalletServer) ManualAdjustCreditTurnoverField(conte
 }
 func (UnimplementedBackofficeWalletServer) ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*v1.ListOperatorWithdrawableAmountsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorWithdrawableAmounts not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListUserFreeRewards(context.Context, *BOListUserFreeRewardsRequest) (*v1.ListUserFreeRewardsBOResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListUserFreeRewards not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -1835,6 +1853,24 @@ func _BackofficeWallet_ListOperatorWithdrawableAmounts_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_ListUserFreeRewards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BOListUserFreeRewardsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListUserFreeRewards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListUserFreeRewards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListUserFreeRewards(ctx, req.(*BOListUserFreeRewardsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2037,6 +2073,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperatorWithdrawableAmounts",
 			Handler:    _BackofficeWallet_ListOperatorWithdrawableAmounts_Handler,
+		},
+		{
+			MethodName: "ListUserFreeRewards",
+			Handler:    _BackofficeWallet_ListUserFreeRewards_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

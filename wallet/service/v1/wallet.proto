@@ -334,6 +334,9 @@ service Wallet {
 	// ListUserFreeRewards returns free spin and free bet details for a user
 	rpc ListUserFreeRewards(ListUserFreeRewardsRequest) returns (ListUserFreeRewardsResponse) {}
 
+	// ListUserFreeRewardsBO returns free spin and free bet rewards for BO with filters, pagination, and summary
+	rpc ListUserFreeRewardsBO(ListUserFreeRewardsBORequest) returns (ListUserFreeRewardsBOResponse) {}
+
 	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	rpc ListOperatorWithdrawableAmounts(ListOperatorWithdrawableAmountsRequest) returns (ListOperatorWithdrawableAmountsResponse) {}
 
@@ -2154,6 +2157,10 @@ message FreeSpinRewardDetail {
 	string winnings = 9;
 	string winnings_usd = 10;
 	string winnings_reporting_currency = 11;
+
+	// Bet amount resolved from (provider_id, game_id, level) via game service.
+	// Empty until game service provides the mapping API.
+	string bet_amount = 12;
 }
 
 // Free bet details - all fields from UserFreeBet DO
@@ -2526,4 +2533,94 @@ message GetOperatorWithdrawCheckInfoResponse {
 	int32 currency_decimal_places = 8;
 	// decimal places for USD (from system-level config)
 	int32 usd_decimal_places = 9;
+}
+
+// ========== ListUserFreeRewardsBO Messages ==========
+
+message ListUserFreeRewardsBORequest {
+	int64 user_id = 1;
+	// Filter by reward type: "free_spin", "free_bet"
+	repeated string types = 2;
+	// Filter by derived status: "active", "used", "expired", "revoked"
+	repeated string statuses = 3;
+	// Filter by source: "deposit_reward", "promo_code", "app_download_reward"
+	repeated string source_types = 4;
+	// If true, only return rewards expiring within 7 days
+	optional bool expiring_soon = 5;
+	// Default 1
+	optional int32 page = 6;
+	// Default 20
+	optional int32 page_size = 7;
+}
+
+message ListUserFreeRewardsBOResponse {
+	repeated FreeRewardBOItem items = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+	// Summary stats for the user, NOT affected by list filters
+	FreeRewardSummary summary = 5;
+}
+
+// Summary cards for BO free reward page
+message FreeRewardSummary {
+	// Remaining active free spin count
+	int32 active_free_spins = 1;
+	// Remaining active free bet count
+	int32 active_free_bets = 2;
+	// Count of rewards expiring within 7 days
+	int32 expiring_soon_count = 3;
+	// All-time total granted count (spins + bets)
+	int32 total_granted_count = 4;
+	// All-time total used count
+	int32 total_used_count = 5;
+}
+
+// A single free reward grant (either free spin or free bet) for BO display
+message FreeRewardBOItem {
+	int64 id = 1;
+	// "free_spin" or "free_bet"
+	string type = 2;
+	// Derived status: "active", "used", "expired", "revoked"
+	string status = 3;
+	// "deposit_reward", "promo_code", "app_download_reward"
+	string source_type = 4;
+	int64 source_id = 5;
+
+	// Settlement/deposit currency
+	string settlement_currency = 6;
+	// Game currency (free_spin) or betting currency (free_bet)
+	string currency = 7;
+
+	// Aggregated counts from rewards JSONB
+	int32 total_count = 8;
+	int32 remaining_count = 9;
+	int32 used_count = 10;
+
+	// Expandable sub-rows: populated based on type
+	repeated FreeSpinRewardDetail free_spin_rewards = 11;
+	repeated FreeBetRewardDetail free_bet_rewards = 12;
+
+	// Earliest non-zero expired_at across all rewards, 0 = never expires
+	int64 expire_time = 13;
+
+	// Total winnings in settlement currency
+	string total_winnings = 14;
+	string total_winnings_usd = 15;
+
+	// Reward config
+	// "cash" or "bonus" — what winnings become
+	string reward_type = 16;
+	int32 wagering_requirement = 17;
+	string max_withdrawal_multiplier = 18;
+	// Winning reward validity in milliseconds
+	int64 reward_validity = 19;
+
+	// Timestamps
+	int64 created_at = 20;
+	int64 updated_at = 21;
+	// When fully used/expired/revoked (for History tab)
+	int64 completed_at = 22;
+	// When revoked, 0 = not revoked (reserved for future revoke feature)
+	int64 revoked_at = 23;
 }
