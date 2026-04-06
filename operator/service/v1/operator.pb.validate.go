@@ -10490,6 +10490,8 @@ func (m *ListAdjustmentsResponse_AdjustmentItem) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for CreatedByUid
+
 	if len(errors) > 0 {
 		return ListAdjustmentsResponse_AdjustmentItemMultiError(errors)
 	}
