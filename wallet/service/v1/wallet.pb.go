@@ -14347,8 +14347,6 @@ type OperatorWithdrawableAmount struct {
 	LockedForPendingInvoicesUsd string `protobuf:"bytes,9,opt,name=locked_for_pending_invoices_usd,json=lockedForPendingInvoicesUsd,proto3" json:"locked_for_pending_invoices_usd,omitempty"`
 	TransferableAmountUsd       string `protobuf:"bytes,10,opt,name=transferable_amount_usd,json=transferableAmountUsd,proto3" json:"transferable_amount_usd,omitempty"`
 	WithdrawableAmountUsd       string `protobuf:"bytes,11,opt,name=withdrawable_amount_usd,json=withdrawableAmountUsd,proto3" json:"withdrawable_amount_usd,omitempty"`
-	// total user wallet balances under this operator in USD
-	UserBalanceUsd string `protobuf:"bytes,12,opt,name=user_balance_usd,json=userBalanceUsd,proto3" json:"user_balance_usd,omitempty"`
 	// aggregated pending freeze in USD (sum of the 4 breakdown fields below)
 	OperatorPendingFreezeUsd string `protobuf:"bytes,14,opt,name=operator_pending_freeze_usd,json=operatorPendingFreezeUsd,proto3" json:"operator_pending_freeze_usd,omitempty"`
 	// bankroll amount in USD (for co-operation mode operators)
@@ -14358,11 +14356,9 @@ type OperatorWithdrawableAmount struct {
 	OperatorPendingAffiliateWithdrawFreezeUsd string `protobuf:"bytes,17,opt,name=operator_pending_affiliate_withdraw_freeze_usd,json=operatorPendingAffiliateWithdrawFreezeUsd,proto3" json:"operator_pending_affiliate_withdraw_freeze_usd,omitempty"`
 	OperatorPendingPaymentWithdrawFreezeUsd   string `protobuf:"bytes,18,opt,name=operator_pending_payment_withdraw_freeze_usd,json=operatorPendingPaymentWithdrawFreezeUsd,proto3" json:"operator_pending_payment_withdraw_freeze_usd,omitempty"`
 	// operator_balance_freeze (System-initiated manual freeze)
-	OperatorBalanceFreezeUsd string `protobuf:"bytes,19,opt,name=operator_balance_freeze_usd,json=operatorBalanceFreezeUsd,proto3" json:"operator_balance_freeze_usd,omitempty"`
-	// total unpaid bets amount in USD (pending game bets not yet settled, already deducted from withdrawable_amount_usd)
-	PendingBetsUsd string `protobuf:"bytes,20,opt,name=pending_bets_usd,json=pendingBetsUsd,proto3" json:"pending_bets_usd,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	OperatorBalanceFreezeUsd string `protobuf:"bytes,19,opt,name=operator_balance_freeze_usd,json=operatorBalanceFreezeUsd,proto3" json:"operator_balance_freeze_usd,omitempty"` // reserved: 12 was user_balance_usd, 20 was pending_bets_usd (removed from MW formula)
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *OperatorWithdrawableAmount) Reset() {
@@ -14472,13 +14468,6 @@ func (x *OperatorWithdrawableAmount) GetWithdrawableAmountUsd() string {
 	return ""
 }
 
-func (x *OperatorWithdrawableAmount) GetUserBalanceUsd() string {
-	if x != nil {
-		return x.UserBalanceUsd
-	}
-	return ""
-}
-
 func (x *OperatorWithdrawableAmount) GetOperatorPendingFreezeUsd() string {
 	if x != nil {
 		return x.OperatorPendingFreezeUsd
@@ -14517,13 +14506,6 @@ func (x *OperatorWithdrawableAmount) GetOperatorPendingPaymentWithdrawFreezeUsd(
 func (x *OperatorWithdrawableAmount) GetOperatorBalanceFreezeUsd() string {
 	if x != nil {
 		return x.OperatorBalanceFreezeUsd
-	}
-	return ""
-}
-
-func (x *OperatorWithdrawableAmount) GetPendingBetsUsd() string {
-	if x != nil {
-		return x.PendingBetsUsd
 	}
 	return ""
 }
@@ -14659,10 +14641,7 @@ type GetOperatorWithdrawCheckInfoResponse struct {
 	LockedForPendingInvoicesUsd string `protobuf:"bytes,3,opt,name=locked_for_pending_invoices_usd,json=lockedForPendingInvoicesUsd,proto3" json:"locked_for_pending_invoices_usd,omitempty"`
 	// pending freeze from operator_balance_transaction in USD (absolute value)
 	OperatorPendingFreezeUsd string `protobuf:"bytes,4,opt,name=operator_pending_freeze_usd,json=operatorPendingFreezeUsd,proto3" json:"operator_pending_freeze_usd,omitempty"`
-	// total user wallet balances under this operator in USD
-	UserBalanceUsd string `protobuf:"bytes,5,opt,name=user_balance_usd,json=userBalanceUsd,proto3" json:"user_balance_usd,omitempty"`
-	// total unpaid bets amount in USD (pending game bets not yet settled)
-	PendingBetsUsd string `protobuf:"bytes,12,opt,name=pending_bets_usd,json=pendingBetsUsd,proto3" json:"pending_bets_usd,omitempty"`
+	// reserved: 5 was user_balance_usd, 12 was pending_bets_usd (removed from MW formula)
 	// bankroll amount in USD (for co-operation mode operators)
 	BankrollUsd string `protobuf:"bytes,13,opt,name=bankroll_usd,json=bankrollUsd,proto3" json:"bankroll_usd,omitempty"`
 	// Currency-specific data
@@ -14733,20 +14712,6 @@ func (x *GetOperatorWithdrawCheckInfoResponse) GetLockedForPendingInvoicesUsd() 
 func (x *GetOperatorWithdrawCheckInfoResponse) GetOperatorPendingFreezeUsd() string {
 	if x != nil {
 		return x.OperatorPendingFreezeUsd
-	}
-	return ""
-}
-
-func (x *GetOperatorWithdrawCheckInfoResponse) GetUserBalanceUsd() string {
-	if x != nil {
-		return x.UserBalanceUsd
-	}
-	return ""
-}
-
-func (x *GetOperatorWithdrawCheckInfoResponse) GetPendingBetsUsd() string {
-	if x != nil {
-		return x.PendingBetsUsd
 	}
 	return ""
 }
@@ -19417,7 +19382,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_pagination\"\xcb\b\n" +
+	"\v_pagination\"\xf7\a\n" +
 	"\x1aOperatorWithdrawableAmount\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
 	"\x16retailer_operator_name\x18\x02 \x01(\tR\x14retailerOperatorName\x122\n" +
@@ -19432,15 +19397,13 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1flocked_for_pending_invoices_usd\x18\t \x01(\tR\x1blockedForPendingInvoicesUsd\x126\n" +
 	"\x17transferable_amount_usd\x18\n" +
 	" \x01(\tR\x15transferableAmountUsd\x126\n" +
-	"\x17withdrawable_amount_usd\x18\v \x01(\tR\x15withdrawableAmountUsd\x12(\n" +
-	"\x10user_balance_usd\x18\f \x01(\tR\x0euserBalanceUsd\x12=\n" +
+	"\x17withdrawable_amount_usd\x18\v \x01(\tR\x15withdrawableAmountUsd\x12=\n" +
 	"\x1boperator_pending_freeze_usd\x18\x0e \x01(\tR\x18operatorPendingFreezeUsd\x12!\n" +
 	"\fbankroll_usd\x18\x0f \x01(\tR\vbankrollUsd\x12W\n" +
 	")operator_pending_user_withdraw_freeze_usd\x18\x10 \x01(\tR$operatorPendingUserWithdrawFreezeUsd\x12a\n" +
 	".operator_pending_affiliate_withdraw_freeze_usd\x18\x11 \x01(\tR)operatorPendingAffiliateWithdrawFreezeUsd\x12]\n" +
 	",operator_pending_payment_withdraw_freeze_usd\x18\x12 \x01(\tR'operatorPendingPaymentWithdrawFreezeUsd\x12=\n" +
-	"\x1boperator_balance_freeze_usd\x18\x13 \x01(\tR\x18operatorBalanceFreezeUsd\x12(\n" +
-	"\x10pending_bets_usd\x18\x14 \x01(\tR\x0ependingBetsUsd\"\xb9\x01\n" +
+	"\x1boperator_balance_freeze_usd\x18\x13 \x01(\tR\x18operatorBalanceFreezeUsd\"\xb9\x01\n" +
 	"'ListOperatorWithdrawableAmountsResponse\x12G\n" +
 	"\x05items\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorWithdrawableAmountR\x05items\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
@@ -19448,16 +19411,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x89\x01\n" +
 	"#GetOperatorWithdrawCheckInfoRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\xda\x04\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\x86\x04\n" +
 	"$GetOperatorWithdrawCheckInfoResponse\x12\x1f\n" +
 	"\vcustody_usd\x18\x01 \x01(\tR\n" +
 	"custodyUsd\x12 \n" +
 	"\fest_cost_usd\x18\x02 \x01(\tR\n" +
 	"estCostUsd\x12D\n" +
 	"\x1flocked_for_pending_invoices_usd\x18\x03 \x01(\tR\x1blockedForPendingInvoicesUsd\x12=\n" +
-	"\x1boperator_pending_freeze_usd\x18\x04 \x01(\tR\x18operatorPendingFreezeUsd\x12(\n" +
-	"\x10user_balance_usd\x18\x05 \x01(\tR\x0euserBalanceUsd\x12(\n" +
-	"\x10pending_bets_usd\x18\f \x01(\tR\x0ependingBetsUsd\x12!\n" +
+	"\x1boperator_pending_freeze_usd\x18\x04 \x01(\tR\x18operatorPendingFreezeUsd\x12!\n" +
 	"\fbankroll_usd\x18\r \x01(\tR\vbankrollUsd\x12?\n" +
 	"\x1coperator_balance_in_currency\x18\x06 \x01(\tR\x19operatorBalanceInCurrency\x12L\n" +
 	"#operator_pending_freeze_in_currency\x18\a \x01(\tR\x1foperatorPendingFreezeInCurrency\x126\n" +
