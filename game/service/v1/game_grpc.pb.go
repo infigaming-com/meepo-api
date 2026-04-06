@@ -94,6 +94,7 @@ const (
 	Game_BackofficeListGamesUnderTag_FullMethodName       = "/api.game.service.v1.Game/BackofficeListGamesUnderTag"
 	Game_GetProviderStats_FullMethodName                  = "/api.game.service.v1.Game/GetProviderStats"
 	Game_GetUserNgr_FullMethodName                        = "/api.game.service.v1.Game/GetUserNgr"
+	Game_GetPendingBetsEstimatedProviderRS_FullMethodName = "/api.game.service.v1.Game/GetPendingBetsEstimatedProviderRS"
 	Game_ListGameGroups_FullMethodName                    = "/api.game.service.v1.Game/ListGameGroups"
 	Game_GetGameGroup_FullMethodName                      = "/api.game.service.v1.Game/GetGameGroup"
 	Game_CreateGameGroup_FullMethodName                   = "/api.game.service.v1.Game/CreateGameGroup"
@@ -210,6 +211,9 @@ type GameClient interface {
 	GetProviderStats(ctx context.Context, in *GetProviderStatsRequest, opts ...grpc.CallOption) (*GetProviderStatsResponse, error)
 	// Get user NGR (Net Gaming Revenue) for a specific time range
 	GetUserNgr(ctx context.Context, in *GetUserNgrRequest, opts ...grpc.CallOption) (*GetUserNgrResponse, error)
+	// Get estimated game provider revenue share from pending (unsettled) bets
+	// Assumes all pending bets are lost by the player (payout = 0, GGR = BetAmount)
+	GetPendingBetsEstimatedProviderRS(ctx context.Context, in *GetPendingBetsEstimatedProviderRSRequest, opts ...grpc.CallOption) (*GetPendingBetsEstimatedProviderRSResponse, error)
 	ListGameGroups(ctx context.Context, in *ListGameGroupsRequest, opts ...grpc.CallOption) (*ListGameGroupsResponse, error)
 	GetGameGroup(ctx context.Context, in *GetGameGroupRequest, opts ...grpc.CallOption) (*GetGameGroupResponse, error)
 	CreateGameGroup(ctx context.Context, in *CreateGameGroupRequest, opts ...grpc.CallOption) (*CreateGameGroupResponse, error)
@@ -986,6 +990,16 @@ func (c *gameClient) GetUserNgr(ctx context.Context, in *GetUserNgrRequest, opts
 	return out, nil
 }
 
+func (c *gameClient) GetPendingBetsEstimatedProviderRS(ctx context.Context, in *GetPendingBetsEstimatedProviderRSRequest, opts ...grpc.CallOption) (*GetPendingBetsEstimatedProviderRSResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPendingBetsEstimatedProviderRSResponse)
+	err := c.cc.Invoke(ctx, Game_GetPendingBetsEstimatedProviderRS_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gameClient) ListGameGroups(ctx context.Context, in *ListGameGroupsRequest, opts ...grpc.CallOption) (*ListGameGroupsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListGameGroupsResponse)
@@ -1226,6 +1240,9 @@ type GameServer interface {
 	GetProviderStats(context.Context, *GetProviderStatsRequest) (*GetProviderStatsResponse, error)
 	// Get user NGR (Net Gaming Revenue) for a specific time range
 	GetUserNgr(context.Context, *GetUserNgrRequest) (*GetUserNgrResponse, error)
+	// Get estimated game provider revenue share from pending (unsettled) bets
+	// Assumes all pending bets are lost by the player (payout = 0, GGR = BetAmount)
+	GetPendingBetsEstimatedProviderRS(context.Context, *GetPendingBetsEstimatedProviderRSRequest) (*GetPendingBetsEstimatedProviderRSResponse, error)
 	ListGameGroups(context.Context, *ListGameGroupsRequest) (*ListGameGroupsResponse, error)
 	GetGameGroup(context.Context, *GetGameGroupRequest) (*GetGameGroupResponse, error)
 	CreateGameGroup(context.Context, *CreateGameGroupRequest) (*CreateGameGroupResponse, error)
@@ -1476,6 +1493,9 @@ func (UnimplementedGameServer) GetProviderStats(context.Context, *GetProviderSta
 }
 func (UnimplementedGameServer) GetUserNgr(context.Context, *GetUserNgrRequest) (*GetUserNgrResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserNgr not implemented")
+}
+func (UnimplementedGameServer) GetPendingBetsEstimatedProviderRS(context.Context, *GetPendingBetsEstimatedProviderRSRequest) (*GetPendingBetsEstimatedProviderRSResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPendingBetsEstimatedProviderRS not implemented")
 }
 func (UnimplementedGameServer) ListGameGroups(context.Context, *ListGameGroupsRequest) (*ListGameGroupsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListGameGroups not implemented")
@@ -2890,6 +2910,24 @@ func _Game_GetUserNgr_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetPendingBetsEstimatedProviderRS_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPendingBetsEstimatedProviderRSRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetPendingBetsEstimatedProviderRS(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetPendingBetsEstimatedProviderRS_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetPendingBetsEstimatedProviderRS(ctx, req.(*GetPendingBetsEstimatedProviderRSRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Game_ListGameGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListGameGroupsRequest)
 	if err := dec(in); err != nil {
@@ -3448,6 +3486,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserNgr",
 			Handler:    _Game_GetUserNgr_Handler,
+		},
+		{
+			MethodName: "GetPendingBetsEstimatedProviderRS",
+			Handler:    _Game_GetPendingBetsEstimatedProviderRS_Handler,
 		},
 		{
 			MethodName: "ListGameGroups",

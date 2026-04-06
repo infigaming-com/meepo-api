@@ -28302,6 +28302,251 @@ var _ interface {
 	ErrorName() string
 } = PreviewRTPRoutingResponseValidationError{}
 
+// Validate checks the field values on GetPendingBetsEstimatedProviderRSRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetPendingBetsEstimatedProviderRSRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetPendingBetsEstimatedProviderRSRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetPendingBetsEstimatedProviderRSRequestMultiError, or nil if none found.
+func (m *GetPendingBetsEstimatedProviderRSRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPendingBetsEstimatedProviderRSRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPendingBetsEstimatedProviderRSRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPendingBetsEstimatedProviderRSRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPendingBetsEstimatedProviderRSRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetPendingBetsEstimatedProviderRSRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPendingBetsEstimatedProviderRSRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetPendingBetsEstimatedProviderRSRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetPendingBetsEstimatedProviderRSRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPendingBetsEstimatedProviderRSRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPendingBetsEstimatedProviderRSRequestMultiError) AllErrors() []error { return m }
+
+// GetPendingBetsEstimatedProviderRSRequestValidationError is the validation
+// error returned by GetPendingBetsEstimatedProviderRSRequest.Validate if the
+// designated constraints aren't met.
+type GetPendingBetsEstimatedProviderRSRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPendingBetsEstimatedProviderRSRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPendingBetsEstimatedProviderRSRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPendingBetsEstimatedProviderRSRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPendingBetsEstimatedProviderRSRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPendingBetsEstimatedProviderRSRequestValidationError) ErrorName() string {
+	return "GetPendingBetsEstimatedProviderRSRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPendingBetsEstimatedProviderRSRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPendingBetsEstimatedProviderRSRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPendingBetsEstimatedProviderRSRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPendingBetsEstimatedProviderRSRequestValidationError{}
+
+// Validate checks the field values on
+// GetPendingBetsEstimatedProviderRSResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetPendingBetsEstimatedProviderRSResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetPendingBetsEstimatedProviderRSResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetPendingBetsEstimatedProviderRSResponseMultiError, or nil if none found.
+func (m *GetPendingBetsEstimatedProviderRSResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPendingBetsEstimatedProviderRSResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalEstimatedProviderRs
+
+	// no validation rules for TotalEstimatedProviderRsUsd
+
+	if len(errors) > 0 {
+		return GetPendingBetsEstimatedProviderRSResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPendingBetsEstimatedProviderRSResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetPendingBetsEstimatedProviderRSResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetPendingBetsEstimatedProviderRSResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPendingBetsEstimatedProviderRSResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPendingBetsEstimatedProviderRSResponseMultiError) AllErrors() []error { return m }
+
+// GetPendingBetsEstimatedProviderRSResponseValidationError is the validation
+// error returned by GetPendingBetsEstimatedProviderRSResponse.Validate if the
+// designated constraints aren't met.
+type GetPendingBetsEstimatedProviderRSResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPendingBetsEstimatedProviderRSResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPendingBetsEstimatedProviderRSResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPendingBetsEstimatedProviderRSResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPendingBetsEstimatedProviderRSResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPendingBetsEstimatedProviderRSResponseValidationError) ErrorName() string {
+	return "GetPendingBetsEstimatedProviderRSResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPendingBetsEstimatedProviderRSResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPendingBetsEstimatedProviderRSResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPendingBetsEstimatedProviderRSResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPendingBetsEstimatedProviderRSResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
