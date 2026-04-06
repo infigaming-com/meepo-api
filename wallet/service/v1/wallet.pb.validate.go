@@ -26652,8 +26652,6 @@ func (m *OperatorWithdrawableAmount) validate(all bool) error {
 
 	// no validation rules for WithdrawableAmountUsd
 
-	// no validation rules for UserBalanceUsd
-
 	// no validation rules for OperatorPendingFreezeUsd
 
 	// no validation rules for BankrollUsd
@@ -26665,8 +26663,6 @@ func (m *OperatorWithdrawableAmount) validate(all bool) error {
 	// no validation rules for OperatorPendingPaymentWithdrawFreezeUsd
 
 	// no validation rules for OperatorBalanceFreezeUsd
-
-	// no validation rules for PendingBetsUsd
 
 	if len(errors) > 0 {
 		return OperatorWithdrawableAmountMultiError(errors)
@@ -27060,10 +27056,6 @@ func (m *GetOperatorWithdrawCheckInfoResponse) validate(all bool) error {
 	// no validation rules for LockedForPendingInvoicesUsd
 
 	// no validation rules for OperatorPendingFreezeUsd
-
-	// no validation rules for UserBalanceUsd
-
-	// no validation rules for PendingBetsUsd
 
 	// no validation rules for BankrollUsd
 
