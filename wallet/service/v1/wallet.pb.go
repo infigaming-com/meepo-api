@@ -12255,8 +12255,11 @@ type FreeSpinRewardDetail struct {
 	Winnings                  string `protobuf:"bytes,9,opt,name=winnings,proto3" json:"winnings,omitempty"`
 	WinningsUsd               string `protobuf:"bytes,10,opt,name=winnings_usd,json=winningsUsd,proto3" json:"winnings_usd,omitempty"`
 	WinningsReportingCurrency string `protobuf:"bytes,11,opt,name=winnings_reporting_currency,json=winningsReportingCurrency,proto3" json:"winnings_reporting_currency,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	// Bet amount resolved from (provider_id, game_id, level) via game service.
+	// Empty until game service provides the mapping API.
+	BetAmount     string `protobuf:"bytes,12,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FreeSpinRewardDetail) Reset() {
@@ -12355,6 +12358,13 @@ func (x *FreeSpinRewardDetail) GetWinningsUsd() string {
 func (x *FreeSpinRewardDetail) GetWinningsReportingCurrency() string {
 	if x != nil {
 		return x.WinningsReportingCurrency
+	}
+	return ""
+}
+
+func (x *FreeSpinRewardDetail) GetBetAmount() string {
+	if x != nil {
+		return x.BetAmount
 	}
 	return ""
 }
@@ -19668,7 +19678,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\x10 \x01(\x03R\tupdatedAt\x12#\n" +
 	"\rrounds_played\x18\x11 \x01(\x05R\froundsPlayed\x12!\n" +
-	"\ftotal_rounds\x18\x12 \x01(\x05R\vtotalRounds\"\x85\x03\n" +
+	"\ftotal_rounds\x18\x12 \x01(\x05R\vtotalRounds\"\xa4\x03\n" +
 	"\x14FreeSpinRewardDetail\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12\x17\n" +
@@ -19684,7 +19694,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bwinnings\x18\t \x01(\tR\bwinnings\x12!\n" +
 	"\fwinnings_usd\x18\n" +
 	" \x01(\tR\vwinningsUsd\x12>\n" +
-	"\x1bwinnings_reporting_currency\x18\v \x01(\tR\x19winningsReportingCurrencyJ\x04\b\a\x10\bR\x12free_spin_validity\"\x85\x05\n" +
+	"\x1bwinnings_reporting_currency\x18\v \x01(\tR\x19winningsReportingCurrency\x12\x1d\n" +
+	"\n" +
+	"bet_amount\x18\f \x01(\tR\tbetAmountJ\x04\b\a\x10\bR\x12free_spin_validity\"\x85\x05\n" +
 	"\rFreeBetDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vsource_type\x18\x02 \x01(\tR\n" +

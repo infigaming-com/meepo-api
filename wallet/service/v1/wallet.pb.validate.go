@@ -22769,6 +22769,8 @@ func (m *FreeSpinRewardDetail) validate(all bool) error {
 
 	// no validation rules for WinningsReportingCurrency
 
+	// no validation rules for BetAmount
+
 	if len(errors) > 0 {
 		return FreeSpinRewardDetailMultiError(errors)
 	}

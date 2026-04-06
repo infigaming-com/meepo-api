@@ -33771,6 +33771,11 @@ components:
                     type: string
                 winningsReportingCurrency:
                     type: string
+                betAmount:
+                    type: string
+                    description: |-
+                        Bet amount resolved from (provider_id, game_id, level) via game service.
+                         Empty until game service provides the mapping API.
             description: Single free spin reward item - from FreeSpinRewardItem in JSONB
         api.wallet.service.v1.GenerateOneTimePromoCodesResponse:
             type: object

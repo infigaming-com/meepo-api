@@ -2157,6 +2157,10 @@ message FreeSpinRewardDetail {
 	string winnings = 9;
 	string winnings_usd = 10;
 	string winnings_reporting_currency = 11;
+
+	// Bet amount resolved from (provider_id, game_id, level) via game service.
+	// Empty until game service provides the mapping API.
+	string bet_amount = 12;
 }
 
 // Free bet details - all fields from UserFreeBet DO
