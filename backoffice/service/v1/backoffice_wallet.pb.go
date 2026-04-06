@@ -4806,6 +4806,51 @@ func (x *ListOperatorWithdrawableAmountsRequest) GetTargetOperatorContext() *com
 	return nil
 }
 
+type BOGetOperatorWithdrawableAmountRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator to query; initiator's permission is validated against this
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *BOGetOperatorWithdrawableAmountRequest) Reset() {
+	*x = BOGetOperatorWithdrawableAmountRequest{}
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[65]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BOGetOperatorWithdrawableAmountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BOGetOperatorWithdrawableAmountRequest) ProtoMessage() {}
+
+func (x *BOGetOperatorWithdrawableAmountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[65]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BOGetOperatorWithdrawableAmountRequest.ProtoReflect.Descriptor instead.
+func (*BOGetOperatorWithdrawableAmountRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{65}
+}
+
+func (x *BOGetOperatorWithdrawableAmountRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
 type BOListUserFreeRewardsRequest struct {
 	state  protoimpl.MessageState `protogen:"open.v1"`
 	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -4827,7 +4872,7 @@ type BOListUserFreeRewardsRequest struct {
 
 func (x *BOListUserFreeRewardsRequest) Reset() {
 	*x = BOListUserFreeRewardsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[65]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4839,7 +4884,7 @@ func (x *BOListUserFreeRewardsRequest) String() string {
 func (*BOListUserFreeRewardsRequest) ProtoMessage() {}
 
 func (x *BOListUserFreeRewardsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[65]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4852,7 +4897,7 @@ func (x *BOListUserFreeRewardsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BOListUserFreeRewardsRequest.ProtoReflect.Descriptor instead.
 func (*BOListUserFreeRewardsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{65}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *BOListUserFreeRewardsRequest) GetUserId() int64 {
@@ -4919,7 +4964,7 @@ type GetWalletCreditsResponse_Credit struct {
 
 func (x *GetWalletCreditsResponse_Credit) Reset() {
 	*x = GetWalletCreditsResponse_Credit{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4931,7 +4976,7 @@ func (x *GetWalletCreditsResponse_Credit) String() string {
 func (*GetWalletCreditsResponse_Credit) ProtoMessage() {}
 
 func (x *GetWalletCreditsResponse_Credit) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5036,7 +5081,7 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) Reset() {
 	*x = ListWalletBalanceTransactionsResponse_BalanceTransaction{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[67]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5048,7 +5093,7 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) String() stri
 func (*ListWalletBalanceTransactionsResponse_BalanceTransaction) ProtoMessage() {}
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[67]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5172,7 +5217,7 @@ type GetWalletCreditTransactionsResponse_CreditTransaction struct {
 
 func (x *GetWalletCreditTransactionsResponse_CreditTransaction) Reset() {
 	*x = GetWalletCreditTransactionsResponse_CreditTransaction{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[68]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5184,7 +5229,7 @@ func (x *GetWalletCreditTransactionsResponse_CreditTransaction) String() string 
 func (*GetWalletCreditTransactionsResponse_CreditTransaction) ProtoMessage() {}
 
 func (x *GetWalletCreditTransactionsResponse_CreditTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[68]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5769,7 +5814,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_pagination\"\x9a\x02\n" +
+	"\v_pagination\"}\n" +
+	"&BOGetOperatorWithdrawableAmountRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\x9a\x02\n" +
 	"\x1cBOListUserFreeRewardsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
 	"\x05types\x18\x02 \x03(\tR\x05types\x12\x1a\n" +
@@ -5781,7 +5828,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x0e_expiring_soonB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size2\xc9N\n" +
+	"_page_size2\xabP\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -5832,7 +5879,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x18ListManualJournalEntries\x12:.api.backoffice.service.v1.ListManualJournalEntriesRequest\x1a7.api.wallet.service.v1.ListManualJournalEntriesResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/wallet/manual/journal-entries/list\x12\xd5\x01\n" +
 	"\x1aExportManualJournalEntries\x12<.api.backoffice.service.v1.ExportManualJournalEntriesRequest\x1a9.api.wallet.service.v1.ExportManualJournalEntriesResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/wallet/manual/journal-entries/export\x12\xdb\x01\n" +
 	"\x1fManualAdjustCreditTurnoverField\x12A.api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest\x1a>.api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/wallet/credit/manual_adjust\x12\xe9\x01\n" +
-	"\x1fListOperatorWithdrawableAmounts\x12A.api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest\x1a>.api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/wallet/operator/withdrawable-amounts/list\x12\xb8\x01\n" +
+	"\x1fListOperatorWithdrawableAmounts\x12A.api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest\x1a>.api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/wallet/operator/withdrawable-amounts/list\x12\xdf\x01\n" +
+	"\x1dGetOperatorWithdrawableAmount\x12A.api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest\x1a<.api.wallet.service.v1.GetOperatorWithdrawableAmountResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/v1/backoffice/wallet/operator/withdrawable-amount\x12\xb8\x01\n" +
 	"\x13ListUserFreeRewards\x127.api.backoffice.service.v1.BOListUserFreeRewardsRequest\x1a4.api.wallet.service.v1.ListUserFreeRewardsBOResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/wallet/free-rewards/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
@@ -5848,7 +5896,7 @@ func file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 71)
+var file_backoffice_service_v1_backoffice_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 72)
 var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*GetWalletsRequest)(nil),                                        // 0: api.backoffice.service.v1.GetWalletsRequest
 	(*GetWalletCreditsRequest)(nil),                                  // 1: api.backoffice.service.v1.GetWalletCreditsRequest
@@ -5915,248 +5963,253 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*SetAppDownloadRewardConfigRequest)(nil),                        // 62: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest
 	(*GetAppDownloadRewardConfigRequest)(nil),                        // 63: api.backoffice.service.v1.GetAppDownloadRewardConfigRequest
 	(*ListOperatorWithdrawableAmountsRequest)(nil),                   // 64: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest
-	(*BOListUserFreeRewardsRequest)(nil),                             // 65: api.backoffice.service.v1.BOListUserFreeRewardsRequest
-	(*GetWalletCreditsResponse_Credit)(nil),                          // 66: api.backoffice.service.v1.GetWalletCreditsResponse.Credit
-	(*ListWalletBalanceTransactionsResponse_BalanceTransaction)(nil), // 67: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
-	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil),    // 68: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	nil,                                                // 69: api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
-	nil,                                                // 70: api.backoffice.service.v1.GetExchangeRatesResponse.SwapFeesEntry
-	(*timestamppb.Timestamp)(nil),                      // 71: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),                     // 72: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil),              // 73: api.common.OperatorContextFilters
-	(*v1.RewardSequence)(nil),                          // 74: api.wallet.service.v1.RewardSequence
-	(*v1.OperatorCurrencyConfig)(nil),                  // 75: api.wallet.service.v1.OperatorCurrencyConfig
-	(*v1.WalletConfig)(nil),                            // 76: api.wallet.service.v1.WalletConfig
-	(*v1.FICAThresholdConfig)(nil),                     // 77: api.wallet.service.v1.FICAThresholdConfig
-	(*v1.PromoCodeConditions)(nil),                     // 78: api.wallet.service.v1.PromoCodeConditions
-	(*v1.PromoCodeRewardConfigs)(nil),                  // 79: api.wallet.service.v1.PromoCodeRewardConfigs
-	(*v1.AppDownloadRewardConfigItem)(nil),             // 80: api.wallet.service.v1.AppDownloadRewardConfigItem
-	(*v1.GetWalletsResponse)(nil),                      // 81: api.wallet.service.v1.GetWalletsResponse
-	(*v1.ListCurrenciesResponse)(nil),                  // 82: api.wallet.service.v1.ListCurrenciesResponse
-	(*v1.UpdateOperatorCurrencyResponse)(nil),          // 83: api.wallet.service.v1.UpdateOperatorCurrencyResponse
-	(*v1.ListBottomOperatorBalancesResponse)(nil),      // 84: api.wallet.service.v1.ListBottomOperatorBalancesResponse
-	(*v1.GetOperatorBalanceResponse)(nil),              // 85: api.wallet.service.v1.GetOperatorBalanceResponse
-	(*v1.SetDepositRewardSequencesResponse)(nil),       // 86: api.wallet.service.v1.SetDepositRewardSequencesResponse
-	(*v1.DeleteDepositRewardSequencesResponse)(nil),    // 87: api.wallet.service.v1.DeleteDepositRewardSequencesResponse
-	(*v1.GetDepositRewardConfigResponse)(nil),          // 88: api.wallet.service.v1.GetDepositRewardConfigResponse
-	(*v1.SetAppDownloadRewardConfigResponse)(nil),      // 89: api.wallet.service.v1.SetAppDownloadRewardConfigResponse
-	(*v1.GetAppDownloadRewardConfigResponse)(nil),      // 90: api.wallet.service.v1.GetAppDownloadRewardConfigResponse
-	(*v1.CreatePromoCodeCampaignResponse)(nil),         // 91: api.wallet.service.v1.CreatePromoCodeCampaignResponse
-	(*v1.UpdatePromoCodeCampaignResponse)(nil),         // 92: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
-	(*v1.UpdatePromoCodeCampaignStatusResponse)(nil),   // 93: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
-	(*v1.ListPromoCodeCampaignsResponse)(nil),          // 94: api.wallet.service.v1.ListPromoCodeCampaignsResponse
-	(*v1.ListPromoCodeCampaignDetailsResponse)(nil),    // 95: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
-	(*v1.GenerateOneTimePromoCodesResponse)(nil),       // 96: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
-	(*v1.GenerateUniversalPromoCodesResponse)(nil),     // 97: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
-	(*v1.ListUniversalCodeUsagesResponse)(nil),         // 98: api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	(*v1.GetGamificationCurrencyConfigResponse)(nil),   // 99: api.wallet.service.v1.GetGamificationCurrencyConfigResponse
-	(*v1.UpdateOperatorCurrencyConfigResponse)(nil),    // 100: api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	(*v1.UpdateWalletConfigResponse)(nil),              // 101: api.wallet.service.v1.UpdateWalletConfigResponse
-	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 102: api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
-	(*v1.ListResponsibleGamblingConfigsResponse)(nil),  // 103: api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
-	(*v1.ListCustomerRecordsResponse)(nil),             // 104: api.wallet.service.v1.ListCustomerRecordsResponse
-	(*v1.ExportCustomerRecordsResponse)(nil),           // 105: api.wallet.service.v1.ExportCustomerRecordsResponse
-	(*v1.SetFICAThresholdConfigResponse)(nil),          // 106: api.wallet.service.v1.SetFICAThresholdConfigResponse
-	(*v1.GetFICAThresholdConfigResponse)(nil),          // 107: api.wallet.service.v1.GetFICAThresholdConfigResponse
-	(*v1.ListFICAThresholdTransactionsResponse)(nil),   // 108: api.wallet.service.v1.ListFICAThresholdTransactionsResponse
-	(*v1.ExportFICAThresholdTransactionsResponse)(nil), // 109: api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
-	(*v1.CreditResponse)(nil),                          // 110: api.wallet.service.v1.CreditResponse
-	(*v1.DebitResponse)(nil),                           // 111: api.wallet.service.v1.DebitResponse
-	(*v1.ListManualJournalEntriesResponse)(nil),        // 112: api.wallet.service.v1.ListManualJournalEntriesResponse
-	(*v1.ExportManualJournalEntriesResponse)(nil),      // 113: api.wallet.service.v1.ExportManualJournalEntriesResponse
-	(*v1.ManualAdjustCreditTurnoverFieldResponse)(nil), // 114: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
-	(*v1.ListOperatorWithdrawableAmountsResponse)(nil), // 115: api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
-	(*v1.ListUserFreeRewardsBOResponse)(nil),           // 116: api.wallet.service.v1.ListUserFreeRewardsBOResponse
+	(*BOGetOperatorWithdrawableAmountRequest)(nil),                   // 65: api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest
+	(*BOListUserFreeRewardsRequest)(nil),                             // 66: api.backoffice.service.v1.BOListUserFreeRewardsRequest
+	(*GetWalletCreditsResponse_Credit)(nil),                          // 67: api.backoffice.service.v1.GetWalletCreditsResponse.Credit
+	(*ListWalletBalanceTransactionsResponse_BalanceTransaction)(nil), // 68: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
+	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil),    // 69: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
+	nil,                                                // 70: api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	nil,                                                // 71: api.backoffice.service.v1.GetExchangeRatesResponse.SwapFeesEntry
+	(*timestamppb.Timestamp)(nil),                      // 72: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),                     // 73: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),              // 74: api.common.OperatorContextFilters
+	(*v1.RewardSequence)(nil),                          // 75: api.wallet.service.v1.RewardSequence
+	(*v1.OperatorCurrencyConfig)(nil),                  // 76: api.wallet.service.v1.OperatorCurrencyConfig
+	(*v1.WalletConfig)(nil),                            // 77: api.wallet.service.v1.WalletConfig
+	(*v1.FICAThresholdConfig)(nil),                     // 78: api.wallet.service.v1.FICAThresholdConfig
+	(*v1.PromoCodeConditions)(nil),                     // 79: api.wallet.service.v1.PromoCodeConditions
+	(*v1.PromoCodeRewardConfigs)(nil),                  // 80: api.wallet.service.v1.PromoCodeRewardConfigs
+	(*v1.AppDownloadRewardConfigItem)(nil),             // 81: api.wallet.service.v1.AppDownloadRewardConfigItem
+	(*v1.GetWalletsResponse)(nil),                      // 82: api.wallet.service.v1.GetWalletsResponse
+	(*v1.ListCurrenciesResponse)(nil),                  // 83: api.wallet.service.v1.ListCurrenciesResponse
+	(*v1.UpdateOperatorCurrencyResponse)(nil),          // 84: api.wallet.service.v1.UpdateOperatorCurrencyResponse
+	(*v1.ListBottomOperatorBalancesResponse)(nil),      // 85: api.wallet.service.v1.ListBottomOperatorBalancesResponse
+	(*v1.GetOperatorBalanceResponse)(nil),              // 86: api.wallet.service.v1.GetOperatorBalanceResponse
+	(*v1.SetDepositRewardSequencesResponse)(nil),       // 87: api.wallet.service.v1.SetDepositRewardSequencesResponse
+	(*v1.DeleteDepositRewardSequencesResponse)(nil),    // 88: api.wallet.service.v1.DeleteDepositRewardSequencesResponse
+	(*v1.GetDepositRewardConfigResponse)(nil),          // 89: api.wallet.service.v1.GetDepositRewardConfigResponse
+	(*v1.SetAppDownloadRewardConfigResponse)(nil),      // 90: api.wallet.service.v1.SetAppDownloadRewardConfigResponse
+	(*v1.GetAppDownloadRewardConfigResponse)(nil),      // 91: api.wallet.service.v1.GetAppDownloadRewardConfigResponse
+	(*v1.CreatePromoCodeCampaignResponse)(nil),         // 92: api.wallet.service.v1.CreatePromoCodeCampaignResponse
+	(*v1.UpdatePromoCodeCampaignResponse)(nil),         // 93: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
+	(*v1.UpdatePromoCodeCampaignStatusResponse)(nil),   // 94: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
+	(*v1.ListPromoCodeCampaignsResponse)(nil),          // 95: api.wallet.service.v1.ListPromoCodeCampaignsResponse
+	(*v1.ListPromoCodeCampaignDetailsResponse)(nil),    // 96: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
+	(*v1.GenerateOneTimePromoCodesResponse)(nil),       // 97: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
+	(*v1.GenerateUniversalPromoCodesResponse)(nil),     // 98: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
+	(*v1.ListUniversalCodeUsagesResponse)(nil),         // 99: api.wallet.service.v1.ListUniversalCodeUsagesResponse
+	(*v1.GetGamificationCurrencyConfigResponse)(nil),   // 100: api.wallet.service.v1.GetGamificationCurrencyConfigResponse
+	(*v1.UpdateOperatorCurrencyConfigResponse)(nil),    // 101: api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
+	(*v1.UpdateWalletConfigResponse)(nil),              // 102: api.wallet.service.v1.UpdateWalletConfigResponse
+	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 103: api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
+	(*v1.ListResponsibleGamblingConfigsResponse)(nil),  // 104: api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
+	(*v1.ListCustomerRecordsResponse)(nil),             // 105: api.wallet.service.v1.ListCustomerRecordsResponse
+	(*v1.ExportCustomerRecordsResponse)(nil),           // 106: api.wallet.service.v1.ExportCustomerRecordsResponse
+	(*v1.SetFICAThresholdConfigResponse)(nil),          // 107: api.wallet.service.v1.SetFICAThresholdConfigResponse
+	(*v1.GetFICAThresholdConfigResponse)(nil),          // 108: api.wallet.service.v1.GetFICAThresholdConfigResponse
+	(*v1.ListFICAThresholdTransactionsResponse)(nil),   // 109: api.wallet.service.v1.ListFICAThresholdTransactionsResponse
+	(*v1.ExportFICAThresholdTransactionsResponse)(nil), // 110: api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
+	(*v1.CreditResponse)(nil),                          // 111: api.wallet.service.v1.CreditResponse
+	(*v1.DebitResponse)(nil),                           // 112: api.wallet.service.v1.DebitResponse
+	(*v1.ListManualJournalEntriesResponse)(nil),        // 113: api.wallet.service.v1.ListManualJournalEntriesResponse
+	(*v1.ExportManualJournalEntriesResponse)(nil),      // 114: api.wallet.service.v1.ExportManualJournalEntriesResponse
+	(*v1.ManualAdjustCreditTurnoverFieldResponse)(nil), // 115: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
+	(*v1.ListOperatorWithdrawableAmountsResponse)(nil), // 116: api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
+	(*v1.GetOperatorWithdrawableAmountResponse)(nil),   // 117: api.wallet.service.v1.GetOperatorWithdrawableAmountResponse
+	(*v1.ListUserFreeRewardsBOResponse)(nil),           // 118: api.wallet.service.v1.ListUserFreeRewardsBOResponse
 }
 var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
-	71,  // 0: api.backoffice.service.v1.GetWalletCreditsRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 1: api.backoffice.service.v1.GetWalletCreditsRequest.end_time:type_name -> google.protobuf.Timestamp
-	66,  // 2: api.backoffice.service.v1.GetWalletCreditsResponse.credits:type_name -> api.backoffice.service.v1.GetWalletCreditsResponse.Credit
-	71,  // 3: api.backoffice.service.v1.ListWalletBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 4: api.backoffice.service.v1.ListWalletBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	67,  // 5: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.balance_transactions:type_name -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
-	68,  // 6: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	72,  // 7: api.backoffice.service.v1.ListWalletCurrenciesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	72,  // 8: api.backoffice.service.v1.UpdateWalletCurrencyRequest.target_operator_context:type_name -> api.common.OperatorContext
-	73,  // 9: api.backoffice.service.v1.ListOperatorBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	69,  // 10: api.backoffice.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
-	70,  // 11: api.backoffice.service.v1.GetExchangeRatesResponse.swap_fees:type_name -> api.backoffice.service.v1.GetExchangeRatesResponse.SwapFeesEntry
-	72,  // 12: api.backoffice.service.v1.OperatorTransferRequest.operator_context:type_name -> api.common.OperatorContext
-	72,  // 13: api.backoffice.service.v1.OperatorSwapRequest.source_operator_context:type_name -> api.common.OperatorContext
-	72,  // 14: api.backoffice.service.v1.OperatorSwapRequest.target_operator_context:type_name -> api.common.OperatorContext
-	72,  // 15: api.backoffice.service.v1.OperatorBalanceFreezeRequest.operator_context:type_name -> api.common.OperatorContext
-	72,  // 16: api.backoffice.service.v1.OperatorBalanceRollbackRequest.operator_context:type_name -> api.common.OperatorContext
-	72,  // 17: api.backoffice.service.v1.OperatorBalanceSettleRequest.operator_context:type_name -> api.common.OperatorContext
-	72,  // 18: api.backoffice.service.v1.OperatorBalanceAdjustRequest.operator_context:type_name -> api.common.OperatorContext
-	73,  // 19: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	71,  // 20: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 21: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	72,  // 22: api.backoffice.service.v1.OperatorBalanceTransaction.operator_context:type_name -> api.common.OperatorContext
-	71,  // 23: api.backoffice.service.v1.OperatorBalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	71,  // 24: api.backoffice.service.v1.OperatorBalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	72,  // 0: api.backoffice.service.v1.GetWalletCreditsRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 1: api.backoffice.service.v1.GetWalletCreditsRequest.end_time:type_name -> google.protobuf.Timestamp
+	67,  // 2: api.backoffice.service.v1.GetWalletCreditsResponse.credits:type_name -> api.backoffice.service.v1.GetWalletCreditsResponse.Credit
+	72,  // 3: api.backoffice.service.v1.ListWalletBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 4: api.backoffice.service.v1.ListWalletBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	68,  // 5: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.balance_transactions:type_name -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
+	69,  // 6: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
+	73,  // 7: api.backoffice.service.v1.ListWalletCurrenciesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	73,  // 8: api.backoffice.service.v1.UpdateWalletCurrencyRequest.target_operator_context:type_name -> api.common.OperatorContext
+	74,  // 9: api.backoffice.service.v1.ListOperatorBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	70,  // 10: api.backoffice.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	71,  // 11: api.backoffice.service.v1.GetExchangeRatesResponse.swap_fees:type_name -> api.backoffice.service.v1.GetExchangeRatesResponse.SwapFeesEntry
+	73,  // 12: api.backoffice.service.v1.OperatorTransferRequest.operator_context:type_name -> api.common.OperatorContext
+	73,  // 13: api.backoffice.service.v1.OperatorSwapRequest.source_operator_context:type_name -> api.common.OperatorContext
+	73,  // 14: api.backoffice.service.v1.OperatorSwapRequest.target_operator_context:type_name -> api.common.OperatorContext
+	73,  // 15: api.backoffice.service.v1.OperatorBalanceFreezeRequest.operator_context:type_name -> api.common.OperatorContext
+	73,  // 16: api.backoffice.service.v1.OperatorBalanceRollbackRequest.operator_context:type_name -> api.common.OperatorContext
+	73,  // 17: api.backoffice.service.v1.OperatorBalanceSettleRequest.operator_context:type_name -> api.common.OperatorContext
+	73,  // 18: api.backoffice.service.v1.OperatorBalanceAdjustRequest.operator_context:type_name -> api.common.OperatorContext
+	74,  // 19: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	72,  // 20: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 21: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	73,  // 22: api.backoffice.service.v1.OperatorBalanceTransaction.operator_context:type_name -> api.common.OperatorContext
+	72,  // 23: api.backoffice.service.v1.OperatorBalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	72,  // 24: api.backoffice.service.v1.OperatorBalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
 	30,  // 25: api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse.transactions:type_name -> api.backoffice.service.v1.OperatorBalanceTransaction
-	72,  // 26: api.backoffice.service.v1.UpdateOperatorBalanceRequest.target_operator_context:type_name -> api.common.OperatorContext
-	72,  // 27: api.backoffice.service.v1.GetOperatorBalanceRequest.operator_context:type_name -> api.common.OperatorContext
-	72,  // 28: api.backoffice.service.v1.SetDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	74,  // 29: api.backoffice.service.v1.SetDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	74,  // 30: api.backoffice.service.v1.SetDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	72,  // 31: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	74,  // 32: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	74,  // 33: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	72,  // 34: api.backoffice.service.v1.GetDepositRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	72,  // 35: api.backoffice.service.v1.GetGamificationCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	72,  // 36: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	75,  // 37: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.operator_currency_config:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
-	72,  // 38: api.backoffice.service.v1.UpdateWalletConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	76,  // 39: api.backoffice.service.v1.UpdateWalletConfigRequest.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
-	71,  // 40: api.backoffice.service.v1.ListCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 41: api.backoffice.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
-	73,  // 42: api.backoffice.service.v1.ListCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	71,  // 43: api.backoffice.service.v1.ExportCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 44: api.backoffice.service.v1.ExportCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
-	73,  // 45: api.backoffice.service.v1.ExportCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	77,  // 46: api.backoffice.service.v1.SetFICAThresholdConfigRequest.fica_threshold_config:type_name -> api.wallet.service.v1.FICAThresholdConfig
-	72,  // 47: api.backoffice.service.v1.SetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	72,  // 48: api.backoffice.service.v1.GetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	71,  // 49: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 50: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	72,  // 51: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	71,  // 52: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 53: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	72,  // 54: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	71,  // 55: api.backoffice.service.v1.ListManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 56: api.backoffice.service.v1.ListManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
-	73,  // 57: api.backoffice.service.v1.ListManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	71,  // 58: api.backoffice.service.v1.ExportManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 59: api.backoffice.service.v1.ExportManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
-	73,  // 60: api.backoffice.service.v1.ExportManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	72,  // 61: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	71,  // 62: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 63: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
-	78,  // 64: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	79,  // 65: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	72,  // 66: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	71,  // 67: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 68: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
-	78,  // 69: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	79,  // 70: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	72,  // 71: api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	72,  // 72: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	71,  // 73: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.start_time:type_name -> google.protobuf.Timestamp
-	71,  // 74: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.end_time:type_name -> google.protobuf.Timestamp
-	72,  // 75: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	80,  // 76: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest.configs:type_name -> api.wallet.service.v1.AppDownloadRewardConfigItem
-	72,  // 77: api.backoffice.service.v1.GetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	73,  // 78: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	72,  // 79: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	71,  // 80: api.backoffice.service.v1.GetWalletCreditsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
-	71,  // 81: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	71,  // 82: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
-	0,   // 83: api.backoffice.service.v1.BackofficeWallet.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
-	1,   // 84: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:input_type -> api.backoffice.service.v1.GetWalletCreditsRequest
-	3,   // 85: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:input_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsRequest
-	5,   // 86: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
-	7,   // 87: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
-	10,  // 88: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:input_type -> api.backoffice.service.v1.AddWalletCurrencyRequest
-	12,  // 89: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:input_type -> api.backoffice.service.v1.ListWalletCurrenciesRequest
-	13,  // 90: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:input_type -> api.backoffice.service.v1.UpdateWalletCurrencyRequest
-	14,  // 91: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:input_type -> api.backoffice.service.v1.ListOperatorBalancesRequest
-	15,  // 92: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:input_type -> api.backoffice.service.v1.GetExchangeRatesRequest
-	17,  // 93: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:input_type -> api.backoffice.service.v1.OperatorTransferRequest
-	19,  // 94: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:input_type -> api.backoffice.service.v1.OperatorSwapRequest
-	21,  // 95: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:input_type -> api.backoffice.service.v1.OperatorBalanceFreezeRequest
-	23,  // 96: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:input_type -> api.backoffice.service.v1.OperatorBalanceRollbackRequest
-	25,  // 97: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:input_type -> api.backoffice.service.v1.OperatorBalanceSettleRequest
-	27,  // 98: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:input_type -> api.backoffice.service.v1.OperatorBalanceAdjustRequest
-	29,  // 99: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:input_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
-	32,  // 100: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:input_type -> api.backoffice.service.v1.UpdateOperatorBalanceRequest
-	34,  // 101: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:input_type -> api.backoffice.service.v1.GetOperatorBalanceRequest
-	35,  // 102: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:input_type -> api.backoffice.service.v1.SetDepositRewardSequencesRequest
-	36,  // 103: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:input_type -> api.backoffice.service.v1.DeleteDepositRewardSequencesRequest
-	37,  // 104: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:input_type -> api.backoffice.service.v1.GetDepositRewardConfigRequest
-	62,  // 105: api.backoffice.service.v1.BackofficeWallet.SetAppDownloadRewardConfig:input_type -> api.backoffice.service.v1.SetAppDownloadRewardConfigRequest
-	63,  // 106: api.backoffice.service.v1.BackofficeWallet.GetAppDownloadRewardConfig:input_type -> api.backoffice.service.v1.GetAppDownloadRewardConfigRequest
-	53,  // 107: api.backoffice.service.v1.BackofficeWallet.CreatePromoCodeCampaign:input_type -> api.backoffice.service.v1.CreatePromoCodeCampaignRequest
-	54,  // 108: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaign:input_type -> api.backoffice.service.v1.UpdatePromoCodeCampaignRequest
-	55,  // 109: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaignStatus:input_type -> api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest
-	56,  // 110: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaigns:input_type -> api.backoffice.service.v1.ListPromoCodeCampaignsRequest
-	57,  // 111: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaignDetails:input_type -> api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest
-	58,  // 112: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:input_type -> api.backoffice.service.v1.GenerateOneTimePromoCodesRequest
-	59,  // 113: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:input_type -> api.backoffice.service.v1.GenerateUniversalPromoCodesRequest
-	60,  // 114: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:input_type -> api.backoffice.service.v1.ListUniversalCodeUsagesRequest
-	38,  // 115: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:input_type -> api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
-	39,  // 116: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:input_type -> api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
-	40,  // 117: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:input_type -> api.backoffice.service.v1.UpdateWalletConfigRequest
-	41,  // 118: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
-	42,  // 119: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:input_type -> api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
-	43,  // 120: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:input_type -> api.backoffice.service.v1.ListCustomerRecordsRequest
-	44,  // 121: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:input_type -> api.backoffice.service.v1.ExportCustomerRecordsRequest
-	45,  // 122: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:input_type -> api.backoffice.service.v1.SetFICAThresholdConfigRequest
-	46,  // 123: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:input_type -> api.backoffice.service.v1.GetFICAThresholdConfigRequest
-	47,  // 124: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
-	48,  // 125: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
-	49,  // 126: api.backoffice.service.v1.BackofficeWallet.ManualCredit:input_type -> api.backoffice.service.v1.ManualCreditRequest
-	50,  // 127: api.backoffice.service.v1.BackofficeWallet.ManualDebit:input_type -> api.backoffice.service.v1.ManualDebitRequest
-	51,  // 128: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:input_type -> api.backoffice.service.v1.ListManualJournalEntriesRequest
-	52,  // 129: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:input_type -> api.backoffice.service.v1.ExportManualJournalEntriesRequest
-	61,  // 130: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:input_type -> api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest
-	64,  // 131: api.backoffice.service.v1.BackofficeWallet.ListOperatorWithdrawableAmounts:input_type -> api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest
-	65,  // 132: api.backoffice.service.v1.BackofficeWallet.ListUserFreeRewards:input_type -> api.backoffice.service.v1.BOListUserFreeRewardsRequest
-	81,  // 133: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
-	2,   // 134: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
-	4,   // 135: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
-	6,   // 136: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
-	8,   // 137: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
-	11,  // 138: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:output_type -> api.backoffice.service.v1.AddWalletCurrencyResponse
-	82,  // 139: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
-	83,  // 140: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
-	84,  // 141: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
-	16,  // 142: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:output_type -> api.backoffice.service.v1.GetExchangeRatesResponse
-	18,  // 143: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:output_type -> api.backoffice.service.v1.OperatorTransferResponse
-	20,  // 144: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:output_type -> api.backoffice.service.v1.OperatorSwapResponse
-	22,  // 145: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:output_type -> api.backoffice.service.v1.OperatorBalanceFreezeResponse
-	24,  // 146: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:output_type -> api.backoffice.service.v1.OperatorBalanceRollbackResponse
-	26,  // 147: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:output_type -> api.backoffice.service.v1.OperatorBalanceSettleResponse
-	28,  // 148: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:output_type -> api.backoffice.service.v1.OperatorBalanceAdjustResponse
-	31,  // 149: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
-	33,  // 150: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
-	85,  // 151: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
-	86,  // 152: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
-	87,  // 153: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
-	88,  // 154: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
-	89,  // 155: api.backoffice.service.v1.BackofficeWallet.SetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.SetAppDownloadRewardConfigResponse
-	90,  // 156: api.backoffice.service.v1.BackofficeWallet.GetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.GetAppDownloadRewardConfigResponse
-	91,  // 157: api.backoffice.service.v1.BackofficeWallet.CreatePromoCodeCampaign:output_type -> api.wallet.service.v1.CreatePromoCodeCampaignResponse
-	92,  // 158: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaign:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignResponse
-	93,  // 159: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaignStatus:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
-	94,  // 160: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaigns:output_type -> api.wallet.service.v1.ListPromoCodeCampaignsResponse
-	95,  // 161: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaignDetails:output_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
-	96,  // 162: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:output_type -> api.wallet.service.v1.GenerateOneTimePromoCodesResponse
-	97,  // 163: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:output_type -> api.wallet.service.v1.GenerateUniversalPromoCodesResponse
-	98,  // 164: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:output_type -> api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	99,  // 165: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
-	100, // 166: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	101, // 167: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
-	102, // 168: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
-	103, // 169: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
-	104, // 170: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
-	105, // 171: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
-	106, // 172: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
-	107, // 173: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
-	108, // 174: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
-	109, // 175: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
-	110, // 176: api.backoffice.service.v1.BackofficeWallet.ManualCredit:output_type -> api.wallet.service.v1.CreditResponse
-	111, // 177: api.backoffice.service.v1.BackofficeWallet.ManualDebit:output_type -> api.wallet.service.v1.DebitResponse
-	112, // 178: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:output_type -> api.wallet.service.v1.ListManualJournalEntriesResponse
-	113, // 179: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:output_type -> api.wallet.service.v1.ExportManualJournalEntriesResponse
-	114, // 180: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:output_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
-	115, // 181: api.backoffice.service.v1.BackofficeWallet.ListOperatorWithdrawableAmounts:output_type -> api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
-	116, // 182: api.backoffice.service.v1.BackofficeWallet.ListUserFreeRewards:output_type -> api.wallet.service.v1.ListUserFreeRewardsBOResponse
-	133, // [133:183] is the sub-list for method output_type
-	83,  // [83:133] is the sub-list for method input_type
-	83,  // [83:83] is the sub-list for extension type_name
-	83,  // [83:83] is the sub-list for extension extendee
-	0,   // [0:83] is the sub-list for field type_name
+	73,  // 26: api.backoffice.service.v1.UpdateOperatorBalanceRequest.target_operator_context:type_name -> api.common.OperatorContext
+	73,  // 27: api.backoffice.service.v1.GetOperatorBalanceRequest.operator_context:type_name -> api.common.OperatorContext
+	73,  // 28: api.backoffice.service.v1.SetDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	75,  // 29: api.backoffice.service.v1.SetDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
+	75,  // 30: api.backoffice.service.v1.SetDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
+	73,  // 31: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	75,  // 32: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
+	75,  // 33: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
+	73,  // 34: api.backoffice.service.v1.GetDepositRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	73,  // 35: api.backoffice.service.v1.GetGamificationCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	73,  // 36: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	76,  // 37: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.operator_currency_config:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
+	73,  // 38: api.backoffice.service.v1.UpdateWalletConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 39: api.backoffice.service.v1.UpdateWalletConfigRequest.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
+	72,  // 40: api.backoffice.service.v1.ListCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 41: api.backoffice.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
+	74,  // 42: api.backoffice.service.v1.ListCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	72,  // 43: api.backoffice.service.v1.ExportCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 44: api.backoffice.service.v1.ExportCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
+	74,  // 45: api.backoffice.service.v1.ExportCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	78,  // 46: api.backoffice.service.v1.SetFICAThresholdConfigRequest.fica_threshold_config:type_name -> api.wallet.service.v1.FICAThresholdConfig
+	73,  // 47: api.backoffice.service.v1.SetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	73,  // 48: api.backoffice.service.v1.GetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	72,  // 49: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 50: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	73,  // 51: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	72,  // 52: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 53: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	73,  // 54: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	72,  // 55: api.backoffice.service.v1.ListManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 56: api.backoffice.service.v1.ListManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
+	74,  // 57: api.backoffice.service.v1.ListManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	72,  // 58: api.backoffice.service.v1.ExportManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 59: api.backoffice.service.v1.ExportManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
+	74,  // 60: api.backoffice.service.v1.ExportManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	73,  // 61: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	72,  // 62: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 63: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
+	79,  // 64: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	80,  // 65: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	73,  // 66: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	72,  // 67: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 68: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
+	79,  // 69: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	80,  // 70: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	73,  // 71: api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	73,  // 72: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	72,  // 73: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.start_time:type_name -> google.protobuf.Timestamp
+	72,  // 74: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.end_time:type_name -> google.protobuf.Timestamp
+	73,  // 75: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	81,  // 76: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest.configs:type_name -> api.wallet.service.v1.AppDownloadRewardConfigItem
+	73,  // 77: api.backoffice.service.v1.GetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	74,  // 78: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	73,  // 79: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	73,  // 80: api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest.target_operator_context:type_name -> api.common.OperatorContext
+	72,  // 81: api.backoffice.service.v1.GetWalletCreditsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
+	72,  // 82: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	72,  // 83: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
+	0,   // 84: api.backoffice.service.v1.BackofficeWallet.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
+	1,   // 85: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:input_type -> api.backoffice.service.v1.GetWalletCreditsRequest
+	3,   // 86: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:input_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsRequest
+	5,   // 87: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
+	7,   // 88: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
+	10,  // 89: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:input_type -> api.backoffice.service.v1.AddWalletCurrencyRequest
+	12,  // 90: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:input_type -> api.backoffice.service.v1.ListWalletCurrenciesRequest
+	13,  // 91: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:input_type -> api.backoffice.service.v1.UpdateWalletCurrencyRequest
+	14,  // 92: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:input_type -> api.backoffice.service.v1.ListOperatorBalancesRequest
+	15,  // 93: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:input_type -> api.backoffice.service.v1.GetExchangeRatesRequest
+	17,  // 94: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:input_type -> api.backoffice.service.v1.OperatorTransferRequest
+	19,  // 95: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:input_type -> api.backoffice.service.v1.OperatorSwapRequest
+	21,  // 96: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:input_type -> api.backoffice.service.v1.OperatorBalanceFreezeRequest
+	23,  // 97: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:input_type -> api.backoffice.service.v1.OperatorBalanceRollbackRequest
+	25,  // 98: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:input_type -> api.backoffice.service.v1.OperatorBalanceSettleRequest
+	27,  // 99: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:input_type -> api.backoffice.service.v1.OperatorBalanceAdjustRequest
+	29,  // 100: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:input_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
+	32,  // 101: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:input_type -> api.backoffice.service.v1.UpdateOperatorBalanceRequest
+	34,  // 102: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:input_type -> api.backoffice.service.v1.GetOperatorBalanceRequest
+	35,  // 103: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:input_type -> api.backoffice.service.v1.SetDepositRewardSequencesRequest
+	36,  // 104: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:input_type -> api.backoffice.service.v1.DeleteDepositRewardSequencesRequest
+	37,  // 105: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:input_type -> api.backoffice.service.v1.GetDepositRewardConfigRequest
+	62,  // 106: api.backoffice.service.v1.BackofficeWallet.SetAppDownloadRewardConfig:input_type -> api.backoffice.service.v1.SetAppDownloadRewardConfigRequest
+	63,  // 107: api.backoffice.service.v1.BackofficeWallet.GetAppDownloadRewardConfig:input_type -> api.backoffice.service.v1.GetAppDownloadRewardConfigRequest
+	53,  // 108: api.backoffice.service.v1.BackofficeWallet.CreatePromoCodeCampaign:input_type -> api.backoffice.service.v1.CreatePromoCodeCampaignRequest
+	54,  // 109: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaign:input_type -> api.backoffice.service.v1.UpdatePromoCodeCampaignRequest
+	55,  // 110: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaignStatus:input_type -> api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest
+	56,  // 111: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaigns:input_type -> api.backoffice.service.v1.ListPromoCodeCampaignsRequest
+	57,  // 112: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaignDetails:input_type -> api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest
+	58,  // 113: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:input_type -> api.backoffice.service.v1.GenerateOneTimePromoCodesRequest
+	59,  // 114: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:input_type -> api.backoffice.service.v1.GenerateUniversalPromoCodesRequest
+	60,  // 115: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:input_type -> api.backoffice.service.v1.ListUniversalCodeUsagesRequest
+	38,  // 116: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:input_type -> api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
+	39,  // 117: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:input_type -> api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
+	40,  // 118: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:input_type -> api.backoffice.service.v1.UpdateWalletConfigRequest
+	41,  // 119: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
+	42,  // 120: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:input_type -> api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
+	43,  // 121: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:input_type -> api.backoffice.service.v1.ListCustomerRecordsRequest
+	44,  // 122: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:input_type -> api.backoffice.service.v1.ExportCustomerRecordsRequest
+	45,  // 123: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:input_type -> api.backoffice.service.v1.SetFICAThresholdConfigRequest
+	46,  // 124: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:input_type -> api.backoffice.service.v1.GetFICAThresholdConfigRequest
+	47,  // 125: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
+	48,  // 126: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
+	49,  // 127: api.backoffice.service.v1.BackofficeWallet.ManualCredit:input_type -> api.backoffice.service.v1.ManualCreditRequest
+	50,  // 128: api.backoffice.service.v1.BackofficeWallet.ManualDebit:input_type -> api.backoffice.service.v1.ManualDebitRequest
+	51,  // 129: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:input_type -> api.backoffice.service.v1.ListManualJournalEntriesRequest
+	52,  // 130: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:input_type -> api.backoffice.service.v1.ExportManualJournalEntriesRequest
+	61,  // 131: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:input_type -> api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest
+	64,  // 132: api.backoffice.service.v1.BackofficeWallet.ListOperatorWithdrawableAmounts:input_type -> api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest
+	65,  // 133: api.backoffice.service.v1.BackofficeWallet.GetOperatorWithdrawableAmount:input_type -> api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest
+	66,  // 134: api.backoffice.service.v1.BackofficeWallet.ListUserFreeRewards:input_type -> api.backoffice.service.v1.BOListUserFreeRewardsRequest
+	82,  // 135: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
+	2,   // 136: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
+	4,   // 137: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
+	6,   // 138: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
+	8,   // 139: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
+	11,  // 140: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:output_type -> api.backoffice.service.v1.AddWalletCurrencyResponse
+	83,  // 141: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
+	84,  // 142: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
+	85,  // 143: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
+	16,  // 144: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:output_type -> api.backoffice.service.v1.GetExchangeRatesResponse
+	18,  // 145: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:output_type -> api.backoffice.service.v1.OperatorTransferResponse
+	20,  // 146: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:output_type -> api.backoffice.service.v1.OperatorSwapResponse
+	22,  // 147: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:output_type -> api.backoffice.service.v1.OperatorBalanceFreezeResponse
+	24,  // 148: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:output_type -> api.backoffice.service.v1.OperatorBalanceRollbackResponse
+	26,  // 149: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:output_type -> api.backoffice.service.v1.OperatorBalanceSettleResponse
+	28,  // 150: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:output_type -> api.backoffice.service.v1.OperatorBalanceAdjustResponse
+	31,  // 151: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
+	33,  // 152: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
+	86,  // 153: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
+	87,  // 154: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
+	88,  // 155: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
+	89,  // 156: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
+	90,  // 157: api.backoffice.service.v1.BackofficeWallet.SetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.SetAppDownloadRewardConfigResponse
+	91,  // 158: api.backoffice.service.v1.BackofficeWallet.GetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.GetAppDownloadRewardConfigResponse
+	92,  // 159: api.backoffice.service.v1.BackofficeWallet.CreatePromoCodeCampaign:output_type -> api.wallet.service.v1.CreatePromoCodeCampaignResponse
+	93,  // 160: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaign:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignResponse
+	94,  // 161: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaignStatus:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
+	95,  // 162: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaigns:output_type -> api.wallet.service.v1.ListPromoCodeCampaignsResponse
+	96,  // 163: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaignDetails:output_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
+	97,  // 164: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:output_type -> api.wallet.service.v1.GenerateOneTimePromoCodesResponse
+	98,  // 165: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:output_type -> api.wallet.service.v1.GenerateUniversalPromoCodesResponse
+	99,  // 166: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:output_type -> api.wallet.service.v1.ListUniversalCodeUsagesResponse
+	100, // 167: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
+	101, // 168: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
+	102, // 169: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
+	103, // 170: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
+	104, // 171: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
+	105, // 172: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
+	106, // 173: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
+	107, // 174: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
+	108, // 175: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
+	109, // 176: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
+	110, // 177: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
+	111, // 178: api.backoffice.service.v1.BackofficeWallet.ManualCredit:output_type -> api.wallet.service.v1.CreditResponse
+	112, // 179: api.backoffice.service.v1.BackofficeWallet.ManualDebit:output_type -> api.wallet.service.v1.DebitResponse
+	113, // 180: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:output_type -> api.wallet.service.v1.ListManualJournalEntriesResponse
+	114, // 181: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:output_type -> api.wallet.service.v1.ExportManualJournalEntriesResponse
+	115, // 182: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:output_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
+	116, // 183: api.backoffice.service.v1.BackofficeWallet.ListOperatorWithdrawableAmounts:output_type -> api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
+	117, // 184: api.backoffice.service.v1.BackofficeWallet.GetOperatorWithdrawableAmount:output_type -> api.wallet.service.v1.GetOperatorWithdrawableAmountResponse
+	118, // 185: api.backoffice.service.v1.BackofficeWallet.ListUserFreeRewards:output_type -> api.wallet.service.v1.ListUserFreeRewardsBOResponse
+	135, // [135:186] is the sub-list for method output_type
+	84,  // [84:135] is the sub-list for method input_type
+	84,  // [84:84] is the sub-list for extension type_name
+	84,  // [84:84] is the sub-list for extension extendee
+	0,   // [0:84] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_wallet_proto_init() }
@@ -6182,14 +6235,14 @@ func file_backoffice_service_v1_backoffice_wallet_proto_init() {
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[57].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[62].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[64].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[65].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_wallet_proto_rawDesc), len(file_backoffice_service_v1_backoffice_wallet_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   71,
+			NumMessages:   72,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

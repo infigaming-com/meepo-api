@@ -35,6 +35,7 @@ const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.Ba
 const OperationBackofficeWalletGetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
 const OperationBackofficeWalletGetGamificationCurrencyConfig = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
 const OperationBackofficeWalletGetOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
+const OperationBackofficeWalletGetOperatorWithdrawableAmount = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorWithdrawableAmount"
 const OperationBackofficeWalletGetWalletCreditTransactions = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
 const OperationBackofficeWalletGetWalletCredits = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
 const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
@@ -102,6 +103,8 @@ type BackofficeWalletHTTPServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
+	// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
+	GetOperatorWithdrawableAmount(context.Context, *BOGetOperatorWithdrawableAmountRequest) (*v1.GetOperatorWithdrawableAmountResponse, error)
 	// GetWalletCreditTransactions Get credit transaction details by credit ID
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	// GetWalletCredits Get wallet credit/debit transaction history for a user
@@ -225,6 +228,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/manual/journal-entries/export", _BackofficeWallet_ExportManualJournalEntries0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/credit/manual_adjust", _BackofficeWallet_ManualAdjustCreditTurnoverField0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/withdrawable-amounts/list", _BackofficeWallet_ListOperatorWithdrawableAmounts0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/withdrawable-amount", _BackofficeWallet_GetOperatorWithdrawableAmount0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/free-rewards/list", _BackofficeWallet_ListUserFreeRewards1_HTTP_Handler(srv))
 }
 
@@ -1306,6 +1310,28 @@ func _BackofficeWallet_ListOperatorWithdrawableAmounts0_HTTP_Handler(srv Backoff
 	}
 }
 
+func _BackofficeWallet_GetOperatorWithdrawableAmount0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in BOGetOperatorWithdrawableAmountRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletGetOperatorWithdrawableAmount)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorWithdrawableAmount(ctx, req.(*BOGetOperatorWithdrawableAmountRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetOperatorWithdrawableAmountResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeWallet_ListUserFreeRewards1_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BOListUserFreeRewardsRequest
@@ -1359,6 +1385,8 @@ type BackofficeWalletHTTPClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, req *GetGamificationCurrencyConfigRequest, opts ...http.CallOption) (rsp *v1.GetGamificationCurrencyConfigResponse, err error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(ctx context.Context, req *GetOperatorBalanceRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalanceResponse, err error)
+	// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
+	GetOperatorWithdrawableAmount(ctx context.Context, req *BOGetOperatorWithdrawableAmountRequest, opts ...http.CallOption) (rsp *v1.GetOperatorWithdrawableAmountResponse, err error)
 	// GetWalletCreditTransactions Get credit transaction details by credit ID
 	GetWalletCreditTransactions(ctx context.Context, req *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (rsp *GetWalletCreditTransactionsResponse, err error)
 	// GetWalletCredits Get wallet credit/debit transaction history for a user
@@ -1641,6 +1669,20 @@ func (c *BackofficeWalletHTTPClientImpl) GetOperatorBalance(ctx context.Context,
 	pattern := "/v1/backoffice/wallet/operator/balance/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletGetOperatorBalance))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
+func (c *BackofficeWalletHTTPClientImpl) GetOperatorWithdrawableAmount(ctx context.Context, in *BOGetOperatorWithdrawableAmountRequest, opts ...http.CallOption) (*v1.GetOperatorWithdrawableAmountResponse, error) {
+	var out v1.GetOperatorWithdrawableAmountResponse
+	pattern := "/v1/backoffice/wallet/operator/withdrawable-amount"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetOperatorWithdrawableAmount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

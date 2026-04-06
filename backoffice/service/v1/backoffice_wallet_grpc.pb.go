@@ -69,6 +69,7 @@ const (
 	BackofficeWallet_ExportManualJournalEntries_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
 	BackofficeWallet_ManualAdjustCreditTurnoverField_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ManualAdjustCreditTurnoverField"
 	BackofficeWallet_ListOperatorWithdrawableAmounts_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorWithdrawableAmounts"
+	BackofficeWallet_GetOperatorWithdrawableAmount_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorWithdrawableAmount"
 	BackofficeWallet_ListUserFreeRewards_FullMethodName                   = "/api.backoffice.service.v1.BackofficeWallet/ListUserFreeRewards"
 )
 
@@ -174,6 +175,8 @@ type BackofficeWalletClient interface {
 	ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*v1.ManualAdjustCreditTurnoverFieldResponse, error)
 	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	ListOperatorWithdrawableAmounts(ctx context.Context, in *ListOperatorWithdrawableAmountsRequest, opts ...grpc.CallOption) (*v1.ListOperatorWithdrawableAmountsResponse, error)
+	// GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
+	GetOperatorWithdrawableAmount(ctx context.Context, in *BOGetOperatorWithdrawableAmountRequest, opts ...grpc.CallOption) (*v1.GetOperatorWithdrawableAmountResponse, error)
 	// List user's free spin and free bet rewards with filters, pagination, and summary
 	ListUserFreeRewards(ctx context.Context, in *BOListUserFreeRewardsRequest, opts ...grpc.CallOption) (*v1.ListUserFreeRewardsBOResponse, error)
 }
@@ -676,6 +679,16 @@ func (c *backofficeWalletClient) ListOperatorWithdrawableAmounts(ctx context.Con
 	return out, nil
 }
 
+func (c *backofficeWalletClient) GetOperatorWithdrawableAmount(ctx context.Context, in *BOGetOperatorWithdrawableAmountRequest, opts ...grpc.CallOption) (*v1.GetOperatorWithdrawableAmountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorWithdrawableAmountResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetOperatorWithdrawableAmount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeWalletClient) ListUserFreeRewards(ctx context.Context, in *BOListUserFreeRewardsRequest, opts ...grpc.CallOption) (*v1.ListUserFreeRewardsBOResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListUserFreeRewardsBOResponse)
@@ -788,6 +801,8 @@ type BackofficeWalletServer interface {
 	ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*v1.ManualAdjustCreditTurnoverFieldResponse, error)
 	// ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*v1.ListOperatorWithdrawableAmountsResponse, error)
+	// GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
+	GetOperatorWithdrawableAmount(context.Context, *BOGetOperatorWithdrawableAmountRequest) (*v1.GetOperatorWithdrawableAmountResponse, error)
 	// List user's free spin and free bet rewards with filters, pagination, and summary
 	ListUserFreeRewards(context.Context, *BOListUserFreeRewardsRequest) (*v1.ListUserFreeRewardsBOResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
@@ -946,6 +961,9 @@ func (UnimplementedBackofficeWalletServer) ManualAdjustCreditTurnoverField(conte
 }
 func (UnimplementedBackofficeWalletServer) ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*v1.ListOperatorWithdrawableAmountsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorWithdrawableAmounts not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GetOperatorWithdrawableAmount(context.Context, *BOGetOperatorWithdrawableAmountRequest) (*v1.GetOperatorWithdrawableAmountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorWithdrawableAmount not implemented")
 }
 func (UnimplementedBackofficeWalletServer) ListUserFreeRewards(context.Context, *BOListUserFreeRewardsRequest) (*v1.ListUserFreeRewardsBOResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUserFreeRewards not implemented")
@@ -1853,6 +1871,24 @@ func _BackofficeWallet_ListOperatorWithdrawableAmounts_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_GetOperatorWithdrawableAmount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BOGetOperatorWithdrawableAmountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GetOperatorWithdrawableAmount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GetOperatorWithdrawableAmount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GetOperatorWithdrawableAmount(ctx, req.(*BOGetOperatorWithdrawableAmountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeWallet_ListUserFreeRewards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BOListUserFreeRewardsRequest)
 	if err := dec(in); err != nil {
@@ -2073,6 +2109,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperatorWithdrawableAmounts",
 			Handler:    _BackofficeWallet_ListOperatorWithdrawableAmounts_Handler,
+		},
+		{
+			MethodName: "GetOperatorWithdrawableAmount",
+			Handler:    _BackofficeWallet_GetOperatorWithdrawableAmount_Handler,
 		},
 		{
 			MethodName: "ListUserFreeRewards",

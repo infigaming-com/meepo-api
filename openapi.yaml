@@ -8860,6 +8860,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.OperatorTransferResponse'
+    /v1/backoffice/wallet/operator/withdrawable-amount:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
+            operationId: BackofficeWallet_GetOperatorWithdrawableAmount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorWithdrawableAmountResponse'
     /v1/backoffice/wallet/operator/withdrawable-amounts/list:
         post:
             tags:
@@ -14914,6 +14933,13 @@ components:
                 audit:
                     type: string
                     description: audit a transaction "approved" or "delined"
+        api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator to query; initiator's permission is validated against this
         api.backoffice.service.v1.BOListUserFreeRewardsRequest:
             type: object
             properties:
@@ -33927,6 +33953,26 @@ components:
                     type: string
                 totalCashReportingCurrency:
                     type: string
+        api.wallet.service.v1.GetOperatorWithdrawableAmountResponse:
+            type: object
+            properties:
+                custodyUsd:
+                    type: string
+                estCostUsd:
+                    type: string
+                estRsToSysUsd:
+                    type: string
+                lockedForPendingInvoicesUsd:
+                    type: string
+                transferableAmountUsd:
+                    type: string
+                    description: transferable = custody - est_cost - bankroll
+                withdrawableAmountUsd:
+                    type: string
+                    description: withdrawable = transferable - locked_for_pending_invoices (this is the MW)
+                bankrollUsd:
+                    type: string
+                    description: bankroll in USD (only for co-operation mode site-level operators, 0 otherwise)
         api.wallet.service.v1.GetPromoCodeInfoRequest:
             type: object
             properties:

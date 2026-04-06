@@ -386,6 +386,14 @@ service BackofficeWallet {
 		};
 	}
 
+	// GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
+	rpc GetOperatorWithdrawableAmount(BOGetOperatorWithdrawableAmountRequest) returns (wallet.service.v1.GetOperatorWithdrawableAmountResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/withdrawable-amount"
+			body: "*"
+		};
+	}
+
 	// List user's free spin and free bet rewards with filters, pagination, and summary
 	rpc ListUserFreeRewards(BOListUserFreeRewardsRequest) returns (wallet.service.v1.ListUserFreeRewardsBOResponse) {
 		option (google.api.http) = {
@@ -1012,6 +1020,11 @@ message ListOperatorWithdrawableAmountsRequest {
 	optional bool pagination = 4;
 	// optional: query a specific operator's data; if omitted, uses the initiator's own context
 	api.common.OperatorContext target_operator_context = 5;
+}
+
+message BOGetOperatorWithdrawableAmountRequest {
+	// Target operator to query; initiator's permission is validated against this
+	api.common.OperatorContext target_operator_context = 1;
 }
 
 // ============================================

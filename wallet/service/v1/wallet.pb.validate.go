@@ -25115,357 +25115,6 @@ var _ interface {
 	ErrorName() string
 } = GetCompanyFinancialSummaryResponseValidationError{}
 
-// Validate checks the field values on ListCompanyFinancialSummariesRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *ListCompanyFinancialSummariesRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ListCompanyFinancialSummariesRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListCompanyFinancialSummariesRequestMultiError, or nil if none found.
-func (m *ListCompanyFinancialSummariesRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ListCompanyFinancialSummariesRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListCompanyFinancialSummariesRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListCompanyFinancialSummariesRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListCompanyFinancialSummariesRequestValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.StartTime != nil {
-
-		if all {
-			switch v := interface{}(m.GetStartTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListCompanyFinancialSummariesRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListCompanyFinancialSummariesRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListCompanyFinancialSummariesRequestValidationError{
-					field:  "StartTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if m.EndTime != nil {
-
-		if all {
-			switch v := interface{}(m.GetEndTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListCompanyFinancialSummariesRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListCompanyFinancialSummariesRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListCompanyFinancialSummariesRequestValidationError{
-					field:  "EndTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if len(errors) > 0 {
-		return ListCompanyFinancialSummariesRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// ListCompanyFinancialSummariesRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// ListCompanyFinancialSummariesRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ListCompanyFinancialSummariesRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ListCompanyFinancialSummariesRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ListCompanyFinancialSummariesRequestMultiError) AllErrors() []error { return m }
-
-// ListCompanyFinancialSummariesRequestValidationError is the validation error
-// returned by ListCompanyFinancialSummariesRequest.Validate if the designated
-// constraints aren't met.
-type ListCompanyFinancialSummariesRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ListCompanyFinancialSummariesRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ListCompanyFinancialSummariesRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ListCompanyFinancialSummariesRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ListCompanyFinancialSummariesRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ListCompanyFinancialSummariesRequestValidationError) ErrorName() string {
-	return "ListCompanyFinancialSummariesRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ListCompanyFinancialSummariesRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sListCompanyFinancialSummariesRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ListCompanyFinancialSummariesRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ListCompanyFinancialSummariesRequestValidationError{}
-
-// Validate checks the field values on ListCompanyFinancialSummariesResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *ListCompanyFinancialSummariesResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ListCompanyFinancialSummariesResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListCompanyFinancialSummariesResponseMultiError, or nil if none found.
-func (m *ListCompanyFinancialSummariesResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ListCompanyFinancialSummariesResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	{
-		sorted_keys := make([]int64, len(m.GetSummaries()))
-		i := 0
-		for key := range m.GetSummaries() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetSummaries()[key]
-			_ = val
-
-			// no validation rules for Summaries[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, ListCompanyFinancialSummariesResponseValidationError{
-							field:  fmt.Sprintf("Summaries[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, ListCompanyFinancialSummariesResponseValidationError{
-							field:  fmt.Sprintf("Summaries[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
-				if err := v.Validate(); err != nil {
-					return ListCompanyFinancialSummariesResponseValidationError{
-						field:  fmt.Sprintf("Summaries[%v]", key),
-						reason: "embedded message failed validation",
-						cause:  err,
-					}
-				}
-			}
-
-		}
-	}
-
-	if len(errors) > 0 {
-		return ListCompanyFinancialSummariesResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// ListCompanyFinancialSummariesResponseMultiError is an error wrapping
-// multiple validation errors returned by
-// ListCompanyFinancialSummariesResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ListCompanyFinancialSummariesResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ListCompanyFinancialSummariesResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ListCompanyFinancialSummariesResponseMultiError) AllErrors() []error { return m }
-
-// ListCompanyFinancialSummariesResponseValidationError is the validation error
-// returned by ListCompanyFinancialSummariesResponse.Validate if the
-// designated constraints aren't met.
-type ListCompanyFinancialSummariesResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ListCompanyFinancialSummariesResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ListCompanyFinancialSummariesResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ListCompanyFinancialSummariesResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ListCompanyFinancialSummariesResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ListCompanyFinancialSummariesResponseValidationError) ErrorName() string {
-	return "ListCompanyFinancialSummariesResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ListCompanyFinancialSummariesResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sListCompanyFinancialSummariesResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ListCompanyFinancialSummariesResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ListCompanyFinancialSummariesResponseValidationError{}
-
 // Validate checks the field values on CompanyFinancialSummary with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -25527,6 +25176,10 @@ func (m *CompanyFinancialSummary) validate(all bool) error {
 	// no validation rules for CompanyAffiliateWithdrawUsd
 
 	// no validation rules for CompanyWithdrawUsd
+
+	// no validation rules for CompanyMaxWithdrawableUsd
+
+	// no validation rules for CustodyMaxWithdrawableUsd
 
 	if len(errors) > 0 {
 		return CompanyFinancialSummaryMultiError(errors)
@@ -27069,6 +26722,10 @@ func (m *GetOperatorWithdrawCheckInfoResponse) validate(all bool) error {
 
 	// no validation rules for UsdDecimalPlaces
 
+	// no validation rules for TransferableAmountUsd
+
+	// no validation rules for WithdrawableAmountUsd
+
 	if len(errors) > 0 {
 		return GetOperatorWithdrawCheckInfoResponseMultiError(errors)
 	}
@@ -27150,6 +26807,259 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetOperatorWithdrawCheckInfoResponseValidationError{}
+
+// Validate checks the field values on GetOperatorWithdrawableAmountRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorWithdrawableAmountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorWithdrawableAmountRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorWithdrawableAmountRequestMultiError, or nil if none found.
+func (m *GetOperatorWithdrawableAmountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorWithdrawableAmountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorWithdrawableAmountRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorWithdrawableAmountRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorWithdrawableAmountRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorWithdrawableAmountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorWithdrawableAmountRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOperatorWithdrawableAmountRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorWithdrawableAmountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorWithdrawableAmountRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorWithdrawableAmountRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorWithdrawableAmountRequestValidationError is the validation error
+// returned by GetOperatorWithdrawableAmountRequest.Validate if the designated
+// constraints aren't met.
+type GetOperatorWithdrawableAmountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorWithdrawableAmountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorWithdrawableAmountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorWithdrawableAmountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorWithdrawableAmountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorWithdrawableAmountRequestValidationError) ErrorName() string {
+	return "GetOperatorWithdrawableAmountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorWithdrawableAmountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorWithdrawableAmountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorWithdrawableAmountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorWithdrawableAmountRequestValidationError{}
+
+// Validate checks the field values on GetOperatorWithdrawableAmountResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorWithdrawableAmountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorWithdrawableAmountResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorWithdrawableAmountResponseMultiError, or nil if none found.
+func (m *GetOperatorWithdrawableAmountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorWithdrawableAmountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CustodyUsd
+
+	// no validation rules for EstCostUsd
+
+	// no validation rules for EstRsToSysUsd
+
+	// no validation rules for LockedForPendingInvoicesUsd
+
+	// no validation rules for TransferableAmountUsd
+
+	// no validation rules for WithdrawableAmountUsd
+
+	// no validation rules for BankrollUsd
+
+	if len(errors) > 0 {
+		return GetOperatorWithdrawableAmountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorWithdrawableAmountResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorWithdrawableAmountResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorWithdrawableAmountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorWithdrawableAmountResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorWithdrawableAmountResponseMultiError) AllErrors() []error { return m }
+
+// GetOperatorWithdrawableAmountResponseValidationError is the validation error
+// returned by GetOperatorWithdrawableAmountResponse.Validate if the
+// designated constraints aren't met.
+type GetOperatorWithdrawableAmountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorWithdrawableAmountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorWithdrawableAmountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorWithdrawableAmountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorWithdrawableAmountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorWithdrawableAmountResponseValidationError) ErrorName() string {
+	return "GetOperatorWithdrawableAmountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorWithdrawableAmountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorWithdrawableAmountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorWithdrawableAmountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorWithdrawableAmountResponseValidationError{}
 
 // Validate checks the field values on ListUserFreeRewardsBORequest with the
 // rules defined in the proto definition for this message. If any rules are
