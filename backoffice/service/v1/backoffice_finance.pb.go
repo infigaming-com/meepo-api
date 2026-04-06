@@ -5278,6 +5278,7 @@ type ListAdjustmentsResponse_AdjustmentItem struct {
 	AppliedDate           string                  `protobuf:"bytes,11,opt,name=applied_date,json=appliedDate,proto3" json:"applied_date,omitempty"`
 	PeriodKey             string                  `protobuf:"bytes,12,opt,name=period_key,json=periodKey,proto3" json:"period_key,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,13,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	CreatedByUid          int64                   `protobuf:"varint,14,opt,name=created_by_uid,json=createdByUid,proto3" json:"created_by_uid,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -5401,6 +5402,13 @@ func (x *ListAdjustmentsResponse_AdjustmentItem) GetTargetOperatorContext() *com
 		return x.TargetOperatorContext
 	}
 	return nil
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetCreatedByUid() int64 {
+	if x != nil {
+		return x.CreatedByUid
+	}
+	return 0
 }
 
 type ListBillingPeriodsResponse_BillingPeriod struct {
@@ -6413,14 +6421,14 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_period_key\"\xb1\x05\n" +
+	"\v_period_key\"\xd7\x05\n" +
 	"\x17ListAdjustmentsResponse\x12W\n" +
 	"\x05items\x18\x01 \x03(\v2A.api.backoffice.service.v1.ListAdjustmentsResponse.AdjustmentItemR\x05items\x12\x1a\n" +
 	"\bsubtotal\x18\x02 \x01(\tR\bsubtotal\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xce\x03\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xf4\x03\n" +
 	"\x0eAdjustmentItem\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -6439,7 +6447,8 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\fapplied_date\x18\v \x01(\tR\vappliedDate\x12\x1d\n" +
 	"\n" +
 	"period_key\x18\f \x01(\tR\tperiodKey\x12S\n" +
-	"\x17target_operator_context\x18\r \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"U\n" +
+	"\x17target_operator_context\x18\r \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12$\n" +
+	"\x0ecreated_by_uid\x18\x0e \x01(\x03R\fcreatedByUid\"U\n" +
 	"\x1dCreateAdjustmentConfigRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\" \n" +
