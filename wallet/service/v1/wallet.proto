@@ -2551,6 +2551,8 @@ message ListUserFreeRewardsBORequest {
 	optional int32 page = 6;
 	// Default 20
 	optional int32 page_size = 7;
+	// Initiator's operator context — used to verify the target user belongs to this operator hierarchy
+	api.common.OperatorContext initiator_operator_context = 8;
 }
 
 message ListUserFreeRewardsBOResponse {
