@@ -79,6 +79,14 @@ service BackofficeWallet {
 		};
 	}
 
+	// ListCompanyBalances lists all company operator balances, system-level only
+	rpc ListCompanyBalances(ListCompanyBalancesRequest) returns (wallet.service.v1.ListCompanyOperatorBalancesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/company/balances/list"
+			body: "*"
+		};
+	}
+
 	// Get exchange rates for specified currencies
 	rpc GetExchangeRates(GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {
 		option (google.api.http) = {
@@ -584,6 +592,15 @@ message UpdateWalletCurrencyRequest {
 }
 
 message ListOperatorBalancesRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string currencies = 2;
+	// Default 1
+	optional int32 page = 3;
+	// Default 20
+	optional int32 page_size = 4;
+}
+
+message ListCompanyBalancesRequest {
 	api.common.OperatorContextFilters operator_context_filters = 1;
 	repeated string currencies = 2;
 	// Default 1

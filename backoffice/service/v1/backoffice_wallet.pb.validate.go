@@ -2069,6 +2069,145 @@ var _ interface {
 	ErrorName() string
 } = ListOperatorBalancesRequestValidationError{}
 
+// Validate checks the field values on ListCompanyBalancesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCompanyBalancesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCompanyBalancesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCompanyBalancesRequestMultiError, or nil if none found.
+func (m *ListCompanyBalancesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCompanyBalancesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCompanyBalancesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCompanyBalancesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCompanyBalancesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListCompanyBalancesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCompanyBalancesRequestMultiError is an error wrapping multiple
+// validation errors returned by ListCompanyBalancesRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListCompanyBalancesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCompanyBalancesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCompanyBalancesRequestMultiError) AllErrors() []error { return m }
+
+// ListCompanyBalancesRequestValidationError is the validation error returned
+// by ListCompanyBalancesRequest.Validate if the designated constraints aren't met.
+type ListCompanyBalancesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCompanyBalancesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCompanyBalancesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCompanyBalancesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCompanyBalancesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCompanyBalancesRequestValidationError) ErrorName() string {
+	return "ListCompanyBalancesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCompanyBalancesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCompanyBalancesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCompanyBalancesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCompanyBalancesRequestValidationError{}
+
 // Validate checks the field values on GetExchangeRatesRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

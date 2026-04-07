@@ -39,6 +39,7 @@ const OperationBackofficeWalletGetOperatorWithdrawableAmount = "/api.backoffice.
 const OperationBackofficeWalletGetWalletCreditTransactions = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
 const OperationBackofficeWalletGetWalletCredits = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
 const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
+const OperationBackofficeWalletListCompanyBalances = "/api.backoffice.service.v1.BackofficeWallet/ListCompanyBalances"
 const OperationBackofficeWalletListCustomerRecords = "/api.backoffice.service.v1.BackofficeWallet/ListCustomerRecords"
 const OperationBackofficeWalletListFICAThresholdTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListFICAThresholdTransactions"
 const OperationBackofficeWalletListManualJournalEntries = "/api.backoffice.service.v1.BackofficeWallet/ListManualJournalEntries"
@@ -111,6 +112,8 @@ type BackofficeWalletHTTPServer interface {
 	GetWalletCredits(context.Context, *GetWalletCreditsRequest) (*GetWalletCreditsResponse, error)
 	// GetWallets Get wallet balances for a user
 	GetWallets(context.Context, *GetWalletsRequest) (*v1.GetWalletsResponse, error)
+	// ListCompanyBalances ListCompanyBalances lists all company operator balances, system-level only
+	ListCompanyBalances(context.Context, *ListCompanyBalancesRequest) (*v1.ListCompanyOperatorBalancesResponse, error)
 	// ListCustomerRecords ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error)
 	// ListFICAThresholdTransactions ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
@@ -188,6 +191,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/currencies/list", _BackofficeWallet_ListWalletCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/currencies/update", _BackofficeWallet_UpdateWalletCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balances/list", _BackofficeWallet_ListOperatorBalances0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/company/balances/list", _BackofficeWallet_ListCompanyBalances0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/exchange-rates/get", _BackofficeWallet_GetExchangeRates0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/transfer", _BackofficeWallet_OperatorTransfer0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/swap", _BackofficeWallet_OperatorSwap0_HTTP_Handler(srv))
@@ -426,6 +430,28 @@ func _BackofficeWallet_ListOperatorBalances0_HTTP_Handler(srv BackofficeWalletHT
 			return err
 		}
 		reply := out.(*v1.ListBottomOperatorBalancesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_ListCompanyBalances0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListCompanyBalancesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletListCompanyBalances)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListCompanyBalances(ctx, req.(*ListCompanyBalancesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListCompanyOperatorBalancesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1393,6 +1419,8 @@ type BackofficeWalletHTTPClient interface {
 	GetWalletCredits(ctx context.Context, req *GetWalletCreditsRequest, opts ...http.CallOption) (rsp *GetWalletCreditsResponse, err error)
 	// GetWallets Get wallet balances for a user
 	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *v1.GetWalletsResponse, err error)
+	// ListCompanyBalances ListCompanyBalances lists all company operator balances, system-level only
+	ListCompanyBalances(ctx context.Context, req *ListCompanyBalancesRequest, opts ...http.CallOption) (rsp *v1.ListCompanyOperatorBalancesResponse, err error)
 	// ListCustomerRecords ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ListCustomerRecords(ctx context.Context, req *ListCustomerRecordsRequest, opts ...http.CallOption) (rsp *v1.ListCustomerRecordsResponse, err error)
 	// ListFICAThresholdTransactions ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
@@ -1725,6 +1753,20 @@ func (c *BackofficeWalletHTTPClientImpl) GetWallets(ctx context.Context, in *Get
 	pattern := "/v1/backoffice/wallet/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletGetWallets))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListCompanyBalances ListCompanyBalances lists all company operator balances, system-level only
+func (c *BackofficeWalletHTTPClientImpl) ListCompanyBalances(ctx context.Context, in *ListCompanyBalancesRequest, opts ...http.CallOption) (*v1.ListCompanyOperatorBalancesResponse, error) {
+	var out v1.ListCompanyOperatorBalancesResponse
+	pattern := "/v1/backoffice/wallet/company/balances/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletListCompanyBalances))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
