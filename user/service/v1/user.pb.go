@@ -7940,12 +7940,14 @@ type OperatorDetails struct {
 	// system operator id in the operator hierarchy
 	SystemOperatorId int64 `protobuf:"varint,28,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
 	// system operator name in the operator hierarchy, or empty string if not exists
-	SystemOperatorName    string          `protobuf:"bytes,29,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	Config                *OperatorConfig `protobuf:"bytes,30,opt,name=config,proto3" json:"config,omitempty"`
-	MinLaunchBalance      string          `protobuf:"bytes,31,opt,name=min_launch_balance,json=minLaunchBalance,proto3" json:"min_launch_balance,omitempty"`
-	StatusLaunchWhitelist []string        `protobuf:"bytes,32,rep,name=status_launch_whitelist,json=statusLaunchWhitelist,proto3" json:"status_launch_whitelist,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	SystemOperatorName      string          `protobuf:"bytes,29,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	Config                  *OperatorConfig `protobuf:"bytes,30,opt,name=config,proto3" json:"config,omitempty"`
+	MinLaunchBalance        string          `protobuf:"bytes,31,opt,name=min_launch_balance,json=minLaunchBalance,proto3" json:"min_launch_balance,omitempty"`
+	StatusLaunchWhitelist   []string        `protobuf:"bytes,32,rep,name=status_launch_whitelist,json=statusLaunchWhitelist,proto3" json:"status_launch_whitelist,omitempty"`
+	ByoSubdomains           []string        `protobuf:"bytes,33,rep,name=byo_subdomains,json=byoSubdomains,proto3" json:"byo_subdomains,omitempty"`
+	BackofficeByoSubdomains []string        `protobuf:"bytes,34,rep,name=backoffice_byo_subdomains,json=backofficeByoSubdomains,proto3" json:"backoffice_byo_subdomains,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *OperatorDetails) Reset() {
@@ -8191,6 +8193,20 @@ func (x *OperatorDetails) GetMinLaunchBalance() string {
 func (x *OperatorDetails) GetStatusLaunchWhitelist() []string {
 	if x != nil {
 		return x.StatusLaunchWhitelist
+	}
+	return nil
+}
+
+func (x *OperatorDetails) GetByoSubdomains() []string {
+	if x != nil {
+		return x.ByoSubdomains
+	}
+	return nil
+}
+
+func (x *OperatorDetails) GetBackofficeByoSubdomains() []string {
+	if x != nil {
+		return x.BackofficeByoSubdomains
 	}
 	return nil
 }
@@ -18214,6 +18230,7 @@ type ListBottomOperatorsResponse_OperatorInfo struct {
 	ReportingCurrency    string                  `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	BackofficeSubdomain  string                  `protobuf:"bytes,9,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
 	BackofficeByoDomains []string                `protobuf:"bytes,10,rep,name=backoffice_byo_domains,json=backofficeByoDomains,proto3" json:"backoffice_byo_domains,omitempty"`
+	FrontendByoDomains   []string                `protobuf:"bytes,11,rep,name=frontend_byo_domains,json=frontendByoDomains,proto3" json:"frontend_byo_domains,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -18314,6 +18331,13 @@ func (x *ListBottomOperatorsResponse_OperatorInfo) GetBackofficeSubdomain() stri
 func (x *ListBottomOperatorsResponse_OperatorInfo) GetBackofficeByoDomains() []string {
 	if x != nil {
 		return x.BackofficeByoDomains
+	}
+	return nil
+}
+
+func (x *ListBottomOperatorsResponse_OperatorInfo) GetFrontendByoDomains() []string {
+	if x != nil {
+		return x.FrontendByoDomains
 	}
 	return nil
 }
@@ -19486,8 +19510,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0emax_house_edge\x18\x03 \x01(\x05H\x02R\fmaxHouseEdge\x88\x01\x01B\x16\n" +
 	"\x14_swap_fee_percentageB\x13\n" +
 	"\x11_account_settingsB\x11\n" +
-	"\x0f_max_house_edge\"\xa0\n" +
-	"\n" +
+	"\x0f_max_house_edge\"\x83\v\n" +
 	"\x0fOperatorDetails\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12,\n" +
@@ -19523,7 +19546,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x14system_operator_name\x18\x1d \x01(\tR\x12systemOperatorName\x12;\n" +
 	"\x06config\x18\x1e \x01(\v2#.api.user.service.v1.OperatorConfigR\x06config\x12,\n" +
 	"\x12min_launch_balance\x18\x1f \x01(\tR\x10minLaunchBalance\x126\n" +
-	"\x17status_launch_whitelist\x18  \x03(\tR\x15statusLaunchWhitelist\"<\n" +
+	"\x17status_launch_whitelist\x18  \x03(\tR\x15statusLaunchWhitelist\x12%\n" +
+	"\x0ebyo_subdomains\x18! \x03(\tR\rbyoSubdomains\x12:\n" +
+	"\x19backoffice_byo_subdomains\x18\" \x03(\tR\x17backofficeByoSubdomains\"<\n" +
 	"\x19GetOperatorDetailsRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"m\n" +
@@ -19591,9 +19616,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aListBottomOperatorsRequest\x122\n" +
 	"\x15retailer_operator_ids\x18\x01 \x03(\x03R\x13retailerOperatorIds\x120\n" +
 	"\x14company_operator_ids\x18\x02 \x03(\x03R\x12companyOperatorIds\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xde\x04\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x90\x05\n" +
 	"\x1bListBottomOperatorsResponse\x12h\n" +
-	"\x10bottom_operators\x18\x01 \x03(\v2=.api.user.service.v1.ListBottomOperatorsResponse.OperatorInfoR\x0fbottomOperators\x1a\xd4\x03\n" +
+	"\x10bottom_operators\x18\x01 \x03(\v2=.api.user.service.v1.ListBottomOperatorsResponse.OperatorInfoR\x0fbottomOperators\x1a\x86\x04\n" +
 	"\fOperatorInfo\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x120\n" +
 	"\x14bottom_operator_name\x18\x02 \x01(\tR\x12bottomOperatorName\x124\n" +
@@ -19605,7 +19630,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\x121\n" +
 	"\x14backoffice_subdomain\x18\t \x01(\tR\x13backofficeSubdomain\x124\n" +
 	"\x16backoffice_byo_domains\x18\n" +
-	" \x03(\tR\x14backofficeByoDomains\"\xec\x02\n" +
+	" \x03(\tR\x14backofficeByoDomains\x120\n" +
+	"\x14frontend_byo_domains\x18\v \x03(\tR\x12frontendByoDomains\"\xec\x02\n" +
 	"\x1bUpdateOperatorStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12<\n" +

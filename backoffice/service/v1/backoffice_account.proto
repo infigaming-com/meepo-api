@@ -378,6 +378,8 @@ message AccountInfoResponse {
     string backoffice_subdomain = 11;
     string operator_mode = 12;
     int64 user_id = 13;
+    repeated string frontend_byo_domains = 14;
+    repeated string backoffice_byo_domains = 15;
 }
 
 message Role {
