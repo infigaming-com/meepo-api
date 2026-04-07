@@ -31985,11 +31985,11 @@ components:
                     type: array
                     items:
                         type: string
-                byoSubdomains:
+                frontendByoDomains:
                     type: array
                     items:
                         type: string
-                backofficeByoSubdomains:
+                backofficeByoDomains:
                     type: array
                     items:
                         type: string

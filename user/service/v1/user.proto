@@ -1731,8 +1731,8 @@ message OperatorDetails {
 	OperatorConfig config = 30;
 	string min_launch_balance = 31;
 	repeated string status_launch_whitelist = 32;
-	repeated string byo_subdomains = 33;
-	repeated string backoffice_byo_subdomains = 34;
+	repeated string frontend_byo_domains = 33;
+	repeated string backoffice_byo_domains = 34;
 
 }
 
