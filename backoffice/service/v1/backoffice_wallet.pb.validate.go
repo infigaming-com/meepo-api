@@ -2128,8 +2128,8 @@ func (m *ListCompanyBalancesRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
-	if m.NoPagination != nil {
-		// no validation rules for NoPagination
+	if m.Pagination != nil {
+		// no validation rules for Pagination
 	}
 
 	if len(errors) > 0 {

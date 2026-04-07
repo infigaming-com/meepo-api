@@ -20027,6 +20027,9 @@ components:
                     type: integer
                     description: Default 20
                     format: int32
+                pagination:
+                    type: boolean
+                    description: if nil, pagination is true
         api.backoffice.service.v1.ListCompanyOperatorsRequest:
             type: object
             properties:

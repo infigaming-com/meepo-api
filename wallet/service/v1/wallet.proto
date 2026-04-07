@@ -1115,8 +1115,8 @@ message ListCompanyOperatorBalancesRequest {
 	optional int32 page = 4;
 	// default 20
 	optional int32 page_size = 5;
-	// If true, return all results without pagination
-	optional bool no_pagination = 6;
+	// if nil, pagination is true
+	optional bool pagination = 6;
 }
 
 message ListCompanyOperatorBalancesResponse {

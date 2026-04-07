@@ -1186,8 +1186,8 @@ type ListCompanyBalancesRequest struct {
 	Page *int32 `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	// Default 20
 	PageSize *int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	// If true, return all results without pagination
-	NoPagination  *bool `protobuf:"varint,5,opt,name=no_pagination,json=noPagination,proto3,oneof" json:"no_pagination,omitempty"`
+	// if nil, pagination is true
+	Pagination    *bool `protobuf:"varint,5,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1250,9 +1250,9 @@ func (x *ListCompanyBalancesRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListCompanyBalancesRequest) GetNoPagination() bool {
-	if x != nil && x.NoPagination != nil {
-		return *x.NoPagination
+func (x *ListCompanyBalancesRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
 	}
 	return false
 }
@@ -5507,19 +5507,21 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xa8\x02\n" +
+	"_page_size\"\xa0\x02\n" +
 	"\x1aListCompanyBalancesRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x02 \x03(\tR\n" +
 	"currencies\x12\x17\n" +
 	"\x04page\x18\x03 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12(\n" +
-	"\rno_pagination\x18\x05 \x01(\bH\x02R\fnoPagination\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12#\n" +
+	"\n" +
+	"pagination\x18\x05 \x01(\bH\x02R\n" +
+	"pagination\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_sizeB\x10\n" +
-	"\x0e_no_pagination\"9\n" +
+	"_page_sizeB\r\n" +
+	"\v_pagination\"9\n" +
 	"\x17GetExchangeRatesRequest\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
