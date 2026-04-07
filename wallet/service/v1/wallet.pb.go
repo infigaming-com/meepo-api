@@ -4645,7 +4645,9 @@ type ListCompanyOperatorBalancesRequest struct {
 	// default 1
 	Page *int32 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	// default 20
-	PageSize      *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	PageSize *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	// If true, return all results without pagination
+	NoPagination  *bool `protobuf:"varint,6,opt,name=no_pagination,json=noPagination,proto3,oneof" json:"no_pagination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4713,6 +4715,13 @@ func (x *ListCompanyOperatorBalancesRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListCompanyOperatorBalancesRequest) GetNoPagination() bool {
+	if x != nil && x.NoPagination != nil {
+		return *x.NoPagination
+	}
+	return false
 }
 
 type ListCompanyOperatorBalancesResponse struct {
@@ -19023,7 +19032,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1dtotal_cash_reporting_currency\x18\x03 \x01(\tR\x1atotalCashReportingCurrency\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\"\xbc\x02\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\"\xf8\x02\n" +
 	"\"ListCompanyOperatorBalancesRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
 	"\n" +
@@ -19031,10 +19040,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"currencies\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\x04page\x18\x04 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x05 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x05 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12(\n" +
+	"\rno_pagination\x18\x06 \x01(\bH\x02R\fnoPagination\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xaa\x02\n" +
+	"_page_sizeB\x10\n" +
+	"\x0e_no_pagination\"\xaa\x02\n" +
 	"#ListCompanyOperatorBalancesResponse\x12S\n" +
 	"\x11operator_balances\x18\x01 \x03(\v2&.api.wallet.service.v1.OperatorBalanceR\x10operatorBalances\x12$\n" +
 	"\x0etotal_cash_usd\x18\x02 \x01(\tR\ftotalCashUsd\x12A\n" +

@@ -607,6 +607,8 @@ message ListCompanyBalancesRequest {
 	optional int32 page = 3;
 	// Default 20
 	optional int32 page_size = 4;
+	// If true, return all results without pagination
+	optional bool no_pagination = 5;
 }
 
 message GetExchangeRatesRequest {
