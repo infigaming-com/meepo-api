@@ -103,7 +103,10 @@ service Wallet {
 
 	// List Bottom Operator Balances based on filter
 	rpc ListBottomOperatorBalances (ListBottomOperatorBalancesRequest) returns (ListBottomOperatorBalancesResponse) {}
-	
+
+	// List Company Operator Balances based on filter
+	rpc ListCompanyOperatorBalances (ListCompanyOperatorBalancesRequest) returns (ListCompanyOperatorBalancesResponse) {}
+
 	// Transfer cash from operator to its company operator
 	rpc OperatorTransfer (OperatorTransferRequest) returns (OperatorTransferResponse) {}
 
@@ -1095,6 +1098,28 @@ message OperatorBalance {
 }
 
 message ListBottomOperatorBalancesResponse {
+	repeated OperatorBalance operator_balances = 1;
+	string total_cash_usd = 2;
+	string total_cash_reporting_currency = 3;
+	int32 total = 4;
+	int32 page = 5;
+	int32 page_size = 6;
+}
+
+message ListCompanyOperatorBalancesRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string currencies = 2;
+	// define the basic range of operators
+	api.common.OperatorContext operator_context = 3;
+	// default 1
+	optional int32 page = 4;
+	// default 20
+	optional int32 page_size = 5;
+	// if nil, pagination is true
+	optional bool pagination = 6;
+}
+
+message ListCompanyOperatorBalancesResponse {
 	repeated OperatorBalance operator_balances = 1;
 	string total_cash_usd = 2;
 	string total_cash_reporting_currency = 3;

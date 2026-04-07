@@ -8195,6 +8195,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse'
+    /v1/backoffice/wallet/company/balances/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListCompanyBalances lists all company operator balances, system-level only
+            operationId: BackofficeWallet_ListCompanyBalances
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyBalancesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListCompanyOperatorBalancesResponse'
     /v1/backoffice/wallet/config/update:
         post:
             tags:
@@ -19991,6 +20010,26 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ListCompanyBalancesRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    description: Default 1
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Default 20
+                    format: int32
+                pagination:
+                    type: boolean
+                    description: if nil, pagination is true
         api.backoffice.service.v1.ListCompanyOperatorsRequest:
             type: object
             properties:
@@ -34266,6 +34305,26 @@ components:
                     format: int32
             description: Invitation condition for promo code campaign
         api.wallet.service.v1.ListBottomOperatorBalancesResponse:
+            type: object
+            properties:
+                operatorBalances:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorBalance'
+                totalCashUsd:
+                    type: string
+                totalCashReportingCurrency:
+                    type: string
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.wallet.service.v1.ListCompanyOperatorBalancesResponse:
             type: object
             properties:
                 operatorBalances:
