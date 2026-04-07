@@ -8,12 +8,15 @@ spec:
   - name: meepo-gateway
     namespace: meepo-dev
   hostnames:
-  - "dev.hicasino.xyz"
+  - "prediction.meepoapi.xyz"
   rules:
   - matches:
     - path:
         type: PathPrefix
-        value: "/v1/markets"
+        value: "/v1"
+    - path:
+        type: PathPrefix
+        value: "/sessions"
     backendRefs:
     - name: oracle-service-svc
       namespace: oracle-dev

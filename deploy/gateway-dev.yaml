@@ -30,6 +30,18 @@ spec:
       certificateRefs:
       - name: meepoapi-xyz-tls
         namespace: meepo-dev
+  - name: meepoapi-xyz-prediction-https
+    protocol: HTTPS
+    port: 443
+    hostname: "prediction.meepoapi.xyz"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: meepoapi-xyz-tls
+        namespace: meepo-dev
   - name: hicasino-xyz-dev-https
     protocol: HTTPS
     port: 443
