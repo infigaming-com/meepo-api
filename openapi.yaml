@@ -32154,6 +32154,8 @@ components:
                     type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                phone:
+                    type: string
         api.user.service.v1.ResetPasswordWithCodeResponse:
             type: object
             properties: {}
@@ -32273,6 +32275,8 @@ components:
                     type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                phone:
+                    type: string
         api.user.service.v1.SendPasswordResetCodeResponse:
             type: object
             properties: {}
