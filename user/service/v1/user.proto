@@ -1731,6 +1731,8 @@ message OperatorDetails {
 	OperatorConfig config = 30;
 	string min_launch_balance = 31;
 	repeated string status_launch_whitelist = 32;
+	repeated string frontend_byo_domains = 33;
+	repeated string backoffice_byo_domains = 34;
 
 }
 
@@ -1835,6 +1837,7 @@ message ListBottomOperatorsResponse {
 		string reporting_currency = 8;
 		string backoffice_subdomain = 9;
 		repeated string backoffice_byo_domains = 10;
+		repeated string frontend_byo_domains = 11;
 	}
 	repeated OperatorInfo bottom_operators = 1;
 }
