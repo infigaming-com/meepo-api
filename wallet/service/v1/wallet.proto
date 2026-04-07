@@ -141,9 +141,6 @@ service Wallet {
 	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
 	rpc GetCompanyFinancialSummary(GetCompanyFinancialSummaryRequest) returns (GetCompanyFinancialSummaryResponse) {}
 
-	// ListCompanyFinancialSummaries returns financial summaries for multiple companies in one call
-	rpc ListCompanyFinancialSummaries(ListCompanyFinancialSummariesRequest) returns (ListCompanyFinancialSummariesResponse) {}
-
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	rpc GetOperatorBalanceTransactionsByIds(GetOperatorBalanceTransactionsByIdsRequest) returns (GetOperatorBalanceTransactionsByIdsResponse) {}
 
@@ -342,6 +339,10 @@ service Wallet {
 
 	// GetOperatorWithdrawCheckInfo returns operator financial health data for withdraw approval checks
 	rpc GetOperatorWithdrawCheckInfo(GetOperatorWithdrawCheckInfoRequest) returns (GetOperatorWithdrawCheckInfoResponse) {}
+
+	// GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single operator.
+	// MW formula (custody - est_cost - invoice - bankroll) is computed by wallet as the single source of truth.
+	rpc GetOperatorWithdrawableAmount(GetOperatorWithdrawableAmountRequest) returns (GetOperatorWithdrawableAmountResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -2331,20 +2332,6 @@ message GetCompanyFinancialSummaryResponse {
 	CompanyFinancialSummary summary = 1;
 }
 
-message ListCompanyFinancialSummariesRequest {
-	// company operator IDs to fetch summaries for
-	repeated int64 company_operator_ids = 1;
-	// caller's operator context for permission validation
-	api.common.OperatorContext operator_context = 2;
-	optional google.protobuf.Timestamp start_time = 3;
-	optional google.protobuf.Timestamp end_time = 4;
-}
-
-message ListCompanyFinancialSummariesResponse {
-	// map of company_operator_id to financial summary
-	map<int64, CompanyFinancialSummary> summaries = 1;
-}
-
 message CompanyFinancialSummary {
 	// [NOT time-filtered] Total wallet balance of all sub-operators under this company, converted to USD using real-time exchange rates
 	string custody_balance_usd = 1;
@@ -2386,6 +2373,10 @@ message CompanyFinancialSummary {
 	string company_affiliate_withdraw_usd = 19;
 	// [NOT time-filtered] Settled company's own payment withdrawals (operator_payment_withdraw_freeze with status settled on company operator), absolute value in USD
 	string company_withdraw_usd = 20;
+	// [NOT time-filtered] Company operator's own max withdrawable (MW = custody - est_cost - invoice, bankroll=0 for company level)
+	string company_max_withdrawable_usd = 21;
+	// [NOT time-filtered] Sum of all sub-operator max withdrawable amounts (each computed as custody - est_cost - invoice - bankroll)
+	string custody_max_withdrawable_usd = 22;
 }
 
 // ============================================================================
@@ -2533,6 +2524,30 @@ message GetOperatorWithdrawCheckInfoResponse {
 	int32 currency_decimal_places = 8;
 	// decimal places for USD (from system-level config)
 	int32 usd_decimal_places = 9;
+
+	// Computed MW (wallet is the single source of truth for the formula)
+	// transferable = custody - est_cost - bankroll
+	string transferable_amount_usd = 10;
+	// withdrawable = transferable - locked_for_pending_invoices
+	string withdrawable_amount_usd = 11;
+}
+
+// GetOperatorWithdrawableAmount — single operator MW query
+message GetOperatorWithdrawableAmountRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message GetOperatorWithdrawableAmountResponse {
+	string custody_usd = 1;
+	string est_cost_usd = 2;
+	string est_rs_to_sys_usd = 3;
+	string locked_for_pending_invoices_usd = 4;
+	// transferable = custody - est_cost - bankroll
+	string transferable_amount_usd = 5;
+	// withdrawable = transferable - locked_for_pending_invoices (this is the MW)
+	string withdrawable_amount_usd = 6;
+	// bankroll in USD (only for co-operation mode site-level operators, 0 otherwise)
+	string bankroll_usd = 7;
 }
 
 // ========== ListUserFreeRewardsBO Messages ==========
