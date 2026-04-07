@@ -4941,6 +4941,8 @@ func (m *SendPasswordResetCodeRequest) validate(all bool) error {
 
 	// no validation rules for Email
 
+	// no validation rules for Phone
+
 	if m.OperatorContext != nil {
 
 		if all {
@@ -5185,6 +5187,8 @@ func (m *ResetPasswordWithCodeRequest) validate(all bool) error {
 	// no validation rules for VerificationCode
 
 	// no validation rules for NewPassword
+
+	// no validation rules for Phone
 
 	if m.OperatorContext != nil {
 

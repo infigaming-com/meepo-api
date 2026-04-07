@@ -2817,8 +2817,9 @@ func (*SendEmailVerificationCodeResponse) Descriptor() ([]byte, []int) {
 
 type SendPasswordResetCodeRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
-	Email           string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                                  // User's email address
+	Email           string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                                  // User's email address (use email OR phone)
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3,oneof" json:"operator_context,omitempty"` // Operator context
+	Phone           string                  `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`                                                  // User's phone number in E.164 format (use email OR phone)
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2867,6 +2868,13 @@ func (x *SendPasswordResetCodeRequest) GetOperatorContext() *common.OperatorCont
 	return nil
 }
 
+func (x *SendPasswordResetCodeRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
 type SendPasswordResetCodeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -2905,10 +2913,11 @@ func (*SendPasswordResetCodeResponse) Descriptor() ([]byte, []int) {
 
 type ResetPasswordWithCodeRequest struct {
 	state            protoimpl.MessageState  `protogen:"open.v1"`
-	Email            string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                                  // User's email address
-	VerificationCode string                  `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`    // Verification code received via email
+	Email            string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                                  // User's email address (use email OR phone)
+	VerificationCode string                  `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`    // Verification code received via email or SMS
 	NewPassword      string                  `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`                   // New password
 	OperatorContext  *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3,oneof" json:"operator_context,omitempty"` // Operator context
+	Phone            string                  `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`                                                  // User's phone number in E.164 format (use email OR phone)
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -2969,6 +2978,13 @@ func (x *ResetPasswordWithCodeRequest) GetOperatorContext() *common.OperatorCont
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *ResetPasswordWithCodeRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
 }
 
 type ResetPasswordWithCodeResponse struct {
@@ -18831,17 +18847,19 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\auser_id\x18\x03 \x01(\x03H\x00R\x06userId\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_id\"#\n" +
-	"!SendEmailVerificationCodeResponse\"\x96\x01\n" +
+	"!SendEmailVerificationCodeResponse\"\xac\x01\n" +
 	"\x1cSendPasswordResetCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12K\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextH\x00R\x0foperatorContext\x88\x01\x01B\x13\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextH\x00R\x0foperatorContext\x88\x01\x01\x12\x14\n" +
+	"\x05phone\x18\x03 \x01(\tR\x05phoneB\x13\n" +
 	"\x11_operator_context\"\x1f\n" +
-	"\x1dSendPasswordResetCodeResponse\"\xe6\x01\n" +
+	"\x1dSendPasswordResetCodeResponse\"\xfc\x01\n" +
 	"\x1cResetPasswordWithCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12+\n" +
 	"\x11verification_code\x18\x02 \x01(\tR\x10verificationCode\x12!\n" +
 	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12K\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextH\x00R\x0foperatorContext\x88\x01\x01B\x13\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextH\x00R\x0foperatorContext\x88\x01\x01\x12\x14\n" +
+	"\x05phone\x18\x05 \x01(\tR\x05phoneB\x13\n" +
 	"\x11_operator_context\"\x1f\n" +
 	"\x1dResetPasswordWithCodeResponse\"a\n" +
 	"\x13UserIdentityRequest\x12\x17\n" +

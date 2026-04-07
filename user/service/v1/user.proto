@@ -1020,18 +1020,20 @@ message SendEmailVerificationCodeResponse {
 }
 
 message SendPasswordResetCodeRequest {
-	string email = 1;  // User's email address
+	string email = 1;  // User's email address (use email OR phone)
 	optional api.common.OperatorContext operator_context = 2;  // Operator context
+	string phone = 3;  // User's phone number in E.164 format (use email OR phone)
 }
 
 message SendPasswordResetCodeResponse {
 }
 
 message ResetPasswordWithCodeRequest {
-	string email = 1;           // User's email address
-	string verification_code = 2;  // Verification code received via email
+	string email = 1;           // User's email address (use email OR phone)
+	string verification_code = 2;  // Verification code received via email or SMS
 	string new_password = 3;    // New password
 	optional api.common.OperatorContext operator_context = 4;  // Operator context
+	string phone = 5;           // User's phone number in E.164 format (use email OR phone)
 }
 
 message ResetPasswordWithCodeResponse {
