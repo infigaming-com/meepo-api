@@ -17370,8 +17370,8 @@ components:
         api.backoffice.service.v1.GetBalanceSummaryRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetBalanceSummaryResponse:
             type: object
             properties:

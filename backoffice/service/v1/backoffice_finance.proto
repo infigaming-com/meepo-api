@@ -613,7 +613,7 @@ message GetInvoiceSummaryResponse {
 }
 
 message GetBalanceSummaryRequest {
-	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext target_operator_context = 1;
 }
 
 message GetBalanceSummaryResponse {
