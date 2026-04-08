@@ -15285,15 +15285,17 @@ type FreeRewardBOItem struct {
 	SettlementCurrency string `protobuf:"bytes,6,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
 	// Game currency (free_spin) or betting currency (free_bet)
 	Currency string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
-	// Aggregated counts from rewards JSONB
+	// Aggregated counts.
+	// For free_spin: from record-level rounds_played/total_rounds (synced from game service).
+	// For free_bet: from rewards JSONB used_count.
 	TotalCount     int32 `protobuf:"varint,8,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	RemainingCount int32 `protobuf:"varint,9,opt,name=remaining_count,json=remainingCount,proto3" json:"remaining_count,omitempty"`
 	UsedCount      int32 `protobuf:"varint,10,opt,name=used_count,json=usedCount,proto3" json:"used_count,omitempty"`
 	// Expandable sub-rows: populated based on type
 	FreeSpinRewards []*FreeSpinRewardDetail `protobuf:"bytes,11,rep,name=free_spin_rewards,json=freeSpinRewards,proto3" json:"free_spin_rewards,omitempty"`
 	FreeBetRewards  []*FreeBetRewardDetail  `protobuf:"bytes,12,rep,name=free_bet_rewards,json=freeBetRewards,proto3" json:"free_bet_rewards,omitempty"`
-	// Earliest non-zero expired_at across all rewards, 0 = never expires
-	ExpireTime int64 `protobuf:"varint,13,opt,name=expire_time,json=expireTime,proto3" json:"expire_time,omitempty"`
+	// Earliest expiration timestamp (ms) across all sub-rewards, 0 = never expires
+	ExpiredAt int64 `protobuf:"varint,13,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
 	// Total winnings in settlement currency
 	TotalWinnings    string `protobuf:"bytes,14,opt,name=total_winnings,json=totalWinnings,proto3" json:"total_winnings,omitempty"`
 	TotalWinningsUsd string `protobuf:"bytes,15,opt,name=total_winnings_usd,json=totalWinningsUsd,proto3" json:"total_winnings_usd,omitempty"`
@@ -15429,9 +15431,9 @@ func (x *FreeRewardBOItem) GetFreeBetRewards() []*FreeBetRewardDetail {
 	return nil
 }
 
-func (x *FreeRewardBOItem) GetExpireTime() int64 {
+func (x *FreeRewardBOItem) GetExpiredAt() int64 {
 	if x != nil {
-		return x.ExpireTime
+		return x.ExpiredAt
 	}
 	return 0
 }
@@ -20233,7 +20235,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x10active_free_bets\x18\x02 \x01(\x05R\x0eactiveFreeBets\x12.\n" +
 	"\x13expiring_soon_count\x18\x03 \x01(\x05R\x11expiringSoonCount\x12.\n" +
 	"\x13total_granted_count\x18\x04 \x01(\x05R\x11totalGrantedCount\x12(\n" +
-	"\x10total_used_count\x18\x05 \x01(\x05R\x0etotalUsedCount\"\xa0\a\n" +
+	"\x10total_used_count\x18\x05 \x01(\x05R\x0etotalUsedCount\"\x9e\a\n" +
 	"\x10FreeRewardBOItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x16\n" +
@@ -20250,9 +20252,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"used_count\x18\n" +
 	" \x01(\x05R\tusedCount\x12W\n" +
 	"\x11free_spin_rewards\x18\v \x03(\v2+.api.wallet.service.v1.FreeSpinRewardDetailR\x0ffreeSpinRewards\x12T\n" +
-	"\x10free_bet_rewards\x18\f \x03(\v2*.api.wallet.service.v1.FreeBetRewardDetailR\x0efreeBetRewards\x12\x1f\n" +
-	"\vexpire_time\x18\r \x01(\x03R\n" +
-	"expireTime\x12%\n" +
+	"\x10free_bet_rewards\x18\f \x03(\v2*.api.wallet.service.v1.FreeBetRewardDetailR\x0efreeBetRewards\x12\x1d\n" +
+	"\n" +
+	"expired_at\x18\r \x01(\x03R\texpiredAt\x12%\n" +
 	"\x0etotal_winnings\x18\x0e \x01(\tR\rtotalWinnings\x12,\n" +
 	"\x12total_winnings_usd\x18\x0f \x01(\tR\x10totalWinningsUsd\x12\x1f\n" +
 	"\vreward_type\x18\x10 \x01(\tR\n" +

@@ -27927,7 +27927,7 @@ func (m *FreeRewardBOItem) validate(all bool) error {
 
 	}
 
-	// no validation rules for ExpireTime
+	// no validation rules for ExpiredAt
 
 	// no validation rules for TotalWinnings
 
