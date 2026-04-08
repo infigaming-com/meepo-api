@@ -2402,6 +2402,8 @@ message CompanyFinancialSummary {
 	string company_max_withdrawable_usd = 21;
 	// [NOT time-filtered] Sum of all sub-operator max withdrawable amounts (each computed as custody - est_cost - invoice - bankroll)
 	string custody_max_withdrawable_usd = 22;
+	// [NOT time-filtered] Total deposits to company's own wallet (operator_payment_credit on company operator), absolute value in USD
+	string company_deposit_usd = 23;
 }
 
 // ============================================================================

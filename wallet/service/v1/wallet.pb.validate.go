@@ -25505,6 +25505,8 @@ func (m *CompanyFinancialSummary) validate(all bool) error {
 
 	// no validation rules for CustodyMaxWithdrawableUsd
 
+	// no validation rules for CompanyDepositUsd
+
 	if len(errors) > 0 {
 		return CompanyFinancialSummaryMultiError(errors)
 	}

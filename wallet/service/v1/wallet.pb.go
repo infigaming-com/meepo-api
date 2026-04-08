@@ -13678,8 +13678,10 @@ type CompanyFinancialSummary struct {
 	CompanyMaxWithdrawableUsd string `protobuf:"bytes,21,opt,name=company_max_withdrawable_usd,json=companyMaxWithdrawableUsd,proto3" json:"company_max_withdrawable_usd,omitempty"`
 	// [NOT time-filtered] Sum of all sub-operator max withdrawable amounts (each computed as custody - est_cost - invoice - bankroll)
 	CustodyMaxWithdrawableUsd string `protobuf:"bytes,22,opt,name=custody_max_withdrawable_usd,json=custodyMaxWithdrawableUsd,proto3" json:"custody_max_withdrawable_usd,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	// [NOT time-filtered] Total deposits to company's own wallet (operator_payment_credit on company operator), absolute value in USD
+	CompanyDepositUsd string `protobuf:"bytes,23,opt,name=company_deposit_usd,json=companyDepositUsd,proto3" json:"company_deposit_usd,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CompanyFinancialSummary) Reset() {
@@ -13862,6 +13864,13 @@ func (x *CompanyFinancialSummary) GetCompanyMaxWithdrawableUsd() string {
 func (x *CompanyFinancialSummary) GetCustodyMaxWithdrawableUsd() string {
 	if x != nil {
 		return x.CustodyMaxWithdrawableUsd
+	}
+	return ""
+}
+
+func (x *CompanyFinancialSummary) GetCompanyDepositUsd() string {
+	if x != nil {
+		return x.CompanyDepositUsd
 	}
 	return ""
 }
@@ -20058,7 +20067,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\v_start_timeB\v\n" +
 	"\t_end_time\"n\n" +
 	"\"GetCompanyFinancialSummaryResponse\x12H\n" +
-	"\asummary\x18\x01 \x01(\v2..api.wallet.service.v1.CompanyFinancialSummaryR\asummary\"\x88\n" +
+	"\asummary\x18\x01 \x01(\v2..api.wallet.service.v1.CompanyFinancialSummaryR\asummary\"\xb8\n" +
 	"\n" +
 	"\x17CompanyFinancialSummary\x12.\n" +
 	"\x13custody_balance_usd\x18\x01 \x01(\tR\x11custodyBalanceUsd\x122\n" +
@@ -20084,7 +20093,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ecompany_affiliate_withdraw_usd\x18\x13 \x01(\tR\x1bcompanyAffiliateWithdrawUsd\x120\n" +
 	"\x14company_withdraw_usd\x18\x14 \x01(\tR\x12companyWithdrawUsd\x12?\n" +
 	"\x1ccompany_max_withdrawable_usd\x18\x15 \x01(\tR\x19companyMaxWithdrawableUsd\x12?\n" +
-	"\x1ccustody_max_withdrawable_usd\x18\x16 \x01(\tR\x19custodyMaxWithdrawableUsd\"\xd4\x03\n" +
+	"\x1ccustody_max_withdrawable_usd\x18\x16 \x01(\tR\x19custodyMaxWithdrawableUsd\x12.\n" +
+	"\x13company_deposit_usd\x18\x17 \x01(\tR\x11companyDepositUsd\"\xd4\x03\n" +
 	"\x1cGameBatchBetAndSettleRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
