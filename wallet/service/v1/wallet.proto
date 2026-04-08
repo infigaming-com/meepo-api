@@ -2634,7 +2634,9 @@ message FreeRewardBOItem {
 	// Game currency (free_spin) or betting currency (free_bet)
 	string currency = 7;
 
-	// Aggregated counts from rewards JSONB
+	// Aggregated counts.
+	// For free_spin: from record-level rounds_played/total_rounds (synced from game service).
+	// For free_bet: from rewards JSONB used_count.
 	int32 total_count = 8;
 	int32 remaining_count = 9;
 	int32 used_count = 10;
@@ -2643,8 +2645,8 @@ message FreeRewardBOItem {
 	repeated FreeSpinRewardDetail free_spin_rewards = 11;
 	repeated FreeBetRewardDetail free_bet_rewards = 12;
 
-	// Earliest non-zero expired_at across all rewards, 0 = never expires
-	int64 expire_time = 13;
+	// Earliest expiration timestamp (ms) across all sub-rewards, 0 = never expires
+	int64 expired_at = 13;
 
 	// Total winnings in settlement currency
 	string total_winnings = 14;

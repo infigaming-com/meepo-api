@@ -33644,7 +33644,10 @@ components:
                     description: Game currency (free_spin) or betting currency (free_bet)
                 totalCount:
                     type: integer
-                    description: Aggregated counts from rewards JSONB
+                    description: |-
+                        Aggregated counts.
+                         For free_spin: from record-level rounds_played/total_rounds (synced from game service).
+                         For free_bet: from rewards JSONB used_count.
                     format: int32
                 remainingCount:
                     type: integer
@@ -33661,9 +33664,9 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.FreeBetRewardDetail'
-                expireTime:
+                expiredAt:
                     type: string
-                    description: Earliest non-zero expired_at across all rewards, 0 = never expires
+                    description: Earliest expiration timestamp (ms) across all sub-rewards, 0 = never expires
                 totalWinnings:
                     type: string
                     description: Total winnings in settlement currency
