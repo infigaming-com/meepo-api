@@ -115,6 +115,9 @@ service Operator {
 
 	rpc ListPaymentChannelFees(ListPaymentChannelFeesRequest) returns (ListPaymentChannelFeesResponse) {
 	}
+
+	rpc GetOperatorSummary(GetOperatorSummaryRequest) returns (GetOperatorSummaryResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -942,4 +945,19 @@ message PaymentChannelFeeItem {
 	string service_fee = 10;
 	string fx_rate = 11;
 	string amount_usd = 12;
+}
+
+message GetOperatorSummaryRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message GetOperatorSummaryResponse {
+	// individual_cost + coop_cost
+	string total_cost_usd = 1;
+	// GameProviderRS + 3rdParty + Adjustment + RevenueShareSystem + PendingBetsRS (unsent individual)
+	string individual_cost_usd = 2;
+	// GameProviderRS + 3rdParty + Adjustment + RevenueShareSystem + PendingBetsRS (unsent co-op)
+	string coop_cost_usd = 3;
+	// SUM(amount_due) from SENT+PENDING/OVERDUE invoices
+	string pending_invoice_amount_usd = 4;
 }
