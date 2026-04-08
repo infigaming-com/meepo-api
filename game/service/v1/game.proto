@@ -2579,6 +2579,9 @@ message PreviewRTPRoutingResponse {
 
 message GetPendingBetsEstimatedProviderRSRequest {
 	api.common.OperatorContext operator_context = 1;
+	// Optional time range filter: only include pending bets created within this range
+	optional google.protobuf.Timestamp start_time = 2;
+	optional google.protobuf.Timestamp end_time = 3;
 }
 
 message GetPendingBetsEstimatedProviderRSResponse {
