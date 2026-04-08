@@ -1314,3 +1314,15 @@ func IsListGlobalPostbackLogsFailed(err error) bool {
 func ErrorListGlobalPostbackLogsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_GLOBAL_POSTBACK_LOGS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsPostbackUrlBlocked(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_POSTBACK_URL_BLOCKED.String() && e.Code == 400
+}
+
+func ErrorPostbackUrlBlocked(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_POSTBACK_URL_BLOCKED.String(), fmt.Sprintf(format, args...))
+}

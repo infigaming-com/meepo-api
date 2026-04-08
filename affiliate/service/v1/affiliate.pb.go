@@ -7435,8 +7435,10 @@ type SimulateGlobalPostbackResponse struct {
 	Success        bool                   `protobuf:"varint,4,opt,name=success,proto3" json:"success,omitempty"`
 	ResponseBody   string                 `protobuf:"bytes,5,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"`
 	LatencyMs      int64                  `protobuf:"varint,6,opt,name=latency_ms,json=latencyMs,proto3" json:"latency_ms,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Result reason (e.g. "OK", "HTTP 502: Bad Gateway", "blocked: private IP")
+	Reason        string `protobuf:"bytes,7,opt,name=reason,proto3" json:"reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SimulateGlobalPostbackResponse) Reset() {
@@ -7509,6 +7511,13 @@ func (x *SimulateGlobalPostbackResponse) GetLatencyMs() int64 {
 		return x.LatencyMs
 	}
 	return 0
+}
+
+func (x *SimulateGlobalPostbackResponse) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
 }
 
 type ListAffiliatesResponse_Affiliate struct {
@@ -12289,7 +12298,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x11initiator_user_id\x18\x06 \x01(\x03R\x0finitiatorUserId\x1a>\n" +
 	"\x10MacroValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe4\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xfc\x01\n" +
 	"\x1eSimulateGlobalPostbackResponse\x12\x1b\n" +
 	"\tfinal_url\x18\x01 \x01(\tR\bfinalUrl\x12\x1d\n" +
 	"\n" +
@@ -12298,7 +12307,8 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\asuccess\x18\x04 \x01(\bR\asuccess\x12#\n" +
 	"\rresponse_body\x18\x05 \x01(\tR\fresponseBody\x12\x1d\n" +
 	"\n" +
-	"latency_ms\x18\x06 \x01(\x03R\tlatencyMs2\x96K\n" +
+	"latency_ms\x18\x06 \x01(\x03R\tlatencyMs\x12\x16\n" +
+	"\x06reason\x18\a \x01(\tR\x06reason2\x96K\n" +
 	"\tAffiliate\x12\x87\x01\n" +
 	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00\x12\x87\x01\n" +
 	"\x14UpdateCommissionPlan\x125.api.affiliate.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\"\x00\x12~\n" +

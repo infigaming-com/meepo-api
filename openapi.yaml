@@ -14290,6 +14290,9 @@ components:
                     type: string
                 latencyMs:
                     type: string
+                reason:
+                    type: string
+                    description: 'Result reason (e.g. "OK", "HTTP 502: Bad Gateway", "blocked: private IP")'
         api.affiliate.service.v1.SnapshotReportItem:
             type: object
             properties:

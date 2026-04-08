@@ -1586,4 +1586,6 @@ message SimulateGlobalPostbackResponse {
     bool success = 4;
     string response_body = 5;
     int64 latency_ms = 6;
+    // Result reason (e.g. "OK", "HTTP 502: Bad Gateway", "blocked: private IP")
+    string reason = 7;
 }
