@@ -23,6 +23,7 @@ func ErrorUnspecified(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UNSPECIFIED.String(), fmt.Sprintf(format, args...))
 }
 
+// General
 func IsCallWalletServiceFailed(err error) bool {
 	if err == nil {
 		return false
@@ -31,6 +32,7 @@ func IsCallWalletServiceFailed(err error) bool {
 	return e.Reason == ErrorReason_CALL_WALLET_SERVICE_FAILED.String() && e.Code == 500
 }
 
+// General
 func ErrorCallWalletServiceFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CALL_WALLET_SERVICE_FAILED.String(), fmt.Sprintf(format, args...))
 }
@@ -59,30 +61,6 @@ func ErrorUserInfoNotFoundInContext(format string, args ...interface{}) *errors.
 	return errors.New(500, ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
 
-func IsReportTimeRangeError(err error) bool {
-	if err == nil {
-		return false
-	}
-	e := errors.FromError(err)
-	return e.Reason == ErrorReason_REPORT_TIME_RANGE_ERROR.String() && e.Code == 500
-}
-
-func ErrorReportTimeRangeError(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_REPORT_TIME_RANGE_ERROR.String(), fmt.Sprintf(format, args...))
-}
-
-func IsReportGetDataError(err error) bool {
-	if err == nil {
-		return false
-	}
-	e := errors.FromError(err)
-	return e.Reason == ErrorReason_REPORT_GET_DATA_ERROR.String() && e.Code == 500
-}
-
-func ErrorReportGetDataError(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_REPORT_GET_DATA_ERROR.String(), fmt.Sprintf(format, args...))
-}
-
 func IsOperatorContextPermissionDenied(err error) bool {
 	if err == nil {
 		return false
@@ -107,6 +85,33 @@ func ErrorInternalRequestMappingError(format string, args ...interface{}) *error
 	return errors.New(500, ErrorReason_INTERNAL_REQUEST_MAPPING_ERROR.String(), fmt.Sprintf(format, args...))
 }
 
+// Report
+func IsReportTimeRangeError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REPORT_TIME_RANGE_ERROR.String() && e.Code == 500
+}
+
+// Report
+func ErrorReportTimeRangeError(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REPORT_TIME_RANGE_ERROR.String(), fmt.Sprintf(format, args...))
+}
+
+func IsReportGetDataError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REPORT_GET_DATA_ERROR.String() && e.Code == 500
+}
+
+func ErrorReportGetDataError(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REPORT_GET_DATA_ERROR.String(), fmt.Sprintf(format, args...))
+}
+
+// Cloudflare
 func IsCloudflareInvalidRequest(err error) bool {
 	if err == nil {
 		return false
@@ -115,6 +120,7 @@ func IsCloudflareInvalidRequest(err error) bool {
 	return e.Reason == ErrorReason_CLOUDFLARE_INVALID_REQUEST.String() && e.Code == 500
 }
 
+// Cloudflare
 func ErrorCloudflareInvalidRequest(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CLOUDFLARE_INVALID_REQUEST.String(), fmt.Sprintf(format, args...))
 }
@@ -167,7 +173,7 @@ func ErrorCloudflarePurgeFailed(format string, args ...interface{}) *errors.Erro
 	return errors.New(500, ErrorReason_CLOUDFLARE_PURGE_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-// 2FA related errors
+// 2FA
 func IsMfaNotEnabled(err error) bool {
 	if err == nil {
 		return false
@@ -176,7 +182,7 @@ func IsMfaNotEnabled(err error) bool {
 	return e.Reason == ErrorReason_MFA_NOT_ENABLED.String() && e.Code == 400
 }
 
-// 2FA related errors
+// 2FA
 func ErrorMfaNotEnabled(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_MFA_NOT_ENABLED.String(), fmt.Sprintf(format, args...))
 }
