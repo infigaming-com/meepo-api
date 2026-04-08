@@ -1554,6 +1554,8 @@ message ListGlobalPostbackLogsResponse {
         int64 latency_ms = 20;
         // Unix milliseconds
         int64 created_at = 21;
+        // "callback" or "simulate"
+        string log_type = 22;
     }
     repeated GlobalPostbackLog logs = 1;
     int32 total = 2;
@@ -1574,6 +1576,7 @@ message SimulateGlobalPostbackRequest {
     // Macro values without braces (e.g. {"user_id": "123", "email": "test@example.com"})
     map<string, string> macro_values = 4;
     api.common.OperatorContext initiator_operator_context = 5;
+    int64 initiator_user_id = 6;
 }
 
 message SimulateGlobalPostbackResponse {

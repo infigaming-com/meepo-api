@@ -14680,6 +14680,8 @@ func (m *SimulateGlobalPostbackRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for InitiatorUserId
+
 	if len(errors) > 0 {
 		return SimulateGlobalPostbackRequestMultiError(errors)
 	}
@@ -19698,6 +19700,8 @@ func (m *ListGlobalPostbackLogsResponse_GlobalPostbackLog) validate(all bool) er
 	// no validation rules for LatencyMs
 
 	// no validation rules for CreatedAt
+
+	// no validation rules for LogType
 
 	if len(errors) > 0 {
 		return ListGlobalPostbackLogsResponse_GlobalPostbackLogMultiError(errors)

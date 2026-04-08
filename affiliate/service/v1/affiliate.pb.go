@@ -7350,6 +7350,7 @@ type SimulateGlobalPostbackRequest struct {
 	// Macro values without braces (e.g. {"user_id": "123", "email": "test@example.com"})
 	MacroValues              map[string]string       `protobuf:"bytes,4,rep,name=macro_values,json=macroValues,proto3" json:"macro_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	InitiatorUserId          int64                   `protobuf:"varint,6,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -7417,6 +7418,13 @@ func (x *SimulateGlobalPostbackRequest) GetInitiatorOperatorContext() *common.Op
 		return x.InitiatorOperatorContext
 	}
 	return nil
+}
+
+func (x *SimulateGlobalPostbackRequest) GetInitiatorUserId() int64 {
+	if x != nil {
+		return x.InitiatorUserId
+	}
+	return 0
 }
 
 type SimulateGlobalPostbackResponse struct {
@@ -10960,7 +10968,9 @@ type ListGlobalPostbackLogsResponse_GlobalPostbackLog struct {
 	// Request latency in milliseconds
 	LatencyMs int64 `protobuf:"varint,20,opt,name=latency_ms,json=latencyMs,proto3" json:"latency_ms,omitempty"`
 	// Unix milliseconds
-	CreatedAt     int64 `protobuf:"varint,21,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt int64 `protobuf:"varint,21,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// "callback" or "simulate"
+	LogType       string `protobuf:"bytes,22,opt,name=log_type,json=logType,proto3" json:"log_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -11140,6 +11150,13 @@ func (x *ListGlobalPostbackLogsResponse_GlobalPostbackLog) GetCreatedAt() int64 
 		return x.CreatedAt
 	}
 	return 0
+}
+
+func (x *ListGlobalPostbackLogsResponse_GlobalPostbackLog) GetLogType() string {
+	if x != nil {
+		return x.LogType
+	}
+	return ""
 }
 
 var File_affiliate_service_v1_affiliate_proto protoreflect.FileDescriptor
@@ -12229,12 +12246,12 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"_page_sizeB\x0e\n" +
 	"\f_action_typeB\n" +
 	"\n" +
-	"\b_success\"\xb8\a\n" +
+	"\b_success\"\xd3\a\n" +
 	"\x1eListGlobalPostbackLogsResponse\x12^\n" +
 	"\x04logs\x18\x01 \x03(\v2J.api.affiliate.service.v1.ListGlobalPostbackLogsResponse.GlobalPostbackLogR\x04logs\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xee\x05\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x89\x06\n" +
 	"\x11GlobalPostbackLog\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12,\n" +
 	"\x12global_postback_id\x18\x02 \x01(\x03R\x10globalPostbackId\x12#\n" +
@@ -12261,13 +12278,15 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\n" +
 	"latency_ms\x18\x14 \x01(\x03R\tlatencyMs\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x15 \x01(\x03R\tcreatedAt\"\x8e\x03\n" +
+	"created_at\x18\x15 \x01(\x03R\tcreatedAt\x12\x19\n" +
+	"\blog_type\x18\x16 \x01(\tR\alogType\"\xba\x03\n" +
 	"\x1dSimulateGlobalPostbackRequest\x12!\n" +
 	"\fpostback_url\x18\x01 \x01(\tR\vpostbackUrl\x12%\n" +
 	"\x0erequest_method\x18\x02 \x01(\tR\rrequestMethod\x12\x1b\n" +
 	"\tpost_body\x18\x03 \x01(\tR\bpostBody\x12k\n" +
 	"\fmacro_values\x18\x04 \x03(\v2H.api.affiliate.service.v1.SimulateGlobalPostbackRequest.MacroValuesEntryR\vmacroValues\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x1a>\n" +
+	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
+	"\x11initiator_user_id\x18\x06 \x01(\x03R\x0finitiatorUserId\x1a>\n" +
 	"\x10MacroValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe4\x01\n" +
