@@ -13579,6 +13579,9 @@ components:
                 createdAt:
                     type: string
                     description: Unix milliseconds
+                logType:
+                    type: string
+                    description: '"callback" or "simulate"'
         api.affiliate.service.v1.ListGlobalPostbacksResponse:
             type: object
             properties:
