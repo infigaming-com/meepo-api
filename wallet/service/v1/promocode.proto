@@ -355,8 +355,8 @@ message ListUniversalCodeUsagesResponse {
 	}
 }
 
-// Export Promo Code Campaign
-message ExportPromoCodeCampaignRequest {
+// Export Promo Codes
+message ExportPromoCodesRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	int64 campaign_id = 2;
 	// "csv", "excel", or "pdf"
@@ -370,7 +370,7 @@ message ExportPromoCodeCampaignRequest {
 	optional string code = 8;
 }
 
-message ExportPromoCodeCampaignResponse {
+message ExportPromoCodesResponse {
 	int64 task_id = 1;
 }
 

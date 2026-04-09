@@ -5287,22 +5287,22 @@ var _ interface {
 	ErrorName() string
 } = ListUniversalCodeUsagesResponseValidationError{}
 
-// Validate checks the field values on ExportPromoCodeCampaignRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ExportPromoCodesRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ExportPromoCodeCampaignRequest) Validate() error {
+func (m *ExportPromoCodesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ExportPromoCodeCampaignRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ExportPromoCodeCampaignRequestMultiError, or nil if none found.
-func (m *ExportPromoCodeCampaignRequest) ValidateAll() error {
+// ValidateAll checks the field values on ExportPromoCodesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportPromoCodesRequestMultiError, or nil if none found.
+func (m *ExportPromoCodesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ExportPromoCodeCampaignRequest) validate(all bool) error {
+func (m *ExportPromoCodesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -5313,7 +5313,7 @@ func (m *ExportPromoCodeCampaignRequest) validate(all bool) error {
 		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ExportPromoCodeCampaignRequestValidationError{
+				errors = append(errors, ExportPromoCodesRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5321,7 +5321,7 @@ func (m *ExportPromoCodeCampaignRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ExportPromoCodeCampaignRequestValidationError{
+				errors = append(errors, ExportPromoCodesRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5330,7 +5330,7 @@ func (m *ExportPromoCodeCampaignRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ExportPromoCodeCampaignRequestValidationError{
+			return ExportPromoCodesRequestValidationError{
 				field:  "InitiatorOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5359,19 +5359,19 @@ func (m *ExportPromoCodeCampaignRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ExportPromoCodeCampaignRequestMultiError(errors)
+		return ExportPromoCodesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ExportPromoCodeCampaignRequestMultiError is an error wrapping multiple
-// validation errors returned by ExportPromoCodeCampaignRequest.ValidateAll()
-// if the designated constraints aren't met.
-type ExportPromoCodeCampaignRequestMultiError []error
+// ExportPromoCodesRequestMultiError is an error wrapping multiple validation
+// errors returned by ExportPromoCodesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ExportPromoCodesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ExportPromoCodeCampaignRequestMultiError) Error() string {
+func (m ExportPromoCodesRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5380,12 +5380,11 @@ func (m ExportPromoCodeCampaignRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ExportPromoCodeCampaignRequestMultiError) AllErrors() []error { return m }
+func (m ExportPromoCodesRequestMultiError) AllErrors() []error { return m }
 
-// ExportPromoCodeCampaignRequestValidationError is the validation error
-// returned by ExportPromoCodeCampaignRequest.Validate if the designated
-// constraints aren't met.
-type ExportPromoCodeCampaignRequestValidationError struct {
+// ExportPromoCodesRequestValidationError is the validation error returned by
+// ExportPromoCodesRequest.Validate if the designated constraints aren't met.
+type ExportPromoCodesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5393,24 +5392,24 @@ type ExportPromoCodeCampaignRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ExportPromoCodeCampaignRequestValidationError) Field() string { return e.field }
+func (e ExportPromoCodesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ExportPromoCodeCampaignRequestValidationError) Reason() string { return e.reason }
+func (e ExportPromoCodesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ExportPromoCodeCampaignRequestValidationError) Cause() error { return e.cause }
+func (e ExportPromoCodesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ExportPromoCodeCampaignRequestValidationError) Key() bool { return e.key }
+func (e ExportPromoCodesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ExportPromoCodeCampaignRequestValidationError) ErrorName() string {
-	return "ExportPromoCodeCampaignRequestValidationError"
+func (e ExportPromoCodesRequestValidationError) ErrorName() string {
+	return "ExportPromoCodesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ExportPromoCodeCampaignRequestValidationError) Error() string {
+func (e ExportPromoCodesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5422,14 +5421,14 @@ func (e ExportPromoCodeCampaignRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sExportPromoCodeCampaignRequest.%s: %s%s",
+		"invalid %sExportPromoCodesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ExportPromoCodeCampaignRequestValidationError{}
+var _ error = ExportPromoCodesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -5437,24 +5436,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ExportPromoCodeCampaignRequestValidationError{}
+} = ExportPromoCodesRequestValidationError{}
 
-// Validate checks the field values on ExportPromoCodeCampaignResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ExportPromoCodesResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ExportPromoCodeCampaignResponse) Validate() error {
+func (m *ExportPromoCodesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ExportPromoCodeCampaignResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ExportPromoCodeCampaignResponseMultiError, or nil if none found.
-func (m *ExportPromoCodeCampaignResponse) ValidateAll() error {
+// ValidateAll checks the field values on ExportPromoCodesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportPromoCodesResponseMultiError, or nil if none found.
+func (m *ExportPromoCodesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ExportPromoCodeCampaignResponse) validate(all bool) error {
+func (m *ExportPromoCodesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -5464,19 +5463,19 @@ func (m *ExportPromoCodeCampaignResponse) validate(all bool) error {
 	// no validation rules for TaskId
 
 	if len(errors) > 0 {
-		return ExportPromoCodeCampaignResponseMultiError(errors)
+		return ExportPromoCodesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ExportPromoCodeCampaignResponseMultiError is an error wrapping multiple
-// validation errors returned by ExportPromoCodeCampaignResponse.ValidateAll()
-// if the designated constraints aren't met.
-type ExportPromoCodeCampaignResponseMultiError []error
+// ExportPromoCodesResponseMultiError is an error wrapping multiple validation
+// errors returned by ExportPromoCodesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ExportPromoCodesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ExportPromoCodeCampaignResponseMultiError) Error() string {
+func (m ExportPromoCodesResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5485,12 +5484,11 @@ func (m ExportPromoCodeCampaignResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ExportPromoCodeCampaignResponseMultiError) AllErrors() []error { return m }
+func (m ExportPromoCodesResponseMultiError) AllErrors() []error { return m }
 
-// ExportPromoCodeCampaignResponseValidationError is the validation error
-// returned by ExportPromoCodeCampaignResponse.Validate if the designated
-// constraints aren't met.
-type ExportPromoCodeCampaignResponseValidationError struct {
+// ExportPromoCodesResponseValidationError is the validation error returned by
+// ExportPromoCodesResponse.Validate if the designated constraints aren't met.
+type ExportPromoCodesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5498,24 +5496,24 @@ type ExportPromoCodeCampaignResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ExportPromoCodeCampaignResponseValidationError) Field() string { return e.field }
+func (e ExportPromoCodesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ExportPromoCodeCampaignResponseValidationError) Reason() string { return e.reason }
+func (e ExportPromoCodesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ExportPromoCodeCampaignResponseValidationError) Cause() error { return e.cause }
+func (e ExportPromoCodesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ExportPromoCodeCampaignResponseValidationError) Key() bool { return e.key }
+func (e ExportPromoCodesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ExportPromoCodeCampaignResponseValidationError) ErrorName() string {
-	return "ExportPromoCodeCampaignResponseValidationError"
+func (e ExportPromoCodesResponseValidationError) ErrorName() string {
+	return "ExportPromoCodesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ExportPromoCodeCampaignResponseValidationError) Error() string {
+func (e ExportPromoCodesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5527,14 +5525,14 @@ func (e ExportPromoCodeCampaignResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sExportPromoCodeCampaignResponse.%s: %s%s",
+		"invalid %sExportPromoCodesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ExportPromoCodeCampaignResponseValidationError{}
+var _ error = ExportPromoCodesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -5542,7 +5540,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ExportPromoCodeCampaignResponseValidationError{}
+} = ExportPromoCodesResponseValidationError{}
 
 // Validate checks the field values on GetPromoCodeInfoRequest with the rules
 // defined in the proto definition for this message. If any rules are

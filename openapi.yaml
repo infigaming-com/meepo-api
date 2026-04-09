@@ -8959,13 +8959,13 @@ paths:
         post:
             tags:
                 - BackofficeWallet
-            description: ExportPromoCodeCampaign exports promo code campaign details (one_time codes or universal usages)
-            operationId: BackofficeWallet_ExportPromoCodeCampaign
+            description: ExportPromoCodes exports promo codes (one_time codes or universal usages) for a campaign
+            operationId: BackofficeWallet_ExportPromoCodes
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportPromoCodeCampaignRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportPromoCodesRequest'
                 required: true
             responses:
                 "200":
@@ -8973,7 +8973,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.ExportPromoCodeCampaignResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.ExportPromoCodesResponse'
     /v1/backoffice/wallet/promo-code/campaign/status/update:
         post:
             tags:
@@ -17095,7 +17095,7 @@ components:
                     type: string
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-        api.backoffice.service.v1.ExportPromoCodeCampaignRequest:
+        api.backoffice.service.v1.ExportPromoCodesRequest:
             type: object
             properties:
                 campaignId:
@@ -17113,7 +17113,7 @@ components:
                     description: '"used" or "unused" (one_time only)'
                 code:
                     type: string
-            description: Export Promo Code Campaign
+            description: Export Promo Codes
         api.backoffice.service.v1.ExportSevRequest:
             type: object
             properties:
@@ -33517,7 +33517,7 @@ components:
             properties:
                 taskId:
                     type: string
-        api.wallet.service.v1.ExportPromoCodeCampaignResponse:
+        api.wallet.service.v1.ExportPromoCodesResponse:
             type: object
             properties:
                 taskId:

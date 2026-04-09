@@ -20268,7 +20268,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"updated_at\x18\x15 \x01(\x03R\tupdatedAt\x12!\n" +
 	"\fcompleted_at\x18\x16 \x01(\x03R\vcompletedAt\x12\x1d\n" +
 	"\n" +
-	"revoked_at\x18\x17 \x01(\x03R\trevokedAt2\xa1f\n" +
+	"revoked_at\x18\x17 \x01(\x03R\trevokedAt2\x8bf\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -20327,8 +20327,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1cListPromoCodeCampaignDetails\x12:.api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest\x1a;.api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse\"\x00\x12\x90\x01\n" +
 	"\x19GenerateOneTimePromoCodes\x127.api.wallet.service.v1.GenerateOneTimePromoCodesRequest\x1a8.api.wallet.service.v1.GenerateOneTimePromoCodesResponse\"\x00\x12\x96\x01\n" +
 	"\x1bGenerateUniversalPromoCodes\x129.api.wallet.service.v1.GenerateUniversalPromoCodesRequest\x1a:.api.wallet.service.v1.GenerateUniversalPromoCodesResponse\"\x00\x12\x8a\x01\n" +
-	"\x17ListUniversalCodeUsages\x125.api.wallet.service.v1.ListUniversalCodeUsagesRequest\x1a6.api.wallet.service.v1.ListUniversalCodeUsagesResponse\"\x00\x12\x8a\x01\n" +
-	"\x17ExportPromoCodeCampaign\x125.api.wallet.service.v1.ExportPromoCodeCampaignRequest\x1a6.api.wallet.service.v1.ExportPromoCodeCampaignResponse\"\x00\x12\x9a\x01\n" +
+	"\x17ListUniversalCodeUsages\x125.api.wallet.service.v1.ListUniversalCodeUsagesRequest\x1a6.api.wallet.service.v1.ListUniversalCodeUsagesResponse\"\x00\x12u\n" +
+	"\x10ExportPromoCodes\x12..api.wallet.service.v1.ExportPromoCodesRequest\x1a/.api.wallet.service.v1.ExportPromoCodesResponse\"\x00\x12\x9a\x01\n" +
 	"\x10GetPromoCodeInfo\x12..api.wallet.service.v1.GetPromoCodeInfoRequest\x1a/.api.wallet.service.v1.GetPromoCodeInfoResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/wallet/promo-code/info\x12\x95\x01\n" +
 	"\x0eClaimPromoCode\x12,.api.wallet.service.v1.ClaimPromoCodeRequest\x1a-.api.wallet.service.v1.ClaimPromoCodeResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/wallet/promo-code/claim\x12\xcb\x01\n" +
 	"\x1cGetUserDepositRewardSequence\x12:.api.wallet.service.v1.GetUserDepositRewardSequenceRequest\x1a;.api.wallet.service.v1.GetUserDepositRewardSequenceResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/wallet/deposit-reward/user-sequence\x12\x9c\x01\n" +
@@ -20604,7 +20604,7 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*GenerateOneTimePromoCodesRequest)(nil),      // 222: api.wallet.service.v1.GenerateOneTimePromoCodesRequest
 	(*GenerateUniversalPromoCodesRequest)(nil),    // 223: api.wallet.service.v1.GenerateUniversalPromoCodesRequest
 	(*ListUniversalCodeUsagesRequest)(nil),        // 224: api.wallet.service.v1.ListUniversalCodeUsagesRequest
-	(*ExportPromoCodeCampaignRequest)(nil),        // 225: api.wallet.service.v1.ExportPromoCodeCampaignRequest
+	(*ExportPromoCodesRequest)(nil),               // 225: api.wallet.service.v1.ExportPromoCodesRequest
 	(*GetPromoCodeInfoRequest)(nil),               // 226: api.wallet.service.v1.GetPromoCodeInfoRequest
 	(*ClaimPromoCodeRequest)(nil),                 // 227: api.wallet.service.v1.ClaimPromoCodeRequest
 	(*CreatePromoCodeCampaignResponse)(nil),       // 228: api.wallet.service.v1.CreatePromoCodeCampaignResponse
@@ -20615,7 +20615,7 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*GenerateOneTimePromoCodesResponse)(nil),     // 233: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
 	(*GenerateUniversalPromoCodesResponse)(nil),   // 234: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
 	(*ListUniversalCodeUsagesResponse)(nil),       // 235: api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	(*ExportPromoCodeCampaignResponse)(nil),       // 236: api.wallet.service.v1.ExportPromoCodeCampaignResponse
+	(*ExportPromoCodesResponse)(nil),              // 236: api.wallet.service.v1.ExportPromoCodesResponse
 	(*GetPromoCodeInfoResponse)(nil),              // 237: api.wallet.service.v1.GetPromoCodeInfoResponse
 	(*ClaimPromoCodeResponse)(nil),                // 238: api.wallet.service.v1.ClaimPromoCodeResponse
 }
@@ -20914,7 +20914,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	222, // 291: api.wallet.service.v1.Wallet.GenerateOneTimePromoCodes:input_type -> api.wallet.service.v1.GenerateOneTimePromoCodesRequest
 	223, // 292: api.wallet.service.v1.Wallet.GenerateUniversalPromoCodes:input_type -> api.wallet.service.v1.GenerateUniversalPromoCodesRequest
 	224, // 293: api.wallet.service.v1.Wallet.ListUniversalCodeUsages:input_type -> api.wallet.service.v1.ListUniversalCodeUsagesRequest
-	225, // 294: api.wallet.service.v1.Wallet.ExportPromoCodeCampaign:input_type -> api.wallet.service.v1.ExportPromoCodeCampaignRequest
+	225, // 294: api.wallet.service.v1.Wallet.ExportPromoCodes:input_type -> api.wallet.service.v1.ExportPromoCodesRequest
 	226, // 295: api.wallet.service.v1.Wallet.GetPromoCodeInfo:input_type -> api.wallet.service.v1.GetPromoCodeInfoRequest
 	227, // 296: api.wallet.service.v1.Wallet.ClaimPromoCode:input_type -> api.wallet.service.v1.ClaimPromoCodeRequest
 	89,  // 297: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:input_type -> api.wallet.service.v1.GetUserDepositRewardSequenceRequest
@@ -21005,7 +21005,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	233, // 382: api.wallet.service.v1.Wallet.GenerateOneTimePromoCodes:output_type -> api.wallet.service.v1.GenerateOneTimePromoCodesResponse
 	234, // 383: api.wallet.service.v1.Wallet.GenerateUniversalPromoCodes:output_type -> api.wallet.service.v1.GenerateUniversalPromoCodesResponse
 	235, // 384: api.wallet.service.v1.Wallet.ListUniversalCodeUsages:output_type -> api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	236, // 385: api.wallet.service.v1.Wallet.ExportPromoCodeCampaign:output_type -> api.wallet.service.v1.ExportPromoCodeCampaignResponse
+	236, // 385: api.wallet.service.v1.Wallet.ExportPromoCodes:output_type -> api.wallet.service.v1.ExportPromoCodesResponse
 	237, // 386: api.wallet.service.v1.Wallet.GetPromoCodeInfo:output_type -> api.wallet.service.v1.GetPromoCodeInfoResponse
 	238, // 387: api.wallet.service.v1.Wallet.ClaimPromoCode:output_type -> api.wallet.service.v1.ClaimPromoCodeResponse
 	90,  // 388: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:output_type -> api.wallet.service.v1.GetUserDepositRewardSequenceResponse

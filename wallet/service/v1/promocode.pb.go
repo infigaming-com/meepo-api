@@ -2500,8 +2500,8 @@ func (x *ListUniversalCodeUsagesResponse) GetUsages() []*ListUniversalCodeUsages
 	return nil
 }
 
-// Export Promo Code Campaign
-type ExportPromoCodeCampaignRequest struct {
+// Export Promo Codes
+type ExportPromoCodesRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	CampaignId               int64                   `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
@@ -2518,20 +2518,20 @@ type ExportPromoCodeCampaignRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ExportPromoCodeCampaignRequest) Reset() {
-	*x = ExportPromoCodeCampaignRequest{}
+func (x *ExportPromoCodesRequest) Reset() {
+	*x = ExportPromoCodesRequest{}
 	mi := &file_wallet_service_v1_promocode_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ExportPromoCodeCampaignRequest) String() string {
+func (x *ExportPromoCodesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ExportPromoCodeCampaignRequest) ProtoMessage() {}
+func (*ExportPromoCodesRequest) ProtoMessage() {}
 
-func (x *ExportPromoCodeCampaignRequest) ProtoReflect() protoreflect.Message {
+func (x *ExportPromoCodesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_promocode_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2543,88 +2543,88 @@ func (x *ExportPromoCodeCampaignRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportPromoCodeCampaignRequest.ProtoReflect.Descriptor instead.
-func (*ExportPromoCodeCampaignRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ExportPromoCodesRequest.ProtoReflect.Descriptor instead.
+func (*ExportPromoCodesRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{32}
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+func (x *ExportPromoCodesRequest) GetInitiatorOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.InitiatorOperatorContext
 	}
 	return nil
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetCampaignId() int64 {
+func (x *ExportPromoCodesRequest) GetCampaignId() int64 {
 	if x != nil {
 		return x.CampaignId
 	}
 	return 0
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetFormat() string {
+func (x *ExportPromoCodesRequest) GetFormat() string {
 	if x != nil {
 		return x.Format
 	}
 	return ""
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetTimeZone() string {
+func (x *ExportPromoCodesRequest) GetTimeZone() string {
 	if x != nil {
 		return x.TimeZone
 	}
 	return ""
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetInitiatorUserId() int64 {
+func (x *ExportPromoCodesRequest) GetInitiatorUserId() int64 {
 	if x != nil {
 		return x.InitiatorUserId
 	}
 	return 0
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetUserId() int64 {
+func (x *ExportPromoCodesRequest) GetUserId() int64 {
 	if x != nil && x.UserId != nil {
 		return *x.UserId
 	}
 	return 0
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetStatus() string {
+func (x *ExportPromoCodesRequest) GetStatus() string {
 	if x != nil && x.Status != nil {
 		return *x.Status
 	}
 	return ""
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetCode() string {
+func (x *ExportPromoCodesRequest) GetCode() string {
 	if x != nil && x.Code != nil {
 		return *x.Code
 	}
 	return ""
 }
 
-type ExportPromoCodeCampaignResponse struct {
+type ExportPromoCodesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ExportPromoCodeCampaignResponse) Reset() {
-	*x = ExportPromoCodeCampaignResponse{}
+func (x *ExportPromoCodesResponse) Reset() {
+	*x = ExportPromoCodesResponse{}
 	mi := &file_wallet_service_v1_promocode_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ExportPromoCodeCampaignResponse) String() string {
+func (x *ExportPromoCodesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ExportPromoCodeCampaignResponse) ProtoMessage() {}
+func (*ExportPromoCodesResponse) ProtoMessage() {}
 
-func (x *ExportPromoCodeCampaignResponse) ProtoReflect() protoreflect.Message {
+func (x *ExportPromoCodesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_promocode_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2636,12 +2636,12 @@ func (x *ExportPromoCodeCampaignResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportPromoCodeCampaignResponse.ProtoReflect.Descriptor instead.
-func (*ExportPromoCodeCampaignResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ExportPromoCodesResponse.ProtoReflect.Descriptor instead.
+func (*ExportPromoCodesResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{33}
 }
 
-func (x *ExportPromoCodeCampaignResponse) GetTaskId() int64 {
+func (x *ExportPromoCodesResponse) GetTaskId() int64 {
 	if x != nil {
 		return x.TaskId
 	}
@@ -3442,8 +3442,8 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\n" +
 	"used_count\x18\x02 \x01(\x05R\tusedCount\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"\xf1\x02\n" +
-	"\x1eExportPromoCodeCampaignRequest\x12Y\n" +
+	"totalCount\"\xea\x02\n" +
+	"\x17ExportPromoCodesRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\x1f\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03R\n" +
 	"campaignId\x12\x16\n" +
@@ -3456,8 +3456,8 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\n" +
 	"\b_user_idB\t\n" +
 	"\a_statusB\a\n" +
-	"\x05_code\":\n" +
-	"\x1fExportPromoCodeCampaignResponse\x12\x17\n" +
+	"\x05_code\"3\n" +
+	"\x18ExportPromoCodesResponse\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\"-\n" +
 	"\x17GetPromoCodeInfoRequest\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\"\x81\x06\n" +
@@ -3535,8 +3535,8 @@ var file_wallet_service_v1_promocode_proto_goTypes = []any{
 	(*GenerateUniversalPromoCodesResponse)(nil),                // 29: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
 	(*ListUniversalCodeUsagesRequest)(nil),                     // 30: api.wallet.service.v1.ListUniversalCodeUsagesRequest
 	(*ListUniversalCodeUsagesResponse)(nil),                    // 31: api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	(*ExportPromoCodeCampaignRequest)(nil),                     // 32: api.wallet.service.v1.ExportPromoCodeCampaignRequest
-	(*ExportPromoCodeCampaignResponse)(nil),                    // 33: api.wallet.service.v1.ExportPromoCodeCampaignResponse
+	(*ExportPromoCodesRequest)(nil),                            // 32: api.wallet.service.v1.ExportPromoCodesRequest
+	(*ExportPromoCodesResponse)(nil),                           // 33: api.wallet.service.v1.ExportPromoCodesResponse
 	(*GetPromoCodeInfoRequest)(nil),                            // 34: api.wallet.service.v1.GetPromoCodeInfoRequest
 	(*GetPromoCodeInfoResponse)(nil),                           // 35: api.wallet.service.v1.GetPromoCodeInfoResponse
 	(*ClaimPromoCodeRequest)(nil),                              // 36: api.wallet.service.v1.ClaimPromoCodeRequest
@@ -3608,7 +3608,7 @@ var file_wallet_service_v1_promocode_proto_depIdxs = []int32{
 	43, // 56: api.wallet.service.v1.GenerateUniversalPromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	43, // 57: api.wallet.service.v1.ListUniversalCodeUsagesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	41, // 58: api.wallet.service.v1.ListUniversalCodeUsagesResponse.usages:type_name -> api.wallet.service.v1.ListUniversalCodeUsagesResponse.UniversalCodeUsage
-	43, // 59: api.wallet.service.v1.ExportPromoCodeCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	43, // 59: api.wallet.service.v1.ExportPromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	42, // 60: api.wallet.service.v1.GetPromoCodeInfoResponse.start_time:type_name -> google.protobuf.Timestamp
 	42, // 61: api.wallet.service.v1.GetPromoCodeInfoResponse.end_time:type_name -> google.protobuf.Timestamp
 	3,  // 62: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs

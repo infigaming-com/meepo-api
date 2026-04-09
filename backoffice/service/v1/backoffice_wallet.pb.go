@@ -4606,8 +4606,8 @@ func (x *ListUniversalCodeUsagesRequest) GetCampaignId() int64 {
 	return 0
 }
 
-// Export Promo Code Campaign
-type ExportPromoCodeCampaignRequest struct {
+// Export Promo Codes
+type ExportPromoCodesRequest struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
 	CampaignId int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
 	// "csv", "excel", or "pdf"
@@ -4622,20 +4622,20 @@ type ExportPromoCodeCampaignRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ExportPromoCodeCampaignRequest) Reset() {
-	*x = ExportPromoCodeCampaignRequest{}
+func (x *ExportPromoCodesRequest) Reset() {
+	*x = ExportPromoCodesRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ExportPromoCodeCampaignRequest) String() string {
+func (x *ExportPromoCodesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ExportPromoCodeCampaignRequest) ProtoMessage() {}
+func (*ExportPromoCodesRequest) ProtoMessage() {}
 
-func (x *ExportPromoCodeCampaignRequest) ProtoReflect() protoreflect.Message {
+func (x *ExportPromoCodesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4647,47 +4647,47 @@ func (x *ExportPromoCodeCampaignRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportPromoCodeCampaignRequest.ProtoReflect.Descriptor instead.
-func (*ExportPromoCodeCampaignRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ExportPromoCodesRequest.ProtoReflect.Descriptor instead.
+func (*ExportPromoCodesRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{62}
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetCampaignId() int64 {
+func (x *ExportPromoCodesRequest) GetCampaignId() int64 {
 	if x != nil {
 		return x.CampaignId
 	}
 	return 0
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetFormat() string {
+func (x *ExportPromoCodesRequest) GetFormat() string {
 	if x != nil {
 		return x.Format
 	}
 	return ""
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetTimeZone() string {
+func (x *ExportPromoCodesRequest) GetTimeZone() string {
 	if x != nil {
 		return x.TimeZone
 	}
 	return ""
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetUserId() int64 {
+func (x *ExportPromoCodesRequest) GetUserId() int64 {
 	if x != nil && x.UserId != nil {
 		return *x.UserId
 	}
 	return 0
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetStatus() string {
+func (x *ExportPromoCodesRequest) GetStatus() string {
 	if x != nil && x.Status != nil {
 		return *x.Status
 	}
 	return ""
 }
 
-func (x *ExportPromoCodeCampaignRequest) GetCode() string {
+func (x *ExportPromoCodesRequest) GetCode() string {
 	if x != nil && x.Code != nil {
 		return *x.Code
 	}
@@ -5969,8 +5969,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x05codes\x18\x02 \x03(\tR\x05codes\"A\n" +
 	"\x1eListUniversalCodeUsagesRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
-	"campaignId\"\xea\x01\n" +
-	"\x1eExportPromoCodeCampaignRequest\x12\x1f\n" +
+	"campaignId\"\xe3\x01\n" +
+	"\x17ExportPromoCodesRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12\x16\n" +
 	"\x06format\x18\x02 \x01(\tR\x06format\x12\x1b\n" +
@@ -6021,7 +6021,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x0e_expiring_soonB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size2\xbaS\n" +
+	"_page_size2\xa5S\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -6056,8 +6056,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x1cListPromoCodeCampaignDetails\x12>.api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest\x1a;.api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/wallet/promo-code/campaign/details\x12\xd7\x01\n" +
 	"\x19GenerateOneTimePromoCodes\x12;.api.backoffice.service.v1.GenerateOneTimePromoCodesRequest\x1a8.api.wallet.service.v1.GenerateOneTimePromoCodesResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/wallet/promo-code/one-time/codes/generate\x12\xde\x01\n" +
 	"\x1bGenerateUniversalPromoCodes\x12=.api.backoffice.service.v1.GenerateUniversalPromoCodesRequest\x1a:.api.wallet.service.v1.GenerateUniversalPromoCodesResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/v1/backoffice/wallet/promo-code/universal/codes/generate\x12\xcf\x01\n" +
-	"\x17ListUniversalCodeUsages\x129.api.backoffice.service.v1.ListUniversalCodeUsagesRequest\x1a6.api.wallet.service.v1.ListUniversalCodeUsagesResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/v1/backoffice/wallet/promo-code/universal/usages/list\x12\xc9\x01\n" +
-	"\x17ExportPromoCodeCampaign\x129.api.backoffice.service.v1.ExportPromoCodeCampaignRequest\x1a6.api.wallet.service.v1.ExportPromoCodeCampaignResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/wallet/promo-code/campaign/export\x12\xd1\x01\n" +
+	"\x17ListUniversalCodeUsages\x129.api.backoffice.service.v1.ListUniversalCodeUsagesRequest\x1a6.api.wallet.service.v1.ListUniversalCodeUsagesResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/v1/backoffice/wallet/promo-code/universal/usages/list\x12\xb4\x01\n" +
+	"\x10ExportPromoCodes\x122.api.backoffice.service.v1.ExportPromoCodesRequest\x1a/.api.wallet.service.v1.ExportPromoCodesResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/wallet/promo-code/campaign/export\x12\xd1\x01\n" +
 	"\x1dGetGamificationCurrencyConfig\x12?.api.backoffice.service.v1.GetGamificationCurrencyConfigRequest\x1a<.api.wallet.service.v1.GetGamificationCurrencyConfigResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/wallet/gamification/get\x12\xd4\x01\n" +
 	"\x1cUpdateOperatorCurrencyConfig\x12>.api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest\x1a;.api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/currency/config/update\x12\xad\x01\n" +
 	"\x12UpdateWalletConfig\x124.api.backoffice.service.v1.UpdateWalletConfigRequest\x1a1.api.wallet.service.v1.UpdateWalletConfigResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/wallet/config/update\x12\xf5\x01\n" +
@@ -6155,7 +6155,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*GenerateOneTimePromoCodesRequest)(nil),                         // 59: api.backoffice.service.v1.GenerateOneTimePromoCodesRequest
 	(*GenerateUniversalPromoCodesRequest)(nil),                       // 60: api.backoffice.service.v1.GenerateUniversalPromoCodesRequest
 	(*ListUniversalCodeUsagesRequest)(nil),                           // 61: api.backoffice.service.v1.ListUniversalCodeUsagesRequest
-	(*ExportPromoCodeCampaignRequest)(nil),                           // 62: api.backoffice.service.v1.ExportPromoCodeCampaignRequest
+	(*ExportPromoCodesRequest)(nil),                                  // 62: api.backoffice.service.v1.ExportPromoCodesRequest
 	(*ManualAdjustCreditTurnoverFieldRequest)(nil),                   // 63: api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest
 	(*SetAppDownloadRewardConfigRequest)(nil),                        // 64: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest
 	(*GetAppDownloadRewardConfigRequest)(nil),                        // 65: api.backoffice.service.v1.GetAppDownloadRewardConfigRequest
@@ -6196,7 +6196,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*v1.GenerateOneTimePromoCodesResponse)(nil),       // 100: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
 	(*v1.GenerateUniversalPromoCodesResponse)(nil),     // 101: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
 	(*v1.ListUniversalCodeUsagesResponse)(nil),         // 102: api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	(*v1.ExportPromoCodeCampaignResponse)(nil),         // 103: api.wallet.service.v1.ExportPromoCodeCampaignResponse
+	(*v1.ExportPromoCodesResponse)(nil),                // 103: api.wallet.service.v1.ExportPromoCodesResponse
 	(*v1.GetGamificationCurrencyConfigResponse)(nil),   // 104: api.wallet.service.v1.GetGamificationCurrencyConfigResponse
 	(*v1.UpdateOperatorCurrencyConfigResponse)(nil),    // 105: api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
 	(*v1.UpdateWalletConfigResponse)(nil),              // 106: api.wallet.service.v1.UpdateWalletConfigResponse
@@ -6336,7 +6336,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	59,  // 115: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:input_type -> api.backoffice.service.v1.GenerateOneTimePromoCodesRequest
 	60,  // 116: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:input_type -> api.backoffice.service.v1.GenerateUniversalPromoCodesRequest
 	61,  // 117: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:input_type -> api.backoffice.service.v1.ListUniversalCodeUsagesRequest
-	62,  // 118: api.backoffice.service.v1.BackofficeWallet.ExportPromoCodeCampaign:input_type -> api.backoffice.service.v1.ExportPromoCodeCampaignRequest
+	62,  // 118: api.backoffice.service.v1.BackofficeWallet.ExportPromoCodes:input_type -> api.backoffice.service.v1.ExportPromoCodesRequest
 	39,  // 119: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:input_type -> api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
 	40,  // 120: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:input_type -> api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
 	41,  // 121: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:input_type -> api.backoffice.service.v1.UpdateWalletConfigRequest
@@ -6389,7 +6389,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	100, // 168: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:output_type -> api.wallet.service.v1.GenerateOneTimePromoCodesResponse
 	101, // 169: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:output_type -> api.wallet.service.v1.GenerateUniversalPromoCodesResponse
 	102, // 170: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:output_type -> api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	103, // 171: api.backoffice.service.v1.BackofficeWallet.ExportPromoCodeCampaign:output_type -> api.wallet.service.v1.ExportPromoCodeCampaignResponse
+	103, // 171: api.backoffice.service.v1.BackofficeWallet.ExportPromoCodes:output_type -> api.wallet.service.v1.ExportPromoCodesResponse
 	104, // 172: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
 	105, // 173: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
 	106, // 174: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse

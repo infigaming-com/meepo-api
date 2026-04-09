@@ -258,8 +258,8 @@ service BackofficeWallet {
 		};
 	}
 
-	// ExportPromoCodeCampaign exports promo code campaign details (one_time codes or universal usages)
-	rpc ExportPromoCodeCampaign(ExportPromoCodeCampaignRequest) returns (wallet.service.v1.ExportPromoCodeCampaignResponse) {
+	// ExportPromoCodes exports promo codes (one_time codes or universal usages) for a campaign
+	rpc ExportPromoCodes(ExportPromoCodesRequest) returns (wallet.service.v1.ExportPromoCodesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/promo-code/campaign/export"
 			body: "*"
@@ -999,8 +999,8 @@ message ListUniversalCodeUsagesRequest {
 	int64 campaign_id = 1;
 }
 
-// Export Promo Code Campaign
-message ExportPromoCodeCampaignRequest {
+// Export Promo Codes
+message ExportPromoCodesRequest {
 	int64 campaign_id = 1;
 	// "csv", "excel", or "pdf"
 	string format = 2;
