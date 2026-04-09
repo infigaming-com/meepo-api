@@ -27,6 +27,7 @@ const OperationBackofficeWalletDeleteWalletResponsibleGamblingConfig = "/api.bac
 const OperationBackofficeWalletExportCustomerRecords = "/api.backoffice.service.v1.BackofficeWallet/ExportCustomerRecords"
 const OperationBackofficeWalletExportFICAThresholdTransactions = "/api.backoffice.service.v1.BackofficeWallet/ExportFICAThresholdTransactions"
 const OperationBackofficeWalletExportManualJournalEntries = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
+const OperationBackofficeWalletExportPromoCodeCampaign = "/api.backoffice.service.v1.BackofficeWallet/ExportPromoCodeCampaign"
 const OperationBackofficeWalletGenerateOneTimePromoCodes = "/api.backoffice.service.v1.BackofficeWallet/GenerateOneTimePromoCodes"
 const OperationBackofficeWalletGenerateUniversalPromoCodes = "/api.backoffice.service.v1.BackofficeWallet/GenerateUniversalPromoCodes"
 const OperationBackofficeWalletGetAppDownloadRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/GetAppDownloadRewardConfig"
@@ -88,6 +89,8 @@ type BackofficeWalletHTTPServer interface {
 	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
 	// ExportManualJournalEntries ExportManualJournalEntries creates a task to exports manual journal entries for all users
 	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error)
+	// ExportPromoCodeCampaign ExportPromoCodeCampaign exports promo code campaign details (one_time codes or universal usages)
+	ExportPromoCodeCampaign(context.Context, *ExportPromoCodeCampaignRequest) (*v1.ExportPromoCodeCampaignResponse, error)
 	// GenerateOneTimePromoCodes GenerateOneTimePromoCodes generates codes for a one_time campaign
 	GenerateOneTimePromoCodes(context.Context, *GenerateOneTimePromoCodesRequest) (*v1.GenerateOneTimePromoCodesResponse, error)
 	// GenerateUniversalPromoCodes GenerateUniversalPromoCodes generates codes for a universal campaign
@@ -215,6 +218,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/promo-code/one-time/codes/generate", _BackofficeWallet_GenerateOneTimePromoCodes0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/universal/codes/generate", _BackofficeWallet_GenerateUniversalPromoCodes0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/universal/usages/list", _BackofficeWallet_ListUniversalCodeUsages0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/promo-code/campaign/export", _BackofficeWallet_ExportPromoCodeCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/gamification/get", _BackofficeWallet_GetGamificationCurrencyConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/currency/config/update", _BackofficeWallet_UpdateOperatorCurrencyConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/config/update", _BackofficeWallet_UpdateWalletConfig0_HTTP_Handler(srv))
@@ -962,6 +966,28 @@ func _BackofficeWallet_ListUniversalCodeUsages0_HTTP_Handler(srv BackofficeWalle
 	}
 }
 
+func _BackofficeWallet_ExportPromoCodeCampaign0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportPromoCodeCampaignRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletExportPromoCodeCampaign)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportPromoCodeCampaign(ctx, req.(*ExportPromoCodeCampaignRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ExportPromoCodeCampaignResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeWallet_GetGamificationCurrencyConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetGamificationCurrencyConfigRequest
@@ -1395,6 +1421,8 @@ type BackofficeWalletHTTPClient interface {
 	ExportFICAThresholdTransactions(ctx context.Context, req *ExportFICAThresholdTransactionsRequest, opts ...http.CallOption) (rsp *v1.ExportFICAThresholdTransactionsResponse, err error)
 	// ExportManualJournalEntries ExportManualJournalEntries creates a task to exports manual journal entries for all users
 	ExportManualJournalEntries(ctx context.Context, req *ExportManualJournalEntriesRequest, opts ...http.CallOption) (rsp *v1.ExportManualJournalEntriesResponse, err error)
+	// ExportPromoCodeCampaign ExportPromoCodeCampaign exports promo code campaign details (one_time codes or universal usages)
+	ExportPromoCodeCampaign(ctx context.Context, req *ExportPromoCodeCampaignRequest, opts ...http.CallOption) (rsp *v1.ExportPromoCodeCampaignResponse, err error)
 	// GenerateOneTimePromoCodes GenerateOneTimePromoCodes generates codes for a one_time campaign
 	GenerateOneTimePromoCodes(ctx context.Context, req *GenerateOneTimePromoCodesRequest, opts ...http.CallOption) (rsp *v1.GenerateOneTimePromoCodesResponse, err error)
 	// GenerateUniversalPromoCodes GenerateUniversalPromoCodes generates codes for a universal campaign
@@ -1585,6 +1613,20 @@ func (c *BackofficeWalletHTTPClientImpl) ExportManualJournalEntries(ctx context.
 	pattern := "/v1/backoffice/wallet/manual/journal-entries/export"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletExportManualJournalEntries))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ExportPromoCodeCampaign ExportPromoCodeCampaign exports promo code campaign details (one_time codes or universal usages)
+func (c *BackofficeWalletHTTPClientImpl) ExportPromoCodeCampaign(ctx context.Context, in *ExportPromoCodeCampaignRequest, opts ...http.CallOption) (*v1.ExportPromoCodeCampaignResponse, error) {
+	var out v1.ExportPromoCodeCampaignResponse
+	pattern := "/v1/backoffice/wallet/promo-code/campaign/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletExportPromoCodeCampaign))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

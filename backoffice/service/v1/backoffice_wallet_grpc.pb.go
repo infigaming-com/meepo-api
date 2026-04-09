@@ -53,6 +53,7 @@ const (
 	BackofficeWallet_GenerateOneTimePromoCodes_FullMethodName             = "/api.backoffice.service.v1.BackofficeWallet/GenerateOneTimePromoCodes"
 	BackofficeWallet_GenerateUniversalPromoCodes_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/GenerateUniversalPromoCodes"
 	BackofficeWallet_ListUniversalCodeUsages_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/ListUniversalCodeUsages"
+	BackofficeWallet_ExportPromoCodeCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/ExportPromoCodeCampaign"
 	BackofficeWallet_GetGamificationCurrencyConfig_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
 	BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
 	BackofficeWallet_UpdateWalletConfig_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletConfig"
@@ -144,6 +145,8 @@ type BackofficeWalletClient interface {
 	GenerateUniversalPromoCodes(ctx context.Context, in *GenerateUniversalPromoCodesRequest, opts ...grpc.CallOption) (*v1.GenerateUniversalPromoCodesResponse, error)
 	// ListUniversalCodeUsages lists the usages of a universal campaign
 	ListUniversalCodeUsages(ctx context.Context, in *ListUniversalCodeUsagesRequest, opts ...grpc.CallOption) (*v1.ListUniversalCodeUsagesResponse, error)
+	// ExportPromoCodeCampaign exports promo code campaign details (one_time codes or universal usages)
+	ExportPromoCodeCampaign(ctx context.Context, in *ExportPromoCodeCampaignRequest, opts ...grpc.CallOption) (*v1.ExportPromoCodeCampaignResponse, error)
 	// GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -522,6 +525,16 @@ func (c *backofficeWalletClient) ListUniversalCodeUsages(ctx context.Context, in
 	return out, nil
 }
 
+func (c *backofficeWalletClient) ExportPromoCodeCampaign(ctx context.Context, in *ExportPromoCodeCampaignRequest, opts ...grpc.CallOption) (*v1.ExportPromoCodeCampaignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportPromoCodeCampaignResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ExportPromoCodeCampaign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeWalletClient) GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.GetGamificationCurrencyConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetGamificationCurrencyConfigResponse)
@@ -782,6 +795,8 @@ type BackofficeWalletServer interface {
 	GenerateUniversalPromoCodes(context.Context, *GenerateUniversalPromoCodesRequest) (*v1.GenerateUniversalPromoCodesResponse, error)
 	// ListUniversalCodeUsages lists the usages of a universal campaign
 	ListUniversalCodeUsages(context.Context, *ListUniversalCodeUsagesRequest) (*v1.ListUniversalCodeUsagesResponse, error)
+	// ExportPromoCodeCampaign exports promo code campaign details (one_time codes or universal usages)
+	ExportPromoCodeCampaign(context.Context, *ExportPromoCodeCampaignRequest) (*v1.ExportPromoCodeCampaignResponse, error)
 	// GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -928,6 +943,9 @@ func (UnimplementedBackofficeWalletServer) GenerateUniversalPromoCodes(context.C
 }
 func (UnimplementedBackofficeWalletServer) ListUniversalCodeUsages(context.Context, *ListUniversalCodeUsagesRequest) (*v1.ListUniversalCodeUsagesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUniversalCodeUsages not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ExportPromoCodeCampaign(context.Context, *ExportPromoCodeCampaignRequest) (*v1.ExportPromoCodeCampaignResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportPromoCodeCampaign not implemented")
 }
 func (UnimplementedBackofficeWalletServer) GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGamificationCurrencyConfig not implemented")
@@ -1601,6 +1619,24 @@ func _BackofficeWallet_ListUniversalCodeUsages_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_ExportPromoCodeCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportPromoCodeCampaignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ExportPromoCodeCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ExportPromoCodeCampaign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ExportPromoCodeCampaign(ctx, req.(*ExportPromoCodeCampaignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeWallet_GetGamificationCurrencyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGamificationCurrencyConfigRequest)
 	if err := dec(in); err != nil {
@@ -2081,6 +2117,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUniversalCodeUsages",
 			Handler:    _BackofficeWallet_ListUniversalCodeUsages_Handler,
+		},
+		{
+			MethodName: "ExportPromoCodeCampaign",
+			Handler:    _BackofficeWallet_ExportPromoCodeCampaign_Handler,
 		},
 		{
 			MethodName: "GetGamificationCurrencyConfig",
