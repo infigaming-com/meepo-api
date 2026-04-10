@@ -258,6 +258,14 @@ service BackofficeWallet {
 		};
 	}
 
+	// ExportPromoCodes exports promo codes (one_time codes or universal usages) for a campaign
+	rpc ExportPromoCodes(ExportPromoCodesRequest) returns (wallet.service.v1.ExportPromoCodesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/promo-code/campaign/export"
+			body: "*"
+		};
+	}
+
 	// GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	rpc GetGamificationCurrencyConfig(GetGamificationCurrencyConfigRequest) returns (wallet.service.v1.GetGamificationCurrencyConfigResponse) {
 		option (google.api.http) = {
@@ -989,6 +997,19 @@ message GenerateUniversalPromoCodesRequest {
 // List Universal Code Usages
 message ListUniversalCodeUsagesRequest {
 	int64 campaign_id = 1;
+}
+
+// Export Promo Codes
+message ExportPromoCodesRequest {
+	int64 campaign_id = 1;
+	// "csv", "excel", or "pdf"
+	string format = 2;
+	// e.g. "UTC+0", "UTC+8"
+	string time_zone = 3;
+	optional int64 user_id = 4;
+	// "used" or "unused" (one_time only)
+	optional string status = 5;
+	optional string code = 6;
 }
 
 // ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value

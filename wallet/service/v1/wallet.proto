@@ -207,6 +207,9 @@ service Wallet {
 
 	rpc ListUniversalCodeUsages(ListUniversalCodeUsagesRequest) returns (ListUniversalCodeUsagesResponse) {}
 
+	// ExportPromoCodes exports promo codes (one_time codes or universal usages) for a campaign
+	rpc ExportPromoCodes(ExportPromoCodesRequest) returns (ExportPromoCodesResponse) {}
+
 	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	rpc GetPromoCodeInfo(GetPromoCodeInfoRequest) returns (GetPromoCodeInfoResponse) {
 		option (google.api.http) = {

@@ -355,6 +355,25 @@ message ListUniversalCodeUsagesResponse {
 	}
 }
 
+// Export Promo Codes
+message ExportPromoCodesRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	int64 campaign_id = 2;
+	// "csv", "excel", or "pdf"
+	string format = 3;
+	// e.g. "UTC+0", "UTC+8"
+	string time_zone = 4;
+	int64 initiator_user_id = 5;
+	// Filters (same as ListPromoCodeCampaignDetails)
+	optional int64 user_id = 6;
+	optional string status = 7;   // "used" or "unused" (one_time only)
+	optional string code = 8;
+}
+
+message ExportPromoCodesResponse {
+	int64 task_id = 1;
+}
+
 // ============================================
 // User Promo Code APIs
 // ============================================
