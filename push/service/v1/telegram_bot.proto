@@ -173,7 +173,7 @@ message TelegramRichMessage {
   string text = 2;
   // Media URL for photo/video/animation types
   string media_url = 3;
-  // Parse mode: "HTML" or "MarkdownV2"
+  // Parse mode. Valid values: "HTML", "MarkdownV2". Defaults to "HTML" if empty.
   string parse_mode = 4;
   // Inline keyboard buttons
   repeated TelegramButtonRow buttons = 5;
@@ -196,7 +196,7 @@ message SendTelegramToUserResponse {
 message BatchSendTelegramRequest {
   // Operator ID
   int64 operator_id = 1;
-  // Target user IDs
+  // Target user IDs (max 1000 per call; use pagination for larger campaigns)
   repeated int64 user_ids = 2;
   // Message content (same message sent to all users)
   TelegramRichMessage message = 3;
@@ -253,6 +253,7 @@ message TelegramDevice {
   int64 telegram_id = 4;
   string username = 5;
   string first_name = 6;
+  // Whether the user has blocked the bot (detected when sendMessage returns 403 Forbidden)
   bool is_blocked = 7;
   int64 first_seen_at = 8;
   int64 last_active_at = 9;

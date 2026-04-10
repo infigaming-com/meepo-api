@@ -885,7 +885,7 @@ type TelegramRichMessage struct {
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
 	// Media URL for photo/video/animation types
 	MediaUrl string `protobuf:"bytes,3,opt,name=media_url,json=mediaUrl,proto3" json:"media_url,omitempty"`
-	// Parse mode: "HTML" or "MarkdownV2"
+	// Parse mode. Valid values: "HTML", "MarkdownV2". Defaults to "HTML" if empty.
 	ParseMode string `protobuf:"bytes,4,opt,name=parse_mode,json=parseMode,proto3" json:"parse_mode,omitempty"`
 	// Inline keyboard buttons
 	Buttons       []*TelegramButtonRow `protobuf:"bytes,5,rep,name=buttons,proto3" json:"buttons,omitempty"`
@@ -1077,7 +1077,7 @@ type BatchSendTelegramRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Operator ID
 	OperatorId int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	// Target user IDs
+	// Target user IDs (max 1000 per call; use pagination for larger campaigns)
 	UserIds []int64 `protobuf:"varint,2,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	// Message content (same message sent to all users)
 	Message       *TelegramRichMessage `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
@@ -1510,16 +1510,17 @@ func (x *ListTelegramDevicesResponse) GetPageSize() int32 {
 }
 
 type TelegramDevice struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorId    int64                  `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	TelegramId    int64                  `protobuf:"varint,4,opt,name=telegram_id,json=telegramId,proto3" json:"telegram_id,omitempty"`
-	Username      string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
-	FirstName     string                 `protobuf:"bytes,6,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	IsBlocked     bool                   `protobuf:"varint,7,opt,name=is_blocked,json=isBlocked,proto3" json:"is_blocked,omitempty"`
-	FirstSeenAt   int64                  `protobuf:"varint,8,opt,name=first_seen_at,json=firstSeenAt,proto3" json:"first_seen_at,omitempty"`
-	LastActiveAt  int64                  `protobuf:"varint,9,opt,name=last_active_at,json=lastActiveAt,proto3" json:"last_active_at,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Id         int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId     int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorId int64                  `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	TelegramId int64                  `protobuf:"varint,4,opt,name=telegram_id,json=telegramId,proto3" json:"telegram_id,omitempty"`
+	Username   string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
+	FirstName  string                 `protobuf:"bytes,6,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	// Whether the user has blocked the bot (detected when sendMessage returns 403 Forbidden)
+	IsBlocked     bool  `protobuf:"varint,7,opt,name=is_blocked,json=isBlocked,proto3" json:"is_blocked,omitempty"`
+	FirstSeenAt   int64 `protobuf:"varint,8,opt,name=first_seen_at,json=firstSeenAt,proto3" json:"first_seen_at,omitempty"`
+	LastActiveAt  int64 `protobuf:"varint,9,opt,name=last_active_at,json=lastActiveAt,proto3" json:"last_active_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
