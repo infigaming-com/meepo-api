@@ -23533,6 +23533,10 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+                externalTransactionId:
+                    type: string
+                relatedTransactionId:
+                    type: string
         api.backoffice.service.v1.OperatorDetails:
             type: object
             properties:
