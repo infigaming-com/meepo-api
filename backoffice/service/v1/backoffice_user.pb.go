@@ -60,7 +60,9 @@ type ListUsersRequest struct {
 	// Registration source filter: "direct" (no parent) or "invited" (has parent)
 	RegistrationSource *string `protobuf:"bytes,27,opt,name=registration_source,json=registrationSource,proto3,oneof" json:"registration_source,omitempty"`
 	// Agent type filter: "referral" or "affiliate"
-	AgentType     *string `protobuf:"bytes,28,opt,name=agent_type,json=agentType,proto3,oneof" json:"agent_type,omitempty"`
+	AgentType *string `protobuf:"bytes,28,opt,name=agent_type,json=agentType,proto3,oneof" json:"agent_type,omitempty"`
+	// Filter by whether the user has logged in via PWA
+	PwaLoggedIn   *bool `protobuf:"varint,29,opt,name=pwa_logged_in,json=pwaLoggedIn,proto3,oneof" json:"pwa_logged_in,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -275,6 +277,13 @@ func (x *ListUsersRequest) GetAgentType() string {
 		return *x.AgentType
 	}
 	return ""
+}
+
+func (x *ListUsersRequest) GetPwaLoggedIn() bool {
+	if x != nil && x.PwaLoggedIn != nil {
+		return *x.PwaLoggedIn
+	}
+	return false
 }
 
 type ListUsersResponse struct {
@@ -2501,7 +2510,8 @@ type ListUsersResponse_User struct {
 	// string device = 23;
 	// string source = 24;
 	RegistrationIp string `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
-	Locked         bool   `protobuf:"varint,26,opt,name=locked,proto3" json:"locked,omitempty"` // whether the user is locked
+	Locked         bool   `protobuf:"varint,26,opt,name=locked,proto3" json:"locked,omitempty"`                                // whether the user is locked
+	PwaLoggedIn    bool   `protobuf:"varint,27,opt,name=pwa_logged_in,json=pwaLoggedIn,proto3" json:"pwa_logged_in,omitempty"` // whether the user has ever logged in via PWA
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -2718,6 +2728,13 @@ func (x *ListUsersResponse_User) GetLocked() bool {
 	return false
 }
 
+func (x *ListUsersResponse_User) GetPwaLoggedIn() bool {
+	if x != nil {
+		return x.PwaLoggedIn
+	}
+	return false
+}
+
 type GetUserOverviewResponse_GameData struct {
 	state                     protoimpl.MessageState `protogen:"open.v1"`
 	GameType                  string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"` // game category
@@ -2866,7 +2883,7 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\x1a\x1euser/service/v1/operator.proto\"\xd4\v\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\x1a\x1euser/service/v1/operator.proto\"\x8f\f\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -2898,7 +2915,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x1a \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x124\n" +
 	"\x13registration_source\x18\x1b \x01(\tH\x15R\x12registrationSource\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"agent_type\x18\x1c \x01(\tH\x16R\tagentType\x88\x01\x01B\n" +
+	"agent_type\x18\x1c \x01(\tH\x16R\tagentType\x88\x01\x01\x12'\n" +
+	"\rpwa_logged_in\x18\x1d \x01(\bH\x17R\vpwaLoggedIn\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -2928,12 +2946,13 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x10_registration_ipB\v\n" +
 	"\t_login_ipB\x16\n" +
 	"\x14_registration_sourceB\r\n" +
-	"\v_agent_type\"\xfc\b\n" +
+	"\v_agent_typeB\x10\n" +
+	"\x0e_pwa_logged_in\"\xa0\t\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xd6\a\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xfa\a\n" +
 	"\x04User\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\x02 \x01(\tR\x13companyOperatorName\x124\n" +
@@ -2962,7 +2981,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\faffiliate_id\x18\x17 \x01(\x03R\vaffiliateId\x12\x18\n" +
 	"\acountry\x18\x18 \x01(\tR\acountry\x12'\n" +
 	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\x12\x16\n" +
-	"\x06locked\x18\x1a \x01(\bR\x06locked\"Y\n" +
+	"\x06locked\x18\x1a \x01(\bR\x06locked\x12\"\n" +
+	"\rpwa_logged_in\x18\x1b \x01(\bR\vpwaLoggedIn\"Y\n" +
 	"\x16GetUserOverviewRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\x06filter\x18\x02 \x01(\tH\x00R\x06filter\x88\x01\x01B\t\n" +

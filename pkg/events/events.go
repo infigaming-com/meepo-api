@@ -475,5 +475,6 @@ type SessionActivityEvent struct {
 	PrevUAHash         string   `json:"prevUaHash,omitempty"`
 	Country            string   `json:"country"`
 	PrevCountry        string   `json:"prevCountry,omitempty"`
+	IsPwa              bool     `json:"isPwa,omitempty"`
 	Timestamp          int64    `json:"timestamp"`
 }

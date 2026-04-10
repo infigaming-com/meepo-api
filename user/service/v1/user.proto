@@ -1146,6 +1146,8 @@ message ListUsersRequest {
 	optional string registration_source = 28;
 	// Agent type filter: "referral" or "affiliate"
 	optional string agent_type = 29;
+	// Filter by whether the user has logged in via PWA
+	optional bool pwa_logged_in = 30;
 }
 
 message ListUsersResponse {
@@ -1187,6 +1189,7 @@ message ListUsersResponse {
 		string role_creator_name = 32;
 		string affiliation = 33;   // operator name the account belongs to
 		string creator = 34;       // creator username, e.g. "system:jimmy"
+		bool pwa_logged_in = 35;   // whether the user has ever logged in via PWA
 	}
 	repeated User users = 1;
 	int32 page = 2;

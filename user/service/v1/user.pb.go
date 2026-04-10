@@ -3629,7 +3629,9 @@ type ListUsersRequest struct {
 	// Registration source filter: "direct" (no parent) or "invited" (has parent)
 	RegistrationSource *string `protobuf:"bytes,28,opt,name=registration_source,json=registrationSource,proto3,oneof" json:"registration_source,omitempty"`
 	// Agent type filter: "referral" or "affiliate"
-	AgentType     *string `protobuf:"bytes,29,opt,name=agent_type,json=agentType,proto3,oneof" json:"agent_type,omitempty"`
+	AgentType *string `protobuf:"bytes,29,opt,name=agent_type,json=agentType,proto3,oneof" json:"agent_type,omitempty"`
+	// Filter by whether the user has logged in via PWA
+	PwaLoggedIn   *bool `protobuf:"varint,30,opt,name=pwa_logged_in,json=pwaLoggedIn,proto3,oneof" json:"pwa_logged_in,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3865,6 +3867,13 @@ func (x *ListUsersRequest) GetAgentType() string {
 		return *x.AgentType
 	}
 	return ""
+}
+
+func (x *ListUsersRequest) GetPwaLoggedIn() bool {
+	if x != nil && x.PwaLoggedIn != nil {
+		return *x.PwaLoggedIn
+	}
+	return false
 }
 
 type ListUsersResponse struct {
@@ -16877,8 +16886,9 @@ type ListUsersResponse_User struct {
 	MfaEnabled      bool                   `protobuf:"varint,30,opt,name=mfa_enabled,json=mfaEnabled,proto3" json:"mfa_enabled,omitempty"`
 	LastLoginIp     string                 `protobuf:"bytes,31,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
 	RoleCreatorName string                 `protobuf:"bytes,32,opt,name=role_creator_name,json=roleCreatorName,proto3" json:"role_creator_name,omitempty"`
-	Affiliation     string                 `protobuf:"bytes,33,opt,name=affiliation,proto3" json:"affiliation,omitempty"` // operator name the account belongs to
-	Creator         string                 `protobuf:"bytes,34,opt,name=creator,proto3" json:"creator,omitempty"`         // creator username, e.g. "system:jimmy"
+	Affiliation     string                 `protobuf:"bytes,33,opt,name=affiliation,proto3" json:"affiliation,omitempty"`                       // operator name the account belongs to
+	Creator         string                 `protobuf:"bytes,34,opt,name=creator,proto3" json:"creator,omitempty"`                               // creator username, e.g. "system:jimmy"
+	PwaLoggedIn     bool                   `protobuf:"varint,35,opt,name=pwa_logged_in,json=pwaLoggedIn,proto3" json:"pwa_logged_in,omitempty"` // whether the user has ever logged in via PWA
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -17149,6 +17159,13 @@ func (x *ListUsersResponse_User) GetCreator() string {
 		return x.Creator
 	}
 	return ""
+}
+
+func (x *ListUsersResponse_User) GetPwaLoggedIn() bool {
+	if x != nil {
+		return x.PwaLoggedIn
+	}
+	return false
 }
 
 type GetCommentsByUserIdResponse_Comment struct {
@@ -18969,7 +18986,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x1b\n" +
 	"\tid_number\x18\x03 \x01(\tR\bidNumber\x12\x14\n" +
 	"\x05image\x18\x04 \x01(\tR\x05image\"\x1c\n" +
-	"\x1aUpdateUserIdentityResponse\"\xf6\f\n" +
+	"\x1aUpdateUserIdentityResponse\"\xb1\r\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -19004,7 +19021,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x1b \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x124\n" +
 	"\x13registration_source\x18\x1c \x01(\tH\x17R\x12registrationSource\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"agent_type\x18\x1d \x01(\tH\x18R\tagentType\x88\x01\x01B\n" +
+	"agent_type\x18\x1d \x01(\tH\x18R\tagentType\x88\x01\x01\x12'\n" +
+	"\rpwa_logged_in\x18\x1e \x01(\bH\x19R\vpwaLoggedIn\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -19038,14 +19056,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10_registration_ipB\v\n" +
 	"\t_login_ipB\x16\n" +
 	"\x14_registration_sourceB\r\n" +
-	"\v_agent_type\"\xf3\v\n" +
+	"\v_agent_typeB\x10\n" +
+	"\x0e_pwa_logged_in\"\x97\f\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\x87\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xab\n" +
 	"\n" +
 	"\x04User\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
@@ -19085,7 +19104,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\rlast_login_ip\x18\x1f \x01(\tR\vlastLoginIp\x12*\n" +
 	"\x11role_creator_name\x18  \x01(\tR\x0froleCreatorName\x12 \n" +
 	"\vaffiliation\x18! \x01(\tR\vaffiliation\x12\x18\n" +
-	"\acreator\x18\" \x01(\tR\acreator\"\x99\f\n" +
+	"\acreator\x18\" \x01(\tR\acreator\x12\"\n" +
+	"\rpwa_logged_in\x18# \x01(\bR\vpwaLoggedIn\"\x99\f\n" +
 	"\x12ExportUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12W\n" +
 	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
