@@ -4285,6 +4285,10 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for ExternalTransactionId
+
+	// no validation rules for RelatedTransactionId
+
 	if len(errors) > 0 {
 		return OperatorBalanceTransactionMultiError(errors)
 	}

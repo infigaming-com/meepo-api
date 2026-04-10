@@ -2284,24 +2284,26 @@ func (x *ListOperatorBalanceTransactionsRequest) GetPageSize() int32 {
 }
 
 type OperatorBalanceTransaction struct {
-	state                protoimpl.MessageState  `protogen:"open.v1"`
-	TransactionId        int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OperatorContext      *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	RetailerOperatorName string                  `protobuf:"bytes,3,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	CompanyOperatorName  string                  `protobuf:"bytes,4,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	OperatorName         string                  `protobuf:"bytes,5,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	SettlementCurrency   string                  `protobuf:"bytes,6,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	BeforeBalance        string                  `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance         string                  `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	CashAmount           string                  `protobuf:"bytes,9,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	TransactionType      string                  `protobuf:"bytes,10,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	Status               string                  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
-	Memo                 string                  `protobuf:"bytes,12,opt,name=memo,proto3" json:"memo,omitempty"`
-	FeeAmount            string                  `protobuf:"bytes,13,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
-	CreatedAt            *timestamppb.Timestamp  `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            *timestamppb.Timestamp  `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId         int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OperatorContext       *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	RetailerOperatorName  string                  `protobuf:"bytes,3,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName   string                  `protobuf:"bytes,4,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName          string                  `protobuf:"bytes,5,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	SettlementCurrency    string                  `protobuf:"bytes,6,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	BeforeBalance         string                  `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance          string                  `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	CashAmount            string                  `protobuf:"bytes,9,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	TransactionType       string                  `protobuf:"bytes,10,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	Status                string                  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	Memo                  string                  `protobuf:"bytes,12,opt,name=memo,proto3" json:"memo,omitempty"`
+	FeeAmount             string                  `protobuf:"bytes,13,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
+	CreatedAt             *timestamppb.Timestamp  `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt             *timestamppb.Timestamp  `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ExternalTransactionId int64                   `protobuf:"varint,16,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
+	RelatedTransactionId  int64                   `protobuf:"varint,17,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *OperatorBalanceTransaction) Reset() {
@@ -2437,6 +2439,20 @@ func (x *OperatorBalanceTransaction) GetUpdatedAt() *timestamppb.Timestamp {
 		return x.UpdatedAt
 	}
 	return nil
+}
+
+func (x *OperatorBalanceTransaction) GetExternalTransactionId() int64 {
+	if x != nil {
+		return x.ExternalTransactionId
+	}
+	return 0
+}
+
+func (x *OperatorBalanceTransaction) GetRelatedTransactionId() int64 {
+	if x != nil {
+		return x.RelatedTransactionId
+	}
+	return 0
 }
 
 type ListOperatorBalanceTransactionsResponse struct {
@@ -5705,7 +5721,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xa4\x05\n" +
+	"_page_size\"\x92\x06\n" +
 	"\x1aOperatorBalanceTransaction\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
@@ -5726,7 +5742,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xcb\x01\n" +
+	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x126\n" +
+	"\x17external_transaction_id\x18\x10 \x01(\x03R\x15externalTransactionId\x124\n" +
+	"\x16related_transaction_id\x18\x11 \x01(\x03R\x14relatedTransactionId\"\xcb\x01\n" +
 	"'ListOperatorBalanceTransactionsResponse\x12Y\n" +
 	"\ftransactions\x18\x01 \x03(\v25.api.backoffice.service.v1.OperatorBalanceTransactionR\ftransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
