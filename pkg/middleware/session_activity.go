@@ -8,9 +8,6 @@ import (
 	"github.com/infigaming-com/meepo-api/pkg/util"
 )
 
-// LoginMethodPWA is the Login-Method header value indicating a PWA session.
-const LoginMethodPWA = "pwa"
-
 // SessionActivityRequest carries enriched session info for the tracker.
 type SessionActivityRequest struct {
 	UserID             int64
@@ -23,7 +20,7 @@ type SessionActivityRequest struct {
 	IP                 string
 	UserAgent          string
 	Country            string
-	IsPwa              bool
+	LoginMethod        string
 }
 
 // SessionActivityMiddleware tracks session activity for players (RoleId == 0).
@@ -48,7 +45,7 @@ func SessionActivityMiddleware(
 						IP:                 reqInfo.ClientIP,
 						UserAgent:          reqInfo.UserAgent,
 						Country:            reqInfo.Country,
-						IsPwa:              reqInfo.LoginMethod == LoginMethodPWA,
+						LoginMethod:        reqInfo.LoginMethod,
 					})
 				}
 			}
