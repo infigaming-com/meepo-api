@@ -1,0 +1,260 @@
+syntax = "proto3";
+
+package api.push.service.v1;
+
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/push/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.push.service.v1";
+
+// TelegramBot service for bot configuration, webhook management, and user messaging.
+service TelegramBot {
+  // ============ Bot Configuration ============
+
+  // Set or update the Telegram bot configuration for an operator.
+  rpc SetTelegramBotConfig(SetTelegramBotConfigRequest) returns (SetTelegramBotConfigResponse) {}
+  // Get the Telegram bot configuration for an operator.
+  rpc GetTelegramBotConfig(GetTelegramBotConfigRequest) returns (GetTelegramBotConfigResponse) {}
+
+  // ============ Webhook Management ============
+
+  // Register the Telegram webhook for an operator's bot.
+  rpc RegisterWebhook(RegisterTelegramWebhookRequest) returns (RegisterTelegramWebhookResponse) {}
+  // Unregister the Telegram webhook for an operator's bot.
+  rpc UnregisterWebhook(UnregisterTelegramWebhookRequest) returns (UnregisterTelegramWebhookResponse) {}
+
+  // ============ User Messaging ============
+
+  // Send the welcome message to a specific user (used for Mini App login trigger).
+  rpc SendWelcomeMessage(SendTelegramWelcomeRequest) returns (SendTelegramWelcomeResponse) {}
+  // Send a rich Telegram message to a user (used by CRM workflow).
+  rpc SendTelegramToUser(SendTelegramToUserRequest) returns (SendTelegramToUserResponse) {}
+  // Batch send Telegram messages to multiple users (used by CRM campaigns).
+  rpc BatchSendTelegram(BatchSendTelegramRequest) returns (BatchSendTelegramResponse) {}
+
+  // ============ Device Management ============
+
+  // Register or update a user's Telegram device (called during auth flow).
+  rpc RegisterTelegramDevice(RegisterTelegramDeviceRequest) returns (RegisterTelegramDeviceResponse) {}
+  // List Telegram devices for an operator (for debugging/admin).
+  rpc ListTelegramDevices(ListTelegramDevicesRequest) returns (ListTelegramDevicesResponse) {}
+}
+
+// ============ Enums ============
+
+// Telegram message content type.
+enum TelegramMessageType {
+  TELEGRAM_MESSAGE_TYPE_UNSPECIFIED = 0;
+  // Plain text message (sendMessage API)
+  TELEGRAM_MESSAGE_TYPE_TEXT = 1;
+  // Photo with optional caption (sendPhoto API)
+  TELEGRAM_MESSAGE_TYPE_PHOTO = 2;
+  // Video with optional caption (sendVideo API)
+  TELEGRAM_MESSAGE_TYPE_VIDEO = 3;
+  // GIF/animation with optional caption (sendAnimation API)
+  TELEGRAM_MESSAGE_TYPE_ANIMATION = 4;
+}
+
+// ============ Config Messages ============
+
+// Inline keyboard button for Telegram messages.
+message TelegramInlineButton {
+  // Button display text
+  string text = 1;
+  // URL to open when button is clicked
+  string url = 2;
+}
+
+// A row of inline keyboard buttons.
+message TelegramButtonRow {
+  repeated TelegramInlineButton buttons = 1;
+}
+
+// Welcome message configuration.
+message TelegramWelcomeConfig {
+  // Whether welcome message is enabled
+  bool enabled = 1;
+  // Message type (text, photo, video, animation)
+  TelegramMessageType message_type = 2;
+  // Message text or caption (supports HTML formatting)
+  string text = 3;
+  // Media URL for photo/video/animation types
+  string media_url = 4;
+  // Inline keyboard buttons
+  repeated TelegramButtonRow buttons = 5;
+  // If true, only send welcome message on the user's first /start
+  bool only_first_start = 6;
+}
+
+// Full Telegram bot configuration for an operator.
+message TelegramBotConfig {
+  // Unique config ID
+  int64 id = 1;
+  // Bot username (without @)
+  string bot_username = 2;
+  // Bot token (masked in responses)
+  string bot_token_masked = 3;
+  // Whether the webhook is registered with Telegram
+  bool webhook_registered = 4;
+  // Welcome message configuration
+  TelegramWelcomeConfig welcome = 5;
+  // Unix timestamp of creation
+  int64 created_at = 6;
+  // Unix timestamp of last update
+  int64 updated_at = 7;
+}
+
+// ============ Bot Config Requests ============
+
+message SetTelegramBotConfigRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  // Bot API token (will be encrypted at rest)
+  string bot_token = 2;
+  // Bot username (without @)
+  string bot_username = 3;
+  // Welcome message configuration
+  TelegramWelcomeConfig welcome = 4;
+}
+
+message SetTelegramBotConfigResponse {
+  TelegramBotConfig config = 1;
+}
+
+message GetTelegramBotConfigRequest {
+  api.common.OperatorContext target_operator_context = 1;
+}
+
+message GetTelegramBotConfigResponse {
+  TelegramBotConfig config = 1;
+}
+
+// ============ Webhook Requests ============
+
+message RegisterTelegramWebhookRequest {
+  api.common.OperatorContext target_operator_context = 1;
+}
+
+message RegisterTelegramWebhookResponse {
+  // The webhook URL that was registered with Telegram
+  string webhook_url = 1;
+  bool success = 2;
+}
+
+message UnregisterTelegramWebhookRequest {
+  api.common.OperatorContext target_operator_context = 1;
+}
+
+message UnregisterTelegramWebhookResponse {
+  bool success = 1;
+}
+
+// ============ User Messaging Requests ============
+
+message SendTelegramWelcomeRequest {
+  // Operator ID to look up bot config and welcome message
+  int64 operator_id = 1;
+  // User ID to send welcome message to
+  int64 user_id = 2;
+  // Telegram user ID (chat_id) - if provided, skip device lookup
+  int64 telegram_id = 3;
+}
+
+message SendTelegramWelcomeResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+// Rich Telegram message for CRM/direct sending.
+message TelegramRichMessage {
+  // Message type
+  TelegramMessageType message_type = 1;
+  // Message text or caption (supports HTML formatting)
+  string text = 2;
+  // Media URL for photo/video/animation types
+  string media_url = 3;
+  // Parse mode. Valid values: "HTML", "MarkdownV2". Defaults to "HTML" if empty.
+  string parse_mode = 4;
+  // Inline keyboard buttons
+  repeated TelegramButtonRow buttons = 5;
+}
+
+message SendTelegramToUserRequest {
+  // Operator ID
+  int64 operator_id = 1;
+  // Target user ID
+  int64 user_id = 2;
+  // Message content
+  TelegramRichMessage message = 3;
+}
+
+message SendTelegramToUserResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message BatchSendTelegramRequest {
+  // Operator ID
+  int64 operator_id = 1;
+  // Target user IDs (max 1000 per call; use pagination for larger campaigns)
+  repeated int64 user_ids = 2;
+  // Message content (same message sent to all users)
+  TelegramRichMessage message = 3;
+}
+
+message BatchSendTelegramResponse {
+  int32 success_count = 1;
+  int32 failure_count = 2;
+  // Per-user errors (only failed deliveries)
+  repeated BatchSendError errors = 3;
+}
+
+message BatchSendError {
+  int64 user_id = 1;
+  string error_message = 2;
+}
+
+// ============ Device Management Requests ============
+
+message RegisterTelegramDeviceRequest {
+  int64 user_id = 1;
+  int64 operator_id = 2;
+  // Telegram user ID (also used as chat_id for sending messages)
+  int64 telegram_id = 3;
+  // Telegram username (without @)
+  string username = 4;
+  // Telegram display name
+  string first_name = 5;
+}
+
+message RegisterTelegramDeviceResponse {
+  int64 device_id = 1;
+}
+
+message ListTelegramDevicesRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  // Filter by user_id (0 = all users)
+  int64 user_id = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message ListTelegramDevicesResponse {
+  repeated TelegramDevice devices = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message TelegramDevice {
+  int64 id = 1;
+  int64 user_id = 2;
+  int64 operator_id = 3;
+  int64 telegram_id = 4;
+  string username = 5;
+  string first_name = 6;
+  // Whether the user has blocked the bot (detected when sendMessage returns 403 Forbidden)
+  bool is_blocked = 7;
+  int64 first_seen_at = 8;
+  int64 last_active_at = 9;
+}
