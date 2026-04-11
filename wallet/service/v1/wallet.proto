@@ -207,6 +207,9 @@ service Wallet {
 
 	rpc ListUniversalCodeUsages(ListUniversalCodeUsagesRequest) returns (ListUniversalCodeUsagesResponse) {}
 
+	// ExportPromoCodes exports promo codes (one_time codes or universal usages) for a campaign
+	rpc ExportPromoCodes(ExportPromoCodesRequest) returns (ExportPromoCodesResponse) {}
+
 	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	rpc GetPromoCodeInfo(GetPromoCodeInfoRequest) returns (GetPromoCodeInfoResponse) {
 		option (google.api.http) = {
@@ -1183,6 +1186,8 @@ message OperatorFreezeRequest {
 	optional int64 external_transaction_id = 6;
 	string cash_amount = 7;
 	string memo = 8;
+	// Channel operator context for user withdraw freeze — used to determine if operator balance should be frozen
+	api.common.OperatorContext channel_operator_context = 9;
 }
 
 message OperatorFreezeResponse {

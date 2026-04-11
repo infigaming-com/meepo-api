@@ -24,6 +24,7 @@ const (
 	REPORT_EXPORT_TYPE_AFFILIATE_USERS             = "affiliate_users"
 	REPORT_EXPORT_TYPE_GAME_DATA                   = "game_data"
 	REPORT_EXPORT_TYPE_USER_LIST                   = "user_list"
+	REPORT_EXPORT_TYPE_PROMO_CODES                 = "promo_codes"
 )
 
 type ReportExportPayload struct {

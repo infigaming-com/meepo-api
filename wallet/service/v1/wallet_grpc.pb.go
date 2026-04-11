@@ -75,6 +75,7 @@ const (
 	Wallet_GenerateOneTimePromoCodes_FullMethodName           = "/api.wallet.service.v1.Wallet/GenerateOneTimePromoCodes"
 	Wallet_GenerateUniversalPromoCodes_FullMethodName         = "/api.wallet.service.v1.Wallet/GenerateUniversalPromoCodes"
 	Wallet_ListUniversalCodeUsages_FullMethodName             = "/api.wallet.service.v1.Wallet/ListUniversalCodeUsages"
+	Wallet_ExportPromoCodes_FullMethodName                    = "/api.wallet.service.v1.Wallet/ExportPromoCodes"
 	Wallet_GetPromoCodeInfo_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
 	Wallet_ClaimPromoCode_FullMethodName                      = "/api.wallet.service.v1.Wallet/ClaimPromoCode"
 	Wallet_GetUserDepositRewardSequence_FullMethodName        = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
@@ -223,6 +224,8 @@ type WalletClient interface {
 	// GenerateUniversalPromoCodes generates codes for a universal campaign
 	GenerateUniversalPromoCodes(ctx context.Context, in *GenerateUniversalPromoCodesRequest, opts ...grpc.CallOption) (*GenerateUniversalPromoCodesResponse, error)
 	ListUniversalCodeUsages(ctx context.Context, in *ListUniversalCodeUsagesRequest, opts ...grpc.CallOption) (*ListUniversalCodeUsagesResponse, error)
+	// ExportPromoCodes exports promo codes (one_time codes or universal usages) for a campaign
+	ExportPromoCodes(ctx context.Context, in *ExportPromoCodesRequest, opts ...grpc.CallOption) (*ExportPromoCodesResponse, error)
 	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	GetPromoCodeInfo(ctx context.Context, in *GetPromoCodeInfoRequest, opts ...grpc.CallOption) (*GetPromoCodeInfoResponse, error)
 	// ClaimPromoCode claims promo code reward for the current user
@@ -858,6 +861,16 @@ func (c *walletClient) ListUniversalCodeUsages(ctx context.Context, in *ListUniv
 	return out, nil
 }
 
+func (c *walletClient) ExportPromoCodes(ctx context.Context, in *ExportPromoCodesRequest, opts ...grpc.CallOption) (*ExportPromoCodesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportPromoCodesResponse)
+	err := c.cc.Invoke(ctx, Wallet_ExportPromoCodes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) GetPromoCodeInfo(ctx context.Context, in *GetPromoCodeInfoRequest, opts ...grpc.CallOption) (*GetPromoCodeInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPromoCodeInfoResponse)
@@ -1310,6 +1323,8 @@ type WalletServer interface {
 	// GenerateUniversalPromoCodes generates codes for a universal campaign
 	GenerateUniversalPromoCodes(context.Context, *GenerateUniversalPromoCodesRequest) (*GenerateUniversalPromoCodesResponse, error)
 	ListUniversalCodeUsages(context.Context, *ListUniversalCodeUsagesRequest) (*ListUniversalCodeUsagesResponse, error)
+	// ExportPromoCodes exports promo codes (one_time codes or universal usages) for a campaign
+	ExportPromoCodes(context.Context, *ExportPromoCodesRequest) (*ExportPromoCodesResponse, error)
 	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	GetPromoCodeInfo(context.Context, *GetPromoCodeInfoRequest) (*GetPromoCodeInfoResponse, error)
 	// ClaimPromoCode claims promo code reward for the current user
@@ -1552,6 +1567,9 @@ func (UnimplementedWalletServer) GenerateUniversalPromoCodes(context.Context, *G
 }
 func (UnimplementedWalletServer) ListUniversalCodeUsages(context.Context, *ListUniversalCodeUsagesRequest) (*ListUniversalCodeUsagesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUniversalCodeUsages not implemented")
+}
+func (UnimplementedWalletServer) ExportPromoCodes(context.Context, *ExportPromoCodesRequest) (*ExportPromoCodesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportPromoCodes not implemented")
 }
 func (UnimplementedWalletServer) GetPromoCodeInfo(context.Context, *GetPromoCodeInfoRequest) (*GetPromoCodeInfoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPromoCodeInfo not implemented")
@@ -2684,6 +2702,24 @@ func _Wallet_ListUniversalCodeUsages_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ExportPromoCodes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportPromoCodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ExportPromoCodes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ExportPromoCodes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ExportPromoCodes(ctx, req.(*ExportPromoCodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_GetPromoCodeInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPromoCodeInfoRequest)
 	if err := dec(in); err != nil {
@@ -3526,6 +3562,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUniversalCodeUsages",
 			Handler:    _Wallet_ListUniversalCodeUsages_Handler,
+		},
+		{
+			MethodName: "ExportPromoCodes",
+			Handler:    _Wallet_ExportPromoCodes_Handler,
 		},
 		{
 			MethodName: "GetPromoCodeInfo",
