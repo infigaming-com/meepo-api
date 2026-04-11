@@ -38072,6 +38072,10 @@ func (m *ListUserSessionActivitiesResponse_SessionActivity) validate(all bool) e
 
 	// no validation rules for IpLoginUserCount
 
+	// no validation rules for LoginMethod
+
+	// no validation rules for PrevLoginMethod
+
 	if len(errors) > 0 {
 		return ListUserSessionActivitiesResponse_SessionActivityMultiError(errors)
 	}

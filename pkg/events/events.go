@@ -476,5 +476,6 @@ type SessionActivityEvent struct {
 	Country            string   `json:"country"`
 	PrevCountry        string   `json:"prevCountry,omitempty"`
 	LoginMethod        string   `json:"loginMethod,omitempty"`
+	PrevLoginMethod    string   `json:"prevLoginMethod,omitempty"`
 	Timestamp          int64    `json:"timestamp"`
 }
