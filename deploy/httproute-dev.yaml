@@ -114,3 +114,11 @@ spec:
         - name: push-svc
           port: 8000
           weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/push/telegram/webhook"
+      backendRefs:
+        - name: push-svc
+          port: 8000
+          weight: 1
