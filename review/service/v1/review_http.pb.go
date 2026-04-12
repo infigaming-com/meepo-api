@@ -20,14 +20,20 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationReviewCreateWithdraw = "/api.review.service.v1.Review/CreateWithdraw"
+const OperationReviewPlayerListTickets = "/api.review.service.v1.Review/PlayerListTickets"
+const OperationReviewPlayerGetTicket = "/api.review.service.v1.Review/PlayerGetTicket"
 
 type ReviewHTTPServer interface {
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
+	PlayerListTickets(context.Context, *PlayerListTicketsRequest) (*PlayerListTicketsResponse, error)
+	PlayerGetTicket(context.Context, *PlayerGetTicketRequest) (*PlayerGetTicketResponse, error)
 }
 
 func RegisterReviewHTTPServer(s *http.Server, srv ReviewHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/review/withdraw", _Review_CreateWithdraw1_HTTP_Handler(srv))
+	r.POST("/v1/review/tickets/list", _Review_PlayerListTickets_HTTP_Handler(srv))
+	r.POST("/v1/review/tickets/get", _Review_PlayerGetTicket_HTTP_Handler(srv))
 }
 
 func _Review_CreateWithdraw1_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
@@ -48,6 +54,50 @@ func _Review_CreateWithdraw1_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Co
 			return err
 		}
 		reply := out.(*CreateWithdrawResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Review_PlayerListTickets_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in PlayerListTicketsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationReviewPlayerListTickets)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.PlayerListTickets(ctx, req.(*PlayerListTicketsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*PlayerListTicketsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Review_PlayerGetTicket_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in PlayerGetTicketRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationReviewPlayerGetTicket)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.PlayerGetTicket(ctx, req.(*PlayerGetTicketRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*PlayerGetTicketResponse)
 		return ctx.Result(200, reply)
 	}
 }

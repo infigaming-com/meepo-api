@@ -639,6 +639,8 @@ type ReviewTicketRequest struct {
 	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
 	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"` // approve, reject, manual_payout
 	ReviewComment string                 `protobuf:"bytes,3,opt,name=review_comment,json=reviewComment,proto3" json:"review_comment,omitempty"`
+	// player_comment is an optional comment visible to the player (set on reject)
+	PlayerComment string                 `protobuf:"bytes,4,opt,name=player_comment,json=playerComment,proto3" json:"player_comment,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -690,6 +692,13 @@ func (x *ReviewTicketRequest) GetAction() string {
 func (x *ReviewTicketRequest) GetReviewComment() string {
 	if x != nil {
 		return x.ReviewComment
+	}
+	return ""
+}
+
+func (x *ReviewTicketRequest) GetPlayerComment() string {
+	if x != nil {
+		return x.PlayerComment
 	}
 	return ""
 }
