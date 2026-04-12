@@ -2194,3 +2194,15 @@ func IsListUserFreeRewardsBoFailed(err error) bool {
 func ErrorListUserFreeRewardsBoFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_USER_FREE_REWARDS_BO_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsBonusBetLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BONUS_BET_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorBonusBetLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BONUS_BET_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}

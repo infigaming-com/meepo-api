@@ -1100,6 +1100,10 @@ func (m *GameDebitRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for RoundId
+
+	// no validation rules for GameId
+
 	if m.AllowOverdraft != nil {
 		// no validation rules for AllowOverdraft
 	}
@@ -1552,6 +1556,10 @@ func (m *GameCreditRequest) validate(all bool) error {
 	}
 
 	// no validation rules for OriginalTransactionTurnoverAmount
+
+	// no validation rules for RoundId
+
+	// no validation rules for GameId
 
 	if m.OriginalTransactionType != nil {
 		// no validation rules for OriginalTransactionType
@@ -25858,6 +25866,10 @@ func (m *BatchBetItem) validate(all bool) error {
 
 	// no validation rules for Turnover
 
+	// no validation rules for RoundId
+
+	// no validation rules for GameId
+
 	if len(errors) > 0 {
 		return BatchBetItemMultiError(errors)
 	}
@@ -25964,6 +25976,10 @@ func (m *BatchWinItem) validate(all bool) error {
 	// no validation rules for OriginalTransactionId
 
 	// no validation rules for OriginalTransactionTurnover
+
+	// no validation rules for RoundId
+
+	// no validation rules for GameId
 
 	if m.OriginalTransactionType != nil {
 		// no validation rules for OriginalTransactionType
