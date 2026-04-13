@@ -30,16 +30,16 @@ func RequestInfoMiddleware() middleware.Middleware {
 				}
 
 				requestInfo := mctx.RequestInfo{
-					Method:      r.Method,
-					Path:        r.URL.Path,
-					Host:        r.Host,
-					RemoteAddr:  r.RemoteAddr,
-					Country:     r.Header.Get("Cf-Ipcountry"),
-					Origin:      r.Header.Get("Origin"),
-					Referer:     r.Header.Get("Referer"),
-					UserAgent:   r.Header.Get("User-Agent"),
-					ClientIP:    clientIP,
-					LoginMethod: r.Header.Get("Login-Method"),
+					Method:       r.Method,
+					Path:         r.URL.Path,
+					Host:         r.Host,
+					RemoteAddr:   r.RemoteAddr,
+					Country:      r.Header.Get("Cf-Ipcountry"),
+					Origin:       r.Header.Get("Origin"),
+					Referer:      r.Header.Get("Referer"),
+					UserAgent:    r.Header.Get("User-Agent"),
+					ClientIP:     clientIP,
+					ClientSource: r.Header.Get(ClientSourceHeader),
 				}
 				ctx = mctx.WithRequestInfo(ctx, requestInfo)
 			}

@@ -475,7 +475,7 @@ type SessionActivityEvent struct {
 	PrevUAHash         string   `json:"prevUaHash,omitempty"`
 	Country            string   `json:"country"`
 	PrevCountry        string   `json:"prevCountry,omitempty"`
-	LoginMethod        string   `json:"loginMethod,omitempty"`
-	PrevLoginMethod    string   `json:"prevLoginMethod,omitempty"`
+	ClientSource       string   `json:"clientSource,omitempty"`
+	PrevClientSource   string   `json:"prevClientSource,omitempty"`
 	Timestamp          int64    `json:"timestamp"`
 }
