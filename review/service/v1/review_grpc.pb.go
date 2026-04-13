@@ -30,8 +30,8 @@ const (
 	Review_GetTicket_FullMethodName                    = "/api.review.service.v1.Review/GetTicket"
 	Review_GetOperatorTicket_FullMethodName            = "/api.review.service.v1.Review/GetOperatorTicket"
 	Review_PrecheckUserWithdrawApproval_FullMethodName = "/api.review.service.v1.Review/PrecheckUserWithdrawApproval"
-	Review_PlayerListTickets_FullMethodName             = "/api.review.service.v1.Review/PlayerListTickets"
-	Review_PlayerGetTicket_FullMethodName               = "/api.review.service.v1.Review/PlayerGetTicket"
+	Review_PlayerListTickets_FullMethodName            = "/api.review.service.v1.Review/PlayerListTickets"
+	Review_PlayerGetTicket_FullMethodName              = "/api.review.service.v1.Review/PlayerGetTicket"
 )
 
 // ReviewClient is the client API for Review service.
@@ -178,13 +178,23 @@ func (c *reviewClient) PrecheckUserWithdrawApproval(ctx context.Context, in *Pre
 }
 
 func (c *reviewClient) PlayerListTickets(ctx context.Context, in *PlayerListTicketsRequest, opts ...grpc.CallOption) (*PlayerListTicketsResponse, error) {
-	// Player endpoints are HTTP-only, not available via gRPC
-	return nil, status.Error(codes.Unimplemented, "PlayerListTickets is HTTP-only")
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlayerListTicketsResponse)
+	err := c.cc.Invoke(ctx, Review_PlayerListTickets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *reviewClient) PlayerGetTicket(ctx context.Context, in *PlayerGetTicketRequest, opts ...grpc.CallOption) (*PlayerGetTicketResponse, error) {
-	// Player endpoints are HTTP-only, not available via gRPC
-	return nil, status.Error(codes.Unimplemented, "PlayerGetTicket is HTTP-only")
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlayerGetTicketResponse)
+	err := c.cc.Invoke(ctx, Review_PlayerGetTicket_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 // ReviewServer is the server API for Review service.
@@ -478,6 +488,42 @@ func _Review_PrecheckUserWithdrawApproval_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Review_PlayerListTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlayerListTicketsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServer).PlayerListTickets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Review_PlayerListTickets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServer).PlayerListTickets(ctx, req.(*PlayerListTicketsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Review_PlayerGetTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlayerGetTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServer).PlayerGetTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Review_PlayerGetTicket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServer).PlayerGetTicket(ctx, req.(*PlayerGetTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Review_ServiceDesc is the grpc.ServiceDesc for Review service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -528,6 +574,14 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PrecheckUserWithdrawApproval",
 			Handler:    _Review_PrecheckUserWithdrawApproval_Handler,
+		},
+		{
+			MethodName: "PlayerListTickets",
+			Handler:    _Review_PlayerListTickets_Handler,
+		},
+		{
+			MethodName: "PlayerGetTicket",
+			Handler:    _Review_PlayerGetTicket_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

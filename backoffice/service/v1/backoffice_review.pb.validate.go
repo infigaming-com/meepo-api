@@ -1272,6 +1272,8 @@ func (m *ReviewTicketRequest) validate(all bool) error {
 
 	// no validation rules for ReviewComment
 
+	// no validation rules for PlayerComment
+
 	if len(errors) > 0 {
 		return ReviewTicketRequestMultiError(errors)
 	}
