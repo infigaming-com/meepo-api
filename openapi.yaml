@@ -31715,9 +31715,9 @@ components:
                 ipLoginUserCount:
                     type: integer
                     format: int32
-                loginMethod:
+                clientSource:
                     type: string
-                prevLoginMethod:
+                prevClientSource:
                     type: string
         api.user.service.v1.LoginMethodConfig:
             type: object

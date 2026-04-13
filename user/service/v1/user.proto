@@ -2626,7 +2626,7 @@ message GetCompanyAdminEmailsResponse {
 
 message ListUserSessionActivitiesRequest {
 	int64 user_id = 1;
-	optional string event_type = 2;           // filter: daily_visit, ip_change, device_change, login_method_change
+	optional string event_type = 2;           // filter: daily_visit, ip_change, device_change, client_source_change
 	optional google.protobuf.Timestamp start_time = 3;
 	optional google.protobuf.Timestamp end_time = 4;
 	optional int32 page = 5;                  // default 1
@@ -2635,7 +2635,7 @@ message ListUserSessionActivitiesRequest {
 
 message ListUserSessionActivitiesResponse {
 	message SessionActivity {
-		string event_type = 1;                  // daily_visit, ip_change, device_change, login_method_change
+		string event_type = 1;                  // daily_visit, ip_change, device_change, client_source_change
 		string ip = 2;
 		string country = 3;
 		string user_agent = 4;
@@ -2643,8 +2643,8 @@ message ListUserSessionActivitiesResponse {
 		string prev_country = 6;
 		google.protobuf.Timestamp created_at = 7;
 		int32 ip_login_user_count = 8;          // distinct users who logged in from this IP
-		string login_method = 9;                // login method, e.g. "pwa"
-		string prev_login_method = 10;          // previous login method (set on login_method_change)
+		string client_source = 9;               // client source, e.g. "pwa"
+		string prev_client_source = 10;         // previous client source (set on client_source_change)
 	}
 	repeated SessionActivity activities = 1;
 	int32 total = 2;

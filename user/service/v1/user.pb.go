@@ -15828,7 +15828,7 @@ func (x *GetCompanyAdminEmailsResponse) GetEmails() []string {
 type ListUserSessionActivitiesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	EventType     *string                `protobuf:"bytes,2,opt,name=event_type,json=eventType,proto3,oneof" json:"event_type,omitempty"` // filter: daily_visit, ip_change, device_change, login_method_change
+	EventType     *string                `protobuf:"bytes,2,opt,name=event_type,json=eventType,proto3,oneof" json:"event_type,omitempty"` // filter: daily_visit, ip_change, device_change, client_source_change
 	StartTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	Page          *int32                 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // default 1
@@ -18593,7 +18593,7 @@ func (x *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) GetSource() 
 
 type ListUserSessionActivitiesResponse_SessionActivity struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	EventType        string                 `protobuf:"bytes,1,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"` // daily_visit, ip_change, device_change, login_method_change
+	EventType        string                 `protobuf:"bytes,1,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"` // daily_visit, ip_change, device_change, client_source_change
 	Ip               string                 `protobuf:"bytes,2,opt,name=ip,proto3" json:"ip,omitempty"`
 	Country          string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	UserAgent        string                 `protobuf:"bytes,4,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
@@ -18601,8 +18601,8 @@ type ListUserSessionActivitiesResponse_SessionActivity struct {
 	PrevCountry      string                 `protobuf:"bytes,6,opt,name=prev_country,json=prevCountry,proto3" json:"prev_country,omitempty"`
 	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	IpLoginUserCount int32                  `protobuf:"varint,8,opt,name=ip_login_user_count,json=ipLoginUserCount,proto3" json:"ip_login_user_count,omitempty"` // distinct users who logged in from this IP
-	LoginMethod      string                 `protobuf:"bytes,9,opt,name=login_method,json=loginMethod,proto3" json:"login_method,omitempty"`                     // login method, e.g. "pwa"
-	PrevLoginMethod  string                 `protobuf:"bytes,10,opt,name=prev_login_method,json=prevLoginMethod,proto3" json:"prev_login_method,omitempty"`      // previous login method (set on login_method_change)
+	ClientSource     string                 `protobuf:"bytes,9,opt,name=client_source,json=clientSource,proto3" json:"client_source,omitempty"`                  // client source, e.g. "pwa"
+	PrevClientSource string                 `protobuf:"bytes,10,opt,name=prev_client_source,json=prevClientSource,proto3" json:"prev_client_source,omitempty"`   // previous client source (set on client_source_change)
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -18693,16 +18693,16 @@ func (x *ListUserSessionActivitiesResponse_SessionActivity) GetIpLoginUserCount(
 	return 0
 }
 
-func (x *ListUserSessionActivitiesResponse_SessionActivity) GetLoginMethod() string {
+func (x *ListUserSessionActivitiesResponse_SessionActivity) GetClientSource() string {
 	if x != nil {
-		return x.LoginMethod
+		return x.ClientSource
 	}
 	return ""
 }
 
-func (x *ListUserSessionActivitiesResponse_SessionActivity) GetPrevLoginMethod() string {
+func (x *ListUserSessionActivitiesResponse_SessionActivity) GetPrevClientSource() string {
 	if x != nil {
-		return x.PrevLoginMethod
+		return x.PrevClientSource
 	}
 	return ""
 }
@@ -20219,14 +20219,14 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc3\x04\n" +
+	"_page_size\"\xc7\x04\n" +
 	"!ListUserSessionActivitiesResponse\x12f\n" +
 	"\n" +
 	"activities\x18\x01 \x03(\v2F.api.user.service.v1.ListUserSessionActivitiesResponse.SessionActivityR\n" +
 	"activities\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xee\x02\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xf2\x02\n" +
 	"\x0fSessionActivity\x12\x1d\n" +
 	"\n" +
 	"event_type\x18\x01 \x01(\tR\teventType\x12\x0e\n" +
@@ -20238,10 +20238,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\fprev_country\x18\x06 \x01(\tR\vprevCountry\x129\n" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x13ip_login_user_count\x18\b \x01(\x05R\x10ipLoginUserCount\x12!\n" +
-	"\flogin_method\x18\t \x01(\tR\vloginMethod\x12*\n" +
-	"\x11prev_login_method\x18\n" +
-	" \x01(\tR\x0fprevLoginMethod\"U\n" +
+	"\x13ip_login_user_count\x18\b \x01(\x05R\x10ipLoginUserCount\x12#\n" +
+	"\rclient_source\x18\t \x01(\tR\fclientSource\x12,\n" +
+	"\x12prev_client_source\x18\n" +
+	" \x01(\tR\x10prevClientSource\"U\n" +
 	"\x17SwapFeeCurrencyOverride\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1e\n" +
 	"\n" +
