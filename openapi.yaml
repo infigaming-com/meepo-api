@@ -31363,6 +31363,8 @@ components:
                     type: string
                 username:
                     type: string
+                clientSource:
+                    type: string
         api.user.service.v1.GetUserProfileResponse_RegistrationRecord:
             type: object
             properties:

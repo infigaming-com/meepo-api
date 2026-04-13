@@ -35884,6 +35884,8 @@ func (m *GetUserProfileResponse_LoginRecord) validate(all bool) error {
 
 	// no validation rules for Username
 
+	// no validation rules for ClientSource
+
 	if len(errors) > 0 {
 		return GetUserProfileResponse_LoginRecordMultiError(errors)
 	}
