@@ -463,6 +463,8 @@ message GameDebitRequest {
 	string turnover = 9;
 	api.common.OperatorContext operator_context = 10;
 	optional bool allow_overdraft = 11;
+	int64 round_id = 12;
+	string game_id = 13;
 }
 
 message AffectedCredit {
@@ -520,6 +522,8 @@ message GameCreditRequest {
 	api.common.OperatorContext operator_context = 10;
 	optional string original_transaction_type = 11;
 	string original_transaction_turnover_amount = 12;
+	int64 round_id = 13;
+	string game_id = 14;
 }
 
 message GameCreditResponse {
@@ -2434,6 +2438,10 @@ message BatchBetItem {
 	string amount = 2;
 	// Turnover amount for wagering requirements
 	string turnover = 3;
+	// Game round id; used by wallet-side reverse lookup when matching pure-win callbacks
+	int64 round_id = 4;
+	// Game identifier (e.g., provider game code); used by wallet-side reverse lookup fallback
+	string game_id = 5;
 }
 
 message BatchWinItem {
@@ -2447,6 +2455,10 @@ message BatchWinItem {
 	optional string original_transaction_type = 4;
 	// Turnover amount from the original bet for credit turnover tracking
 	string original_transaction_turnover = 5;
+	// Game round id; used by wallet-side reverse lookup when original_transaction_id is missing
+	int64 round_id = 6;
+	// Game identifier; used by wallet-side reverse lookup fallback
+	string game_id = 7;
 }
 
 message GameBatchBetAndSettleResponse {

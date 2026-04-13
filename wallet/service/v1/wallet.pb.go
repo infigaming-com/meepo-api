@@ -640,6 +640,8 @@ type GameDebitRequest struct {
 	Turnover        string                  `protobuf:"bytes,9,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	AllowOverdraft  *bool                   `protobuf:"varint,11,opt,name=allow_overdraft,json=allowOverdraft,proto3,oneof" json:"allow_overdraft,omitempty"`
+	RoundId         int64                   `protobuf:"varint,12,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	GameId          string                  `protobuf:"bytes,13,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -749,6 +751,20 @@ func (x *GameDebitRequest) GetAllowOverdraft() bool {
 		return *x.AllowOverdraft
 	}
 	return false
+}
+
+func (x *GameDebitRequest) GetRoundId() int64 {
+	if x != nil {
+		return x.RoundId
+	}
+	return 0
+}
+
+func (x *GameDebitRequest) GetGameId() string {
+	if x != nil {
+		return x.GameId
+	}
+	return ""
 }
 
 type AffectedCredit struct {
@@ -1104,6 +1120,8 @@ type GameCreditRequest struct {
 	OperatorContext                   *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	OriginalTransactionType           *string                 `protobuf:"bytes,11,opt,name=original_transaction_type,json=originalTransactionType,proto3,oneof" json:"original_transaction_type,omitempty"`
 	OriginalTransactionTurnoverAmount string                  `protobuf:"bytes,12,opt,name=original_transaction_turnover_amount,json=originalTransactionTurnoverAmount,proto3" json:"original_transaction_turnover_amount,omitempty"`
+	RoundId                           int64                   `protobuf:"varint,13,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	GameId                            string                  `protobuf:"bytes,14,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	unknownFields                     protoimpl.UnknownFields
 	sizeCache                         protoimpl.SizeCache
 }
@@ -1218,6 +1236,20 @@ func (x *GameCreditRequest) GetOriginalTransactionType() string {
 func (x *GameCreditRequest) GetOriginalTransactionTurnoverAmount() string {
 	if x != nil {
 		return x.OriginalTransactionTurnoverAmount
+	}
+	return ""
+}
+
+func (x *GameCreditRequest) GetRoundId() int64 {
+	if x != nil {
+		return x.RoundId
+	}
+	return 0
+}
+
+func (x *GameCreditRequest) GetGameId() string {
+	if x != nil {
+		return x.GameId
 	}
 	return ""
 }
@@ -13999,7 +14031,11 @@ type BatchBetItem struct {
 	// Bet amount in player currency
 	Amount string `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Turnover amount for wagering requirements
-	Turnover      string `protobuf:"bytes,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	Turnover string `protobuf:"bytes,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	// Game round id; used by wallet-side reverse lookup when matching pure-win callbacks
+	RoundId int64 `protobuf:"varint,4,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	// Game identifier (e.g., provider game code); used by wallet-side reverse lookup fallback
+	GameId        string `protobuf:"bytes,5,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -14055,6 +14091,20 @@ func (x *BatchBetItem) GetTurnover() string {
 	return ""
 }
 
+func (x *BatchBetItem) GetRoundId() int64 {
+	if x != nil {
+		return x.RoundId
+	}
+	return 0
+}
+
+func (x *BatchBetItem) GetGameId() string {
+	if x != nil {
+		return x.GameId
+	}
+	return ""
+}
+
 type BatchWinItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique transaction ID for this win (used for idempotency)
@@ -14067,8 +14117,12 @@ type BatchWinItem struct {
 	OriginalTransactionType *string `protobuf:"bytes,4,opt,name=original_transaction_type,json=originalTransactionType,proto3,oneof" json:"original_transaction_type,omitempty"`
 	// Turnover amount from the original bet for credit turnover tracking
 	OriginalTransactionTurnover string `protobuf:"bytes,5,opt,name=original_transaction_turnover,json=originalTransactionTurnover,proto3" json:"original_transaction_turnover,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	// Game round id; used by wallet-side reverse lookup when original_transaction_id is missing
+	RoundId int64 `protobuf:"varint,6,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	// Game identifier; used by wallet-side reverse lookup fallback
+	GameId        string `protobuf:"bytes,7,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *BatchWinItem) Reset() {
@@ -14132,6 +14186,20 @@ func (x *BatchWinItem) GetOriginalTransactionType() string {
 func (x *BatchWinItem) GetOriginalTransactionTurnover() string {
 	if x != nil {
 		return x.OriginalTransactionTurnover
+	}
+	return ""
+}
+
+func (x *BatchWinItem) GetRoundId() int64 {
+	if x != nil {
+		return x.RoundId
+	}
+	return 0
+}
+
+func (x *BatchWinItem) GetGameId() string {
+	if x != nil {
+		return x.GameId
 	}
 	return ""
 }
@@ -18455,7 +18523,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\acomment\x18\t \x01(\tR\acommentB\x11\n" +
 	"\x0f_transaction_id\"6\n" +
 	"\rDebitResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xdc\x03\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\x90\x04\n" +
 	"\x10GameDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
@@ -18468,7 +18536,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bturnover\x18\t \x01(\tR\bturnover\x12F\n" +
 	"\x10operator_context\x18\n" +
 	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12,\n" +
-	"\x0fallow_overdraft\x18\v \x01(\bH\x00R\x0eallowOverdraft\x88\x01\x01B\x12\n" +
+	"\x0fallow_overdraft\x18\v \x01(\bH\x00R\x0eallowOverdraft\x88\x01\x01\x12\x19\n" +
+	"\bround_id\x18\f \x01(\x03R\aroundId\x12\x17\n" +
+	"\agame_id\x18\r \x01(\tR\x06gameIdB\x12\n" +
 	"\x10_allow_overdraft\"\xa6\b\n" +
 	"\x0eAffectedCredit\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12/\n" +
@@ -18509,7 +18579,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ecash_amount_reporting_currency\x18\f \x01(\tR\x1bcashAmountReportingCurrency\x12V\n" +
 	"(operator_bonus_amount_reporting_currency\x18\r \x01(\tR$operatorBonusAmountReportingCurrency\x12V\n" +
 	"(provider_bonus_amount_reporting_currency\x18\x0e \x01(\tR$providerBonusAmountReportingCurrency\x12P\n" +
-	"\x10affected_credits\x18\x0f \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\xe7\x04\n" +
+	"\x10affected_credits\x18\x0f \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\x9b\x05\n" +
 	"\x11GameCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
@@ -18523,7 +18593,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x10operator_context\x18\n" +
 	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12?\n" +
 	"\x19original_transaction_type\x18\v \x01(\tH\x00R\x17originalTransactionType\x88\x01\x01\x12O\n" +
-	"$original_transaction_turnover_amount\x18\f \x01(\tR!originalTransactionTurnoverAmountB\x1c\n" +
+	"$original_transaction_turnover_amount\x18\f \x01(\tR!originalTransactionTurnoverAmount\x12\x19\n" +
+	"\bround_id\x18\r \x01(\x03R\aroundId\x12\x17\n" +
+	"\agame_id\x18\x0e \x01(\tR\x06gameIdB\x1c\n" +
 	"\x1a_original_transaction_type\"\xb0\x06\n" +
 	"\x12GameCreditResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
@@ -20117,17 +20189,21 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0fallow_overdraft\x18\a \x01(\bH\x00R\x0eallowOverdraft\x88\x01\x01\x127\n" +
 	"\x04bets\x18\b \x03(\v2#.api.wallet.service.v1.BatchBetItemR\x04bets\x127\n" +
 	"\x04wins\x18\t \x03(\v2#.api.wallet.service.v1.BatchWinItemR\x04winsB\x12\n" +
-	"\x10_allow_overdraft\"i\n" +
+	"\x10_allow_overdraft\"\x9d\x01\n" +
 	"\fBatchBetItem\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1a\n" +
-	"\bturnover\x18\x03 \x01(\tR\bturnover\"\xa8\x02\n" +
+	"\bturnover\x18\x03 \x01(\tR\bturnover\x12\x19\n" +
+	"\bround_id\x18\x04 \x01(\x03R\aroundId\x12\x17\n" +
+	"\agame_id\x18\x05 \x01(\tR\x06gameId\"\xdc\x02\n" +
 	"\fBatchWinItem\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\tR\x06amount\x126\n" +
 	"\x17original_transaction_id\x18\x03 \x01(\x03R\x15originalTransactionId\x12?\n" +
 	"\x19original_transaction_type\x18\x04 \x01(\tH\x00R\x17originalTransactionType\x88\x01\x01\x12B\n" +
-	"\x1doriginal_transaction_turnover\x18\x05 \x01(\tR\x1boriginalTransactionTurnoverB\x1c\n" +
+	"\x1doriginal_transaction_turnover\x18\x05 \x01(\tR\x1boriginalTransactionTurnover\x12\x19\n" +
+	"\bround_id\x18\x06 \x01(\x03R\aroundId\x12\x17\n" +
+	"\agame_id\x18\a \x01(\tR\x06gameIdB\x1c\n" +
 	"\x1a_original_transaction_type\"\xf8\x03\n" +
 	"\x1dGameBatchBetAndSettleResponse\x12#\n" +
 	"\rexchange_rate\x18\x01 \x01(\tR\fexchangeRate\x12\x12\n" +
