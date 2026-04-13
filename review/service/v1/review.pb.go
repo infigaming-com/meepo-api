@@ -241,8 +241,10 @@ type ReviewTicketRequest struct {
 	Action          string                  `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"`
 	ReviewComment   string                  `protobuf:"bytes,4,opt,name=review_comment,json=reviewComment,proto3" json:"review_comment,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// player_comment is an optional comment visible to the player (set on reject)
+	PlayerComment string                  `protobuf:"bytes,6,opt,name=player_comment,json=playerComment,proto3" json:"player_comment,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ReviewTicketRequest) Reset() {
@@ -308,6 +310,13 @@ func (x *ReviewTicketRequest) GetOperatorContext() *common.OperatorContext {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *ReviewTicketRequest) GetPlayerComment() string {
+	if x != nil {
+		return x.PlayerComment
+	}
+	return ""
 }
 
 type ReviewTicketResponse struct {

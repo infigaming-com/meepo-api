@@ -30,6 +30,8 @@ const (
 	Review_GetTicket_FullMethodName                    = "/api.review.service.v1.Review/GetTicket"
 	Review_GetOperatorTicket_FullMethodName            = "/api.review.service.v1.Review/GetOperatorTicket"
 	Review_PrecheckUserWithdrawApproval_FullMethodName = "/api.review.service.v1.Review/PrecheckUserWithdrawApproval"
+	Review_PlayerListTickets_FullMethodName             = "/api.review.service.v1.Review/PlayerListTickets"
+	Review_PlayerGetTicket_FullMethodName               = "/api.review.service.v1.Review/PlayerGetTicket"
 )
 
 // ReviewClient is the client API for Review service.
@@ -52,6 +54,9 @@ type ReviewClient interface {
 	GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*GetOperatorTicketResponse, error)
 	// PrecheckUserWithdrawApproval checks if a user/affiliate withdraw ticket can be safely approved
 	PrecheckUserWithdrawApproval(ctx context.Context, in *PrecheckWithdrawApprovalRequest, opts ...grpc.CallOption) (*PrecheckWithdrawApprovalResponse, error)
+	// Player-facing endpoints
+	PlayerListTickets(ctx context.Context, in *PlayerListTicketsRequest, opts ...grpc.CallOption) (*PlayerListTicketsResponse, error)
+	PlayerGetTicket(ctx context.Context, in *PlayerGetTicketRequest, opts ...grpc.CallOption) (*PlayerGetTicketResponse, error)
 }
 
 type reviewClient struct {
@@ -172,6 +177,16 @@ func (c *reviewClient) PrecheckUserWithdrawApproval(ctx context.Context, in *Pre
 	return out, nil
 }
 
+func (c *reviewClient) PlayerListTickets(ctx context.Context, in *PlayerListTicketsRequest, opts ...grpc.CallOption) (*PlayerListTicketsResponse, error) {
+	// Player endpoints are HTTP-only, not available via gRPC
+	return nil, status.Error(codes.Unimplemented, "PlayerListTickets is HTTP-only")
+}
+
+func (c *reviewClient) PlayerGetTicket(ctx context.Context, in *PlayerGetTicketRequest, opts ...grpc.CallOption) (*PlayerGetTicketResponse, error) {
+	// Player endpoints are HTTP-only, not available via gRPC
+	return nil, status.Error(codes.Unimplemented, "PlayerGetTicket is HTTP-only")
+}
+
 // ReviewServer is the server API for Review service.
 // All implementations must embed UnimplementedReviewServer
 // for forward compatibility.
@@ -192,6 +207,9 @@ type ReviewServer interface {
 	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*GetOperatorTicketResponse, error)
 	// PrecheckUserWithdrawApproval checks if a user/affiliate withdraw ticket can be safely approved
 	PrecheckUserWithdrawApproval(context.Context, *PrecheckWithdrawApprovalRequest) (*PrecheckWithdrawApprovalResponse, error)
+	// Player-facing endpoints
+	PlayerListTickets(context.Context, *PlayerListTicketsRequest) (*PlayerListTicketsResponse, error)
+	PlayerGetTicket(context.Context, *PlayerGetTicketRequest) (*PlayerGetTicketResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
 
@@ -234,6 +252,12 @@ func (UnimplementedReviewServer) GetOperatorTicket(context.Context, *GetOperator
 }
 func (UnimplementedReviewServer) PrecheckUserWithdrawApproval(context.Context, *PrecheckWithdrawApprovalRequest) (*PrecheckWithdrawApprovalResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method PrecheckUserWithdrawApproval not implemented")
+}
+func (UnimplementedReviewServer) PlayerListTickets(context.Context, *PlayerListTicketsRequest) (*PlayerListTicketsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PlayerListTickets not implemented")
+}
+func (UnimplementedReviewServer) PlayerGetTicket(context.Context, *PlayerGetTicketRequest) (*PlayerGetTicketResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PlayerGetTicket not implemented")
 }
 func (UnimplementedReviewServer) mustEmbedUnimplementedReviewServer() {}
 func (UnimplementedReviewServer) testEmbeddedByValue()                {}
