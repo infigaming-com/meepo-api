@@ -1466,12 +1466,17 @@ func (x *WithdrawApprovalCheck) GetRequestValue() string {
 	return ""
 }
 
-// Player-facing ticket messages
+// PlayerListTickets - returns a paginated list of the current player's withdrawal tickets.
+// The player identity is extracted from the JWT token by the gateway; no user_id is passed explicitly.
 type PlayerListTicketsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        *string                `protobuf:"bytes,1,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	Page          *int32                 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Filter by ticket review status. If not set, returns all statuses.
+	// Values: "pending", "approved", "rejected", "manual_payout", "paying", "paid", "failed"
+	Status *string `protobuf:"bytes,1,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	// Page number, 1-based. Defaults to 1.
+	Page *int32 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	// Number of tickets per page. Defaults to 20, max 100.
+	PageSize      *int32 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1528,11 +1533,14 @@ func (x *PlayerListTicketsRequest) GetPageSize() int32 {
 }
 
 type PlayerListTicketsResponse struct {
-	state         protoimpl.MessageState              `protogen:"open.v1"`
-	Tickets       []*PlayerListTicketsResponse_Ticket `protobuf:"bytes,1,rep,name=tickets,proto3" json:"tickets,omitempty"`
-	Page          int32                               `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                               `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	TotalCount    int32                               `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	state   protoimpl.MessageState              `protogen:"open.v1"`
+	Tickets []*PlayerListTicketsResponse_Ticket `protobuf:"bytes,1,rep,name=tickets,proto3" json:"tickets,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	// Page size used
+	PageSize int32 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of tickets matching the filter
+	TotalCount    int32 `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1595,9 +1603,11 @@ func (x *PlayerListTicketsResponse) GetTotalCount() int32 {
 	return 0
 }
 
+// PlayerGetTicket - returns the detail of a single withdrawal ticket owned by the current player.
 type PlayerGetTicketRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Ticket ID to retrieve. Must belong to the current player.
+	TicketId      int64 `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1639,16 +1649,26 @@ func (x *PlayerGetTicketRequest) GetTicketId() int64 {
 	return 0
 }
 
+// PlayerGetTicketResponse - ticket detail visible to the player.
+// Fields are identical to PlayerListTicketsResponse.Ticket for consistency.
 type PlayerGetTicketResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency      string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	PaymentStatus string                 `protobuf:"bytes,5,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
-	PlayerComment string                 `protobuf:"bytes,6,opt,name=player_comment,json=playerComment,proto3" json:"player_comment,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	ReviewedAt    int64                  `protobuf:"varint,8,opt,name=reviewed_at,json=reviewedAt,proto3" json:"reviewed_at,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique ticket identifier
+	TicketId int64 `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	// Review status: "pending", "approved", "rejected", "manual_payout", "paying", "paid", "failed"
+	Status string `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	// Withdrawal amount in the original currency (decimal string)
+	Amount string `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Currency code (e.g. "USD", "BRL", "USDT")
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Payment channel processing status: "pending", "processing", "success", "failed"
+	PaymentStatus string `protobuf:"bytes,5,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
+	// Reviewer comment visible to the player (typically set on rejection)
+	PlayerComment string `protobuf:"bytes,6,opt,name=player_comment,json=playerComment,proto3" json:"player_comment,omitempty"`
+	// Ticket creation time (Unix timestamp in seconds)
+	CreatedAt int64 `protobuf:"varint,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
+	ReviewedAt    int64 `protobuf:"varint,8,opt,name=reviewed_at,json=reviewedAt,proto3" json:"reviewed_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3319,16 +3339,32 @@ func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalPendingRepo
 	return ""
 }
 
+// Ticket summary visible to the player.
 type PlayerListTicketsResponse_Ticket struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency      string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	PaymentStatus string                 `protobuf:"bytes,5,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
-	PlayerComment string                 `protobuf:"bytes,6,opt,name=player_comment,json=playerComment,proto3" json:"player_comment,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	ReviewedAt    int64                  `protobuf:"varint,8,opt,name=reviewed_at,json=reviewedAt,proto3" json:"reviewed_at,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique ticket identifier
+	TicketId int64 `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	// Review status: "pending", "approved", "rejected", "manual_payout", "paying", "paid", "failed"
+	//   - pending: awaiting review
+	//   - approved: approved by reviewer, proceeding to payment
+	//   - rejected: rejected by reviewer (see player_comment for reason)
+	//   - manual_payout: reviewer chose manual payout outside the system
+	//   - paying: payment in progress via payment channel
+	//   - paid: payment completed successfully
+	//   - failed: payment failed after approval
+	Status string `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	// Withdrawal amount in the original currency (decimal string, e.g. "100.50")
+	Amount string `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Currency code (e.g. "USD", "BRL", "USDT")
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Payment channel processing status: "pending", "processing", "success", "failed"
+	PaymentStatus string `protobuf:"bytes,5,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
+	// Reviewer comment visible to the player (typically set on rejection to explain the reason)
+	PlayerComment string `protobuf:"bytes,6,opt,name=player_comment,json=playerComment,proto3" json:"player_comment,omitempty"`
+	// Ticket creation time (Unix timestamp in seconds)
+	CreatedAt int64 `protobuf:"varint,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
+	ReviewedAt    int64 `protobuf:"varint,8,opt,name=reviewed_at,json=reviewedAt,proto3" json:"reviewed_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

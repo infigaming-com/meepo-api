@@ -37,13 +37,16 @@ service Review {
 	// PrecheckUserWithdrawApproval checks if a user/affiliate withdraw ticket can be safely approved
 	rpc PrecheckUserWithdrawApproval(PrecheckWithdrawApprovalRequest) returns (PrecheckWithdrawApprovalResponse) {}
 
-	// Player-facing endpoints
+	// PlayerListTickets returns a paginated list of the current player's withdrawal tickets.
+	// Supports optional filtering by status. Results are ordered by created_at DESC.
 	rpc PlayerListTickets(PlayerListTicketsRequest) returns (PlayerListTicketsResponse) {
 		option (google.api.http) = {
 			post: "/v1/review/tickets/list"
 			body: "*"
 		};
 	}
+	// PlayerGetTicket returns the detail of a single withdrawal ticket owned by the current player.
+	// Returns NOT_FOUND if the ticket does not exist or does not belong to the caller.
 	rpc PlayerGetTicket(PlayerGetTicketRequest) returns (PlayerGetTicketResponse) {
 		option (google.api.http) = {
 			post: "/v1/review/tickets/get"
@@ -373,41 +376,77 @@ message WithdrawApprovalCheck {
 	string request_value = 5;
 }
 
-// Player-facing ticket messages
+// PlayerListTickets - returns a paginated list of the current player's withdrawal tickets.
+// The player identity is extracted from the JWT token by the gateway; no user_id is passed explicitly.
 message PlayerListTicketsRequest {
+	// Filter by ticket review status. If not set, returns all statuses.
+	// Values: "pending", "approved", "rejected", "manual_payout", "paying", "paid", "failed"
 	optional string status = 1;
+	// Page number, 1-based. Defaults to 1.
 	optional int32 page = 2;
+	// Number of tickets per page. Defaults to 20, max 100.
 	optional int32 page_size = 3;
 }
 
 message PlayerListTicketsResponse {
+	// Ticket summary visible to the player.
 	message Ticket {
+		// Unique ticket identifier
 		int64 ticket_id = 1;
+		// Review status: "pending", "approved", "rejected", "manual_payout", "paying", "paid", "failed"
+		//   - pending: awaiting review
+		//   - approved: approved by reviewer, proceeding to payment
+		//   - rejected: rejected by reviewer (see player_comment for reason)
+		//   - manual_payout: reviewer chose manual payout outside the system
+		//   - paying: payment in progress via payment channel
+		//   - paid: payment completed successfully
+		//   - failed: payment failed after approval
 		string status = 2;
+		// Withdrawal amount in the original currency (decimal string, e.g. "100.50")
 		string amount = 3;
+		// Currency code (e.g. "USD", "BRL", "USDT")
 		string currency = 4;
+		// Payment channel processing status: "pending", "processing", "success", "failed"
 		string payment_status = 5;
+		// Reviewer comment visible to the player (typically set on rejection to explain the reason)
 		string player_comment = 6;
+		// Ticket creation time (Unix timestamp in seconds)
 		int64 created_at = 7;
+		// Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
 		int64 reviewed_at = 8;
 	}
 	repeated Ticket tickets = 1;
+	// Current page number
 	int32 page = 2;
+	// Page size used
 	int32 page_size = 3;
+	// Total number of tickets matching the filter
 	int32 total_count = 4;
 }
 
+// PlayerGetTicket - returns the detail of a single withdrawal ticket owned by the current player.
 message PlayerGetTicketRequest {
+	// Ticket ID to retrieve. Must belong to the current player.
 	int64 ticket_id = 1;
 }
 
+// PlayerGetTicketResponse - ticket detail visible to the player.
+// Fields are identical to PlayerListTicketsResponse.Ticket for consistency.
 message PlayerGetTicketResponse {
+	// Unique ticket identifier
 	int64 ticket_id = 1;
+	// Review status: "pending", "approved", "rejected", "manual_payout", "paying", "paid", "failed"
 	string status = 2;
+	// Withdrawal amount in the original currency (decimal string)
 	string amount = 3;
+	// Currency code (e.g. "USD", "BRL", "USDT")
 	string currency = 4;
+	// Payment channel processing status: "pending", "processing", "success", "failed"
 	string payment_status = 5;
+	// Reviewer comment visible to the player (typically set on rejection)
 	string player_comment = 6;
+	// Ticket creation time (Unix timestamp in seconds)
 	int64 created_at = 7;
+	// Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
 	int64 reviewed_at = 8;
 }

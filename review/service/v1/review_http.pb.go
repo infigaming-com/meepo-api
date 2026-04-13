@@ -25,8 +25,11 @@ const OperationReviewPlayerListTickets = "/api.review.service.v1.Review/PlayerLi
 
 type ReviewHTTPServer interface {
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
+	// PlayerGetTicket PlayerGetTicket returns the detail of a single withdrawal ticket owned by the current player.
+	// Returns NOT_FOUND if the ticket does not exist or does not belong to the caller.
 	PlayerGetTicket(context.Context, *PlayerGetTicketRequest) (*PlayerGetTicketResponse, error)
-	// PlayerListTickets Player-facing endpoints
+	// PlayerListTickets PlayerListTickets returns a paginated list of the current player's withdrawal tickets.
+	// Supports optional filtering by status. Results are ordered by created_at DESC.
 	PlayerListTickets(context.Context, *PlayerListTicketsRequest) (*PlayerListTicketsResponse, error)
 }
 
@@ -105,8 +108,11 @@ func _Review_PlayerGetTicket0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.C
 
 type ReviewHTTPClient interface {
 	CreateWithdraw(ctx context.Context, req *CreateWithdrawRequest, opts ...http.CallOption) (rsp *CreateWithdrawResponse, err error)
+	// PlayerGetTicket PlayerGetTicket returns the detail of a single withdrawal ticket owned by the current player.
+	// Returns NOT_FOUND if the ticket does not exist or does not belong to the caller.
 	PlayerGetTicket(ctx context.Context, req *PlayerGetTicketRequest, opts ...http.CallOption) (rsp *PlayerGetTicketResponse, err error)
-	// PlayerListTickets Player-facing endpoints
+	// PlayerListTickets PlayerListTickets returns a paginated list of the current player's withdrawal tickets.
+	// Supports optional filtering by status. Results are ordered by created_at DESC.
 	PlayerListTickets(ctx context.Context, req *PlayerListTicketsRequest, opts ...http.CallOption) (rsp *PlayerListTicketsResponse, err error)
 }
 
@@ -131,6 +137,8 @@ func (c *ReviewHTTPClientImpl) CreateWithdraw(ctx context.Context, in *CreateWit
 	return &out, nil
 }
 
+// PlayerGetTicket PlayerGetTicket returns the detail of a single withdrawal ticket owned by the current player.
+// Returns NOT_FOUND if the ticket does not exist or does not belong to the caller.
 func (c *ReviewHTTPClientImpl) PlayerGetTicket(ctx context.Context, in *PlayerGetTicketRequest, opts ...http.CallOption) (*PlayerGetTicketResponse, error) {
 	var out PlayerGetTicketResponse
 	pattern := "/v1/review/tickets/get"
@@ -144,7 +152,8 @@ func (c *ReviewHTTPClientImpl) PlayerGetTicket(ctx context.Context, in *PlayerGe
 	return &out, nil
 }
 
-// PlayerListTickets Player-facing endpoints
+// PlayerListTickets PlayerListTickets returns a paginated list of the current player's withdrawal tickets.
+// Supports optional filtering by status. Results are ordered by created_at DESC.
 func (c *ReviewHTTPClientImpl) PlayerListTickets(ctx context.Context, in *PlayerListTicketsRequest, opts ...http.CallOption) (*PlayerListTicketsResponse, error) {
 	var out PlayerListTicketsResponse
 	pattern := "/v1/review/tickets/list"

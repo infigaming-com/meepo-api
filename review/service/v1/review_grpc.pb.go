@@ -54,8 +54,11 @@ type ReviewClient interface {
 	GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*GetOperatorTicketResponse, error)
 	// PrecheckUserWithdrawApproval checks if a user/affiliate withdraw ticket can be safely approved
 	PrecheckUserWithdrawApproval(ctx context.Context, in *PrecheckWithdrawApprovalRequest, opts ...grpc.CallOption) (*PrecheckWithdrawApprovalResponse, error)
-	// Player-facing endpoints
+	// PlayerListTickets returns a paginated list of the current player's withdrawal tickets.
+	// Supports optional filtering by status. Results are ordered by created_at DESC.
 	PlayerListTickets(ctx context.Context, in *PlayerListTicketsRequest, opts ...grpc.CallOption) (*PlayerListTicketsResponse, error)
+	// PlayerGetTicket returns the detail of a single withdrawal ticket owned by the current player.
+	// Returns NOT_FOUND if the ticket does not exist or does not belong to the caller.
 	PlayerGetTicket(ctx context.Context, in *PlayerGetTicketRequest, opts ...grpc.CallOption) (*PlayerGetTicketResponse, error)
 }
 
@@ -217,8 +220,11 @@ type ReviewServer interface {
 	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*GetOperatorTicketResponse, error)
 	// PrecheckUserWithdrawApproval checks if a user/affiliate withdraw ticket can be safely approved
 	PrecheckUserWithdrawApproval(context.Context, *PrecheckWithdrawApprovalRequest) (*PrecheckWithdrawApprovalResponse, error)
-	// Player-facing endpoints
+	// PlayerListTickets returns a paginated list of the current player's withdrawal tickets.
+	// Supports optional filtering by status. Results are ordered by created_at DESC.
 	PlayerListTickets(context.Context, *PlayerListTicketsRequest) (*PlayerListTicketsResponse, error)
+	// PlayerGetTicket returns the detail of a single withdrawal ticket owned by the current player.
+	// Returns NOT_FOUND if the ticket does not exist or does not belong to the caller.
 	PlayerGetTicket(context.Context, *PlayerGetTicketRequest) (*PlayerGetTicketResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }

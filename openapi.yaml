@@ -10183,6 +10183,9 @@ paths:
         post:
             tags:
                 - Review
+            description: |-
+                PlayerGetTicket returns the detail of a single withdrawal ticket owned by the current player.
+                 Returns NOT_FOUND if the ticket does not exist or does not belong to the caller.
             operationId: Review_PlayerGetTicket
             requestBody:
                 content:
@@ -10201,7 +10204,9 @@ paths:
         post:
             tags:
                 - Review
-            description: Player-facing endpoints
+            description: |-
+                PlayerListTickets returns a paginated list of the current player's withdrawal tickets.
+                 Supports optional filtering by status. Results are ordered by created_at DESC.
             operationId: Review_PlayerListTickets
             requestBody:
                 content:
@@ -30721,37 +30726,57 @@ components:
             properties:
                 ticketId:
                     type: string
+                    description: Ticket ID to retrieve. Must belong to the current player.
+            description: PlayerGetTicket - returns the detail of a single withdrawal ticket owned by the current player.
         api.review.service.v1.PlayerGetTicketResponse:
             type: object
             properties:
                 ticketId:
                     type: string
+                    description: Unique ticket identifier
                 status:
                     type: string
+                    description: 'Review status: "pending", "approved", "rejected", "manual_payout", "paying", "paid", "failed"'
                 amount:
                     type: string
+                    description: Withdrawal amount in the original currency (decimal string)
                 currency:
                     type: string
+                    description: Currency code (e.g. "USD", "BRL", "USDT")
                 paymentStatus:
                     type: string
+                    description: 'Payment channel processing status: "pending", "processing", "success", "failed"'
                 playerComment:
                     type: string
+                    description: Reviewer comment visible to the player (typically set on rejection)
                 createdAt:
                     type: string
+                    description: Ticket creation time (Unix timestamp in seconds)
                 reviewedAt:
                     type: string
+                    description: Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
+            description: |-
+                PlayerGetTicketResponse - ticket detail visible to the player.
+                 Fields are identical to PlayerListTicketsResponse.Ticket for consistency.
         api.review.service.v1.PlayerListTicketsRequest:
             type: object
             properties:
                 status:
                     type: string
+                    description: |-
+                        Filter by ticket review status. If not set, returns all statuses.
+                         Values: "pending", "approved", "rejected", "manual_payout", "paying", "paid", "failed"
                 page:
                     type: integer
+                    description: Page number, 1-based. Defaults to 1.
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of tickets per page. Defaults to 20, max 100.
                     format: int32
-            description: Player-facing ticket messages
+            description: |-
+                PlayerListTickets - returns a paginated list of the current player's withdrawal tickets.
+                 The player identity is extracted from the JWT token by the gateway; no user_id is passed explicitly.
         api.review.service.v1.PlayerListTicketsResponse:
             type: object
             properties:
@@ -30761,32 +30786,52 @@ components:
                         $ref: '#/components/schemas/api.review.service.v1.PlayerListTicketsResponse_Ticket'
                 page:
                     type: integer
+                    description: Current page number
                     format: int32
                 pageSize:
                     type: integer
+                    description: Page size used
                     format: int32
                 totalCount:
                     type: integer
+                    description: Total number of tickets matching the filter
                     format: int32
         api.review.service.v1.PlayerListTicketsResponse_Ticket:
             type: object
             properties:
                 ticketId:
                     type: string
+                    description: Unique ticket identifier
                 status:
                     type: string
+                    description: |-
+                        Review status: "pending", "approved", "rejected", "manual_payout", "paying", "paid", "failed"
+                           - pending: awaiting review
+                           - approved: approved by reviewer, proceeding to payment
+                           - rejected: rejected by reviewer (see player_comment for reason)
+                           - manual_payout: reviewer chose manual payout outside the system
+                           - paying: payment in progress via payment channel
+                           - paid: payment completed successfully
+                           - failed: payment failed after approval
                 amount:
                     type: string
+                    description: Withdrawal amount in the original currency (decimal string, e.g. "100.50")
                 currency:
                     type: string
+                    description: Currency code (e.g. "USD", "BRL", "USDT")
                 paymentStatus:
                     type: string
+                    description: 'Payment channel processing status: "pending", "processing", "success", "failed"'
                 playerComment:
                     type: string
+                    description: Reviewer comment visible to the player (typically set on rejection to explain the reason)
                 createdAt:
                     type: string
+                    description: Ticket creation time (Unix timestamp in seconds)
                 reviewedAt:
                     type: string
+                    description: Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
+            description: Ticket summary visible to the player.
         api.review.service.v1.PrecheckWithdrawApprovalResponse:
             type: object
             properties:
