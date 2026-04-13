@@ -10179,6 +10179,43 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse'
+    /v1/review/tickets/get:
+        post:
+            tags:
+                - Review
+            operationId: Review_PlayerGetTicket
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.PlayerGetTicketRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.PlayerGetTicketResponse'
+    /v1/review/tickets/list:
+        post:
+            tags:
+                - Review
+            description: Player-facing endpoints
+            operationId: Review_PlayerListTickets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.PlayerListTicketsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.PlayerListTicketsResponse'
     /v1/review/withdraw:
         post:
             tags:
@@ -23933,6 +23970,9 @@ components:
                     type: string
                 reviewComment:
                     type: string
+                playerComment:
+                    type: string
+                    description: player_comment is an optional comment visible to the player (set on reject)
         api.backoffice.service.v1.ReviewTicketResponse:
             type: object
             properties: {}
@@ -30675,6 +30715,77 @@ components:
                     type: integer
                     format: int32
                 operatorMode:
+                    type: string
+        api.review.service.v1.PlayerGetTicketRequest:
+            type: object
+            properties:
+                ticketId:
+                    type: string
+        api.review.service.v1.PlayerGetTicketResponse:
+            type: object
+            properties:
+                ticketId:
+                    type: string
+                status:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                paymentStatus:
+                    type: string
+                playerComment:
+                    type: string
+                createdAt:
+                    type: string
+                reviewedAt:
+                    type: string
+        api.review.service.v1.PlayerListTicketsRequest:
+            type: object
+            properties:
+                status:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: Player-facing ticket messages
+        api.review.service.v1.PlayerListTicketsResponse:
+            type: object
+            properties:
+                tickets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.review.service.v1.PlayerListTicketsResponse_Ticket'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalCount:
+                    type: integer
+                    format: int32
+        api.review.service.v1.PlayerListTicketsResponse_Ticket:
+            type: object
+            properties:
+                ticketId:
+                    type: string
+                status:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                paymentStatus:
+                    type: string
+                playerComment:
+                    type: string
+                createdAt:
+                    type: string
+                reviewedAt:
                     type: string
         api.review.service.v1.PrecheckWithdrawApprovalResponse:
             type: object

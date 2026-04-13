@@ -640,7 +640,7 @@ type ReviewTicketRequest struct {
 	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"` // approve, reject, manual_payout
 	ReviewComment string                 `protobuf:"bytes,3,opt,name=review_comment,json=reviewComment,proto3" json:"review_comment,omitempty"`
 	// player_comment is an optional comment visible to the player (set on reject)
-	PlayerComment string                 `protobuf:"bytes,4,opt,name=player_comment,json=playerComment,proto3" json:"player_comment,omitempty"`
+	PlayerComment string `protobuf:"bytes,4,opt,name=player_comment,json=playerComment,proto3" json:"player_comment,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1682,11 +1682,12 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x7f\n" +
 	"\x18GetOperatorTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"q\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x98\x01\n" +
 	"\x13ReviewTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12%\n" +
-	"\x0ereview_comment\x18\x03 \x01(\tR\rreviewComment\"\x16\n" +
+	"\x0ereview_comment\x18\x03 \x01(\tR\rreviewComment\x12%\n" +
+	"\x0eplayer_comment\x18\x04 \x01(\tR\rplayerComment\"\x16\n" +
 	"\x14ReviewTicketResponse\"J\n" +
 	"\x11AddCommentRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12\x18\n" +

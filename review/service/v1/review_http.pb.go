@@ -20,20 +20,21 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationReviewCreateWithdraw = "/api.review.service.v1.Review/CreateWithdraw"
-const OperationReviewPlayerListTickets = "/api.review.service.v1.Review/PlayerListTickets"
 const OperationReviewPlayerGetTicket = "/api.review.service.v1.Review/PlayerGetTicket"
+const OperationReviewPlayerListTickets = "/api.review.service.v1.Review/PlayerListTickets"
 
 type ReviewHTTPServer interface {
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
-	PlayerListTickets(context.Context, *PlayerListTicketsRequest) (*PlayerListTicketsResponse, error)
 	PlayerGetTicket(context.Context, *PlayerGetTicketRequest) (*PlayerGetTicketResponse, error)
+	// PlayerListTickets Player-facing endpoints
+	PlayerListTickets(context.Context, *PlayerListTicketsRequest) (*PlayerListTicketsResponse, error)
 }
 
 func RegisterReviewHTTPServer(s *http.Server, srv ReviewHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/review/withdraw", _Review_CreateWithdraw1_HTTP_Handler(srv))
-	r.POST("/v1/review/tickets/list", _Review_PlayerListTickets_HTTP_Handler(srv))
-	r.POST("/v1/review/tickets/get", _Review_PlayerGetTicket_HTTP_Handler(srv))
+	r.POST("/v1/review/tickets/list", _Review_PlayerListTickets0_HTTP_Handler(srv))
+	r.POST("/v1/review/tickets/get", _Review_PlayerGetTicket0_HTTP_Handler(srv))
 }
 
 func _Review_CreateWithdraw1_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
@@ -58,7 +59,7 @@ func _Review_CreateWithdraw1_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Co
 	}
 }
 
-func _Review_PlayerListTickets_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
+func _Review_PlayerListTickets0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in PlayerListTicketsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -80,7 +81,7 @@ func _Review_PlayerListTickets_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.
 	}
 }
 
-func _Review_PlayerGetTicket_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
+func _Review_PlayerGetTicket0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in PlayerGetTicketRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -104,6 +105,9 @@ func _Review_PlayerGetTicket_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Co
 
 type ReviewHTTPClient interface {
 	CreateWithdraw(ctx context.Context, req *CreateWithdrawRequest, opts ...http.CallOption) (rsp *CreateWithdrawResponse, err error)
+	PlayerGetTicket(ctx context.Context, req *PlayerGetTicketRequest, opts ...http.CallOption) (rsp *PlayerGetTicketResponse, err error)
+	// PlayerListTickets Player-facing endpoints
+	PlayerListTickets(ctx context.Context, req *PlayerListTicketsRequest, opts ...http.CallOption) (rsp *PlayerListTicketsResponse, err error)
 }
 
 type ReviewHTTPClientImpl struct {
@@ -119,6 +123,33 @@ func (c *ReviewHTTPClientImpl) CreateWithdraw(ctx context.Context, in *CreateWit
 	pattern := "/v1/review/withdraw"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationReviewCreateWithdraw))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ReviewHTTPClientImpl) PlayerGetTicket(ctx context.Context, in *PlayerGetTicketRequest, opts ...http.CallOption) (*PlayerGetTicketResponse, error) {
+	var out PlayerGetTicketResponse
+	pattern := "/v1/review/tickets/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationReviewPlayerGetTicket))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// PlayerListTickets Player-facing endpoints
+func (c *ReviewHTTPClientImpl) PlayerListTickets(ctx context.Context, in *PlayerListTicketsRequest, opts ...http.CallOption) (*PlayerListTicketsResponse, error) {
+	var out PlayerListTicketsResponse
+	pattern := "/v1/review/tickets/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationReviewPlayerListTickets))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

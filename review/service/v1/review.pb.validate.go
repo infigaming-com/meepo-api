@@ -682,6 +682,8 @@ func (m *ReviewTicketRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for PlayerComment
+
 	if len(errors) > 0 {
 		return ReviewTicketRequestMultiError(errors)
 	}
@@ -3208,6 +3210,484 @@ var _ interface {
 	ErrorName() string
 } = WithdrawApprovalCheckValidationError{}
 
+// Validate checks the field values on PlayerListTicketsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PlayerListTicketsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlayerListTicketsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PlayerListTicketsRequestMultiError, or nil if none found.
+func (m *PlayerListTicketsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlayerListTicketsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return PlayerListTicketsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlayerListTicketsRequestMultiError is an error wrapping multiple validation
+// errors returned by PlayerListTicketsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type PlayerListTicketsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlayerListTicketsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlayerListTicketsRequestMultiError) AllErrors() []error { return m }
+
+// PlayerListTicketsRequestValidationError is the validation error returned by
+// PlayerListTicketsRequest.Validate if the designated constraints aren't met.
+type PlayerListTicketsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlayerListTicketsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlayerListTicketsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlayerListTicketsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlayerListTicketsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlayerListTicketsRequestValidationError) ErrorName() string {
+	return "PlayerListTicketsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PlayerListTicketsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlayerListTicketsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlayerListTicketsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlayerListTicketsRequestValidationError{}
+
+// Validate checks the field values on PlayerListTicketsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PlayerListTicketsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlayerListTicketsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PlayerListTicketsResponseMultiError, or nil if none found.
+func (m *PlayerListTicketsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlayerListTicketsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetTickets() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PlayerListTicketsResponseValidationError{
+						field:  fmt.Sprintf("Tickets[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PlayerListTicketsResponseValidationError{
+						field:  fmt.Sprintf("Tickets[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PlayerListTicketsResponseValidationError{
+					field:  fmt.Sprintf("Tickets[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for TotalCount
+
+	if len(errors) > 0 {
+		return PlayerListTicketsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlayerListTicketsResponseMultiError is an error wrapping multiple validation
+// errors returned by PlayerListTicketsResponse.ValidateAll() if the
+// designated constraints aren't met.
+type PlayerListTicketsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlayerListTicketsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlayerListTicketsResponseMultiError) AllErrors() []error { return m }
+
+// PlayerListTicketsResponseValidationError is the validation error returned by
+// PlayerListTicketsResponse.Validate if the designated constraints aren't met.
+type PlayerListTicketsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlayerListTicketsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlayerListTicketsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlayerListTicketsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlayerListTicketsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlayerListTicketsResponseValidationError) ErrorName() string {
+	return "PlayerListTicketsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PlayerListTicketsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlayerListTicketsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlayerListTicketsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlayerListTicketsResponseValidationError{}
+
+// Validate checks the field values on PlayerGetTicketRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PlayerGetTicketRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlayerGetTicketRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PlayerGetTicketRequestMultiError, or nil if none found.
+func (m *PlayerGetTicketRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlayerGetTicketRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TicketId
+
+	if len(errors) > 0 {
+		return PlayerGetTicketRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlayerGetTicketRequestMultiError is an error wrapping multiple validation
+// errors returned by PlayerGetTicketRequest.ValidateAll() if the designated
+// constraints aren't met.
+type PlayerGetTicketRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlayerGetTicketRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlayerGetTicketRequestMultiError) AllErrors() []error { return m }
+
+// PlayerGetTicketRequestValidationError is the validation error returned by
+// PlayerGetTicketRequest.Validate if the designated constraints aren't met.
+type PlayerGetTicketRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlayerGetTicketRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlayerGetTicketRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlayerGetTicketRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlayerGetTicketRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlayerGetTicketRequestValidationError) ErrorName() string {
+	return "PlayerGetTicketRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PlayerGetTicketRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlayerGetTicketRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlayerGetTicketRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlayerGetTicketRequestValidationError{}
+
+// Validate checks the field values on PlayerGetTicketResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PlayerGetTicketResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlayerGetTicketResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PlayerGetTicketResponseMultiError, or nil if none found.
+func (m *PlayerGetTicketResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlayerGetTicketResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TicketId
+
+	// no validation rules for Status
+
+	// no validation rules for Amount
+
+	// no validation rules for Currency
+
+	// no validation rules for PaymentStatus
+
+	// no validation rules for PlayerComment
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for ReviewedAt
+
+	if len(errors) > 0 {
+		return PlayerGetTicketResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlayerGetTicketResponseMultiError is an error wrapping multiple validation
+// errors returned by PlayerGetTicketResponse.ValidateAll() if the designated
+// constraints aren't met.
+type PlayerGetTicketResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlayerGetTicketResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlayerGetTicketResponseMultiError) AllErrors() []error { return m }
+
+// PlayerGetTicketResponseValidationError is the validation error returned by
+// PlayerGetTicketResponse.Validate if the designated constraints aren't met.
+type PlayerGetTicketResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlayerGetTicketResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlayerGetTicketResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlayerGetTicketResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlayerGetTicketResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlayerGetTicketResponseValidationError) ErrorName() string {
+	return "PlayerGetTicketResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PlayerGetTicketResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlayerGetTicketResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlayerGetTicketResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlayerGetTicketResponseValidationError{}
+
 // Validate checks the field values on ListTicketsResponse_Ticket with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -5129,3 +5609,124 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetOperatorTicketResponse_WalletTransactionSummaryValidationError{}
+
+// Validate checks the field values on PlayerListTicketsResponse_Ticket with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *PlayerListTicketsResponse_Ticket) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlayerListTicketsResponse_Ticket with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// PlayerListTicketsResponse_TicketMultiError, or nil if none found.
+func (m *PlayerListTicketsResponse_Ticket) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlayerListTicketsResponse_Ticket) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TicketId
+
+	// no validation rules for Status
+
+	// no validation rules for Amount
+
+	// no validation rules for Currency
+
+	// no validation rules for PaymentStatus
+
+	// no validation rules for PlayerComment
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for ReviewedAt
+
+	if len(errors) > 0 {
+		return PlayerListTicketsResponse_TicketMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlayerListTicketsResponse_TicketMultiError is an error wrapping multiple
+// validation errors returned by
+// PlayerListTicketsResponse_Ticket.ValidateAll() if the designated
+// constraints aren't met.
+type PlayerListTicketsResponse_TicketMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlayerListTicketsResponse_TicketMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlayerListTicketsResponse_TicketMultiError) AllErrors() []error { return m }
+
+// PlayerListTicketsResponse_TicketValidationError is the validation error
+// returned by PlayerListTicketsResponse_Ticket.Validate if the designated
+// constraints aren't met.
+type PlayerListTicketsResponse_TicketValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlayerListTicketsResponse_TicketValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlayerListTicketsResponse_TicketValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlayerListTicketsResponse_TicketValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlayerListTicketsResponse_TicketValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlayerListTicketsResponse_TicketValidationError) ErrorName() string {
+	return "PlayerListTicketsResponse_TicketValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PlayerListTicketsResponse_TicketValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlayerListTicketsResponse_Ticket.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlayerListTicketsResponse_TicketValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlayerListTicketsResponse_TicketValidationError{}
