@@ -10773,6 +10773,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegistrationFieldConfigResponse'
+    /v1/user/phone/verification-code/send:
+        post:
+            tags:
+                - User
+            description: Send verification code to phone via SMS
+            operationId: User_SendPhoneVerificationCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.SendPhoneVerificationCodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SendPhoneVerificationCodeResponse'
+    /v1/user/phone/verify/get:
+        post:
+            tags:
+                - User
+            description: Verify phone with code, sets MobileVerified=true and refreshes KYC level
+            operationId: User_VerifyPhone
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.VerifyPhoneRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.VerifyPhoneResponse'
     /v1/user/privacy-settings:
         get:
             tags:
@@ -32504,6 +32542,18 @@ components:
         api.user.service.v1.SendPasswordResetCodeResponse:
             type: object
             properties: {}
+        api.user.service.v1.SendPhoneVerificationCodeRequest:
+            type: object
+            properties:
+                phone:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                userId:
+                    type: string
+        api.user.service.v1.SendPhoneVerificationCodeResponse:
+            type: object
+            properties: {}
         api.user.service.v1.SetOperatorRegisterLimitConfigResponse:
             type: object
             properties: {}
@@ -32938,6 +32988,18 @@ components:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.VerifyEmailResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.VerifyPhoneRequest:
+            type: object
+            properties:
+                phone:
+                    type: string
+                verificationCode:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.user.service.v1.VerifyPhoneResponse:
             type: object
             properties: {}
         api.vip.service.v1.ClaimVipRewardResponse:

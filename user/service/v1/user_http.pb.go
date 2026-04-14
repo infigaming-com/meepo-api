@@ -59,6 +59,7 @@ const OperationUserResetPasswordWithCode = "/api.user.service.v1.User/ResetPassw
 const OperationUserSendAuthOTP = "/api.user.service.v1.User/SendAuthOTP"
 const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
+const OperationUserSendPhoneVerificationCode = "/api.user.service.v1.User/SendPhoneVerificationCode"
 const OperationUserUnbindOAuthAccount = "/api.user.service.v1.User/UnbindOAuthAccount"
 const OperationUserUnregisterWebPushDevice = "/api.user.service.v1.User/UnregisterWebPushDevice"
 const OperationUserUpdateUser = "/api.user.service.v1.User/UpdateUser"
@@ -66,6 +67,7 @@ const OperationUserUpdateUserIdentity = "/api.user.service.v1.User/UpdateUserIde
 const OperationUserUpdateUserPrivacySettings = "/api.user.service.v1.User/UpdateUserPrivacySettings"
 const OperationUserUpdateVipRewardSlider = "/api.user.service.v1.User/UpdateVipRewardSlider"
 const OperationUserVerifyEmail = "/api.user.service.v1.User/VerifyEmail"
+const OperationUserVerifyPhone = "/api.user.service.v1.User/VerifyPhone"
 
 type UserHTTPServer interface {
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
@@ -142,6 +144,8 @@ type UserHTTPServer interface {
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	// SendPasswordResetCode Send password reset verification code to email
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
+	// SendPhoneVerificationCode Send verification code to phone via SMS
+	SendPhoneVerificationCode(context.Context, *SendPhoneVerificationCodeRequest) (*SendPhoneVerificationCodeResponse, error)
 	// UnbindOAuthAccount Unbind OAuth account from current user (requires authentication)
 	UnbindOAuthAccount(context.Context, *UnbindOAuthAccountRequest) (*UnbindOAuthAccountResponse, error)
 	UnregisterWebPushDevice(context.Context, *UnregisterWebPushDeviceRequest) (*UnregisterWebPushDeviceResponse, error)
@@ -150,6 +154,8 @@ type UserHTTPServer interface {
 	UpdateUserPrivacySettings(context.Context, *UpdateUserPrivacySettingsRequest) (*UpdateUserPrivacySettingsResponse, error)
 	UpdateVipRewardSlider(context.Context, *UpdateVipRewardSliderRequest) (*v1.UpdateVipRewardSliderResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
+	// VerifyPhone Verify phone with code, sets MobileVerified=true and refreshes KYC level
+	VerifyPhone(context.Context, *VerifyPhoneRequest) (*VerifyPhoneResponse, error)
 }
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
@@ -166,11 +172,13 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/auth/logout", _User_Logout0_HTTP_Handler(srv))
 	r.POST("/v1/user/tags/get", _User_GetUserTags0_HTTP_Handler(srv))
 	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode0_HTTP_Handler(srv))
+	r.POST("/v1/user/phone/verification-code/send", _User_SendPhoneVerificationCode0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/password/reset-code/send", _User_SendPasswordResetCode0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/password/reset", _User_ResetPasswordWithCode0_HTTP_Handler(srv))
 	r.POST("/v1/user/update", _User_UpdateUser0_HTTP_Handler(srv))
 	r.POST("/v1/user/identity/update", _User_UpdateUserIdentity0_HTTP_Handler(srv))
 	r.POST("/v1/user/email/verify/get", _User_VerifyEmail0_HTTP_Handler(srv))
+	r.POST("/v1/user/phone/verify/get", _User_VerifyPhone0_HTTP_Handler(srv))
 	r.POST("/v1/user/operator/account-settings/get", _User_GetOperatorAccountSettings0_HTTP_Handler(srv))
 	r.POST("/v1/user/account-settings/status/get", _User_GetUserAccountSettingsStatus0_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/add", _User_AddResponsibleGamblingConfig1_HTTP_Handler(srv))
@@ -465,6 +473,28 @@ func _User_SendEmailVerificationCode0_HTTP_Handler(srv UserHTTPServer) func(ctx 
 	}
 }
 
+func _User_SendPhoneVerificationCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SendPhoneVerificationCodeRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserSendPhoneVerificationCode)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SendPhoneVerificationCode(ctx, req.(*SendPhoneVerificationCodeRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SendPhoneVerificationCodeResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _User_SendPasswordResetCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SendPasswordResetCodeRequest
@@ -571,6 +601,28 @@ func _User_VerifyEmail0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) 
 			return err
 		}
 		reply := out.(*VerifyEmailResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_VerifyPhone0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in VerifyPhoneRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserVerifyPhone)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.VerifyPhone(ctx, req.(*VerifyPhoneRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*VerifyPhoneResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1254,6 +1306,8 @@ type UserHTTPClient interface {
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	// SendPasswordResetCode Send password reset verification code to email
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
+	// SendPhoneVerificationCode Send verification code to phone via SMS
+	SendPhoneVerificationCode(ctx context.Context, req *SendPhoneVerificationCodeRequest, opts ...http.CallOption) (rsp *SendPhoneVerificationCodeResponse, err error)
 	// UnbindOAuthAccount Unbind OAuth account from current user (requires authentication)
 	UnbindOAuthAccount(ctx context.Context, req *UnbindOAuthAccountRequest, opts ...http.CallOption) (rsp *UnbindOAuthAccountResponse, err error)
 	UnregisterWebPushDevice(ctx context.Context, req *UnregisterWebPushDeviceRequest, opts ...http.CallOption) (rsp *UnregisterWebPushDeviceResponse, err error)
@@ -1262,6 +1316,8 @@ type UserHTTPClient interface {
 	UpdateUserPrivacySettings(ctx context.Context, req *UpdateUserPrivacySettingsRequest, opts ...http.CallOption) (rsp *UpdateUserPrivacySettingsResponse, err error)
 	UpdateVipRewardSlider(ctx context.Context, req *UpdateVipRewardSliderRequest, opts ...http.CallOption) (rsp *v1.UpdateVipRewardSliderResponse, err error)
 	VerifyEmail(ctx context.Context, req *VerifyEmailRequest, opts ...http.CallOption) (rsp *VerifyEmailResponse, err error)
+	// VerifyPhone Verify phone with code, sets MobileVerified=true and refreshes KYC level
+	VerifyPhone(ctx context.Context, req *VerifyPhoneRequest, opts ...http.CallOption) (rsp *VerifyPhoneResponse, err error)
 }
 
 type UserHTTPClientImpl struct {
@@ -1802,6 +1858,20 @@ func (c *UserHTTPClientImpl) SendPasswordResetCode(ctx context.Context, in *Send
 	return &out, nil
 }
 
+// SendPhoneVerificationCode Send verification code to phone via SMS
+func (c *UserHTTPClientImpl) SendPhoneVerificationCode(ctx context.Context, in *SendPhoneVerificationCodeRequest, opts ...http.CallOption) (*SendPhoneVerificationCodeResponse, error) {
+	var out SendPhoneVerificationCodeResponse
+	pattern := "/v1/user/phone/verification-code/send"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserSendPhoneVerificationCode))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // UnbindOAuthAccount Unbind OAuth account from current user (requires authentication)
 func (c *UserHTTPClientImpl) UnbindOAuthAccount(ctx context.Context, in *UnbindOAuthAccountRequest, opts ...http.CallOption) (*UnbindOAuthAccountResponse, error) {
 	var out UnbindOAuthAccountResponse
@@ -1886,6 +1956,20 @@ func (c *UserHTTPClientImpl) VerifyEmail(ctx context.Context, in *VerifyEmailReq
 	pattern := "/v1/user/email/verify/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserVerifyEmail))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// VerifyPhone Verify phone with code, sets MobileVerified=true and refreshes KYC level
+func (c *UserHTTPClientImpl) VerifyPhone(ctx context.Context, in *VerifyPhoneRequest, opts ...http.CallOption) (*VerifyPhoneResponse, error) {
+	var out VerifyPhoneResponse
+	pattern := "/v1/user/phone/verify/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserVerifyPhone))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
