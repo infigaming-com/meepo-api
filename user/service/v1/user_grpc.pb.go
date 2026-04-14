@@ -47,6 +47,7 @@ const (
 	User_CheckPermission_FullMethodName                    = "/api.user.service.v1.User/CheckPermission"
 	User_AddOperator_FullMethodName                        = "/api.user.service.v1.User/AddOperator"
 	User_SendEmailVerificationCode_FullMethodName          = "/api.user.service.v1.User/SendEmailVerificationCode"
+	User_SendPhoneVerificationCode_FullMethodName          = "/api.user.service.v1.User/SendPhoneVerificationCode"
 	User_SendPasswordResetCode_FullMethodName              = "/api.user.service.v1.User/SendPasswordResetCode"
 	User_ResetPasswordWithCode_FullMethodName              = "/api.user.service.v1.User/ResetPasswordWithCode"
 	User_UpdateUser_FullMethodName                         = "/api.user.service.v1.User/UpdateUser"
@@ -55,6 +56,7 @@ const (
 	User_ExportUsers_FullMethodName                        = "/api.user.service.v1.User/ExportUsers"
 	User_CreateUser_FullMethodName                         = "/api.user.service.v1.User/CreateUser"
 	User_VerifyEmail_FullMethodName                        = "/api.user.service.v1.User/VerifyEmail"
+	User_VerifyPhone_FullMethodName                        = "/api.user.service.v1.User/VerifyPhone"
 	User_AddComment_FullMethodName                         = "/api.user.service.v1.User/AddComment"
 	User_GetCommentsByUserId_FullMethodName                = "/api.user.service.v1.User/GetCommentsByUserId"
 	User_GetUserProfile_FullMethodName                     = "/api.user.service.v1.User/GetUserProfile"
@@ -222,6 +224,8 @@ type UserClient interface {
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
+	// Send verification code to phone via SMS
+	SendPhoneVerificationCode(ctx context.Context, in *SendPhoneVerificationCodeRequest, opts ...grpc.CallOption) (*SendPhoneVerificationCodeResponse, error)
 	// Send password reset verification code to email
 	SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error)
 	// Reset password using verification code
@@ -232,6 +236,8 @@ type UserClient interface {
 	ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
+	// Verify phone with code, sets MobileVerified=true and refreshes KYC level
+	VerifyPhone(ctx context.Context, in *VerifyPhoneRequest, opts ...grpc.CallOption) (*VerifyPhoneResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
 	GetCommentsByUserId(ctx context.Context, in *GetCommentsByUserIdRequest, opts ...grpc.CallOption) (*GetCommentsByUserIdResponse, error)
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
@@ -661,6 +667,16 @@ func (c *userClient) SendEmailVerificationCode(ctx context.Context, in *SendEmai
 	return out, nil
 }
 
+func (c *userClient) SendPhoneVerificationCode(ctx context.Context, in *SendPhoneVerificationCodeRequest, opts ...grpc.CallOption) (*SendPhoneVerificationCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendPhoneVerificationCodeResponse)
+	err := c.cc.Invoke(ctx, User_SendPhoneVerificationCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendPasswordResetCodeResponse)
@@ -735,6 +751,16 @@ func (c *userClient) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, op
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyEmailResponse)
 	err := c.cc.Invoke(ctx, User_VerifyEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) VerifyPhone(ctx context.Context, in *VerifyPhoneRequest, opts ...grpc.CallOption) (*VerifyPhoneResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VerifyPhoneResponse)
+	err := c.cc.Invoke(ctx, User_VerifyPhone_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1779,6 +1805,8 @@ type UserServer interface {
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
+	// Send verification code to phone via SMS
+	SendPhoneVerificationCode(context.Context, *SendPhoneVerificationCodeRequest) (*SendPhoneVerificationCodeResponse, error)
 	// Send password reset verification code to email
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
 	// Reset password using verification code
@@ -1789,6 +1817,8 @@ type UserServer interface {
 	ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
+	// Verify phone with code, sets MobileVerified=true and refreshes KYC level
+	VerifyPhone(context.Context, *VerifyPhoneRequest) (*VerifyPhoneResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	GetCommentsByUserId(context.Context, *GetCommentsByUserIdRequest) (*GetCommentsByUserIdResponse, error)
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
@@ -2036,6 +2066,9 @@ func (UnimplementedUserServer) AddOperator(context.Context, *AddOperatorRequest)
 func (UnimplementedUserServer) SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendEmailVerificationCode not implemented")
 }
+func (UnimplementedUserServer) SendPhoneVerificationCode(context.Context, *SendPhoneVerificationCodeRequest) (*SendPhoneVerificationCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendPhoneVerificationCode not implemented")
+}
 func (UnimplementedUserServer) SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendPasswordResetCode not implemented")
 }
@@ -2059,6 +2092,9 @@ func (UnimplementedUserServer) CreateUser(context.Context, *CreateUserRequest) (
 }
 func (UnimplementedUserServer) VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method VerifyEmail not implemented")
+}
+func (UnimplementedUserServer) VerifyPhone(context.Context, *VerifyPhoneRequest) (*VerifyPhoneResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method VerifyPhone not implemented")
 }
 func (UnimplementedUserServer) AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddComment not implemented")
@@ -2840,6 +2876,24 @@ func _User_SendEmailVerificationCode_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_SendPhoneVerificationCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendPhoneVerificationCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SendPhoneVerificationCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SendPhoneVerificationCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SendPhoneVerificationCode(ctx, req.(*SendPhoneVerificationCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_SendPasswordResetCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SendPasswordResetCodeRequest)
 	if err := dec(in); err != nil {
@@ -2980,6 +3034,24 @@ func _User_VerifyEmail_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).VerifyEmail(ctx, req.(*VerifyEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_VerifyPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyPhoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).VerifyPhone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_VerifyPhone_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).VerifyPhone(ctx, req.(*VerifyPhoneRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4842,6 +4914,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_SendEmailVerificationCode_Handler,
 		},
 		{
+			MethodName: "SendPhoneVerificationCode",
+			Handler:    _User_SendPhoneVerificationCode_Handler,
+		},
+		{
 			MethodName: "SendPasswordResetCode",
 			Handler:    _User_SendPasswordResetCode_Handler,
 		},
@@ -4872,6 +4948,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyEmail",
 			Handler:    _User_VerifyEmail_Handler,
+		},
+		{
+			MethodName: "VerifyPhone",
+			Handler:    _User_VerifyPhone_Handler,
 		},
 		{
 			MethodName: "AddComment",
