@@ -32552,10 +32552,7 @@ components:
             properties:
                 email:
                     type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                userId:
-                    type: string
+            description: HTTP request — operator context and user id are populated from JWT.
         api.user.service.v1.SendEmailVerificationCodeResponse:
             type: object
             properties: {}
@@ -32576,10 +32573,7 @@ components:
             properties:
                 phone:
                     type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                userId:
-                    type: string
+            description: HTTP request — operator context and user id are populated from JWT.
         api.user.service.v1.SendPhoneVerificationCodeResponse:
             type: object
             properties: {}
@@ -33014,8 +33008,7 @@ components:
                     type: string
                 verificationCode:
                     type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: HTTP request — operator context is populated from JWT.
         api.user.service.v1.VerifyEmailResponse:
             type: object
             properties: {}
@@ -33026,8 +33019,7 @@ components:
                     type: string
                 verificationCode:
                     type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: HTTP request — operator context is populated from JWT.
         api.user.service.v1.VerifyPhoneResponse:
             type: object
             properties: {}

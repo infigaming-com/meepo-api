@@ -4697,39 +4697,6 @@ func (m *SendEmailVerificationCodeRequest) validate(all bool) error {
 
 	// no validation rules for Email
 
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SendEmailVerificationCodeRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, SendEmailVerificationCodeRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SendEmailVerificationCodeRequestValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.UserId != nil {
-		// no validation rules for UserId
-	}
-
 	if len(errors) > 0 {
 		return SendEmailVerificationCodeRequestMultiError(errors)
 	}
@@ -4917,6 +4884,147 @@ var _ interface {
 	ErrorName() string
 } = SendEmailVerificationCodeResponseValidationError{}
 
+// Validate checks the field values on SendEmailVerificationCodeWithInfoRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *SendEmailVerificationCodeWithInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// SendEmailVerificationCodeWithInfoRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// SendEmailVerificationCodeWithInfoRequestMultiError, or nil if none found.
+func (m *SendEmailVerificationCodeWithInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendEmailVerificationCodeWithInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Email
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendEmailVerificationCodeWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendEmailVerificationCodeWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendEmailVerificationCodeWithInfoRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if len(errors) > 0 {
+		return SendEmailVerificationCodeWithInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendEmailVerificationCodeWithInfoRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// SendEmailVerificationCodeWithInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SendEmailVerificationCodeWithInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendEmailVerificationCodeWithInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendEmailVerificationCodeWithInfoRequestMultiError) AllErrors() []error { return m }
+
+// SendEmailVerificationCodeWithInfoRequestValidationError is the validation
+// error returned by SendEmailVerificationCodeWithInfoRequest.Validate if the
+// designated constraints aren't met.
+type SendEmailVerificationCodeWithInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendEmailVerificationCodeWithInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendEmailVerificationCodeWithInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendEmailVerificationCodeWithInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendEmailVerificationCodeWithInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendEmailVerificationCodeWithInfoRequestValidationError) ErrorName() string {
+	return "SendEmailVerificationCodeWithInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendEmailVerificationCodeWithInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendEmailVerificationCodeWithInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendEmailVerificationCodeWithInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendEmailVerificationCodeWithInfoRequestValidationError{}
+
 // Validate checks the field values on SendPhoneVerificationCodeRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -4941,39 +5049,6 @@ func (m *SendPhoneVerificationCodeRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for Phone
-
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SendPhoneVerificationCodeRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, SendPhoneVerificationCodeRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SendPhoneVerificationCodeRequestValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.UserId != nil {
-		// no validation rules for UserId
-	}
 
 	if len(errors) > 0 {
 		return SendPhoneVerificationCodeRequestMultiError(errors)
@@ -5161,6 +5236,147 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SendPhoneVerificationCodeResponseValidationError{}
+
+// Validate checks the field values on SendPhoneVerificationCodeWithInfoRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *SendPhoneVerificationCodeWithInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// SendPhoneVerificationCodeWithInfoRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// SendPhoneVerificationCodeWithInfoRequestMultiError, or nil if none found.
+func (m *SendPhoneVerificationCodeWithInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendPhoneVerificationCodeWithInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Phone
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendPhoneVerificationCodeWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendPhoneVerificationCodeWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendPhoneVerificationCodeWithInfoRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if len(errors) > 0 {
+		return SendPhoneVerificationCodeWithInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendPhoneVerificationCodeWithInfoRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// SendPhoneVerificationCodeWithInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SendPhoneVerificationCodeWithInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendPhoneVerificationCodeWithInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendPhoneVerificationCodeWithInfoRequestMultiError) AllErrors() []error { return m }
+
+// SendPhoneVerificationCodeWithInfoRequestValidationError is the validation
+// error returned by SendPhoneVerificationCodeWithInfoRequest.Validate if the
+// designated constraints aren't met.
+type SendPhoneVerificationCodeWithInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendPhoneVerificationCodeWithInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendPhoneVerificationCodeWithInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendPhoneVerificationCodeWithInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendPhoneVerificationCodeWithInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendPhoneVerificationCodeWithInfoRequestValidationError) ErrorName() string {
+	return "SendPhoneVerificationCodeWithInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendPhoneVerificationCodeWithInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendPhoneVerificationCodeWithInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendPhoneVerificationCodeWithInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendPhoneVerificationCodeWithInfoRequestValidationError{}
 
 // Validate checks the field values on SendPasswordResetCodeRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -7751,35 +7967,6 @@ func (m *VerifyEmailRequest) validate(all bool) error {
 
 	// no validation rules for VerificationCode
 
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, VerifyEmailRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, VerifyEmailRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return VerifyEmailRequestValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return VerifyEmailRequestMultiError(errors)
 	}
@@ -7962,6 +8149,141 @@ var _ interface {
 	ErrorName() string
 } = VerifyEmailResponseValidationError{}
 
+// Validate checks the field values on VerifyEmailWithInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *VerifyEmailWithInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on VerifyEmailWithInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// VerifyEmailWithInfoRequestMultiError, or nil if none found.
+func (m *VerifyEmailWithInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *VerifyEmailWithInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Email
+
+	// no validation rules for VerificationCode
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, VerifyEmailWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, VerifyEmailWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifyEmailWithInfoRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return VerifyEmailWithInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// VerifyEmailWithInfoRequestMultiError is an error wrapping multiple
+// validation errors returned by VerifyEmailWithInfoRequest.ValidateAll() if
+// the designated constraints aren't met.
+type VerifyEmailWithInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m VerifyEmailWithInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m VerifyEmailWithInfoRequestMultiError) AllErrors() []error { return m }
+
+// VerifyEmailWithInfoRequestValidationError is the validation error returned
+// by VerifyEmailWithInfoRequest.Validate if the designated constraints aren't met.
+type VerifyEmailWithInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifyEmailWithInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifyEmailWithInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifyEmailWithInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifyEmailWithInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifyEmailWithInfoRequestValidationError) ErrorName() string {
+	return "VerifyEmailWithInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifyEmailWithInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifyEmailWithInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifyEmailWithInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifyEmailWithInfoRequestValidationError{}
+
 // Validate checks the field values on VerifyPhoneRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -7987,35 +8309,6 @@ func (m *VerifyPhoneRequest) validate(all bool) error {
 	// no validation rules for Phone
 
 	// no validation rules for VerificationCode
-
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, VerifyPhoneRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, VerifyPhoneRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return VerifyPhoneRequestValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return VerifyPhoneRequestMultiError(errors)
@@ -8198,6 +8491,141 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = VerifyPhoneResponseValidationError{}
+
+// Validate checks the field values on VerifyPhoneWithInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *VerifyPhoneWithInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on VerifyPhoneWithInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// VerifyPhoneWithInfoRequestMultiError, or nil if none found.
+func (m *VerifyPhoneWithInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *VerifyPhoneWithInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Phone
+
+	// no validation rules for VerificationCode
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, VerifyPhoneWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, VerifyPhoneWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifyPhoneWithInfoRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return VerifyPhoneWithInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// VerifyPhoneWithInfoRequestMultiError is an error wrapping multiple
+// validation errors returned by VerifyPhoneWithInfoRequest.ValidateAll() if
+// the designated constraints aren't met.
+type VerifyPhoneWithInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m VerifyPhoneWithInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m VerifyPhoneWithInfoRequestMultiError) AllErrors() []error { return m }
+
+// VerifyPhoneWithInfoRequestValidationError is the validation error returned
+// by VerifyPhoneWithInfoRequest.Validate if the designated constraints aren't met.
+type VerifyPhoneWithInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifyPhoneWithInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifyPhoneWithInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifyPhoneWithInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifyPhoneWithInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifyPhoneWithInfoRequestValidationError) ErrorName() string {
+	return "VerifyPhoneWithInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifyPhoneWithInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifyPhoneWithInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifyPhoneWithInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifyPhoneWithInfoRequestValidationError{}
 
 // Validate checks the field values on AddCommentRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the

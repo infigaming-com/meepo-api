@@ -173,12 +173,20 @@ service User {
 		};
 	}
 
+	// Internal gRPC variant of SendEmailVerificationCode with operator context.
+	rpc SendEmailVerificationCodeWithInfo(SendEmailVerificationCodeWithInfoRequest) returns (SendEmailVerificationCodeResponse) {
+	}
+
 	// Send verification code to phone via SMS
 	rpc SendPhoneVerificationCode(SendPhoneVerificationCodeRequest) returns (SendPhoneVerificationCodeResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/phone/verification-code/send"
 			body: "*"
 		};
+	}
+
+	// Internal gRPC variant of SendPhoneVerificationCode with operator context.
+	rpc SendPhoneVerificationCodeWithInfo(SendPhoneVerificationCodeWithInfoRequest) returns (SendPhoneVerificationCodeResponse) {
 	}
 
 	// Send password reset verification code to email
@@ -224,12 +232,20 @@ service User {
 		};
 	}
 
+	// Internal gRPC variant of VerifyEmail with operator context.
+	rpc VerifyEmailWithInfo(VerifyEmailWithInfoRequest) returns (VerifyEmailResponse) {
+	}
+
 	// Verify phone with code, sets MobileVerified=true and refreshes KYC level
 	rpc VerifyPhone(VerifyPhoneRequest) returns (VerifyPhoneResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/phone/verify/get"
 			body: "*"
 		};
+	}
+
+	// Internal gRPC variant of VerifyPhone with operator context.
+	rpc VerifyPhoneWithInfo(VerifyPhoneWithInfoRequest) returns (VerifyPhoneResponse) {
 	}
 
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
@@ -1026,22 +1042,38 @@ message AddOperatorRequest {
 message AddOperatorResponse {
 }
 
+// HTTP request — operator context and user id are populated from JWT.
 message SendEmailVerificationCodeRequest {
 	string email = 1;
-	api.common.OperatorContext operator_context = 2;
-	optional int64 user_id = 3;
+	reserved 2, 3;
+	reserved "operator_context", "user_id";
 }
 
 message SendEmailVerificationCodeResponse {
 }
 
-message SendPhoneVerificationCodeRequest {
-	string phone = 1;  // Phone number in E.164 format (e.g. +1234567890)
+// Internal gRPC variant that carries explicit operator context and user id.
+message SendEmailVerificationCodeWithInfoRequest {
+	string email = 1;
 	api.common.OperatorContext operator_context = 2;
 	optional int64 user_id = 3;
 }
 
+// HTTP request — operator context and user id are populated from JWT.
+message SendPhoneVerificationCodeRequest {
+	string phone = 1;  // Phone number in E.164 format (e.g. +1234567890)
+	reserved 2, 3;
+	reserved "operator_context", "user_id";
+}
+
 message SendPhoneVerificationCodeResponse {
+}
+
+// Internal gRPC variant that carries explicit operator context and user id.
+message SendPhoneVerificationCodeWithInfoRequest {
+	string phone = 1;
+	api.common.OperatorContext operator_context = 2;
+	optional int64 user_id = 3;
 }
 
 message SendPasswordResetCodeRequest {
@@ -1275,21 +1307,39 @@ message CreateUserResponse {
 	string password = 3;
 }
 
+// HTTP request — operator context is populated from JWT.
 message VerifyEmailRequest {
+	string email = 1;
+	string verification_code = 2;
+	reserved 3;
+	reserved "operator_context";
+}
+
+message VerifyEmailResponse {}
+
+// Internal gRPC variant that carries explicit operator context.
+message VerifyEmailWithInfoRequest {
 	string email = 1;
 	string verification_code = 2;
 	api.common.OperatorContext operator_context = 3;
 }
 
-message VerifyEmailResponse {}
-
+// HTTP request — operator context is populated from JWT.
 message VerifyPhoneRequest {
 	string phone = 1;  // Phone number in E.164 format
 	string verification_code = 2;
-	api.common.OperatorContext operator_context = 3;
+	reserved 3;
+	reserved "operator_context";
 }
 
 message VerifyPhoneResponse {}
+
+// Internal gRPC variant that carries explicit operator context.
+message VerifyPhoneWithInfoRequest {
+	string phone = 1;
+	string verification_code = 2;
+	api.common.OperatorContext operator_context = 3;
+}
 message AddCommentRequest {
 	int64 user_id = 1;
 	int64 author_user_id = 2;
