@@ -206,7 +206,11 @@ const (
 	ErrorReason_CREATE_TELEGRAM_CONFIG_FAILED  ErrorReason = 10406
 	ErrorReason_UPDATE_TELEGRAM_CONFIG_FAILED  ErrorReason = 10407
 	ErrorReason_DELETE_TELEGRAM_CONFIG_FAILED  ErrorReason = 10408
-	ErrorReason_INVALID_OPERATOR_NAME          ErrorReason = 10500
+	// Phone verification errors
+	ErrorReason_PHONE_VERIFICATION_FAILED ErrorReason = 10450
+	ErrorReason_PHONE_ALREADY_EXISTS      ErrorReason = 10451
+	ErrorReason_INVALID_PHONE_NUMBER      ErrorReason = 10452
+	ErrorReason_INVALID_OPERATOR_NAME     ErrorReason = 10500
 )
 
 // Enum value maps for ErrorReason.
@@ -388,6 +392,9 @@ var (
 		10406: "CREATE_TELEGRAM_CONFIG_FAILED",
 		10407: "UPDATE_TELEGRAM_CONFIG_FAILED",
 		10408: "DELETE_TELEGRAM_CONFIG_FAILED",
+		10450: "PHONE_VERIFICATION_FAILED",
+		10451: "PHONE_ALREADY_EXISTS",
+		10452: "INVALID_PHONE_NUMBER",
 		10500: "INVALID_OPERATOR_NAME",
 	}
 	ErrorReason_value = map[string]int32{
@@ -567,6 +574,9 @@ var (
 		"CREATE_TELEGRAM_CONFIG_FAILED":                  10406,
 		"UPDATE_TELEGRAM_CONFIG_FAILED":                  10407,
 		"DELETE_TELEGRAM_CONFIG_FAILED":                  10408,
+		"PHONE_VERIFICATION_FAILED":                      10450,
+		"PHONE_ALREADY_EXISTS":                           10451,
+		"INVALID_PHONE_NUMBER":                           10452,
 		"INVALID_OPERATOR_NAME":                          10500,
 	}
 )
@@ -602,7 +612,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xdc.\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xb2/\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -779,7 +789,10 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1eTELEGRAM_CONFIG_ALREADY_EXISTS\x10\xa5Q\x1a\x04\xa8E\x99\x03\x12\"\n" +
 	"\x1dCREATE_TELEGRAM_CONFIG_FAILED\x10\xa6Q\x12\"\n" +
 	"\x1dUPDATE_TELEGRAM_CONFIG_FAILED\x10\xa7Q\x12\"\n" +
-	"\x1dDELETE_TELEGRAM_CONFIG_FAILED\x10\xa8Q\x12\x1a\n" +
+	"\x1dDELETE_TELEGRAM_CONFIG_FAILED\x10\xa8Q\x12\x1e\n" +
+	"\x19PHONE_VERIFICATION_FAILED\x10\xd2Q\x12\x19\n" +
+	"\x14PHONE_ALREADY_EXISTS\x10\xd3Q\x12\x19\n" +
+	"\x14INVALID_PHONE_NUMBER\x10\xd4Q\x12\x1a\n" +
 	"\x15INVALID_OPERATOR_NAME\x10\x84R\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 

@@ -2135,6 +2135,44 @@ func ErrorDeleteTelegramConfigFailed(format string, args ...interface{}) *errors
 	return errors.New(500, ErrorReason_DELETE_TELEGRAM_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
+// Phone verification errors
+func IsPhoneVerificationFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PHONE_VERIFICATION_FAILED.String() && e.Code == 500
+}
+
+// Phone verification errors
+func ErrorPhoneVerificationFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PHONE_VERIFICATION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPhoneAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PHONE_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorPhoneAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PHONE_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPhoneNumber(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_PHONE_NUMBER.String() && e.Code == 500
+}
+
+func ErrorInvalidPhoneNumber(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_PHONE_NUMBER.String(), fmt.Sprintf(format, args...))
+}
+
 func IsInvalidOperatorName(err error) bool {
 	if err == nil {
 		return false
