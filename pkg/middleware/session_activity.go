@@ -8,6 +8,14 @@ import (
 	"github.com/infigaming-com/meepo-api/pkg/util"
 )
 
+// ClientSourceHeader is the HTTP header name for client source identification.
+const ClientSourceHeader = "X-Client-Source"
+
+// Client source values.
+const (
+	ClientSourcePWA = "pwa"
+)
+
 // SessionActivityRequest carries enriched session info for the tracker.
 type SessionActivityRequest struct {
 	UserID             int64
@@ -20,6 +28,7 @@ type SessionActivityRequest struct {
 	IP                 string
 	UserAgent          string
 	Country            string
+	ClientSource       string
 }
 
 // SessionActivityMiddleware tracks session activity for players (RoleId == 0).
@@ -44,6 +53,7 @@ func SessionActivityMiddleware(
 						IP:                 reqInfo.ClientIP,
 						UserAgent:          reqInfo.UserAgent,
 						Country:            reqInfo.Country,
+						ClientSource:       reqInfo.ClientSource,
 					})
 				}
 			}

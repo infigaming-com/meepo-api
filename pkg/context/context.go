@@ -20,7 +20,7 @@ type RequestInfo struct {
 	Referer     string
 	UserAgent   string
 	ClientIP    string
-	LoginMethod string // from "Login-Method" header
+	ClientSource string // from "X-Client-Source" header (e.g. "pwa")
 }
 
 type OperatorIds struct {

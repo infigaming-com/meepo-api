@@ -22958,6 +22958,9 @@ components:
                 agentType:
                     type: string
                     description: 'Agent type filter: "referral" or "affiliate"'
+                pwaLoggedIn:
+                    type: boolean
+                    description: Filter by whether the user has logged in via PWA
         api.backoffice.service.v1.ListUsersResponse:
             type: object
             properties:
@@ -23037,6 +23040,8 @@ components:
                         string device = 23;
                          string source = 24;
                 locked:
+                    type: boolean
+                pwaLoggedIn:
                     type: boolean
         api.backoffice.service.v1.ListWalletBalanceTransactionsRequest:
             type: object
@@ -31552,6 +31557,8 @@ components:
                     type: string
                 username:
                     type: string
+                clientSource:
+                    type: string
         api.user.service.v1.GetUserProfileResponse_RegistrationRecord:
             type: object
             properties:
@@ -31902,6 +31909,10 @@ components:
                 ipLoginUserCount:
                     type: integer
                     format: int32
+                clientSource:
+                    type: string
+                prevClientSource:
+                    type: string
         api.user.service.v1.LoginMethodConfig:
             type: object
             properties:

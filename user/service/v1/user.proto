@@ -1171,6 +1171,8 @@ message ListUsersRequest {
 	optional string registration_source = 28;
 	// Agent type filter: "referral" or "affiliate"
 	optional string agent_type = 29;
+	// Filter by whether the user has logged in via PWA
+	optional bool pwa_logged_in = 30;
 }
 
 message ListUsersResponse {
@@ -1212,6 +1214,7 @@ message ListUsersResponse {
 		string role_creator_name = 32;
 		string affiliation = 33;   // operator name the account belongs to
 		string creator = 34;       // creator username, e.g. "system:jimmy"
+		bool pwa_logged_in = 35;   // whether the user has ever logged in via PWA
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -1350,6 +1353,7 @@ message GetUserProfileResponse {
 		string email = 7;
 		string mobile = 8;
 		string username = 9;
+		string client_source = 10; // client source, e.g. "pwa"
 	}
 	message Comment {
 		int64 comment_id = 1;
@@ -2655,7 +2659,7 @@ message GetCompanyAdminEmailsResponse {
 
 message ListUserSessionActivitiesRequest {
 	int64 user_id = 1;
-	optional string event_type = 2;           // filter: daily_visit, ip_change, device_change
+	optional string event_type = 2;           // filter: daily_visit, ip_change, device_change, client_source_change
 	optional google.protobuf.Timestamp start_time = 3;
 	optional google.protobuf.Timestamp end_time = 4;
 	optional int32 page = 5;                  // default 1
@@ -2664,7 +2668,7 @@ message ListUserSessionActivitiesRequest {
 
 message ListUserSessionActivitiesResponse {
 	message SessionActivity {
-		string event_type = 1;                  // daily_visit, ip_change, device_change
+		string event_type = 1;                  // daily_visit, ip_change, device_change, client_source_change
 		string ip = 2;
 		string country = 3;
 		string user_agent = 4;
@@ -2672,6 +2676,8 @@ message ListUserSessionActivitiesResponse {
 		string prev_country = 6;
 		google.protobuf.Timestamp created_at = 7;
 		int32 ip_login_user_count = 8;          // distinct users who logged in from this IP
+		string client_source = 9;               // client source, e.g. "pwa"
+		string prev_client_source = 10;         // previous client source (set on client_source_change)
 	}
 	repeated SessionActivity activities = 1;
 	int32 total = 2;

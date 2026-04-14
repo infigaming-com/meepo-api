@@ -265,6 +265,10 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for AgentType
 	}
 
+	if m.PwaLoggedIn != nil {
+		// no validation rules for PwaLoggedIn
+	}
+
 	if len(errors) > 0 {
 		return ListUsersRequestMultiError(errors)
 	}
@@ -4412,6 +4416,8 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 	// no validation rules for RegistrationIp
 
 	// no validation rules for Locked
+
+	// no validation rules for PwaLoggedIn
 
 	if len(errors) > 0 {
 		return ListUsersResponse_UserMultiError(errors)

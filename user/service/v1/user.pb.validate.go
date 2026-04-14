@@ -6797,6 +6797,10 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for AgentType
 	}
 
+	if m.PwaLoggedIn != nil {
+		// no validation rules for PwaLoggedIn
+	}
+
 	if len(errors) > 0 {
 		return ListUsersRequestMultiError(errors)
 	}
@@ -35781,6 +35785,8 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	// no validation rules for Creator
 
+	// no validation rules for PwaLoggedIn
+
 	if len(errors) > 0 {
 		return ListUsersResponse_UserMultiError(errors)
 	}
@@ -36359,6 +36365,8 @@ func (m *GetUserProfileResponse_LoginRecord) validate(all bool) error {
 	// no validation rules for Mobile
 
 	// no validation rules for Username
+
+	// no validation rules for ClientSource
 
 	if len(errors) > 0 {
 		return GetUserProfileResponse_LoginRecordMultiError(errors)
@@ -38547,6 +38555,10 @@ func (m *ListUserSessionActivitiesResponse_SessionActivity) validate(all bool) e
 	}
 
 	// no validation rules for IpLoginUserCount
+
+	// no validation rules for ClientSource
+
+	// no validation rules for PrevClientSource
 
 	if len(errors) > 0 {
 		return ListUserSessionActivitiesResponse_SessionActivityMultiError(errors)

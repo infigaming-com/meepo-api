@@ -192,6 +192,8 @@ message ListUsersRequest {
 	optional string registration_source = 27;
 	// Agent type filter: "referral" or "affiliate"
 	optional string agent_type = 28;
+	// Filter by whether the user has logged in via PWA
+	optional bool pwa_logged_in = 29;
 }
 
 message ListUsersResponse {
@@ -225,6 +227,7 @@ message ListUsersResponse {
 		// string source = 24;
 		string registration_ip = 25;
 		bool locked = 26;  // whether the user is locked
+		bool pwa_logged_in = 27;  // whether the user has ever logged in via PWA
 	}
 	repeated User users = 1;
 	int32 page = 2;

@@ -3725,7 +3725,9 @@ type ListUsersRequest struct {
 	// Registration source filter: "direct" (no parent) or "invited" (has parent)
 	RegistrationSource *string `protobuf:"bytes,28,opt,name=registration_source,json=registrationSource,proto3,oneof" json:"registration_source,omitempty"`
 	// Agent type filter: "referral" or "affiliate"
-	AgentType     *string `protobuf:"bytes,29,opt,name=agent_type,json=agentType,proto3,oneof" json:"agent_type,omitempty"`
+	AgentType *string `protobuf:"bytes,29,opt,name=agent_type,json=agentType,proto3,oneof" json:"agent_type,omitempty"`
+	// Filter by whether the user has logged in via PWA
+	PwaLoggedIn   *bool `protobuf:"varint,30,opt,name=pwa_logged_in,json=pwaLoggedIn,proto3,oneof" json:"pwa_logged_in,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3961,6 +3963,13 @@ func (x *ListUsersRequest) GetAgentType() string {
 		return *x.AgentType
 	}
 	return ""
+}
+
+func (x *ListUsersRequest) GetPwaLoggedIn() bool {
+	if x != nil && x.PwaLoggedIn != nil {
+		return *x.PwaLoggedIn
+	}
+	return false
 }
 
 type ListUsersResponse struct {
@@ -16011,7 +16020,7 @@ func (x *GetCompanyAdminEmailsResponse) GetEmails() []string {
 type ListUserSessionActivitiesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	EventType     *string                `protobuf:"bytes,2,opt,name=event_type,json=eventType,proto3,oneof" json:"event_type,omitempty"` // filter: daily_visit, ip_change, device_change
+	EventType     *string                `protobuf:"bytes,2,opt,name=event_type,json=eventType,proto3,oneof" json:"event_type,omitempty"` // filter: daily_visit, ip_change, device_change, client_source_change
 	StartTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	Page          *int32                 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // default 1
@@ -17069,8 +17078,9 @@ type ListUsersResponse_User struct {
 	MfaEnabled      bool                   `protobuf:"varint,30,opt,name=mfa_enabled,json=mfaEnabled,proto3" json:"mfa_enabled,omitempty"`
 	LastLoginIp     string                 `protobuf:"bytes,31,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
 	RoleCreatorName string                 `protobuf:"bytes,32,opt,name=role_creator_name,json=roleCreatorName,proto3" json:"role_creator_name,omitempty"`
-	Affiliation     string                 `protobuf:"bytes,33,opt,name=affiliation,proto3" json:"affiliation,omitempty"` // operator name the account belongs to
-	Creator         string                 `protobuf:"bytes,34,opt,name=creator,proto3" json:"creator,omitempty"`         // creator username, e.g. "system:jimmy"
+	Affiliation     string                 `protobuf:"bytes,33,opt,name=affiliation,proto3" json:"affiliation,omitempty"`                       // operator name the account belongs to
+	Creator         string                 `protobuf:"bytes,34,opt,name=creator,proto3" json:"creator,omitempty"`                               // creator username, e.g. "system:jimmy"
+	PwaLoggedIn     bool                   `protobuf:"varint,35,opt,name=pwa_logged_in,json=pwaLoggedIn,proto3" json:"pwa_logged_in,omitempty"` // whether the user has ever logged in via PWA
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -17343,6 +17353,13 @@ func (x *ListUsersResponse_User) GetCreator() string {
 	return ""
 }
 
+func (x *ListUsersResponse_User) GetPwaLoggedIn() bool {
+	if x != nil {
+		return x.PwaLoggedIn
+	}
+	return false
+}
+
 type GetCommentsByUserIdResponse_Comment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
@@ -17606,6 +17623,7 @@ type GetUserProfileResponse_LoginRecord struct {
 	Email         string                         `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile        string                         `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	Username      string                         `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
+	ClientSource  string                         `protobuf:"bytes,10,opt,name=client_source,json=clientSource,proto3" json:"client_source,omitempty"` // client source, e.g. "pwa"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -17699,6 +17717,13 @@ func (x *GetUserProfileResponse_LoginRecord) GetMobile() string {
 func (x *GetUserProfileResponse_LoginRecord) GetUsername() string {
 	if x != nil {
 		return x.Username
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetClientSource() string {
+	if x != nil {
+		return x.ClientSource
 	}
 	return ""
 }
@@ -18760,7 +18785,7 @@ func (x *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) GetSource() 
 
 type ListUserSessionActivitiesResponse_SessionActivity struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	EventType        string                 `protobuf:"bytes,1,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"` // daily_visit, ip_change, device_change
+	EventType        string                 `protobuf:"bytes,1,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"` // daily_visit, ip_change, device_change, client_source_change
 	Ip               string                 `protobuf:"bytes,2,opt,name=ip,proto3" json:"ip,omitempty"`
 	Country          string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	UserAgent        string                 `protobuf:"bytes,4,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
@@ -18768,6 +18793,8 @@ type ListUserSessionActivitiesResponse_SessionActivity struct {
 	PrevCountry      string                 `protobuf:"bytes,6,opt,name=prev_country,json=prevCountry,proto3" json:"prev_country,omitempty"`
 	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	IpLoginUserCount int32                  `protobuf:"varint,8,opt,name=ip_login_user_count,json=ipLoginUserCount,proto3" json:"ip_login_user_count,omitempty"` // distinct users who logged in from this IP
+	ClientSource     string                 `protobuf:"bytes,9,opt,name=client_source,json=clientSource,proto3" json:"client_source,omitempty"`                  // client source, e.g. "pwa"
+	PrevClientSource string                 `protobuf:"bytes,10,opt,name=prev_client_source,json=prevClientSource,proto3" json:"prev_client_source,omitempty"`   // previous client source (set on client_source_change)
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -18856,6 +18883,20 @@ func (x *ListUserSessionActivitiesResponse_SessionActivity) GetIpLoginUserCount(
 		return x.IpLoginUserCount
 	}
 	return 0
+}
+
+func (x *ListUserSessionActivitiesResponse_SessionActivity) GetClientSource() string {
+	if x != nil {
+		return x.ClientSource
+	}
+	return ""
+}
+
+func (x *ListUserSessionActivitiesResponse_SessionActivity) GetPrevClientSource() string {
+	if x != nil {
+		return x.PrevClientSource
+	}
+	return ""
 }
 
 var File_user_service_v1_user_proto protoreflect.FileDescriptor
@@ -19168,7 +19209,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x1b\n" +
 	"\tid_number\x18\x03 \x01(\tR\bidNumber\x12\x14\n" +
 	"\x05image\x18\x04 \x01(\tR\x05image\"\x1c\n" +
-	"\x1aUpdateUserIdentityResponse\"\xf6\f\n" +
+	"\x1aUpdateUserIdentityResponse\"\xb1\r\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -19203,7 +19244,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x1b \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x124\n" +
 	"\x13registration_source\x18\x1c \x01(\tH\x17R\x12registrationSource\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"agent_type\x18\x1d \x01(\tH\x18R\tagentType\x88\x01\x01B\n" +
+	"agent_type\x18\x1d \x01(\tH\x18R\tagentType\x88\x01\x01\x12'\n" +
+	"\rpwa_logged_in\x18\x1e \x01(\bH\x19R\vpwaLoggedIn\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -19237,14 +19279,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10_registration_ipB\v\n" +
 	"\t_login_ipB\x16\n" +
 	"\x14_registration_sourceB\r\n" +
-	"\v_agent_type\"\xf3\v\n" +
+	"\v_agent_typeB\x10\n" +
+	"\x0e_pwa_logged_in\"\x97\f\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\x87\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xab\n" +
 	"\n" +
 	"\x04User\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
@@ -19284,7 +19327,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\rlast_login_ip\x18\x1f \x01(\tR\vlastLoginIp\x12*\n" +
 	"\x11role_creator_name\x18  \x01(\tR\x0froleCreatorName\x12 \n" +
 	"\vaffiliation\x18! \x01(\tR\vaffiliation\x12\x18\n" +
-	"\acreator\x18\" \x01(\tR\acreator\"\x99\f\n" +
+	"\acreator\x18\" \x01(\tR\acreator\x12\"\n" +
+	"\rpwa_logged_in\x18# \x01(\bR\vpwaLoggedIn\"\x99\f\n" +
 	"\x12ExportUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12W\n" +
 	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
@@ -19400,7 +19444,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\r\n" +
 	"\v_login_pageB\x12\n" +
-	"\x10_login_page_size\"\xfd\x14\n" +
+	"\x10_login_page_size\"\xa2\x15\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -19455,7 +19499,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x05email\x18\b \x01(\tR\x05email\x12\x1a\n" +
 	"\busername\x18\t \x01(\tR\busername\x12\x16\n" +
 	"\x06source\x18\n" +
-	" \x01(\tR\x06source\x1a\xb7\x02\n" +
+	" \x01(\tR\x06source\x1a\xdc\x02\n" +
 	"\vLoginRecord\x125\n" +
 	"\blogin_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\aloginAt\x12K\n" +
 	"\aip_info\x18\x02 \x01(\v22.api.user.service.v1.GetUserProfileResponse.IpInfoR\x06ipInfo\x12\x16\n" +
@@ -19465,7 +19509,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x03app\x18\x06 \x01(\tR\x03app\x12\x14\n" +
 	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
 	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x1a\n" +
-	"\busername\x18\t \x01(\tR\busername\x1a\xc2\x01\n" +
+	"\busername\x18\t \x01(\tR\busername\x12#\n" +
+	"\rclient_source\x18\n" +
+	" \x01(\tR\fclientSource\x1a\xc2\x01\n" +
 	"\aComment\x12\x1d\n" +
 	"\n" +
 	"comment_id\x18\x01 \x01(\x03R\tcommentId\x12\x1a\n" +
@@ -20377,14 +20423,14 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf4\x03\n" +
+	"_page_size\"\xc7\x04\n" +
 	"!ListUserSessionActivitiesResponse\x12f\n" +
 	"\n" +
 	"activities\x18\x01 \x03(\v2F.api.user.service.v1.ListUserSessionActivitiesResponse.SessionActivityR\n" +
 	"activities\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x9f\x02\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xf2\x02\n" +
 	"\x0fSessionActivity\x12\x1d\n" +
 	"\n" +
 	"event_type\x18\x01 \x01(\tR\teventType\x12\x0e\n" +
@@ -20396,7 +20442,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\fprev_country\x18\x06 \x01(\tR\vprevCountry\x129\n" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x13ip_login_user_count\x18\b \x01(\x05R\x10ipLoginUserCount\"U\n" +
+	"\x13ip_login_user_count\x18\b \x01(\x05R\x10ipLoginUserCount\x12#\n" +
+	"\rclient_source\x18\t \x01(\tR\fclientSource\x12,\n" +
+	"\x12prev_client_source\x18\n" +
+	" \x01(\tR\x10prevClientSource\"U\n" +
 	"\x17SwapFeeCurrencyOverride\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1e\n" +
 	"\n" +
