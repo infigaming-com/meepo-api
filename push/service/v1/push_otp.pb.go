@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -519,7 +520,7 @@ func (x *SendOTPResponse) GetProviderName() string {
 type OTPProviderInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The operator who owns this provider. Set automatically from the caller's context.
+	// Deprecated: use operator_context. Kept during transition; equals operator_context.real_operator_id.
 	OwnerOperatorId int64 `protobuf:"varint,2,opt,name=owner_operator_id,json=ownerOperatorId,proto3" json:"owner_operator_id,omitempty"`
 	// Third-party provider type (e.g., OTP_PROVIDER_TYPE_ENGAGELAB)
 	ProviderType OTPProviderType `protobuf:"varint,3,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType" json:"provider_type,omitempty"`
@@ -537,8 +538,11 @@ type OTPProviderInfo struct {
 	SupportedCountries []string `protobuf:"bytes,8,rep,name=supported_countries,json=supportedCountries,proto3" json:"supported_countries,omitempty"`
 	CreatedAt          int64    `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt          int64    `protobuf:"varint,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Hierarchy that owns this provider (operator, company, retailer, system).
+	// Used together with OperatorContextFilters for visibility control.
+	OperatorContext *common.OperatorContext `protobuf:"bytes,11,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OTPProviderInfo) Reset() {
@@ -641,6 +645,13 @@ func (x *OTPProviderInfo) GetUpdatedAt() int64 {
 	return 0
 }
 
+func (x *OTPProviderInfo) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 // CreateOTPProviderRequest registers an OTP delivery provider.
 //
 // ## What is an OTP Provider?
@@ -658,7 +669,7 @@ func (x *OTPProviderInfo) GetUpdatedAt() int64 {
 // - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
 type CreateOTPProviderRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Creator's operator_id (set by backoffice from context)
+	// Deprecated: use operator_context. Kept for backward compatibility.
 	OwnerOperatorId int64 `protobuf:"varint,1,opt,name=owner_operator_id,json=ownerOperatorId,proto3" json:"owner_operator_id,omitempty"`
 	// Third-party provider type: OTP_PROVIDER_TYPE_ENGAGELAB (SMS, WhatsApp, Voice)
 	ProviderType OTPProviderType `protobuf:"varint,2,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType" json:"provider_type,omitempty"`
@@ -674,8 +685,10 @@ type CreateOTPProviderRequest struct {
 	// Countries this provider supports (e.g., ["BR", "JP"]). Empty = all countries.
 	// When creating a binding, the binding's country must be in this list (or list is empty).
 	SupportedCountries []string `protobuf:"bytes,7,rep,name=supported_countries,json=supportedCountries,proto3" json:"supported_countries,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Caller hierarchy. Required: drives ownership assignment on the new record.
+	OperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreateOTPProviderRequest) Reset() {
@@ -757,6 +770,13 @@ func (x *CreateOTPProviderRequest) GetSupportedCountries() []string {
 	return nil
 }
 
+func (x *CreateOTPProviderRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 type CreateOTPProviderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Provider      *OTPProviderInfo       `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
@@ -828,8 +848,11 @@ type UpdateOTPProviderRequest struct {
 	// Set to true to clear supported_countries (provider will support all countries).
 	// Takes precedence over supported_countries field.
 	ClearSupportedCountries *bool `protobuf:"varint,7,opt,name=clear_supported_countries,json=clearSupportedCountries,proto3,oneof" json:"clear_supported_countries,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// Visibility scope. If set, the update only affects a row whose owner tuple is in scope;
+	// 0 rows affected means not-found-or-forbidden.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *UpdateOTPProviderRequest) Reset() {
@@ -911,6 +934,13 @@ func (x *UpdateOTPProviderRequest) GetClearSupportedCountries() bool {
 	return false
 }
 
+func (x *UpdateOTPProviderRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
 type UpdateOTPProviderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -957,10 +987,12 @@ func (*UpdateOTPProviderResponse) Descriptor() ([]byte, []int) {
 // ## Errors
 // - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
 type DeleteOTPProviderRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Visibility scope. See UpdateOTPProviderRequest.operator_context_filters.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *DeleteOTPProviderRequest) Reset() {
@@ -998,6 +1030,13 @@ func (x *DeleteOTPProviderRequest) GetId() int64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *DeleteOTPProviderRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type DeleteOTPProviderResponse struct {
@@ -1042,10 +1081,12 @@ func (*DeleteOTPProviderResponse) Descriptor() ([]byte, []int) {
 // ## Errors
 // - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
 type GetOTPProviderRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Visibility scope. If set, returns NOT_FOUND when the row's owner tuple is out of scope.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetOTPProviderRequest) Reset() {
@@ -1083,6 +1124,13 @@ func (x *GetOTPProviderRequest) GetId() int64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *GetOTPProviderRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type GetOTPProviderResponse struct {
@@ -1133,7 +1181,7 @@ func (x *GetOTPProviderResponse) GetProvider() *OTPProviderInfo {
 // Results are scoped to the owner_operator_id.
 type ListOTPProvidersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Filter by owner operator ID
+	// Deprecated: visibility is now driven by operator_context_filters. Kept during transition.
 	OwnerOperatorId int64 `protobuf:"varint,1,opt,name=owner_operator_id,json=ownerOperatorId,proto3" json:"owner_operator_id,omitempty"`
 	// Filter by provider type (optional)
 	ProviderType *OTPProviderType `protobuf:"varint,2,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType,oneof" json:"provider_type,omitempty"`
@@ -1143,9 +1191,11 @@ type ListOTPProvidersRequest struct {
 	// Page number (1-based, default 1)
 	Page int32 `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
 	// Items per page (default 20, max 100)
-	PageSize      int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	PageSize int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Visibility scope. Only rows whose owner tuple matches are returned.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,6,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListOTPProvidersRequest) Reset() {
@@ -1211,6 +1261,13 @@ func (x *ListOTPProvidersRequest) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
+}
+
+func (x *ListOTPProvidersRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type ListOTPProvidersResponse struct {
@@ -1309,15 +1366,17 @@ func (x *ListOTPProvidersResponse) GetPageSize() int32 {
 type OTPProviderBindingInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The operator level this binding applies to
-	OperatorId int64 `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// Routing target: the operator level this binding applies to (can be 0 for "any operator"
+	// at the owner level when the owner is system/retailer/company).
+	// Historically named "operator_id"; renamed to avoid collision with the owner tuple.
+	TargetOperatorId int64 `protobuf:"varint,2,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
 	// The provider this binding references
 	ProviderId int64 `protobuf:"varint,3,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
 	// ISO 3166-1 alpha-2 country code, or "global" for default fallback
 	Country string `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
 	// Whether this binding is active for routing. Disabled bindings are skipped.
 	Enabled bool `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Routing priority within same (operator_id, country). Lower value = higher priority.
+	// Routing priority within same (target_operator_id, country). Lower value = higher priority.
 	Priority int32 `protobuf:"varint,6,opt,name=priority,proto3" json:"priority,omitempty"`
 	// Phone number prefix filter. If set, this binding only matches phone numbers
 	// starting with one of these prefixes. Empty = matches all phone numbers.
@@ -1332,8 +1391,10 @@ type OTPProviderBindingInfo struct {
 	CreatedByOperatorName string `protobuf:"bytes,12,opt,name=created_by_operator_name,json=createdByOperatorName,proto3" json:"created_by_operator_name,omitempty"`
 	// Operator type of the creator's level (system, retailer, company, operator)
 	CreatedByOperatorType string `protobuf:"bytes,13,opt,name=created_by_operator_type,json=createdByOperatorType,proto3" json:"created_by_operator_type,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Hierarchy that owns this binding. Used together with OperatorContextFilters for visibility.
+	OperatorContext *common.OperatorContext `protobuf:"bytes,14,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OTPProviderBindingInfo) Reset() {
@@ -1373,9 +1434,9 @@ func (x *OTPProviderBindingInfo) GetId() int64 {
 	return 0
 }
 
-func (x *OTPProviderBindingInfo) GetOperatorId() int64 {
+func (x *OTPProviderBindingInfo) GetTargetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorId
+		return x.TargetOperatorId
 	}
 	return 0
 }
@@ -1457,6 +1518,13 @@ func (x *OTPProviderBindingInfo) GetCreatedByOperatorType() string {
 	return ""
 }
 
+func (x *OTPProviderBindingInfo) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 // CreateOTPProviderBindingRequest binds a provider to an operator+country for routing.
 //
 // ## Prerequisites
@@ -1474,15 +1542,15 @@ func (x *OTPProviderBindingInfo) GetCreatedByOperatorType() string {
 // - OTP_PROVIDER_BINDING_INVALID_COUNTRY: country not in provider's supported_countries
 type CreateOTPProviderBindingRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Which operator level this binding applies to
-	OperatorId int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// Routing target (historically "operator_id"). The operator this binding applies to.
+	TargetOperatorId int64 `protobuf:"varint,1,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
 	// Provider to bind (must exist)
 	ProviderId int64 `protobuf:"varint,2,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
 	// ISO 3166-1 alpha-2 (e.g., "BR"), or "global" for default fallback
 	Country string `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	// Whether this binding is active for routing
 	Enabled bool `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Routing priority within same (operator_id, country). Lower = higher priority.
+	// Routing priority within same (target_operator_id, country). Lower = higher priority.
 	Priority int32 `protobuf:"varint,5,opt,name=priority,proto3" json:"priority,omitempty"`
 	// Phone number prefix filter. e.g., ["+5511", "+5521"]. Empty = matches all numbers.
 	PhonePrefixes []string `protobuf:"bytes,6,rep,name=phone_prefixes,json=phonePrefixes,proto3" json:"phone_prefixes,omitempty"`
@@ -1492,8 +1560,10 @@ type CreateOTPProviderBindingRequest struct {
 	CreatedByOperatorName string `protobuf:"bytes,8,opt,name=created_by_operator_name,json=createdByOperatorName,proto3" json:"created_by_operator_name,omitempty"`
 	// Operator type of the creator's level (system, retailer, company, operator)
 	CreatedByOperatorType string `protobuf:"bytes,9,opt,name=created_by_operator_type,json=createdByOperatorType,proto3" json:"created_by_operator_type,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Caller hierarchy. Required: drives ownership assignment on the new record.
+	OperatorContext *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreateOTPProviderBindingRequest) Reset() {
@@ -1526,9 +1596,9 @@ func (*CreateOTPProviderBindingRequest) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *CreateOTPProviderBindingRequest) GetOperatorId() int64 {
+func (x *CreateOTPProviderBindingRequest) GetTargetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorId
+		return x.TargetOperatorId
 	}
 	return 0
 }
@@ -1587,6 +1657,13 @@ func (x *CreateOTPProviderBindingRequest) GetCreatedByOperatorType() string {
 		return x.CreatedByOperatorType
 	}
 	return ""
+}
+
+func (x *CreateOTPProviderBindingRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
 }
 
 type CreateOTPProviderBindingResponse struct {
@@ -1657,8 +1734,10 @@ type UpdateOTPProviderBindingRequest struct {
 	// Set to true to clear phone_prefixes (match all numbers).
 	// Takes precedence over phone_prefixes field.
 	ClearPhonePrefixes *bool `protobuf:"varint,5,opt,name=clear_phone_prefixes,json=clearPhonePrefixes,proto3,oneof" json:"clear_phone_prefixes,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Visibility scope. Only rows whose owner tuple matches may be updated.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,6,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *UpdateOTPProviderBindingRequest) Reset() {
@@ -1726,6 +1805,13 @@ func (x *UpdateOTPProviderBindingRequest) GetClearPhonePrefixes() bool {
 	return false
 }
 
+func (x *UpdateOTPProviderBindingRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
 type UpdateOTPProviderBindingResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1771,10 +1857,12 @@ func (*UpdateOTPProviderBindingResponse) Descriptor() ([]byte, []int) {
 // ## Errors
 // - OTP_PROVIDER_BINDING_NOT_FOUND: no binding with the given ID
 type DeleteOTPProviderBindingRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Visibility scope. Only rows whose owner tuple matches may be deleted.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *DeleteOTPProviderBindingRequest) Reset() {
@@ -1812,6 +1900,13 @@ func (x *DeleteOTPProviderBindingRequest) GetId() int64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *DeleteOTPProviderBindingRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type DeleteOTPProviderBindingResponse struct {
@@ -1854,8 +1949,9 @@ func (*DeleteOTPProviderBindingResponse) Descriptor() ([]byte, []int) {
 // Results are scoped to the operator_id.
 type ListOTPProviderBindingsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Filter by operator ID
-	OperatorId int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// Filter by routing target operator ID (optional; 0 means no target filter).
+	// Historically named "operator_id".
+	TargetOperatorId int64 `protobuf:"varint,1,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
 	// Filter by country code (e.g., "BR") or "global" (optional)
 	Country *string `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`
 	// Filter by associated provider ID (optional)
@@ -1865,9 +1961,11 @@ type ListOTPProviderBindingsRequest struct {
 	// Page number (1-based, default 1)
 	Page int32 `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
 	// Items per page (default 20, max 100)
-	PageSize      int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	PageSize int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Visibility scope. Only rows whose owner tuple matches are returned.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,7,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListOTPProviderBindingsRequest) Reset() {
@@ -1900,9 +1998,9 @@ func (*ListOTPProviderBindingsRequest) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *ListOTPProviderBindingsRequest) GetOperatorId() int64 {
+func (x *ListOTPProviderBindingsRequest) GetTargetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorId
+		return x.TargetOperatorId
 	}
 	return 0
 }
@@ -1940,6 +2038,13 @@ func (x *ListOTPProviderBindingsRequest) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
+}
+
+func (x *ListOTPProviderBindingsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type ListOTPProviderBindingsResponse struct {
@@ -2013,12 +2118,15 @@ func (x *ListOTPProviderBindingsResponse) GetPageSize() int32 {
 // ListOTPBindingCountriesRequest returns the distinct countries configured
 // for an operator via provider bindings.
 type ListOTPBindingCountriesRequest struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Routing target operator ID (historically "operator_id").
+	TargetOperatorId int64 `protobuf:"varint,1,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
 	// If set, only count bindings with this enabled status
-	Enabled       *bool `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Enabled *bool `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	// Visibility scope. Only rows whose owner tuple matches contribute to the result.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListOTPBindingCountriesRequest) Reset() {
@@ -2051,9 +2159,9 @@ func (*ListOTPBindingCountriesRequest) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *ListOTPBindingCountriesRequest) GetOperatorId() int64 {
+func (x *ListOTPBindingCountriesRequest) GetTargetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorId
+		return x.TargetOperatorId
 	}
 	return 0
 }
@@ -2063,6 +2171,13 @@ func (x *ListOTPBindingCountriesRequest) GetEnabled() bool {
 		return *x.Enabled
 	}
 	return false
+}
+
+func (x *ListOTPBindingCountriesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type ListOTPBindingCountriesResponse struct {
@@ -2122,11 +2237,14 @@ func (x *ListOTPBindingCountriesResponse) GetTotal() int32 {
 // CheckOTPBindingCountryRequest checks whether an operator has at least one
 // enabled provider binding for a specific country.
 type CheckOTPBindingCountryRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	Country       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Routing target operator ID (historically "operator_id").
+	TargetOperatorId int64  `protobuf:"varint,1,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
+	Country          string `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	// Visibility scope. Only rows whose owner tuple matches are considered.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *CheckOTPBindingCountryRequest) Reset() {
@@ -2159,9 +2277,9 @@ func (*CheckOTPBindingCountryRequest) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *CheckOTPBindingCountryRequest) GetOperatorId() int64 {
+func (x *CheckOTPBindingCountryRequest) GetTargetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorId
+		return x.TargetOperatorId
 	}
 	return 0
 }
@@ -2171,6 +2289,13 @@ func (x *CheckOTPBindingCountryRequest) GetCountry() string {
 		return x.Country
 	}
 	return ""
+}
+
+func (x *CheckOTPBindingCountryRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type CheckOTPBindingCountryResponse struct {
@@ -2225,9 +2350,10 @@ func (x *CheckOTPBindingCountryResponse) GetConfigured() bool {
 // Templates are resolved per (operator, country, template_type, language) with
 // fallback to "global" country and "en" language.
 type OTPTemplateInfo struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	Id         int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	OperatorId int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Owner operator ID (single-column, legacy). Equals operator_context.real_operator_id.
+	OperatorId int64 `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// ISO 3166-1 alpha-2 country code, or "global"
 	Country string `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	// Provider this template belongs to
@@ -2251,11 +2377,13 @@ type OTPTemplateInfo struct {
 	// Review status from external provider (relevant for WhatsApp templates)
 	ReviewStatus OTPTemplateReviewStatus `protobuf:"varint,13,opt,name=review_status,json=reviewStatus,proto3,enum=api.push.service.v1.OTPTemplateReviewStatus" json:"review_status,omitempty"`
 	// Whether this template is active for routing
-	Enabled       bool  `protobuf:"varint,14,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	CreatedAt     int64 `protobuf:"varint,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     int64 `protobuf:"varint,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Enabled   bool  `protobuf:"varint,14,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	CreatedAt int64 `protobuf:"varint,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt int64 `protobuf:"varint,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Hierarchy that owns this template. Used with OperatorContextFilters for visibility.
+	OperatorContext *common.OperatorContext `protobuf:"bytes,17,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OTPTemplateInfo) Reset() {
@@ -2400,6 +2528,13 @@ func (x *OTPTemplateInfo) GetUpdatedAt() int64 {
 	return 0
 }
 
+func (x *OTPTemplateInfo) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 // CreateOTPTemplateRequest creates a message template bound to a specific OTP provider.
 //
 // ## What is external_template_id?
@@ -2430,8 +2565,10 @@ func (x *OTPTemplateInfo) GetUpdatedAt() int64 {
 // ## Errors
 // - OTP_TEMPLATE_ALREADY_EXISTS: duplicate (operator_id, country, template_type, language)
 type CreateOTPTemplateRequest struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Deprecated: use operator_context. Kept for backward compatibility;
+	// ignored when operator_context is set.
+	OperatorId int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// ISO 3166-1 alpha-2 (e.g., "BR"), or "global" for default fallback
 	Country string `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
 	// ID of the OTP provider this template belongs to
@@ -2453,9 +2590,11 @@ type CreateOTPTemplateRequest struct {
 	// JSON string of additional template variables (e.g., '{"app_name":"Meepo"}')
 	ExtraParams string `protobuf:"bytes,11,opt,name=extra_params,json=extraParams,proto3" json:"extra_params,omitempty"`
 	// Whether this template is active for routing
-	Enabled       bool `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Enabled bool `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Caller hierarchy. Required: drives ownership assignment on the new record.
+	OperatorContext *common.OperatorContext `protobuf:"bytes,13,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreateOTPTemplateRequest) Reset() {
@@ -2572,6 +2711,13 @@ func (x *CreateOTPTemplateRequest) GetEnabled() bool {
 	return false
 }
 
+func (x *CreateOTPTemplateRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 type CreateOTPTemplateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Template      *OTPTemplateInfo       `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
@@ -2637,8 +2783,10 @@ type UpdateOTPTemplateRequest struct {
 	CodeTtlSeconds     *int32                 `protobuf:"varint,7,opt,name=code_ttl_seconds,json=codeTtlSeconds,proto3,oneof" json:"code_ttl_seconds,omitempty"`
 	ExtraParams        *string                `protobuf:"bytes,8,opt,name=extra_params,json=extraParams,proto3,oneof" json:"extra_params,omitempty"`
 	Enabled            *bool                  `protobuf:"varint,9,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Visibility scope. Only rows whose owner tuple matches may be updated.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,10,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *UpdateOTPTemplateRequest) Reset() {
@@ -2734,6 +2882,13 @@ func (x *UpdateOTPTemplateRequest) GetEnabled() bool {
 	return false
 }
 
+func (x *UpdateOTPTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
 type UpdateOTPTemplateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -2779,10 +2934,12 @@ func (*UpdateOTPTemplateResponse) Descriptor() ([]byte, []int) {
 // ## Errors
 // - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 type DeleteOTPTemplateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Visibility scope. Only rows whose owner tuple matches may be deleted.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *DeleteOTPTemplateRequest) Reset() {
@@ -2820,6 +2977,13 @@ func (x *DeleteOTPTemplateRequest) GetId() int64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *DeleteOTPTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type DeleteOTPTemplateResponse struct {
@@ -2864,10 +3028,12 @@ func (*DeleteOTPTemplateResponse) Descriptor() ([]byte, []int) {
 // ## Errors
 // - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 type GetOTPTemplateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Visibility scope. If set, returns NOT_FOUND when the row's owner tuple is out of scope.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetOTPTemplateRequest) Reset() {
@@ -2905,6 +3071,13 @@ func (x *GetOTPTemplateRequest) GetId() int64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *GetOTPTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type GetOTPTemplateResponse struct {
@@ -2953,8 +3126,9 @@ func (x *GetOTPTemplateResponse) GetTemplate() *OTPTemplateInfo {
 
 // ListOTPTemplatesRequest lists OTP templates with optional filters and pagination.
 type ListOTPTemplatesRequest struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Deprecated: visibility is now driven by operator_context_filters. Kept during transition.
+	OperatorId int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Filter by country code (e.g., "BR") or "global" (optional)
 	Country *string `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`
 	// Filter by associated provider ID (optional)
@@ -2966,9 +3140,11 @@ type ListOTPTemplatesRequest struct {
 	// Page number (1-based, default 1)
 	Page int32 `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
 	// Items per page (default 20, max 100)
-	PageSize      int32 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	PageSize int32 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Visibility scope. Only rows whose owner tuple matches are returned.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListOTPTemplatesRequest) Reset() {
@@ -3048,6 +3224,13 @@ func (x *ListOTPTemplatesRequest) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
+}
+
+func (x *ListOTPTemplatesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type ListOTPTemplatesResponse struct {
@@ -4201,7 +4384,7 @@ var File_push_service_v1_push_otp_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\n" +
-	"\x1epush/service/v1/push_otp.proto\x12\x13api.push.service.v1\"\x80\x05\n" +
+	"\x1epush/service/v1/push_otp.proto\x12\x13api.push.service.v1\x1a\x13common/common.proto\"\x80\x05\n" +
 	"\x0eSendOTPRequest\x12\x1c\n" +
 	"\trecipient\x18\x01 \x01(\tR\trecipient\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12I\n" +
@@ -4227,7 +4410,7 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"message_id\x18\x01 \x01(\tR\tmessageId\x12.\n" +
 	"\x13external_message_id\x18\x02 \x01(\tR\x11externalMessageId\x12!\n" +
 	"\fchannel_used\x18\x03 \x01(\tR\vchannelUsed\x12#\n" +
-	"\rprovider_name\x18\x04 \x01(\tR\fproviderName\"\xbd\x03\n" +
+	"\rprovider_name\x18\x04 \x01(\tR\fproviderName\"\x85\x04\n" +
 	"\x0fOTPProviderInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12*\n" +
 	"\x11owner_operator_id\x18\x02 \x01(\x03R\x0fownerOperatorId\x12I\n" +
@@ -4241,7 +4424,8 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\x03R\tupdatedAt\"\xfa\x02\n" +
+	" \x01(\x03R\tupdatedAt\x12F\n" +
+	"\x10operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc2\x03\n" +
 	"\x18CreateOTPProviderRequest\x12*\n" +
 	"\x11owner_operator_id\x18\x01 \x01(\x03R\x0fownerOperatorId\x12I\n" +
 	"\rprovider_type\x18\x02 \x01(\x0e2$.api.push.service.v1.OTPProviderTypeR\fproviderType\x12\x12\n" +
@@ -4249,9 +4433,10 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\x10credentials_json\x18\x04 \x01(\tR\x0fcredentialsJson\x12\x16\n" +
 	"\x06config\x18\x05 \x01(\tR\x06config\x12_\n" +
 	"\x15send_channel_strategy\x18\x06 \x01(\x0e2+.api.push.service.v1.OTPSendChannelStrategyR\x13sendChannelStrategy\x12/\n" +
-	"\x13supported_countries\x18\a \x03(\tR\x12supportedCountries\"]\n" +
+	"\x13supported_countries\x18\a \x03(\tR\x12supportedCountries\x12F\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"]\n" +
 	"\x19CreateOTPProviderResponse\x12@\n" +
-	"\bprovider\x18\x01 \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\"\xc9\x03\n" +
+	"\bprovider\x18\x01 \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\"\xa7\x04\n" +
 	"\x18UpdateOTPProviderRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12.\n" +
@@ -4259,26 +4444,30 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\x06config\x18\x04 \x01(\tH\x02R\x06config\x88\x01\x01\x12d\n" +
 	"\x15send_channel_strategy\x18\x05 \x01(\x0e2+.api.push.service.v1.OTPSendChannelStrategyH\x03R\x13sendChannelStrategy\x88\x01\x01\x12/\n" +
 	"\x13supported_countries\x18\x06 \x03(\tR\x12supportedCountries\x12?\n" +
-	"\x19clear_supported_countries\x18\a \x01(\bH\x04R\x17clearSupportedCountries\x88\x01\x01B\a\n" +
+	"\x19clear_supported_countries\x18\a \x01(\bH\x04R\x17clearSupportedCountries\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\a\n" +
 	"\x05_nameB\x13\n" +
 	"\x11_credentials_jsonB\t\n" +
 	"\a_configB\x18\n" +
 	"\x16_send_channel_strategyB\x1c\n" +
 	"\x1a_clear_supported_countries\"\x1b\n" +
-	"\x19UpdateOTPProviderResponse\"*\n" +
+	"\x19UpdateOTPProviderResponse\"\x88\x01\n" +
 	"\x18DeleteOTPProviderRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1b\n" +
-	"\x19DeleteOTPProviderResponse\"'\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x1b\n" +
+	"\x19DeleteOTPProviderResponse\"\x85\x01\n" +
 	"\x15GetOTPProviderRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"Z\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"Z\n" +
 	"\x16GetOTPProviderResponse\x12@\n" +
-	"\bprovider\x18\x01 \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\"\x83\x02\n" +
+	"\bprovider\x18\x01 \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\"\xe1\x02\n" +
 	"\x17ListOTPProvidersRequest\x12*\n" +
 	"\x11owner_operator_id\x18\x01 \x01(\x03R\x0fownerOperatorId\x12N\n" +
 	"\rprovider_type\x18\x02 \x01(\x0e2$.api.push.service.v1.OTPProviderTypeH\x00R\fproviderType\x88\x01\x01\x12\x1d\n" +
 	"\acountry\x18\x03 \x01(\tH\x01R\acountry\x88\x01\x01\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSizeB\x10\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x12\\\n" +
+	"\x18operator_context_filters\x18\x06 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x10\n" +
 	"\x0e_provider_typeB\n" +
 	"\n" +
 	"\b_country\"\xa5\x01\n" +
@@ -4286,11 +4475,10 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\tproviders\x18\x01 \x03(\v2$.api.push.service.v1.OTPProviderInfoR\tproviders\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x88\x04\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xdd\x04\n" +
 	"\x16OTPProviderBindingInfo\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\x03R\n" +
-	"operatorId\x12\x1f\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
+	"\x12target_operator_id\x18\x02 \x01(\x03R\x10targetOperatorId\x12\x1f\n" +
 	"\vprovider_id\x18\x03 \x01(\x03R\n" +
 	"providerId\x12\x18\n" +
 	"\acountry\x18\x04 \x01(\tR\acountry\x12\x18\n" +
@@ -4305,10 +4493,10 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	" \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\x123\n" +
 	"\x16created_by_operator_id\x18\v \x01(\x03R\x13createdByOperatorId\x127\n" +
 	"\x18created_by_operator_name\x18\f \x01(\tR\x15createdByOperatorName\x127\n" +
-	"\x18created_by_operator_type\x18\r \x01(\tR\x15createdByOperatorType\"\x81\x03\n" +
-	"\x1fCreateOTPProviderBindingRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\x12\x1f\n" +
+	"\x18created_by_operator_type\x18\r \x01(\tR\x15createdByOperatorType\x12F\n" +
+	"\x10operator_context\x18\x0e \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd6\x03\n" +
+	"\x1fCreateOTPProviderBindingRequest\x12,\n" +
+	"\x12target_operator_id\x18\x01 \x01(\x03R\x10targetOperatorId\x12\x1f\n" +
 	"\vprovider_id\x18\x02 \x01(\x03R\n" +
 	"providerId\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x18\n" +
@@ -4317,32 +4505,36 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\x0ephone_prefixes\x18\x06 \x03(\tR\rphonePrefixes\x123\n" +
 	"\x16created_by_operator_id\x18\a \x01(\x03R\x13createdByOperatorId\x127\n" +
 	"\x18created_by_operator_name\x18\b \x01(\tR\x15createdByOperatorName\x127\n" +
-	"\x18created_by_operator_type\x18\t \x01(\tR\x15createdByOperatorType\"i\n" +
+	"\x18created_by_operator_type\x18\t \x01(\tR\x15createdByOperatorType\x12F\n" +
+	"\x10operator_context\x18\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"i\n" +
 	" CreateOTPProviderBindingResponse\x12E\n" +
-	"\abinding\x18\x01 \x01(\v2+.api.push.service.v1.OTPProviderBindingInfoR\abinding\"\x81\x02\n" +
+	"\abinding\x18\x01 \x01(\v2+.api.push.service.v1.OTPProviderBindingInfoR\abinding\"\xdf\x02\n" +
 	"\x1fUpdateOTPProviderBindingRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
 	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01\x12\x1f\n" +
 	"\bpriority\x18\x03 \x01(\x05H\x01R\bpriority\x88\x01\x01\x12%\n" +
 	"\x0ephone_prefixes\x18\x04 \x03(\tR\rphonePrefixes\x125\n" +
-	"\x14clear_phone_prefixes\x18\x05 \x01(\bH\x02R\x12clearPhonePrefixes\x88\x01\x01B\n" +
+	"\x14clear_phone_prefixes\x18\x05 \x01(\bH\x02R\x12clearPhonePrefixes\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\x06 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
 	"\n" +
 	"\b_enabledB\v\n" +
 	"\t_priorityB\x17\n" +
 	"\x15_clear_phone_prefixes\"\"\n" +
-	" UpdateOTPProviderBindingResponse\"1\n" +
+	" UpdateOTPProviderBindingResponse\"\x8f\x01\n" +
 	"\x1fDeleteOTPProviderBindingRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\"\n" +
-	" DeleteOTPProviderBindingResponse\"\xfe\x01\n" +
-	"\x1eListOTPProviderBindingsRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\x12\x1d\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\"\n" +
+	" DeleteOTPProviderBindingResponse\"\xe9\x02\n" +
+	"\x1eListOTPProviderBindingsRequest\x12,\n" +
+	"\x12target_operator_id\x18\x01 \x01(\x03R\x10targetOperatorId\x12\x1d\n" +
 	"\acountry\x18\x02 \x01(\tH\x00R\acountry\x88\x01\x01\x12$\n" +
 	"\vprovider_id\x18\x03 \x01(\x03H\x01R\n" +
 	"providerId\x88\x01\x01\x12\x1d\n" +
 	"\aenabled\x18\x04 \x01(\bH\x02R\aenabled\x88\x01\x01\x12\x12\n" +
 	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x06 \x01(\x05R\bpageSizeB\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\x12\\\n" +
+	"\x18operator_context_filters\x18\a \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
 	"\n" +
 	"\b_countryB\x0e\n" +
 	"\f_provider_idB\n" +
@@ -4352,24 +4544,24 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\bbindings\x18\x01 \x03(\v2+.api.push.service.v1.OTPProviderBindingInfoR\bbindings\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"l\n" +
-	"\x1eListOTPBindingCountriesRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\x12\x1d\n" +
-	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xd7\x01\n" +
+	"\x1eListOTPBindingCountriesRequest\x12,\n" +
+	"\x12target_operator_id\x18\x01 \x01(\x03R\x10targetOperatorId\x12\x1d\n" +
+	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\x03 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
 	"\n" +
 	"\b_enabled\"U\n" +
 	"\x1fListOTPBindingCountriesResponse\x12\x1c\n" +
 	"\tcountries\x18\x01 \x03(\tR\tcountries\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"Z\n" +
-	"\x1dCheckOTPBindingCountryRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\x12\x18\n" +
-	"\acountry\x18\x02 \x01(\tR\acountry\"@\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"\xc5\x01\n" +
+	"\x1dCheckOTPBindingCountryRequest\x12,\n" +
+	"\x12target_operator_id\x18\x01 \x01(\x03R\x10targetOperatorId\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12\\\n" +
+	"\x18operator_context_filters\x18\x03 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"@\n" +
 	"\x1eCheckOTPBindingCountryResponse\x12\x1e\n" +
 	"\n" +
 	"configured\x18\x01 \x01(\bR\n" +
-	"configured\"\xe2\x04\n" +
+	"configured\"\xaa\x05\n" +
 	"\x0fOTPTemplateInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -4393,7 +4585,8 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x0f \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x10 \x01(\x03R\tupdatedAt\"\xca\x03\n" +
+	"updated_at\x18\x10 \x01(\x03R\tupdatedAt\x12F\n" +
+	"\x10operator_context\x18\x11 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x92\x04\n" +
 	"\x18CreateOTPTemplateRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x18\n" +
@@ -4411,9 +4604,10 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\x10code_ttl_seconds\x18\n" +
 	" \x01(\x05R\x0ecodeTtlSeconds\x12!\n" +
 	"\fextra_params\x18\v \x01(\tR\vextraParams\x12\x18\n" +
-	"\aenabled\x18\f \x01(\bR\aenabled\"]\n" +
+	"\aenabled\x18\f \x01(\bR\aenabled\x12F\n" +
+	"\x10operator_context\x18\r \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"]\n" +
 	"\x19CreateOTPTemplateResponse\x12@\n" +
-	"\btemplate\x18\x01 \x01(\v2$.api.push.service.v1.OTPTemplateInfoR\btemplate\"\xdb\x03\n" +
+	"\btemplate\x18\x01 \x01(\v2$.api.push.service.v1.OTPTemplateInfoR\btemplate\"\xb9\x04\n" +
 	"\x18UpdateOTPTemplateRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x125\n" +
@@ -4425,7 +4619,9 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"codeLength\x88\x01\x01\x12-\n" +
 	"\x10code_ttl_seconds\x18\a \x01(\x05H\x05R\x0ecodeTtlSeconds\x88\x01\x01\x12&\n" +
 	"\fextra_params\x18\b \x01(\tH\x06R\vextraParams\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\t \x01(\bH\aR\aenabled\x88\x01\x01B\a\n" +
+	"\aenabled\x18\t \x01(\bH\aR\aenabled\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\n" +
+	" \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\a\n" +
 	"\x05_nameB\x17\n" +
 	"\x15_external_template_idB\v\n" +
 	"\t_languageB\r\n" +
@@ -4435,14 +4631,16 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\r_extra_paramsB\n" +
 	"\n" +
 	"\b_enabled\"\x1b\n" +
-	"\x19UpdateOTPTemplateResponse\"*\n" +
+	"\x19UpdateOTPTemplateResponse\"\x88\x01\n" +
 	"\x18DeleteOTPTemplateRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1b\n" +
-	"\x19DeleteOTPTemplateResponse\"'\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x1b\n" +
+	"\x19DeleteOTPTemplateResponse\"\x85\x01\n" +
 	"\x15GetOTPTemplateRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"Z\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"Z\n" +
 	"\x16GetOTPTemplateResponse\x12@\n" +
-	"\btemplate\x18\x01 \x01(\v2$.api.push.service.v1.OTPTemplateInfoR\btemplate\"\xd9\x02\n" +
+	"\btemplate\x18\x01 \x01(\v2$.api.push.service.v1.OTPTemplateInfoR\btemplate\"\xb7\x03\n" +
 	"\x17ListOTPTemplatesRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x1d\n" +
@@ -4452,7 +4650,8 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\rtemplate_type\x18\x04 \x01(\x0e2$.api.push.service.v1.OTPTemplateTypeH\x02R\ftemplateType\x88\x01\x01\x12\x1d\n" +
 	"\aenabled\x18\x05 \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSizeB\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
 	"\n" +
 	"\b_countryB\x0e\n" +
 	"\f_provider_idB\x10\n" +
@@ -4697,7 +4896,9 @@ var file_push_service_v1_push_otp_proto_goTypes = []any{
 	(*ListSMSChannelRatesResponse)(nil),        // 55: api.push.service.v1.ListSMSChannelRatesResponse
 	(*BatchCreateSMSChannelRatesRequest)(nil),  // 56: api.push.service.v1.BatchCreateSMSChannelRatesRequest
 	(*BatchCreateSMSChannelRatesResponse)(nil), // 57: api.push.service.v1.BatchCreateSMSChannelRatesResponse
-	nil, // 58: api.push.service.v1.SendOTPRequest.ExtraParamsEntry
+	nil,                                   // 58: api.push.service.v1.SendOTPRequest.ExtraParamsEntry
+	(*common.OperatorContext)(nil),        // 59: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil), // 60: api.common.OperatorContextFilters
 }
 var file_push_service_v1_push_otp_proto_depIdxs = []int32{
 	3,  // 0: api.push.service.v1.SendOTPRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
@@ -4705,83 +4906,102 @@ var file_push_service_v1_push_otp_proto_depIdxs = []int32{
 	0,  // 2: api.push.service.v1.SendOTPRequest.preferred_channel:type_name -> api.push.service.v1.OTPChannel
 	1,  // 3: api.push.service.v1.OTPProviderInfo.provider_type:type_name -> api.push.service.v1.OTPProviderType
 	2,  // 4: api.push.service.v1.OTPProviderInfo.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
-	1,  // 5: api.push.service.v1.CreateOTPProviderRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
-	2,  // 6: api.push.service.v1.CreateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
-	7,  // 7: api.push.service.v1.CreateOTPProviderResponse.provider:type_name -> api.push.service.v1.OTPProviderInfo
-	2,  // 8: api.push.service.v1.UpdateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
-	7,  // 9: api.push.service.v1.GetOTPProviderResponse.provider:type_name -> api.push.service.v1.OTPProviderInfo
-	1,  // 10: api.push.service.v1.ListOTPProvidersRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
-	7,  // 11: api.push.service.v1.ListOTPProvidersResponse.providers:type_name -> api.push.service.v1.OTPProviderInfo
-	7,  // 12: api.push.service.v1.OTPProviderBindingInfo.provider:type_name -> api.push.service.v1.OTPProviderInfo
-	18, // 13: api.push.service.v1.CreateOTPProviderBindingResponse.binding:type_name -> api.push.service.v1.OTPProviderBindingInfo
-	18, // 14: api.push.service.v1.ListOTPProviderBindingsResponse.bindings:type_name -> api.push.service.v1.OTPProviderBindingInfo
-	3,  // 15: api.push.service.v1.OTPTemplateInfo.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	4,  // 16: api.push.service.v1.OTPTemplateInfo.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
-	3,  // 17: api.push.service.v1.CreateOTPTemplateRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	31, // 18: api.push.service.v1.CreateOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
-	31, // 19: api.push.service.v1.GetOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
-	3,  // 20: api.push.service.v1.ListOTPTemplatesRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	31, // 21: api.push.service.v1.ListOTPTemplatesResponse.templates:type_name -> api.push.service.v1.OTPTemplateInfo
-	4,  // 22: api.push.service.v1.SyncOTPTemplateStatusResponse.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
-	44, // 23: api.push.service.v1.ListOTPSendLogsResponse.logs:type_name -> api.push.service.v1.OTPSendLogInfo
-	47, // 24: api.push.service.v1.CreateSMSChannelRateResponse.rate:type_name -> api.push.service.v1.SMSChannelRate
-	47, // 25: api.push.service.v1.UpdateSMSChannelRateResponse.rate:type_name -> api.push.service.v1.SMSChannelRate
-	47, // 26: api.push.service.v1.ListSMSChannelRatesResponse.rates:type_name -> api.push.service.v1.SMSChannelRate
-	48, // 27: api.push.service.v1.BatchCreateSMSChannelRatesRequest.rates:type_name -> api.push.service.v1.CreateSMSChannelRateRequest
-	47, // 28: api.push.service.v1.BatchCreateSMSChannelRatesResponse.rates:type_name -> api.push.service.v1.SMSChannelRate
-	5,  // 29: api.push.service.v1.PushOTP.SendOTP:input_type -> api.push.service.v1.SendOTPRequest
-	8,  // 30: api.push.service.v1.PushOTP.CreateOTPProvider:input_type -> api.push.service.v1.CreateOTPProviderRequest
-	10, // 31: api.push.service.v1.PushOTP.UpdateOTPProvider:input_type -> api.push.service.v1.UpdateOTPProviderRequest
-	12, // 32: api.push.service.v1.PushOTP.DeleteOTPProvider:input_type -> api.push.service.v1.DeleteOTPProviderRequest
-	14, // 33: api.push.service.v1.PushOTP.GetOTPProvider:input_type -> api.push.service.v1.GetOTPProviderRequest
-	16, // 34: api.push.service.v1.PushOTP.ListOTPProviders:input_type -> api.push.service.v1.ListOTPProvidersRequest
-	19, // 35: api.push.service.v1.PushOTP.CreateOTPProviderBinding:input_type -> api.push.service.v1.CreateOTPProviderBindingRequest
-	21, // 36: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:input_type -> api.push.service.v1.UpdateOTPProviderBindingRequest
-	23, // 37: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:input_type -> api.push.service.v1.DeleteOTPProviderBindingRequest
-	25, // 38: api.push.service.v1.PushOTP.ListOTPProviderBindings:input_type -> api.push.service.v1.ListOTPProviderBindingsRequest
-	27, // 39: api.push.service.v1.PushOTP.ListOTPBindingCountries:input_type -> api.push.service.v1.ListOTPBindingCountriesRequest
-	29, // 40: api.push.service.v1.PushOTP.CheckOTPBindingCountry:input_type -> api.push.service.v1.CheckOTPBindingCountryRequest
-	32, // 41: api.push.service.v1.PushOTP.CreateOTPTemplate:input_type -> api.push.service.v1.CreateOTPTemplateRequest
-	34, // 42: api.push.service.v1.PushOTP.UpdateOTPTemplate:input_type -> api.push.service.v1.UpdateOTPTemplateRequest
-	36, // 43: api.push.service.v1.PushOTP.DeleteOTPTemplate:input_type -> api.push.service.v1.DeleteOTPTemplateRequest
-	38, // 44: api.push.service.v1.PushOTP.GetOTPTemplate:input_type -> api.push.service.v1.GetOTPTemplateRequest
-	40, // 45: api.push.service.v1.PushOTP.ListOTPTemplates:input_type -> api.push.service.v1.ListOTPTemplatesRequest
-	42, // 46: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:input_type -> api.push.service.v1.SyncOTPTemplateStatusRequest
-	45, // 47: api.push.service.v1.PushOTP.ListOTPSendLogs:input_type -> api.push.service.v1.ListOTPSendLogsRequest
-	48, // 48: api.push.service.v1.PushOTP.CreateSMSChannelRate:input_type -> api.push.service.v1.CreateSMSChannelRateRequest
-	50, // 49: api.push.service.v1.PushOTP.UpdateSMSChannelRate:input_type -> api.push.service.v1.UpdateSMSChannelRateRequest
-	52, // 50: api.push.service.v1.PushOTP.DeleteSMSChannelRate:input_type -> api.push.service.v1.DeleteSMSChannelRateRequest
-	54, // 51: api.push.service.v1.PushOTP.ListSMSChannelRates:input_type -> api.push.service.v1.ListSMSChannelRatesRequest
-	56, // 52: api.push.service.v1.PushOTP.BatchCreateSMSChannelRates:input_type -> api.push.service.v1.BatchCreateSMSChannelRatesRequest
-	6,  // 53: api.push.service.v1.PushOTP.SendOTP:output_type -> api.push.service.v1.SendOTPResponse
-	9,  // 54: api.push.service.v1.PushOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
-	11, // 55: api.push.service.v1.PushOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
-	13, // 56: api.push.service.v1.PushOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
-	15, // 57: api.push.service.v1.PushOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
-	17, // 58: api.push.service.v1.PushOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
-	20, // 59: api.push.service.v1.PushOTP.CreateOTPProviderBinding:output_type -> api.push.service.v1.CreateOTPProviderBindingResponse
-	22, // 60: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:output_type -> api.push.service.v1.UpdateOTPProviderBindingResponse
-	24, // 61: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:output_type -> api.push.service.v1.DeleteOTPProviderBindingResponse
-	26, // 62: api.push.service.v1.PushOTP.ListOTPProviderBindings:output_type -> api.push.service.v1.ListOTPProviderBindingsResponse
-	28, // 63: api.push.service.v1.PushOTP.ListOTPBindingCountries:output_type -> api.push.service.v1.ListOTPBindingCountriesResponse
-	30, // 64: api.push.service.v1.PushOTP.CheckOTPBindingCountry:output_type -> api.push.service.v1.CheckOTPBindingCountryResponse
-	33, // 65: api.push.service.v1.PushOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
-	35, // 66: api.push.service.v1.PushOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
-	37, // 67: api.push.service.v1.PushOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
-	39, // 68: api.push.service.v1.PushOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
-	41, // 69: api.push.service.v1.PushOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
-	43, // 70: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
-	46, // 71: api.push.service.v1.PushOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
-	49, // 72: api.push.service.v1.PushOTP.CreateSMSChannelRate:output_type -> api.push.service.v1.CreateSMSChannelRateResponse
-	51, // 73: api.push.service.v1.PushOTP.UpdateSMSChannelRate:output_type -> api.push.service.v1.UpdateSMSChannelRateResponse
-	53, // 74: api.push.service.v1.PushOTP.DeleteSMSChannelRate:output_type -> api.push.service.v1.DeleteSMSChannelRateResponse
-	55, // 75: api.push.service.v1.PushOTP.ListSMSChannelRates:output_type -> api.push.service.v1.ListSMSChannelRatesResponse
-	57, // 76: api.push.service.v1.PushOTP.BatchCreateSMSChannelRates:output_type -> api.push.service.v1.BatchCreateSMSChannelRatesResponse
-	53, // [53:77] is the sub-list for method output_type
-	29, // [29:53] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	59, // 5: api.push.service.v1.OTPProviderInfo.operator_context:type_name -> api.common.OperatorContext
+	1,  // 6: api.push.service.v1.CreateOTPProviderRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
+	2,  // 7: api.push.service.v1.CreateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
+	59, // 8: api.push.service.v1.CreateOTPProviderRequest.operator_context:type_name -> api.common.OperatorContext
+	7,  // 9: api.push.service.v1.CreateOTPProviderResponse.provider:type_name -> api.push.service.v1.OTPProviderInfo
+	2,  // 10: api.push.service.v1.UpdateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
+	60, // 11: api.push.service.v1.UpdateOTPProviderRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	60, // 12: api.push.service.v1.DeleteOTPProviderRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	60, // 13: api.push.service.v1.GetOTPProviderRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	7,  // 14: api.push.service.v1.GetOTPProviderResponse.provider:type_name -> api.push.service.v1.OTPProviderInfo
+	1,  // 15: api.push.service.v1.ListOTPProvidersRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
+	60, // 16: api.push.service.v1.ListOTPProvidersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	7,  // 17: api.push.service.v1.ListOTPProvidersResponse.providers:type_name -> api.push.service.v1.OTPProviderInfo
+	7,  // 18: api.push.service.v1.OTPProviderBindingInfo.provider:type_name -> api.push.service.v1.OTPProviderInfo
+	59, // 19: api.push.service.v1.OTPProviderBindingInfo.operator_context:type_name -> api.common.OperatorContext
+	59, // 20: api.push.service.v1.CreateOTPProviderBindingRequest.operator_context:type_name -> api.common.OperatorContext
+	18, // 21: api.push.service.v1.CreateOTPProviderBindingResponse.binding:type_name -> api.push.service.v1.OTPProviderBindingInfo
+	60, // 22: api.push.service.v1.UpdateOTPProviderBindingRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	60, // 23: api.push.service.v1.DeleteOTPProviderBindingRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	60, // 24: api.push.service.v1.ListOTPProviderBindingsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	18, // 25: api.push.service.v1.ListOTPProviderBindingsResponse.bindings:type_name -> api.push.service.v1.OTPProviderBindingInfo
+	60, // 26: api.push.service.v1.ListOTPBindingCountriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	60, // 27: api.push.service.v1.CheckOTPBindingCountryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	3,  // 28: api.push.service.v1.OTPTemplateInfo.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	4,  // 29: api.push.service.v1.OTPTemplateInfo.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
+	59, // 30: api.push.service.v1.OTPTemplateInfo.operator_context:type_name -> api.common.OperatorContext
+	3,  // 31: api.push.service.v1.CreateOTPTemplateRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	59, // 32: api.push.service.v1.CreateOTPTemplateRequest.operator_context:type_name -> api.common.OperatorContext
+	31, // 33: api.push.service.v1.CreateOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
+	60, // 34: api.push.service.v1.UpdateOTPTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	60, // 35: api.push.service.v1.DeleteOTPTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	60, // 36: api.push.service.v1.GetOTPTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	31, // 37: api.push.service.v1.GetOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
+	3,  // 38: api.push.service.v1.ListOTPTemplatesRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	60, // 39: api.push.service.v1.ListOTPTemplatesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	31, // 40: api.push.service.v1.ListOTPTemplatesResponse.templates:type_name -> api.push.service.v1.OTPTemplateInfo
+	4,  // 41: api.push.service.v1.SyncOTPTemplateStatusResponse.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
+	44, // 42: api.push.service.v1.ListOTPSendLogsResponse.logs:type_name -> api.push.service.v1.OTPSendLogInfo
+	47, // 43: api.push.service.v1.CreateSMSChannelRateResponse.rate:type_name -> api.push.service.v1.SMSChannelRate
+	47, // 44: api.push.service.v1.UpdateSMSChannelRateResponse.rate:type_name -> api.push.service.v1.SMSChannelRate
+	47, // 45: api.push.service.v1.ListSMSChannelRatesResponse.rates:type_name -> api.push.service.v1.SMSChannelRate
+	48, // 46: api.push.service.v1.BatchCreateSMSChannelRatesRequest.rates:type_name -> api.push.service.v1.CreateSMSChannelRateRequest
+	47, // 47: api.push.service.v1.BatchCreateSMSChannelRatesResponse.rates:type_name -> api.push.service.v1.SMSChannelRate
+	5,  // 48: api.push.service.v1.PushOTP.SendOTP:input_type -> api.push.service.v1.SendOTPRequest
+	8,  // 49: api.push.service.v1.PushOTP.CreateOTPProvider:input_type -> api.push.service.v1.CreateOTPProviderRequest
+	10, // 50: api.push.service.v1.PushOTP.UpdateOTPProvider:input_type -> api.push.service.v1.UpdateOTPProviderRequest
+	12, // 51: api.push.service.v1.PushOTP.DeleteOTPProvider:input_type -> api.push.service.v1.DeleteOTPProviderRequest
+	14, // 52: api.push.service.v1.PushOTP.GetOTPProvider:input_type -> api.push.service.v1.GetOTPProviderRequest
+	16, // 53: api.push.service.v1.PushOTP.ListOTPProviders:input_type -> api.push.service.v1.ListOTPProvidersRequest
+	19, // 54: api.push.service.v1.PushOTP.CreateOTPProviderBinding:input_type -> api.push.service.v1.CreateOTPProviderBindingRequest
+	21, // 55: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:input_type -> api.push.service.v1.UpdateOTPProviderBindingRequest
+	23, // 56: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:input_type -> api.push.service.v1.DeleteOTPProviderBindingRequest
+	25, // 57: api.push.service.v1.PushOTP.ListOTPProviderBindings:input_type -> api.push.service.v1.ListOTPProviderBindingsRequest
+	27, // 58: api.push.service.v1.PushOTP.ListOTPBindingCountries:input_type -> api.push.service.v1.ListOTPBindingCountriesRequest
+	29, // 59: api.push.service.v1.PushOTP.CheckOTPBindingCountry:input_type -> api.push.service.v1.CheckOTPBindingCountryRequest
+	32, // 60: api.push.service.v1.PushOTP.CreateOTPTemplate:input_type -> api.push.service.v1.CreateOTPTemplateRequest
+	34, // 61: api.push.service.v1.PushOTP.UpdateOTPTemplate:input_type -> api.push.service.v1.UpdateOTPTemplateRequest
+	36, // 62: api.push.service.v1.PushOTP.DeleteOTPTemplate:input_type -> api.push.service.v1.DeleteOTPTemplateRequest
+	38, // 63: api.push.service.v1.PushOTP.GetOTPTemplate:input_type -> api.push.service.v1.GetOTPTemplateRequest
+	40, // 64: api.push.service.v1.PushOTP.ListOTPTemplates:input_type -> api.push.service.v1.ListOTPTemplatesRequest
+	42, // 65: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:input_type -> api.push.service.v1.SyncOTPTemplateStatusRequest
+	45, // 66: api.push.service.v1.PushOTP.ListOTPSendLogs:input_type -> api.push.service.v1.ListOTPSendLogsRequest
+	48, // 67: api.push.service.v1.PushOTP.CreateSMSChannelRate:input_type -> api.push.service.v1.CreateSMSChannelRateRequest
+	50, // 68: api.push.service.v1.PushOTP.UpdateSMSChannelRate:input_type -> api.push.service.v1.UpdateSMSChannelRateRequest
+	52, // 69: api.push.service.v1.PushOTP.DeleteSMSChannelRate:input_type -> api.push.service.v1.DeleteSMSChannelRateRequest
+	54, // 70: api.push.service.v1.PushOTP.ListSMSChannelRates:input_type -> api.push.service.v1.ListSMSChannelRatesRequest
+	56, // 71: api.push.service.v1.PushOTP.BatchCreateSMSChannelRates:input_type -> api.push.service.v1.BatchCreateSMSChannelRatesRequest
+	6,  // 72: api.push.service.v1.PushOTP.SendOTP:output_type -> api.push.service.v1.SendOTPResponse
+	9,  // 73: api.push.service.v1.PushOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
+	11, // 74: api.push.service.v1.PushOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
+	13, // 75: api.push.service.v1.PushOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
+	15, // 76: api.push.service.v1.PushOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
+	17, // 77: api.push.service.v1.PushOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
+	20, // 78: api.push.service.v1.PushOTP.CreateOTPProviderBinding:output_type -> api.push.service.v1.CreateOTPProviderBindingResponse
+	22, // 79: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:output_type -> api.push.service.v1.UpdateOTPProviderBindingResponse
+	24, // 80: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:output_type -> api.push.service.v1.DeleteOTPProviderBindingResponse
+	26, // 81: api.push.service.v1.PushOTP.ListOTPProviderBindings:output_type -> api.push.service.v1.ListOTPProviderBindingsResponse
+	28, // 82: api.push.service.v1.PushOTP.ListOTPBindingCountries:output_type -> api.push.service.v1.ListOTPBindingCountriesResponse
+	30, // 83: api.push.service.v1.PushOTP.CheckOTPBindingCountry:output_type -> api.push.service.v1.CheckOTPBindingCountryResponse
+	33, // 84: api.push.service.v1.PushOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
+	35, // 85: api.push.service.v1.PushOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
+	37, // 86: api.push.service.v1.PushOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
+	39, // 87: api.push.service.v1.PushOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
+	41, // 88: api.push.service.v1.PushOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
+	43, // 89: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
+	46, // 90: api.push.service.v1.PushOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
+	49, // 91: api.push.service.v1.PushOTP.CreateSMSChannelRate:output_type -> api.push.service.v1.CreateSMSChannelRateResponse
+	51, // 92: api.push.service.v1.PushOTP.UpdateSMSChannelRate:output_type -> api.push.service.v1.UpdateSMSChannelRateResponse
+	53, // 93: api.push.service.v1.PushOTP.DeleteSMSChannelRate:output_type -> api.push.service.v1.DeleteSMSChannelRateResponse
+	55, // 94: api.push.service.v1.PushOTP.ListSMSChannelRates:output_type -> api.push.service.v1.ListSMSChannelRatesResponse
+	57, // 95: api.push.service.v1.PushOTP.BatchCreateSMSChannelRates:output_type -> api.push.service.v1.BatchCreateSMSChannelRatesResponse
+	72, // [72:96] is the sub-list for method output_type
+	48, // [48:72] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_push_service_v1_push_otp_proto_init() }
