@@ -219,7 +219,8 @@ message OTPProviderInfo {
 // - OTP_PROVIDER_ALREADY_EXISTS: duplicate provider
 // - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
 message CreateOTPProviderRequest {
-  // Deprecated: use operator_context. Kept for backward compatibility.
+  // Deprecated: use operator_context. Kept for backward compatibility;
+  // ignored when operator_context is set.
   int64 owner_operator_id = 1;
   // Third-party provider type: OTP_PROVIDER_TYPE_ENGAGELAB (SMS, WhatsApp, Voice)
   OTPProviderType provider_type = 2;

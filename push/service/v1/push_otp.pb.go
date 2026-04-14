@@ -669,7 +669,8 @@ func (x *OTPProviderInfo) GetOperatorContext() *common.OperatorContext {
 // - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
 type CreateOTPProviderRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: use operator_context. Kept for backward compatibility.
+	// Deprecated: use operator_context. Kept for backward compatibility;
+	// ignored when operator_context is set.
 	OwnerOperatorId int64 `protobuf:"varint,1,opt,name=owner_operator_id,json=ownerOperatorId,proto3" json:"owner_operator_id,omitempty"`
 	// Third-party provider type: OTP_PROVIDER_TYPE_ENGAGELAB (SMS, WhatsApp, Voice)
 	ProviderType OTPProviderType `protobuf:"varint,2,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType" json:"provider_type,omitempty"`
