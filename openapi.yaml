@@ -29575,9 +29575,12 @@ components:
             properties:
                 id:
                     type: string
-                operatorId:
+                targetOperatorId:
                     type: string
-                    description: The operator level this binding applies to
+                    description: |-
+                        Routing target: the operator level this binding applies to (can be 0 for "any operator"
+                         at the owner level when the owner is system/retailer/company).
+                         Historically named "operator_id"; renamed to avoid collision with the owner tuple.
                 providerId:
                     type: string
                     description: The provider this binding references
@@ -29589,7 +29592,7 @@ components:
                     description: Whether this binding is active for routing. Disabled bindings are skipped.
                 priority:
                     type: integer
-                    description: Routing priority within same (operator_id, country). Lower value = higher priority.
+                    description: Routing priority within same (target_operator_id, country). Lower value = higher priority.
                     format: int32
                 phonePrefixes:
                     type: array
@@ -29615,6 +29618,10 @@ components:
                 createdByOperatorType:
                     type: string
                     description: Operator type of the creator's level (system, retailer, company, operator)
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Hierarchy that owns this binding. Used together with OperatorContextFilters for visibility.
             description: |-
                 OTPProviderBindingInfo represents a binding between a provider and an operator+country.
 
@@ -29646,7 +29653,7 @@ components:
                     type: string
                 ownerOperatorId:
                     type: string
-                    description: The operator who owns this provider. Set automatically from the caller's context.
+                    description: 'Deprecated: use operator_context. Kept during transition; equals operator_context.real_operator_id.'
                 providerType:
                     enum:
                         - OTP_PROVIDER_TYPE_UNSPECIFIED
@@ -29684,6 +29691,12 @@ components:
                     type: string
                 updatedAt:
                     type: string
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: |-
+                        Hierarchy that owns this provider (operator, company, retailer, system).
+                         Used together with OperatorContextFilters for visibility control.
             description: |-
                 OTPProviderInfo represents a third-party OTP delivery provider configuration.
 
@@ -29739,6 +29752,7 @@ components:
                     type: string
                 operatorId:
                     type: string
+                    description: Owner operator ID (single-column, legacy). Equals operator_context.real_operator_id.
                 country:
                     type: string
                     description: ISO 3166-1 alpha-2 country code, or "global"
@@ -29796,6 +29810,10 @@ components:
                     type: string
                 updatedAt:
                     type: string
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Hierarchy that owns this template. Used with OperatorContextFilters for visibility.
             description: |-
                 OTPTemplateInfo represents an OTP message template configuration.
 
