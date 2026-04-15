@@ -62,8 +62,13 @@ enum TelegramMessageType {
 message TelegramInlineButton {
   // Button display text
   string text = 1;
-  // URL to open when button is clicked
+  // URL to open in browser when button is clicked.
+  // Ignored if web_app_url is set.
   string url = 2;
+  // Web App URL. If set, the button opens the URL as a Telegram Mini App
+  // (launched inside Telegram with access to the Mini App SDK and user
+  // initData) instead of a plain browser link. Takes precedence over url.
+  string web_app_url = 3;
 }
 
 // A row of inline keyboard buttons.

@@ -87,8 +87,13 @@ type TelegramInlineButton struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Button display text
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
-	// URL to open when button is clicked
-	Url           string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	// URL to open in browser when button is clicked.
+	// Ignored if web_app_url is set.
+	Url string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	// Web App URL. If set, the button opens the URL as a Telegram Mini App
+	// (launched inside Telegram with access to the Mini App SDK and user
+	// initData) instead of a plain browser link. Takes precedence over url.
+	WebAppUrl     string `protobuf:"bytes,3,opt,name=web_app_url,json=webAppUrl,proto3" json:"web_app_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -133,6 +138,13 @@ func (x *TelegramInlineButton) GetText() string {
 func (x *TelegramInlineButton) GetUrl() string {
 	if x != nil {
 		return x.Url
+	}
+	return ""
+}
+
+func (x *TelegramInlineButton) GetWebAppUrl() string {
+	if x != nil {
+		return x.WebAppUrl
 	}
 	return ""
 }
@@ -1622,10 +1634,11 @@ var File_push_service_v1_telegram_bot_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_telegram_bot_proto_rawDesc = "" +
 	"\n" +
-	"\"push/service/v1/telegram_bot.proto\x12\x13api.push.service.v1\x1a\x13common/common.proto\"<\n" +
+	"\"push/service/v1/telegram_bot.proto\x12\x13api.push.service.v1\x1a\x13common/common.proto\"\\\n" +
 	"\x14TelegramInlineButton\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x12\x10\n" +
-	"\x03url\x18\x02 \x01(\tR\x03url\"X\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\x12\x1e\n" +
+	"\vweb_app_url\x18\x03 \x01(\tR\twebAppUrl\"X\n" +
 	"\x11TelegramButtonRow\x12C\n" +
 	"\abuttons\x18\x01 \x03(\v2).api.push.service.v1.TelegramInlineButtonR\abuttons\"\x9b\x02\n" +
 	"\x15TelegramWelcomeConfig\x12\x18\n" +

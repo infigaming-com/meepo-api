@@ -61,6 +61,8 @@ func (m *TelegramInlineButton) validate(all bool) error {
 
 	// no validation rules for Url
 
+	// no validation rules for WebAppUrl
+
 	if len(errors) > 0 {
 		return TelegramInlineButtonMultiError(errors)
 	}
