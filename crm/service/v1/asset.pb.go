@@ -24,15 +24,33 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Asset types
+// Asset types.
+// Each type maps to a CRM workflow action (see AssetService doc) and
+// determines which fields of AssetVersion are used at render time.
 type AssetType int32
 
 const (
 	AssetType_ASSET_TYPE_UNSPECIFIED AssetType = 0
-	AssetType_ASSET_TYPE_EMAIL       AssetType = 1
-	AssetType_ASSET_TYPE_SMS         AssetType = 2
-	AssetType_ASSET_TYPE_PUSH        AssetType = 3
-	AssetType_ASSET_TYPE_INBOX       AssetType = 4
+	// Email: `subject` is email subject, `content` is HTML body,
+	// `preview_text` is preheader. Consumed by `send_email` action.
+	AssetType_ASSET_TYPE_EMAIL AssetType = 1
+	// SMS: `content` is plain-text body. `subject` and `preview_text`
+	// are ignored. Consumed by `send_sms` action.
+	AssetType_ASSET_TYPE_SMS AssetType = 2
+	// Push: `subject` is notification title, `content` is body,
+	// `preview_text` is subtitle. Consumed by `send_push` action.
+	AssetType_ASSET_TYPE_PUSH AssetType = 3
+	// Inbox: in-app inbox message. `subject` is title, `content` is body.
+	// Consumed by `send_inbox` action.
+	AssetType_ASSET_TYPE_INBOX AssetType = 4
+	// Telegram: `content` is the HTML caption/text of the Telegram
+	// message (supports HTML formatting via Telegram Bot API).
+	// `subject` and `preview_text` are not used.
+	// message_type (text/photo/video/animation), media_url, and inline
+	// keyboard buttons (url / web_app_url) are supplied by the
+	// `send_telegram` workflow action config, not by the asset — the
+	// same asset can thus be reused with different media and CTAs.
+	AssetType_ASSET_TYPE_TELEGRAM AssetType = 5
 )
 
 // Enum value maps for AssetType.
@@ -43,6 +61,7 @@ var (
 		2: "ASSET_TYPE_SMS",
 		3: "ASSET_TYPE_PUSH",
 		4: "ASSET_TYPE_INBOX",
+		5: "ASSET_TYPE_TELEGRAM",
 	}
 	AssetType_value = map[string]int32{
 		"ASSET_TYPE_UNSPECIFIED": 0,
@@ -50,6 +69,7 @@ var (
 		"ASSET_TYPE_SMS":         2,
 		"ASSET_TYPE_PUSH":        3,
 		"ASSET_TYPE_INBOX":       4,
+		"ASSET_TYPE_TELEGRAM":    5,
 	}
 )
 
@@ -2642,13 +2662,14 @@ const file_crm_service_v1_asset_proto_rawDesc = "" +
 	"\x14unresolved_variables\x18\a \x03(\tR\x13unresolvedVariables\x1aD\n" +
 	"\x16ResolvedVariablesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*|\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*\x95\x01\n" +
 	"\tAssetType\x12\x1a\n" +
 	"\x16ASSET_TYPE_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10ASSET_TYPE_EMAIL\x10\x01\x12\x12\n" +
 	"\x0eASSET_TYPE_SMS\x10\x02\x12\x13\n" +
 	"\x0fASSET_TYPE_PUSH\x10\x03\x12\x14\n" +
-	"\x10ASSET_TYPE_INBOX\x10\x04*w\n" +
+	"\x10ASSET_TYPE_INBOX\x10\x04\x12\x17\n" +
+	"\x13ASSET_TYPE_TELEGRAM\x10\x05*w\n" +
 	"\vAssetStatus\x12\x1c\n" +
 	"\x18ASSET_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12ASSET_STATUS_DRAFT\x10\x01\x12\x17\n" +

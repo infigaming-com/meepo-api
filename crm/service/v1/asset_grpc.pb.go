@@ -40,7 +40,20 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // AssetService provides operations for managing marketing campaign templates
-// (Email, SMS, Push, Inbox) with multi-language support and variable rendering.
+// with multi-language support and variable rendering.
+//
+// Supported channels (see AssetType):
+//   - Email  — rendered by CRM `send_email` workflow action
+//   - SMS    — rendered by CRM `send_sms` workflow action
+//   - Push   — rendered by CRM `send_push` workflow action
+//   - Telegram — rendered by CRM `send_telegram` workflow action;
+//     delivered via push-service TelegramBot/SendTelegramToUser.
+//     Asset content is the HTML caption/text of the Telegram
+//     message; media_url and inline keyboard buttons are
+//     configured on the workflow action (not on the asset),
+//     so the same asset can be reused with different media
+//     and CTAs per campaign.
+//   - Inbox  — in-app inbox message
 type AssetServiceClient interface {
 	// Asset CRUD operations
 	CreateAsset(ctx context.Context, in *CreateAssetRequest, opts ...grpc.CallOption) (*CreateAssetResponse, error)
@@ -215,7 +228,20 @@ func (c *assetServiceClient) RenderAsset(ctx context.Context, in *RenderAssetReq
 // for forward compatibility.
 //
 // AssetService provides operations for managing marketing campaign templates
-// (Email, SMS, Push, Inbox) with multi-language support and variable rendering.
+// with multi-language support and variable rendering.
+//
+// Supported channels (see AssetType):
+//   - Email  — rendered by CRM `send_email` workflow action
+//   - SMS    — rendered by CRM `send_sms` workflow action
+//   - Push   — rendered by CRM `send_push` workflow action
+//   - Telegram — rendered by CRM `send_telegram` workflow action;
+//     delivered via push-service TelegramBot/SendTelegramToUser.
+//     Asset content is the HTML caption/text of the Telegram
+//     message; media_url and inline keyboard buttons are
+//     configured on the workflow action (not on the asset),
+//     so the same asset can be reused with different media
+//     and CTAs per campaign.
+//   - Inbox  — in-app inbox message
 type AssetServiceServer interface {
 	// Asset CRUD operations
 	CreateAsset(context.Context, *CreateAssetRequest) (*CreateAssetResponse, error)
