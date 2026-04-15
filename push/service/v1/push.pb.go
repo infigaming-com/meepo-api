@@ -618,10 +618,13 @@ func (x *BettingFilterConfig) GetMaskingRule() string {
 type UpdateBetTickerConfigRequest struct {
 	state protoimpl.MessageState               `protogen:"open.v1"`
 	List  []*UpdateBetTickerConfigRequest_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
-	// enable is optional; when omitted the server preserves the existing
-	// per-country value (or defaults to true for new rows). Prevents the
-	// proto3 zero-value from silently disabling the ticker when a caller
-	// only wants to update other fields (e.g. global_ticker_enabled).
+	// enable is optional. Server-side semantics:
+	//   - omitted: preserve the existing value for the (operator, country)
+	//     row, or default to true when no such row exists yet.
+	//   - explicit true/false: written to the DB as-is.
+	//
+	// This avoids the proto3 zero-value silently disabling the ticker when a
+	// caller only wants to update other fields (e.g. global_ticker_enabled).
 	Enable              *bool `protobuf:"varint,2,opt,name=enable,proto3,oneof" json:"enable,omitempty"`
 	OperatorId          int64 `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	GlobalTickerEnabled *bool `protobuf:"varint,4,opt,name=global_ticker_enabled,json=globalTickerEnabled,proto3,oneof" json:"global_ticker_enabled,omitempty"`
