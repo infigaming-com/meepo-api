@@ -211,6 +211,11 @@ const (
 	ErrorReason_PHONE_ALREADY_EXISTS      ErrorReason = 10451
 	ErrorReason_INVALID_PHONE_NUMBER      ErrorReason = 10452
 	ErrorReason_INVALID_OPERATOR_NAME     ErrorReason = 10500
+	// KYC / contact rebind guards. Returned when a user tries to re-run the
+	// verify flow on a contact (email / mobile) that is already verified,
+	// which would otherwise silently overwrite the previously bound value.
+	ErrorReason_EMAIL_ALREADY_VERIFIED ErrorReason = 10501
+	ErrorReason_PHONE_ALREADY_VERIFIED ErrorReason = 10502
 )
 
 // Enum value maps for ErrorReason.
@@ -396,6 +401,8 @@ var (
 		10451: "PHONE_ALREADY_EXISTS",
 		10452: "INVALID_PHONE_NUMBER",
 		10500: "INVALID_OPERATOR_NAME",
+		10501: "EMAIL_ALREADY_VERIFIED",
+		10502: "PHONE_ALREADY_VERIFIED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -578,6 +585,8 @@ var (
 		"PHONE_ALREADY_EXISTS":                           10451,
 		"INVALID_PHONE_NUMBER":                           10452,
 		"INVALID_OPERATOR_NAME":                          10500,
+		"EMAIL_ALREADY_VERIFIED":                         10501,
+		"PHONE_ALREADY_VERIFIED":                         10502,
 	}
 )
 
@@ -612,7 +621,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xb2/\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xf8/\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -793,7 +802,9 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x19PHONE_VERIFICATION_FAILED\x10\xd2Q\x12\x19\n" +
 	"\x14PHONE_ALREADY_EXISTS\x10\xd3Q\x12\x19\n" +
 	"\x14INVALID_PHONE_NUMBER\x10\xd4Q\x12\x1a\n" +
-	"\x15INVALID_OPERATOR_NAME\x10\x84R\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x15INVALID_OPERATOR_NAME\x10\x84R\x12!\n" +
+	"\x16EMAIL_ALREADY_VERIFIED\x10\x85R\x1a\x04\xa8E\x99\x03\x12!\n" +
+	"\x16PHONE_ALREADY_VERIFIED\x10\x86R\x1a\x04\xa8E\x99\x03\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
