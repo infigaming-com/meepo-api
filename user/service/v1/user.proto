@@ -1392,6 +1392,7 @@ message GetUserProfileResponse {
 		string email = 8;
 		string username = 9;
 		string source = 10;
+		string client_source = 11; // client source, e.g. "pwa"
 	}
 	message LoginRecord {
 		google.protobuf.Timestamp login_at = 1;
