@@ -36617,6 +36617,8 @@ func (m *GetUserProfileResponse_RegistrationRecord) validate(all bool) error {
 
 	// no validation rules for Source
 
+	// no validation rules for ClientSource
+
 	if len(errors) > 0 {
 		return GetUserProfileResponse_RegistrationRecordMultiError(errors)
 	}

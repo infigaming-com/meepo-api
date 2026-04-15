@@ -17708,6 +17708,7 @@ type GetUserProfileResponse_RegistrationRecord struct {
 	Email         string                         `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
 	Username      string                         `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
 	Source        string                         `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
+	ClientSource  string                         `protobuf:"bytes,11,opt,name=client_source,json=clientSource,proto3" json:"client_source,omitempty"` // client source, e.g. "pwa"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -17808,6 +17809,13 @@ func (x *GetUserProfileResponse_RegistrationRecord) GetUsername() string {
 func (x *GetUserProfileResponse_RegistrationRecord) GetSource() string {
 	if x != nil {
 		return x.Source
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetClientSource() string {
+	if x != nil {
+		return x.ClientSource
 	}
 	return ""
 }
@@ -19654,7 +19662,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\r\n" +
 	"\v_login_pageB\x12\n" +
-	"\x10_login_page_size\"\xa2\x15\n" +
+	"\x10_login_page_size\"\xc7\x15\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -19697,7 +19705,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x06IpInfo\x12\x0e\n" +
 	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x1a\xe0\x02\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x1a\x85\x03\n" +
 	"\x12RegistrationRecord\x12?\n" +
 	"\rregistered_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12K\n" +
 	"\aip_info\x18\x02 \x01(\v22.api.user.service.v1.GetUserProfileResponse.IpInfoR\x06ipInfo\x12\x16\n" +
@@ -19709,7 +19717,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x05email\x18\b \x01(\tR\x05email\x12\x1a\n" +
 	"\busername\x18\t \x01(\tR\busername\x12\x16\n" +
 	"\x06source\x18\n" +
-	" \x01(\tR\x06source\x1a\xdc\x02\n" +
+	" \x01(\tR\x06source\x12#\n" +
+	"\rclient_source\x18\v \x01(\tR\fclientSource\x1a\xdc\x02\n" +
 	"\vLoginRecord\x125\n" +
 	"\blogin_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\aloginAt\x12K\n" +
 	"\aip_info\x18\x02 \x01(\v22.api.user.service.v1.GetUserProfileResponse.IpInfoR\x06ipInfo\x12\x16\n" +

@@ -31601,6 +31601,8 @@ components:
                     type: string
                 source:
                     type: string
+                clientSource:
+                    type: string
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
