@@ -425,11 +425,14 @@ message ResetAffiliatePasswordResponse {}
 message Campaign {
     string domain = 1;
     string campaign_name = 2;
-    // "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+    // "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", "google_ads", or "telegram_miniapp"
     string channel_type = 3;
     ChannelConfig channel_config = 4;
     Params params = 5;
     EventMappings event_mappings = 6;
+    // Required when channel_type == "telegram_miniapp" (e.g. https://t.me/betqio_bot/app);
+    // empty for all other channel types
+    optional string telegram_bot_url = 7;
 }
 
 message Params {
@@ -506,9 +509,11 @@ message CreateCampaignRequest {
     message Campaign {
         string domain = 1;
         string campaign_name = 2;
-        // "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+        // "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", "google_ads", or "telegram_miniapp"
         string channel_type = 3;
         ChannelConfig channel_config = 4;
+        // Required when channel_type == "telegram_miniapp" (e.g. https://t.me/betqio_bot/app)
+        optional string telegram_bot_url = 5;
     }
     Campaign campaign = 1;
     api.common.OperatorContext initiator_operator_context = 2;

@@ -995,13 +995,16 @@ type Campaign struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	Domain       string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
 	CampaignName string                 `protobuf:"bytes,2,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	// "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+	// "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", "google_ads", or "telegram_miniapp"
 	ChannelType   string         `protobuf:"bytes,3,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
 	ChannelConfig *ChannelConfig `protobuf:"bytes,4,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
 	Params        *Params        `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
 	EventMappings *EventMappings `protobuf:"bytes,6,opt,name=event_mappings,json=eventMappings,proto3" json:"event_mappings,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Required when channel_type == "telegram_miniapp" (e.g. https://t.me/betqio_bot/app);
+	// empty for all other channel types
+	TelegramBotUrl *string `protobuf:"bytes,7,opt,name=telegram_bot_url,json=telegramBotUrl,proto3,oneof" json:"telegram_bot_url,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *Campaign) Reset() {
@@ -1074,6 +1077,13 @@ func (x *Campaign) GetEventMappings() *EventMappings {
 		return x.EventMappings
 	}
 	return nil
+}
+
+func (x *Campaign) GetTelegramBotUrl() string {
+	if x != nil && x.TelegramBotUrl != nil {
+		return *x.TelegramBotUrl
+	}
+	return ""
 }
 
 type Params struct {
@@ -8605,11 +8615,13 @@ type CreateCampaignRequest_Campaign struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	Domain       string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
 	CampaignName string                 `protobuf:"bytes,2,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	// "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+	// "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", "google_ads", or "telegram_miniapp"
 	ChannelType   string         `protobuf:"bytes,3,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
 	ChannelConfig *ChannelConfig `protobuf:"bytes,4,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Required when channel_type == "telegram_miniapp" (e.g. https://t.me/betqio_bot/app)
+	TelegramBotUrl *string `protobuf:"bytes,5,opt,name=telegram_bot_url,json=telegramBotUrl,proto3,oneof" json:"telegram_bot_url,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CreateCampaignRequest_Campaign) Reset() {
@@ -8668,6 +8680,13 @@ func (x *CreateCampaignRequest_Campaign) GetChannelConfig() *ChannelConfig {
 		return x.ChannelConfig
 	}
 	return nil
+}
+
+func (x *CreateCampaignRequest_Campaign) GetTelegramBotUrl() string {
+	if x != nil && x.TelegramBotUrl != nil {
+		return *x.TelegramBotUrl
+	}
+	return ""
 }
 
 type ListCampaignsResponse_CampaignInfo struct {
@@ -11311,14 +11330,16 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\fnew_password\x18\x02 \x01(\tR\vnewPassword\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
 	"\x11initiator_user_id\x18\x04 \x01(\x03R\x0finitiatorUserId\" \n" +
-	"\x1eResetAffiliatePasswordResponse\"\xc4\x02\n" +
+	"\x1eResetAffiliatePasswordResponse\"\x88\x03\n" +
 	"\bCampaign\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12#\n" +
 	"\rcampaign_name\x18\x02 \x01(\tR\fcampaignName\x12!\n" +
 	"\fchannel_type\x18\x03 \x01(\tR\vchannelType\x12N\n" +
 	"\x0echannel_config\x18\x04 \x01(\v2'.api.affiliate.service.v1.ChannelConfigR\rchannelConfig\x128\n" +
 	"\x06params\x18\x05 \x01(\v2 .api.affiliate.service.v1.ParamsR\x06params\x12N\n" +
-	"\x0eevent_mappings\x18\x06 \x01(\v2'.api.affiliate.service.v1.EventMappingsR\reventMappings\"\xf9\x01\n" +
+	"\x0eevent_mappings\x18\x06 \x01(\v2'.api.affiliate.service.v1.EventMappingsR\reventMappings\x12-\n" +
+	"\x10telegram_bot_url\x18\a \x01(\tH\x00R\x0etelegramBotUrl\x88\x01\x01B\x13\n" +
+	"\x11_telegram_bot_url\"\xf9\x01\n" +
 	"\x06Params\x12_\n" +
 	"\x15predefined_parameters\x18\x01 \x03(\v2*.api.affiliate.service.v1.Params.ParameterR\x14predefinedParameters\x12W\n" +
 	"\x11custom_parameters\x18\x02 \x03(\v2*.api.affiliate.service.v1.Params.ParameterR\x10customParameters\x1a5\n" +
@@ -11385,18 +11406,20 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\vcustom_name\x18\x02 \x01(\tH\x01R\n" +
 	"customName\x88\x01\x01B\x10\n" +
 	"\x0e_channel_eventB\x0e\n" +
-	"\f_custom_name\"\xaa\x04\n" +
+	"\f_custom_name\"\xee\x04\n" +
 	"\x15CreateCampaignRequest\x12T\n" +
 	"\bcampaign\x18\x01 \x01(\v28.api.affiliate.service.v1.CreateCampaignRequest.CampaignR\bcampaign\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
 	"\x11initiator_user_id\x18\x03 \x01(\x03R\x0finitiatorUserId\x12*\n" +
 	"\x11initiator_role_id\x18\x04 \x01(\x03R\x0finitiatorRoleId\x123\n" +
-	"\x13target_affiliate_id\x18\x05 \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01\x1a\xba\x01\n" +
+	"\x13target_affiliate_id\x18\x05 \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01\x1a\xfe\x01\n" +
 	"\bCampaign\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12#\n" +
 	"\rcampaign_name\x18\x02 \x01(\tR\fcampaignName\x12!\n" +
 	"\fchannel_type\x18\x03 \x01(\tR\vchannelType\x12N\n" +
-	"\x0echannel_config\x18\x04 \x01(\v2'.api.affiliate.service.v1.ChannelConfigR\rchannelConfigB\x16\n" +
+	"\x0echannel_config\x18\x04 \x01(\v2'.api.affiliate.service.v1.ChannelConfigR\rchannelConfig\x12-\n" +
+	"\x10telegram_bot_url\x18\x05 \x01(\tH\x00R\x0etelegramBotUrl\x88\x01\x01B\x13\n" +
+	"\x11_telegram_bot_urlB\x16\n" +
 	"\x14_target_affiliate_id\"9\n" +
 	"\x16CreateCampaignResponse\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
@@ -12888,6 +12911,7 @@ func file_affiliate_service_v1_affiliate_proto_init() {
 	file_affiliate_service_v1_commission_report_proto_init()
 	file_affiliate_service_v1_referral_plan_proto_init()
 	file_affiliate_service_v1_affiliate_proto_msgTypes[6].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[14].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[16].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[19].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[21].OneofWrappers = []any{}
@@ -12915,6 +12939,7 @@ func file_affiliate_service_v1_affiliate_proto_init() {
 	file_affiliate_service_v1_affiliate_proto_msgTypes[93].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[98].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[110].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[111].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[112].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

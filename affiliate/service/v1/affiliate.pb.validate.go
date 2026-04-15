@@ -2045,6 +2045,10 @@ func (m *Campaign) validate(all bool) error {
 		}
 	}
 
+	if m.TelegramBotUrl != nil {
+		// no validation rules for TelegramBotUrl
+	}
+
 	if len(errors) > 0 {
 		return CampaignMultiError(errors)
 	}
@@ -16678,6 +16682,10 @@ func (m *CreateCampaignRequest_Campaign) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.TelegramBotUrl != nil {
+		// no validation rules for TelegramBotUrl
 	}
 
 	if len(errors) > 0 {
