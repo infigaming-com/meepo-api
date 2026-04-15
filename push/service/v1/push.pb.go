@@ -616,11 +616,15 @@ func (x *BettingFilterConfig) GetMaskingRule() string {
 }
 
 type UpdateBetTickerConfigRequest struct {
-	state               protoimpl.MessageState               `protogen:"open.v1"`
-	List                []*UpdateBetTickerConfigRequest_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
-	Enable              bool                                 `protobuf:"varint,2,opt,name=enable,proto3" json:"enable,omitempty"`
-	OperatorId          int64                                `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	GlobalTickerEnabled *bool                                `protobuf:"varint,4,opt,name=global_ticker_enabled,json=globalTickerEnabled,proto3,oneof" json:"global_ticker_enabled,omitempty"`
+	state protoimpl.MessageState               `protogen:"open.v1"`
+	List  []*UpdateBetTickerConfigRequest_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	// enable is optional; when omitted the server preserves the existing
+	// per-country value (or defaults to true for new rows). Prevents the
+	// proto3 zero-value from silently disabling the ticker when a caller
+	// only wants to update other fields (e.g. global_ticker_enabled).
+	Enable              *bool `protobuf:"varint,2,opt,name=enable,proto3,oneof" json:"enable,omitempty"`
+	OperatorId          int64 `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	GlobalTickerEnabled *bool `protobuf:"varint,4,opt,name=global_ticker_enabled,json=globalTickerEnabled,proto3,oneof" json:"global_ticker_enabled,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -663,8 +667,8 @@ func (x *UpdateBetTickerConfigRequest) GetList() []*UpdateBetTickerConfigRequest
 }
 
 func (x *UpdateBetTickerConfigRequest) GetEnable() bool {
-	if x != nil {
-		return x.Enable
+	if x != nil && x.Enable != nil {
+		return *x.Enable
 	}
 	return false
 }
@@ -1577,13 +1581,13 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"\x0fmasking_enabled\x18\x05 \x01(\bH\x00R\x0emaskingEnabled\x88\x01\x01\x12&\n" +
 	"\fmasking_rule\x18\x06 \x01(\tH\x01R\vmaskingRule\x88\x01\x01B\x12\n" +
 	"\x10_masking_enabledB\x0f\n" +
-	"\r_masking_rule\"\xc7\x03\n" +
+	"\r_masking_rule\"\xd7\x03\n" +
 	"\x1cUpdateBetTickerConfigRequest\x12J\n" +
-	"\x04list\x18\x01 \x03(\v26.api.push.service.v1.UpdateBetTickerConfigRequest.ItemR\x04list\x12\x16\n" +
-	"\x06enable\x18\x02 \x01(\bR\x06enable\x12\x1f\n" +
+	"\x04list\x18\x01 \x03(\v26.api.push.service.v1.UpdateBetTickerConfigRequest.ItemR\x04list\x12\x1b\n" +
+	"\x06enable\x18\x02 \x01(\bH\x00R\x06enable\x88\x01\x01\x12\x1f\n" +
 	"\voperator_id\x18\x03 \x01(\x03R\n" +
 	"operatorId\x127\n" +
-	"\x15global_ticker_enabled\x18\x04 \x01(\bH\x00R\x13globalTickerEnabled\x88\x01\x01\x1a\xce\x01\n" +
+	"\x15global_ticker_enabled\x18\x04 \x01(\bH\x01R\x13globalTickerEnabled\x88\x01\x01\x1a\xce\x01\n" +
 	"\x04Item\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12F\n" +
 	"\aall_bet\x18\x02 \x01(\v2(.api.push.service.v1.BettingFilterConfigH\x00R\x06allBet\x88\x01\x01\x12J\n" +
@@ -1591,7 +1595,8 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"\n" +
 	"\b_all_betB\f\n" +
 	"\n" +
-	"_high_winsB\x18\n" +
+	"_high_winsB\t\n" +
+	"\a_enableB\x18\n" +
 	"\x16_global_ticker_enabled\"\x1f\n" +
 	"\x1dUpdateBetTickerConfigResponse\"=\n" +
 	"\x1aListBetTickerConfigRequest\x12\x1f\n" +

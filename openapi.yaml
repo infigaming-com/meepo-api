@@ -25051,6 +25051,11 @@ components:
                         $ref: '#/components/schemas/api.backoffice.service.v1.UpdateBetTickerConfigRequest_Item'
                 enable:
                     type: boolean
+                    description: |-
+                        enable is optional; when omitted the server preserves the existing
+                         per-country value (or defaults to true for new rows). Prevents the
+                         proto3 zero-value from silently disabling the ticker when a caller
+                         only wants to update other fields (e.g. global_ticker_enabled).
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 globalTickerEnabled:

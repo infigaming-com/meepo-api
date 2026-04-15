@@ -1210,9 +1210,11 @@ func (m *UpdateBetTickerConfigRequest) validate(all bool) error {
 
 	}
 
-	// no validation rules for Enable
-
 	// no validation rules for OperatorId
+
+	if m.Enable != nil {
+		// no validation rules for Enable
+	}
 
 	if m.GlobalTickerEnabled != nil {
 		// no validation rules for GlobalTickerEnabled
