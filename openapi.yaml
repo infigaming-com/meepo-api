@@ -15641,6 +15641,7 @@ components:
                         - ASSET_TYPE_SMS
                         - ASSET_TYPE_PUSH
                         - ASSET_TYPE_INBOX
+                        - ASSET_TYPE_TELEGRAM
                     type: string
                     description: 'Delivery channel: `ASSET_TYPE_EMAIL`, `ASSET_TYPE_SMS`, `ASSET_TYPE_PUSH`, `ASSET_TYPE_INBOX`'
                     format: enum
@@ -19630,6 +19631,7 @@ components:
                         - ASSET_TYPE_SMS
                         - ASSET_TYPE_PUSH
                         - ASSET_TYPE_INBOX
+                        - ASSET_TYPE_TELEGRAM
                     type: string
                     description: Filter by asset type (optional)
                     format: enum
@@ -19669,6 +19671,7 @@ components:
                         - ASSET_TYPE_SMS
                         - ASSET_TYPE_PUSH
                         - ASSET_TYPE_INBOX
+                        - ASSET_TYPE_TELEGRAM
                     type: string
                     description: Filter by asset type (optional)
                     format: enum
@@ -26611,6 +26614,7 @@ components:
                         - ASSET_TYPE_SMS
                         - ASSET_TYPE_PUSH
                         - ASSET_TYPE_INBOX
+                        - ASSET_TYPE_TELEGRAM
                     type: string
                     format: enum
                 status:
