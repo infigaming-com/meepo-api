@@ -204,4 +204,10 @@ enum ErrorReason {
   INVALID_PHONE_NUMBER = 10452;
 
   INVALID_OPERATOR_NAME = 10500;
+
+  // KYC / contact rebind guards. Returned when a user tries to re-run the
+  // verify flow on a contact (email / mobile) that is already verified,
+  // which would otherwise silently overwrite the previously bound value.
+  EMAIL_ALREADY_VERIFIED = 10501 [(errors.code) = 409];
+  PHONE_ALREADY_VERIFIED = 10502 [(errors.code) = 409];
 }

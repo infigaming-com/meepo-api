@@ -2184,3 +2184,33 @@ func IsInvalidOperatorName(err error) bool {
 func ErrorInvalidOperatorName(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_OPERATOR_NAME.String(), fmt.Sprintf(format, args...))
 }
+
+// KYC / contact rebind guards. Returned when a user tries to re-run the
+// verify flow on a contact (email / mobile) that is already verified,
+// which would otherwise silently overwrite the previously bound value.
+func IsEmailAlreadyVerified(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_ALREADY_VERIFIED.String() && e.Code == 409
+}
+
+// KYC / contact rebind guards. Returned when a user tries to re-run the
+// verify flow on a contact (email / mobile) that is already verified,
+// which would otherwise silently overwrite the previously bound value.
+func ErrorEmailAlreadyVerified(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_EMAIL_ALREADY_VERIFIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPhoneAlreadyVerified(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PHONE_ALREADY_VERIFIED.String() && e.Code == 409
+}
+
+func ErrorPhoneAlreadyVerified(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_PHONE_ALREADY_VERIFIED.String(), fmt.Sprintf(format, args...))
+}
