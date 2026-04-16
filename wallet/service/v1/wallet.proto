@@ -2573,9 +2573,26 @@ message ListOperatorWithdrawableAmountsResponse {
 	int32 page_size = 4;
 }
 
+// WithdrawScenario identifies the caller context so wallet can apply the right MW formula.
+// Bankroll (operator MinLaunchBalance, co-operation mode only) constrains operator
+// self-withdrawals but not player/affiliate withdrawals — wallet branches on this value.
+enum WithdrawScenario {
+	// Default — treated as OPERATOR for backward compatibility during rollout.
+	WITHDRAW_SCENARIO_UNSPECIFIED = 0;
+	// Player withdrawal: bankroll NOT deducted from MW.
+	WITHDRAW_SCENARIO_PLAYER = 1;
+	// Affiliate withdrawal: bankroll NOT deducted from MW.
+	WITHDRAW_SCENARIO_AFFILIATE = 2;
+	// Operator self-withdrawal: bankroll deducted from MW.
+	WITHDRAW_SCENARIO_OPERATOR = 3;
+}
+
 message GetOperatorWithdrawCheckInfoRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
+	// Caller scenario. Wallet uses this to decide whether bankroll is deducted from MW.
+	// UNSPECIFIED is accepted for rollout compat and treated as OPERATOR.
+	WithdrawScenario withdraw_scenario = 3;
 }
 
 message GetOperatorWithdrawCheckInfoResponse {
@@ -2589,7 +2606,8 @@ message GetOperatorWithdrawCheckInfoResponse {
 	// pending freeze from operator_balance_transaction in USD (absolute value)
 	string operator_pending_freeze_usd = 4;
 	// reserved: 5 was user_balance_usd, 12 was pending_bets_usd (removed from MW formula)
-	// bankroll amount in USD (for co-operation mode operators)
+	// bankroll amount in USD (for co-operation mode operators); informational — wallet
+	// already applies it (or not) to the computed MW based on withdraw_scenario.
 	string bankroll_usd = 13;
 
 	// Currency-specific data
@@ -2604,8 +2622,9 @@ message GetOperatorWithdrawCheckInfoResponse {
 	// decimal places for USD (from system-level config)
 	int32 usd_decimal_places = 9;
 
-	// Computed MW (wallet is the single source of truth for the formula)
-	// transferable = custody - est_cost - bankroll
+	// Computed MW (wallet is the single source of truth for the formula).
+	// For OPERATOR (and UNSPECIFIED): transferable = custody - est_cost - bankroll.
+	// For PLAYER / AFFILIATE:        transferable = custody - est_cost.
 	string transferable_amount_usd = 10;
 	// withdrawable = transferable - locked_for_pending_invoices
 	string withdrawable_amount_usd = 11;

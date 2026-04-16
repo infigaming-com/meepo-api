@@ -27475,6 +27475,8 @@ func (m *GetOperatorWithdrawCheckInfoRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for WithdrawScenario
+
 	if len(errors) > 0 {
 		return GetOperatorWithdrawCheckInfoRequestMultiError(errors)
 	}
