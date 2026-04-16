@@ -19,42 +19,44 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Payment_GetSupportedPaymentMethodList_FullMethodName    = "/payment.service.v1.Payment/GetSupportedPaymentMethodList"
-	Payment_CreatePaymentMethod_FullMethodName              = "/payment.service.v1.Payment/CreatePaymentMethod"
-	Payment_GetPaymentMethodList_FullMethodName             = "/payment.service.v1.Payment/GetPaymentMethodList"
-	Payment_UpdatePaymentChannel_FullMethodName             = "/payment.service.v1.Payment/UpdatePaymentChannel"
-	Payment_CreatePaymentChannel_FullMethodName             = "/payment.service.v1.Payment/CreatePaymentChannel"
-	Payment_GetAddress_FullMethodName                       = "/payment.service.v1.Payment/GetAddress"
-	Payment_InitiateDeposit_FullMethodName                  = "/payment.service.v1.Payment/InitiateDeposit"
-	Payment_InitiateWithdraw_FullMethodName                 = "/payment.service.v1.Payment/InitiateWithdraw"
-	Payment_DepositCallback_FullMethodName                  = "/payment.service.v1.Payment/DepositCallback"
-	Payment_WithdrawCallback_FullMethodName                 = "/payment.service.v1.Payment/WithdrawCallback"
-	Payment_GetOperatorAddress_FullMethodName               = "/payment.service.v1.Payment/GetOperatorAddress"
-	Payment_InitiateOperatorWithdraw_FullMethodName         = "/payment.service.v1.Payment/InitiateOperatorWithdraw"
-	Payment_OperatorDepositCallback_FullMethodName          = "/payment.service.v1.Payment/OperatorDepositCallback"
-	Payment_OperatorWithdrawCallback_FullMethodName         = "/payment.service.v1.Payment/OperatorWithdrawCallback"
-	Payment_GetTransactionPage_FullMethodName               = "/payment.service.v1.Payment/GetTransactionPage"
-	Payment_GetPaymentChannelPage_FullMethodName            = "/payment.service.v1.Payment/GetPaymentChannelPage"
-	Payment_GetTransactionDetailById_FullMethodName         = "/payment.service.v1.Payment/GetTransactionDetailById"
-	Payment_GetOperatorTransactionPage_FullMethodName       = "/payment.service.v1.Payment/GetOperatorTransactionPage"
-	Payment_GetOperatorTransactionDetailById_FullMethodName = "/payment.service.v1.Payment/GetOperatorTransactionDetailById"
-	Payment_GetChannelsByIds_FullMethodName                 = "/payment.service.v1.Payment/GetChannelsByIds"
-	Payment_UpdatePaymentMethod_FullMethodName              = "/payment.service.v1.Payment/UpdatePaymentMethod"
-	Payment_GetOperatorPaymentChannelPage_FullMethodName    = "/payment.service.v1.Payment/GetOperatorPaymentChannelPage"
-	Payment_GetUserBankCardList_FullMethodName              = "/payment.service.v1.Payment/GetUserBankCardList"
-	Payment_AddUserBankCard_FullMethodName                  = "/payment.service.v1.Payment/AddUserBankCard"
-	Payment_UpdateUserBankCard_FullMethodName               = "/payment.service.v1.Payment/UpdateUserBankCard"
-	Payment_DeleteUsesrBankCard_FullMethodName              = "/payment.service.v1.Payment/DeleteUsesrBankCard"
-	Payment_GetBankSchema_FullMethodName                    = "/payment.service.v1.Payment/GetBankSchema"
-	Payment_BuyCryptoViaFiatCurrentList_FullMethodName      = "/payment.service.v1.Payment/BuyCryptoViaFiatCurrentList"
-	Payment_BuyCryptoViaFiatPriceQuery_FullMethodName       = "/payment.service.v1.Payment/BuyCryptoViaFiatPriceQuery"
-	Payment_BuyCryptoViaFiat_FullMethodName                 = "/payment.service.v1.Payment/BuyCryptoViaFiat"
-	Payment_GetResponsibleGamblingStatus_FullMethodName     = "/payment.service.v1.Payment/GetResponsibleGamblingStatus"
-	Payment_ListSavedPaymentInfo_FullMethodName             = "/payment.service.v1.Payment/ListSavedPaymentInfo"
-	Payment_DeleteSavedPaymentInfo_FullMethodName           = "/payment.service.v1.Payment/DeleteSavedPaymentInfo"
-	Payment_SetCryptoBonusPreference_FullMethodName         = "/payment.service.v1.Payment/SetCryptoBonusPreference"
-	Payment_GetCryptoBonusPreference_FullMethodName         = "/payment.service.v1.Payment/GetCryptoBonusPreference"
-	Payment_GetPaymentChannelFeeSummary_FullMethodName      = "/payment.service.v1.Payment/GetPaymentChannelFeeSummary"
+	Payment_GetSupportedPaymentMethodList_FullMethodName      = "/payment.service.v1.Payment/GetSupportedPaymentMethodList"
+	Payment_CreatePaymentMethod_FullMethodName                = "/payment.service.v1.Payment/CreatePaymentMethod"
+	Payment_GetPaymentMethodList_FullMethodName               = "/payment.service.v1.Payment/GetPaymentMethodList"
+	Payment_UpdatePaymentChannel_FullMethodName               = "/payment.service.v1.Payment/UpdatePaymentChannel"
+	Payment_CreatePaymentChannel_FullMethodName               = "/payment.service.v1.Payment/CreatePaymentChannel"
+	Payment_GetAddress_FullMethodName                         = "/payment.service.v1.Payment/GetAddress"
+	Payment_InitiateDeposit_FullMethodName                    = "/payment.service.v1.Payment/InitiateDeposit"
+	Payment_InitiateWithdraw_FullMethodName                   = "/payment.service.v1.Payment/InitiateWithdraw"
+	Payment_DepositCallback_FullMethodName                    = "/payment.service.v1.Payment/DepositCallback"
+	Payment_WithdrawCallback_FullMethodName                   = "/payment.service.v1.Payment/WithdrawCallback"
+	Payment_GetOperatorAddress_FullMethodName                 = "/payment.service.v1.Payment/GetOperatorAddress"
+	Payment_InitiateOperatorWithdraw_FullMethodName           = "/payment.service.v1.Payment/InitiateOperatorWithdraw"
+	Payment_OperatorDepositCallback_FullMethodName            = "/payment.service.v1.Payment/OperatorDepositCallback"
+	Payment_OperatorWithdrawCallback_FullMethodName           = "/payment.service.v1.Payment/OperatorWithdrawCallback"
+	Payment_GetTransactionPage_FullMethodName                 = "/payment.service.v1.Payment/GetTransactionPage"
+	Payment_GetPaymentChannelPage_FullMethodName              = "/payment.service.v1.Payment/GetPaymentChannelPage"
+	Payment_GetTransactionDetailById_FullMethodName           = "/payment.service.v1.Payment/GetTransactionDetailById"
+	Payment_GetOperatorTransactionPage_FullMethodName         = "/payment.service.v1.Payment/GetOperatorTransactionPage"
+	Payment_GetOperatorTransactionDetailById_FullMethodName   = "/payment.service.v1.Payment/GetOperatorTransactionDetailById"
+	Payment_GetTransactionDetailsByIds_FullMethodName         = "/payment.service.v1.Payment/GetTransactionDetailsByIds"
+	Payment_GetOperatorTransactionDetailsByIds_FullMethodName = "/payment.service.v1.Payment/GetOperatorTransactionDetailsByIds"
+	Payment_GetChannelsByIds_FullMethodName                   = "/payment.service.v1.Payment/GetChannelsByIds"
+	Payment_UpdatePaymentMethod_FullMethodName                = "/payment.service.v1.Payment/UpdatePaymentMethod"
+	Payment_GetOperatorPaymentChannelPage_FullMethodName      = "/payment.service.v1.Payment/GetOperatorPaymentChannelPage"
+	Payment_GetUserBankCardList_FullMethodName                = "/payment.service.v1.Payment/GetUserBankCardList"
+	Payment_AddUserBankCard_FullMethodName                    = "/payment.service.v1.Payment/AddUserBankCard"
+	Payment_UpdateUserBankCard_FullMethodName                 = "/payment.service.v1.Payment/UpdateUserBankCard"
+	Payment_DeleteUsesrBankCard_FullMethodName                = "/payment.service.v1.Payment/DeleteUsesrBankCard"
+	Payment_GetBankSchema_FullMethodName                      = "/payment.service.v1.Payment/GetBankSchema"
+	Payment_BuyCryptoViaFiatCurrentList_FullMethodName        = "/payment.service.v1.Payment/BuyCryptoViaFiatCurrentList"
+	Payment_BuyCryptoViaFiatPriceQuery_FullMethodName         = "/payment.service.v1.Payment/BuyCryptoViaFiatPriceQuery"
+	Payment_BuyCryptoViaFiat_FullMethodName                   = "/payment.service.v1.Payment/BuyCryptoViaFiat"
+	Payment_GetResponsibleGamblingStatus_FullMethodName       = "/payment.service.v1.Payment/GetResponsibleGamblingStatus"
+	Payment_ListSavedPaymentInfo_FullMethodName               = "/payment.service.v1.Payment/ListSavedPaymentInfo"
+	Payment_DeleteSavedPaymentInfo_FullMethodName             = "/payment.service.v1.Payment/DeleteSavedPaymentInfo"
+	Payment_SetCryptoBonusPreference_FullMethodName           = "/payment.service.v1.Payment/SetCryptoBonusPreference"
+	Payment_GetCryptoBonusPreference_FullMethodName           = "/payment.service.v1.Payment/GetCryptoBonusPreference"
+	Payment_GetPaymentChannelFeeSummary_FullMethodName        = "/payment.service.v1.Payment/GetPaymentChannelFeeSummary"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -132,6 +134,11 @@ type PaymentClient interface {
 	GetTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
 	GetOperatorTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error)
 	GetOperatorTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
+	// Batch variant of GetTransactionDetailById
+	// Resolves all operator names in a single user-service call instead of per-id fan-out
+	GetTransactionDetailsByIds(ctx context.Context, in *GetTransactionDetailsByIdsRequest, opts ...grpc.CallOption) (*GetTransactionDetailsByIdsResponse, error)
+	// Batch variant of GetOperatorTransactionDetailById
+	GetOperatorTransactionDetailsByIds(ctx context.Context, in *GetTransactionDetailsByIdsRequest, opts ...grpc.CallOption) (*GetTransactionDetailsByIdsResponse, error)
 	GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error)
 	UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error)
 	GetOperatorPaymentChannelPage(ctx context.Context, in *GetOperatorPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error)
@@ -354,6 +361,26 @@ func (c *paymentClient) GetOperatorTransactionDetailById(ctx context.Context, in
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTransactionDetailByIdResponse)
 	err := c.cc.Invoke(ctx, Payment_GetOperatorTransactionDetailById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetTransactionDetailsByIds(ctx context.Context, in *GetTransactionDetailsByIdsRequest, opts ...grpc.CallOption) (*GetTransactionDetailsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTransactionDetailsByIdsResponse)
+	err := c.cc.Invoke(ctx, Payment_GetTransactionDetailsByIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetOperatorTransactionDetailsByIds(ctx context.Context, in *GetTransactionDetailsByIdsRequest, opts ...grpc.CallOption) (*GetTransactionDetailsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTransactionDetailsByIdsResponse)
+	err := c.cc.Invoke(ctx, Payment_GetOperatorTransactionDetailsByIds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -605,6 +632,11 @@ type PaymentServer interface {
 	GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
 	GetOperatorTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
 	GetOperatorTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
+	// Batch variant of GetTransactionDetailById
+	// Resolves all operator names in a single user-service call instead of per-id fan-out
+	GetTransactionDetailsByIds(context.Context, *GetTransactionDetailsByIdsRequest) (*GetTransactionDetailsByIdsResponse, error)
+	// Batch variant of GetOperatorTransactionDetailById
+	GetOperatorTransactionDetailsByIds(context.Context, *GetTransactionDetailsByIdsRequest) (*GetTransactionDetailsByIdsResponse, error)
 	GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error)
 	UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*CreatePaymentMethodResponse, error)
 	GetOperatorPaymentChannelPage(context.Context, *GetOperatorPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
@@ -699,6 +731,12 @@ func (UnimplementedPaymentServer) GetOperatorTransactionPage(context.Context, *G
 }
 func (UnimplementedPaymentServer) GetOperatorTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorTransactionDetailById not implemented")
+}
+func (UnimplementedPaymentServer) GetTransactionDetailsByIds(context.Context, *GetTransactionDetailsByIdsRequest) (*GetTransactionDetailsByIdsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTransactionDetailsByIds not implemented")
+}
+func (UnimplementedPaymentServer) GetOperatorTransactionDetailsByIds(context.Context, *GetTransactionDetailsByIdsRequest) (*GetTransactionDetailsByIdsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorTransactionDetailsByIds not implemented")
 }
 func (UnimplementedPaymentServer) GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetChannelsByIds not implemented")
@@ -1114,6 +1152,42 @@ func _Payment_GetOperatorTransactionDetailById_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_GetTransactionDetailsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionDetailsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetTransactionDetailsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetTransactionDetailsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetTransactionDetailsByIds(ctx, req.(*GetTransactionDetailsByIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetOperatorTransactionDetailsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionDetailsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetOperatorTransactionDetailsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetOperatorTransactionDetailsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetOperatorTransactionDetailsByIds(ctx, req.(*GetTransactionDetailsByIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Payment_GetChannelsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetChannelsByIdsRequest)
 	if err := dec(in); err != nil {
@@ -1502,6 +1576,14 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorTransactionDetailById",
 			Handler:    _Payment_GetOperatorTransactionDetailById_Handler,
+		},
+		{
+			MethodName: "GetTransactionDetailsByIds",
+			Handler:    _Payment_GetTransactionDetailsByIds_Handler,
+		},
+		{
+			MethodName: "GetOperatorTransactionDetailsByIds",
+			Handler:    _Payment_GetOperatorTransactionDetailsByIds_Handler,
 		},
 		{
 			MethodName: "GetChannelsByIds",

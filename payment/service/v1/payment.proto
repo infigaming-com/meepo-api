@@ -861,6 +861,20 @@ message GetTransactionDetailByIdResponse {
   TransactionDetail detail = 1;
 }
 
+// Request to batch-fetch transaction details by IDs
+// Used to avoid N+1 RPC fan-out when iterating over tickets/transactions
+message GetTransactionDetailsByIdsRequest {
+  // Transaction IDs to fetch details for; duplicates are allowed but ignored
+  repeated int64 transaction_ids = 1;
+}
+
+// Response for batch transaction details
+// Order is not guaranteed; missing IDs are silently skipped
+message GetTransactionDetailsByIdsResponse {
+  // Detailed transaction information; one entry per existing id in the request
+  repeated TransactionDetail details = 1;
+}
+
 message GetChannelsByIdsRequest {
 	repeated string channel_ids = 1;
 }
@@ -1216,7 +1230,14 @@ service Payment {
   rpc GetOperatorTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) { }
 
   rpc GetOperatorTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) { }
-  
+
+  // Batch variant of GetTransactionDetailById
+  // Resolves all operator names in a single user-service call instead of per-id fan-out
+  rpc GetTransactionDetailsByIds(GetTransactionDetailsByIdsRequest) returns (GetTransactionDetailsByIdsResponse) { }
+
+  // Batch variant of GetOperatorTransactionDetailById
+  rpc GetOperatorTransactionDetailsByIds(GetTransactionDetailsByIdsRequest) returns (GetTransactionDetailsByIdsResponse) { }
+
 	rpc GetChannelsByIds(GetChannelsByIdsRequest) returns (GetChannelsByIdsResponse) { }
 
 	rpc UpdatePaymentMethod(UpdatePaymentMethodRequest) returns (CreatePaymentMethodResponse) { }
