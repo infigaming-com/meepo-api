@@ -8026,6 +8026,10 @@ func (m *CreateCampaignRequest_Campaign) validate(all bool) error {
 		}
 	}
 
+	if m.TelegramBotUrl != nil {
+		// no validation rules for TelegramBotUrl
+	}
+
 	if len(errors) > 0 {
 		return CreateCampaignRequest_CampaignMultiError(errors)
 	}
