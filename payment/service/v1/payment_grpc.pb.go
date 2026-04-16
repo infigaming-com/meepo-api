@@ -134,10 +134,13 @@ type PaymentClient interface {
 	GetTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
 	GetOperatorTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error)
 	GetOperatorTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
-	// Batch variant of GetTransactionDetailById
-	// Resolves all operator names in a single user-service call instead of per-id fan-out
+	// Batch variant of GetTransactionDetailById.
+	// Treats the request as a single authorization unit; see the request
+	// message comment for the auth-scope contract and size limit.
 	GetTransactionDetailsByIds(ctx context.Context, in *GetTransactionDetailsByIdsRequest, opts ...grpc.CallOption) (*GetTransactionDetailsByIdsResponse, error)
-	// Batch variant of GetOperatorTransactionDetailById
+	// Batch variant of GetOperatorTransactionDetailById.
+	// Treats the request as a single authorization unit; see the request
+	// message comment for the auth-scope contract and size limit.
 	GetOperatorTransactionDetailsByIds(ctx context.Context, in *GetTransactionDetailsByIdsRequest, opts ...grpc.CallOption) (*GetTransactionDetailsByIdsResponse, error)
 	GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error)
 	UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error)
@@ -632,10 +635,13 @@ type PaymentServer interface {
 	GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
 	GetOperatorTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
 	GetOperatorTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
-	// Batch variant of GetTransactionDetailById
-	// Resolves all operator names in a single user-service call instead of per-id fan-out
+	// Batch variant of GetTransactionDetailById.
+	// Treats the request as a single authorization unit; see the request
+	// message comment for the auth-scope contract and size limit.
 	GetTransactionDetailsByIds(context.Context, *GetTransactionDetailsByIdsRequest) (*GetTransactionDetailsByIdsResponse, error)
-	// Batch variant of GetOperatorTransactionDetailById
+	// Batch variant of GetOperatorTransactionDetailById.
+	// Treats the request as a single authorization unit; see the request
+	// message comment for the auth-scope contract and size limit.
 	GetOperatorTransactionDetailsByIds(context.Context, *GetTransactionDetailsByIdsRequest) (*GetTransactionDetailsByIdsResponse, error)
 	GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error)
 	UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*CreatePaymentMethodResponse, error)

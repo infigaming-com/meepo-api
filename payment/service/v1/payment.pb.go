@@ -4397,11 +4397,21 @@ func (x *GetTransactionDetailByIdResponse) GetDetail() *TransactionDetail {
 	return nil
 }
 
-// Request to batch-fetch transaction details by IDs
-// Used to avoid N+1 RPC fan-out when iterating over tickets/transactions
+// Request to batch-fetch transaction details by IDs.
+//
+// Authorization contract: the server MUST filter the result by the caller's
+// auth scope (the user-side RPC by the caller's user_id; the operator-side
+// RPC by the caller's operator context). IDs that do not exist AND IDs that
+// exist but fall outside the caller's scope are both treated as missing and
+// returned in `missing_ids` — the two cases are deliberately not
+// distinguished, to avoid an oracle for cross-tenant existence probing.
+//
+// Server limit: servers SHOULD reject requests with more than 200 ids with
+// InvalidArgument. Callers must chunk accordingly.
 type GetTransactionDetailsByIdsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Transaction IDs to fetch details for; duplicates are allowed but ignored
+	// Transaction IDs to fetch details for. Duplicates are allowed but ignored.
+	// Empty request is valid and returns an empty response.
 	TransactionIds []int64 `protobuf:"varint,1,rep,packed,name=transaction_ids,json=transactionIds,proto3" json:"transaction_ids,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -4444,12 +4454,20 @@ func (x *GetTransactionDetailsByIdsRequest) GetTransactionIds() []int64 {
 	return nil
 }
 
-// Response for batch transaction details
-// Order is not guaranteed; missing IDs are silently skipped
+// Response for batch transaction details.
 type GetTransactionDetailsByIdsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Detailed transaction information; one entry per existing id in the request
-	Details       []*TransactionDetail `protobuf:"bytes,1,rep,name=details,proto3" json:"details,omitempty"`
+	// Detailed transaction information. Order is not guaranteed; callers must
+	// index by `detail.transaction.transaction_id`.
+	Details []*TransactionDetail `protobuf:"bytes,1,rep,name=details,proto3" json:"details,omitempty"`
+	// IDs from the request that were not returned. Callers can rely on
+	//
+	//	len(request.transaction_ids_dedup) == len(details) + len(missing_ids)
+	//
+	// to distinguish "detail fetch failed silently" from "ID is not visible".
+	// Intentionally does NOT distinguish "not found" from "out of caller's
+	// scope" — see the authorization contract on the request message.
+	MissingIds    []int64 `protobuf:"varint,2,rep,packed,name=missing_ids,json=missingIds,proto3" json:"missing_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4487,6 +4505,13 @@ func (*GetTransactionDetailsByIdsResponse) Descriptor() ([]byte, []int) {
 func (x *GetTransactionDetailsByIdsResponse) GetDetails() []*TransactionDetail {
 	if x != nil {
 		return x.Details
+	}
+	return nil
+}
+
+func (x *GetTransactionDetailsByIdsResponse) GetMissingIds() []int64 {
+	if x != nil {
+		return x.MissingIds
 	}
 	return nil
 }
@@ -7375,9 +7400,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" GetTransactionDetailByIdResponse\x12=\n" +
 	"\x06detail\x18\x01 \x01(\v2%.payment.service.v1.TransactionDetailR\x06detail\"L\n" +
 	"!GetTransactionDetailsByIdsRequest\x12'\n" +
-	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\"e\n" +
+	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\"\x86\x01\n" +
 	"\"GetTransactionDetailsByIdsResponse\x12?\n" +
-	"\adetails\x18\x01 \x03(\v2%.payment.service.v1.TransactionDetailR\adetails\":\n" +
+	"\adetails\x18\x01 \x03(\v2%.payment.service.v1.TransactionDetailR\adetails\x12\x1f\n" +
+	"\vmissing_ids\x18\x02 \x03(\x03R\n" +
+	"missingIds\":\n" +
 	"\x17GetChannelsByIdsRequest\x12\x1f\n" +
 	"\vchannel_ids\x18\x01 \x03(\tR\n" +
 	"channelIds\"^\n" +
