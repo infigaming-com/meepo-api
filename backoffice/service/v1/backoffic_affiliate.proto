@@ -552,9 +552,11 @@ message CreateCampaignRequest {
     message Campaign {
         string domain = 1;
         string campaign_name = 2;
-        // "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"
+        // "facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", "google_ads", or "telegram_miniapp"
         string channel_type = 3;
         api.affiliate.service.v1.ChannelConfig channel_config = 4;
+        // Required when channel_type == "telegram_miniapp" (e.g. https://t.me/betqio_bot/app)
+        optional string telegram_bot_url = 5;
     }
     Campaign campaign = 1;
     optional int64 target_affiliate_id = 2;
