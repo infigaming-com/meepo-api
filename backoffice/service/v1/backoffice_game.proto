@@ -1014,7 +1014,13 @@ message UpdateBetTickerConfigRequest {
 		optional api.push.service.v1.BettingFilterConfig high_wins = 3;
 	}
 	repeated Item list = 1;
-	bool enable = 2;
+	// enable is optional. Server-side semantics:
+	//   - omitted: preserve the existing value for the (operator, country)
+	//     row, or default to true when no such row exists yet.
+	//   - explicit true/false: written to the DB as-is.
+	// This avoids the proto3 zero-value silently disabling the ticker when a
+	// caller only wants to update other fields (e.g. global_ticker_enabled).
+	optional bool enable = 2;
 	api.common.OperatorContext target_operator_context = 3;
 	optional bool global_ticker_enabled = 4;
 }

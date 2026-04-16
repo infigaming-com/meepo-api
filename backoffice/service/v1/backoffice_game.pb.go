@@ -4660,11 +4660,18 @@ func (x *BackofficeListGamesUnderTagResponse) GetPageSize() int32 {
 }
 
 type UpdateBetTickerConfigRequest struct {
-	state                 protoimpl.MessageState               `protogen:"open.v1"`
-	List                  []*UpdateBetTickerConfigRequest_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
-	Enable                bool                                 `protobuf:"varint,2,opt,name=enable,proto3" json:"enable,omitempty"`
-	TargetOperatorContext *common.OperatorContext              `protobuf:"bytes,3,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	GlobalTickerEnabled   *bool                                `protobuf:"varint,4,opt,name=global_ticker_enabled,json=globalTickerEnabled,proto3,oneof" json:"global_ticker_enabled,omitempty"`
+	state protoimpl.MessageState               `protogen:"open.v1"`
+	List  []*UpdateBetTickerConfigRequest_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	// enable is optional. Server-side semantics:
+	//   - omitted: preserve the existing value for the (operator, country)
+	//     row, or default to true when no such row exists yet.
+	//   - explicit true/false: written to the DB as-is.
+	//
+	// This avoids the proto3 zero-value silently disabling the ticker when a
+	// caller only wants to update other fields (e.g. global_ticker_enabled).
+	Enable                *bool                   `protobuf:"varint,2,opt,name=enable,proto3,oneof" json:"enable,omitempty"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	GlobalTickerEnabled   *bool                   `protobuf:"varint,4,opt,name=global_ticker_enabled,json=globalTickerEnabled,proto3,oneof" json:"global_ticker_enabled,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -4707,8 +4714,8 @@ func (x *UpdateBetTickerConfigRequest) GetList() []*UpdateBetTickerConfigRequest
 }
 
 func (x *UpdateBetTickerConfigRequest) GetEnable() bool {
-	if x != nil {
-		return x.Enable
+	if x != nil && x.Enable != nil {
+		return *x.Enable
 	}
 	return false
 }
@@ -6504,12 +6511,12 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"orderIndex\x12\x16\n" +
 	"\x06sticky\x18\f \x01(\bR\x06sticky\x12\x1b\n" +
 	"\tfree_spin\x18\r \x01(\bR\bfreeSpin\x12\x10\n" +
-	"\x03rtp\x18\x0e \x01(\tR\x03rtp\"\x81\x04\n" +
+	"\x03rtp\x18\x0e \x01(\tR\x03rtp\"\x91\x04\n" +
 	"\x1cUpdateBetTickerConfigRequest\x12P\n" +
-	"\x04list\x18\x01 \x03(\v2<.api.backoffice.service.v1.UpdateBetTickerConfigRequest.ItemR\x04list\x12\x16\n" +
-	"\x06enable\x18\x02 \x01(\bR\x06enable\x12S\n" +
+	"\x04list\x18\x01 \x03(\v2<.api.backoffice.service.v1.UpdateBetTickerConfigRequest.ItemR\x04list\x12\x1b\n" +
+	"\x06enable\x18\x02 \x01(\bH\x00R\x06enable\x88\x01\x01\x12S\n" +
 	"\x17target_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x127\n" +
-	"\x15global_ticker_enabled\x18\x04 \x01(\bH\x00R\x13globalTickerEnabled\x88\x01\x01\x1a\xce\x01\n" +
+	"\x15global_ticker_enabled\x18\x04 \x01(\bH\x01R\x13globalTickerEnabled\x88\x01\x01\x1a\xce\x01\n" +
 	"\x04Item\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12F\n" +
 	"\aall_bet\x18\x02 \x01(\v2(.api.push.service.v1.BettingFilterConfigH\x00R\x06allBet\x88\x01\x01\x12J\n" +
@@ -6517,7 +6524,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
 	"\b_all_betB\f\n" +
 	"\n" +
-	"_high_winsB\x18\n" +
+	"_high_winsB\t\n" +
+	"\a_enableB\x18\n" +
 	"\x16_global_ticker_enabled\"q\n" +
 	"\x1aListBetTickerConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext2\xa0Q\n" +

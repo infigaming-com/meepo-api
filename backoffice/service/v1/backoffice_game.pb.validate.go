@@ -9078,8 +9078,6 @@ func (m *UpdateBetTickerConfigRequest) validate(all bool) error {
 
 	}
 
-	// no validation rules for Enable
-
 	if all {
 		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -9107,6 +9105,10 @@ func (m *UpdateBetTickerConfigRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Enable != nil {
+		// no validation rules for Enable
 	}
 
 	if m.GlobalTickerEnabled != nil {
