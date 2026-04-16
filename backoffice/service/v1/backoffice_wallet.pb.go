@@ -2981,6 +2981,104 @@ func (x *UpdateOperatorCurrencyConfigRequest) GetOperatorCurrencyConfig() *v1.Op
 	return nil
 }
 
+type PushBetLimitsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Optional currency filter. Empty = every currency configured on System.
+	Currencies    []string `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PushBetLimitsRequest) Reset() {
+	*x = PushBetLimitsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PushBetLimitsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PushBetLimitsRequest) ProtoMessage() {}
+
+func (x *PushBetLimitsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PushBetLimitsRequest.ProtoReflect.Descriptor instead.
+func (*PushBetLimitsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *PushBetLimitsRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+type PullBetLimitsRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// Optional currency filter. Empty = every currency the target already has.
+	Currencies    []string `protobuf:"bytes,2,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PullBetLimitsRequest) Reset() {
+	*x = PullBetLimitsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PullBetLimitsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PullBetLimitsRequest) ProtoMessage() {}
+
+func (x *PullBetLimitsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PullBetLimitsRequest.ProtoReflect.Descriptor instead.
+func (*PullBetLimitsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *PullBetLimitsRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *PullBetLimitsRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
 type UpdateWalletConfigRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
@@ -2991,7 +3089,7 @@ type UpdateWalletConfigRequest struct {
 
 func (x *UpdateWalletConfigRequest) Reset() {
 	*x = UpdateWalletConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3003,7 +3101,7 @@ func (x *UpdateWalletConfigRequest) String() string {
 func (*UpdateWalletConfigRequest) ProtoMessage() {}
 
 func (x *UpdateWalletConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3016,7 +3114,7 @@ func (x *UpdateWalletConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateWalletConfigRequest.ProtoReflect.Descriptor instead.
 func (*UpdateWalletConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{41}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *UpdateWalletConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -3046,7 +3144,7 @@ type DeleteWalletResponsibleGamblingConfigRequest struct {
 
 func (x *DeleteWalletResponsibleGamblingConfigRequest) Reset() {
 	*x = DeleteWalletResponsibleGamblingConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3058,7 +3156,7 @@ func (x *DeleteWalletResponsibleGamblingConfigRequest) String() string {
 func (*DeleteWalletResponsibleGamblingConfigRequest) ProtoMessage() {}
 
 func (x *DeleteWalletResponsibleGamblingConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3071,7 +3169,7 @@ func (x *DeleteWalletResponsibleGamblingConfigRequest) ProtoReflect() protorefle
 
 // Deprecated: Use DeleteWalletResponsibleGamblingConfigRequest.ProtoReflect.Descriptor instead.
 func (*DeleteWalletResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{42}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *DeleteWalletResponsibleGamblingConfigRequest) GetUserId() int64 {
@@ -3104,7 +3202,7 @@ type ListWalletResponsibleGamblingConfigsRequest struct {
 
 func (x *ListWalletResponsibleGamblingConfigsRequest) Reset() {
 	*x = ListWalletResponsibleGamblingConfigsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3116,7 +3214,7 @@ func (x *ListWalletResponsibleGamblingConfigsRequest) String() string {
 func (*ListWalletResponsibleGamblingConfigsRequest) ProtoMessage() {}
 
 func (x *ListWalletResponsibleGamblingConfigsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3129,7 +3227,7 @@ func (x *ListWalletResponsibleGamblingConfigsRequest) ProtoReflect() protoreflec
 
 // Deprecated: Use ListWalletResponsibleGamblingConfigsRequest.ProtoReflect.Descriptor instead.
 func (*ListWalletResponsibleGamblingConfigsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{43}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *ListWalletResponsibleGamblingConfigsRequest) GetUserId() int64 {
@@ -3155,7 +3253,7 @@ type ListCustomerRecordsRequest struct {
 
 func (x *ListCustomerRecordsRequest) Reset() {
 	*x = ListCustomerRecordsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3167,7 +3265,7 @@ func (x *ListCustomerRecordsRequest) String() string {
 func (*ListCustomerRecordsRequest) ProtoMessage() {}
 
 func (x *ListCustomerRecordsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3180,7 +3278,7 @@ func (x *ListCustomerRecordsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCustomerRecordsRequest.ProtoReflect.Descriptor instead.
 func (*ListCustomerRecordsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{44}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *ListCustomerRecordsRequest) GetStartTime() *timestamppb.Timestamp {
@@ -3257,7 +3355,7 @@ type ExportCustomerRecordsRequest struct {
 
 func (x *ExportCustomerRecordsRequest) Reset() {
 	*x = ExportCustomerRecordsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3269,7 +3367,7 @@ func (x *ExportCustomerRecordsRequest) String() string {
 func (*ExportCustomerRecordsRequest) ProtoMessage() {}
 
 func (x *ExportCustomerRecordsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3282,7 +3380,7 @@ func (x *ExportCustomerRecordsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExportCustomerRecordsRequest.ProtoReflect.Descriptor instead.
 func (*ExportCustomerRecordsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{45}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *ExportCustomerRecordsRequest) GetStartTime() *timestamppb.Timestamp {
@@ -3352,7 +3450,7 @@ type SetFICAThresholdConfigRequest struct {
 
 func (x *SetFICAThresholdConfigRequest) Reset() {
 	*x = SetFICAThresholdConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3364,7 +3462,7 @@ func (x *SetFICAThresholdConfigRequest) String() string {
 func (*SetFICAThresholdConfigRequest) ProtoMessage() {}
 
 func (x *SetFICAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3377,7 +3475,7 @@ func (x *SetFICAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetFICAThresholdConfigRequest.ProtoReflect.Descriptor instead.
 func (*SetFICAThresholdConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{46}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *SetFICAThresholdConfigRequest) GetCurrency() string {
@@ -3410,7 +3508,7 @@ type GetFICAThresholdConfigRequest struct {
 
 func (x *GetFICAThresholdConfigRequest) Reset() {
 	*x = GetFICAThresholdConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[47]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3422,7 +3520,7 @@ func (x *GetFICAThresholdConfigRequest) String() string {
 func (*GetFICAThresholdConfigRequest) ProtoMessage() {}
 
 func (x *GetFICAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[47]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3435,7 +3533,7 @@ func (x *GetFICAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFICAThresholdConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetFICAThresholdConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{47}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *GetFICAThresholdConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -3461,7 +3559,7 @@ type ListFICAThresholdTransactionsRequest struct {
 
 func (x *ListFICAThresholdTransactionsRequest) Reset() {
 	*x = ListFICAThresholdTransactionsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[48]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3473,7 +3571,7 @@ func (x *ListFICAThresholdTransactionsRequest) String() string {
 func (*ListFICAThresholdTransactionsRequest) ProtoMessage() {}
 
 func (x *ListFICAThresholdTransactionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[48]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3486,7 +3584,7 @@ func (x *ListFICAThresholdTransactionsRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ListFICAThresholdTransactionsRequest.ProtoReflect.Descriptor instead.
 func (*ListFICAThresholdTransactionsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{48}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *ListFICAThresholdTransactionsRequest) GetStartTime() *timestamppb.Timestamp {
@@ -3563,7 +3661,7 @@ type ExportFICAThresholdTransactionsRequest struct {
 
 func (x *ExportFICAThresholdTransactionsRequest) Reset() {
 	*x = ExportFICAThresholdTransactionsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[49]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3575,7 +3673,7 @@ func (x *ExportFICAThresholdTransactionsRequest) String() string {
 func (*ExportFICAThresholdTransactionsRequest) ProtoMessage() {}
 
 func (x *ExportFICAThresholdTransactionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[49]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3588,7 +3686,7 @@ func (x *ExportFICAThresholdTransactionsRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ExportFICAThresholdTransactionsRequest.ProtoReflect.Descriptor instead.
 func (*ExportFICAThresholdTransactionsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{49}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *ExportFICAThresholdTransactionsRequest) GetStartTime() *timestamppb.Timestamp {
@@ -3665,7 +3763,7 @@ type ManualCreditRequest struct {
 
 func (x *ManualCreditRequest) Reset() {
 	*x = ManualCreditRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[50]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3677,7 +3775,7 @@ func (x *ManualCreditRequest) String() string {
 func (*ManualCreditRequest) ProtoMessage() {}
 
 func (x *ManualCreditRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[50]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3690,7 +3788,7 @@ func (x *ManualCreditRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ManualCreditRequest.ProtoReflect.Descriptor instead.
 func (*ManualCreditRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{50}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *ManualCreditRequest) GetUserId() int64 {
@@ -3770,7 +3868,7 @@ type ManualDebitRequest struct {
 
 func (x *ManualDebitRequest) Reset() {
 	*x = ManualDebitRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[51]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3782,7 +3880,7 @@ func (x *ManualDebitRequest) String() string {
 func (*ManualDebitRequest) ProtoMessage() {}
 
 func (x *ManualDebitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[51]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3795,7 +3893,7 @@ func (x *ManualDebitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ManualDebitRequest.ProtoReflect.Descriptor instead.
 func (*ManualDebitRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{51}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *ManualDebitRequest) GetUserId() int64 {
@@ -3848,7 +3946,7 @@ type ListManualJournalEntriesRequest struct {
 
 func (x *ListManualJournalEntriesRequest) Reset() {
 	*x = ListManualJournalEntriesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[52]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3860,7 +3958,7 @@ func (x *ListManualJournalEntriesRequest) String() string {
 func (*ListManualJournalEntriesRequest) ProtoMessage() {}
 
 func (x *ListManualJournalEntriesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[52]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3873,7 +3971,7 @@ func (x *ListManualJournalEntriesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListManualJournalEntriesRequest.ProtoReflect.Descriptor instead.
 func (*ListManualJournalEntriesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{52}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *ListManualJournalEntriesRequest) GetStartTime() *timestamppb.Timestamp {
@@ -3942,7 +4040,7 @@ type ExportManualJournalEntriesRequest struct {
 
 func (x *ExportManualJournalEntriesRequest) Reset() {
 	*x = ExportManualJournalEntriesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[53]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3954,7 +4052,7 @@ func (x *ExportManualJournalEntriesRequest) String() string {
 func (*ExportManualJournalEntriesRequest) ProtoMessage() {}
 
 func (x *ExportManualJournalEntriesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[53]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3967,7 +4065,7 @@ func (x *ExportManualJournalEntriesRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ExportManualJournalEntriesRequest.ProtoReflect.Descriptor instead.
 func (*ExportManualJournalEntriesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{53}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *ExportManualJournalEntriesRequest) GetStartTime() *timestamppb.Timestamp {
@@ -4036,7 +4134,7 @@ type CreatePromoCodeCampaignRequest struct {
 
 func (x *CreatePromoCodeCampaignRequest) Reset() {
 	*x = CreatePromoCodeCampaignRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[54]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4048,7 +4146,7 @@ func (x *CreatePromoCodeCampaignRequest) String() string {
 func (*CreatePromoCodeCampaignRequest) ProtoMessage() {}
 
 func (x *CreatePromoCodeCampaignRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[54]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4061,7 +4159,7 @@ func (x *CreatePromoCodeCampaignRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePromoCodeCampaignRequest.ProtoReflect.Descriptor instead.
 func (*CreatePromoCodeCampaignRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{54}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *CreatePromoCodeCampaignRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -4136,7 +4234,7 @@ type UpdatePromoCodeCampaignRequest struct {
 
 func (x *UpdatePromoCodeCampaignRequest) Reset() {
 	*x = UpdatePromoCodeCampaignRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[55]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4148,7 +4246,7 @@ func (x *UpdatePromoCodeCampaignRequest) String() string {
 func (*UpdatePromoCodeCampaignRequest) ProtoMessage() {}
 
 func (x *UpdatePromoCodeCampaignRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[55]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4161,7 +4259,7 @@ func (x *UpdatePromoCodeCampaignRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePromoCodeCampaignRequest.ProtoReflect.Descriptor instead.
 func (*UpdatePromoCodeCampaignRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{55}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *UpdatePromoCodeCampaignRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -4226,7 +4324,7 @@ type UpdatePromoCodeCampaignStatusRequest struct {
 
 func (x *UpdatePromoCodeCampaignStatusRequest) Reset() {
 	*x = UpdatePromoCodeCampaignStatusRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[56]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4238,7 +4336,7 @@ func (x *UpdatePromoCodeCampaignStatusRequest) String() string {
 func (*UpdatePromoCodeCampaignStatusRequest) ProtoMessage() {}
 
 func (x *UpdatePromoCodeCampaignStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[56]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4251,7 +4349,7 @@ func (x *UpdatePromoCodeCampaignStatusRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use UpdatePromoCodeCampaignStatusRequest.ProtoReflect.Descriptor instead.
 func (*UpdatePromoCodeCampaignStatusRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{56}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *UpdatePromoCodeCampaignStatusRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -4293,7 +4391,7 @@ type ListPromoCodeCampaignsRequest struct {
 
 func (x *ListPromoCodeCampaignsRequest) Reset() {
 	*x = ListPromoCodeCampaignsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[57]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4305,7 +4403,7 @@ func (x *ListPromoCodeCampaignsRequest) String() string {
 func (*ListPromoCodeCampaignsRequest) ProtoMessage() {}
 
 func (x *ListPromoCodeCampaignsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[57]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4318,7 +4416,7 @@ func (x *ListPromoCodeCampaignsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPromoCodeCampaignsRequest.ProtoReflect.Descriptor instead.
 func (*ListPromoCodeCampaignsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{57}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *ListPromoCodeCampaignsRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -4385,7 +4483,7 @@ type ListPromoCodeCampaignDetailsRequest struct {
 
 func (x *ListPromoCodeCampaignDetailsRequest) Reset() {
 	*x = ListPromoCodeCampaignDetailsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[58]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4397,7 +4495,7 @@ func (x *ListPromoCodeCampaignDetailsRequest) String() string {
 func (*ListPromoCodeCampaignDetailsRequest) ProtoMessage() {}
 
 func (x *ListPromoCodeCampaignDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[58]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4410,7 +4508,7 @@ func (x *ListPromoCodeCampaignDetailsRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ListPromoCodeCampaignDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListPromoCodeCampaignDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{58}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *ListPromoCodeCampaignDetailsRequest) GetCampaignId() int64 {
@@ -4468,7 +4566,7 @@ type GenerateOneTimePromoCodesRequest struct {
 
 func (x *GenerateOneTimePromoCodesRequest) Reset() {
 	*x = GenerateOneTimePromoCodesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[59]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4480,7 +4578,7 @@ func (x *GenerateOneTimePromoCodesRequest) String() string {
 func (*GenerateOneTimePromoCodesRequest) ProtoMessage() {}
 
 func (x *GenerateOneTimePromoCodesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[59]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4493,7 +4591,7 @@ func (x *GenerateOneTimePromoCodesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateOneTimePromoCodesRequest.ProtoReflect.Descriptor instead.
 func (*GenerateOneTimePromoCodesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{59}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *GenerateOneTimePromoCodesRequest) GetCampaignId() int64 {
@@ -4535,7 +4633,7 @@ type GenerateUniversalPromoCodesRequest struct {
 
 func (x *GenerateUniversalPromoCodesRequest) Reset() {
 	*x = GenerateUniversalPromoCodesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[60]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4547,7 +4645,7 @@ func (x *GenerateUniversalPromoCodesRequest) String() string {
 func (*GenerateUniversalPromoCodesRequest) ProtoMessage() {}
 
 func (x *GenerateUniversalPromoCodesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[60]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4560,7 +4658,7 @@ func (x *GenerateUniversalPromoCodesRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use GenerateUniversalPromoCodesRequest.ProtoReflect.Descriptor instead.
 func (*GenerateUniversalPromoCodesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{60}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *GenerateUniversalPromoCodesRequest) GetCampaignId() int64 {
@@ -4587,7 +4685,7 @@ type ListUniversalCodeUsagesRequest struct {
 
 func (x *ListUniversalCodeUsagesRequest) Reset() {
 	*x = ListUniversalCodeUsagesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[61]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4599,7 +4697,7 @@ func (x *ListUniversalCodeUsagesRequest) String() string {
 func (*ListUniversalCodeUsagesRequest) ProtoMessage() {}
 
 func (x *ListUniversalCodeUsagesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[61]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4612,7 +4710,7 @@ func (x *ListUniversalCodeUsagesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUniversalCodeUsagesRequest.ProtoReflect.Descriptor instead.
 func (*ListUniversalCodeUsagesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{61}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *ListUniversalCodeUsagesRequest) GetCampaignId() int64 {
@@ -4640,7 +4738,7 @@ type ExportPromoCodesRequest struct {
 
 func (x *ExportPromoCodesRequest) Reset() {
 	*x = ExportPromoCodesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[62]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4652,7 +4750,7 @@ func (x *ExportPromoCodesRequest) String() string {
 func (*ExportPromoCodesRequest) ProtoMessage() {}
 
 func (x *ExportPromoCodesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[62]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4665,7 +4763,7 @@ func (x *ExportPromoCodesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExportPromoCodesRequest.ProtoReflect.Descriptor instead.
 func (*ExportPromoCodesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{62}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *ExportPromoCodesRequest) GetCampaignId() int64 {
@@ -4728,7 +4826,7 @@ type ManualAdjustCreditTurnoverFieldRequest struct {
 
 func (x *ManualAdjustCreditTurnoverFieldRequest) Reset() {
 	*x = ManualAdjustCreditTurnoverFieldRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[63]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4740,7 +4838,7 @@ func (x *ManualAdjustCreditTurnoverFieldRequest) String() string {
 func (*ManualAdjustCreditTurnoverFieldRequest) ProtoMessage() {}
 
 func (x *ManualAdjustCreditTurnoverFieldRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[63]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4753,7 +4851,7 @@ func (x *ManualAdjustCreditTurnoverFieldRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ManualAdjustCreditTurnoverFieldRequest.ProtoReflect.Descriptor instead.
 func (*ManualAdjustCreditTurnoverFieldRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{63}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *ManualAdjustCreditTurnoverFieldRequest) GetTargetUserId() int64 {
@@ -4814,7 +4912,7 @@ type SetAppDownloadRewardConfigRequest struct {
 
 func (x *SetAppDownloadRewardConfigRequest) Reset() {
 	*x = SetAppDownloadRewardConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[64]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4826,7 +4924,7 @@ func (x *SetAppDownloadRewardConfigRequest) String() string {
 func (*SetAppDownloadRewardConfigRequest) ProtoMessage() {}
 
 func (x *SetAppDownloadRewardConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[64]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4839,7 +4937,7 @@ func (x *SetAppDownloadRewardConfigRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use SetAppDownloadRewardConfigRequest.ProtoReflect.Descriptor instead.
 func (*SetAppDownloadRewardConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{64}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *SetAppDownloadRewardConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -4874,7 +4972,7 @@ type GetAppDownloadRewardConfigRequest struct {
 
 func (x *GetAppDownloadRewardConfigRequest) Reset() {
 	*x = GetAppDownloadRewardConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[65]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4886,7 +4984,7 @@ func (x *GetAppDownloadRewardConfigRequest) String() string {
 func (*GetAppDownloadRewardConfigRequest) ProtoMessage() {}
 
 func (x *GetAppDownloadRewardConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[65]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4899,7 +4997,7 @@ func (x *GetAppDownloadRewardConfigRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GetAppDownloadRewardConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetAppDownloadRewardConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{65}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *GetAppDownloadRewardConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -4926,7 +5024,7 @@ type ListOperatorWithdrawableAmountsRequest struct {
 
 func (x *ListOperatorWithdrawableAmountsRequest) Reset() {
 	*x = ListOperatorWithdrawableAmountsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4938,7 +5036,7 @@ func (x *ListOperatorWithdrawableAmountsRequest) String() string {
 func (*ListOperatorWithdrawableAmountsRequest) ProtoMessage() {}
 
 func (x *ListOperatorWithdrawableAmountsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4951,7 +5049,7 @@ func (x *ListOperatorWithdrawableAmountsRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListOperatorWithdrawableAmountsRequest.ProtoReflect.Descriptor instead.
 func (*ListOperatorWithdrawableAmountsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{66}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *ListOperatorWithdrawableAmountsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -4999,7 +5097,7 @@ type BOGetOperatorWithdrawableAmountRequest struct {
 
 func (x *BOGetOperatorWithdrawableAmountRequest) Reset() {
 	*x = BOGetOperatorWithdrawableAmountRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[67]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5011,7 +5109,7 @@ func (x *BOGetOperatorWithdrawableAmountRequest) String() string {
 func (*BOGetOperatorWithdrawableAmountRequest) ProtoMessage() {}
 
 func (x *BOGetOperatorWithdrawableAmountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[67]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5024,7 +5122,7 @@ func (x *BOGetOperatorWithdrawableAmountRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use BOGetOperatorWithdrawableAmountRequest.ProtoReflect.Descriptor instead.
 func (*BOGetOperatorWithdrawableAmountRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{67}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *BOGetOperatorWithdrawableAmountRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -5055,7 +5153,7 @@ type BOListUserFreeRewardsRequest struct {
 
 func (x *BOListUserFreeRewardsRequest) Reset() {
 	*x = BOListUserFreeRewardsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[68]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5067,7 +5165,7 @@ func (x *BOListUserFreeRewardsRequest) String() string {
 func (*BOListUserFreeRewardsRequest) ProtoMessage() {}
 
 func (x *BOListUserFreeRewardsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[68]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5080,7 +5178,7 @@ func (x *BOListUserFreeRewardsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BOListUserFreeRewardsRequest.ProtoReflect.Descriptor instead.
 func (*BOListUserFreeRewardsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{68}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *BOListUserFreeRewardsRequest) GetUserId() int64 {
@@ -5147,7 +5245,7 @@ type GetWalletCreditsResponse_Credit struct {
 
 func (x *GetWalletCreditsResponse_Credit) Reset() {
 	*x = GetWalletCreditsResponse_Credit{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[69]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5159,7 +5257,7 @@ func (x *GetWalletCreditsResponse_Credit) String() string {
 func (*GetWalletCreditsResponse_Credit) ProtoMessage() {}
 
 func (x *GetWalletCreditsResponse_Credit) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[69]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5264,7 +5362,7 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) Reset() {
 	*x = ListWalletBalanceTransactionsResponse_BalanceTransaction{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[70]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5276,7 +5374,7 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) String() stri
 func (*ListWalletBalanceTransactionsResponse_BalanceTransaction) ProtoMessage() {}
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[70]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5400,7 +5498,7 @@ type GetWalletCreditTransactionsResponse_CreditTransaction struct {
 
 func (x *GetWalletCreditTransactionsResponse_CreditTransaction) Reset() {
 	*x = GetWalletCreditTransactionsResponse_CreditTransaction{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[71]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5412,7 +5510,7 @@ func (x *GetWalletCreditTransactionsResponse_CreditTransaction) String() string 
 func (*GetWalletCreditTransactionsResponse_CreditTransaction) ProtoMessage() {}
 
 func (x *GetWalletCreditTransactionsResponse_CreditTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[71]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5781,7 +5879,16 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xe3\x01\n" +
 	"#UpdateOperatorCurrencyConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12g\n" +
-	"\x18operator_currency_config\x18\x02 \x01(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x16operatorCurrencyConfig\"\xba\x01\n" +
+	"\x18operator_currency_config\x18\x02 \x01(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x16operatorCurrencyConfig\"6\n" +
+	"\x14PushBetLimitsRequest\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\x01 \x03(\tR\n" +
+	"currencies\"\x8b\x01\n" +
+	"\x14PullBetLimitsRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\x02 \x03(\tR\n" +
+	"currencies\"\xba\x01\n" +
 	"\x19UpdateWalletConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12H\n" +
 	"\rwallet_config\x18\x02 \x01(\v2#.api.wallet.service.v1.WalletConfigR\fwalletConfig\"\x82\x01\n" +
@@ -6039,7 +6146,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x0e_expiring_soonB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size2\xa5S\n" +
+	"_page_size2\x86V\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -6077,7 +6184,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x17ListUniversalCodeUsages\x129.api.backoffice.service.v1.ListUniversalCodeUsagesRequest\x1a6.api.wallet.service.v1.ListUniversalCodeUsagesResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/v1/backoffice/wallet/promo-code/universal/usages/list\x12\xb4\x01\n" +
 	"\x10ExportPromoCodes\x122.api.backoffice.service.v1.ExportPromoCodesRequest\x1a/.api.wallet.service.v1.ExportPromoCodesResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/wallet/promo-code/campaign/export\x12\xd1\x01\n" +
 	"\x1dGetGamificationCurrencyConfig\x12?.api.backoffice.service.v1.GetGamificationCurrencyConfigRequest\x1a<.api.wallet.service.v1.GetGamificationCurrencyConfigResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/wallet/gamification/get\x12\xd4\x01\n" +
-	"\x1cUpdateOperatorCurrencyConfig\x12>.api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest\x1a;.api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/currency/config/update\x12\xad\x01\n" +
+	"\x1cUpdateOperatorCurrencyConfig\x12>.api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest\x1a;.api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/currency/config/update\x12\xb1\x01\n" +
+	"\x1ePushBetLimitsToBottomOperators\x12/.api.backoffice.service.v1.PushBetLimitsRequest\x1a,.api.wallet.service.v1.PushBetLimitsResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/bet-limits/push\x12\xaa\x01\n" +
+	"\x17PullBetLimitsFromSystem\x12/.api.backoffice.service.v1.PullBetLimitsRequest\x1a,.api.wallet.service.v1.PullBetLimitsResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/bet-limits/pull\x12\xad\x01\n" +
 	"\x12UpdateWalletConfig\x124.api.backoffice.service.v1.UpdateWalletConfigRequest\x1a1.api.wallet.service.v1.UpdateWalletConfigResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/wallet/config/update\x12\xf5\x01\n" +
 	"%DeleteWalletResponsibleGamblingConfig\x12G.api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest\x1a>.api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/wallet/responsible-gambling/config/delete\x12\xf1\x01\n" +
 	"$ListWalletResponsibleGamblingConfigs\x12F.api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest\x1a=.api.wallet.service.v1.ListResponsibleGamblingConfigsResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/wallet/responsible-gambling/configs/list\x12\xb8\x01\n" +
@@ -6109,7 +6218,7 @@ func file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 74)
+var file_backoffice_service_v1_backoffice_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 76)
 var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*GetWalletsRequest)(nil),                                        // 0: api.backoffice.service.v1.GetWalletsRequest
 	(*GetWalletCreditsRequest)(nil),                                  // 1: api.backoffice.service.v1.GetWalletCreditsRequest
@@ -6152,286 +6261,295 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*GetDepositRewardConfigRequest)(nil),                            // 38: api.backoffice.service.v1.GetDepositRewardConfigRequest
 	(*GetGamificationCurrencyConfigRequest)(nil),                     // 39: api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
 	(*UpdateOperatorCurrencyConfigRequest)(nil),                      // 40: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
-	(*UpdateWalletConfigRequest)(nil),                                // 41: api.backoffice.service.v1.UpdateWalletConfigRequest
-	(*DeleteWalletResponsibleGamblingConfigRequest)(nil),             // 42: api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
-	(*ListWalletResponsibleGamblingConfigsRequest)(nil),              // 43: api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
-	(*ListCustomerRecordsRequest)(nil),                               // 44: api.backoffice.service.v1.ListCustomerRecordsRequest
-	(*ExportCustomerRecordsRequest)(nil),                             // 45: api.backoffice.service.v1.ExportCustomerRecordsRequest
-	(*SetFICAThresholdConfigRequest)(nil),                            // 46: api.backoffice.service.v1.SetFICAThresholdConfigRequest
-	(*GetFICAThresholdConfigRequest)(nil),                            // 47: api.backoffice.service.v1.GetFICAThresholdConfigRequest
-	(*ListFICAThresholdTransactionsRequest)(nil),                     // 48: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
-	(*ExportFICAThresholdTransactionsRequest)(nil),                   // 49: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
-	(*ManualCreditRequest)(nil),                                      // 50: api.backoffice.service.v1.ManualCreditRequest
-	(*ManualDebitRequest)(nil),                                       // 51: api.backoffice.service.v1.ManualDebitRequest
-	(*ListManualJournalEntriesRequest)(nil),                          // 52: api.backoffice.service.v1.ListManualJournalEntriesRequest
-	(*ExportManualJournalEntriesRequest)(nil),                        // 53: api.backoffice.service.v1.ExportManualJournalEntriesRequest
-	(*CreatePromoCodeCampaignRequest)(nil),                           // 54: api.backoffice.service.v1.CreatePromoCodeCampaignRequest
-	(*UpdatePromoCodeCampaignRequest)(nil),                           // 55: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest
-	(*UpdatePromoCodeCampaignStatusRequest)(nil),                     // 56: api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest
-	(*ListPromoCodeCampaignsRequest)(nil),                            // 57: api.backoffice.service.v1.ListPromoCodeCampaignsRequest
-	(*ListPromoCodeCampaignDetailsRequest)(nil),                      // 58: api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest
-	(*GenerateOneTimePromoCodesRequest)(nil),                         // 59: api.backoffice.service.v1.GenerateOneTimePromoCodesRequest
-	(*GenerateUniversalPromoCodesRequest)(nil),                       // 60: api.backoffice.service.v1.GenerateUniversalPromoCodesRequest
-	(*ListUniversalCodeUsagesRequest)(nil),                           // 61: api.backoffice.service.v1.ListUniversalCodeUsagesRequest
-	(*ExportPromoCodesRequest)(nil),                                  // 62: api.backoffice.service.v1.ExportPromoCodesRequest
-	(*ManualAdjustCreditTurnoverFieldRequest)(nil),                   // 63: api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest
-	(*SetAppDownloadRewardConfigRequest)(nil),                        // 64: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest
-	(*GetAppDownloadRewardConfigRequest)(nil),                        // 65: api.backoffice.service.v1.GetAppDownloadRewardConfigRequest
-	(*ListOperatorWithdrawableAmountsRequest)(nil),                   // 66: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest
-	(*BOGetOperatorWithdrawableAmountRequest)(nil),                   // 67: api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest
-	(*BOListUserFreeRewardsRequest)(nil),                             // 68: api.backoffice.service.v1.BOListUserFreeRewardsRequest
-	(*GetWalletCreditsResponse_Credit)(nil),                          // 69: api.backoffice.service.v1.GetWalletCreditsResponse.Credit
-	(*ListWalletBalanceTransactionsResponse_BalanceTransaction)(nil), // 70: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
-	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil),    // 71: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	nil,                                                // 72: api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
-	nil,                                                // 73: api.backoffice.service.v1.GetExchangeRatesResponse.SwapFeesEntry
-	(*timestamppb.Timestamp)(nil),                      // 74: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),                     // 75: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil),              // 76: api.common.OperatorContextFilters
-	(*v1.RewardSequence)(nil),                          // 77: api.wallet.service.v1.RewardSequence
-	(*v1.OperatorCurrencyConfig)(nil),                  // 78: api.wallet.service.v1.OperatorCurrencyConfig
-	(*v1.WalletConfig)(nil),                            // 79: api.wallet.service.v1.WalletConfig
-	(*v1.FICAThresholdConfig)(nil),                     // 80: api.wallet.service.v1.FICAThresholdConfig
-	(*v1.PromoCodeConditions)(nil),                     // 81: api.wallet.service.v1.PromoCodeConditions
-	(*v1.PromoCodeRewardConfigs)(nil),                  // 82: api.wallet.service.v1.PromoCodeRewardConfigs
-	(*v1.AppDownloadRewardConfigItem)(nil),             // 83: api.wallet.service.v1.AppDownloadRewardConfigItem
-	(*v1.GetWalletsResponse)(nil),                      // 84: api.wallet.service.v1.GetWalletsResponse
-	(*v1.ListCurrenciesResponse)(nil),                  // 85: api.wallet.service.v1.ListCurrenciesResponse
-	(*v1.UpdateOperatorCurrencyResponse)(nil),          // 86: api.wallet.service.v1.UpdateOperatorCurrencyResponse
-	(*v1.ListBottomOperatorBalancesResponse)(nil),      // 87: api.wallet.service.v1.ListBottomOperatorBalancesResponse
-	(*v1.ListCompanyOperatorBalancesResponse)(nil),     // 88: api.wallet.service.v1.ListCompanyOperatorBalancesResponse
-	(*v1.GetOperatorBalanceResponse)(nil),              // 89: api.wallet.service.v1.GetOperatorBalanceResponse
-	(*v1.SetDepositRewardSequencesResponse)(nil),       // 90: api.wallet.service.v1.SetDepositRewardSequencesResponse
-	(*v1.DeleteDepositRewardSequencesResponse)(nil),    // 91: api.wallet.service.v1.DeleteDepositRewardSequencesResponse
-	(*v1.GetDepositRewardConfigResponse)(nil),          // 92: api.wallet.service.v1.GetDepositRewardConfigResponse
-	(*v1.SetAppDownloadRewardConfigResponse)(nil),      // 93: api.wallet.service.v1.SetAppDownloadRewardConfigResponse
-	(*v1.GetAppDownloadRewardConfigResponse)(nil),      // 94: api.wallet.service.v1.GetAppDownloadRewardConfigResponse
-	(*v1.CreatePromoCodeCampaignResponse)(nil),         // 95: api.wallet.service.v1.CreatePromoCodeCampaignResponse
-	(*v1.UpdatePromoCodeCampaignResponse)(nil),         // 96: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
-	(*v1.UpdatePromoCodeCampaignStatusResponse)(nil),   // 97: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
-	(*v1.ListPromoCodeCampaignsResponse)(nil),          // 98: api.wallet.service.v1.ListPromoCodeCampaignsResponse
-	(*v1.ListPromoCodeCampaignDetailsResponse)(nil),    // 99: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
-	(*v1.GenerateOneTimePromoCodesResponse)(nil),       // 100: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
-	(*v1.GenerateUniversalPromoCodesResponse)(nil),     // 101: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
-	(*v1.ListUniversalCodeUsagesResponse)(nil),         // 102: api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	(*v1.ExportPromoCodesResponse)(nil),                // 103: api.wallet.service.v1.ExportPromoCodesResponse
-	(*v1.GetGamificationCurrencyConfigResponse)(nil),   // 104: api.wallet.service.v1.GetGamificationCurrencyConfigResponse
-	(*v1.UpdateOperatorCurrencyConfigResponse)(nil),    // 105: api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	(*v1.UpdateWalletConfigResponse)(nil),              // 106: api.wallet.service.v1.UpdateWalletConfigResponse
-	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 107: api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
-	(*v1.ListResponsibleGamblingConfigsResponse)(nil),  // 108: api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
-	(*v1.ListCustomerRecordsResponse)(nil),             // 109: api.wallet.service.v1.ListCustomerRecordsResponse
-	(*v1.ExportCustomerRecordsResponse)(nil),           // 110: api.wallet.service.v1.ExportCustomerRecordsResponse
-	(*v1.SetFICAThresholdConfigResponse)(nil),          // 111: api.wallet.service.v1.SetFICAThresholdConfigResponse
-	(*v1.GetFICAThresholdConfigResponse)(nil),          // 112: api.wallet.service.v1.GetFICAThresholdConfigResponse
-	(*v1.ListFICAThresholdTransactionsResponse)(nil),   // 113: api.wallet.service.v1.ListFICAThresholdTransactionsResponse
-	(*v1.ExportFICAThresholdTransactionsResponse)(nil), // 114: api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
-	(*v1.CreditResponse)(nil),                          // 115: api.wallet.service.v1.CreditResponse
-	(*v1.DebitResponse)(nil),                           // 116: api.wallet.service.v1.DebitResponse
-	(*v1.ListManualJournalEntriesResponse)(nil),        // 117: api.wallet.service.v1.ListManualJournalEntriesResponse
-	(*v1.ExportManualJournalEntriesResponse)(nil),      // 118: api.wallet.service.v1.ExportManualJournalEntriesResponse
-	(*v1.ManualAdjustCreditTurnoverFieldResponse)(nil), // 119: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
-	(*v1.ListOperatorWithdrawableAmountsResponse)(nil), // 120: api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
-	(*v1.GetOperatorWithdrawableAmountResponse)(nil),   // 121: api.wallet.service.v1.GetOperatorWithdrawableAmountResponse
-	(*v1.ListUserFreeRewardsBOResponse)(nil),           // 122: api.wallet.service.v1.ListUserFreeRewardsBOResponse
+	(*PushBetLimitsRequest)(nil),                                     // 41: api.backoffice.service.v1.PushBetLimitsRequest
+	(*PullBetLimitsRequest)(nil),                                     // 42: api.backoffice.service.v1.PullBetLimitsRequest
+	(*UpdateWalletConfigRequest)(nil),                                // 43: api.backoffice.service.v1.UpdateWalletConfigRequest
+	(*DeleteWalletResponsibleGamblingConfigRequest)(nil),             // 44: api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
+	(*ListWalletResponsibleGamblingConfigsRequest)(nil),              // 45: api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
+	(*ListCustomerRecordsRequest)(nil),                               // 46: api.backoffice.service.v1.ListCustomerRecordsRequest
+	(*ExportCustomerRecordsRequest)(nil),                             // 47: api.backoffice.service.v1.ExportCustomerRecordsRequest
+	(*SetFICAThresholdConfigRequest)(nil),                            // 48: api.backoffice.service.v1.SetFICAThresholdConfigRequest
+	(*GetFICAThresholdConfigRequest)(nil),                            // 49: api.backoffice.service.v1.GetFICAThresholdConfigRequest
+	(*ListFICAThresholdTransactionsRequest)(nil),                     // 50: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
+	(*ExportFICAThresholdTransactionsRequest)(nil),                   // 51: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
+	(*ManualCreditRequest)(nil),                                      // 52: api.backoffice.service.v1.ManualCreditRequest
+	(*ManualDebitRequest)(nil),                                       // 53: api.backoffice.service.v1.ManualDebitRequest
+	(*ListManualJournalEntriesRequest)(nil),                          // 54: api.backoffice.service.v1.ListManualJournalEntriesRequest
+	(*ExportManualJournalEntriesRequest)(nil),                        // 55: api.backoffice.service.v1.ExportManualJournalEntriesRequest
+	(*CreatePromoCodeCampaignRequest)(nil),                           // 56: api.backoffice.service.v1.CreatePromoCodeCampaignRequest
+	(*UpdatePromoCodeCampaignRequest)(nil),                           // 57: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest
+	(*UpdatePromoCodeCampaignStatusRequest)(nil),                     // 58: api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest
+	(*ListPromoCodeCampaignsRequest)(nil),                            // 59: api.backoffice.service.v1.ListPromoCodeCampaignsRequest
+	(*ListPromoCodeCampaignDetailsRequest)(nil),                      // 60: api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest
+	(*GenerateOneTimePromoCodesRequest)(nil),                         // 61: api.backoffice.service.v1.GenerateOneTimePromoCodesRequest
+	(*GenerateUniversalPromoCodesRequest)(nil),                       // 62: api.backoffice.service.v1.GenerateUniversalPromoCodesRequest
+	(*ListUniversalCodeUsagesRequest)(nil),                           // 63: api.backoffice.service.v1.ListUniversalCodeUsagesRequest
+	(*ExportPromoCodesRequest)(nil),                                  // 64: api.backoffice.service.v1.ExportPromoCodesRequest
+	(*ManualAdjustCreditTurnoverFieldRequest)(nil),                   // 65: api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest
+	(*SetAppDownloadRewardConfigRequest)(nil),                        // 66: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest
+	(*GetAppDownloadRewardConfigRequest)(nil),                        // 67: api.backoffice.service.v1.GetAppDownloadRewardConfigRequest
+	(*ListOperatorWithdrawableAmountsRequest)(nil),                   // 68: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest
+	(*BOGetOperatorWithdrawableAmountRequest)(nil),                   // 69: api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest
+	(*BOListUserFreeRewardsRequest)(nil),                             // 70: api.backoffice.service.v1.BOListUserFreeRewardsRequest
+	(*GetWalletCreditsResponse_Credit)(nil),                          // 71: api.backoffice.service.v1.GetWalletCreditsResponse.Credit
+	(*ListWalletBalanceTransactionsResponse_BalanceTransaction)(nil), // 72: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
+	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil),    // 73: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
+	nil,                                                // 74: api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	nil,                                                // 75: api.backoffice.service.v1.GetExchangeRatesResponse.SwapFeesEntry
+	(*timestamppb.Timestamp)(nil),                      // 76: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),                     // 77: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),              // 78: api.common.OperatorContextFilters
+	(*v1.RewardSequence)(nil),                          // 79: api.wallet.service.v1.RewardSequence
+	(*v1.OperatorCurrencyConfig)(nil),                  // 80: api.wallet.service.v1.OperatorCurrencyConfig
+	(*v1.WalletConfig)(nil),                            // 81: api.wallet.service.v1.WalletConfig
+	(*v1.FICAThresholdConfig)(nil),                     // 82: api.wallet.service.v1.FICAThresholdConfig
+	(*v1.PromoCodeConditions)(nil),                     // 83: api.wallet.service.v1.PromoCodeConditions
+	(*v1.PromoCodeRewardConfigs)(nil),                  // 84: api.wallet.service.v1.PromoCodeRewardConfigs
+	(*v1.AppDownloadRewardConfigItem)(nil),             // 85: api.wallet.service.v1.AppDownloadRewardConfigItem
+	(*v1.GetWalletsResponse)(nil),                      // 86: api.wallet.service.v1.GetWalletsResponse
+	(*v1.ListCurrenciesResponse)(nil),                  // 87: api.wallet.service.v1.ListCurrenciesResponse
+	(*v1.UpdateOperatorCurrencyResponse)(nil),          // 88: api.wallet.service.v1.UpdateOperatorCurrencyResponse
+	(*v1.ListBottomOperatorBalancesResponse)(nil),      // 89: api.wallet.service.v1.ListBottomOperatorBalancesResponse
+	(*v1.ListCompanyOperatorBalancesResponse)(nil),     // 90: api.wallet.service.v1.ListCompanyOperatorBalancesResponse
+	(*v1.GetOperatorBalanceResponse)(nil),              // 91: api.wallet.service.v1.GetOperatorBalanceResponse
+	(*v1.SetDepositRewardSequencesResponse)(nil),       // 92: api.wallet.service.v1.SetDepositRewardSequencesResponse
+	(*v1.DeleteDepositRewardSequencesResponse)(nil),    // 93: api.wallet.service.v1.DeleteDepositRewardSequencesResponse
+	(*v1.GetDepositRewardConfigResponse)(nil),          // 94: api.wallet.service.v1.GetDepositRewardConfigResponse
+	(*v1.SetAppDownloadRewardConfigResponse)(nil),      // 95: api.wallet.service.v1.SetAppDownloadRewardConfigResponse
+	(*v1.GetAppDownloadRewardConfigResponse)(nil),      // 96: api.wallet.service.v1.GetAppDownloadRewardConfigResponse
+	(*v1.CreatePromoCodeCampaignResponse)(nil),         // 97: api.wallet.service.v1.CreatePromoCodeCampaignResponse
+	(*v1.UpdatePromoCodeCampaignResponse)(nil),         // 98: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
+	(*v1.UpdatePromoCodeCampaignStatusResponse)(nil),   // 99: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
+	(*v1.ListPromoCodeCampaignsResponse)(nil),          // 100: api.wallet.service.v1.ListPromoCodeCampaignsResponse
+	(*v1.ListPromoCodeCampaignDetailsResponse)(nil),    // 101: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
+	(*v1.GenerateOneTimePromoCodesResponse)(nil),       // 102: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
+	(*v1.GenerateUniversalPromoCodesResponse)(nil),     // 103: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
+	(*v1.ListUniversalCodeUsagesResponse)(nil),         // 104: api.wallet.service.v1.ListUniversalCodeUsagesResponse
+	(*v1.ExportPromoCodesResponse)(nil),                // 105: api.wallet.service.v1.ExportPromoCodesResponse
+	(*v1.GetGamificationCurrencyConfigResponse)(nil),   // 106: api.wallet.service.v1.GetGamificationCurrencyConfigResponse
+	(*v1.UpdateOperatorCurrencyConfigResponse)(nil),    // 107: api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
+	(*v1.PushBetLimitsResponse)(nil),                   // 108: api.wallet.service.v1.PushBetLimitsResponse
+	(*v1.PullBetLimitsResponse)(nil),                   // 109: api.wallet.service.v1.PullBetLimitsResponse
+	(*v1.UpdateWalletConfigResponse)(nil),              // 110: api.wallet.service.v1.UpdateWalletConfigResponse
+	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 111: api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
+	(*v1.ListResponsibleGamblingConfigsResponse)(nil),  // 112: api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
+	(*v1.ListCustomerRecordsResponse)(nil),             // 113: api.wallet.service.v1.ListCustomerRecordsResponse
+	(*v1.ExportCustomerRecordsResponse)(nil),           // 114: api.wallet.service.v1.ExportCustomerRecordsResponse
+	(*v1.SetFICAThresholdConfigResponse)(nil),          // 115: api.wallet.service.v1.SetFICAThresholdConfigResponse
+	(*v1.GetFICAThresholdConfigResponse)(nil),          // 116: api.wallet.service.v1.GetFICAThresholdConfigResponse
+	(*v1.ListFICAThresholdTransactionsResponse)(nil),   // 117: api.wallet.service.v1.ListFICAThresholdTransactionsResponse
+	(*v1.ExportFICAThresholdTransactionsResponse)(nil), // 118: api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
+	(*v1.CreditResponse)(nil),                          // 119: api.wallet.service.v1.CreditResponse
+	(*v1.DebitResponse)(nil),                           // 120: api.wallet.service.v1.DebitResponse
+	(*v1.ListManualJournalEntriesResponse)(nil),        // 121: api.wallet.service.v1.ListManualJournalEntriesResponse
+	(*v1.ExportManualJournalEntriesResponse)(nil),      // 122: api.wallet.service.v1.ExportManualJournalEntriesResponse
+	(*v1.ManualAdjustCreditTurnoverFieldResponse)(nil), // 123: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
+	(*v1.ListOperatorWithdrawableAmountsResponse)(nil), // 124: api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
+	(*v1.GetOperatorWithdrawableAmountResponse)(nil),   // 125: api.wallet.service.v1.GetOperatorWithdrawableAmountResponse
+	(*v1.ListUserFreeRewardsBOResponse)(nil),           // 126: api.wallet.service.v1.ListUserFreeRewardsBOResponse
 }
 var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
-	74,  // 0: api.backoffice.service.v1.GetWalletCreditsRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 1: api.backoffice.service.v1.GetWalletCreditsRequest.end_time:type_name -> google.protobuf.Timestamp
-	69,  // 2: api.backoffice.service.v1.GetWalletCreditsResponse.credits:type_name -> api.backoffice.service.v1.GetWalletCreditsResponse.Credit
-	74,  // 3: api.backoffice.service.v1.ListWalletBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 4: api.backoffice.service.v1.ListWalletBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	70,  // 5: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.balance_transactions:type_name -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
-	71,  // 6: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	75,  // 7: api.backoffice.service.v1.ListWalletCurrenciesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	75,  // 8: api.backoffice.service.v1.UpdateWalletCurrencyRequest.target_operator_context:type_name -> api.common.OperatorContext
-	76,  // 9: api.backoffice.service.v1.ListOperatorBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	76,  // 10: api.backoffice.service.v1.ListCompanyBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	72,  // 11: api.backoffice.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
-	73,  // 12: api.backoffice.service.v1.GetExchangeRatesResponse.swap_fees:type_name -> api.backoffice.service.v1.GetExchangeRatesResponse.SwapFeesEntry
-	75,  // 13: api.backoffice.service.v1.OperatorTransferRequest.operator_context:type_name -> api.common.OperatorContext
-	75,  // 14: api.backoffice.service.v1.OperatorSwapRequest.source_operator_context:type_name -> api.common.OperatorContext
-	75,  // 15: api.backoffice.service.v1.OperatorSwapRequest.target_operator_context:type_name -> api.common.OperatorContext
-	75,  // 16: api.backoffice.service.v1.OperatorBalanceFreezeRequest.operator_context:type_name -> api.common.OperatorContext
-	75,  // 17: api.backoffice.service.v1.OperatorBalanceRollbackRequest.operator_context:type_name -> api.common.OperatorContext
-	75,  // 18: api.backoffice.service.v1.OperatorBalanceSettleRequest.operator_context:type_name -> api.common.OperatorContext
-	75,  // 19: api.backoffice.service.v1.OperatorBalanceAdjustRequest.operator_context:type_name -> api.common.OperatorContext
-	76,  // 20: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	74,  // 21: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 22: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	75,  // 23: api.backoffice.service.v1.OperatorBalanceTransaction.operator_context:type_name -> api.common.OperatorContext
-	74,  // 24: api.backoffice.service.v1.OperatorBalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	74,  // 25: api.backoffice.service.v1.OperatorBalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	76,  // 0: api.backoffice.service.v1.GetWalletCreditsRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 1: api.backoffice.service.v1.GetWalletCreditsRequest.end_time:type_name -> google.protobuf.Timestamp
+	71,  // 2: api.backoffice.service.v1.GetWalletCreditsResponse.credits:type_name -> api.backoffice.service.v1.GetWalletCreditsResponse.Credit
+	76,  // 3: api.backoffice.service.v1.ListWalletBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 4: api.backoffice.service.v1.ListWalletBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	72,  // 5: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.balance_transactions:type_name -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
+	73,  // 6: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
+	77,  // 7: api.backoffice.service.v1.ListWalletCurrenciesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 8: api.backoffice.service.v1.UpdateWalletCurrencyRequest.target_operator_context:type_name -> api.common.OperatorContext
+	78,  // 9: api.backoffice.service.v1.ListOperatorBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	78,  // 10: api.backoffice.service.v1.ListCompanyBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	74,  // 11: api.backoffice.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	75,  // 12: api.backoffice.service.v1.GetExchangeRatesResponse.swap_fees:type_name -> api.backoffice.service.v1.GetExchangeRatesResponse.SwapFeesEntry
+	77,  // 13: api.backoffice.service.v1.OperatorTransferRequest.operator_context:type_name -> api.common.OperatorContext
+	77,  // 14: api.backoffice.service.v1.OperatorSwapRequest.source_operator_context:type_name -> api.common.OperatorContext
+	77,  // 15: api.backoffice.service.v1.OperatorSwapRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 16: api.backoffice.service.v1.OperatorBalanceFreezeRequest.operator_context:type_name -> api.common.OperatorContext
+	77,  // 17: api.backoffice.service.v1.OperatorBalanceRollbackRequest.operator_context:type_name -> api.common.OperatorContext
+	77,  // 18: api.backoffice.service.v1.OperatorBalanceSettleRequest.operator_context:type_name -> api.common.OperatorContext
+	77,  // 19: api.backoffice.service.v1.OperatorBalanceAdjustRequest.operator_context:type_name -> api.common.OperatorContext
+	78,  // 20: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	76,  // 21: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 22: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	77,  // 23: api.backoffice.service.v1.OperatorBalanceTransaction.operator_context:type_name -> api.common.OperatorContext
+	76,  // 24: api.backoffice.service.v1.OperatorBalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	76,  // 25: api.backoffice.service.v1.OperatorBalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
 	31,  // 26: api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse.transactions:type_name -> api.backoffice.service.v1.OperatorBalanceTransaction
-	75,  // 27: api.backoffice.service.v1.UpdateOperatorBalanceRequest.target_operator_context:type_name -> api.common.OperatorContext
-	75,  // 28: api.backoffice.service.v1.GetOperatorBalanceRequest.operator_context:type_name -> api.common.OperatorContext
-	75,  // 29: api.backoffice.service.v1.SetDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	77,  // 30: api.backoffice.service.v1.SetDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	77,  // 31: api.backoffice.service.v1.SetDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	75,  // 32: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	77,  // 33: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	77,  // 34: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	75,  // 35: api.backoffice.service.v1.GetDepositRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	75,  // 36: api.backoffice.service.v1.GetGamificationCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	75,  // 37: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	78,  // 38: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.operator_currency_config:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
-	75,  // 39: api.backoffice.service.v1.UpdateWalletConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	79,  // 40: api.backoffice.service.v1.UpdateWalletConfigRequest.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
-	74,  // 41: api.backoffice.service.v1.ListCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 42: api.backoffice.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
-	76,  // 43: api.backoffice.service.v1.ListCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	74,  // 44: api.backoffice.service.v1.ExportCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 45: api.backoffice.service.v1.ExportCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
-	76,  // 46: api.backoffice.service.v1.ExportCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	80,  // 47: api.backoffice.service.v1.SetFICAThresholdConfigRequest.fica_threshold_config:type_name -> api.wallet.service.v1.FICAThresholdConfig
-	75,  // 48: api.backoffice.service.v1.SetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	75,  // 49: api.backoffice.service.v1.GetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	74,  // 50: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 51: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	75,  // 52: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	74,  // 53: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 54: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	75,  // 55: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	74,  // 56: api.backoffice.service.v1.ListManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 57: api.backoffice.service.v1.ListManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
-	76,  // 58: api.backoffice.service.v1.ListManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	74,  // 59: api.backoffice.service.v1.ExportManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 60: api.backoffice.service.v1.ExportManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
-	76,  // 61: api.backoffice.service.v1.ExportManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	75,  // 62: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	74,  // 63: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 64: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
-	81,  // 65: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	82,  // 66: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	75,  // 67: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	74,  // 68: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 69: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
-	81,  // 70: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	82,  // 71: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	75,  // 72: api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	75,  // 73: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	74,  // 74: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.start_time:type_name -> google.protobuf.Timestamp
-	74,  // 75: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.end_time:type_name -> google.protobuf.Timestamp
-	75,  // 76: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	83,  // 77: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest.configs:type_name -> api.wallet.service.v1.AppDownloadRewardConfigItem
-	75,  // 78: api.backoffice.service.v1.GetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	76,  // 79: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	75,  // 80: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	75,  // 81: api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest.target_operator_context:type_name -> api.common.OperatorContext
-	74,  // 82: api.backoffice.service.v1.GetWalletCreditsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
-	74,  // 83: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	74,  // 84: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
-	0,   // 85: api.backoffice.service.v1.BackofficeWallet.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
-	1,   // 86: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:input_type -> api.backoffice.service.v1.GetWalletCreditsRequest
-	3,   // 87: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:input_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsRequest
-	5,   // 88: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
-	7,   // 89: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
-	10,  // 90: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:input_type -> api.backoffice.service.v1.AddWalletCurrencyRequest
-	12,  // 91: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:input_type -> api.backoffice.service.v1.ListWalletCurrenciesRequest
-	13,  // 92: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:input_type -> api.backoffice.service.v1.UpdateWalletCurrencyRequest
-	14,  // 93: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:input_type -> api.backoffice.service.v1.ListOperatorBalancesRequest
-	15,  // 94: api.backoffice.service.v1.BackofficeWallet.ListCompanyBalances:input_type -> api.backoffice.service.v1.ListCompanyBalancesRequest
-	16,  // 95: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:input_type -> api.backoffice.service.v1.GetExchangeRatesRequest
-	18,  // 96: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:input_type -> api.backoffice.service.v1.OperatorTransferRequest
-	20,  // 97: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:input_type -> api.backoffice.service.v1.OperatorSwapRequest
-	22,  // 98: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:input_type -> api.backoffice.service.v1.OperatorBalanceFreezeRequest
-	24,  // 99: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:input_type -> api.backoffice.service.v1.OperatorBalanceRollbackRequest
-	26,  // 100: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:input_type -> api.backoffice.service.v1.OperatorBalanceSettleRequest
-	28,  // 101: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:input_type -> api.backoffice.service.v1.OperatorBalanceAdjustRequest
-	30,  // 102: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:input_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
-	33,  // 103: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:input_type -> api.backoffice.service.v1.UpdateOperatorBalanceRequest
-	35,  // 104: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:input_type -> api.backoffice.service.v1.GetOperatorBalanceRequest
-	36,  // 105: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:input_type -> api.backoffice.service.v1.SetDepositRewardSequencesRequest
-	37,  // 106: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:input_type -> api.backoffice.service.v1.DeleteDepositRewardSequencesRequest
-	38,  // 107: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:input_type -> api.backoffice.service.v1.GetDepositRewardConfigRequest
-	64,  // 108: api.backoffice.service.v1.BackofficeWallet.SetAppDownloadRewardConfig:input_type -> api.backoffice.service.v1.SetAppDownloadRewardConfigRequest
-	65,  // 109: api.backoffice.service.v1.BackofficeWallet.GetAppDownloadRewardConfig:input_type -> api.backoffice.service.v1.GetAppDownloadRewardConfigRequest
-	54,  // 110: api.backoffice.service.v1.BackofficeWallet.CreatePromoCodeCampaign:input_type -> api.backoffice.service.v1.CreatePromoCodeCampaignRequest
-	55,  // 111: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaign:input_type -> api.backoffice.service.v1.UpdatePromoCodeCampaignRequest
-	56,  // 112: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaignStatus:input_type -> api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest
-	57,  // 113: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaigns:input_type -> api.backoffice.service.v1.ListPromoCodeCampaignsRequest
-	58,  // 114: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaignDetails:input_type -> api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest
-	59,  // 115: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:input_type -> api.backoffice.service.v1.GenerateOneTimePromoCodesRequest
-	60,  // 116: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:input_type -> api.backoffice.service.v1.GenerateUniversalPromoCodesRequest
-	61,  // 117: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:input_type -> api.backoffice.service.v1.ListUniversalCodeUsagesRequest
-	62,  // 118: api.backoffice.service.v1.BackofficeWallet.ExportPromoCodes:input_type -> api.backoffice.service.v1.ExportPromoCodesRequest
-	39,  // 119: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:input_type -> api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
-	40,  // 120: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:input_type -> api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
-	41,  // 121: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:input_type -> api.backoffice.service.v1.UpdateWalletConfigRequest
-	42,  // 122: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
-	43,  // 123: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:input_type -> api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
-	44,  // 124: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:input_type -> api.backoffice.service.v1.ListCustomerRecordsRequest
-	45,  // 125: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:input_type -> api.backoffice.service.v1.ExportCustomerRecordsRequest
-	46,  // 126: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:input_type -> api.backoffice.service.v1.SetFICAThresholdConfigRequest
-	47,  // 127: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:input_type -> api.backoffice.service.v1.GetFICAThresholdConfigRequest
-	48,  // 128: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
-	49,  // 129: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
-	50,  // 130: api.backoffice.service.v1.BackofficeWallet.ManualCredit:input_type -> api.backoffice.service.v1.ManualCreditRequest
-	51,  // 131: api.backoffice.service.v1.BackofficeWallet.ManualDebit:input_type -> api.backoffice.service.v1.ManualDebitRequest
-	52,  // 132: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:input_type -> api.backoffice.service.v1.ListManualJournalEntriesRequest
-	53,  // 133: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:input_type -> api.backoffice.service.v1.ExportManualJournalEntriesRequest
-	63,  // 134: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:input_type -> api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest
-	66,  // 135: api.backoffice.service.v1.BackofficeWallet.ListOperatorWithdrawableAmounts:input_type -> api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest
-	67,  // 136: api.backoffice.service.v1.BackofficeWallet.GetOperatorWithdrawableAmount:input_type -> api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest
-	68,  // 137: api.backoffice.service.v1.BackofficeWallet.ListUserFreeRewards:input_type -> api.backoffice.service.v1.BOListUserFreeRewardsRequest
-	84,  // 138: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
-	2,   // 139: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
-	4,   // 140: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
-	6,   // 141: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
-	8,   // 142: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
-	11,  // 143: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:output_type -> api.backoffice.service.v1.AddWalletCurrencyResponse
-	85,  // 144: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
-	86,  // 145: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
-	87,  // 146: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
-	88,  // 147: api.backoffice.service.v1.BackofficeWallet.ListCompanyBalances:output_type -> api.wallet.service.v1.ListCompanyOperatorBalancesResponse
-	17,  // 148: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:output_type -> api.backoffice.service.v1.GetExchangeRatesResponse
-	19,  // 149: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:output_type -> api.backoffice.service.v1.OperatorTransferResponse
-	21,  // 150: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:output_type -> api.backoffice.service.v1.OperatorSwapResponse
-	23,  // 151: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:output_type -> api.backoffice.service.v1.OperatorBalanceFreezeResponse
-	25,  // 152: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:output_type -> api.backoffice.service.v1.OperatorBalanceRollbackResponse
-	27,  // 153: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:output_type -> api.backoffice.service.v1.OperatorBalanceSettleResponse
-	29,  // 154: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:output_type -> api.backoffice.service.v1.OperatorBalanceAdjustResponse
-	32,  // 155: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
-	34,  // 156: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
-	89,  // 157: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
-	90,  // 158: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
-	91,  // 159: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
-	92,  // 160: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
-	93,  // 161: api.backoffice.service.v1.BackofficeWallet.SetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.SetAppDownloadRewardConfigResponse
-	94,  // 162: api.backoffice.service.v1.BackofficeWallet.GetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.GetAppDownloadRewardConfigResponse
-	95,  // 163: api.backoffice.service.v1.BackofficeWallet.CreatePromoCodeCampaign:output_type -> api.wallet.service.v1.CreatePromoCodeCampaignResponse
-	96,  // 164: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaign:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignResponse
-	97,  // 165: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaignStatus:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
-	98,  // 166: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaigns:output_type -> api.wallet.service.v1.ListPromoCodeCampaignsResponse
-	99,  // 167: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaignDetails:output_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
-	100, // 168: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:output_type -> api.wallet.service.v1.GenerateOneTimePromoCodesResponse
-	101, // 169: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:output_type -> api.wallet.service.v1.GenerateUniversalPromoCodesResponse
-	102, // 170: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:output_type -> api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	103, // 171: api.backoffice.service.v1.BackofficeWallet.ExportPromoCodes:output_type -> api.wallet.service.v1.ExportPromoCodesResponse
-	104, // 172: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
-	105, // 173: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	106, // 174: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
-	107, // 175: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
-	108, // 176: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
-	109, // 177: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
-	110, // 178: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
-	111, // 179: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
-	112, // 180: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
-	113, // 181: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
-	114, // 182: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
-	115, // 183: api.backoffice.service.v1.BackofficeWallet.ManualCredit:output_type -> api.wallet.service.v1.CreditResponse
-	116, // 184: api.backoffice.service.v1.BackofficeWallet.ManualDebit:output_type -> api.wallet.service.v1.DebitResponse
-	117, // 185: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:output_type -> api.wallet.service.v1.ListManualJournalEntriesResponse
-	118, // 186: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:output_type -> api.wallet.service.v1.ExportManualJournalEntriesResponse
-	119, // 187: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:output_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
-	120, // 188: api.backoffice.service.v1.BackofficeWallet.ListOperatorWithdrawableAmounts:output_type -> api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
-	121, // 189: api.backoffice.service.v1.BackofficeWallet.GetOperatorWithdrawableAmount:output_type -> api.wallet.service.v1.GetOperatorWithdrawableAmountResponse
-	122, // 190: api.backoffice.service.v1.BackofficeWallet.ListUserFreeRewards:output_type -> api.wallet.service.v1.ListUserFreeRewardsBOResponse
-	138, // [138:191] is the sub-list for method output_type
-	85,  // [85:138] is the sub-list for method input_type
-	85,  // [85:85] is the sub-list for extension type_name
-	85,  // [85:85] is the sub-list for extension extendee
-	0,   // [0:85] is the sub-list for field type_name
+	77,  // 27: api.backoffice.service.v1.UpdateOperatorBalanceRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 28: api.backoffice.service.v1.GetOperatorBalanceRequest.operator_context:type_name -> api.common.OperatorContext
+	77,  // 29: api.backoffice.service.v1.SetDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	79,  // 30: api.backoffice.service.v1.SetDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
+	79,  // 31: api.backoffice.service.v1.SetDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
+	77,  // 32: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	79,  // 33: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
+	79,  // 34: api.backoffice.service.v1.DeleteDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
+	77,  // 35: api.backoffice.service.v1.GetDepositRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 36: api.backoffice.service.v1.GetGamificationCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 37: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	80,  // 38: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.operator_currency_config:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
+	77,  // 39: api.backoffice.service.v1.PullBetLimitsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 40: api.backoffice.service.v1.UpdateWalletConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	81,  // 41: api.backoffice.service.v1.UpdateWalletConfigRequest.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
+	76,  // 42: api.backoffice.service.v1.ListCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 43: api.backoffice.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
+	78,  // 44: api.backoffice.service.v1.ListCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	76,  // 45: api.backoffice.service.v1.ExportCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 46: api.backoffice.service.v1.ExportCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
+	78,  // 47: api.backoffice.service.v1.ExportCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	82,  // 48: api.backoffice.service.v1.SetFICAThresholdConfigRequest.fica_threshold_config:type_name -> api.wallet.service.v1.FICAThresholdConfig
+	77,  // 49: api.backoffice.service.v1.SetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 50: api.backoffice.service.v1.GetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	76,  // 51: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 52: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	77,  // 53: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	76,  // 54: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 55: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	77,  // 56: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	76,  // 57: api.backoffice.service.v1.ListManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 58: api.backoffice.service.v1.ListManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
+	78,  // 59: api.backoffice.service.v1.ListManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	76,  // 60: api.backoffice.service.v1.ExportManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 61: api.backoffice.service.v1.ExportManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
+	78,  // 62: api.backoffice.service.v1.ExportManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	77,  // 63: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	76,  // 64: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 65: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
+	83,  // 66: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	84,  // 67: api.backoffice.service.v1.CreatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	77,  // 68: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	76,  // 69: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 70: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
+	83,  // 71: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	84,  // 72: api.backoffice.service.v1.UpdatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	77,  // 73: api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 74: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	76,  // 75: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.start_time:type_name -> google.protobuf.Timestamp
+	76,  // 76: api.backoffice.service.v1.ListPromoCodeCampaignsRequest.end_time:type_name -> google.protobuf.Timestamp
+	77,  // 77: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	85,  // 78: api.backoffice.service.v1.SetAppDownloadRewardConfigRequest.configs:type_name -> api.wallet.service.v1.AppDownloadRewardConfigItem
+	77,  // 79: api.backoffice.service.v1.GetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	78,  // 80: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	77,  // 81: api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	77,  // 82: api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest.target_operator_context:type_name -> api.common.OperatorContext
+	76,  // 83: api.backoffice.service.v1.GetWalletCreditsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
+	76,  // 84: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	76,  // 85: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
+	0,   // 86: api.backoffice.service.v1.BackofficeWallet.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
+	1,   // 87: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:input_type -> api.backoffice.service.v1.GetWalletCreditsRequest
+	3,   // 88: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:input_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsRequest
+	5,   // 89: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
+	7,   // 90: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
+	10,  // 91: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:input_type -> api.backoffice.service.v1.AddWalletCurrencyRequest
+	12,  // 92: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:input_type -> api.backoffice.service.v1.ListWalletCurrenciesRequest
+	13,  // 93: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:input_type -> api.backoffice.service.v1.UpdateWalletCurrencyRequest
+	14,  // 94: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:input_type -> api.backoffice.service.v1.ListOperatorBalancesRequest
+	15,  // 95: api.backoffice.service.v1.BackofficeWallet.ListCompanyBalances:input_type -> api.backoffice.service.v1.ListCompanyBalancesRequest
+	16,  // 96: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:input_type -> api.backoffice.service.v1.GetExchangeRatesRequest
+	18,  // 97: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:input_type -> api.backoffice.service.v1.OperatorTransferRequest
+	20,  // 98: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:input_type -> api.backoffice.service.v1.OperatorSwapRequest
+	22,  // 99: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:input_type -> api.backoffice.service.v1.OperatorBalanceFreezeRequest
+	24,  // 100: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:input_type -> api.backoffice.service.v1.OperatorBalanceRollbackRequest
+	26,  // 101: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:input_type -> api.backoffice.service.v1.OperatorBalanceSettleRequest
+	28,  // 102: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:input_type -> api.backoffice.service.v1.OperatorBalanceAdjustRequest
+	30,  // 103: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:input_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
+	33,  // 104: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:input_type -> api.backoffice.service.v1.UpdateOperatorBalanceRequest
+	35,  // 105: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:input_type -> api.backoffice.service.v1.GetOperatorBalanceRequest
+	36,  // 106: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:input_type -> api.backoffice.service.v1.SetDepositRewardSequencesRequest
+	37,  // 107: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:input_type -> api.backoffice.service.v1.DeleteDepositRewardSequencesRequest
+	38,  // 108: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:input_type -> api.backoffice.service.v1.GetDepositRewardConfigRequest
+	66,  // 109: api.backoffice.service.v1.BackofficeWallet.SetAppDownloadRewardConfig:input_type -> api.backoffice.service.v1.SetAppDownloadRewardConfigRequest
+	67,  // 110: api.backoffice.service.v1.BackofficeWallet.GetAppDownloadRewardConfig:input_type -> api.backoffice.service.v1.GetAppDownloadRewardConfigRequest
+	56,  // 111: api.backoffice.service.v1.BackofficeWallet.CreatePromoCodeCampaign:input_type -> api.backoffice.service.v1.CreatePromoCodeCampaignRequest
+	57,  // 112: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaign:input_type -> api.backoffice.service.v1.UpdatePromoCodeCampaignRequest
+	58,  // 113: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaignStatus:input_type -> api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest
+	59,  // 114: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaigns:input_type -> api.backoffice.service.v1.ListPromoCodeCampaignsRequest
+	60,  // 115: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaignDetails:input_type -> api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest
+	61,  // 116: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:input_type -> api.backoffice.service.v1.GenerateOneTimePromoCodesRequest
+	62,  // 117: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:input_type -> api.backoffice.service.v1.GenerateUniversalPromoCodesRequest
+	63,  // 118: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:input_type -> api.backoffice.service.v1.ListUniversalCodeUsagesRequest
+	64,  // 119: api.backoffice.service.v1.BackofficeWallet.ExportPromoCodes:input_type -> api.backoffice.service.v1.ExportPromoCodesRequest
+	39,  // 120: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:input_type -> api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
+	40,  // 121: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:input_type -> api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
+	41,  // 122: api.backoffice.service.v1.BackofficeWallet.PushBetLimitsToBottomOperators:input_type -> api.backoffice.service.v1.PushBetLimitsRequest
+	42,  // 123: api.backoffice.service.v1.BackofficeWallet.PullBetLimitsFromSystem:input_type -> api.backoffice.service.v1.PullBetLimitsRequest
+	43,  // 124: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:input_type -> api.backoffice.service.v1.UpdateWalletConfigRequest
+	44,  // 125: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
+	45,  // 126: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:input_type -> api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
+	46,  // 127: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:input_type -> api.backoffice.service.v1.ListCustomerRecordsRequest
+	47,  // 128: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:input_type -> api.backoffice.service.v1.ExportCustomerRecordsRequest
+	48,  // 129: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:input_type -> api.backoffice.service.v1.SetFICAThresholdConfigRequest
+	49,  // 130: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:input_type -> api.backoffice.service.v1.GetFICAThresholdConfigRequest
+	50,  // 131: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
+	51,  // 132: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
+	52,  // 133: api.backoffice.service.v1.BackofficeWallet.ManualCredit:input_type -> api.backoffice.service.v1.ManualCreditRequest
+	53,  // 134: api.backoffice.service.v1.BackofficeWallet.ManualDebit:input_type -> api.backoffice.service.v1.ManualDebitRequest
+	54,  // 135: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:input_type -> api.backoffice.service.v1.ListManualJournalEntriesRequest
+	55,  // 136: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:input_type -> api.backoffice.service.v1.ExportManualJournalEntriesRequest
+	65,  // 137: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:input_type -> api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest
+	68,  // 138: api.backoffice.service.v1.BackofficeWallet.ListOperatorWithdrawableAmounts:input_type -> api.backoffice.service.v1.ListOperatorWithdrawableAmountsRequest
+	69,  // 139: api.backoffice.service.v1.BackofficeWallet.GetOperatorWithdrawableAmount:input_type -> api.backoffice.service.v1.BOGetOperatorWithdrawableAmountRequest
+	70,  // 140: api.backoffice.service.v1.BackofficeWallet.ListUserFreeRewards:input_type -> api.backoffice.service.v1.BOListUserFreeRewardsRequest
+	86,  // 141: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
+	2,   // 142: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
+	4,   // 143: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
+	6,   // 144: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
+	8,   // 145: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
+	11,  // 146: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:output_type -> api.backoffice.service.v1.AddWalletCurrencyResponse
+	87,  // 147: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
+	88,  // 148: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
+	89,  // 149: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
+	90,  // 150: api.backoffice.service.v1.BackofficeWallet.ListCompanyBalances:output_type -> api.wallet.service.v1.ListCompanyOperatorBalancesResponse
+	17,  // 151: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:output_type -> api.backoffice.service.v1.GetExchangeRatesResponse
+	19,  // 152: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:output_type -> api.backoffice.service.v1.OperatorTransferResponse
+	21,  // 153: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:output_type -> api.backoffice.service.v1.OperatorSwapResponse
+	23,  // 154: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:output_type -> api.backoffice.service.v1.OperatorBalanceFreezeResponse
+	25,  // 155: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:output_type -> api.backoffice.service.v1.OperatorBalanceRollbackResponse
+	27,  // 156: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:output_type -> api.backoffice.service.v1.OperatorBalanceSettleResponse
+	29,  // 157: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:output_type -> api.backoffice.service.v1.OperatorBalanceAdjustResponse
+	32,  // 158: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
+	34,  // 159: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
+	91,  // 160: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
+	92,  // 161: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
+	93,  // 162: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
+	94,  // 163: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
+	95,  // 164: api.backoffice.service.v1.BackofficeWallet.SetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.SetAppDownloadRewardConfigResponse
+	96,  // 165: api.backoffice.service.v1.BackofficeWallet.GetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.GetAppDownloadRewardConfigResponse
+	97,  // 166: api.backoffice.service.v1.BackofficeWallet.CreatePromoCodeCampaign:output_type -> api.wallet.service.v1.CreatePromoCodeCampaignResponse
+	98,  // 167: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaign:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignResponse
+	99,  // 168: api.backoffice.service.v1.BackofficeWallet.UpdatePromoCodeCampaignStatus:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
+	100, // 169: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaigns:output_type -> api.wallet.service.v1.ListPromoCodeCampaignsResponse
+	101, // 170: api.backoffice.service.v1.BackofficeWallet.ListPromoCodeCampaignDetails:output_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
+	102, // 171: api.backoffice.service.v1.BackofficeWallet.GenerateOneTimePromoCodes:output_type -> api.wallet.service.v1.GenerateOneTimePromoCodesResponse
+	103, // 172: api.backoffice.service.v1.BackofficeWallet.GenerateUniversalPromoCodes:output_type -> api.wallet.service.v1.GenerateUniversalPromoCodesResponse
+	104, // 173: api.backoffice.service.v1.BackofficeWallet.ListUniversalCodeUsages:output_type -> api.wallet.service.v1.ListUniversalCodeUsagesResponse
+	105, // 174: api.backoffice.service.v1.BackofficeWallet.ExportPromoCodes:output_type -> api.wallet.service.v1.ExportPromoCodesResponse
+	106, // 175: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
+	107, // 176: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
+	108, // 177: api.backoffice.service.v1.BackofficeWallet.PushBetLimitsToBottomOperators:output_type -> api.wallet.service.v1.PushBetLimitsResponse
+	109, // 178: api.backoffice.service.v1.BackofficeWallet.PullBetLimitsFromSystem:output_type -> api.wallet.service.v1.PullBetLimitsResponse
+	110, // 179: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
+	111, // 180: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
+	112, // 181: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
+	113, // 182: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
+	114, // 183: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
+	115, // 184: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
+	116, // 185: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
+	117, // 186: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
+	118, // 187: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
+	119, // 188: api.backoffice.service.v1.BackofficeWallet.ManualCredit:output_type -> api.wallet.service.v1.CreditResponse
+	120, // 189: api.backoffice.service.v1.BackofficeWallet.ManualDebit:output_type -> api.wallet.service.v1.DebitResponse
+	121, // 190: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:output_type -> api.wallet.service.v1.ListManualJournalEntriesResponse
+	122, // 191: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:output_type -> api.wallet.service.v1.ExportManualJournalEntriesResponse
+	123, // 192: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:output_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
+	124, // 193: api.backoffice.service.v1.BackofficeWallet.ListOperatorWithdrawableAmounts:output_type -> api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
+	125, // 194: api.backoffice.service.v1.BackofficeWallet.GetOperatorWithdrawableAmount:output_type -> api.wallet.service.v1.GetOperatorWithdrawableAmountResponse
+	126, // 195: api.backoffice.service.v1.BackofficeWallet.ListUserFreeRewards:output_type -> api.wallet.service.v1.ListUserFreeRewardsBOResponse
+	141, // [141:196] is the sub-list for method output_type
+	86,  // [86:141] is the sub-list for method input_type
+	86,  // [86:86] is the sub-list for extension type_name
+	86,  // [86:86] is the sub-list for extension extendee
+	0,   // [0:86] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_wallet_proto_init() }
@@ -6448,25 +6566,25 @@ func file_backoffice_service_v1_backoffice_wallet_proto_init() {
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[15].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[30].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[36].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[44].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[45].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[48].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[49].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[52].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[53].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[57].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[58].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[62].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[46].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[47].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[50].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[51].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[54].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[55].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[59].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[60].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[64].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[66].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[68].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[70].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_wallet_proto_rawDesc), len(file_backoffice_service_v1_backoffice_wallet_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   74,
+			NumMessages:   76,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

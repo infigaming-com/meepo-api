@@ -63,6 +63,8 @@ const OperationBackofficeWalletOperatorBalanceRollback = "/api.backoffice.servic
 const OperationBackofficeWalletOperatorBalanceSettle = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
 const OperationBackofficeWalletOperatorSwap = "/api.backoffice.service.v1.BackofficeWallet/OperatorSwap"
 const OperationBackofficeWalletOperatorTransfer = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
+const OperationBackofficeWalletPullBetLimitsFromSystem = "/api.backoffice.service.v1.BackofficeWallet/PullBetLimitsFromSystem"
+const OperationBackofficeWalletPushBetLimitsToBottomOperators = "/api.backoffice.service.v1.BackofficeWallet/PushBetLimitsToBottomOperators"
 const OperationBackofficeWalletSetAppDownloadRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/SetAppDownloadRewardConfig"
 const OperationBackofficeWalletSetDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
 const OperationBackofficeWalletSetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
@@ -161,6 +163,12 @@ type BackofficeWalletHTTPServer interface {
 	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
 	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
+	// PullBetLimitsFromSystem PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
+	// Caller must have management permission over target.
+	PullBetLimitsFromSystem(context.Context, *PullBetLimitsRequest) (*v1.PullBetLimitsResponse, error)
+	// PushBetLimitsToBottomOperators PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// System-level caller only. Executes asynchronously.
+	PushBetLimitsToBottomOperators(context.Context, *PushBetLimitsRequest) (*v1.PushBetLimitsResponse, error)
 	// SetAppDownloadRewardConfig Set app download reward config for a target operator
 	SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*v1.SetAppDownloadRewardConfigResponse, error)
 	// SetDepositRewardSequences SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
@@ -221,6 +229,8 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/promo-code/campaign/export", _BackofficeWallet_ExportPromoCodes0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/gamification/get", _BackofficeWallet_GetGamificationCurrencyConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/currency/config/update", _BackofficeWallet_UpdateOperatorCurrencyConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/bet-limits/push", _BackofficeWallet_PushBetLimitsToBottomOperators0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/bet-limits/pull", _BackofficeWallet_PullBetLimitsFromSystem0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/config/update", _BackofficeWallet_UpdateWalletConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/responsible-gambling/config/delete", _BackofficeWallet_DeleteWalletResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/responsible-gambling/configs/list", _BackofficeWallet_ListWalletResponsibleGamblingConfigs0_HTTP_Handler(srv))
@@ -1032,6 +1042,50 @@ func _BackofficeWallet_UpdateOperatorCurrencyConfig0_HTTP_Handler(srv Backoffice
 	}
 }
 
+func _BackofficeWallet_PushBetLimitsToBottomOperators0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in PushBetLimitsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletPushBetLimitsToBottomOperators)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.PushBetLimitsToBottomOperators(ctx, req.(*PushBetLimitsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.PushBetLimitsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_PullBetLimitsFromSystem0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in PullBetLimitsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletPullBetLimitsFromSystem)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.PullBetLimitsFromSystem(ctx, req.(*PullBetLimitsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.PullBetLimitsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeWallet_UpdateWalletConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateWalletConfigRequest
@@ -1493,6 +1547,12 @@ type BackofficeWalletHTTPClient interface {
 	OperatorSwap(ctx context.Context, req *OperatorSwapRequest, opts ...http.CallOption) (rsp *OperatorSwapResponse, err error)
 	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(ctx context.Context, req *OperatorTransferRequest, opts ...http.CallOption) (rsp *OperatorTransferResponse, err error)
+	// PullBetLimitsFromSystem PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
+	// Caller must have management permission over target.
+	PullBetLimitsFromSystem(ctx context.Context, req *PullBetLimitsRequest, opts ...http.CallOption) (rsp *v1.PullBetLimitsResponse, err error)
+	// PushBetLimitsToBottomOperators PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// System-level caller only. Executes asynchronously.
+	PushBetLimitsToBottomOperators(ctx context.Context, req *PushBetLimitsRequest, opts ...http.CallOption) (rsp *v1.PushBetLimitsResponse, err error)
 	// SetAppDownloadRewardConfig Set app download reward config for a target operator
 	SetAppDownloadRewardConfig(ctx context.Context, req *SetAppDownloadRewardConfigRequest, opts ...http.CallOption) (rsp *v1.SetAppDownloadRewardConfigResponse, err error)
 	// SetDepositRewardSequences SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
@@ -2117,6 +2177,36 @@ func (c *BackofficeWalletHTTPClientImpl) OperatorTransfer(ctx context.Context, i
 	pattern := "/v1/backoffice/wallet/operator/transfer"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorTransfer))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// PullBetLimitsFromSystem PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
+// Caller must have management permission over target.
+func (c *BackofficeWalletHTTPClientImpl) PullBetLimitsFromSystem(ctx context.Context, in *PullBetLimitsRequest, opts ...http.CallOption) (*v1.PullBetLimitsResponse, error) {
+	var out v1.PullBetLimitsResponse
+	pattern := "/v1/backoffice/wallet/bet-limits/pull"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletPullBetLimitsFromSystem))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// PushBetLimitsToBottomOperators PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+// System-level caller only. Executes asynchronously.
+func (c *BackofficeWalletHTTPClientImpl) PushBetLimitsToBottomOperators(ctx context.Context, in *PushBetLimitsRequest, opts ...http.CallOption) (*v1.PushBetLimitsResponse, error) {
+	var out v1.PushBetLimitsResponse
+	pattern := "/v1/backoffice/wallet/bet-limits/push"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletPushBetLimitsToBottomOperators))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
