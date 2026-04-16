@@ -264,3 +264,19 @@ func IsSavedInfoNameTooLong(err error) bool {
 func ErrorSavedInfoNameTooLong(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_SAVED_INFO_NAME_TOO_LONG.String(), fmt.Sprintf(format, args...))
 }
+
+// Batch RPC (e.g. GetTransactionDetailsByIds) received more ids than the
+// per-request cap. Client should chunk the ids.
+func IsBatchRequestSizeExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BATCH_REQUEST_SIZE_EXCEEDED.String() && e.Code == 400
+}
+
+// Batch RPC (e.g. GetTransactionDetailsByIds) received more ids than the
+// per-request cap. Client should chunk the ids.
+func ErrorBatchRequestSizeExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_BATCH_REQUEST_SIZE_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}

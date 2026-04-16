@@ -34,4 +34,8 @@ enum ErrorReason {
   USER_INFO_NOT_FOUND = 50018;
   SAVED_INFO_NAME_REQUIRED = 50019;
   SAVED_INFO_NAME_TOO_LONG = 50020;
+
+  // Batch RPC (e.g. GetTransactionDetailsByIds) received more ids than the
+  // per-request cap. Client should chunk the ids.
+  BATCH_REQUEST_SIZE_EXCEEDED = 50021 [(errors.code) = 400];
 }
