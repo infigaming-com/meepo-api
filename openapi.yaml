@@ -11965,13 +11965,18 @@ components:
                     type: string
                 channelType:
                     type: string
-                    description: '"facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", or "google_ads"'
+                    description: '"facebook", "tiktok", "kwai", "appsflyer", "adjust", "agency", "google_ads", or "telegram_miniapp"'
                 channelConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig'
                 params:
                     $ref: '#/components/schemas/api.affiliate.service.v1.Params'
                 eventMappings:
                     $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings'
+                telegramBotUrl:
+                    type: string
+                    description: |-
+                        Required when channel_type == "telegram_miniapp" (e.g. https://t.me/betqio_bot/app);
+                         empty for all other channel types
         api.affiliate.service.v1.ChannelConfig:
             type: object
             properties:
