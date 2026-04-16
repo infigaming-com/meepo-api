@@ -4399,12 +4399,14 @@ func (x *GetTransactionDetailByIdResponse) GetDetail() *TransactionDetail {
 
 // Request to batch-fetch transaction details by IDs.
 //
-// Authorization contract: the server MUST filter the result by the caller's
-// auth scope (the user-side RPC by the caller's user_id; the operator-side
-// RPC by the caller's operator context). IDs that do not exist AND IDs that
-// exist but fall outside the caller's scope are both treated as missing and
-// returned in `missing_ids` — the two cases are deliberately not
-// distinguished, to avoid an oracle for cross-tenant existence probing.
+// Authorization model: this is an internal RPC. Payment-service does NOT
+// enforce caller scope on the requested IDs — callers MUST validate that
+// every id belongs to the caller's user_id / operator scope before invoking,
+// the same way the single-id variants GetTransactionDetailById and
+// GetOperatorTransactionDetailById behave today. Do NOT expose this
+// endpoint to user-facing traffic without a scope-filtering proxy in front.
+// `missing_ids` therefore means "not present in the database", not "out of
+// caller's scope".
 //
 // Server limit: servers SHOULD reject requests with more than 200 ids with
 // InvalidArgument. Callers must chunk accordingly.
@@ -4460,13 +4462,13 @@ type GetTransactionDetailsByIdsResponse struct {
 	// Detailed transaction information. Order is not guaranteed; callers must
 	// index by `detail.transaction.transaction_id`.
 	Details []*TransactionDetail `protobuf:"bytes,1,rep,name=details,proto3" json:"details,omitempty"`
-	// IDs from the request that were not returned. Callers can rely on
+	// IDs from the request that the server did not find in the database.
+	// Callers can rely on
 	//
 	//	len(request.transaction_ids_dedup) == len(details) + len(missing_ids)
 	//
-	// to distinguish "detail fetch failed silently" from "ID is not visible".
-	// Intentionally does NOT distinguish "not found" from "out of caller's
-	// scope" — see the authorization contract on the request message.
+	// to distinguish "detail fetch failed silently" from "ID is not in DB".
+	// Not a signal about authorization — see the auth note on the request.
 	MissingIds    []int64 `protobuf:"varint,2,rep,packed,name=missing_ids,json=missingIds,proto3" json:"missing_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
