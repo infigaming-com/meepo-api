@@ -81,6 +81,8 @@ const (
 	Wallet_GetUserDepositRewardSequence_FullMethodName        = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
 	Wallet_GetGamificationCurrencyConfig_FullMethodName       = "/api.wallet.service.v1.Wallet/GetGamificationCurrencyConfig"
 	Wallet_UpdateOperatorCurrencyConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
+	Wallet_PushBetLimitsToBottomOperators_FullMethodName      = "/api.wallet.service.v1.Wallet/PushBetLimitsToBottomOperators"
+	Wallet_PullBetLimitsFromSystem_FullMethodName             = "/api.wallet.service.v1.Wallet/PullBetLimitsFromSystem"
 	Wallet_UpdateWalletConfig_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateWalletConfig"
 	Wallet_BonusTransfer_FullMethodName                       = "/api.wallet.service.v1.Wallet/BonusTransfer"
 	Wallet_AddResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/AddResponsibleGamblingConfig"
@@ -236,6 +238,12 @@ type WalletClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyConfigResponse, error)
+	// PushBetLimitsToBottomOperators syncs System's cash/bonus per-bet limits down to every bottom operator.
+	// System-level initiator only. Runs asynchronously via Asynq.
+	PushBetLimitsToBottomOperators(ctx context.Context, in *PushBetLimitsRequest, opts ...grpc.CallOption) (*PushBetLimitsResponse, error)
+	// PullBetLimitsFromSystem syncs a single bottom operator's cash/bonus per-bet limits from System.
+	// Synchronous. Initiator must have update permission over target (any tier with management rights).
+	PullBetLimitsFromSystem(ctx context.Context, in *PullBetLimitsRequest, opts ...grpc.CallOption) (*PullBetLimitsResponse, error)
 	// UpdateWalletConfig updates the wallet config based on operator context
 	UpdateWalletConfig(ctx context.Context, in *UpdateWalletConfigRequest, opts ...grpc.CallOption) (*UpdateWalletConfigResponse, error)
 	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
@@ -921,6 +929,26 @@ func (c *walletClient) UpdateOperatorCurrencyConfig(ctx context.Context, in *Upd
 	return out, nil
 }
 
+func (c *walletClient) PushBetLimitsToBottomOperators(ctx context.Context, in *PushBetLimitsRequest, opts ...grpc.CallOption) (*PushBetLimitsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PushBetLimitsResponse)
+	err := c.cc.Invoke(ctx, Wallet_PushBetLimitsToBottomOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) PullBetLimitsFromSystem(ctx context.Context, in *PullBetLimitsRequest, opts ...grpc.CallOption) (*PullBetLimitsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PullBetLimitsResponse)
+	err := c.cc.Invoke(ctx, Wallet_PullBetLimitsFromSystem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) UpdateWalletConfig(ctx context.Context, in *UpdateWalletConfigRequest, opts ...grpc.CallOption) (*UpdateWalletConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateWalletConfigResponse)
@@ -1335,6 +1363,12 @@ type WalletServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*UpdateOperatorCurrencyConfigResponse, error)
+	// PushBetLimitsToBottomOperators syncs System's cash/bonus per-bet limits down to every bottom operator.
+	// System-level initiator only. Runs asynchronously via Asynq.
+	PushBetLimitsToBottomOperators(context.Context, *PushBetLimitsRequest) (*PushBetLimitsResponse, error)
+	// PullBetLimitsFromSystem syncs a single bottom operator's cash/bonus per-bet limits from System.
+	// Synchronous. Initiator must have update permission over target (any tier with management rights).
+	PullBetLimitsFromSystem(context.Context, *PullBetLimitsRequest) (*PullBetLimitsResponse, error)
 	// UpdateWalletConfig updates the wallet config based on operator context
 	UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*UpdateWalletConfigResponse, error)
 	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
@@ -1585,6 +1619,12 @@ func (UnimplementedWalletServer) GetGamificationCurrencyConfig(context.Context, 
 }
 func (UnimplementedWalletServer) UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*UpdateOperatorCurrencyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorCurrencyConfig not implemented")
+}
+func (UnimplementedWalletServer) PushBetLimitsToBottomOperators(context.Context, *PushBetLimitsRequest) (*PushBetLimitsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PushBetLimitsToBottomOperators not implemented")
+}
+func (UnimplementedWalletServer) PullBetLimitsFromSystem(context.Context, *PullBetLimitsRequest) (*PullBetLimitsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PullBetLimitsFromSystem not implemented")
 }
 func (UnimplementedWalletServer) UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*UpdateWalletConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateWalletConfig not implemented")
@@ -2810,6 +2850,42 @@ func _Wallet_UpdateOperatorCurrencyConfig_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_PushBetLimitsToBottomOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PushBetLimitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).PushBetLimitsToBottomOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_PushBetLimitsToBottomOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).PushBetLimitsToBottomOperators(ctx, req.(*PushBetLimitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_PullBetLimitsFromSystem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PullBetLimitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).PullBetLimitsFromSystem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_PullBetLimitsFromSystem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).PullBetLimitsFromSystem(ctx, req.(*PullBetLimitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_UpdateWalletConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateWalletConfigRequest)
 	if err := dec(in); err != nil {
@@ -3586,6 +3662,14 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorCurrencyConfig",
 			Handler:    _Wallet_UpdateOperatorCurrencyConfig_Handler,
+		},
+		{
+			MethodName: "PushBetLimitsToBottomOperators",
+			Handler:    _Wallet_PushBetLimitsToBottomOperators_Handler,
+		},
+		{
+			MethodName: "PullBetLimitsFromSystem",
+			Handler:    _Wallet_PullBetLimitsFromSystem_Handler,
 		},
 		{
 			MethodName: "UpdateWalletConfig",

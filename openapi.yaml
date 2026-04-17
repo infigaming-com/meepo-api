@@ -8195,6 +8195,48 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse'
+    /v1/backoffice/wallet/bet-limits/pull:
+        post:
+            tags:
+                - BackofficeWallet
+            description: |-
+                PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
+                 Caller must have management permission over target.
+            operationId: BackofficeWallet_PullBetLimitsFromSystem
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PullBetLimitsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.PullBetLimitsResponse'
+    /v1/backoffice/wallet/bet-limits/push:
+        post:
+            tags:
+                - BackofficeWallet
+            description: |-
+                PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+                 System-level caller only. Executes asynchronously.
+            operationId: BackofficeWallet_PushBetLimitsToBottomOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PushBetLimitsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.PushBetLimitsResponse'
     /v1/backoffice/wallet/company/balances/list:
         post:
             tags:
@@ -23865,6 +23907,16 @@ components:
             properties:
                 ticketId:
                     type: string
+        api.backoffice.service.v1.PullBetLimitsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                    description: Optional currency filter. Empty = every currency the target already has.
         api.backoffice.service.v1.PurgeCloudflareCacheRequest:
             type: object
             properties:
@@ -23883,6 +23935,14 @@ components:
                     type: string
                 error:
                     type: string
+        api.backoffice.service.v1.PushBetLimitsRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                    description: Optional currency filter. Empty = every currency configured on System.
         api.backoffice.service.v1.RefreshOperatorApexDomainRequest:
             type: object
             properties:
@@ -35074,6 +35134,9 @@ components:
                     type: string
                 wageringUnlockPriority:
                     type: string
+                maximumCashBetLimit:
+                    type: string
+                    description: Max cash portion per single bet. 0 means no cap. Overdraft cannot exceed this cap.
         api.wallet.service.v1.OperatorWithdrawableAmount:
             type: object
             properties:
@@ -35259,6 +35322,15 @@ components:
                     description: Same as campaign end_time, used directly from campaign
                     format: date-time
             description: Usage item for universal campaigns
+        api.wallet.service.v1.PullBetLimitsResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.PushBetLimitsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
+                    description: Asynq task ID for tracking.
         api.wallet.service.v1.ReferrerCondition:
             type: object
             properties:

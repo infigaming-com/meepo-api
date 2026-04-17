@@ -2206,3 +2206,63 @@ func IsBonusBetLimitExceeded(err error) bool {
 func ErrorBonusBetLimitExceeded(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_BONUS_BET_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidBetLimitSyncRequest(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_BET_LIMIT_SYNC_REQUEST.String() && e.Code == 500
+}
+
+func ErrorInvalidBetLimitSyncRequest(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_BET_LIMIT_SYNC_REQUEST.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEnqueueBetLimitSyncTaskFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ENQUEUE_BET_LIMIT_SYNC_TASK_FAILED.String() && e.Code == 500
+}
+
+func ErrorEnqueueBetLimitSyncTaskFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ENQUEUE_BET_LIMIT_SYNC_TASK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListBottomOperatorsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_BOTTOM_OPERATORS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListBottomOperatorsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_BOTTOM_OPERATORS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBatchUpdateOperatorCurrencyConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorBatchUpdateOperatorCurrencyConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCashBetLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CASH_BET_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorCashBetLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CASH_BET_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}

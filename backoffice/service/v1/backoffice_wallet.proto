@@ -282,6 +282,24 @@ service BackofficeWallet {
 		};
 	}
 
+	// PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// System-level caller only. Executes asynchronously.
+	rpc PushBetLimitsToBottomOperators(PushBetLimitsRequest) returns (wallet.service.v1.PushBetLimitsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/bet-limits/push"
+			body: "*"
+		};
+	}
+
+	// PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
+	// Caller must have management permission over target.
+	rpc PullBetLimitsFromSystem(PullBetLimitsRequest) returns (wallet.service.v1.PullBetLimitsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/bet-limits/pull"
+			body: "*"
+		};
+	}
+
 	// UpdateWalletConfig updates the wallet config based on operator context
 	rpc UpdateWalletConfig(UpdateWalletConfigRequest) returns (wallet.service.v1.UpdateWalletConfigResponse) {
 		option (google.api.http) = {
@@ -802,6 +820,17 @@ message GetGamificationCurrencyConfigRequest {
 message UpdateOperatorCurrencyConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	wallet.service.v1.OperatorCurrencyConfig operator_currency_config = 2;
+}
+
+message PushBetLimitsRequest {
+	// Optional currency filter. Empty = every currency configured on System.
+	repeated string currencies = 1;
+}
+
+message PullBetLimitsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	// Optional currency filter. Empty = every currency the target already has.
+	repeated string currencies = 2;
 }
 
 message UpdateWalletConfigRequest {

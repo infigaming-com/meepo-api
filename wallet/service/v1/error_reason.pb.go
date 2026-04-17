@@ -208,6 +208,11 @@ const (
 	ErrorReason_INVALID_OPERATOR_BALANCE_ADJUSTMENT                             ErrorReason = 30180
 	ErrorReason_LIST_USER_FREE_REWARDS_BO_FAILED                                ErrorReason = 30181
 	ErrorReason_BONUS_BET_LIMIT_EXCEEDED                                        ErrorReason = 30182
+	ErrorReason_INVALID_BET_LIMIT_SYNC_REQUEST                                  ErrorReason = 30183
+	ErrorReason_ENQUEUE_BET_LIMIT_SYNC_TASK_FAILED                              ErrorReason = 30184
+	ErrorReason_LIST_BOTTOM_OPERATORS_FAILED                                    ErrorReason = 30185
+	ErrorReason_BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED                    ErrorReason = 30186
+	ErrorReason_CASH_BET_LIMIT_EXCEEDED                                         ErrorReason = 30187
 )
 
 // Enum value maps for ErrorReason.
@@ -396,6 +401,11 @@ var (
 		30180: "INVALID_OPERATOR_BALANCE_ADJUSTMENT",
 		30181: "LIST_USER_FREE_REWARDS_BO_FAILED",
 		30182: "BONUS_BET_LIMIT_EXCEEDED",
+		30183: "INVALID_BET_LIMIT_SYNC_REQUEST",
+		30184: "ENQUEUE_BET_LIMIT_SYNC_TASK_FAILED",
+		30185: "LIST_BOTTOM_OPERATORS_FAILED",
+		30186: "BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED",
+		30187: "CASH_BET_LIMIT_EXCEEDED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -581,6 +591,11 @@ var (
 		"INVALID_OPERATOR_BALANCE_ADJUSTMENT":                             30180,
 		"LIST_USER_FREE_REWARDS_BO_FAILED":                                30181,
 		"BONUS_BET_LIMIT_EXCEEDED":                                        30182,
+		"INVALID_BET_LIMIT_SYNC_REQUEST":                                  30183,
+		"ENQUEUE_BET_LIMIT_SYNC_TASK_FAILED":                              30184,
+		"LIST_BOTTOM_OPERATORS_FAILED":                                    30185,
+		"BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED":                    30186,
+		"CASH_BET_LIMIT_EXCEEDED":                                         30187,
 	}
 )
 
@@ -615,7 +630,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xbd7\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x849\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -799,7 +814,12 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1dPDF_EXPORT_ROW_LIMIT_EXCEEDED\x10\xe3\xeb\x01\x12)\n" +
 	"#INVALID_OPERATOR_BALANCE_ADJUSTMENT\x10\xe4\xeb\x01\x12&\n" +
 	" LIST_USER_FREE_REWARDS_BO_FAILED\x10\xe5\xeb\x01\x12\x1e\n" +
-	"\x18BONUS_BET_LIMIT_EXCEEDED\x10\xe6\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x18BONUS_BET_LIMIT_EXCEEDED\x10\xe6\xeb\x01\x12$\n" +
+	"\x1eINVALID_BET_LIMIT_SYNC_REQUEST\x10\xe7\xeb\x01\x12(\n" +
+	"\"ENQUEUE_BET_LIMIT_SYNC_TASK_FAILED\x10\xe8\xeb\x01\x12\"\n" +
+	"\x1cLIST_BOTTOM_OPERATORS_FAILED\x10\xe9\xeb\x01\x122\n" +
+	",BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED\x10\xea\xeb\x01\x12\x1d\n" +
+	"\x17CASH_BET_LIMIT_EXCEEDED\x10\xeb\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

@@ -56,6 +56,8 @@ const (
 	BackofficeWallet_ExportPromoCodes_FullMethodName                      = "/api.backoffice.service.v1.BackofficeWallet/ExportPromoCodes"
 	BackofficeWallet_GetGamificationCurrencyConfig_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
 	BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
+	BackofficeWallet_PushBetLimitsToBottomOperators_FullMethodName        = "/api.backoffice.service.v1.BackofficeWallet/PushBetLimitsToBottomOperators"
+	BackofficeWallet_PullBetLimitsFromSystem_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/PullBetLimitsFromSystem"
 	BackofficeWallet_UpdateWalletConfig_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletConfig"
 	BackofficeWallet_DeleteWalletResponsibleGamblingConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
 	BackofficeWallet_ListWalletResponsibleGamblingConfigs_FullMethodName  = "/api.backoffice.service.v1.BackofficeWallet/ListWalletResponsibleGamblingConfigs"
@@ -151,6 +153,12 @@ type BackofficeWalletClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyConfigResponse, error)
+	// PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// System-level caller only. Executes asynchronously.
+	PushBetLimitsToBottomOperators(ctx context.Context, in *PushBetLimitsRequest, opts ...grpc.CallOption) (*v1.PushBetLimitsResponse, error)
+	// PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
+	// Caller must have management permission over target.
+	PullBetLimitsFromSystem(ctx context.Context, in *PullBetLimitsRequest, opts ...grpc.CallOption) (*v1.PullBetLimitsResponse, error)
 	// UpdateWalletConfig updates the wallet config based on operator context
 	UpdateWalletConfig(ctx context.Context, in *UpdateWalletConfigRequest, opts ...grpc.CallOption) (*v1.UpdateWalletConfigResponse, error)
 	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
@@ -555,6 +563,26 @@ func (c *backofficeWalletClient) UpdateOperatorCurrencyConfig(ctx context.Contex
 	return out, nil
 }
 
+func (c *backofficeWalletClient) PushBetLimitsToBottomOperators(ctx context.Context, in *PushBetLimitsRequest, opts ...grpc.CallOption) (*v1.PushBetLimitsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.PushBetLimitsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_PushBetLimitsToBottomOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) PullBetLimitsFromSystem(ctx context.Context, in *PullBetLimitsRequest, opts ...grpc.CallOption) (*v1.PullBetLimitsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.PullBetLimitsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_PullBetLimitsFromSystem_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeWalletClient) UpdateWalletConfig(ctx context.Context, in *UpdateWalletConfigRequest, opts ...grpc.CallOption) (*v1.UpdateWalletConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.UpdateWalletConfigResponse)
@@ -801,6 +829,12 @@ type BackofficeWalletServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error)
+	// PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// System-level caller only. Executes asynchronously.
+	PushBetLimitsToBottomOperators(context.Context, *PushBetLimitsRequest) (*v1.PushBetLimitsResponse, error)
+	// PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
+	// Caller must have management permission over target.
+	PullBetLimitsFromSystem(context.Context, *PullBetLimitsRequest) (*v1.PullBetLimitsResponse, error)
 	// UpdateWalletConfig updates the wallet config based on operator context
 	UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*v1.UpdateWalletConfigResponse, error)
 	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
@@ -952,6 +986,12 @@ func (UnimplementedBackofficeWalletServer) GetGamificationCurrencyConfig(context
 }
 func (UnimplementedBackofficeWalletServer) UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorCurrencyConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) PushBetLimitsToBottomOperators(context.Context, *PushBetLimitsRequest) (*v1.PushBetLimitsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PushBetLimitsToBottomOperators not implemented")
+}
+func (UnimplementedBackofficeWalletServer) PullBetLimitsFromSystem(context.Context, *PullBetLimitsRequest) (*v1.PullBetLimitsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PullBetLimitsFromSystem not implemented")
 }
 func (UnimplementedBackofficeWalletServer) UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*v1.UpdateWalletConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateWalletConfig not implemented")
@@ -1673,6 +1713,42 @@ func _BackofficeWallet_UpdateOperatorCurrencyConfig_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_PushBetLimitsToBottomOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PushBetLimitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).PushBetLimitsToBottomOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_PushBetLimitsToBottomOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).PushBetLimitsToBottomOperators(ctx, req.(*PushBetLimitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_PullBetLimitsFromSystem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PullBetLimitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).PullBetLimitsFromSystem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_PullBetLimitsFromSystem_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).PullBetLimitsFromSystem(ctx, req.(*PullBetLimitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeWallet_UpdateWalletConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateWalletConfigRequest)
 	if err := dec(in); err != nil {
@@ -2129,6 +2205,14 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorCurrencyConfig",
 			Handler:    _BackofficeWallet_UpdateOperatorCurrencyConfig_Handler,
+		},
+		{
+			MethodName: "PushBetLimitsToBottomOperators",
+			Handler:    _BackofficeWallet_PushBetLimitsToBottomOperators_Handler,
+		},
+		{
+			MethodName: "PullBetLimitsFromSystem",
+			Handler:    _BackofficeWallet_PullBetLimitsFromSystem_Handler,
 		},
 		{
 			MethodName: "UpdateWalletConfig",
