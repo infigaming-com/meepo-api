@@ -8578,10 +8578,13 @@ func (x *BonusTransferResponse) GetBalanceBonus() string {
 }
 
 type GetUserBalanceDetailsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Currency string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	// When true, only credits whose turnover has not yet fully met the threshold are returned.
+	// Totals are always computed over all credits and are unaffected by this flag.
+	InProgressOnly *bool `protobuf:"varint,2,opt,name=in_progress_only,json=inProgressOnly,proto3,oneof" json:"in_progress_only,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GetUserBalanceDetailsRequest) Reset() {
@@ -8619,6 +8622,13 @@ func (x *GetUserBalanceDetailsRequest) GetCurrency() string {
 		return x.Currency
 	}
 	return ""
+}
+
+func (x *GetUserBalanceDetailsRequest) GetInProgressOnly() bool {
+	if x != nil && x.InProgressOnly != nil {
+		return *x.InProgressOnly
+	}
+	return false
 }
 
 type UserBalanceDetail struct {
@@ -19700,9 +19710,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12-\n" +
 	"\x12transferred_amount\x18\x02 \x01(\tR\x11transferredAmount\x12!\n" +
 	"\fbalance_cash\x18\x03 \x01(\tR\vbalanceCash\x12#\n" +
-	"\rbalance_bonus\x18\x04 \x01(\tR\fbalanceBonus\":\n" +
+	"\rbalance_bonus\x18\x04 \x01(\tR\fbalanceBonus\"~\n" +
 	"\x1cGetUserBalanceDetailsRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\xaf\a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12-\n" +
+	"\x10in_progress_only\x18\x02 \x01(\bH\x00R\x0einProgressOnly\x88\x01\x01B\x13\n" +
+	"\x11_in_progress_only\"\xaf\a\n" +
 	"\x11UserBalanceDetail\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
@@ -21400,6 +21412,7 @@ func file_wallet_service_v1_wallet_proto_init() {
 	file_wallet_service_v1_wallet_proto_msgTypes[83].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[92].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[95].OneofWrappers = []any{}
+	file_wallet_service_v1_wallet_proto_msgTypes[107].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[110].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[112].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[116].OneofWrappers = []any{}

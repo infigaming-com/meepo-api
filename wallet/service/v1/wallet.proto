@@ -1567,6 +1567,9 @@ message BonusTransferResponse {
 
 message GetUserBalanceDetailsRequest {
 	string currency = 1;
+	// When true, only credits whose turnover has not yet fully met the threshold are returned.
+	// Totals are always computed over all credits and are unaffected by this flag.
+	optional bool in_progress_only = 2;
 }
 
 message UserBalanceDetail {
