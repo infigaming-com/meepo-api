@@ -15463,6 +15463,10 @@ func (m *GetUserBalanceDetailsRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	if m.InProgressOnly != nil {
+		// no validation rules for InProgressOnly
+	}
+
 	if len(errors) > 0 {
 		return GetUserBalanceDetailsRequestMultiError(errors)
 	}
