@@ -240,8 +240,9 @@ service Wallet {
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
 	rpc UpdateOperatorCurrencyConfig(UpdateOperatorCurrencyConfigRequest) returns (UpdateOperatorCurrencyConfigResponse) {}
 
-	// PushBetLimitsToBottomOperators syncs System's cash/bonus per-bet limits down to every bottom operator.
-	// System-level initiator only. Runs asynchronously via Asynq.
+	// PushBetLimitsToBottomOperators syncs System's cash/bonus per-bet limits down to every
+	// cooperation-mode bottom operator under the System. Individual-mode operators are
+	// independently run and excluded. System-level initiator only. Runs asynchronously via Asynq.
 	rpc PushBetLimitsToBottomOperators(PushBetLimitsRequest) returns (PushBetLimitsResponse) {}
 
 	// PullBetLimitsFromSystem syncs a single bottom operator's cash/bonus per-bet limits from System.
@@ -1522,7 +1523,8 @@ message UpdateOperatorCurrencyConfigRequest {
 
 message UpdateOperatorCurrencyConfigResponse {}
 
-// PushBetLimitsRequest: System-only. Always targets all bottom operators under the initiator's System.
+// PushBetLimitsRequest: System-only. Always targets all cooperation-mode bottom operators
+// under the initiator's System. Individual-mode operators are excluded.
 message PushBetLimitsRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	// Optional subset of currencies to sync. Empty = sync every currency that exists on the System row.

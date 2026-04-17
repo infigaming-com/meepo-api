@@ -8156,7 +8156,8 @@ func (*UpdateOperatorCurrencyConfigResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{98}
 }
 
-// PushBetLimitsRequest: System-only. Always targets all bottom operators under the initiator's System.
+// PushBetLimitsRequest: System-only. Always targets all cooperation-mode bottom operators
+// under the initiator's System. Individual-mode operators are excluded.
 type PushBetLimitsRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`

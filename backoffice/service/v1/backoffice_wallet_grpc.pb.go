@@ -153,7 +153,8 @@ type BackofficeWalletClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyConfigResponse, error)
-	// PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all
+	// cooperation-mode bottom operators. Individual-mode operators are excluded.
 	// System-level caller only. Executes asynchronously.
 	PushBetLimitsToBottomOperators(ctx context.Context, in *PushBetLimitsRequest, opts ...grpc.CallOption) (*v1.PushBetLimitsResponse, error)
 	// PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
@@ -829,7 +830,8 @@ type BackofficeWalletServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error)
-	// PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all
+	// cooperation-mode bottom operators. Individual-mode operators are excluded.
 	// System-level caller only. Executes asynchronously.
 	PushBetLimitsToBottomOperators(context.Context, *PushBetLimitsRequest) (*v1.PushBetLimitsResponse, error)
 	// PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
