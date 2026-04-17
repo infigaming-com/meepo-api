@@ -260,6 +260,8 @@ func (m *VipSetting) validate(all bool) error {
 
 	// no validation rules for EnableRebateForBonusBets
 
+	// no validation rules for EnableXpForBonusBets
+
 	if len(errors) > 0 {
 		return VipSettingMultiError(errors)
 	}

@@ -487,6 +487,7 @@ type VipSetting struct {
 	MonthlyRewardExpiryDays  int32               `protobuf:"varint,44,opt,name=monthly_reward_expiry_days,json=monthlyRewardExpiryDays,proto3" json:"monthly_reward_expiry_days,omitempty"`
 	MonthlyRewardExpiryHours int32               `protobuf:"varint,45,opt,name=monthly_reward_expiry_hours,json=monthlyRewardExpiryHours,proto3" json:"monthly_reward_expiry_hours,omitempty"`
 	EnableRebateForBonusBets bool                `protobuf:"varint,46,opt,name=enable_rebate_for_bonus_bets,json=enableRebateForBonusBets,proto3" json:"enable_rebate_for_bonus_bets,omitempty"`
+	EnableXpForBonusBets     bool                `protobuf:"varint,47,opt,name=enable_xp_for_bonus_bets,json=enableXpForBonusBets,proto3" json:"enable_xp_for_bonus_bets,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -839,6 +840,13 @@ func (x *VipSetting) GetMonthlyRewardExpiryHours() int32 {
 func (x *VipSetting) GetEnableRebateForBonusBets() bool {
 	if x != nil {
 		return x.EnableRebateForBonusBets
+	}
+	return false
+}
+
+func (x *VipSetting) GetEnableXpForBonusBets() bool {
+	if x != nil {
+		return x.EnableXpForBonusBets
 	}
 	return false
 }
@@ -4042,7 +4050,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x13company_operator_id\x18\x04 \x01(\x03R\x11companyOperatorId\x12\x1f\n" +
 	"\voperator_id\x18\x05 \x01(\x03R\n" +
 	"operatorId\x12\x18\n" +
-	"\aenabled\x18\x06 \x01(\bR\aenabled\"\xa1\x16\n" +
+	"\aenabled\x18\x06 \x01(\bR\aenabled\"\xd9\x16\n" +
 	"\n" +
 	"VipSetting\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
@@ -4094,7 +4102,8 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x1amonthly_reward_expiry_type\x18+ \x01(\x0e2'.api.vip.service.v1.VipRewardExpiryTypeR\x17monthlyRewardExpiryType\x12;\n" +
 	"\x1amonthly_reward_expiry_days\x18, \x01(\x05R\x17monthlyRewardExpiryDays\x12=\n" +
 	"\x1bmonthly_reward_expiry_hours\x18- \x01(\x05R\x18monthlyRewardExpiryHours\x12>\n" +
-	"\x1cenable_rebate_for_bonus_bets\x18. \x01(\bR\x18enableRebateForBonusBets\"\x87\x01\n" +
+	"\x1cenable_rebate_for_bonus_bets\x18. \x01(\bR\x18enableRebateForBonusBets\x126\n" +
+	"\x18enable_xp_for_bonus_bets\x18/ \x01(\bR\x14enableXpForBonusBets\"\x87\x01\n" +
 	"\x14GetVipSettingRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\xed\x04\n" +

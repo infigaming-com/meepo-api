@@ -193,6 +193,7 @@ message VipSetting {
   int32 monthly_reward_expiry_hours = 45;
 
   bool enable_rebate_for_bonus_bets = 46;
+  bool enable_xp_for_bonus_bets = 47;
 }
 
 message GetVipSettingRequest {

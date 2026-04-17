@@ -33516,6 +33516,8 @@ components:
                     format: int32
                 enableRebateForBonusBets:
                     type: boolean
+                enableXpForBonusBets:
+                    type: boolean
         api.wallet.service.v1.AddResponsibleGamblingConfigRequest:
             type: object
             properties:
