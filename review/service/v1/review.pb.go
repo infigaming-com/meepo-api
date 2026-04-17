@@ -2037,8 +2037,10 @@ type GetTicketResponse_Ticket struct {
 	RetailerOperatorName string                 `protobuf:"bytes,6,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
 	SystemOperatorName   string                 `protobuf:"bytes,7,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
 	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Reviewer comment visible to the player (typically set on rejection)
+	PlayerComment string `protobuf:"bytes,9,opt,name=player_comment,json=playerComment,proto3" json:"player_comment,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetTicketResponse_Ticket) Reset() {
@@ -2125,6 +2127,13 @@ func (x *GetTicketResponse_Ticket) GetCreatedAt() *timestamppb.Timestamp {
 		return x.CreatedAt
 	}
 	return nil
+}
+
+func (x *GetTicketResponse_Ticket) GetPlayerComment() string {
+	if x != nil {
+		return x.PlayerComment
+	}
+	return ""
 }
 
 type GetTicketResponse_Comment struct {
@@ -3597,7 +3606,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
 	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x13\n" +
-	"\x11_include_comments\"\x97\x19\n" +
+	"\x11_include_comments\"\xbe\x19\n" +
 	"\x11GetTicketResponse\x12G\n" +
 	"\x06ticket\x18\x01 \x01(\v2/.api.review.service.v1.GetTicketResponse.TicketR\x06ticket\x12L\n" +
 	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x12N\n" +
@@ -3605,7 +3614,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x18payment_transaction_info\x18\x04 \x01(\v2?.api.review.service.v1.GetTicketResponse.PaymentTransactionInfoR\x16paymentTransactionInfo\x12v\n" +
 	"\x17wallet_transaction_info\x18\x05 \x01(\v2>.api.review.service.v1.GetTicketResponse.WalletTransactionInfoR\x15walletTransactionInfo\x12\x7f\n" +
 	"\x1awallet_transaction_summary\x18\x06 \x01(\v2A.api.review.service.v1.GetTicketResponse.WalletTransactionSummaryR\x18walletTransactionSummary\x12\x87\x01\n" +
-	" operator_wallet_transaction_info\x18\a \x01(\v2>.api.review.service.v1.GetTicketResponse.WalletTransactionInfoR\x1doperatorWalletTransactionInfo\x1a\xc0\x02\n" +
+	" operator_wallet_transaction_info\x18\a \x01(\v2>.api.review.service.v1.GetTicketResponse.WalletTransactionInfoR\x1doperatorWalletTransactionInfo\x1a\xe7\x02\n" +
 	"\x06Ticket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x16\n" +
@@ -3615,7 +3624,8 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x16retailer_operator_name\x18\x06 \x01(\tR\x14retailerOperatorName\x120\n" +
 	"\x14system_operator_name\x18\a \x01(\tR\x12systemOperatorName\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xb4\x01\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
+	"\x0eplayer_comment\x18\t \x01(\tR\rplayerComment\x1a\xb4\x01\n" +
 	"\aComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tticket_id\x18\x02 \x01(\x03R\bticketId\x12'\n" +

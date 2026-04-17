@@ -3938,6 +3938,8 @@ func (m *GetTicketResponse_Ticket) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for PlayerComment
+
 	if len(errors) > 0 {
 		return GetTicketResponse_TicketMultiError(errors)
 	}
