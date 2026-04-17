@@ -333,6 +333,12 @@ service User {
 	rpc ListBottomOperators(ListBottomOperatorsRequest) returns (ListBottomOperatorsResponse) {
 	}
 
+	// ListCooperationOperatorIds returns the real_operator_ids of all bottom operators with mode='co-operation'
+	// scoped by the caller's operator_context (system → all cooperation under system; company → under company; etc.).
+	// Lightweight: returns only ids, used by sync flows that target cooperation sites.
+	rpc ListCooperationOperatorIds(ListCooperationOperatorIdsRequest) returns (ListCooperationOperatorIdsResponse) {
+	}
+
 	// UpdateOperatorStatus updates the status of an operator
 	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
 	}
@@ -1910,6 +1916,14 @@ message ListBottomOperatorsRequest {
 	repeated int64 retailer_operator_ids = 1;
 	repeated int64 company_operator_ids = 2;
 	api.common.OperatorContext operator_context = 3;
+}
+
+message ListCooperationOperatorIdsRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message ListCooperationOperatorIdsResponse {
+	repeated int64 operator_ids = 1;
 }
 
 message ListBottomOperatorsResponse {
