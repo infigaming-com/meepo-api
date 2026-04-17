@@ -30667,6 +30667,9 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                playerComment:
+                    type: string
+                    description: Reviewer comment visible to the player (typically set on rejection)
         api.review.service.v1.GetTicketResponse_UserInfo:
             type: object
             properties:
@@ -36644,6 +36647,12 @@ components:
                 txHash:
                     type: string
                     description: On-chain transaction hash (for crypto transactions)
+                skipBonus:
+                    type: boolean
+                    description: |-
+                        Whether deposit bonus was skipped for this transaction.
+                         Previously only available inside the payee JSONB for crypto deposits;
+                         now returned at the top level for both fiat and crypto.
             description: |-
                 Transaction information
                  Detailed information about a specific transaction
