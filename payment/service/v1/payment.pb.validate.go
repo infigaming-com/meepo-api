@@ -4137,6 +4137,8 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for TxHash
 
+	// no validation rules for SkipBonus
+
 	if len(errors) > 0 {
 		return TransactionInfoMultiError(errors)
 	}

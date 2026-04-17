@@ -689,6 +689,10 @@ message TransactionInfo {
   google.protobuf.Struct payee = 37;
   // On-chain transaction hash (for crypto transactions)
   string tx_hash = 38;
+  // Whether deposit bonus was skipped for this transaction.
+  // Previously only available inside the payee JSONB for crypto deposits;
+  // now returned at the top level for both fiat and crypto.
+  bool skip_bonus = 39 [json_name="skipBonus"];
 }
 
 message TransactionDetail {
