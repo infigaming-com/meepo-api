@@ -3187,7 +3187,11 @@ type TransactionInfo struct {
 	// Payee information (JSONB data)
 	Payee *structpb.Struct `protobuf:"bytes,37,opt,name=payee,proto3" json:"payee,omitempty"`
 	// On-chain transaction hash (for crypto transactions)
-	TxHash        string `protobuf:"bytes,38,opt,name=tx_hash,json=txHash,proto3" json:"tx_hash,omitempty"`
+	TxHash string `protobuf:"bytes,38,opt,name=tx_hash,json=txHash,proto3" json:"tx_hash,omitempty"`
+	// Whether deposit bonus was skipped for this transaction.
+	// Previously only available inside the payee JSONB for crypto deposits;
+	// now returned at the top level for both fiat and crypto.
+	SkipBonus     bool `protobuf:"varint,39,opt,name=skip_bonus,json=skipBonus,proto3" json:"skip_bonus,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3486,6 +3490,13 @@ func (x *TransactionInfo) GetTxHash() string {
 		return x.TxHash
 	}
 	return ""
+}
+
+func (x *TransactionInfo) GetSkipBonus() bool {
+	if x != nil {
+		return x.SkipBonus
+	}
+	return false
 }
 
 type TransactionDetail struct {
@@ -7267,7 +7278,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\atx_hash\x18\r \x01(\tR\x06txHash\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xd5\f\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xf4\f\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
@@ -7312,7 +7323,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bpsp_name\x18# \x01(\tR\apspName\x12-\n" +
 	"\x05payer\x18$ \x01(\v2\x17.google.protobuf.StructR\x05payer\x12-\n" +
 	"\x05payee\x18% \x01(\v2\x17.google.protobuf.StructR\x05payee\x12\x17\n" +
-	"\atx_hash\x18& \x01(\tR\x06txHash\"\x9c\x01\n" +
+	"\atx_hash\x18& \x01(\tR\x06txHash\x12\x1d\n" +
+	"\n" +
+	"skip_bonus\x18' \x01(\bR\tskipBonus\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
 	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xa6\a\n" +
