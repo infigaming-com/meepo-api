@@ -282,7 +282,8 @@ service BackofficeWallet {
 		};
 	}
 
-	// PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all
+	// cooperation-mode bottom operators. Individual-mode operators are excluded.
 	// System-level caller only. Executes asynchronously.
 	rpc PushBetLimitsToBottomOperators(PushBetLimitsRequest) returns (wallet.service.v1.PushBetLimitsResponse) {
 		option (google.api.http) = {

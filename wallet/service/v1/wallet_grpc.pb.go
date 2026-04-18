@@ -238,8 +238,9 @@ type WalletClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyConfigResponse, error)
-	// PushBetLimitsToBottomOperators syncs System's cash/bonus per-bet limits down to every bottom operator.
-	// System-level initiator only. Runs asynchronously via Asynq.
+	// PushBetLimitsToBottomOperators syncs System's cash/bonus per-bet limits down to every
+	// cooperation-mode bottom operator under the System. Individual-mode operators are
+	// independently run and excluded. System-level initiator only. Runs asynchronously via Asynq.
 	PushBetLimitsToBottomOperators(ctx context.Context, in *PushBetLimitsRequest, opts ...grpc.CallOption) (*PushBetLimitsResponse, error)
 	// PullBetLimitsFromSystem syncs a single bottom operator's cash/bonus per-bet limits from System.
 	// Synchronous. Initiator must have update permission over target (any tier with management rights).
@@ -1363,8 +1364,9 @@ type WalletServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*UpdateOperatorCurrencyConfigResponse, error)
-	// PushBetLimitsToBottomOperators syncs System's cash/bonus per-bet limits down to every bottom operator.
-	// System-level initiator only. Runs asynchronously via Asynq.
+	// PushBetLimitsToBottomOperators syncs System's cash/bonus per-bet limits down to every
+	// cooperation-mode bottom operator under the System. Individual-mode operators are
+	// independently run and excluded. System-level initiator only. Runs asynchronously via Asynq.
 	PushBetLimitsToBottomOperators(context.Context, *PushBetLimitsRequest) (*PushBetLimitsResponse, error)
 	// PullBetLimitsFromSystem syncs a single bottom operator's cash/bonus per-bet limits from System.
 	// Synchronous. Initiator must have update permission over target (any tier with management rights).

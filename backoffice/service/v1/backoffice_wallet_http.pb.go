@@ -166,7 +166,8 @@ type BackofficeWalletHTTPServer interface {
 	// PullBetLimitsFromSystem PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
 	// Caller must have management permission over target.
 	PullBetLimitsFromSystem(context.Context, *PullBetLimitsRequest) (*v1.PullBetLimitsResponse, error)
-	// PushBetLimitsToBottomOperators PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// PushBetLimitsToBottomOperators PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all
+	// cooperation-mode bottom operators. Individual-mode operators are excluded.
 	// System-level caller only. Executes asynchronously.
 	PushBetLimitsToBottomOperators(context.Context, *PushBetLimitsRequest) (*v1.PushBetLimitsResponse, error)
 	// SetAppDownloadRewardConfig Set app download reward config for a target operator
@@ -1550,7 +1551,8 @@ type BackofficeWalletHTTPClient interface {
 	// PullBetLimitsFromSystem PullBetLimitsFromSystem syncs a single bottom operator's per-bet limits from System.
 	// Caller must have management permission over target.
 	PullBetLimitsFromSystem(ctx context.Context, req *PullBetLimitsRequest, opts ...http.CallOption) (rsp *v1.PullBetLimitsResponse, err error)
-	// PushBetLimitsToBottomOperators PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+	// PushBetLimitsToBottomOperators PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all
+	// cooperation-mode bottom operators. Individual-mode operators are excluded.
 	// System-level caller only. Executes asynchronously.
 	PushBetLimitsToBottomOperators(ctx context.Context, req *PushBetLimitsRequest, opts ...http.CallOption) (rsp *v1.PushBetLimitsResponse, err error)
 	// SetAppDownloadRewardConfig Set app download reward config for a target operator
@@ -2200,7 +2202,8 @@ func (c *BackofficeWalletHTTPClientImpl) PullBetLimitsFromSystem(ctx context.Con
 	return &out, nil
 }
 
-// PushBetLimitsToBottomOperators PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all bottom operators.
+// PushBetLimitsToBottomOperators PushBetLimitsToBottomOperators pushes System-level cash/bonus per-bet limits down to all
+// cooperation-mode bottom operators. Individual-mode operators are excluded.
 // System-level caller only. Executes asynchronously.
 func (c *BackofficeWalletHTTPClientImpl) PushBetLimitsToBottomOperators(ctx context.Context, in *PushBetLimitsRequest, opts ...http.CallOption) (*v1.PushBetLimitsResponse, error) {
 	var out v1.PushBetLimitsResponse

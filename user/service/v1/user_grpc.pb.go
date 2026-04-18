@@ -89,6 +89,7 @@ const (
 	User_ListRetailerOperators_FullMethodName              = "/api.user.service.v1.User/ListRetailerOperators"
 	User_ListCompanyOperators_FullMethodName               = "/api.user.service.v1.User/ListCompanyOperators"
 	User_ListBottomOperators_FullMethodName                = "/api.user.service.v1.User/ListBottomOperators"
+	User_ListCooperationOperatorIds_FullMethodName         = "/api.user.service.v1.User/ListCooperationOperatorIds"
 	User_UpdateOperatorStatus_FullMethodName               = "/api.user.service.v1.User/UpdateOperatorStatus"
 	User_ListAllUsers_FullMethodName                       = "/api.user.service.v1.User/ListAllUsers"
 	User_ListOperatorsByAdminEmail_FullMethodName          = "/api.user.service.v1.User/ListOperatorsByAdminEmail"
@@ -292,6 +293,10 @@ type UserClient interface {
 	ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsResponse, error)
 	// ListBottomOperators returns a list of bottom operators by operator context
 	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
+	// ListCooperationOperatorIds returns the real_operator_ids of all bottom operators with mode='co-operation'
+	// scoped by the caller's operator_context (system → all cooperation under system; company → under company; etc.).
+	// Lightweight: returns only ids, used by sync flows that target cooperation sites.
+	ListCooperationOperatorIds(ctx context.Context, in *ListCooperationOperatorIdsRequest, opts ...grpc.CallOption) (*ListCooperationOperatorIdsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*UpdateOperatorStatusResponse, error)
 	// ListAllUsers returns a list of all users which belong to the operator context
@@ -1093,6 +1098,16 @@ func (c *userClient) ListBottomOperators(ctx context.Context, in *ListBottomOper
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListBottomOperatorsResponse)
 	err := c.cc.Invoke(ctx, User_ListBottomOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListCooperationOperatorIds(ctx context.Context, in *ListCooperationOperatorIdsRequest, opts ...grpc.CallOption) (*ListCooperationOperatorIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCooperationOperatorIdsResponse)
+	err := c.cc.Invoke(ctx, User_ListCooperationOperatorIds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1921,6 +1936,10 @@ type UserServer interface {
 	ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error)
 	// ListBottomOperators returns a list of bottom operators by operator context
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
+	// ListCooperationOperatorIds returns the real_operator_ids of all bottom operators with mode='co-operation'
+	// scoped by the caller's operator_context (system → all cooperation under system; company → under company; etc.).
+	// Lightweight: returns only ids, used by sync flows that target cooperation sites.
+	ListCooperationOperatorIds(context.Context, *ListCooperationOperatorIdsRequest) (*ListCooperationOperatorIdsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error)
 	// ListAllUsers returns a list of all users which belong to the operator context
@@ -2251,6 +2270,9 @@ func (UnimplementedUserServer) ListCompanyOperators(context.Context, *ListCompan
 }
 func (UnimplementedUserServer) ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListBottomOperators not implemented")
+}
+func (UnimplementedUserServer) ListCooperationOperatorIds(context.Context, *ListCooperationOperatorIdsRequest) (*ListCooperationOperatorIdsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCooperationOperatorIds not implemented")
 }
 func (UnimplementedUserServer) UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorStatus not implemented")
@@ -3700,6 +3722,24 @@ func _User_ListBottomOperators_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).ListBottomOperators(ctx, req.(*ListBottomOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListCooperationOperatorIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCooperationOperatorIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListCooperationOperatorIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListCooperationOperatorIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListCooperationOperatorIds(ctx, req.(*ListCooperationOperatorIdsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5224,6 +5264,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBottomOperators",
 			Handler:    _User_ListBottomOperators_Handler,
+		},
+		{
+			MethodName: "ListCooperationOperatorIds",
+			Handler:    _User_ListCooperationOperatorIds_Handler,
 		},
 		{
 			MethodName: "UpdateOperatorStatus",
