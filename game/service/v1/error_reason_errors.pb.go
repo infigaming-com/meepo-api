@@ -346,3 +346,15 @@ func IsOperatorStatusInvalid(err error) bool {
 func ErrorOperatorStatusInvalid(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OPERATOR_STATUS_INVALID.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGameBonusRestricted(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_BONUS_RESTRICTED.String() && e.Code == 403
+}
+
+func ErrorGameBonusRestricted(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_GAME_BONUS_RESTRICTED.String(), fmt.Sprintf(format, args...))
+}

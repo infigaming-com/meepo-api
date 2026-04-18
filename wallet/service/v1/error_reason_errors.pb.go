@@ -2266,3 +2266,27 @@ func IsCashBetLimitExceeded(err error) bool {
 func ErrorCashBetLimitExceeded(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CASH_BET_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsBonusClaimRejected(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BONUS_CLAIM_REJECTED.String() && e.Code == 403
+}
+
+func ErrorBonusClaimRejected(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_BONUS_CLAIM_REJECTED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGameBonusRestricted(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_BONUS_RESTRICTED.String() && e.Code == 403
+}
+
+func ErrorGameBonusRestricted(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_GAME_BONUS_RESTRICTED.String(), fmt.Sprintf(format, args...))
+}

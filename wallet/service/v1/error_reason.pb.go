@@ -213,6 +213,8 @@ const (
 	ErrorReason_LIST_BOTTOM_OPERATORS_FAILED                                    ErrorReason = 30185
 	ErrorReason_BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED                    ErrorReason = 30186
 	ErrorReason_CASH_BET_LIMIT_EXCEEDED                                         ErrorReason = 30187
+	ErrorReason_BONUS_CLAIM_REJECTED                                            ErrorReason = 30188
+	ErrorReason_GAME_BONUS_RESTRICTED                                           ErrorReason = 30189
 )
 
 // Enum value maps for ErrorReason.
@@ -406,6 +408,8 @@ var (
 		30185: "LIST_BOTTOM_OPERATORS_FAILED",
 		30186: "BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED",
 		30187: "CASH_BET_LIMIT_EXCEEDED",
+		30188: "BONUS_CLAIM_REJECTED",
+		30189: "GAME_BONUS_RESTRICTED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -596,6 +600,8 @@ var (
 		"LIST_BOTTOM_OPERATORS_FAILED":                                    30185,
 		"BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED":                    30186,
 		"CASH_BET_LIMIT_EXCEEDED":                                         30187,
+		"BONUS_CLAIM_REJECTED":                                            30188,
+		"GAME_BONUS_RESTRICTED":                                           30189,
 	}
 )
 
@@ -630,7 +636,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x849\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xc99\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -819,7 +825,9 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\"ENQUEUE_BET_LIMIT_SYNC_TASK_FAILED\x10\xe8\xeb\x01\x12\"\n" +
 	"\x1cLIST_BOTTOM_OPERATORS_FAILED\x10\xe9\xeb\x01\x122\n" +
 	",BATCH_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED\x10\xea\xeb\x01\x12\x1d\n" +
-	"\x17CASH_BET_LIMIT_EXCEEDED\x10\xeb\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x17CASH_BET_LIMIT_EXCEEDED\x10\xeb\xeb\x01\x12 \n" +
+	"\x14BONUS_CLAIM_REJECTED\x10\xec\xeb\x01\x1a\x04\xa8E\x93\x03\x12!\n" +
+	"\x15GAME_BONUS_RESTRICTED\x10\xed\xeb\x01\x1a\x04\xa8E\x93\x03\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
