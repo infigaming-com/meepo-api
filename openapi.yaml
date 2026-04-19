@@ -11352,6 +11352,29 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse'
+    /v1/wallet/gamification/config/get:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                GetGamificationConfig returns the per-currency gamification config (bet limits,
+                 bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
+                 Scoped to the caller's operator context (from middleware). Returns only enabled and
+                 non-hidden currencies, matching backoffice behavior.
+            operationId: Wallet_GetGamificationConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetGamificationConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetGamificationConfigResponse'
     /v1/wallet/promo-code/claim:
         post:
             tags:
@@ -34376,6 +34399,23 @@ components:
                     type: object
                     additionalProperties:
                         $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
+        api.wallet.service.v1.GetGamificationConfigRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                    description: Optional filter; empty = return all enabled+visible currencies for the operator
+        api.wallet.service.v1.GetGamificationConfigResponse:
+            type: object
+            properties:
+                clearBonusOnWithdrawal:
+                    type: boolean
+                operatorCurrencyConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
         api.wallet.service.v1.GetGamificationCurrencyConfigResponse:
             type: object
             properties:
