@@ -20770,7 +20770,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1dWITHDRAW_SCENARIO_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18WITHDRAW_SCENARIO_PLAYER\x10\x01\x12\x1f\n" +
 	"\x1bWITHDRAW_SCENARIO_AFFILIATE\x10\x02\x12\x1e\n" +
-	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xb6i\n" +
+	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xb9i\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -20858,8 +20858,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1eGetUserGameTransactionsSummary\x12<.api.wallet.service.v1.GetUserGameTransactionsSummaryRequest\x1a=.api.wallet.service.v1.GetUserGameTransactionsSummaryResponse\"\x00\x12x\n" +
 	"\x11CreditFreespinWin\x12/.api.wallet.service.v1.CreditFreespinWinRequest\x1a0.api.wallet.service.v1.CreditFreespinWinResponse\"\x00\x12u\n" +
 	"\x10CreditFreeBetWin\x12..api.wallet.service.v1.CreditFreeBetWinRequest\x1a/.api.wallet.service.v1.CreditFreeBetWinResponse\"\x00\x12\xa2\x01\n" +
-	"\x1fGetOperatorUserFinancialSummary\x12=.api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest\x1a>.api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse\"\x00\x12\x92\x01\n" +
-	"\x0fGetWalletConfig\x12-.api.wallet.service.v1.GetWalletConfigRequest\x1a..api.wallet.service.v1.GetWalletConfigResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/wallet/config/get\x12\xb1\x01\n" +
+	"\x1fGetOperatorUserFinancialSummary\x12=.api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest\x1a>.api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse\"\x00\x12\x95\x01\n" +
+	"\x0fGetWalletConfig\x12-.api.wallet.service.v1.GetWalletConfigRequest\x1a..api.wallet.service.v1.GetWalletConfigResponse\"#\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/wallet/config/get\x88\x02\x01\x12\xb1\x01\n" +
 	"\x15GetGamificationConfig\x123.api.wallet.service.v1.GetGamificationConfigRequest\x1a4.api.wallet.service.v1.GetGamificationConfigResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/wallet/gamification/config/get\x12\x99\x01\n" +
 	"\x1cBatchGetUserFinancialMetrics\x12:.api.wallet.service.v1.BatchGetUserFinancialMetricsRequest\x1a;.api.wallet.service.v1.BatchGetUserFinancialMetricsResponse\"\x00\x12\xa2\x01\n" +
 	"\x1fManualAdjustCreditTurnoverField\x12=.api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest\x1a>.api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse\"\x00\x12~\n" +

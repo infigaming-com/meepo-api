@@ -67,6 +67,11 @@ type WalletHTTPServer interface {
 	// GetUserDepositRewardSequence GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(context.Context, *GetUserDepositRewardSequenceRequest) (*GetUserDepositRewardSequenceResponse, error)
 	// GetWalletConfig GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	//
+	// Deprecated: use GetGamificationConfig instead — its response is a strict superset
+	// (includes clear_bonus_on_withdrawal) and is backed by the operator-level bundle cache,
+	// so switching also fixes a server-side cache miss on every call to this endpoint.
+	// Deprecated: Do not use.
 	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error)
@@ -453,6 +458,11 @@ type WalletHTTPClient interface {
 	// GetUserDepositRewardSequence GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(ctx context.Context, req *GetUserDepositRewardSequenceRequest, opts ...http.CallOption) (rsp *GetUserDepositRewardSequenceResponse, err error)
 	// GetWalletConfig GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	//
+	// Deprecated: use GetGamificationConfig instead — its response is a strict superset
+	// (includes clear_bonus_on_withdrawal) and is backed by the operator-level bundle cache,
+	// so switching also fixes a server-side cache miss on every call to this endpoint.
+	// Deprecated: Do not use.
 	GetWalletConfig(ctx context.Context, req *GetWalletConfigRequest, opts ...http.CallOption) (rsp *GetWalletConfigResponse, err error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(ctx context.Context, req *ListResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *ListResponsibleGamblingConfigsResponse, err error)
@@ -653,6 +663,11 @@ func (c *WalletHTTPClientImpl) GetUserDepositRewardSequence(ctx context.Context,
 }
 
 // GetWalletConfig GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+//
+// Deprecated: use GetGamificationConfig instead — its response is a strict superset
+// (includes clear_bonus_on_withdrawal) and is backed by the operator-level bundle cache,
+// so switching also fixes a server-side cache miss on every call to this endpoint.
+// Deprecated: Do not use.
 func (c *WalletHTTPClientImpl) GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...http.CallOption) (*GetWalletConfigResponse, error) {
 	var out GetWalletConfigResponse
 	pattern := "/v1/wallet/config/get"
