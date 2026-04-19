@@ -13844,6 +13844,253 @@ var _ interface {
 	ErrorName() string
 } = GetWalletConfigResponseValidationError{}
 
+// Validate checks the field values on ListGamificationCurrencyConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListGamificationCurrencyConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGamificationCurrencyConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListGamificationCurrencyConfigRequestMultiError, or nil if none found.
+func (m *ListGamificationCurrencyConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGamificationCurrencyConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListGamificationCurrencyConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGamificationCurrencyConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ListGamificationCurrencyConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListGamificationCurrencyConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGamificationCurrencyConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGamificationCurrencyConfigRequestMultiError) AllErrors() []error { return m }
+
+// ListGamificationCurrencyConfigRequestValidationError is the validation error
+// returned by ListGamificationCurrencyConfigRequest.Validate if the
+// designated constraints aren't met.
+type ListGamificationCurrencyConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGamificationCurrencyConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGamificationCurrencyConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGamificationCurrencyConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGamificationCurrencyConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGamificationCurrencyConfigRequestValidationError) ErrorName() string {
+	return "ListGamificationCurrencyConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGamificationCurrencyConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGamificationCurrencyConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGamificationCurrencyConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGamificationCurrencyConfigRequestValidationError{}
+
+// Validate checks the field values on ListGamificationCurrencyConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListGamificationCurrencyConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListGamificationCurrencyConfigResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListGamificationCurrencyConfigResponseMultiError, or nil if none found.
+func (m *ListGamificationCurrencyConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGamificationCurrencyConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ClearBonusOnWithdrawal
+
+	for idx, item := range m.GetOperatorCurrencyConfigs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListGamificationCurrencyConfigResponseValidationError{
+						field:  fmt.Sprintf("OperatorCurrencyConfigs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListGamificationCurrencyConfigResponseValidationError{
+						field:  fmt.Sprintf("OperatorCurrencyConfigs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListGamificationCurrencyConfigResponseValidationError{
+					field:  fmt.Sprintf("OperatorCurrencyConfigs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListGamificationCurrencyConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGamificationCurrencyConfigResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ListGamificationCurrencyConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListGamificationCurrencyConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGamificationCurrencyConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGamificationCurrencyConfigResponseMultiError) AllErrors() []error { return m }
+
+// ListGamificationCurrencyConfigResponseValidationError is the validation
+// error returned by ListGamificationCurrencyConfigResponse.Validate if the
+// designated constraints aren't met.
+type ListGamificationCurrencyConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGamificationCurrencyConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGamificationCurrencyConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGamificationCurrencyConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGamificationCurrencyConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGamificationCurrencyConfigResponseValidationError) ErrorName() string {
+	return "ListGamificationCurrencyConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGamificationCurrencyConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGamificationCurrencyConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGamificationCurrencyConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGamificationCurrencyConfigResponseValidationError{}
+
 // Validate checks the field values on OperatorCurrencyConfig with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
