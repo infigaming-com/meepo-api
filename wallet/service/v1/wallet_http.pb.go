@@ -27,12 +27,12 @@ const OperationWalletDeleteResponsibleGamblingConfig = "/api.wallet.service.v1.W
 const OperationWalletGetAppDownloadRewardStatus = "/api.wallet.service.v1.Wallet/GetAppDownloadRewardStatus"
 const OperationWalletGetCurrencies = "/api.wallet.service.v1.Wallet/GetCurrencies"
 const OperationWalletGetExchangeRatesWithBaseCurrency = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
+const OperationWalletGetGamificationConfig = "/api.wallet.service.v1.Wallet/GetGamificationConfig"
 const OperationWalletGetPromoCodeInfo = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
 const OperationWalletGetUserBalanceDetails = "/api.wallet.service.v1.Wallet/GetUserBalanceDetails"
 const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBalances"
 const OperationWalletGetUserDepositRewardSequence = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
 const OperationWalletGetWalletConfig = "/api.wallet.service.v1.Wallet/GetWalletConfig"
-const OperationWalletListGamificationCurrencyConfig = "/api.wallet.service.v1.Wallet/ListGamificationCurrencyConfig"
 const OperationWalletListResponsibleGamblingConfigs = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
 
 type WalletHTTPServer interface {
@@ -53,6 +53,11 @@ type WalletHTTPServer interface {
 	GetAppDownloadRewardStatus(context.Context, *GetAppDownloadRewardStatusRequest) (*GetAppDownloadRewardStatusResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
 	GetExchangeRatesWithBaseCurrency(context.Context, *GetExchangeRatesWithBaseCurrencyRequest) (*GetExchangeRatesWithBaseCurrencyResponse, error)
+	// GetGamificationConfig GetGamificationConfig returns the per-currency gamification config (bet limits,
+	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
+	// Scoped to the caller's operator context (from middleware). Returns only enabled and
+	// non-hidden currencies, matching backoffice behavior.
+	GetGamificationConfig(context.Context, *GetGamificationConfigRequest) (*GetGamificationConfigResponse, error)
 	// GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	GetPromoCodeInfo(context.Context, *GetPromoCodeInfoRequest) (*GetPromoCodeInfoResponse, error)
 	// GetUserBalanceDetails GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
@@ -63,11 +68,6 @@ type WalletHTTPServer interface {
 	GetUserDepositRewardSequence(context.Context, *GetUserDepositRewardSequenceRequest) (*GetUserDepositRewardSequenceResponse, error)
 	// GetWalletConfig GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
-	// ListGamificationCurrencyConfig ListGamificationCurrencyConfig returns the per-currency gamification config (bet limits,
-	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
-	// Scoped to the caller's operator context (from middleware). Returns only enabled and
-	// non-hidden currencies, matching backoffice behavior.
-	ListGamificationCurrencyConfig(context.Context, *ListGamificationCurrencyConfigRequest) (*ListGamificationCurrencyConfigResponse, error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error)
 }
@@ -88,7 +88,7 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/responsible-gambling/config/delete", _Wallet_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/responsible-gambling/configs/list", _Wallet_ListResponsibleGamblingConfigs0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/config/get", _Wallet_GetWalletConfig0_HTTP_Handler(srv))
-	r.POST("/v1/wallet/gamification/config/list", _Wallet_ListGamificationCurrencyConfig0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/gamification/config/get", _Wallet_GetGamificationConfig0_HTTP_Handler(srv))
 }
 
 func _Wallet_GetUserBalances0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
@@ -399,24 +399,24 @@ func _Wallet_GetWalletConfig0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.C
 	}
 }
 
-func _Wallet_ListGamificationCurrencyConfig0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+func _Wallet_GetGamificationConfig0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListGamificationCurrencyConfigRequest
+		var in GetGamificationConfigRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationWalletListGamificationCurrencyConfig)
+		http.SetOperation(ctx, OperationWalletGetGamificationConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListGamificationCurrencyConfig(ctx, req.(*ListGamificationCurrencyConfigRequest))
+			return srv.GetGamificationConfig(ctx, req.(*GetGamificationConfigRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListGamificationCurrencyConfigResponse)
+		reply := out.(*GetGamificationConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -439,6 +439,11 @@ type WalletHTTPClient interface {
 	GetAppDownloadRewardStatus(ctx context.Context, req *GetAppDownloadRewardStatusRequest, opts ...http.CallOption) (rsp *GetAppDownloadRewardStatusResponse, err error)
 	GetCurrencies(ctx context.Context, req *GetCurrenciesRequest, opts ...http.CallOption) (rsp *GetCurrenciesResponse, err error)
 	GetExchangeRatesWithBaseCurrency(ctx context.Context, req *GetExchangeRatesWithBaseCurrencyRequest, opts ...http.CallOption) (rsp *GetExchangeRatesWithBaseCurrencyResponse, err error)
+	// GetGamificationConfig GetGamificationConfig returns the per-currency gamification config (bet limits,
+	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
+	// Scoped to the caller's operator context (from middleware). Returns only enabled and
+	// non-hidden currencies, matching backoffice behavior.
+	GetGamificationConfig(ctx context.Context, req *GetGamificationConfigRequest, opts ...http.CallOption) (rsp *GetGamificationConfigResponse, err error)
 	// GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	GetPromoCodeInfo(ctx context.Context, req *GetPromoCodeInfoRequest, opts ...http.CallOption) (rsp *GetPromoCodeInfoResponse, err error)
 	// GetUserBalanceDetails GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
@@ -449,11 +454,6 @@ type WalletHTTPClient interface {
 	GetUserDepositRewardSequence(ctx context.Context, req *GetUserDepositRewardSequenceRequest, opts ...http.CallOption) (rsp *GetUserDepositRewardSequenceResponse, err error)
 	// GetWalletConfig GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(ctx context.Context, req *GetWalletConfigRequest, opts ...http.CallOption) (rsp *GetWalletConfigResponse, err error)
-	// ListGamificationCurrencyConfig ListGamificationCurrencyConfig returns the per-currency gamification config (bet limits,
-	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
-	// Scoped to the caller's operator context (from middleware). Returns only enabled and
-	// non-hidden currencies, matching backoffice behavior.
-	ListGamificationCurrencyConfig(ctx context.Context, req *ListGamificationCurrencyConfigRequest, opts ...http.CallOption) (rsp *ListGamificationCurrencyConfigResponse, err error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(ctx context.Context, req *ListResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *ListResponsibleGamblingConfigsResponse, err error)
 }
@@ -579,6 +579,23 @@ func (c *WalletHTTPClientImpl) GetExchangeRatesWithBaseCurrency(ctx context.Cont
 	return &out, nil
 }
 
+// GetGamificationConfig GetGamificationConfig returns the per-currency gamification config (bet limits,
+// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
+// Scoped to the caller's operator context (from middleware). Returns only enabled and
+// non-hidden currencies, matching backoffice behavior.
+func (c *WalletHTTPClientImpl) GetGamificationConfig(ctx context.Context, in *GetGamificationConfigRequest, opts ...http.CallOption) (*GetGamificationConfigResponse, error) {
+	var out GetGamificationConfigResponse
+	pattern := "/v1/wallet/gamification/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletGetGamificationConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
 func (c *WalletHTTPClientImpl) GetPromoCodeInfo(ctx context.Context, in *GetPromoCodeInfoRequest, opts ...http.CallOption) (*GetPromoCodeInfoResponse, error) {
 	var out GetPromoCodeInfoResponse
@@ -641,23 +658,6 @@ func (c *WalletHTTPClientImpl) GetWalletConfig(ctx context.Context, in *GetWalle
 	pattern := "/v1/wallet/config/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletGetWalletConfig))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// ListGamificationCurrencyConfig ListGamificationCurrencyConfig returns the per-currency gamification config (bet limits,
-// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
-// Scoped to the caller's operator context (from middleware). Returns only enabled and
-// non-hidden currencies, matching backoffice behavior.
-func (c *WalletHTTPClientImpl) ListGamificationCurrencyConfig(ctx context.Context, in *ListGamificationCurrencyConfigRequest, opts ...http.CallOption) (*ListGamificationCurrencyConfigResponse, error) {
-	var out ListGamificationCurrencyConfigResponse
-	pattern := "/v1/wallet/gamification/config/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationWalletListGamificationCurrencyConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

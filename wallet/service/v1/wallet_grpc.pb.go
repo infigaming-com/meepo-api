@@ -105,7 +105,7 @@ const (
 	Wallet_CreditFreeBetWin_FullMethodName                    = "/api.wallet.service.v1.Wallet/CreditFreeBetWin"
 	Wallet_GetOperatorUserFinancialSummary_FullMethodName     = "/api.wallet.service.v1.Wallet/GetOperatorUserFinancialSummary"
 	Wallet_GetWalletConfig_FullMethodName                     = "/api.wallet.service.v1.Wallet/GetWalletConfig"
-	Wallet_ListGamificationCurrencyConfig_FullMethodName      = "/api.wallet.service.v1.Wallet/ListGamificationCurrencyConfig"
+	Wallet_GetGamificationConfig_FullMethodName               = "/api.wallet.service.v1.Wallet/GetGamificationConfig"
 	Wallet_BatchGetUserFinancialMetrics_FullMethodName        = "/api.wallet.service.v1.Wallet/BatchGetUserFinancialMetrics"
 	Wallet_ManualAdjustCreditTurnoverField_FullMethodName     = "/api.wallet.service.v1.Wallet/ManualAdjustCreditTurnoverField"
 	Wallet_ListUserFreeRewards_FullMethodName                 = "/api.wallet.service.v1.Wallet/ListUserFreeRewards"
@@ -285,11 +285,11 @@ type WalletClient interface {
 	GetOperatorUserFinancialSummary(ctx context.Context, in *GetOperatorUserFinancialSummaryRequest, opts ...grpc.CallOption) (*GetOperatorUserFinancialSummaryResponse, error)
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...grpc.CallOption) (*GetWalletConfigResponse, error)
-	// ListGamificationCurrencyConfig returns the per-currency gamification config (bet limits,
+	// GetGamificationConfig returns the per-currency gamification config (bet limits,
 	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
 	// Scoped to the caller's operator context (from middleware). Returns only enabled and
 	// non-hidden currencies, matching backoffice behavior.
-	ListGamificationCurrencyConfig(ctx context.Context, in *ListGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*ListGamificationCurrencyConfigResponse, error)
+	GetGamificationConfig(ctx context.Context, in *GetGamificationConfigRequest, opts ...grpc.CallOption) (*GetGamificationConfigResponse, error)
 	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(ctx context.Context, in *BatchGetUserFinancialMetricsRequest, opts ...grpc.CallOption) (*BatchGetUserFinancialMetricsResponse, error)
@@ -1176,10 +1176,10 @@ func (c *walletClient) GetWalletConfig(ctx context.Context, in *GetWalletConfigR
 	return out, nil
 }
 
-func (c *walletClient) ListGamificationCurrencyConfig(ctx context.Context, in *ListGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*ListGamificationCurrencyConfigResponse, error) {
+func (c *walletClient) GetGamificationConfig(ctx context.Context, in *GetGamificationConfigRequest, opts ...grpc.CallOption) (*GetGamificationConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListGamificationCurrencyConfigResponse)
-	err := c.cc.Invoke(ctx, Wallet_ListGamificationCurrencyConfig_FullMethodName, in, out, cOpts...)
+	out := new(GetGamificationConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetGamificationConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1426,11 +1426,11 @@ type WalletServer interface {
 	GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error)
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
-	// ListGamificationCurrencyConfig returns the per-currency gamification config (bet limits,
+	// GetGamificationConfig returns the per-currency gamification config (bet limits,
 	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
 	// Scoped to the caller's operator context (from middleware). Returns only enabled and
 	// non-hidden currencies, matching backoffice behavior.
-	ListGamificationCurrencyConfig(context.Context, *ListGamificationCurrencyConfigRequest) (*ListGamificationCurrencyConfigResponse, error)
+	GetGamificationConfig(context.Context, *GetGamificationConfigRequest) (*GetGamificationConfigResponse, error)
 	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error)
@@ -1715,8 +1715,8 @@ func (UnimplementedWalletServer) GetOperatorUserFinancialSummary(context.Context
 func (UnimplementedWalletServer) GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetWalletConfig not implemented")
 }
-func (UnimplementedWalletServer) ListGamificationCurrencyConfig(context.Context, *ListGamificationCurrencyConfigRequest) (*ListGamificationCurrencyConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListGamificationCurrencyConfig not implemented")
+func (UnimplementedWalletServer) GetGamificationConfig(context.Context, *GetGamificationConfigRequest) (*GetGamificationConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGamificationConfig not implemented")
 }
 func (UnimplementedWalletServer) BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BatchGetUserFinancialMetrics not implemented")
@@ -3308,20 +3308,20 @@ func _Wallet_GetWalletConfig_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_ListGamificationCurrencyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListGamificationCurrencyConfigRequest)
+func _Wallet_GetGamificationConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGamificationConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).ListGamificationCurrencyConfig(ctx, in)
+		return srv.(WalletServer).GetGamificationConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_ListGamificationCurrencyConfig_FullMethodName,
+		FullMethod: Wallet_GetGamificationConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).ListGamificationCurrencyConfig(ctx, req.(*ListGamificationCurrencyConfigRequest))
+		return srv.(WalletServer).GetGamificationConfig(ctx, req.(*GetGamificationConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3804,8 +3804,8 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_GetWalletConfig_Handler,
 		},
 		{
-			MethodName: "ListGamificationCurrencyConfig",
-			Handler:    _Wallet_ListGamificationCurrencyConfig_Handler,
+			MethodName: "GetGamificationConfig",
+			Handler:    _Wallet_GetGamificationConfig_Handler,
 		},
 		{
 			MethodName: "BatchGetUserFinancialMetrics",

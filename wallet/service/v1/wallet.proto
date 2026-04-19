@@ -336,13 +336,13 @@ service Wallet {
 		};
 	}
 
-	// ListGamificationCurrencyConfig returns the per-currency gamification config (bet limits,
+	// GetGamificationConfig returns the per-currency gamification config (bet limits,
 	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
 	// Scoped to the caller's operator context (from middleware). Returns only enabled and
 	// non-hidden currencies, matching backoffice behavior.
-	rpc ListGamificationCurrencyConfig(ListGamificationCurrencyConfigRequest) returns (ListGamificationCurrencyConfigResponse) {
+	rpc GetGamificationConfig(GetGamificationConfigRequest) returns (GetGamificationConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/wallet/gamification/config/list"
+			post: "/v1/wallet/gamification/config/get"
 			body: "*"
 		};
 	}
@@ -1511,12 +1511,12 @@ message GetWalletConfigResponse {
 	// Future fields can be added here
 }
 
-message ListGamificationCurrencyConfigRequest {
+message GetGamificationConfigRequest {
 	// Optional filter; empty = return all enabled+visible currencies for the operator
 	repeated string currencies = 1;
 }
 
-message ListGamificationCurrencyConfigResponse {
+message GetGamificationConfigResponse {
 	bool clear_bonus_on_withdrawal = 1;
 	repeated OperatorCurrencyConfig operator_currency_configs = 2;
 	// NOTE: deduction_type / cash_ratio / bonus_ratio intentionally not exposed to players in v1.

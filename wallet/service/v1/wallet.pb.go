@@ -7982,7 +7982,7 @@ func (x *GetWalletConfigResponse) GetClearBonusOnWithdrawal() bool {
 	return false
 }
 
-type ListGamificationCurrencyConfigRequest struct {
+type GetGamificationConfigRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Optional filter; empty = return all enabled+visible currencies for the operator
 	Currencies    []string `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
@@ -7990,20 +7990,20 @@ type ListGamificationCurrencyConfigRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListGamificationCurrencyConfigRequest) Reset() {
-	*x = ListGamificationCurrencyConfigRequest{}
+func (x *GetGamificationConfigRequest) Reset() {
+	*x = GetGamificationConfigRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListGamificationCurrencyConfigRequest) String() string {
+func (x *GetGamificationConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListGamificationCurrencyConfigRequest) ProtoMessage() {}
+func (*GetGamificationConfigRequest) ProtoMessage() {}
 
-func (x *ListGamificationCurrencyConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *GetGamificationConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8015,19 +8015,19 @@ func (x *ListGamificationCurrencyConfigRequest) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListGamificationCurrencyConfigRequest.ProtoReflect.Descriptor instead.
-func (*ListGamificationCurrencyConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetGamificationConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetGamificationConfigRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{95}
 }
 
-func (x *ListGamificationCurrencyConfigRequest) GetCurrencies() []string {
+func (x *GetGamificationConfigRequest) GetCurrencies() []string {
 	if x != nil {
 		return x.Currencies
 	}
 	return nil
 }
 
-type ListGamificationCurrencyConfigResponse struct {
+type GetGamificationConfigResponse struct {
 	state                   protoimpl.MessageState    `protogen:"open.v1"`
 	ClearBonusOnWithdrawal  bool                      `protobuf:"varint,1,opt,name=clear_bonus_on_withdrawal,json=clearBonusOnWithdrawal,proto3" json:"clear_bonus_on_withdrawal,omitempty"`
 	OperatorCurrencyConfigs []*OperatorCurrencyConfig `protobuf:"bytes,2,rep,name=operator_currency_configs,json=operatorCurrencyConfigs,proto3" json:"operator_currency_configs,omitempty"` // NOTE: deduction_type / cash_ratio / bonus_ratio intentionally not exposed to players in v1.
@@ -8035,20 +8035,20 @@ type ListGamificationCurrencyConfigResponse struct {
 	sizeCache               protoimpl.SizeCache
 }
 
-func (x *ListGamificationCurrencyConfigResponse) Reset() {
-	*x = ListGamificationCurrencyConfigResponse{}
+func (x *GetGamificationConfigResponse) Reset() {
+	*x = GetGamificationConfigResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListGamificationCurrencyConfigResponse) String() string {
+func (x *GetGamificationConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListGamificationCurrencyConfigResponse) ProtoMessage() {}
+func (*GetGamificationConfigResponse) ProtoMessage() {}
 
-func (x *ListGamificationCurrencyConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *GetGamificationConfigResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8060,19 +8060,19 @@ func (x *ListGamificationCurrencyConfigResponse) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListGamificationCurrencyConfigResponse.ProtoReflect.Descriptor instead.
-func (*ListGamificationCurrencyConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetGamificationConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetGamificationConfigResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{96}
 }
 
-func (x *ListGamificationCurrencyConfigResponse) GetClearBonusOnWithdrawal() bool {
+func (x *GetGamificationConfigResponse) GetClearBonusOnWithdrawal() bool {
 	if x != nil {
 		return x.ClearBonusOnWithdrawal
 	}
 	return false
 }
 
-func (x *ListGamificationCurrencyConfigResponse) GetOperatorCurrencyConfigs() []*OperatorCurrencyConfig {
+func (x *GetGamificationConfigResponse) GetOperatorCurrencyConfigs() []*OperatorCurrencyConfig {
 	if x != nil {
 		return x.OperatorCurrencyConfigs
 	}
@@ -19831,12 +19831,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1a_clear_bonus_on_withdrawal\"\x18\n" +
 	"\x16GetWalletConfigRequest\"T\n" +
 	"\x17GetWalletConfigResponse\x129\n" +
-	"\x19clear_bonus_on_withdrawal\x18\x01 \x01(\bR\x16clearBonusOnWithdrawal\"G\n" +
-	"%ListGamificationCurrencyConfigRequest\x12\x1e\n" +
+	"\x19clear_bonus_on_withdrawal\x18\x01 \x01(\bR\x16clearBonusOnWithdrawal\">\n" +
+	"\x1cGetGamificationConfigRequest\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\"\xce\x01\n" +
-	"&ListGamificationCurrencyConfigResponse\x129\n" +
+	"currencies\"\xc5\x01\n" +
+	"\x1dGetGamificationConfigResponse\x129\n" +
 	"\x19clear_bonus_on_withdrawal\x18\x01 \x01(\bR\x16clearBonusOnWithdrawal\x12i\n" +
 	"\x19operator_currency_configs\x18\x02 \x03(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x17operatorCurrencyConfigs\"\xf8\x03\n" +
 	"\x16OperatorCurrencyConfig\x12\x1a\n" +
@@ -20770,7 +20770,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1dWITHDRAW_SCENARIO_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18WITHDRAW_SCENARIO_PLAYER\x10\x01\x12\x1f\n" +
 	"\x1bWITHDRAW_SCENARIO_AFFILIATE\x10\x02\x12\x1e\n" +
-	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xd2i\n" +
+	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xb6i\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -20859,8 +20859,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x11CreditFreespinWin\x12/.api.wallet.service.v1.CreditFreespinWinRequest\x1a0.api.wallet.service.v1.CreditFreespinWinResponse\"\x00\x12u\n" +
 	"\x10CreditFreeBetWin\x12..api.wallet.service.v1.CreditFreeBetWinRequest\x1a/.api.wallet.service.v1.CreditFreeBetWinResponse\"\x00\x12\xa2\x01\n" +
 	"\x1fGetOperatorUserFinancialSummary\x12=.api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest\x1a>.api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse\"\x00\x12\x92\x01\n" +
-	"\x0fGetWalletConfig\x12-.api.wallet.service.v1.GetWalletConfigRequest\x1a..api.wallet.service.v1.GetWalletConfigResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/wallet/config/get\x12\xcd\x01\n" +
-	"\x1eListGamificationCurrencyConfig\x12<.api.wallet.service.v1.ListGamificationCurrencyConfigRequest\x1a=.api.wallet.service.v1.ListGamificationCurrencyConfigResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/wallet/gamification/config/list\x12\x99\x01\n" +
+	"\x0fGetWalletConfig\x12-.api.wallet.service.v1.GetWalletConfigRequest\x1a..api.wallet.service.v1.GetWalletConfigResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/wallet/config/get\x12\xb1\x01\n" +
+	"\x15GetGamificationConfig\x123.api.wallet.service.v1.GetGamificationConfigRequest\x1a4.api.wallet.service.v1.GetGamificationConfigResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/wallet/gamification/config/get\x12\x99\x01\n" +
 	"\x1cBatchGetUserFinancialMetrics\x12:.api.wallet.service.v1.BatchGetUserFinancialMetricsRequest\x1a;.api.wallet.service.v1.BatchGetUserFinancialMetricsResponse\"\x00\x12\xa2\x01\n" +
 	"\x1fManualAdjustCreditTurnoverField\x12=.api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest\x1a>.api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse\"\x00\x12~\n" +
 	"\x13ListUserFreeRewards\x121.api.wallet.service.v1.ListUserFreeRewardsRequest\x1a2.api.wallet.service.v1.ListUserFreeRewardsResponse\"\x00\x12\x84\x01\n" +
@@ -20981,8 +20981,8 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*WalletConfig)(nil),                                                 // 93: api.wallet.service.v1.WalletConfig
 	(*GetWalletConfigRequest)(nil),                                       // 94: api.wallet.service.v1.GetWalletConfigRequest
 	(*GetWalletConfigResponse)(nil),                                      // 95: api.wallet.service.v1.GetWalletConfigResponse
-	(*ListGamificationCurrencyConfigRequest)(nil),                        // 96: api.wallet.service.v1.ListGamificationCurrencyConfigRequest
-	(*ListGamificationCurrencyConfigResponse)(nil),                       // 97: api.wallet.service.v1.ListGamificationCurrencyConfigResponse
+	(*GetGamificationConfigRequest)(nil),                                 // 96: api.wallet.service.v1.GetGamificationConfigRequest
+	(*GetGamificationConfigResponse)(nil),                                // 97: api.wallet.service.v1.GetGamificationConfigResponse
 	(*OperatorCurrencyConfig)(nil),                                       // 98: api.wallet.service.v1.OperatorCurrencyConfig
 	(*GetGamificationCurrencyConfigResponse)(nil),                        // 99: api.wallet.service.v1.GetGamificationCurrencyConfigResponse
 	(*UpdateOperatorCurrencyConfigRequest)(nil),                          // 100: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest
@@ -21236,7 +21236,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	82,  // 100: api.wallet.service.v1.GetUserDepositRewardSequenceResponse.current_reward_sequence:type_name -> api.wallet.service.v1.RewardSequence
 	219, // 101: api.wallet.service.v1.GetGamificationCurrencyConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	219, // 102: api.wallet.service.v1.GetGamificationCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	98,  // 103: api.wallet.service.v1.ListGamificationCurrencyConfigResponse.operator_currency_configs:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
+	98,  // 103: api.wallet.service.v1.GetGamificationConfigResponse.operator_currency_configs:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
 	93,  // 104: api.wallet.service.v1.GetGamificationCurrencyConfigResponse.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
 	98,  // 105: api.wallet.service.v1.GetGamificationCurrencyConfigResponse.operator_currency_configs:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
 	219, // 106: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
@@ -21463,7 +21463,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	150, // 327: api.wallet.service.v1.Wallet.CreditFreeBetWin:input_type -> api.wallet.service.v1.CreditFreeBetWinRequest
 	152, // 328: api.wallet.service.v1.Wallet.GetOperatorUserFinancialSummary:input_type -> api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest
 	94,  // 329: api.wallet.service.v1.Wallet.GetWalletConfig:input_type -> api.wallet.service.v1.GetWalletConfigRequest
-	96,  // 330: api.wallet.service.v1.Wallet.ListGamificationCurrencyConfig:input_type -> api.wallet.service.v1.ListGamificationCurrencyConfigRequest
+	96,  // 330: api.wallet.service.v1.Wallet.GetGamificationConfig:input_type -> api.wallet.service.v1.GetGamificationConfigRequest
 	155, // 331: api.wallet.service.v1.Wallet.BatchGetUserFinancialMetrics:input_type -> api.wallet.service.v1.BatchGetUserFinancialMetricsRequest
 	157, // 332: api.wallet.service.v1.Wallet.ManualAdjustCreditTurnoverField:input_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest
 	159, // 333: api.wallet.service.v1.Wallet.ListUserFreeRewards:input_type -> api.wallet.service.v1.ListUserFreeRewardsRequest
@@ -21557,7 +21557,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	151, // 421: api.wallet.service.v1.Wallet.CreditFreeBetWin:output_type -> api.wallet.service.v1.CreditFreeBetWinResponse
 	154, // 422: api.wallet.service.v1.Wallet.GetOperatorUserFinancialSummary:output_type -> api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse
 	95,  // 423: api.wallet.service.v1.Wallet.GetWalletConfig:output_type -> api.wallet.service.v1.GetWalletConfigResponse
-	97,  // 424: api.wallet.service.v1.Wallet.ListGamificationCurrencyConfig:output_type -> api.wallet.service.v1.ListGamificationCurrencyConfigResponse
+	97,  // 424: api.wallet.service.v1.Wallet.GetGamificationConfig:output_type -> api.wallet.service.v1.GetGamificationConfigResponse
 	156, // 425: api.wallet.service.v1.Wallet.BatchGetUserFinancialMetrics:output_type -> api.wallet.service.v1.BatchGetUserFinancialMetricsResponse
 	158, // 426: api.wallet.service.v1.Wallet.ManualAdjustCreditTurnoverField:output_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
 	160, // 427: api.wallet.service.v1.Wallet.ListUserFreeRewards:output_type -> api.wallet.service.v1.ListUserFreeRewardsResponse

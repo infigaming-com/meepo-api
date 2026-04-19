@@ -13844,23 +13844,22 @@ var _ interface {
 	ErrorName() string
 } = GetWalletConfigResponseValidationError{}
 
-// Validate checks the field values on ListGamificationCurrencyConfigRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *ListGamificationCurrencyConfigRequest) Validate() error {
+// Validate checks the field values on GetGamificationConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetGamificationConfigRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListGamificationCurrencyConfigRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListGamificationCurrencyConfigRequestMultiError, or nil if none found.
-func (m *ListGamificationCurrencyConfigRequest) ValidateAll() error {
+// ValidateAll checks the field values on GetGamificationConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetGamificationConfigRequestMultiError, or nil if none found.
+func (m *GetGamificationConfigRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListGamificationCurrencyConfigRequest) validate(all bool) error {
+func (m *GetGamificationConfigRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -13868,20 +13867,19 @@ func (m *ListGamificationCurrencyConfigRequest) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return ListGamificationCurrencyConfigRequestMultiError(errors)
+		return GetGamificationConfigRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListGamificationCurrencyConfigRequestMultiError is an error wrapping
-// multiple validation errors returned by
-// ListGamificationCurrencyConfigRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ListGamificationCurrencyConfigRequestMultiError []error
+// GetGamificationConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by GetGamificationConfigRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetGamificationConfigRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListGamificationCurrencyConfigRequestMultiError) Error() string {
+func (m GetGamificationConfigRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -13890,12 +13888,12 @@ func (m ListGamificationCurrencyConfigRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListGamificationCurrencyConfigRequestMultiError) AllErrors() []error { return m }
+func (m GetGamificationConfigRequestMultiError) AllErrors() []error { return m }
 
-// ListGamificationCurrencyConfigRequestValidationError is the validation error
-// returned by ListGamificationCurrencyConfigRequest.Validate if the
-// designated constraints aren't met.
-type ListGamificationCurrencyConfigRequestValidationError struct {
+// GetGamificationConfigRequestValidationError is the validation error returned
+// by GetGamificationConfigRequest.Validate if the designated constraints
+// aren't met.
+type GetGamificationConfigRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -13903,24 +13901,24 @@ type ListGamificationCurrencyConfigRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListGamificationCurrencyConfigRequestValidationError) Field() string { return e.field }
+func (e GetGamificationConfigRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListGamificationCurrencyConfigRequestValidationError) Reason() string { return e.reason }
+func (e GetGamificationConfigRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListGamificationCurrencyConfigRequestValidationError) Cause() error { return e.cause }
+func (e GetGamificationConfigRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListGamificationCurrencyConfigRequestValidationError) Key() bool { return e.key }
+func (e GetGamificationConfigRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListGamificationCurrencyConfigRequestValidationError) ErrorName() string {
-	return "ListGamificationCurrencyConfigRequestValidationError"
+func (e GetGamificationConfigRequestValidationError) ErrorName() string {
+	return "GetGamificationConfigRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListGamificationCurrencyConfigRequestValidationError) Error() string {
+func (e GetGamificationConfigRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -13932,14 +13930,14 @@ func (e ListGamificationCurrencyConfigRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListGamificationCurrencyConfigRequest.%s: %s%s",
+		"invalid %sGetGamificationConfigRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListGamificationCurrencyConfigRequestValidationError{}
+var _ error = GetGamificationConfigRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -13947,26 +13945,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListGamificationCurrencyConfigRequestValidationError{}
+} = GetGamificationConfigRequestValidationError{}
 
-// Validate checks the field values on ListGamificationCurrencyConfigResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *ListGamificationCurrencyConfigResponse) Validate() error {
+// Validate checks the field values on GetGamificationConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetGamificationConfigResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// ListGamificationCurrencyConfigResponse with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// ListGamificationCurrencyConfigResponseMultiError, or nil if none found.
-func (m *ListGamificationCurrencyConfigResponse) ValidateAll() error {
+// ValidateAll checks the field values on GetGamificationConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetGamificationConfigResponseMultiError, or nil if none found.
+func (m *GetGamificationConfigResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListGamificationCurrencyConfigResponse) validate(all bool) error {
+func (m *GetGamificationConfigResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -13982,7 +13978,7 @@ func (m *ListGamificationCurrencyConfigResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListGamificationCurrencyConfigResponseValidationError{
+					errors = append(errors, GetGamificationConfigResponseValidationError{
 						field:  fmt.Sprintf("OperatorCurrencyConfigs[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -13990,7 +13986,7 @@ func (m *ListGamificationCurrencyConfigResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListGamificationCurrencyConfigResponseValidationError{
+					errors = append(errors, GetGamificationConfigResponseValidationError{
 						field:  fmt.Sprintf("OperatorCurrencyConfigs[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -13999,7 +13995,7 @@ func (m *ListGamificationCurrencyConfigResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListGamificationCurrencyConfigResponseValidationError{
+				return GetGamificationConfigResponseValidationError{
 					field:  fmt.Sprintf("OperatorCurrencyConfigs[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -14010,20 +14006,19 @@ func (m *ListGamificationCurrencyConfigResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListGamificationCurrencyConfigResponseMultiError(errors)
+		return GetGamificationConfigResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListGamificationCurrencyConfigResponseMultiError is an error wrapping
-// multiple validation errors returned by
-// ListGamificationCurrencyConfigResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ListGamificationCurrencyConfigResponseMultiError []error
+// GetGamificationConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by GetGamificationConfigResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetGamificationConfigResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListGamificationCurrencyConfigResponseMultiError) Error() string {
+func (m GetGamificationConfigResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -14032,12 +14027,12 @@ func (m ListGamificationCurrencyConfigResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListGamificationCurrencyConfigResponseMultiError) AllErrors() []error { return m }
+func (m GetGamificationConfigResponseMultiError) AllErrors() []error { return m }
 
-// ListGamificationCurrencyConfigResponseValidationError is the validation
-// error returned by ListGamificationCurrencyConfigResponse.Validate if the
-// designated constraints aren't met.
-type ListGamificationCurrencyConfigResponseValidationError struct {
+// GetGamificationConfigResponseValidationError is the validation error
+// returned by GetGamificationConfigResponse.Validate if the designated
+// constraints aren't met.
+type GetGamificationConfigResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -14045,24 +14040,24 @@ type ListGamificationCurrencyConfigResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListGamificationCurrencyConfigResponseValidationError) Field() string { return e.field }
+func (e GetGamificationConfigResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListGamificationCurrencyConfigResponseValidationError) Reason() string { return e.reason }
+func (e GetGamificationConfigResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListGamificationCurrencyConfigResponseValidationError) Cause() error { return e.cause }
+func (e GetGamificationConfigResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListGamificationCurrencyConfigResponseValidationError) Key() bool { return e.key }
+func (e GetGamificationConfigResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListGamificationCurrencyConfigResponseValidationError) ErrorName() string {
-	return "ListGamificationCurrencyConfigResponseValidationError"
+func (e GetGamificationConfigResponseValidationError) ErrorName() string {
+	return "GetGamificationConfigResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListGamificationCurrencyConfigResponseValidationError) Error() string {
+func (e GetGamificationConfigResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -14074,14 +14069,14 @@ func (e ListGamificationCurrencyConfigResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListGamificationCurrencyConfigResponse.%s: %s%s",
+		"invalid %sGetGamificationConfigResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListGamificationCurrencyConfigResponseValidationError{}
+var _ error = GetGamificationConfigResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -14089,7 +14084,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListGamificationCurrencyConfigResponseValidationError{}
+} = GetGamificationConfigResponseValidationError{}
 
 // Validate checks the field values on OperatorCurrencyConfig with the rules
 // defined in the proto definition for this message. If any rules are
