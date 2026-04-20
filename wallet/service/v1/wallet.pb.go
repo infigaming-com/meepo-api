@@ -8033,8 +8033,9 @@ type GetGamificationConfigResponse struct {
 	OperatorCurrencyConfigs []*OperatorCurrencyConfig `protobuf:"bytes,2,rep,name=operator_currency_configs,json=operatorCurrencyConfigs,proto3" json:"operator_currency_configs,omitempty"`
 	// "cash_first", "bonus_first", "mixed"
 	DeductionType string `protobuf:"bytes,3,opt,name=deduction_type,json=deductionType,proto3" json:"deduction_type,omitempty"`
-	// cash_ratio / bonus_ratio are only meaningful when deduction_type == "mixed". Decimal strings.
-	CashRatio     *string `protobuf:"bytes,4,opt,name=cash_ratio,json=cashRatio,proto3,oneof" json:"cash_ratio,omitempty"`
+	// Decimal string. Only meaningful when deduction_type == "mixed".
+	CashRatio *string `protobuf:"bytes,4,opt,name=cash_ratio,json=cashRatio,proto3,oneof" json:"cash_ratio,omitempty"`
+	// Decimal string. Only meaningful when deduction_type == "mixed".
 	BonusRatio    *string `protobuf:"bytes,5,opt,name=bonus_ratio,json=bonusRatio,proto3,oneof" json:"bonus_ratio,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

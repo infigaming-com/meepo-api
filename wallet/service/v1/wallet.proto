@@ -1521,8 +1521,9 @@ message GetGamificationConfigResponse {
 	repeated OperatorCurrencyConfig operator_currency_configs = 2;
 	// "cash_first", "bonus_first", "mixed"
 	string deduction_type = 3;
-	// cash_ratio / bonus_ratio are only meaningful when deduction_type == "mixed". Decimal strings.
+	// Decimal string. Only meaningful when deduction_type == "mixed".
 	optional string cash_ratio = 4;
+	// Decimal string. Only meaningful when deduction_type == "mixed".
 	optional string bonus_ratio = 5;
 }
 
