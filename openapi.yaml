@@ -34421,7 +34421,7 @@ components:
                     description: '"cash_first", "bonus_first", "mixed"'
                 cashRatio:
                     type: string
-                    description: Only meaningful when deduction_type == "mixed". Decimal string.
+                    description: cash_ratio / bonus_ratio are only meaningful when deduction_type == "mixed". Decimal strings.
                 bonusRatio:
                     type: string
         api.wallet.service.v1.GetGamificationCurrencyConfigResponse:
