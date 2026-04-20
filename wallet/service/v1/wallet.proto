@@ -1524,7 +1524,12 @@ message GetGamificationConfigRequest {
 message GetGamificationConfigResponse {
 	bool clear_bonus_on_withdrawal = 1;
 	repeated OperatorCurrencyConfig operator_currency_configs = 2;
-	// NOTE: deduction_type / cash_ratio / bonus_ratio intentionally not exposed to players in v1.
+	// "cash_first", "bonus_first", "mixed"
+	string deduction_order_type = 3;
+	// Decimal string. Only meaningful when deduction_order_type == "mixed".
+	optional string cash_ratio = 4;
+	// Decimal string. Only meaningful when deduction_order_type == "mixed".
+	optional string bonus_ratio = 5;
 }
 
 message OperatorCurrencyConfig {

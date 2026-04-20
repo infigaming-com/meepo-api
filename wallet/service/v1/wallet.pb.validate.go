@@ -14005,6 +14005,16 @@ func (m *GetGamificationConfigResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for DeductionType
+
+	if m.CashRatio != nil {
+		// no validation rules for CashRatio
+	}
+
+	if m.BonusRatio != nil {
+		// no validation rules for BonusRatio
+	}
+
 	if len(errors) > 0 {
 		return GetGamificationConfigResponseMultiError(errors)
 	}
