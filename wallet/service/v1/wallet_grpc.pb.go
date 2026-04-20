@@ -283,7 +283,12 @@ type WalletClient interface {
 	CreditFreeBetWin(ctx context.Context, in *CreditFreeBetWinRequest, opts ...grpc.CallOption) (*CreditFreeBetWinResponse, error)
 	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
 	GetOperatorUserFinancialSummary(ctx context.Context, in *GetOperatorUserFinancialSummaryRequest, opts ...grpc.CallOption) (*GetOperatorUserFinancialSummaryResponse, error)
+	// Deprecated: Do not use.
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	//
+	// Deprecated: use GetGamificationConfig instead — its response is a strict superset
+	// (includes clear_bonus_on_withdrawal) and is backed by the operator-level bundle cache,
+	// so switching also fixes a server-side cache miss on every call to this endpoint.
 	GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...grpc.CallOption) (*GetWalletConfigResponse, error)
 	// GetGamificationConfig returns the per-currency gamification config (bet limits,
 	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
@@ -1166,6 +1171,7 @@ func (c *walletClient) GetOperatorUserFinancialSummary(ctx context.Context, in *
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *walletClient) GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...grpc.CallOption) (*GetWalletConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetWalletConfigResponse)
@@ -1424,7 +1430,12 @@ type WalletServer interface {
 	CreditFreeBetWin(context.Context, *CreditFreeBetWinRequest) (*CreditFreeBetWinResponse, error)
 	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
 	GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error)
+	// Deprecated: Do not use.
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	//
+	// Deprecated: use GetGamificationConfig instead — its response is a strict superset
+	// (includes clear_bonus_on_withdrawal) and is backed by the operator-level bundle cache,
+	// so switching also fixes a server-side cache miss on every call to this endpoint.
 	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
 	// GetGamificationConfig returns the per-currency gamification config (bet limits,
 	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.

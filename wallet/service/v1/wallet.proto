@@ -329,7 +329,12 @@ service Wallet {
 	rpc GetOperatorUserFinancialSummary(GetOperatorUserFinancialSummaryRequest) returns (GetOperatorUserFinancialSummaryResponse) {}
 
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	//
+	// Deprecated: use GetGamificationConfig instead — its response is a strict superset
+	// (includes clear_bonus_on_withdrawal) and is backed by the operator-level bundle cache,
+	// so switching also fixes a server-side cache miss on every call to this endpoint.
 	rpc GetWalletConfig(GetWalletConfigRequest) returns (GetWalletConfigResponse) {
+		option deprecated = true;
 		option (google.api.http) = {
 			post: "/v1/wallet/config/get"
 			body: "*"

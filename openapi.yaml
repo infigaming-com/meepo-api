@@ -11282,7 +11282,12 @@ paths:
         post:
             tags:
                 - Wallet
-            description: GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+            description: |-
+                GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+
+                 Deprecated: use GetGamificationConfig instead — its response is a strict superset
+                 (includes clear_bonus_on_withdrawal) and is backed by the operator-level bundle cache,
+                 so switching also fixes a server-side cache miss on every call to this endpoint.
             operationId: Wallet_GetWalletConfig
             requestBody:
                 content:
