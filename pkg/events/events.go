@@ -479,3 +479,28 @@ type SessionActivityEvent struct {
 	PrevClientSource   string   `json:"prevClientSource,omitempty"`
 	Timestamp          int64    `json:"timestamp"`
 }
+
+// BetErrorEvent is emitted by game-service when wallet rejects a bet with a
+// user-actionable reason (insufficient balance, per-bet limit exceeded) so that
+// push-service can forward it to the user's Centrifugo channel for a toast.
+//
+// Reason is the Kratos wallet error reason string, matching one of:
+// INSUFFICIENT_BALANCE, BONUS_BET_LIMIT_EXCEEDED, CASH_BET_LIMIT_EXCEEDED.
+type BetErrorEvent struct {
+	UserID             int64 `json:"user_id"`
+	OperatorID         int64 `json:"operator_id"`
+	CompanyOperatorID  int64 `json:"company_operator_id,omitempty"`
+	RetailerOperatorID int64 `json:"retailer_operator_id,omitempty"`
+	SystemOperatorID   int64 `json:"system_operator_id,omitempty"`
+
+	Reason    string `json:"reason"`
+	GameID    string `json:"game_id"`
+	Currency  string `json:"currency"`
+	BetAmount string `json:"bet_amount"`
+
+	Available   string `json:"available,omitempty"`
+	Required    string `json:"required,omitempty"`
+	LimitAmount string `json:"limit,omitempty"`
+
+	OccurredAt int64 `json:"occurred_at"`
+}
