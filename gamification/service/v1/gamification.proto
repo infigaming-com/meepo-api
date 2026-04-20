@@ -1,0 +1,370 @@
+syntax = "proto3";
+
+package api.gamification.service.v1;
+
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/gamification/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.gamification.service.v1";
+
+service GamificationService {
+  // === Claim Rules ===
+  rpc CreateClaimRule(CreateClaimRuleRequest) returns (CreateClaimRuleResponse);
+  rpc UpdateClaimRule(UpdateClaimRuleRequest) returns (UpdateClaimRuleResponse);
+  rpc DeleteClaimRule(DeleteClaimRuleRequest) returns (DeleteClaimRuleResponse);
+  rpc ListClaimRules(ListClaimRulesRequest) returns (ListClaimRulesResponse);
+  rpc GetClaimRule(GetClaimRuleRequest) returns (GetClaimRuleResponse);
+  rpc UpdateClaimRulePriority(UpdateClaimRulePriorityRequest) returns (UpdateClaimRulePriorityResponse);
+  rpc UpdateClaimRuleStatus(UpdateClaimRuleStatusRequest) returns (UpdateClaimRuleStatusResponse);
+
+  // === Game Restriction Rules ===
+  rpc CreateGameRestrictionRule(CreateGameRestrictionRuleRequest) returns (CreateGameRestrictionRuleResponse);
+  rpc UpdateGameRestrictionRule(UpdateGameRestrictionRuleRequest) returns (UpdateGameRestrictionRuleResponse);
+  rpc DeleteGameRestrictionRule(DeleteGameRestrictionRuleRequest) returns (DeleteGameRestrictionRuleResponse);
+  rpc ListGameRestrictionRules(ListGameRestrictionRulesRequest) returns (ListGameRestrictionRulesResponse);
+  rpc GetGameRestrictionRule(GetGameRestrictionRuleRequest) returns (GetGameRestrictionRuleResponse);
+  rpc UpdateGameRestrictionRulePriority(UpdateGameRestrictionRulePriorityRequest) returns (UpdateGameRestrictionRulePriorityResponse);
+  rpc UpdateGameRestrictionRuleStatus(UpdateGameRestrictionRuleStatusRequest) returns (UpdateGameRestrictionRuleStatusResponse);
+
+  // === Bonus Buy Config ===
+  rpc GetBonusBuyConfig(GetBonusBuyConfigRequest) returns (GetBonusBuyConfigResponse);
+  rpc UpdateBonusBuyConfig(UpdateBonusBuyConfigRequest) returns (UpdateBonusBuyConfigResponse);
+
+  // === Rule Hierarchy Config ===
+  rpc GetRuleHierarchyConfig(GetRuleHierarchyConfigRequest) returns (GetRuleHierarchyConfigResponse);
+  rpc UpdateRuleHierarchyConfig(UpdateRuleHierarchyConfigRequest) returns (UpdateRuleHierarchyConfigResponse);
+
+  // === Runtime Checks ===
+  // Default when no rule matches: REJECT (CLAIM_RULE_NOT_CONFIGURED). Callers must have an active rule for this user's segment.
+  rpc CheckClaimEligibility(CheckClaimEligibilityRequest) returns (CheckClaimEligibilityResponse);
+  // Default when no rule matches: ALLOW. No configured rule means no restriction — user with bonus can play any game.
+  rpc CheckGameRestriction(CheckGameRestrictionRequest) returns (CheckGameRestrictionResponse);
+
+  // === Claim Record (for IP/Device dedup) ===
+  rpc RecordClaim(RecordClaimRequest) returns (RecordClaimResponse);
+}
+
+enum TargetObject {
+  TARGET_OBJECT_ALL_PLAYERS = 0;
+  TARGET_OBJECT_CRM_SEGMENT = 1;
+}
+
+enum RuleStatus {
+  RULE_STATUS_ACTIVE = 0;
+  RULE_STATUS_DISABLED = 1;
+}
+
+// ClaimRule controls who can claim a bonus.
+message ClaimRule {
+  int64 id = 1;
+  string name = 2;
+  int32 priority = 3;
+  TargetObject target_object = 4;
+  int64 segment_id = 5;
+  string segment_name = 6;
+
+  // Account restrictions
+  bool require_kyc = 10;
+  bool require_phone = 11;
+  bool require_email = 12;
+
+  // Exclusion logic
+  bool same_type_exclusion = 20;
+
+  // Risk detection - IP
+  bool ip_dedup_enabled = 30;
+  int32 same_ip_claim_limit = 31;
+  int32 same_reward_same_ip_limit = 32;
+
+  // Risk detection - Device
+  bool device_dedup_enabled = 40;
+  int32 same_device_claim_limit = 41;
+  int32 same_reward_same_device_limit = 42;
+
+  // Sliding time window in hours for IP/Device dedup counts (default 0 = use 24h fallback).
+  int32 ip_device_window_hours = 43;
+
+  RuleStatus status = 50;
+
+  int64 operator_id = 60;
+  int64 company_operator_id = 61;
+  int64 retailer_operator_id = 62;
+  int64 system_operator_id = 63;
+
+  // "self" | "system" | "retailer" | "company" | "operator"
+  string inherited_from_level = 64;
+
+  int64 created_at = 70;
+  int64 updated_at = 71;
+}
+
+// GameRestrictionRule controls which games a bonus holder can play.
+message GameRestrictionRule {
+  int64 id = 1;
+  string name = 2;
+  int32 priority = 3;
+  TargetObject target_object = 4;
+  int64 segment_id = 5;
+  string segment_name = 6;
+
+  repeated string provider_ids = 10;
+  repeated int64 game_tag_ids = 11;
+  bool all_games = 12;
+
+  RuleStatus status = 50;
+
+  int64 operator_id = 60;
+  int64 company_operator_id = 61;
+  int64 retailer_operator_id = 62;
+  int64 system_operator_id = 63;
+
+  // "self" | "system" | "retailer" | "company" | "operator"
+  string inherited_from_level = 64;
+
+  int64 created_at = 70;
+  int64 updated_at = 71;
+}
+
+message BonusBuyConfig {
+  int64 id = 1;
+  bool enabled = 2;
+  int64 operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 retailer_operator_id = 5;
+  int64 system_operator_id = 6;
+  int64 created_at = 7;
+  int64 updated_at = 8;
+}
+
+// === Claim Rule Requests/Responses ===
+
+message CreateClaimRuleRequest {
+  api.common.OperatorContext operator_context = 1;
+  ClaimRule rule = 2;
+}
+
+message CreateClaimRuleResponse {
+  ClaimRule rule = 1;
+}
+
+message UpdateClaimRuleRequest {
+  api.common.OperatorContext operator_context = 1;
+  ClaimRule rule = 2;
+}
+
+message UpdateClaimRuleResponse {
+  ClaimRule rule = 1;
+}
+
+message DeleteClaimRuleRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message DeleteClaimRuleResponse {
+}
+
+message ListClaimRulesRequest {
+  api.common.OperatorContext operator_context = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message ListClaimRulesResponse {
+  repeated ClaimRule rules = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetClaimRuleRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message GetClaimRuleResponse {
+  ClaimRule rule = 1;
+}
+
+message UpdateClaimRulePriorityRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 rule_id = 2;
+  int32 priority = 3;
+}
+
+message UpdateClaimRulePriorityResponse {
+}
+
+message UpdateClaimRuleStatusRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 rule_id = 2;
+  RuleStatus status = 3;
+}
+
+message UpdateClaimRuleStatusResponse {
+}
+
+// === Game Restriction Rule Requests/Responses ===
+
+message CreateGameRestrictionRuleRequest {
+  api.common.OperatorContext operator_context = 1;
+  GameRestrictionRule rule = 2;
+}
+
+message CreateGameRestrictionRuleResponse {
+  GameRestrictionRule rule = 1;
+}
+
+message UpdateGameRestrictionRuleRequest {
+  api.common.OperatorContext operator_context = 1;
+  GameRestrictionRule rule = 2;
+}
+
+message UpdateGameRestrictionRuleResponse {
+  GameRestrictionRule rule = 1;
+}
+
+message DeleteGameRestrictionRuleRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message DeleteGameRestrictionRuleResponse {
+}
+
+message ListGameRestrictionRulesRequest {
+  api.common.OperatorContext operator_context = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message ListGameRestrictionRulesResponse {
+  repeated GameRestrictionRule rules = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetGameRestrictionRuleRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message GetGameRestrictionRuleResponse {
+  GameRestrictionRule rule = 1;
+}
+
+message UpdateGameRestrictionRulePriorityRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 rule_id = 2;
+  int32 priority = 3;
+}
+
+message UpdateGameRestrictionRulePriorityResponse {
+}
+
+message UpdateGameRestrictionRuleStatusRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 rule_id = 2;
+  RuleStatus status = 3;
+}
+
+message UpdateGameRestrictionRuleStatusResponse {
+}
+
+// === Bonus Buy Config Requests/Responses ===
+
+message GetBonusBuyConfigRequest {
+  api.common.OperatorContext operator_context = 1;
+}
+
+message GetBonusBuyConfigResponse {
+  BonusBuyConfig config = 1;
+}
+
+message UpdateBonusBuyConfigRequest {
+  api.common.OperatorContext operator_context = 1;
+  bool enabled = 2;
+}
+
+message UpdateBonusBuyConfigResponse {
+  BonusBuyConfig config = 1;
+}
+
+// === Rule Hierarchy Config Requests/Responses ===
+
+message GetRuleHierarchyConfigRequest {
+  // "claim_rule" | "game_restriction_rule"
+  string rule_type = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message GetRuleHierarchyConfigResponse {
+  bool follow_parent = 1;
+  // "system" | "retailer" | "company" | "operator"
+  string level = 2;
+}
+
+message UpdateRuleHierarchyConfigRequest {
+  // "claim_rule" | "game_restriction_rule"
+  string rule_type = 1;
+  bool follow_parent = 2;
+  api.common.OperatorContext operator_context = 3;
+}
+
+message UpdateRuleHierarchyConfigResponse {
+}
+
+// === Runtime Check Requests/Responses ===
+
+message CheckClaimEligibilityRequest {
+  int64 user_id = 1;
+  // "deposit_reward" | "promo_code" | "vip_reward" | "app_download"
+  string reward_type = 2;
+  string reward_id = 3;
+  string ip_address = 4;
+  string device_id = 5;
+  api.common.OperatorContext operator_context = 6;
+}
+
+message CheckClaimEligibilityResponse {
+  bool eligible = 1;
+  string reject_reason = 2;
+  int64 matched_rule_id = 3;
+}
+
+message CheckGameRestrictionRequest {
+  int64 user_id = 1;
+  string game_id = 2;
+  string provider_id = 3;
+  // Whether the user currently has an active bonus (operatorBonus > 0 or providerBonus > 0).
+  // Determined by game-service before calling; false means no restriction applies.
+  bool has_active_bonus = 4;
+  // Whether the action is a bonus buy (entering a game with BonusBuy=true).
+  bool is_bonus_buy_action = 5;
+  api.common.OperatorContext operator_context = 6;
+}
+
+message CheckGameRestrictionResponse {
+  bool allowed = 1;
+  string reject_reason = 2;
+  int64 matched_rule_id = 3;
+}
+
+// === Claim Record ===
+
+message RecordClaimRequest {
+  int64 user_id = 1;
+  string ip_address = 2;
+  string device_id = 3;
+  string reward_type = 4;
+  string reward_id = 5;
+  int64 claim_rule_id = 6;
+  api.common.OperatorContext operator_context = 7;
+  // Unique transaction ID from wallet-service (snowflake). Used as the dedup key for idempotent inserts.
+  string claim_transaction_id = 8;
+}
+
+message RecordClaimResponse {
+}
