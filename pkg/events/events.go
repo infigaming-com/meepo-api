@@ -487,11 +487,9 @@ type SessionActivityEvent struct {
 // Reason is the Kratos wallet error reason string, matching one of:
 // INSUFFICIENT_BALANCE, BONUS_BET_LIMIT_EXCEEDED, CASH_BET_LIMIT_EXCEEDED.
 //
-// Metadata carries wallet's structured error details (see wallet_bet_deduction_helper.go
-// buildBetLimitMetadata). For bet-limit errors wallet attaches a 15-key map containing
-// the per-bet caps, the bet amount, and available cash/bonus — each expressed in both
-// settlement and caller-side currency. The frontend should prefer these fields over the
-// legacy flat fields (Available / Required / LimitAmount) when present.
+// Monetary fields (BetAmount, Available, Required, LimitAmount) are in the
+// game/caller-side currency (see Currency field), i.e. the unit the player
+// sees in-game, NOT the wallet settlement currency.
 type BetErrorEvent struct {
 	UserID             int64 `json:"user_id"`
 	OperatorID         int64 `json:"operator_id"`
@@ -504,20 +502,16 @@ type BetErrorEvent struct {
 	Currency  string `json:"currency"`
 	BetAmount string `json:"bet_amount"`
 
-	// Legacy flat fields — kept for backwards compatibility with existing
-	// frontend consumers. New consumers should read from Metadata instead.
-	Available   string `json:"available,omitempty"`
-	Required    string `json:"required,omitempty"`
+	// Available: usable balance (cash+bonus) at time of the failed bet.
+	// Present for INSUFFICIENT_BALANCE and for per-bet-limit errors.
+	Available string `json:"available,omitempty"`
+	// Required: bet amount that failed the check (same as BetAmount, duplicated
+	// for UI convenience).
+	Required string `json:"required,omitempty"`
+	// LimitAmount: per-bet cap that was exceeded, matching the Reason:
+	// BONUS_BET_LIMIT_EXCEEDED -> bonus cap; CASH_BET_LIMIT_EXCEEDED -> cash cap.
+	// Empty for INSUFFICIENT_BALANCE.
 	LimitAmount string `json:"limit,omitempty"`
-
-	// Metadata mirrors the Kratos error Metadata attached by wallet for
-	// bet-limit errors. Keys include: settlement_currency, currency,
-	// exchange_rate, bonus_enabled, deduction_order_type,
-	// max_{cash,bonus}_bet_limit_{settlement_currency,currency},
-	// bet_amount_{settlement_currency,currency},
-	// available_{cash,bonus}_{settlement_currency,currency}.
-	// Empty for INSUFFICIENT_BALANCE (wallet does not attach metadata there).
-	Metadata map[string]string `json:"metadata,omitempty"`
 
 	OccurredAt int64 `json:"occurred_at"`
 }
