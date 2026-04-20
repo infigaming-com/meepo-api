@@ -486,6 +486,13 @@ type SessionActivityEvent struct {
 //
 // Reason is the Kratos wallet error reason string, matching one of:
 // INSUFFICIENT_BALANCE, BONUS_BET_LIMIT_EXCEEDED, CASH_BET_LIMIT_EXCEEDED.
+//
+// Metadata is the Kratos error Metadata map attached by wallet, forwarded
+// verbatim for the frontend to format as it sees fit. For bet-limit errors
+// wallet attaches a structured set of keys (see wallet's
+// buildBetLimitMetadata) with per-bet caps, bet amount, and available
+// cash/bonus — each expressed in both settlement and caller-side currency.
+// Empty for INSUFFICIENT_BALANCE (wallet does not attach metadata there).
 type BetErrorEvent struct {
 	UserID             int64 `json:"user_id"`
 	OperatorID         int64 `json:"operator_id"`
@@ -498,9 +505,7 @@ type BetErrorEvent struct {
 	Currency  string `json:"currency"`
 	BetAmount string `json:"bet_amount"`
 
-	Available   string `json:"available,omitempty"`
-	Required    string `json:"required,omitempty"`
-	LimitAmount string `json:"limit,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 
 	OccurredAt int64 `json:"occurred_at"`
 }
