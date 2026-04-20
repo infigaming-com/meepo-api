@@ -502,8 +502,12 @@ type BetErrorEvent struct {
 	Currency  string `json:"currency"`
 	BetAmount string `json:"bet_amount"`
 
-	// Available: usable balance (cash+bonus) at time of the failed bet.
-	// Present for INSUFFICIENT_BALANCE and for per-bet-limit errors.
+	// Available: bucket-aware usable balance at time of the failed bet.
+	//   - BONUS_BET_LIMIT_EXCEEDED -> bonus available only
+	//   - CASH_BET_LIMIT_EXCEEDED  -> cash available only
+	//   - INSUFFICIENT_BALANCE     -> cash + bonus summed
+	// This matches LimitAmount's bucket so the UI can render a coherent
+	// message like "limit {LimitAmount}, you have {Available}".
 	Available string `json:"available,omitempty"`
 	// Required: bet amount that failed the check (same as BetAmount, duplicated
 	// for UI convenience).
