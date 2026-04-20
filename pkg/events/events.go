@@ -487,9 +487,12 @@ type SessionActivityEvent struct {
 // Reason is the Kratos wallet error reason string, matching one of:
 // INSUFFICIENT_BALANCE, BONUS_BET_LIMIT_EXCEEDED, CASH_BET_LIMIT_EXCEEDED.
 //
-// Monetary fields (BetAmount, Available, Required, LimitAmount) are in the
-// game/caller-side currency (see Currency field), i.e. the unit the player
-// sees in-game, NOT the wallet settlement currency.
+// Metadata is the Kratos error Metadata map attached by wallet, forwarded
+// verbatim for the frontend to format as it sees fit. For bet-limit errors
+// wallet attaches a structured set of keys (see wallet's
+// buildBetLimitMetadata) with per-bet caps, bet amount, and available
+// cash/bonus — each expressed in both settlement and caller-side currency.
+// Empty for INSUFFICIENT_BALANCE (wallet does not attach metadata there).
 type BetErrorEvent struct {
 	UserID             int64 `json:"user_id"`
 	OperatorID         int64 `json:"operator_id"`
@@ -502,20 +505,7 @@ type BetErrorEvent struct {
 	Currency  string `json:"currency"`
 	BetAmount string `json:"bet_amount"`
 
-	// Available: bucket-aware usable balance at time of the failed bet.
-	//   - BONUS_BET_LIMIT_EXCEEDED -> bonus available only
-	//   - CASH_BET_LIMIT_EXCEEDED  -> cash available only
-	//   - INSUFFICIENT_BALANCE     -> cash + bonus summed
-	// This matches LimitAmount's bucket so the UI can render a coherent
-	// message like "limit {LimitAmount}, you have {Available}".
-	Available string `json:"available,omitempty"`
-	// Required: bet amount that failed the check (same as BetAmount, duplicated
-	// for UI convenience).
-	Required string `json:"required,omitempty"`
-	// LimitAmount: per-bet cap that was exceeded, matching the Reason:
-	// BONUS_BET_LIMIT_EXCEEDED -> bonus cap; CASH_BET_LIMIT_EXCEEDED -> cash cap.
-	// Empty for INSUFFICIENT_BALANCE.
-	LimitAmount string `json:"limit,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 
 	OccurredAt int64 `json:"occurred_at"`
 }
