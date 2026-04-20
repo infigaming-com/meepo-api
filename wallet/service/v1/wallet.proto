@@ -1520,10 +1520,10 @@ message GetGamificationConfigResponse {
 	bool clear_bonus_on_withdrawal = 1;
 	repeated OperatorCurrencyConfig operator_currency_configs = 2;
 	// "cash_first", "bonus_first", "mixed"
-	string deduction_type = 3;
-	// Decimal string. Only meaningful when deduction_type == "mixed".
+	string deduction_order_type = 3;
+	// Decimal string. Only meaningful when deduction_order_type == "mixed".
 	optional string cash_ratio = 4;
-	// Decimal string. Only meaningful when deduction_type == "mixed".
+	// Decimal string. Only meaningful when deduction_order_type == "mixed".
 	optional string bonus_ratio = 5;
 }
 

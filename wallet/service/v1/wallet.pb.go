@@ -8032,10 +8032,10 @@ type GetGamificationConfigResponse struct {
 	ClearBonusOnWithdrawal  bool                      `protobuf:"varint,1,opt,name=clear_bonus_on_withdrawal,json=clearBonusOnWithdrawal,proto3" json:"clear_bonus_on_withdrawal,omitempty"`
 	OperatorCurrencyConfigs []*OperatorCurrencyConfig `protobuf:"bytes,2,rep,name=operator_currency_configs,json=operatorCurrencyConfigs,proto3" json:"operator_currency_configs,omitempty"`
 	// "cash_first", "bonus_first", "mixed"
-	DeductionType string `protobuf:"bytes,3,opt,name=deduction_type,json=deductionType,proto3" json:"deduction_type,omitempty"`
-	// Decimal string. Only meaningful when deduction_type == "mixed".
+	DeductionOrderType string `protobuf:"bytes,3,opt,name=deduction_order_type,json=deductionOrderType,proto3" json:"deduction_order_type,omitempty"`
+	// Decimal string. Only meaningful when deduction_order_type == "mixed".
 	CashRatio *string `protobuf:"bytes,4,opt,name=cash_ratio,json=cashRatio,proto3,oneof" json:"cash_ratio,omitempty"`
-	// Decimal string. Only meaningful when deduction_type == "mixed".
+	// Decimal string. Only meaningful when deduction_order_type == "mixed".
 	BonusRatio    *string `protobuf:"bytes,5,opt,name=bonus_ratio,json=bonusRatio,proto3,oneof" json:"bonus_ratio,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -8085,9 +8085,9 @@ func (x *GetGamificationConfigResponse) GetOperatorCurrencyConfigs() []*Operator
 	return nil
 }
 
-func (x *GetGamificationConfigResponse) GetDeductionType() string {
+func (x *GetGamificationConfigResponse) GetDeductionOrderType() string {
 	if x != nil {
-		return x.DeductionType
+		return x.DeductionOrderType
 	}
 	return ""
 }
@@ -19862,11 +19862,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1cGetGamificationConfigRequest\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\"\xd5\x02\n" +
+	"currencies\"\xe0\x02\n" +
 	"\x1dGetGamificationConfigResponse\x129\n" +
 	"\x19clear_bonus_on_withdrawal\x18\x01 \x01(\bR\x16clearBonusOnWithdrawal\x12i\n" +
-	"\x19operator_currency_configs\x18\x02 \x03(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x17operatorCurrencyConfigs\x12%\n" +
-	"\x0ededuction_type\x18\x03 \x01(\tR\rdeductionType\x12\"\n" +
+	"\x19operator_currency_configs\x18\x02 \x03(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x17operatorCurrencyConfigs\x120\n" +
+	"\x14deduction_order_type\x18\x03 \x01(\tR\x12deductionOrderType\x12\"\n" +
 	"\n" +
 	"cash_ratio\x18\x04 \x01(\tH\x00R\tcashRatio\x88\x01\x01\x12$\n" +
 	"\vbonus_ratio\x18\x05 \x01(\tH\x01R\n" +
