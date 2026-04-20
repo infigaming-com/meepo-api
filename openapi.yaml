@@ -34416,6 +34416,14 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
+                deductionType:
+                    type: string
+                    description: '"cash_first", "bonus_first", "mixed"'
+                cashRatio:
+                    type: string
+                    description: Only meaningful when deduction_type == "mixed". Decimal string.
+                bonusRatio:
+                    type: string
         api.wallet.service.v1.GetGamificationCurrencyConfigResponse:
             type: object
             properties:

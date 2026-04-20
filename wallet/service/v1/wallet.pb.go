@@ -8030,9 +8030,14 @@ func (x *GetGamificationConfigRequest) GetCurrencies() []string {
 type GetGamificationConfigResponse struct {
 	state                   protoimpl.MessageState    `protogen:"open.v1"`
 	ClearBonusOnWithdrawal  bool                      `protobuf:"varint,1,opt,name=clear_bonus_on_withdrawal,json=clearBonusOnWithdrawal,proto3" json:"clear_bonus_on_withdrawal,omitempty"`
-	OperatorCurrencyConfigs []*OperatorCurrencyConfig `protobuf:"bytes,2,rep,name=operator_currency_configs,json=operatorCurrencyConfigs,proto3" json:"operator_currency_configs,omitempty"` // NOTE: deduction_type / cash_ratio / bonus_ratio intentionally not exposed to players in v1.
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	OperatorCurrencyConfigs []*OperatorCurrencyConfig `protobuf:"bytes,2,rep,name=operator_currency_configs,json=operatorCurrencyConfigs,proto3" json:"operator_currency_configs,omitempty"`
+	// "cash_first", "bonus_first", "mixed"
+	DeductionType string `protobuf:"bytes,3,opt,name=deduction_type,json=deductionType,proto3" json:"deduction_type,omitempty"`
+	// Only meaningful when deduction_type == "mixed". Decimal string.
+	CashRatio     *string `protobuf:"bytes,4,opt,name=cash_ratio,json=cashRatio,proto3,oneof" json:"cash_ratio,omitempty"`
+	BonusRatio    *string `protobuf:"bytes,5,opt,name=bonus_ratio,json=bonusRatio,proto3,oneof" json:"bonus_ratio,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetGamificationConfigResponse) Reset() {
@@ -8077,6 +8082,27 @@ func (x *GetGamificationConfigResponse) GetOperatorCurrencyConfigs() []*Operator
 		return x.OperatorCurrencyConfigs
 	}
 	return nil
+}
+
+func (x *GetGamificationConfigResponse) GetDeductionType() string {
+	if x != nil {
+		return x.DeductionType
+	}
+	return ""
+}
+
+func (x *GetGamificationConfigResponse) GetCashRatio() string {
+	if x != nil && x.CashRatio != nil {
+		return *x.CashRatio
+	}
+	return ""
+}
+
+func (x *GetGamificationConfigResponse) GetBonusRatio() string {
+	if x != nil && x.BonusRatio != nil {
+		return *x.BonusRatio
+	}
+	return ""
 }
 
 type OperatorCurrencyConfig struct {
@@ -19835,10 +19861,17 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1cGetGamificationConfigRequest\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\"\xc5\x01\n" +
+	"currencies\"\xd5\x02\n" +
 	"\x1dGetGamificationConfigResponse\x129\n" +
 	"\x19clear_bonus_on_withdrawal\x18\x01 \x01(\bR\x16clearBonusOnWithdrawal\x12i\n" +
-	"\x19operator_currency_configs\x18\x02 \x03(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x17operatorCurrencyConfigs\"\xf8\x03\n" +
+	"\x19operator_currency_configs\x18\x02 \x03(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x17operatorCurrencyConfigs\x12%\n" +
+	"\x0ededuction_type\x18\x03 \x01(\tR\rdeductionType\x12\"\n" +
+	"\n" +
+	"cash_ratio\x18\x04 \x01(\tH\x00R\tcashRatio\x88\x01\x01\x12$\n" +
+	"\vbonus_ratio\x18\x05 \x01(\tH\x01R\n" +
+	"bonusRatio\x88\x01\x01B\r\n" +
+	"\v_cash_ratioB\x0e\n" +
+	"\f_bonus_ratio\"\xf8\x03\n" +
 	"\x16OperatorCurrencyConfig\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12T\n" +
 	"$cash_withdrawal_wagering_requirement\x18\x02 \x01(\x05H\x00R!cashWithdrawalWageringRequirement\x88\x01\x01\x12(\n" +
@@ -21602,6 +21635,7 @@ func file_wallet_service_v1_wallet_proto_init() {
 	file_wallet_service_v1_wallet_proto_msgTypes[77].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[83].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[92].OneofWrappers = []any{}
+	file_wallet_service_v1_wallet_proto_msgTypes[96].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[97].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[109].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[112].OneofWrappers = []any{}
