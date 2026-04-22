@@ -9489,6 +9489,8 @@ func (m *ListUsersResponse) validate(all bool) error {
 
 	// no validation rules for PageSize
 
+	// no validation rules for ShowPlayerContact
+
 	if len(errors) > 0 {
 		return ListUsersResponseMultiError(errors)
 	}
@@ -10757,6 +10759,10 @@ func (m *OperatorSettings) validate(all bool) error {
 		// no validation rules for ReferralLossRevShareMode
 	}
 
+	if m.ShowPlayerContactToAffiliate != nil {
+		// no validation rules for ShowPlayerContactToAffiliate
+	}
+
 	if len(errors) > 0 {
 		return OperatorSettingsMultiError(errors)
 	}
@@ -11259,6 +11265,211 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateOperatorSettingsResponseValidationError{}
+
+// Validate checks the field values on BackfillUserContactRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BackfillUserContactRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackfillUserContactRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BackfillUserContactRequestMultiError, or nil if none found.
+func (m *BackfillUserContactRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackfillUserContactRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return BackfillUserContactRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackfillUserContactRequestMultiError is an error wrapping multiple
+// validation errors returned by BackfillUserContactRequest.ValidateAll() if
+// the designated constraints aren't met.
+type BackfillUserContactRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackfillUserContactRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackfillUserContactRequestMultiError) AllErrors() []error { return m }
+
+// BackfillUserContactRequestValidationError is the validation error returned
+// by BackfillUserContactRequest.Validate if the designated constraints aren't met.
+type BackfillUserContactRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackfillUserContactRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackfillUserContactRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackfillUserContactRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackfillUserContactRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackfillUserContactRequestValidationError) ErrorName() string {
+	return "BackfillUserContactRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackfillUserContactRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackfillUserContactRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackfillUserContactRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackfillUserContactRequestValidationError{}
+
+// Validate checks the field values on BackfillUserContactResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BackfillUserContactResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackfillUserContactResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BackfillUserContactResponseMultiError, or nil if none found.
+func (m *BackfillUserContactResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackfillUserContactResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return BackfillUserContactResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackfillUserContactResponseMultiError is an error wrapping multiple
+// validation errors returned by BackfillUserContactResponse.ValidateAll() if
+// the designated constraints aren't met.
+type BackfillUserContactResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackfillUserContactResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackfillUserContactResponseMultiError) AllErrors() []error { return m }
+
+// BackfillUserContactResponseValidationError is the validation error returned
+// by BackfillUserContactResponse.Validate if the designated constraints
+// aren't met.
+type BackfillUserContactResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackfillUserContactResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackfillUserContactResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackfillUserContactResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackfillUserContactResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackfillUserContactResponseValidationError) ErrorName() string {
+	return "BackfillUserContactResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackfillUserContactResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackfillUserContactResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackfillUserContactResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackfillUserContactResponseValidationError{}
 
 // Validate checks the field values on GetAffiliateDashboardRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -18324,6 +18535,10 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 	// no validation rules for CommissionReportingCurrency
 
 	// no validation rules for Roi
+
+	// no validation rules for Email
+
+	// no validation rules for Mobile
 
 	if len(errors) > 0 {
 		return ListUsersResponse_UserMultiError(errors)

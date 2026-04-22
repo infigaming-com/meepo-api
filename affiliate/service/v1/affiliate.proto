@@ -194,6 +194,11 @@ service Affiliate {
 
     rpc UpdateOperatorSettings(UpdateOperatorSettingsRequest) returns (UpdateOperatorSettingsResponse) {}
 
+    // BackfillUserContact enqueues a one-shot task that syncs current_email /
+    // current_mobile for existing affiliate_users rows that pre-date pub/sub sync
+    // (contact_updated_at = 0). Internal gRPC-only: ops-triggered via grpcurl.
+    rpc BackfillUserContact(BackfillUserContactRequest) returns (BackfillUserContactResponse) {}
+
     // -------------- Dashboard --------------
 
     // GetAffiliateDashboard returns aggregated dashboard metrics with comparison to previous period
@@ -1073,11 +1078,19 @@ message ListUsersResponse {
         string commission_reporting_currency = 32;
         // percentage, ngr / commission
         string roi = 33;
+        // empty string when show_player_contact=false
+        string email = 34;
+        // empty string when show_player_contact=false
+        string mobile = 35;
     }
     repeated User users = 1;
     int32 total = 2;
     int32 page = 3;
     int32 page_size = 4;
+    // whether email/mobile fields are populated for this response; controlled by
+    // OperatorSettings.show_player_contact_to_affiliate for affiliate-role callers,
+    // always true for operator-role callers
+    bool show_player_contact = 5;
 }
 
 message ExportUsersRequest {
@@ -1212,6 +1225,8 @@ message OperatorSettings {
     string third_party_game_rate = 2;
     // "cross_currency_hedging" or "independent_by_currency"
     optional string referral_loss_rev_share_mode = 3;
+    // whether affiliates can see referred players' email/mobile in the players list
+    optional bool show_player_contact_to_affiliate = 4;
 }
 
 message GetOperatorSettingsResponse {
@@ -1225,6 +1240,12 @@ message UpdateOperatorSettingsRequest {
 }
 
 message UpdateOperatorSettingsResponse {
+}
+
+message BackfillUserContactRequest {
+}
+
+message BackfillUserContactResponse {
 }
 
 // -------------- Dashboard --------------

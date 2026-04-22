@@ -62,6 +62,21 @@ message UserStatusUpdateEvent {
 	int64 updated_at = 6;
 }
 
+// UserContactUpdatedEvent is emitted when a user's current contact info
+// (email or mobile) is modified via UpdateUser. It is NOT emitted on registration —
+// subscribers should treat AddUserEvent as the initial seed for these fields.
+// Subscribers must use updated_at for last-write-wins to defend against out-of-order delivery.
+message UserContactUpdatedEvent {
+	int64 user_id = 1;
+	// Current email after update (empty string if unset)
+	string email = 2;
+	// Current mobile after update (empty string if unset)
+	string mobile = 3;
+	// Millisecond Unix timestamp of the update
+	int64 updated_at = 4;
+	api.common.OperatorContext operator_context = 5;
+}
+
 // UserIdentitySubmitEvent is emitted when a user submits identity documents for KYC Level 3 verification.
 message UserIdentitySubmitEvent {
 	int64 user_id = 1;

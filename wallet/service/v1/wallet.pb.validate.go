@@ -14005,7 +14005,7 @@ func (m *GetGamificationConfigResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for DeductionType
+	// no validation rules for DeductionOrderType
 
 	if m.CashRatio != nil {
 		// no validation rules for CashRatio

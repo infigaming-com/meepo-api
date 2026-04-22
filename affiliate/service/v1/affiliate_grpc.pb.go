@@ -68,6 +68,7 @@ const (
 	Affiliate_GetUserPromoConditionInfo_FullMethodName             = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
 	Affiliate_GetOperatorSettings_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/GetOperatorSettings"
 	Affiliate_UpdateOperatorSettings_FullMethodName                = "/api.affiliate.service.v1.Affiliate/UpdateOperatorSettings"
+	Affiliate_BackfillUserContact_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/BackfillUserContact"
 	Affiliate_GetAffiliateDashboard_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/GetAffiliateDashboard"
 	Affiliate_GetAffiliateTrend_FullMethodName                     = "/api.affiliate.service.v1.Affiliate/GetAffiliateTrend"
 	Affiliate_ListReferralVTGReport_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/ListReferralVTGReport"
@@ -143,6 +144,10 @@ type AffiliateClient interface {
 	GetUserPromoConditionInfo(ctx context.Context, in *GetUserPromoConditionInfoRequest, opts ...grpc.CallOption) (*GetUserPromoConditionInfoResponse, error)
 	GetOperatorSettings(ctx context.Context, in *GetOperatorSettingsRequest, opts ...grpc.CallOption) (*GetOperatorSettingsResponse, error)
 	UpdateOperatorSettings(ctx context.Context, in *UpdateOperatorSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorSettingsResponse, error)
+	// BackfillUserContact enqueues a one-shot task that syncs current_email /
+	// current_mobile for existing affiliate_users rows that pre-date pub/sub sync
+	// (contact_updated_at = 0). Internal gRPC-only: ops-triggered via grpcurl.
+	BackfillUserContact(ctx context.Context, in *BackfillUserContactRequest, opts ...grpc.CallOption) (*BackfillUserContactResponse, error)
 	// GetAffiliateDashboard returns aggregated dashboard metrics with comparison to previous period
 	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*GetAffiliateDashboardResponse, error)
 	// GetAffiliateTrend returns time series data for trend visualization
@@ -668,6 +673,16 @@ func (c *affiliateClient) UpdateOperatorSettings(ctx context.Context, in *Update
 	return out, nil
 }
 
+func (c *affiliateClient) BackfillUserContact(ctx context.Context, in *BackfillUserContactRequest, opts ...grpc.CallOption) (*BackfillUserContactResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackfillUserContactResponse)
+	err := c.cc.Invoke(ctx, Affiliate_BackfillUserContact_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *affiliateClient) GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*GetAffiliateDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAffiliateDashboardResponse)
@@ -894,6 +909,10 @@ type AffiliateServer interface {
 	GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error)
 	GetOperatorSettings(context.Context, *GetOperatorSettingsRequest) (*GetOperatorSettingsResponse, error)
 	UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*UpdateOperatorSettingsResponse, error)
+	// BackfillUserContact enqueues a one-shot task that syncs current_email /
+	// current_mobile for existing affiliate_users rows that pre-date pub/sub sync
+	// (contact_updated_at = 0). Internal gRPC-only: ops-triggered via grpcurl.
+	BackfillUserContact(context.Context, *BackfillUserContactRequest) (*BackfillUserContactResponse, error)
 	// GetAffiliateDashboard returns aggregated dashboard metrics with comparison to previous period
 	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error)
 	// GetAffiliateTrend returns time series data for trend visualization
@@ -1075,6 +1094,9 @@ func (UnimplementedAffiliateServer) GetOperatorSettings(context.Context, *GetOpe
 }
 func (UnimplementedAffiliateServer) UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*UpdateOperatorSettingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorSettings not implemented")
+}
+func (UnimplementedAffiliateServer) BackfillUserContact(context.Context, *BackfillUserContactRequest) (*BackfillUserContactResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackfillUserContact not implemented")
 }
 func (UnimplementedAffiliateServer) GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAffiliateDashboard not implemented")
@@ -2030,6 +2052,24 @@ func _Affiliate_UpdateOperatorSettings_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_BackfillUserContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackfillUserContactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).BackfillUserContact(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_BackfillUserContact_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).BackfillUserContact(ctx, req.(*BackfillUserContactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Affiliate_GetAffiliateDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAffiliateDashboardRequest)
 	if err := dec(in); err != nil {
@@ -2538,6 +2578,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorSettings",
 			Handler:    _Affiliate_UpdateOperatorSettings_Handler,
+		},
+		{
+			MethodName: "BackfillUserContact",
+			Handler:    _Affiliate_BackfillUserContact_Handler,
 		},
 		{
 			MethodName: "GetAffiliateDashboard",
