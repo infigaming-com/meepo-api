@@ -27,9 +27,10 @@ const OperationBackofficeGamificationDeleteGameRestrictionRule = "/api.backoffic
 const OperationBackofficeGamificationGetBonusBuyConfig = "/api.backoffice.service.v1.BackofficeGamification/GetBonusBuyConfig"
 const OperationBackofficeGamificationGetClaimRule = "/api.backoffice.service.v1.BackofficeGamification/GetClaimRule"
 const OperationBackofficeGamificationGetGameRestrictionRule = "/api.backoffice.service.v1.BackofficeGamification/GetGameRestrictionRule"
-const OperationBackofficeGamificationGetRuleHierarchyConfig = "/api.backoffice.service.v1.BackofficeGamification/GetRuleHierarchyConfig"
 const OperationBackofficeGamificationListClaimRules = "/api.backoffice.service.v1.BackofficeGamification/ListClaimRules"
 const OperationBackofficeGamificationListGameRestrictionRules = "/api.backoffice.service.v1.BackofficeGamification/ListGameRestrictionRules"
+const OperationBackofficeGamificationSetClaimRuleFollowParent = "/api.backoffice.service.v1.BackofficeGamification/SetClaimRuleFollowParent"
+const OperationBackofficeGamificationSetGameRestrictionRuleFollowParent = "/api.backoffice.service.v1.BackofficeGamification/SetGameRestrictionRuleFollowParent"
 const OperationBackofficeGamificationUpdateBonusBuyConfig = "/api.backoffice.service.v1.BackofficeGamification/UpdateBonusBuyConfig"
 const OperationBackofficeGamificationUpdateClaimRule = "/api.backoffice.service.v1.BackofficeGamification/UpdateClaimRule"
 const OperationBackofficeGamificationUpdateClaimRulePriority = "/api.backoffice.service.v1.BackofficeGamification/UpdateClaimRulePriority"
@@ -37,7 +38,6 @@ const OperationBackofficeGamificationUpdateClaimRuleStatus = "/api.backoffice.se
 const OperationBackofficeGamificationUpdateGameRestrictionRule = "/api.backoffice.service.v1.BackofficeGamification/UpdateGameRestrictionRule"
 const OperationBackofficeGamificationUpdateGameRestrictionRulePriority = "/api.backoffice.service.v1.BackofficeGamification/UpdateGameRestrictionRulePriority"
 const OperationBackofficeGamificationUpdateGameRestrictionRuleStatus = "/api.backoffice.service.v1.BackofficeGamification/UpdateGameRestrictionRuleStatus"
-const OperationBackofficeGamificationUpdateRuleHierarchyConfig = "/api.backoffice.service.v1.BackofficeGamification/UpdateRuleHierarchyConfig"
 
 type BackofficeGamificationHTTPServer interface {
 	// CreateClaimRule === Claim Rules ===
@@ -50,10 +50,16 @@ type BackofficeGamificationHTTPServer interface {
 	GetBonusBuyConfig(context.Context, *BackofficeGetBonusBuyConfigRequest) (*v1.GetBonusBuyConfigResponse, error)
 	GetClaimRule(context.Context, *BackofficeGetClaimRuleRequest) (*v1.GetClaimRuleResponse, error)
 	GetGameRestrictionRule(context.Context, *BackofficeGetGameRestrictionRuleRequest) (*v1.GetGameRestrictionRuleResponse, error)
-	// GetRuleHierarchyConfig === Rule Hierarchy Config ===
-	GetRuleHierarchyConfig(context.Context, *BackofficeGetRuleHierarchyConfigRequest) (*v1.GetRuleHierarchyConfigResponse, error)
-	ListClaimRules(context.Context, *BackofficeListClaimRulesRequest) (*v1.ListClaimRulesResponse, error)
-	ListGameRestrictionRules(context.Context, *BackofficeListGameRestrictionRulesRequest) (*v1.ListGameRestrictionRulesResponse, error)
+	// ListClaimRules Lists claim rules visible at the target operator level after hierarchy
+	// resolution. The response includes the follow_parent toggle state so the
+	// admin UI can show the rules AND the inheritance switch on the same page.
+	ListClaimRules(context.Context, *BackofficeListClaimRulesRequest) (*BackofficeListClaimRulesResponse, error)
+	ListGameRestrictionRules(context.Context, *BackofficeListGameRestrictionRulesRequest) (*BackofficeListGameRestrictionRulesResponse, error)
+	// SetClaimRuleFollowParent Sets the follow_parent toggle for claim rules at the target operator level.
+	// When follow_parent=true the operator inherits its parent's effective claim
+	// rule set; when false, only the operator's own rules apply.
+	SetClaimRuleFollowParent(context.Context, *BackofficeSetClaimRuleFollowParentRequest) (*BackofficeSetClaimRuleFollowParentResponse, error)
+	SetGameRestrictionRuleFollowParent(context.Context, *BackofficeSetGameRestrictionRuleFollowParentRequest) (*BackofficeSetGameRestrictionRuleFollowParentResponse, error)
 	UpdateBonusBuyConfig(context.Context, *BackofficeUpdateBonusBuyConfigRequest) (*v1.UpdateBonusBuyConfigResponse, error)
 	UpdateClaimRule(context.Context, *BackofficeUpdateClaimRuleRequest) (*v1.UpdateClaimRuleResponse, error)
 	UpdateClaimRulePriority(context.Context, *BackofficeUpdateClaimRulePriorityRequest) (*v1.UpdateClaimRulePriorityResponse, error)
@@ -61,7 +67,6 @@ type BackofficeGamificationHTTPServer interface {
 	UpdateGameRestrictionRule(context.Context, *BackofficeUpdateGameRestrictionRuleRequest) (*v1.UpdateGameRestrictionRuleResponse, error)
 	UpdateGameRestrictionRulePriority(context.Context, *BackofficeUpdateGameRestrictionRulePriorityRequest) (*v1.UpdateGameRestrictionRulePriorityResponse, error)
 	UpdateGameRestrictionRuleStatus(context.Context, *BackofficeUpdateGameRestrictionRuleStatusRequest) (*v1.UpdateGameRestrictionRuleStatusResponse, error)
-	UpdateRuleHierarchyConfig(context.Context, *BackofficeUpdateRuleHierarchyConfigRequest) (*v1.UpdateRuleHierarchyConfigResponse, error)
 }
 
 func RegisterBackofficeGamificationHTTPServer(s *http.Server, srv BackofficeGamificationHTTPServer) {
@@ -73,6 +78,7 @@ func RegisterBackofficeGamificationHTTPServer(s *http.Server, srv BackofficeGami
 	r.POST("/v1/backoffice/gamification/claim-rule/get", _BackofficeGamification_GetClaimRule0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/gamification/claim-rule/priority/update", _BackofficeGamification_UpdateClaimRulePriority0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/gamification/claim-rule/status/update", _BackofficeGamification_UpdateClaimRuleStatus0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/gamification/claim-rule/follow-parent/set", _BackofficeGamification_SetClaimRuleFollowParent0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/gamification/game-restriction-rule/create", _BackofficeGamification_CreateGameRestrictionRule0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/gamification/game-restriction-rule/update", _BackofficeGamification_UpdateGameRestrictionRule0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/gamification/game-restriction-rule/delete", _BackofficeGamification_DeleteGameRestrictionRule0_HTTP_Handler(srv))
@@ -80,10 +86,9 @@ func RegisterBackofficeGamificationHTTPServer(s *http.Server, srv BackofficeGami
 	r.POST("/v1/backoffice/gamification/game-restriction-rule/get", _BackofficeGamification_GetGameRestrictionRule0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/gamification/game-restriction-rule/priority/update", _BackofficeGamification_UpdateGameRestrictionRulePriority0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/gamification/game-restriction-rule/status/update", _BackofficeGamification_UpdateGameRestrictionRuleStatus0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/gamification/game-restriction-rule/follow-parent/set", _BackofficeGamification_SetGameRestrictionRuleFollowParent0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/gamification/bonus-buy-config/get", _BackofficeGamification_GetBonusBuyConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/gamification/bonus-buy-config/update", _BackofficeGamification_UpdateBonusBuyConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/rule-hierarchy-config/get", _BackofficeGamification_GetRuleHierarchyConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/rule-hierarchy-config/update", _BackofficeGamification_UpdateRuleHierarchyConfig0_HTTP_Handler(srv))
 }
 
 func _BackofficeGamification_CreateClaimRule0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
@@ -169,7 +174,7 @@ func _BackofficeGamification_ListClaimRules0_HTTP_Handler(srv BackofficeGamifica
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.ListClaimRulesResponse)
+		reply := out.(*BackofficeListClaimRulesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -236,6 +241,28 @@ func _BackofficeGamification_UpdateClaimRuleStatus0_HTTP_Handler(srv BackofficeG
 			return err
 		}
 		reply := out.(*v1.UpdateClaimRuleStatusResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeGamification_SetClaimRuleFollowParent0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in BackofficeSetClaimRuleFollowParentRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGamificationSetClaimRuleFollowParent)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetClaimRuleFollowParent(ctx, req.(*BackofficeSetClaimRuleFollowParentRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*BackofficeSetClaimRuleFollowParentResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -323,7 +350,7 @@ func _BackofficeGamification_ListGameRestrictionRules0_HTTP_Handler(srv Backoffi
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.ListGameRestrictionRulesResponse)
+		reply := out.(*BackofficeListGameRestrictionRulesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -394,6 +421,28 @@ func _BackofficeGamification_UpdateGameRestrictionRuleStatus0_HTTP_Handler(srv B
 	}
 }
 
+func _BackofficeGamification_SetGameRestrictionRuleFollowParent0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in BackofficeSetGameRestrictionRuleFollowParentRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGamificationSetGameRestrictionRuleFollowParent)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetGameRestrictionRuleFollowParent(ctx, req.(*BackofficeSetGameRestrictionRuleFollowParentRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*BackofficeSetGameRestrictionRuleFollowParentResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeGamification_GetBonusBuyConfig0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeGetBonusBuyConfigRequest
@@ -438,50 +487,6 @@ func _BackofficeGamification_UpdateBonusBuyConfig0_HTTP_Handler(srv BackofficeGa
 	}
 }
 
-func _BackofficeGamification_GetRuleHierarchyConfig0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in BackofficeGetRuleHierarchyConfigRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeGamificationGetRuleHierarchyConfig)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetRuleHierarchyConfig(ctx, req.(*BackofficeGetRuleHierarchyConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*v1.GetRuleHierarchyConfigResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeGamification_UpdateRuleHierarchyConfig0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in BackofficeUpdateRuleHierarchyConfigRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeGamificationUpdateRuleHierarchyConfig)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateRuleHierarchyConfig(ctx, req.(*BackofficeUpdateRuleHierarchyConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*v1.UpdateRuleHierarchyConfigResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type BackofficeGamificationHTTPClient interface {
 	// CreateClaimRule === Claim Rules ===
 	CreateClaimRule(ctx context.Context, req *BackofficeCreateClaimRuleRequest, opts ...http.CallOption) (rsp *v1.CreateClaimRuleResponse, err error)
@@ -493,10 +498,16 @@ type BackofficeGamificationHTTPClient interface {
 	GetBonusBuyConfig(ctx context.Context, req *BackofficeGetBonusBuyConfigRequest, opts ...http.CallOption) (rsp *v1.GetBonusBuyConfigResponse, err error)
 	GetClaimRule(ctx context.Context, req *BackofficeGetClaimRuleRequest, opts ...http.CallOption) (rsp *v1.GetClaimRuleResponse, err error)
 	GetGameRestrictionRule(ctx context.Context, req *BackofficeGetGameRestrictionRuleRequest, opts ...http.CallOption) (rsp *v1.GetGameRestrictionRuleResponse, err error)
-	// GetRuleHierarchyConfig === Rule Hierarchy Config ===
-	GetRuleHierarchyConfig(ctx context.Context, req *BackofficeGetRuleHierarchyConfigRequest, opts ...http.CallOption) (rsp *v1.GetRuleHierarchyConfigResponse, err error)
-	ListClaimRules(ctx context.Context, req *BackofficeListClaimRulesRequest, opts ...http.CallOption) (rsp *v1.ListClaimRulesResponse, err error)
-	ListGameRestrictionRules(ctx context.Context, req *BackofficeListGameRestrictionRulesRequest, opts ...http.CallOption) (rsp *v1.ListGameRestrictionRulesResponse, err error)
+	// ListClaimRules Lists claim rules visible at the target operator level after hierarchy
+	// resolution. The response includes the follow_parent toggle state so the
+	// admin UI can show the rules AND the inheritance switch on the same page.
+	ListClaimRules(ctx context.Context, req *BackofficeListClaimRulesRequest, opts ...http.CallOption) (rsp *BackofficeListClaimRulesResponse, err error)
+	ListGameRestrictionRules(ctx context.Context, req *BackofficeListGameRestrictionRulesRequest, opts ...http.CallOption) (rsp *BackofficeListGameRestrictionRulesResponse, err error)
+	// SetClaimRuleFollowParent Sets the follow_parent toggle for claim rules at the target operator level.
+	// When follow_parent=true the operator inherits its parent's effective claim
+	// rule set; when false, only the operator's own rules apply.
+	SetClaimRuleFollowParent(ctx context.Context, req *BackofficeSetClaimRuleFollowParentRequest, opts ...http.CallOption) (rsp *BackofficeSetClaimRuleFollowParentResponse, err error)
+	SetGameRestrictionRuleFollowParent(ctx context.Context, req *BackofficeSetGameRestrictionRuleFollowParentRequest, opts ...http.CallOption) (rsp *BackofficeSetGameRestrictionRuleFollowParentResponse, err error)
 	UpdateBonusBuyConfig(ctx context.Context, req *BackofficeUpdateBonusBuyConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateBonusBuyConfigResponse, err error)
 	UpdateClaimRule(ctx context.Context, req *BackofficeUpdateClaimRuleRequest, opts ...http.CallOption) (rsp *v1.UpdateClaimRuleResponse, err error)
 	UpdateClaimRulePriority(ctx context.Context, req *BackofficeUpdateClaimRulePriorityRequest, opts ...http.CallOption) (rsp *v1.UpdateClaimRulePriorityResponse, err error)
@@ -504,7 +515,6 @@ type BackofficeGamificationHTTPClient interface {
 	UpdateGameRestrictionRule(ctx context.Context, req *BackofficeUpdateGameRestrictionRuleRequest, opts ...http.CallOption) (rsp *v1.UpdateGameRestrictionRuleResponse, err error)
 	UpdateGameRestrictionRulePriority(ctx context.Context, req *BackofficeUpdateGameRestrictionRulePriorityRequest, opts ...http.CallOption) (rsp *v1.UpdateGameRestrictionRulePriorityResponse, err error)
 	UpdateGameRestrictionRuleStatus(ctx context.Context, req *BackofficeUpdateGameRestrictionRuleStatusRequest, opts ...http.CallOption) (rsp *v1.UpdateGameRestrictionRuleStatusResponse, err error)
-	UpdateRuleHierarchyConfig(ctx context.Context, req *BackofficeUpdateRuleHierarchyConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateRuleHierarchyConfigResponse, err error)
 }
 
 type BackofficeGamificationHTTPClientImpl struct {
@@ -609,22 +619,11 @@ func (c *BackofficeGamificationHTTPClientImpl) GetGameRestrictionRule(ctx contex
 	return &out, nil
 }
 
-// GetRuleHierarchyConfig === Rule Hierarchy Config ===
-func (c *BackofficeGamificationHTTPClientImpl) GetRuleHierarchyConfig(ctx context.Context, in *BackofficeGetRuleHierarchyConfigRequest, opts ...http.CallOption) (*v1.GetRuleHierarchyConfigResponse, error) {
-	var out v1.GetRuleHierarchyConfigResponse
-	pattern := "/v1/backoffice/gamification/rule-hierarchy-config/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationGetRuleHierarchyConfig))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeGamificationHTTPClientImpl) ListClaimRules(ctx context.Context, in *BackofficeListClaimRulesRequest, opts ...http.CallOption) (*v1.ListClaimRulesResponse, error) {
-	var out v1.ListClaimRulesResponse
+// ListClaimRules Lists claim rules visible at the target operator level after hierarchy
+// resolution. The response includes the follow_parent toggle state so the
+// admin UI can show the rules AND the inheritance switch on the same page.
+func (c *BackofficeGamificationHTTPClientImpl) ListClaimRules(ctx context.Context, in *BackofficeListClaimRulesRequest, opts ...http.CallOption) (*BackofficeListClaimRulesResponse, error) {
+	var out BackofficeListClaimRulesResponse
 	pattern := "/v1/backoffice/gamification/claim-rule/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGamificationListClaimRules))
@@ -636,11 +635,40 @@ func (c *BackofficeGamificationHTTPClientImpl) ListClaimRules(ctx context.Contex
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) ListGameRestrictionRules(ctx context.Context, in *BackofficeListGameRestrictionRulesRequest, opts ...http.CallOption) (*v1.ListGameRestrictionRulesResponse, error) {
-	var out v1.ListGameRestrictionRulesResponse
+func (c *BackofficeGamificationHTTPClientImpl) ListGameRestrictionRules(ctx context.Context, in *BackofficeListGameRestrictionRulesRequest, opts ...http.CallOption) (*BackofficeListGameRestrictionRulesResponse, error) {
+	var out BackofficeListGameRestrictionRulesResponse
 	pattern := "/v1/backoffice/gamification/game-restriction-rule/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGamificationListGameRestrictionRules))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SetClaimRuleFollowParent Sets the follow_parent toggle for claim rules at the target operator level.
+// When follow_parent=true the operator inherits its parent's effective claim
+// rule set; when false, only the operator's own rules apply.
+func (c *BackofficeGamificationHTTPClientImpl) SetClaimRuleFollowParent(ctx context.Context, in *BackofficeSetClaimRuleFollowParentRequest, opts ...http.CallOption) (*BackofficeSetClaimRuleFollowParentResponse, error) {
+	var out BackofficeSetClaimRuleFollowParentResponse
+	pattern := "/v1/backoffice/gamification/claim-rule/follow-parent/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGamificationSetClaimRuleFollowParent))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeGamificationHTTPClientImpl) SetGameRestrictionRuleFollowParent(ctx context.Context, in *BackofficeSetGameRestrictionRuleFollowParentRequest, opts ...http.CallOption) (*BackofficeSetGameRestrictionRuleFollowParentResponse, error) {
+	var out BackofficeSetGameRestrictionRuleFollowParentResponse
+	pattern := "/v1/backoffice/gamification/game-restriction-rule/follow-parent/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGamificationSetGameRestrictionRuleFollowParent))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -732,19 +760,6 @@ func (c *BackofficeGamificationHTTPClientImpl) UpdateGameRestrictionRuleStatus(c
 	pattern := "/v1/backoffice/gamification/game-restriction-rule/status/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGamificationUpdateGameRestrictionRuleStatus))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeGamificationHTTPClientImpl) UpdateRuleHierarchyConfig(ctx context.Context, in *BackofficeUpdateRuleHierarchyConfigRequest, opts ...http.CallOption) (*v1.UpdateRuleHierarchyConfigResponse, error) {
-	var out v1.UpdateRuleHierarchyConfigResponse
-	pattern := "/v1/backoffice/gamification/rule-hierarchy-config/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationUpdateRuleHierarchyConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

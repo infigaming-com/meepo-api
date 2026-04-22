@@ -637,6 +637,182 @@ var _ interface {
 	ErrorName() string
 } = BackofficeListClaimRulesRequestValidationError{}
 
+// Validate checks the field values on BackofficeListClaimRulesResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *BackofficeListClaimRulesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackofficeListClaimRulesResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// BackofficeListClaimRulesResponseMultiError, or nil if none found.
+func (m *BackofficeListClaimRulesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeListClaimRulesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetCustomOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BackofficeListClaimRulesResponseValidationError{
+					field:  "CustomOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BackofficeListClaimRulesResponseValidationError{
+					field:  "CustomOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCustomOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BackofficeListClaimRulesResponseValidationError{
+				field:  "CustomOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for FollowParent
+
+	for idx, item := range m.GetRules() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BackofficeListClaimRulesResponseValidationError{
+						field:  fmt.Sprintf("Rules[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BackofficeListClaimRulesResponseValidationError{
+						field:  fmt.Sprintf("Rules[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BackofficeListClaimRulesResponseValidationError{
+					field:  fmt.Sprintf("Rules[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return BackofficeListClaimRulesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeListClaimRulesResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// BackofficeListClaimRulesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BackofficeListClaimRulesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeListClaimRulesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeListClaimRulesResponseMultiError) AllErrors() []error { return m }
+
+// BackofficeListClaimRulesResponseValidationError is the validation error
+// returned by BackofficeListClaimRulesResponse.Validate if the designated
+// constraints aren't met.
+type BackofficeListClaimRulesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeListClaimRulesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackofficeListClaimRulesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackofficeListClaimRulesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackofficeListClaimRulesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeListClaimRulesResponseValidationError) ErrorName() string {
+	return "BackofficeListClaimRulesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeListClaimRulesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeListClaimRulesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeListClaimRulesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeListClaimRulesResponseValidationError{}
+
 // Validate checks the field values on BackofficeGetClaimRuleRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1048,6 +1224,249 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BackofficeUpdateClaimRuleStatusRequestValidationError{}
+
+// Validate checks the field values on
+// BackofficeSetClaimRuleFollowParentRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BackofficeSetClaimRuleFollowParentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BackofficeSetClaimRuleFollowParentRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// BackofficeSetClaimRuleFollowParentRequestMultiError, or nil if none found.
+func (m *BackofficeSetClaimRuleFollowParentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeSetClaimRuleFollowParentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BackofficeSetClaimRuleFollowParentRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BackofficeSetClaimRuleFollowParentRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BackofficeSetClaimRuleFollowParentRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for FollowParent
+
+	if len(errors) > 0 {
+		return BackofficeSetClaimRuleFollowParentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeSetClaimRuleFollowParentRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// BackofficeSetClaimRuleFollowParentRequest.ValidateAll() if the designated
+// constraints aren't met.
+type BackofficeSetClaimRuleFollowParentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeSetClaimRuleFollowParentRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeSetClaimRuleFollowParentRequestMultiError) AllErrors() []error { return m }
+
+// BackofficeSetClaimRuleFollowParentRequestValidationError is the validation
+// error returned by BackofficeSetClaimRuleFollowParentRequest.Validate if the
+// designated constraints aren't met.
+type BackofficeSetClaimRuleFollowParentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeSetClaimRuleFollowParentRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackofficeSetClaimRuleFollowParentRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackofficeSetClaimRuleFollowParentRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackofficeSetClaimRuleFollowParentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeSetClaimRuleFollowParentRequestValidationError) ErrorName() string {
+	return "BackofficeSetClaimRuleFollowParentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeSetClaimRuleFollowParentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeSetClaimRuleFollowParentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeSetClaimRuleFollowParentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeSetClaimRuleFollowParentRequestValidationError{}
+
+// Validate checks the field values on
+// BackofficeSetClaimRuleFollowParentResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BackofficeSetClaimRuleFollowParentResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BackofficeSetClaimRuleFollowParentResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// BackofficeSetClaimRuleFollowParentResponseMultiError, or nil if none found.
+func (m *BackofficeSetClaimRuleFollowParentResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeSetClaimRuleFollowParentResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return BackofficeSetClaimRuleFollowParentResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeSetClaimRuleFollowParentResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// BackofficeSetClaimRuleFollowParentResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BackofficeSetClaimRuleFollowParentResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeSetClaimRuleFollowParentResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeSetClaimRuleFollowParentResponseMultiError) AllErrors() []error { return m }
+
+// BackofficeSetClaimRuleFollowParentResponseValidationError is the validation
+// error returned by BackofficeSetClaimRuleFollowParentResponse.Validate if
+// the designated constraints aren't met.
+type BackofficeSetClaimRuleFollowParentResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeSetClaimRuleFollowParentResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackofficeSetClaimRuleFollowParentResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackofficeSetClaimRuleFollowParentResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackofficeSetClaimRuleFollowParentResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeSetClaimRuleFollowParentResponseValidationError) ErrorName() string {
+	return "BackofficeSetClaimRuleFollowParentResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeSetClaimRuleFollowParentResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeSetClaimRuleFollowParentResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeSetClaimRuleFollowParentResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeSetClaimRuleFollowParentResponseValidationError{}
 
 // Validate checks the field values on
 // BackofficeCreateGameRestrictionRuleRequest with the rules defined in the
@@ -1653,6 +2072,183 @@ var _ interface {
 	ErrorName() string
 } = BackofficeListGameRestrictionRulesRequestValidationError{}
 
+// Validate checks the field values on
+// BackofficeListGameRestrictionRulesResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BackofficeListGameRestrictionRulesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BackofficeListGameRestrictionRulesResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// BackofficeListGameRestrictionRulesResponseMultiError, or nil if none found.
+func (m *BackofficeListGameRestrictionRulesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeListGameRestrictionRulesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetCustomOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BackofficeListGameRestrictionRulesResponseValidationError{
+					field:  "CustomOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BackofficeListGameRestrictionRulesResponseValidationError{
+					field:  "CustomOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCustomOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BackofficeListGameRestrictionRulesResponseValidationError{
+				field:  "CustomOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for FollowParent
+
+	for idx, item := range m.GetRules() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BackofficeListGameRestrictionRulesResponseValidationError{
+						field:  fmt.Sprintf("Rules[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BackofficeListGameRestrictionRulesResponseValidationError{
+						field:  fmt.Sprintf("Rules[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BackofficeListGameRestrictionRulesResponseValidationError{
+					field:  fmt.Sprintf("Rules[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return BackofficeListGameRestrictionRulesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeListGameRestrictionRulesResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// BackofficeListGameRestrictionRulesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BackofficeListGameRestrictionRulesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeListGameRestrictionRulesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeListGameRestrictionRulesResponseMultiError) AllErrors() []error { return m }
+
+// BackofficeListGameRestrictionRulesResponseValidationError is the validation
+// error returned by BackofficeListGameRestrictionRulesResponse.Validate if
+// the designated constraints aren't met.
+type BackofficeListGameRestrictionRulesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeListGameRestrictionRulesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackofficeListGameRestrictionRulesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackofficeListGameRestrictionRulesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackofficeListGameRestrictionRulesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeListGameRestrictionRulesResponseValidationError) ErrorName() string {
+	return "BackofficeListGameRestrictionRulesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeListGameRestrictionRulesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeListGameRestrictionRulesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeListGameRestrictionRulesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeListGameRestrictionRulesResponseValidationError{}
+
 // Validate checks the field values on BackofficeGetGameRestrictionRuleRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
@@ -2083,6 +2679,265 @@ var _ interface {
 	ErrorName() string
 } = BackofficeUpdateGameRestrictionRuleStatusRequestValidationError{}
 
+// Validate checks the field values on
+// BackofficeSetGameRestrictionRuleFollowParentRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *BackofficeSetGameRestrictionRuleFollowParentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BackofficeSetGameRestrictionRuleFollowParentRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// BackofficeSetGameRestrictionRuleFollowParentRequestMultiError, or nil if
+// none found.
+func (m *BackofficeSetGameRestrictionRuleFollowParentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeSetGameRestrictionRuleFollowParentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BackofficeSetGameRestrictionRuleFollowParentRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BackofficeSetGameRestrictionRuleFollowParentRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BackofficeSetGameRestrictionRuleFollowParentRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for FollowParent
+
+	if len(errors) > 0 {
+		return BackofficeSetGameRestrictionRuleFollowParentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeSetGameRestrictionRuleFollowParentRequestMultiError is an error
+// wrapping multiple validation errors returned by
+// BackofficeSetGameRestrictionRuleFollowParentRequest.ValidateAll() if the
+// designated constraints aren't met.
+type BackofficeSetGameRestrictionRuleFollowParentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeSetGameRestrictionRuleFollowParentRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeSetGameRestrictionRuleFollowParentRequestMultiError) AllErrors() []error { return m }
+
+// BackofficeSetGameRestrictionRuleFollowParentRequestValidationError is the
+// validation error returned by
+// BackofficeSetGameRestrictionRuleFollowParentRequest.Validate if the
+// designated constraints aren't met.
+type BackofficeSetGameRestrictionRuleFollowParentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeSetGameRestrictionRuleFollowParentRequestValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e BackofficeSetGameRestrictionRuleFollowParentRequestValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e BackofficeSetGameRestrictionRuleFollowParentRequestValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e BackofficeSetGameRestrictionRuleFollowParentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeSetGameRestrictionRuleFollowParentRequestValidationError) ErrorName() string {
+	return "BackofficeSetGameRestrictionRuleFollowParentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeSetGameRestrictionRuleFollowParentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeSetGameRestrictionRuleFollowParentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeSetGameRestrictionRuleFollowParentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeSetGameRestrictionRuleFollowParentRequestValidationError{}
+
+// Validate checks the field values on
+// BackofficeSetGameRestrictionRuleFollowParentResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *BackofficeSetGameRestrictionRuleFollowParentResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BackofficeSetGameRestrictionRuleFollowParentResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// BackofficeSetGameRestrictionRuleFollowParentResponseMultiError, or nil if
+// none found.
+func (m *BackofficeSetGameRestrictionRuleFollowParentResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeSetGameRestrictionRuleFollowParentResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return BackofficeSetGameRestrictionRuleFollowParentResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeSetGameRestrictionRuleFollowParentResponseMultiError is an error
+// wrapping multiple validation errors returned by
+// BackofficeSetGameRestrictionRuleFollowParentResponse.ValidateAll() if the
+// designated constraints aren't met.
+type BackofficeSetGameRestrictionRuleFollowParentResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeSetGameRestrictionRuleFollowParentResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeSetGameRestrictionRuleFollowParentResponseMultiError) AllErrors() []error { return m }
+
+// BackofficeSetGameRestrictionRuleFollowParentResponseValidationError is the
+// validation error returned by
+// BackofficeSetGameRestrictionRuleFollowParentResponse.Validate if the
+// designated constraints aren't met.
+type BackofficeSetGameRestrictionRuleFollowParentResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeSetGameRestrictionRuleFollowParentResponseValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e BackofficeSetGameRestrictionRuleFollowParentResponseValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e BackofficeSetGameRestrictionRuleFollowParentResponseValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e BackofficeSetGameRestrictionRuleFollowParentResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeSetGameRestrictionRuleFollowParentResponseValidationError) ErrorName() string {
+	return "BackofficeSetGameRestrictionRuleFollowParentResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeSetGameRestrictionRuleFollowParentResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeSetGameRestrictionRuleFollowParentResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeSetGameRestrictionRuleFollowParentResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeSetGameRestrictionRuleFollowParentResponseValidationError{}
+
 // Validate checks the field values on BackofficeGetBonusBuyConfigRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -2352,279 +3207,3 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BackofficeUpdateBonusBuyConfigRequestValidationError{}
-
-// Validate checks the field values on BackofficeGetRuleHierarchyConfigRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *BackofficeGetRuleHierarchyConfigRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// BackofficeGetRuleHierarchyConfigRequest with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// BackofficeGetRuleHierarchyConfigRequestMultiError, or nil if none found.
-func (m *BackofficeGetRuleHierarchyConfigRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *BackofficeGetRuleHierarchyConfigRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BackofficeGetRuleHierarchyConfigRequestValidationError{
-					field:  "TargetOperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, BackofficeGetRuleHierarchyConfigRequestValidationError{
-					field:  "TargetOperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return BackofficeGetRuleHierarchyConfigRequestValidationError{
-				field:  "TargetOperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for RuleType
-
-	if len(errors) > 0 {
-		return BackofficeGetRuleHierarchyConfigRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// BackofficeGetRuleHierarchyConfigRequestMultiError is an error wrapping
-// multiple validation errors returned by
-// BackofficeGetRuleHierarchyConfigRequest.ValidateAll() if the designated
-// constraints aren't met.
-type BackofficeGetRuleHierarchyConfigRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m BackofficeGetRuleHierarchyConfigRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m BackofficeGetRuleHierarchyConfigRequestMultiError) AllErrors() []error { return m }
-
-// BackofficeGetRuleHierarchyConfigRequestValidationError is the validation
-// error returned by BackofficeGetRuleHierarchyConfigRequest.Validate if the
-// designated constraints aren't met.
-type BackofficeGetRuleHierarchyConfigRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e BackofficeGetRuleHierarchyConfigRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e BackofficeGetRuleHierarchyConfigRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e BackofficeGetRuleHierarchyConfigRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e BackofficeGetRuleHierarchyConfigRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e BackofficeGetRuleHierarchyConfigRequestValidationError) ErrorName() string {
-	return "BackofficeGetRuleHierarchyConfigRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e BackofficeGetRuleHierarchyConfigRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sBackofficeGetRuleHierarchyConfigRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = BackofficeGetRuleHierarchyConfigRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = BackofficeGetRuleHierarchyConfigRequestValidationError{}
-
-// Validate checks the field values on
-// BackofficeUpdateRuleHierarchyConfigRequest with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *BackofficeUpdateRuleHierarchyConfigRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// BackofficeUpdateRuleHierarchyConfigRequest with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// BackofficeUpdateRuleHierarchyConfigRequestMultiError, or nil if none found.
-func (m *BackofficeUpdateRuleHierarchyConfigRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *BackofficeUpdateRuleHierarchyConfigRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BackofficeUpdateRuleHierarchyConfigRequestValidationError{
-					field:  "TargetOperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, BackofficeUpdateRuleHierarchyConfigRequestValidationError{
-					field:  "TargetOperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return BackofficeUpdateRuleHierarchyConfigRequestValidationError{
-				field:  "TargetOperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for RuleType
-
-	// no validation rules for FollowParent
-
-	if len(errors) > 0 {
-		return BackofficeUpdateRuleHierarchyConfigRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// BackofficeUpdateRuleHierarchyConfigRequestMultiError is an error wrapping
-// multiple validation errors returned by
-// BackofficeUpdateRuleHierarchyConfigRequest.ValidateAll() if the designated
-// constraints aren't met.
-type BackofficeUpdateRuleHierarchyConfigRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m BackofficeUpdateRuleHierarchyConfigRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m BackofficeUpdateRuleHierarchyConfigRequestMultiError) AllErrors() []error { return m }
-
-// BackofficeUpdateRuleHierarchyConfigRequestValidationError is the validation
-// error returned by BackofficeUpdateRuleHierarchyConfigRequest.Validate if
-// the designated constraints aren't met.
-type BackofficeUpdateRuleHierarchyConfigRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e BackofficeUpdateRuleHierarchyConfigRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e BackofficeUpdateRuleHierarchyConfigRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e BackofficeUpdateRuleHierarchyConfigRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e BackofficeUpdateRuleHierarchyConfigRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e BackofficeUpdateRuleHierarchyConfigRequestValidationError) ErrorName() string {
-	return "BackofficeUpdateRuleHierarchyConfigRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e BackofficeUpdateRuleHierarchyConfigRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sBackofficeUpdateRuleHierarchyConfigRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = BackofficeUpdateRuleHierarchyConfigRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = BackofficeUpdateRuleHierarchyConfigRequestValidationError{}

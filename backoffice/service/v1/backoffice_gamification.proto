@@ -11,8 +11,10 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 // Gamification rules management for backoffice.
-// Proxies the gamification-service admin APIs with operator context injection
-// and HTTP bindings for the admin console.
+// Proxies the gamification-service admin APIs with operator context validation,
+// HTTP bindings, and the inheritance shape used by other backoffice-side
+// hierarchical configs (see BackofficeWallet.GetDepositRewardConfig,
+// GetAppDownloadRewardConfig).
 //
 // Only admin CRUD operations are exposed here. Runtime APIs
 // (CheckClaimEligibility, CheckGameRestriction, RecordClaim) are called
@@ -40,7 +42,10 @@ service BackofficeGamification {
     };
   }
 
-  rpc ListClaimRules(BackofficeListClaimRulesRequest) returns (api.gamification.service.v1.ListClaimRulesResponse) {
+  // Lists claim rules visible at the target operator level after hierarchy
+  // resolution. The response includes the follow_parent toggle state so the
+  // admin UI can show the rules AND the inheritance switch on the same page.
+  rpc ListClaimRules(BackofficeListClaimRulesRequest) returns (BackofficeListClaimRulesResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/gamification/claim-rule/list"
       body: "*"
@@ -68,6 +73,16 @@ service BackofficeGamification {
     };
   }
 
+  // Sets the follow_parent toggle for claim rules at the target operator level.
+  // When follow_parent=true the operator inherits its parent's effective claim
+  // rule set; when false, only the operator's own rules apply.
+  rpc SetClaimRuleFollowParent(BackofficeSetClaimRuleFollowParentRequest) returns (BackofficeSetClaimRuleFollowParentResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/gamification/claim-rule/follow-parent/set"
+      body: "*"
+    };
+  }
+
   // === Game Restriction Rules ===
   rpc CreateGameRestrictionRule(BackofficeCreateGameRestrictionRuleRequest) returns (api.gamification.service.v1.CreateGameRestrictionRuleResponse) {
     option (google.api.http) = {
@@ -90,7 +105,7 @@ service BackofficeGamification {
     };
   }
 
-  rpc ListGameRestrictionRules(BackofficeListGameRestrictionRulesRequest) returns (api.gamification.service.v1.ListGameRestrictionRulesResponse) {
+  rpc ListGameRestrictionRules(BackofficeListGameRestrictionRulesRequest) returns (BackofficeListGameRestrictionRulesResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/gamification/game-restriction-rule/list"
       body: "*"
@@ -118,6 +133,13 @@ service BackofficeGamification {
     };
   }
 
+  rpc SetGameRestrictionRuleFollowParent(BackofficeSetGameRestrictionRuleFollowParentRequest) returns (BackofficeSetGameRestrictionRuleFollowParentResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/gamification/game-restriction-rule/follow-parent/set"
+      body: "*"
+    };
+  }
+
   // === Bonus Buy Config ===
   rpc GetBonusBuyConfig(BackofficeGetBonusBuyConfigRequest) returns (api.gamification.service.v1.GetBonusBuyConfigResponse) {
     option (google.api.http) = {
@@ -129,21 +151,6 @@ service BackofficeGamification {
   rpc UpdateBonusBuyConfig(BackofficeUpdateBonusBuyConfigRequest) returns (api.gamification.service.v1.UpdateBonusBuyConfigResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/gamification/bonus-buy-config/update"
-      body: "*"
-    };
-  }
-
-  // === Rule Hierarchy Config ===
-  rpc GetRuleHierarchyConfig(BackofficeGetRuleHierarchyConfigRequest) returns (api.gamification.service.v1.GetRuleHierarchyConfigResponse) {
-    option (google.api.http) = {
-      post: "/v1/backoffice/gamification/rule-hierarchy-config/get"
-      body: "*"
-    };
-  }
-
-  rpc UpdateRuleHierarchyConfig(BackofficeUpdateRuleHierarchyConfigRequest) returns (api.gamification.service.v1.UpdateRuleHierarchyConfigResponse) {
-    option (google.api.http) = {
-      post: "/v1/backoffice/gamification/rule-hierarchy-config/update"
       body: "*"
     };
   }
@@ -172,6 +179,19 @@ message BackofficeListClaimRulesRequest {
   int32 page_size = 3;
 }
 
+// Mirrors the BackofficeWallet inheritance-shape (see GetDepositRewardConfigResponse):
+// the caller's own operator context, the follow_parent toggle, and the page of
+// rules. Each rule already carries `inherited_from_level` indicating whether
+// it was defined at this level or inherited from an ancestor.
+message BackofficeListClaimRulesResponse {
+  api.common.OperatorContext custom_operator_context = 1;
+  bool follow_parent = 2;
+  repeated api.gamification.service.v1.ClaimRule rules = 3;
+  int32 total = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
 message BackofficeGetClaimRuleRequest {
   api.common.OperatorContext target_operator_context = 1;
   int64 rule_id = 2;
@@ -187,6 +207,14 @@ message BackofficeUpdateClaimRuleStatusRequest {
   api.common.OperatorContext target_operator_context = 1;
   int64 rule_id = 2;
   api.gamification.service.v1.RuleStatus status = 3;
+}
+
+message BackofficeSetClaimRuleFollowParentRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  bool follow_parent = 2;
+}
+
+message BackofficeSetClaimRuleFollowParentResponse {
 }
 
 // === Game Restriction Rule Requests ===
@@ -212,6 +240,15 @@ message BackofficeListGameRestrictionRulesRequest {
   int32 page_size = 3;
 }
 
+message BackofficeListGameRestrictionRulesResponse {
+  api.common.OperatorContext custom_operator_context = 1;
+  bool follow_parent = 2;
+  repeated api.gamification.service.v1.GameRestrictionRule rules = 3;
+  int32 total = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
 message BackofficeGetGameRestrictionRuleRequest {
   api.common.OperatorContext target_operator_context = 1;
   int64 rule_id = 2;
@@ -229,6 +266,14 @@ message BackofficeUpdateGameRestrictionRuleStatusRequest {
   api.gamification.service.v1.RuleStatus status = 3;
 }
 
+message BackofficeSetGameRestrictionRuleFollowParentRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  bool follow_parent = 2;
+}
+
+message BackofficeSetGameRestrictionRuleFollowParentResponse {
+}
+
 // === Bonus Buy Config Requests ===
 
 message BackofficeGetBonusBuyConfigRequest {
@@ -238,19 +283,4 @@ message BackofficeGetBonusBuyConfigRequest {
 message BackofficeUpdateBonusBuyConfigRequest {
   api.common.OperatorContext target_operator_context = 1;
   bool enabled = 2;
-}
-
-// === Rule Hierarchy Config Requests ===
-
-message BackofficeGetRuleHierarchyConfigRequest {
-  api.common.OperatorContext target_operator_context = 1;
-  // "claim_rule" | "game_restriction_rule"
-  string rule_type = 2;
-}
-
-message BackofficeUpdateRuleHierarchyConfigRequest {
-  api.common.OperatorContext target_operator_context = 1;
-  // "claim_rule" | "game_restriction_rule"
-  string rule_type = 2;
-  bool follow_parent = 3;
 }
