@@ -132,21 +132,6 @@ service BackofficeGamification {
       body: "*"
     };
   }
-
-  // === Rule Hierarchy Config ===
-  rpc GetRuleHierarchyConfig(BackofficeGetRuleHierarchyConfigRequest) returns (api.gamification.service.v1.GetRuleHierarchyConfigResponse) {
-    option (google.api.http) = {
-      post: "/v1/backoffice/gamification/rule-hierarchy-config/get"
-      body: "*"
-    };
-  }
-
-  rpc UpdateRuleHierarchyConfig(BackofficeUpdateRuleHierarchyConfigRequest) returns (api.gamification.service.v1.UpdateRuleHierarchyConfigResponse) {
-    option (google.api.http) = {
-      post: "/v1/backoffice/gamification/rule-hierarchy-config/update"
-      body: "*"
-    };
-  }
 }
 
 // === Claim Rule Requests ===
@@ -238,19 +223,4 @@ message BackofficeGetBonusBuyConfigRequest {
 message BackofficeUpdateBonusBuyConfigRequest {
   api.common.OperatorContext target_operator_context = 1;
   bool enabled = 2;
-}
-
-// === Rule Hierarchy Config Requests ===
-
-message BackofficeGetRuleHierarchyConfigRequest {
-  api.common.OperatorContext target_operator_context = 1;
-  // "claim_rule" | "game_restriction_rule"
-  string rule_type = 2;
-}
-
-message BackofficeUpdateRuleHierarchyConfigRequest {
-  api.common.OperatorContext target_operator_context = 1;
-  // "claim_rule" | "game_restriction_rule"
-  string rule_type = 2;
-  bool follow_parent = 3;
 }

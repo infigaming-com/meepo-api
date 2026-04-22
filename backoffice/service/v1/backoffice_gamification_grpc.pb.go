@@ -36,8 +36,6 @@ const (
 	BackofficeGamification_UpdateGameRestrictionRuleStatus_FullMethodName   = "/api.backoffice.service.v1.BackofficeGamification/UpdateGameRestrictionRuleStatus"
 	BackofficeGamification_GetBonusBuyConfig_FullMethodName                 = "/api.backoffice.service.v1.BackofficeGamification/GetBonusBuyConfig"
 	BackofficeGamification_UpdateBonusBuyConfig_FullMethodName              = "/api.backoffice.service.v1.BackofficeGamification/UpdateBonusBuyConfig"
-	BackofficeGamification_GetRuleHierarchyConfig_FullMethodName            = "/api.backoffice.service.v1.BackofficeGamification/GetRuleHierarchyConfig"
-	BackofficeGamification_UpdateRuleHierarchyConfig_FullMethodName         = "/api.backoffice.service.v1.BackofficeGamification/UpdateRuleHierarchyConfig"
 )
 
 // BackofficeGamificationClient is the client API for BackofficeGamification service.
@@ -71,9 +69,6 @@ type BackofficeGamificationClient interface {
 	// === Bonus Buy Config ===
 	GetBonusBuyConfig(ctx context.Context, in *BackofficeGetBonusBuyConfigRequest, opts ...grpc.CallOption) (*v1.GetBonusBuyConfigResponse, error)
 	UpdateBonusBuyConfig(ctx context.Context, in *BackofficeUpdateBonusBuyConfigRequest, opts ...grpc.CallOption) (*v1.UpdateBonusBuyConfigResponse, error)
-	// === Rule Hierarchy Config ===
-	GetRuleHierarchyConfig(ctx context.Context, in *BackofficeGetRuleHierarchyConfigRequest, opts ...grpc.CallOption) (*v1.GetRuleHierarchyConfigResponse, error)
-	UpdateRuleHierarchyConfig(ctx context.Context, in *BackofficeUpdateRuleHierarchyConfigRequest, opts ...grpc.CallOption) (*v1.UpdateRuleHierarchyConfigResponse, error)
 }
 
 type backofficeGamificationClient struct {
@@ -244,26 +239,6 @@ func (c *backofficeGamificationClient) UpdateBonusBuyConfig(ctx context.Context,
 	return out, nil
 }
 
-func (c *backofficeGamificationClient) GetRuleHierarchyConfig(ctx context.Context, in *BackofficeGetRuleHierarchyConfigRequest, opts ...grpc.CallOption) (*v1.GetRuleHierarchyConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.GetRuleHierarchyConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeGamification_GetRuleHierarchyConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeGamificationClient) UpdateRuleHierarchyConfig(ctx context.Context, in *BackofficeUpdateRuleHierarchyConfigRequest, opts ...grpc.CallOption) (*v1.UpdateRuleHierarchyConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.UpdateRuleHierarchyConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeGamification_UpdateRuleHierarchyConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BackofficeGamificationServer is the server API for BackofficeGamification service.
 // All implementations must embed UnimplementedBackofficeGamificationServer
 // for forward compatibility.
@@ -295,9 +270,6 @@ type BackofficeGamificationServer interface {
 	// === Bonus Buy Config ===
 	GetBonusBuyConfig(context.Context, *BackofficeGetBonusBuyConfigRequest) (*v1.GetBonusBuyConfigResponse, error)
 	UpdateBonusBuyConfig(context.Context, *BackofficeUpdateBonusBuyConfigRequest) (*v1.UpdateBonusBuyConfigResponse, error)
-	// === Rule Hierarchy Config ===
-	GetRuleHierarchyConfig(context.Context, *BackofficeGetRuleHierarchyConfigRequest) (*v1.GetRuleHierarchyConfigResponse, error)
-	UpdateRuleHierarchyConfig(context.Context, *BackofficeUpdateRuleHierarchyConfigRequest) (*v1.UpdateRuleHierarchyConfigResponse, error)
 	mustEmbedUnimplementedBackofficeGamificationServer()
 }
 
@@ -355,12 +327,6 @@ func (UnimplementedBackofficeGamificationServer) GetBonusBuyConfig(context.Conte
 }
 func (UnimplementedBackofficeGamificationServer) UpdateBonusBuyConfig(context.Context, *BackofficeUpdateBonusBuyConfigRequest) (*v1.UpdateBonusBuyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateBonusBuyConfig not implemented")
-}
-func (UnimplementedBackofficeGamificationServer) GetRuleHierarchyConfig(context.Context, *BackofficeGetRuleHierarchyConfigRequest) (*v1.GetRuleHierarchyConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetRuleHierarchyConfig not implemented")
-}
-func (UnimplementedBackofficeGamificationServer) UpdateRuleHierarchyConfig(context.Context, *BackofficeUpdateRuleHierarchyConfigRequest) (*v1.UpdateRuleHierarchyConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateRuleHierarchyConfig not implemented")
 }
 func (UnimplementedBackofficeGamificationServer) mustEmbedUnimplementedBackofficeGamificationServer() {
 }
@@ -672,42 +638,6 @@ func _BackofficeGamification_UpdateBonusBuyConfig_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeGamification_GetRuleHierarchyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BackofficeGetRuleHierarchyConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeGamificationServer).GetRuleHierarchyConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeGamification_GetRuleHierarchyConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGamificationServer).GetRuleHierarchyConfig(ctx, req.(*BackofficeGetRuleHierarchyConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeGamification_UpdateRuleHierarchyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BackofficeUpdateRuleHierarchyConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeGamificationServer).UpdateRuleHierarchyConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeGamification_UpdateRuleHierarchyConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGamificationServer).UpdateRuleHierarchyConfig(ctx, req.(*BackofficeUpdateRuleHierarchyConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BackofficeGamification_ServiceDesc is the grpc.ServiceDesc for BackofficeGamification service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -778,14 +708,6 @@ var BackofficeGamification_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBonusBuyConfig",
 			Handler:    _BackofficeGamification_UpdateBonusBuyConfig_Handler,
-		},
-		{
-			MethodName: "GetRuleHierarchyConfig",
-			Handler:    _BackofficeGamification_GetRuleHierarchyConfig_Handler,
-		},
-		{
-			MethodName: "UpdateRuleHierarchyConfig",
-			Handler:    _BackofficeGamification_UpdateRuleHierarchyConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

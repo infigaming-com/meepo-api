@@ -896,120 +896,6 @@ func (x *BackofficeUpdateBonusBuyConfigRequest) GetEnabled() bool {
 	return false
 }
 
-type BackofficeGetRuleHierarchyConfigRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	// "claim_rule" | "game_restriction_rule"
-	RuleType      string `protobuf:"bytes,2,opt,name=rule_type,json=ruleType,proto3" json:"rule_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BackofficeGetRuleHierarchyConfigRequest) Reset() {
-	*x = BackofficeGetRuleHierarchyConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BackofficeGetRuleHierarchyConfigRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BackofficeGetRuleHierarchyConfigRequest) ProtoMessage() {}
-
-func (x *BackofficeGetRuleHierarchyConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BackofficeGetRuleHierarchyConfigRequest.ProtoReflect.Descriptor instead.
-func (*BackofficeGetRuleHierarchyConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *BackofficeGetRuleHierarchyConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.TargetOperatorContext
-	}
-	return nil
-}
-
-func (x *BackofficeGetRuleHierarchyConfigRequest) GetRuleType() string {
-	if x != nil {
-		return x.RuleType
-	}
-	return ""
-}
-
-type BackofficeUpdateRuleHierarchyConfigRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	// "claim_rule" | "game_restriction_rule"
-	RuleType      string `protobuf:"bytes,2,opt,name=rule_type,json=ruleType,proto3" json:"rule_type,omitempty"`
-	FollowParent  bool   `protobuf:"varint,3,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BackofficeUpdateRuleHierarchyConfigRequest) Reset() {
-	*x = BackofficeUpdateRuleHierarchyConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BackofficeUpdateRuleHierarchyConfigRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BackofficeUpdateRuleHierarchyConfigRequest) ProtoMessage() {}
-
-func (x *BackofficeUpdateRuleHierarchyConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BackofficeUpdateRuleHierarchyConfigRequest.ProtoReflect.Descriptor instead.
-func (*BackofficeUpdateRuleHierarchyConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *BackofficeUpdateRuleHierarchyConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.TargetOperatorContext
-	}
-	return nil
-}
-
-func (x *BackofficeUpdateRuleHierarchyConfigRequest) GetRuleType() string {
-	if x != nil {
-		return x.RuleType
-	}
-	return ""
-}
-
-func (x *BackofficeUpdateRuleHierarchyConfigRequest) GetFollowParent() bool {
-	if x != nil {
-		return x.FollowParent
-	}
-	return false
-}
-
 var File_backoffice_service_v1_backoffice_gamification_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_gamification_proto_rawDesc = "" +
@@ -1067,14 +953,7 @@ const file_backoffice_service_v1_backoffice_gamification_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\x96\x01\n" +
 	"%BackofficeUpdateBonusBuyConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x18\n" +
-	"\aenabled\x18\x02 \x01(\bR\aenabled\"\x9b\x01\n" +
-	"'BackofficeGetRuleHierarchyConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
-	"\trule_type\x18\x02 \x01(\tR\bruleType\"\xc3\x01\n" +
-	"*BackofficeUpdateRuleHierarchyConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
-	"\trule_type\x18\x02 \x01(\tR\bruleType\x12#\n" +
-	"\rfollow_parent\x18\x03 \x01(\bR\ffollowParent2\xff\x1e\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled2\xb7\x1b\n" +
 	"\x16BackofficeGamification\x12\xbe\x01\n" +
 	"\x0fCreateClaimRule\x12;.api.backoffice.service.v1.BackofficeCreateClaimRuleRequest\x1a4.api.gamification.service.v1.CreateClaimRuleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/gamification/claim-rule/create\x12\xbe\x01\n" +
 	"\x0fUpdateClaimRule\x12;.api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest\x1a4.api.gamification.service.v1.UpdateClaimRuleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/gamification/claim-rule/update\x12\xbe\x01\n" +
@@ -1091,9 +970,7 @@ const file_backoffice_service_v1_backoffice_gamification_proto_rawDesc = "" +
 	"!UpdateGameRestrictionRulePriority\x12M.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest\x1aF.api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse\"L\x82\xd3\xe4\x93\x02F:\x01*\"A/v1/backoffice/gamification/game-restriction-rule/priority/update\x12\x80\x02\n" +
 	"\x1fUpdateGameRestrictionRuleStatus\x12K.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest\x1aD.api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse\"J\x82\xd3\xe4\x93\x02D:\x01*\"?/v1/backoffice/gamification/game-restriction-rule/status/update\x12\xc7\x01\n" +
 	"\x11GetBonusBuyConfig\x12=.api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest\x1a6.api.gamification.service.v1.GetBonusBuyConfigResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/gamification/bonus-buy-config/get\x12\xd3\x01\n" +
-	"\x14UpdateBonusBuyConfig\x12@.api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest\x1a9.api.gamification.service.v1.UpdateBonusBuyConfigResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/gamification/bonus-buy-config/update\x12\xdb\x01\n" +
-	"\x16GetRuleHierarchyConfig\x12B.api.backoffice.service.v1.BackofficeGetRuleHierarchyConfigRequest\x1a;.api.gamification.service.v1.GetRuleHierarchyConfigResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/v1/backoffice/gamification/rule-hierarchy-config/get\x12\xe7\x01\n" +
-	"\x19UpdateRuleHierarchyConfig\x12E.api.backoffice.service.v1.BackofficeUpdateRuleHierarchyConfigRequest\x1a>.api.gamification.service.v1.UpdateRuleHierarchyConfigResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/gamification/rule-hierarchy-config/updateB[\n" +
+	"\x14UpdateBonusBuyConfig\x12@.api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest\x1a9.api.gamification.service.v1.UpdateBonusBuyConfigResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/gamification/bonus-buy-config/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -1108,7 +985,7 @@ func file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP() []by
 	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_gamification_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_backoffice_service_v1_backoffice_gamification_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_backoffice_service_v1_backoffice_gamification_proto_goTypes = []any{
 	(*BackofficeCreateClaimRuleRequest)(nil),                   // 0: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest
 	(*BackofficeUpdateClaimRuleRequest)(nil),                   // 1: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest
@@ -1126,97 +1003,87 @@ var file_backoffice_service_v1_backoffice_gamification_proto_goTypes = []any{
 	(*BackofficeUpdateGameRestrictionRuleStatusRequest)(nil),   // 13: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest
 	(*BackofficeGetBonusBuyConfigRequest)(nil),                 // 14: api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest
 	(*BackofficeUpdateBonusBuyConfigRequest)(nil),              // 15: api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest
-	(*BackofficeGetRuleHierarchyConfigRequest)(nil),            // 16: api.backoffice.service.v1.BackofficeGetRuleHierarchyConfigRequest
-	(*BackofficeUpdateRuleHierarchyConfigRequest)(nil),         // 17: api.backoffice.service.v1.BackofficeUpdateRuleHierarchyConfigRequest
-	(*common.OperatorContext)(nil),                             // 18: api.common.OperatorContext
-	(*v1.ClaimRule)(nil),                                       // 19: api.gamification.service.v1.ClaimRule
-	(v1.RuleStatus)(0),                                         // 20: api.gamification.service.v1.RuleStatus
-	(*v1.GameRestrictionRule)(nil),                             // 21: api.gamification.service.v1.GameRestrictionRule
-	(*v1.CreateClaimRuleResponse)(nil),                         // 22: api.gamification.service.v1.CreateClaimRuleResponse
-	(*v1.UpdateClaimRuleResponse)(nil),                         // 23: api.gamification.service.v1.UpdateClaimRuleResponse
-	(*v1.DeleteClaimRuleResponse)(nil),                         // 24: api.gamification.service.v1.DeleteClaimRuleResponse
-	(*v1.ListClaimRulesResponse)(nil),                          // 25: api.gamification.service.v1.ListClaimRulesResponse
-	(*v1.GetClaimRuleResponse)(nil),                            // 26: api.gamification.service.v1.GetClaimRuleResponse
-	(*v1.UpdateClaimRulePriorityResponse)(nil),                 // 27: api.gamification.service.v1.UpdateClaimRulePriorityResponse
-	(*v1.UpdateClaimRuleStatusResponse)(nil),                   // 28: api.gamification.service.v1.UpdateClaimRuleStatusResponse
-	(*v1.CreateGameRestrictionRuleResponse)(nil),               // 29: api.gamification.service.v1.CreateGameRestrictionRuleResponse
-	(*v1.UpdateGameRestrictionRuleResponse)(nil),               // 30: api.gamification.service.v1.UpdateGameRestrictionRuleResponse
-	(*v1.DeleteGameRestrictionRuleResponse)(nil),               // 31: api.gamification.service.v1.DeleteGameRestrictionRuleResponse
-	(*v1.ListGameRestrictionRulesResponse)(nil),                // 32: api.gamification.service.v1.ListGameRestrictionRulesResponse
-	(*v1.GetGameRestrictionRuleResponse)(nil),                  // 33: api.gamification.service.v1.GetGameRestrictionRuleResponse
-	(*v1.UpdateGameRestrictionRulePriorityResponse)(nil),       // 34: api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse
-	(*v1.UpdateGameRestrictionRuleStatusResponse)(nil),         // 35: api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse
-	(*v1.GetBonusBuyConfigResponse)(nil),                       // 36: api.gamification.service.v1.GetBonusBuyConfigResponse
-	(*v1.UpdateBonusBuyConfigResponse)(nil),                    // 37: api.gamification.service.v1.UpdateBonusBuyConfigResponse
-	(*v1.GetRuleHierarchyConfigResponse)(nil),                  // 38: api.gamification.service.v1.GetRuleHierarchyConfigResponse
-	(*v1.UpdateRuleHierarchyConfigResponse)(nil),               // 39: api.gamification.service.v1.UpdateRuleHierarchyConfigResponse
+	(*common.OperatorContext)(nil),                             // 16: api.common.OperatorContext
+	(*v1.ClaimRule)(nil),                                       // 17: api.gamification.service.v1.ClaimRule
+	(v1.RuleStatus)(0),                                         // 18: api.gamification.service.v1.RuleStatus
+	(*v1.GameRestrictionRule)(nil),                             // 19: api.gamification.service.v1.GameRestrictionRule
+	(*v1.CreateClaimRuleResponse)(nil),                         // 20: api.gamification.service.v1.CreateClaimRuleResponse
+	(*v1.UpdateClaimRuleResponse)(nil),                         // 21: api.gamification.service.v1.UpdateClaimRuleResponse
+	(*v1.DeleteClaimRuleResponse)(nil),                         // 22: api.gamification.service.v1.DeleteClaimRuleResponse
+	(*v1.ListClaimRulesResponse)(nil),                          // 23: api.gamification.service.v1.ListClaimRulesResponse
+	(*v1.GetClaimRuleResponse)(nil),                            // 24: api.gamification.service.v1.GetClaimRuleResponse
+	(*v1.UpdateClaimRulePriorityResponse)(nil),                 // 25: api.gamification.service.v1.UpdateClaimRulePriorityResponse
+	(*v1.UpdateClaimRuleStatusResponse)(nil),                   // 26: api.gamification.service.v1.UpdateClaimRuleStatusResponse
+	(*v1.CreateGameRestrictionRuleResponse)(nil),               // 27: api.gamification.service.v1.CreateGameRestrictionRuleResponse
+	(*v1.UpdateGameRestrictionRuleResponse)(nil),               // 28: api.gamification.service.v1.UpdateGameRestrictionRuleResponse
+	(*v1.DeleteGameRestrictionRuleResponse)(nil),               // 29: api.gamification.service.v1.DeleteGameRestrictionRuleResponse
+	(*v1.ListGameRestrictionRulesResponse)(nil),                // 30: api.gamification.service.v1.ListGameRestrictionRulesResponse
+	(*v1.GetGameRestrictionRuleResponse)(nil),                  // 31: api.gamification.service.v1.GetGameRestrictionRuleResponse
+	(*v1.UpdateGameRestrictionRulePriorityResponse)(nil),       // 32: api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse
+	(*v1.UpdateGameRestrictionRuleStatusResponse)(nil),         // 33: api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse
+	(*v1.GetBonusBuyConfigResponse)(nil),                       // 34: api.gamification.service.v1.GetBonusBuyConfigResponse
+	(*v1.UpdateBonusBuyConfigResponse)(nil),                    // 35: api.gamification.service.v1.UpdateBonusBuyConfigResponse
 }
 var file_backoffice_service_v1_backoffice_gamification_proto_depIdxs = []int32{
-	18, // 0: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	19, // 1: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.rule:type_name -> api.gamification.service.v1.ClaimRule
-	18, // 2: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	19, // 3: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.rule:type_name -> api.gamification.service.v1.ClaimRule
-	18, // 4: api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 5: api.backoffice.service.v1.BackofficeListClaimRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 6: api.backoffice.service.v1.BackofficeGetClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 7: api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 8: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	20, // 9: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.status:type_name -> api.gamification.service.v1.RuleStatus
-	18, // 10: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	21, // 11: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
-	18, // 12: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	21, // 13: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
-	18, // 14: api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 15: api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 16: api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 17: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 18: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	20, // 19: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.status:type_name -> api.gamification.service.v1.RuleStatus
-	18, // 20: api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 21: api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 22: api.backoffice.service.v1.BackofficeGetRuleHierarchyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 23: api.backoffice.service.v1.BackofficeUpdateRuleHierarchyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	0,  // 24: api.backoffice.service.v1.BackofficeGamification.CreateClaimRule:input_type -> api.backoffice.service.v1.BackofficeCreateClaimRuleRequest
-	1,  // 25: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRule:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest
-	2,  // 26: api.backoffice.service.v1.BackofficeGamification.DeleteClaimRule:input_type -> api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest
-	3,  // 27: api.backoffice.service.v1.BackofficeGamification.ListClaimRules:input_type -> api.backoffice.service.v1.BackofficeListClaimRulesRequest
-	4,  // 28: api.backoffice.service.v1.BackofficeGamification.GetClaimRule:input_type -> api.backoffice.service.v1.BackofficeGetClaimRuleRequest
-	5,  // 29: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRulePriority:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest
-	6,  // 30: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRuleStatus:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest
-	7,  // 31: api.backoffice.service.v1.BackofficeGamification.CreateGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest
-	8,  // 32: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest
-	9,  // 33: api.backoffice.service.v1.BackofficeGamification.DeleteGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest
-	10, // 34: api.backoffice.service.v1.BackofficeGamification.ListGameRestrictionRules:input_type -> api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest
-	11, // 35: api.backoffice.service.v1.BackofficeGamification.GetGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest
-	12, // 36: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRulePriority:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest
-	13, // 37: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRuleStatus:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest
-	14, // 38: api.backoffice.service.v1.BackofficeGamification.GetBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest
-	15, // 39: api.backoffice.service.v1.BackofficeGamification.UpdateBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest
-	16, // 40: api.backoffice.service.v1.BackofficeGamification.GetRuleHierarchyConfig:input_type -> api.backoffice.service.v1.BackofficeGetRuleHierarchyConfigRequest
-	17, // 41: api.backoffice.service.v1.BackofficeGamification.UpdateRuleHierarchyConfig:input_type -> api.backoffice.service.v1.BackofficeUpdateRuleHierarchyConfigRequest
-	22, // 42: api.backoffice.service.v1.BackofficeGamification.CreateClaimRule:output_type -> api.gamification.service.v1.CreateClaimRuleResponse
-	23, // 43: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRule:output_type -> api.gamification.service.v1.UpdateClaimRuleResponse
-	24, // 44: api.backoffice.service.v1.BackofficeGamification.DeleteClaimRule:output_type -> api.gamification.service.v1.DeleteClaimRuleResponse
-	25, // 45: api.backoffice.service.v1.BackofficeGamification.ListClaimRules:output_type -> api.gamification.service.v1.ListClaimRulesResponse
-	26, // 46: api.backoffice.service.v1.BackofficeGamification.GetClaimRule:output_type -> api.gamification.service.v1.GetClaimRuleResponse
-	27, // 47: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRulePriority:output_type -> api.gamification.service.v1.UpdateClaimRulePriorityResponse
-	28, // 48: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRuleStatus:output_type -> api.gamification.service.v1.UpdateClaimRuleStatusResponse
-	29, // 49: api.backoffice.service.v1.BackofficeGamification.CreateGameRestrictionRule:output_type -> api.gamification.service.v1.CreateGameRestrictionRuleResponse
-	30, // 50: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRule:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleResponse
-	31, // 51: api.backoffice.service.v1.BackofficeGamification.DeleteGameRestrictionRule:output_type -> api.gamification.service.v1.DeleteGameRestrictionRuleResponse
-	32, // 52: api.backoffice.service.v1.BackofficeGamification.ListGameRestrictionRules:output_type -> api.gamification.service.v1.ListGameRestrictionRulesResponse
-	33, // 53: api.backoffice.service.v1.BackofficeGamification.GetGameRestrictionRule:output_type -> api.gamification.service.v1.GetGameRestrictionRuleResponse
-	34, // 54: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRulePriority:output_type -> api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse
-	35, // 55: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRuleStatus:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse
-	36, // 56: api.backoffice.service.v1.BackofficeGamification.GetBonusBuyConfig:output_type -> api.gamification.service.v1.GetBonusBuyConfigResponse
-	37, // 57: api.backoffice.service.v1.BackofficeGamification.UpdateBonusBuyConfig:output_type -> api.gamification.service.v1.UpdateBonusBuyConfigResponse
-	38, // 58: api.backoffice.service.v1.BackofficeGamification.GetRuleHierarchyConfig:output_type -> api.gamification.service.v1.GetRuleHierarchyConfigResponse
-	39, // 59: api.backoffice.service.v1.BackofficeGamification.UpdateRuleHierarchyConfig:output_type -> api.gamification.service.v1.UpdateRuleHierarchyConfigResponse
-	42, // [42:60] is the sub-list for method output_type
-	24, // [24:42] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	16, // 0: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	17, // 1: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.rule:type_name -> api.gamification.service.v1.ClaimRule
+	16, // 2: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	17, // 3: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.rule:type_name -> api.gamification.service.v1.ClaimRule
+	16, // 4: api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 5: api.backoffice.service.v1.BackofficeListClaimRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 6: api.backoffice.service.v1.BackofficeGetClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 7: api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 8: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 9: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.status:type_name -> api.gamification.service.v1.RuleStatus
+	16, // 10: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 11: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
+	16, // 12: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 13: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
+	16, // 14: api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 15: api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 16: api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 17: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 18: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 19: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.status:type_name -> api.gamification.service.v1.RuleStatus
+	16, // 20: api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 21: api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0,  // 22: api.backoffice.service.v1.BackofficeGamification.CreateClaimRule:input_type -> api.backoffice.service.v1.BackofficeCreateClaimRuleRequest
+	1,  // 23: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRule:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest
+	2,  // 24: api.backoffice.service.v1.BackofficeGamification.DeleteClaimRule:input_type -> api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest
+	3,  // 25: api.backoffice.service.v1.BackofficeGamification.ListClaimRules:input_type -> api.backoffice.service.v1.BackofficeListClaimRulesRequest
+	4,  // 26: api.backoffice.service.v1.BackofficeGamification.GetClaimRule:input_type -> api.backoffice.service.v1.BackofficeGetClaimRuleRequest
+	5,  // 27: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRulePriority:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest
+	6,  // 28: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRuleStatus:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest
+	7,  // 29: api.backoffice.service.v1.BackofficeGamification.CreateGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest
+	8,  // 30: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest
+	9,  // 31: api.backoffice.service.v1.BackofficeGamification.DeleteGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest
+	10, // 32: api.backoffice.service.v1.BackofficeGamification.ListGameRestrictionRules:input_type -> api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest
+	11, // 33: api.backoffice.service.v1.BackofficeGamification.GetGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest
+	12, // 34: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRulePriority:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest
+	13, // 35: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRuleStatus:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest
+	14, // 36: api.backoffice.service.v1.BackofficeGamification.GetBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest
+	15, // 37: api.backoffice.service.v1.BackofficeGamification.UpdateBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest
+	20, // 38: api.backoffice.service.v1.BackofficeGamification.CreateClaimRule:output_type -> api.gamification.service.v1.CreateClaimRuleResponse
+	21, // 39: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRule:output_type -> api.gamification.service.v1.UpdateClaimRuleResponse
+	22, // 40: api.backoffice.service.v1.BackofficeGamification.DeleteClaimRule:output_type -> api.gamification.service.v1.DeleteClaimRuleResponse
+	23, // 41: api.backoffice.service.v1.BackofficeGamification.ListClaimRules:output_type -> api.gamification.service.v1.ListClaimRulesResponse
+	24, // 42: api.backoffice.service.v1.BackofficeGamification.GetClaimRule:output_type -> api.gamification.service.v1.GetClaimRuleResponse
+	25, // 43: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRulePriority:output_type -> api.gamification.service.v1.UpdateClaimRulePriorityResponse
+	26, // 44: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRuleStatus:output_type -> api.gamification.service.v1.UpdateClaimRuleStatusResponse
+	27, // 45: api.backoffice.service.v1.BackofficeGamification.CreateGameRestrictionRule:output_type -> api.gamification.service.v1.CreateGameRestrictionRuleResponse
+	28, // 46: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRule:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleResponse
+	29, // 47: api.backoffice.service.v1.BackofficeGamification.DeleteGameRestrictionRule:output_type -> api.gamification.service.v1.DeleteGameRestrictionRuleResponse
+	30, // 48: api.backoffice.service.v1.BackofficeGamification.ListGameRestrictionRules:output_type -> api.gamification.service.v1.ListGameRestrictionRulesResponse
+	31, // 49: api.backoffice.service.v1.BackofficeGamification.GetGameRestrictionRule:output_type -> api.gamification.service.v1.GetGameRestrictionRuleResponse
+	32, // 50: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRulePriority:output_type -> api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse
+	33, // 51: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRuleStatus:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse
+	34, // 52: api.backoffice.service.v1.BackofficeGamification.GetBonusBuyConfig:output_type -> api.gamification.service.v1.GetBonusBuyConfigResponse
+	35, // 53: api.backoffice.service.v1.BackofficeGamification.UpdateBonusBuyConfig:output_type -> api.gamification.service.v1.UpdateBonusBuyConfigResponse
+	38, // [38:54] is the sub-list for method output_type
+	22, // [22:38] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_gamification_proto_init() }
@@ -1230,7 +1097,7 @@ func file_backoffice_service_v1_backoffice_gamification_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_gamification_proto_rawDesc), len(file_backoffice_service_v1_backoffice_gamification_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -31,10 +31,6 @@ service GamificationService {
   rpc GetBonusBuyConfig(GetBonusBuyConfigRequest) returns (GetBonusBuyConfigResponse);
   rpc UpdateBonusBuyConfig(UpdateBonusBuyConfigRequest) returns (UpdateBonusBuyConfigResponse);
 
-  // === Rule Hierarchy Config ===
-  rpc GetRuleHierarchyConfig(GetRuleHierarchyConfigRequest) returns (GetRuleHierarchyConfigResponse);
-  rpc UpdateRuleHierarchyConfig(UpdateRuleHierarchyConfigRequest) returns (UpdateRuleHierarchyConfigResponse);
-
   // === Runtime Checks ===
   // Default when no rule matches: REJECT (CLAIM_RULE_NOT_CONFIGURED). Callers must have an active rule for this user's segment.
   rpc CheckClaimEligibility(CheckClaimEligibilityRequest) returns (CheckClaimEligibilityResponse);
@@ -290,30 +286,6 @@ message UpdateBonusBuyConfigRequest {
 
 message UpdateBonusBuyConfigResponse {
   BonusBuyConfig config = 1;
-}
-
-// === Rule Hierarchy Config Requests/Responses ===
-
-message GetRuleHierarchyConfigRequest {
-  // "claim_rule" | "game_restriction_rule"
-  string rule_type = 1;
-  api.common.OperatorContext operator_context = 2;
-}
-
-message GetRuleHierarchyConfigResponse {
-  bool follow_parent = 1;
-  // "system" | "retailer" | "company" | "operator"
-  string level = 2;
-}
-
-message UpdateRuleHierarchyConfigRequest {
-  // "claim_rule" | "game_restriction_rule"
-  string rule_type = 1;
-  bool follow_parent = 2;
-  api.common.OperatorContext operator_context = 3;
-}
-
-message UpdateRuleHierarchyConfigResponse {
 }
 
 // === Runtime Check Requests/Responses ===
