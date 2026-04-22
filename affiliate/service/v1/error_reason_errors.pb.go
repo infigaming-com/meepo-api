@@ -1329,6 +1329,7 @@ func ErrorPostbackUrlBlocked(format string, args ...interface{}) *errors.Error {
 
 // User profile sync — emitted by the UserProfileUpdateEvent subscriber
 // when applying a batched profile change (email, mobile, ...) fails.
+// Note: 130108 is USER_REFERRAL_CODE_ALREADY_EXISTS above, so this is 130109.
 func IsProcessUserProfileUpdateFailed(err error) bool {
 	if err == nil {
 		return false
@@ -1339,6 +1340,7 @@ func IsProcessUserProfileUpdateFailed(err error) bool {
 
 // User profile sync — emitted by the UserProfileUpdateEvent subscriber
 // when applying a batched profile change (email, mobile, ...) fails.
+// Note: 130108 is USER_REFERRAL_CODE_ALREADY_EXISTS above, so this is 130109.
 func ErrorProcessUserProfileUpdateFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROCESS_USER_PROFILE_UPDATE_FAILED.String(), fmt.Sprintf(format, args...))
 }

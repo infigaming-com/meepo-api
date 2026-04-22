@@ -343,14 +343,6 @@ const UserStatusUpdateTopic = "user.status.update"
 
 const UserIdentitySubmitTopic = "user.identity.submit"
 
-// UserProfileField* are the canonical `field` values carried in
-// UserProfileUpdateEvent.UserFieldChange.field. Publishers and subscribers
-// must reference these constants rather than inline the string, so the
-// contract has a single source of truth.
-const (
-	UserProfileFieldEmail  = "email"
-	UserProfileFieldMobile = "mobile"
-)
 
 // UserIdentitySubmitEvent is published when a user submits identity documents for KYC Level 3 verification.
 type UserIdentitySubmitEvent struct {

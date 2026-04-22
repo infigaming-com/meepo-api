@@ -62,12 +62,20 @@ message UserStatusUpdateEvent {
 	int64 updated_at = 6;
 }
 
+// UserProfileField enumerates which profile attribute changed inside a
+// UserFieldChange. Add new values as more fields need downstream sync;
+// subscribers must handle USER_PROFILE_FIELD_UNSPECIFIED gracefully so they
+// stay forward-compatible with publishers emitting unknown new values.
+enum UserProfileField {
+	USER_PROFILE_FIELD_UNSPECIFIED = 0;
+	USER_PROFILE_FIELD_EMAIL = 1;
+	USER_PROFILE_FIELD_MOBILE = 2;
+}
+
 // UserFieldChange carries one before/after of a single user profile field,
 // grouped inside UserProfileUpdateEvent.
 message UserFieldChange {
-	// Canonical field name agreed between publisher and subscribers.
-	// Currently published: "email", "mobile".
-	string field = 1;
+	UserProfileField field = 1;
 	string old_value = 2;
 	string new_value = 3;
 }

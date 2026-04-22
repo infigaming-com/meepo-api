@@ -140,6 +140,7 @@ const (
 	ErrorReason_POSTBACK_URL_BLOCKED             ErrorReason = 130107
 	// User profile sync — emitted by the UserProfileUpdateEvent subscriber
 	// when applying a batched profile change (email, mobile, ...) fails.
+	// Note: 130108 is USER_REFERRAL_CODE_ALREADY_EXISTS above, so this is 130109.
 	ErrorReason_PROCESS_USER_PROFILE_UPDATE_FAILED ErrorReason = 130109
 )
 
