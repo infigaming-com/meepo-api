@@ -135,4 +135,9 @@ enum ErrorReason {
   // when applying a batched profile change (email, mobile, ...) fails.
   // Note: 130108 is USER_REFERRAL_CODE_ALREADY_EXISTS above, so this is 130109.
   PROCESS_USER_PROFILE_UPDATE_FAILED = 130109;
+
+  // 4xx variant of LIST_AFFILIATE_USERS_FAILED for caller misuse (page_size
+  // over cap, missing initiator context, etc.) so clients don't see 5xx
+  // alerts for what is their own fixable input.
+  LIST_AFFILIATE_USERS_INVALID_ARGUMENT = 130110 [(errors.code) = 400];
 }

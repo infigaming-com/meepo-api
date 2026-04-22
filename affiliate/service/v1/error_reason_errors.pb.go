@@ -1344,3 +1344,21 @@ func IsProcessUserProfileUpdateFailed(err error) bool {
 func ErrorProcessUserProfileUpdateFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROCESS_USER_PROFILE_UPDATE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// 4xx variant of LIST_AFFILIATE_USERS_FAILED for caller misuse (page_size
+// over cap, missing initiator context, etc.) so clients don't see 5xx
+// alerts for what is their own fixable input.
+func IsListAffiliateUsersInvalidArgument(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_AFFILIATE_USERS_INVALID_ARGUMENT.String() && e.Code == 400
+}
+
+// 4xx variant of LIST_AFFILIATE_USERS_FAILED for caller misuse (page_size
+// over cap, missing initiator context, etc.) so clients don't see 5xx
+// alerts for what is their own fixable input.
+func ErrorListAffiliateUsersInvalidArgument(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_LIST_AFFILIATE_USERS_INVALID_ARGUMENT.String(), fmt.Sprintf(format, args...))
+}
