@@ -4761,6 +4761,334 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
+    /v1/backoffice/gamification/bonus-buy-config/get:
+        post:
+            tags:
+                - BackofficeGamification
+            description: === Bonus Buy Config ===
+            operationId: BackofficeGamification_GetBonusBuyConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.GetBonusBuyConfigResponse'
+    /v1/backoffice/gamification/bonus-buy-config/update:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_UpdateBonusBuyConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.UpdateBonusBuyConfigResponse'
+    /v1/backoffice/gamification/claim-rule/create:
+        post:
+            tags:
+                - BackofficeGamification
+            description: === Claim Rules ===
+            operationId: BackofficeGamification_CreateClaimRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeCreateClaimRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.CreateClaimRuleResponse'
+    /v1/backoffice/gamification/claim-rule/delete:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_DeleteClaimRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.DeleteClaimRuleResponse'
+    /v1/backoffice/gamification/claim-rule/get:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_GetClaimRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeGetClaimRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.GetClaimRuleResponse'
+    /v1/backoffice/gamification/claim-rule/list:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_ListClaimRules
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListClaimRulesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.ListClaimRulesResponse'
+    /v1/backoffice/gamification/claim-rule/priority/update:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_UpdateClaimRulePriority
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.UpdateClaimRulePriorityResponse'
+    /v1/backoffice/gamification/claim-rule/status/update:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_UpdateClaimRuleStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.UpdateClaimRuleStatusResponse'
+    /v1/backoffice/gamification/claim-rule/update:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_UpdateClaimRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.UpdateClaimRuleResponse'
+    /v1/backoffice/gamification/game-restriction-rule/create:
+        post:
+            tags:
+                - BackofficeGamification
+            description: === Game Restriction Rules ===
+            operationId: BackofficeGamification_CreateGameRestrictionRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.CreateGameRestrictionRuleResponse'
+    /v1/backoffice/gamification/game-restriction-rule/delete:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_DeleteGameRestrictionRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.DeleteGameRestrictionRuleResponse'
+    /v1/backoffice/gamification/game-restriction-rule/get:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_GetGameRestrictionRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.GetGameRestrictionRuleResponse'
+    /v1/backoffice/gamification/game-restriction-rule/list:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_ListGameRestrictionRules
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.ListGameRestrictionRulesResponse'
+    /v1/backoffice/gamification/game-restriction-rule/priority/update:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_UpdateGameRestrictionRulePriority
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse'
+    /v1/backoffice/gamification/game-restriction-rule/status/update:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_UpdateGameRestrictionRuleStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse'
+    /v1/backoffice/gamification/game-restriction-rule/update:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_UpdateGameRestrictionRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.UpdateGameRestrictionRuleResponse'
+    /v1/backoffice/gamification/rule-hierarchy-config/get:
+        post:
+            tags:
+                - BackofficeGamification
+            description: === Rule Hierarchy Config ===
+            operationId: BackofficeGamification_GetRuleHierarchyConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeGetRuleHierarchyConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.GetRuleHierarchyConfigResponse'
+    /v1/backoffice/gamification/rule-hierarchy-config/update:
+        post:
+            tags:
+                - BackofficeGamification
+            operationId: BackofficeGamification_UpdateRuleHierarchyConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateRuleHierarchyConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gamification.service.v1.UpdateRuleHierarchyConfigResponse'
     /v1/backoffice/notification/channel/create:
         post:
             tags:
@@ -15219,6 +15547,20 @@ components:
                 gamesAdded:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.BackofficeCreateClaimRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.ClaimRule'
+        api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.GameRestrictionRule'
         api.backoffice.service.v1.BackofficeCreateGameTagRequest:
             type: object
             properties:
@@ -15229,6 +15571,20 @@ components:
             properties:
                 tagId:
                     type: string
+        api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+        api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
         api.backoffice.service.v1.BackofficeDeleteGameTagRequest:
             type: object
             properties:
@@ -15237,6 +15593,55 @@ components:
         api.backoffice.service.v1.BackofficeDeleteGameTagResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.BackofficeGetClaimRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+        api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+        api.backoffice.service.v1.BackofficeGetRuleHierarchyConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleType:
+                    type: string
+                    description: '"claim_rule" | "game_restriction_rule"'
+        api.backoffice.service.v1.BackofficeListClaimRulesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.BackofficeListGameTagsRequest:
             type: object
             properties:
@@ -15391,6 +15796,43 @@ components:
                 gamesRemoved:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                enabled:
+                    type: boolean
+        api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+                priority:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.ClaimRule'
+        api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+                status:
+                    enum:
+                        - RULE_STATUS_ACTIVE
+                        - RULE_STATUS_DISABLED
+                    type: string
+                    format: enum
         api.backoffice.service.v1.BackofficeUpdateGameOrderInTagRequest:
             type: object
             properties:
@@ -15409,6 +15851,36 @@ components:
         api.backoffice.service.v1.BackofficeUpdateGameOrderInTagResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+                priority:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.GameRestrictionRule'
+        api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+                status:
+                    enum:
+                        - RULE_STATUS_ACTIVE
+                        - RULE_STATUS_DISABLED
+                    type: string
+                    format: enum
         api.backoffice.service.v1.BackofficeUpdateGameTagRequest:
             type: object
             properties:
@@ -15421,6 +15893,16 @@ components:
         api.backoffice.service.v1.BackofficeUpdateGameTagResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.BackofficeUpdateRuleHierarchyConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleType:
+                    type: string
+                    description: '"claim_rule" | "game_restriction_rule"'
+                followParent:
+                    type: boolean
         api.backoffice.service.v1.BalancesSummaryRow:
             type: object
             properties:
@@ -29137,6 +29619,252 @@ components:
                 lobbyUrl:
                     type: string
                     description: URL to redirect user to lobby.
+        api.gamification.service.v1.BonusBuyConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                enabled:
+                    type: boolean
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+        api.gamification.service.v1.ClaimRule:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                priority:
+                    type: integer
+                    format: int32
+                targetObject:
+                    enum:
+                        - TARGET_OBJECT_ALL_PLAYERS
+                        - TARGET_OBJECT_CRM_SEGMENT
+                    type: string
+                    format: enum
+                segmentId:
+                    type: string
+                segmentName:
+                    type: string
+                requireKyc:
+                    type: boolean
+                    description: Account restrictions
+                requirePhone:
+                    type: boolean
+                requireEmail:
+                    type: boolean
+                sameTypeExclusion:
+                    type: boolean
+                    description: Exclusion logic
+                ipDedupEnabled:
+                    type: boolean
+                    description: Risk detection - IP
+                sameIpClaimLimit:
+                    type: integer
+                    format: int32
+                sameRewardSameIpLimit:
+                    type: integer
+                    format: int32
+                deviceDedupEnabled:
+                    type: boolean
+                    description: Risk detection - Device
+                sameDeviceClaimLimit:
+                    type: integer
+                    format: int32
+                sameRewardSameDeviceLimit:
+                    type: integer
+                    format: int32
+                ipDeviceWindowHours:
+                    type: integer
+                    description: Sliding time window in hours for IP/Device dedup counts (default 0 = use 24h fallback).
+                    format: int32
+                status:
+                    enum:
+                        - RULE_STATUS_ACTIVE
+                        - RULE_STATUS_DISABLED
+                    type: string
+                    format: enum
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                inheritedFromLevel:
+                    type: string
+                    description: '"self" | "system" | "retailer" | "company" | "operator"'
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: ClaimRule controls who can claim a bonus.
+        api.gamification.service.v1.CreateClaimRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.ClaimRule'
+        api.gamification.service.v1.CreateGameRestrictionRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.GameRestrictionRule'
+        api.gamification.service.v1.DeleteClaimRuleResponse:
+            type: object
+            properties: {}
+        api.gamification.service.v1.DeleteGameRestrictionRuleResponse:
+            type: object
+            properties: {}
+        api.gamification.service.v1.GameRestrictionRule:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                priority:
+                    type: integer
+                    format: int32
+                targetObject:
+                    enum:
+                        - TARGET_OBJECT_ALL_PLAYERS
+                        - TARGET_OBJECT_CRM_SEGMENT
+                    type: string
+                    format: enum
+                segmentId:
+                    type: string
+                segmentName:
+                    type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameTagIds:
+                    type: array
+                    items:
+                        type: string
+                allGames:
+                    type: boolean
+                status:
+                    enum:
+                        - RULE_STATUS_ACTIVE
+                        - RULE_STATUS_DISABLED
+                    type: string
+                    format: enum
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                inheritedFromLevel:
+                    type: string
+                    description: '"self" | "system" | "retailer" | "company" | "operator"'
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: GameRestrictionRule controls which games a bonus holder can play.
+        api.gamification.service.v1.GetBonusBuyConfigResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.gamification.service.v1.BonusBuyConfig'
+        api.gamification.service.v1.GetClaimRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.ClaimRule'
+        api.gamification.service.v1.GetGameRestrictionRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.GameRestrictionRule'
+        api.gamification.service.v1.GetRuleHierarchyConfigResponse:
+            type: object
+            properties:
+                followParent:
+                    type: boolean
+                level:
+                    type: string
+                    description: '"system" | "retailer" | "company" | "operator"'
+        api.gamification.service.v1.ListClaimRulesResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.gamification.service.v1.ClaimRule'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.gamification.service.v1.ListGameRestrictionRulesResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.gamification.service.v1.GameRestrictionRule'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.gamification.service.v1.UpdateBonusBuyConfigResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.gamification.service.v1.BonusBuyConfig'
+        api.gamification.service.v1.UpdateClaimRulePriorityResponse:
+            type: object
+            properties: {}
+        api.gamification.service.v1.UpdateClaimRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.ClaimRule'
+        api.gamification.service.v1.UpdateClaimRuleStatusResponse:
+            type: object
+            properties: {}
+        api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse:
+            type: object
+            properties: {}
+        api.gamification.service.v1.UpdateGameRestrictionRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.gamification.service.v1.GameRestrictionRule'
+        api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse:
+            type: object
+            properties: {}
+        api.gamification.service.v1.UpdateRuleHierarchyConfigResponse:
+            type: object
+            properties: {}
         api.push.service.v1.BatchCreateSMSChannelRatesResponse:
             type: object
             properties:
@@ -36990,6 +37718,15 @@ tags:
     - name: BackofficeFileStore
     - name: BackofficeFinance
     - name: BackofficeGame
+    - name: BackofficeGamification
+      description: |-
+        Gamification rules management for backoffice.
+         Proxies the gamification-service admin APIs with operator context injection
+         and HTTP bindings for the admin console.
+
+         Only admin CRUD operations are exposed here. Runtime APIs
+         (CheckClaimEligibility, CheckGameRestriction, RecordClaim) are called
+         directly by wallet-service and game-service and are NOT proxied.
     - name: BackofficeNotification
       description: |-
         Notification channel and rule management service for backoffice.
