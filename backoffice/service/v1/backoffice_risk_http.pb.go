@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.9.0
 // - protoc             v5.29.3
-// source: backoffice/service/v1/backoffice_gamification.proto
+// source: backoffice/service/v1/backoffice_risk.proto
 
 package v1
 
@@ -10,7 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
-	v1 "github.com/infigaming-com/meepo-api/gamification/service/v1"
+	v1 "github.com/infigaming-com/meepo-api/risk/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,24 +20,24 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeGamificationCreateClaimRule = "/api.backoffice.service.v1.BackofficeGamification/CreateClaimRule"
-const OperationBackofficeGamificationCreateGameRestrictionRule = "/api.backoffice.service.v1.BackofficeGamification/CreateGameRestrictionRule"
-const OperationBackofficeGamificationDeleteClaimRule = "/api.backoffice.service.v1.BackofficeGamification/DeleteClaimRule"
-const OperationBackofficeGamificationDeleteGameRestrictionRule = "/api.backoffice.service.v1.BackofficeGamification/DeleteGameRestrictionRule"
-const OperationBackofficeGamificationGetBonusBuyConfig = "/api.backoffice.service.v1.BackofficeGamification/GetBonusBuyConfig"
-const OperationBackofficeGamificationGetClaimRule = "/api.backoffice.service.v1.BackofficeGamification/GetClaimRule"
-const OperationBackofficeGamificationGetGameRestrictionRule = "/api.backoffice.service.v1.BackofficeGamification/GetGameRestrictionRule"
-const OperationBackofficeGamificationListClaimRules = "/api.backoffice.service.v1.BackofficeGamification/ListClaimRules"
-const OperationBackofficeGamificationListGameRestrictionRules = "/api.backoffice.service.v1.BackofficeGamification/ListGameRestrictionRules"
-const OperationBackofficeGamificationUpdateBonusBuyConfig = "/api.backoffice.service.v1.BackofficeGamification/UpdateBonusBuyConfig"
-const OperationBackofficeGamificationUpdateClaimRule = "/api.backoffice.service.v1.BackofficeGamification/UpdateClaimRule"
-const OperationBackofficeGamificationUpdateClaimRulePriority = "/api.backoffice.service.v1.BackofficeGamification/UpdateClaimRulePriority"
-const OperationBackofficeGamificationUpdateClaimRuleStatus = "/api.backoffice.service.v1.BackofficeGamification/UpdateClaimRuleStatus"
-const OperationBackofficeGamificationUpdateGameRestrictionRule = "/api.backoffice.service.v1.BackofficeGamification/UpdateGameRestrictionRule"
-const OperationBackofficeGamificationUpdateGameRestrictionRulePriority = "/api.backoffice.service.v1.BackofficeGamification/UpdateGameRestrictionRulePriority"
-const OperationBackofficeGamificationUpdateGameRestrictionRuleStatus = "/api.backoffice.service.v1.BackofficeGamification/UpdateGameRestrictionRuleStatus"
+const OperationBackofficeRiskCreateClaimRule = "/api.backoffice.service.v1.BackofficeRisk/CreateClaimRule"
+const OperationBackofficeRiskCreateGameRestrictionRule = "/api.backoffice.service.v1.BackofficeRisk/CreateGameRestrictionRule"
+const OperationBackofficeRiskDeleteClaimRule = "/api.backoffice.service.v1.BackofficeRisk/DeleteClaimRule"
+const OperationBackofficeRiskDeleteGameRestrictionRule = "/api.backoffice.service.v1.BackofficeRisk/DeleteGameRestrictionRule"
+const OperationBackofficeRiskGetBonusBuyConfig = "/api.backoffice.service.v1.BackofficeRisk/GetBonusBuyConfig"
+const OperationBackofficeRiskGetClaimRule = "/api.backoffice.service.v1.BackofficeRisk/GetClaimRule"
+const OperationBackofficeRiskGetGameRestrictionRule = "/api.backoffice.service.v1.BackofficeRisk/GetGameRestrictionRule"
+const OperationBackofficeRiskListClaimRules = "/api.backoffice.service.v1.BackofficeRisk/ListClaimRules"
+const OperationBackofficeRiskListGameRestrictionRules = "/api.backoffice.service.v1.BackofficeRisk/ListGameRestrictionRules"
+const OperationBackofficeRiskUpdateBonusBuyConfig = "/api.backoffice.service.v1.BackofficeRisk/UpdateBonusBuyConfig"
+const OperationBackofficeRiskUpdateClaimRule = "/api.backoffice.service.v1.BackofficeRisk/UpdateClaimRule"
+const OperationBackofficeRiskUpdateClaimRulePriority = "/api.backoffice.service.v1.BackofficeRisk/UpdateClaimRulePriority"
+const OperationBackofficeRiskUpdateClaimRuleStatus = "/api.backoffice.service.v1.BackofficeRisk/UpdateClaimRuleStatus"
+const OperationBackofficeRiskUpdateGameRestrictionRule = "/api.backoffice.service.v1.BackofficeRisk/UpdateGameRestrictionRule"
+const OperationBackofficeRiskUpdateGameRestrictionRulePriority = "/api.backoffice.service.v1.BackofficeRisk/UpdateGameRestrictionRulePriority"
+const OperationBackofficeRiskUpdateGameRestrictionRuleStatus = "/api.backoffice.service.v1.BackofficeRisk/UpdateGameRestrictionRuleStatus"
 
-type BackofficeGamificationHTTPServer interface {
+type BackofficeRiskHTTPServer interface {
 	// CreateClaimRule === Claim Rules ===
 	CreateClaimRule(context.Context, *BackofficeCreateClaimRuleRequest) (*v1.CreateClaimRuleResponse, error)
 	// CreateGameRestrictionRule === Game Restriction Rules ===
@@ -59,27 +59,27 @@ type BackofficeGamificationHTTPServer interface {
 	UpdateGameRestrictionRuleStatus(context.Context, *BackofficeUpdateGameRestrictionRuleStatusRequest) (*v1.UpdateGameRestrictionRuleStatusResponse, error)
 }
 
-func RegisterBackofficeGamificationHTTPServer(s *http.Server, srv BackofficeGamificationHTTPServer) {
+func RegisterBackofficeRiskHTTPServer(s *http.Server, srv BackofficeRiskHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/gamification/claim-rule/create", _BackofficeGamification_CreateClaimRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/claim-rule/update", _BackofficeGamification_UpdateClaimRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/claim-rule/delete", _BackofficeGamification_DeleteClaimRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/claim-rule/list", _BackofficeGamification_ListClaimRules0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/claim-rule/get", _BackofficeGamification_GetClaimRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/claim-rule/priority/update", _BackofficeGamification_UpdateClaimRulePriority0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/claim-rule/status/update", _BackofficeGamification_UpdateClaimRuleStatus0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/game-restriction-rule/create", _BackofficeGamification_CreateGameRestrictionRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/game-restriction-rule/update", _BackofficeGamification_UpdateGameRestrictionRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/game-restriction-rule/delete", _BackofficeGamification_DeleteGameRestrictionRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/game-restriction-rule/list", _BackofficeGamification_ListGameRestrictionRules0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/game-restriction-rule/get", _BackofficeGamification_GetGameRestrictionRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/game-restriction-rule/priority/update", _BackofficeGamification_UpdateGameRestrictionRulePriority0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/game-restriction-rule/status/update", _BackofficeGamification_UpdateGameRestrictionRuleStatus0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/bonus-buy-config/get", _BackofficeGamification_GetBonusBuyConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/gamification/bonus-buy-config/update", _BackofficeGamification_UpdateBonusBuyConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/claim-rule/create", _BackofficeRisk_CreateClaimRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/claim-rule/update", _BackofficeRisk_UpdateClaimRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/claim-rule/delete", _BackofficeRisk_DeleteClaimRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/claim-rule/list", _BackofficeRisk_ListClaimRules0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/claim-rule/get", _BackofficeRisk_GetClaimRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/claim-rule/priority/update", _BackofficeRisk_UpdateClaimRulePriority0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/claim-rule/status/update", _BackofficeRisk_UpdateClaimRuleStatus0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/game-restriction-rule/create", _BackofficeRisk_CreateGameRestrictionRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/game-restriction-rule/update", _BackofficeRisk_UpdateGameRestrictionRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/game-restriction-rule/delete", _BackofficeRisk_DeleteGameRestrictionRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/game-restriction-rule/list", _BackofficeRisk_ListGameRestrictionRules0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/game-restriction-rule/get", _BackofficeRisk_GetGameRestrictionRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/game-restriction-rule/priority/update", _BackofficeRisk_UpdateGameRestrictionRulePriority0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/game-restriction-rule/status/update", _BackofficeRisk_UpdateGameRestrictionRuleStatus0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/bonus-buy-config/get", _BackofficeRisk_GetBonusBuyConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/risk/bonus-buy-config/update", _BackofficeRisk_UpdateBonusBuyConfig0_HTTP_Handler(srv))
 }
 
-func _BackofficeGamification_CreateClaimRule0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_CreateClaimRule0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeCreateClaimRuleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -88,7 +88,7 @@ func _BackofficeGamification_CreateClaimRule0_HTTP_Handler(srv BackofficeGamific
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationCreateClaimRule)
+		http.SetOperation(ctx, OperationBackofficeRiskCreateClaimRule)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.CreateClaimRule(ctx, req.(*BackofficeCreateClaimRuleRequest))
 		})
@@ -101,7 +101,7 @@ func _BackofficeGamification_CreateClaimRule0_HTTP_Handler(srv BackofficeGamific
 	}
 }
 
-func _BackofficeGamification_UpdateClaimRule0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_UpdateClaimRule0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeUpdateClaimRuleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -110,7 +110,7 @@ func _BackofficeGamification_UpdateClaimRule0_HTTP_Handler(srv BackofficeGamific
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationUpdateClaimRule)
+		http.SetOperation(ctx, OperationBackofficeRiskUpdateClaimRule)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateClaimRule(ctx, req.(*BackofficeUpdateClaimRuleRequest))
 		})
@@ -123,7 +123,7 @@ func _BackofficeGamification_UpdateClaimRule0_HTTP_Handler(srv BackofficeGamific
 	}
 }
 
-func _BackofficeGamification_DeleteClaimRule0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_DeleteClaimRule0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeDeleteClaimRuleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -132,7 +132,7 @@ func _BackofficeGamification_DeleteClaimRule0_HTTP_Handler(srv BackofficeGamific
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationDeleteClaimRule)
+		http.SetOperation(ctx, OperationBackofficeRiskDeleteClaimRule)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.DeleteClaimRule(ctx, req.(*BackofficeDeleteClaimRuleRequest))
 		})
@@ -145,7 +145,7 @@ func _BackofficeGamification_DeleteClaimRule0_HTTP_Handler(srv BackofficeGamific
 	}
 }
 
-func _BackofficeGamification_ListClaimRules0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_ListClaimRules0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeListClaimRulesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -154,7 +154,7 @@ func _BackofficeGamification_ListClaimRules0_HTTP_Handler(srv BackofficeGamifica
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationListClaimRules)
+		http.SetOperation(ctx, OperationBackofficeRiskListClaimRules)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListClaimRules(ctx, req.(*BackofficeListClaimRulesRequest))
 		})
@@ -167,7 +167,7 @@ func _BackofficeGamification_ListClaimRules0_HTTP_Handler(srv BackofficeGamifica
 	}
 }
 
-func _BackofficeGamification_GetClaimRule0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_GetClaimRule0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeGetClaimRuleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -176,7 +176,7 @@ func _BackofficeGamification_GetClaimRule0_HTTP_Handler(srv BackofficeGamificati
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationGetClaimRule)
+		http.SetOperation(ctx, OperationBackofficeRiskGetClaimRule)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetClaimRule(ctx, req.(*BackofficeGetClaimRuleRequest))
 		})
@@ -189,7 +189,7 @@ func _BackofficeGamification_GetClaimRule0_HTTP_Handler(srv BackofficeGamificati
 	}
 }
 
-func _BackofficeGamification_UpdateClaimRulePriority0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_UpdateClaimRulePriority0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeUpdateClaimRulePriorityRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -198,7 +198,7 @@ func _BackofficeGamification_UpdateClaimRulePriority0_HTTP_Handler(srv Backoffic
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationUpdateClaimRulePriority)
+		http.SetOperation(ctx, OperationBackofficeRiskUpdateClaimRulePriority)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateClaimRulePriority(ctx, req.(*BackofficeUpdateClaimRulePriorityRequest))
 		})
@@ -211,7 +211,7 @@ func _BackofficeGamification_UpdateClaimRulePriority0_HTTP_Handler(srv Backoffic
 	}
 }
 
-func _BackofficeGamification_UpdateClaimRuleStatus0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_UpdateClaimRuleStatus0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeUpdateClaimRuleStatusRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -220,7 +220,7 @@ func _BackofficeGamification_UpdateClaimRuleStatus0_HTTP_Handler(srv BackofficeG
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationUpdateClaimRuleStatus)
+		http.SetOperation(ctx, OperationBackofficeRiskUpdateClaimRuleStatus)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateClaimRuleStatus(ctx, req.(*BackofficeUpdateClaimRuleStatusRequest))
 		})
@@ -233,7 +233,7 @@ func _BackofficeGamification_UpdateClaimRuleStatus0_HTTP_Handler(srv BackofficeG
 	}
 }
 
-func _BackofficeGamification_CreateGameRestrictionRule0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_CreateGameRestrictionRule0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeCreateGameRestrictionRuleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -242,7 +242,7 @@ func _BackofficeGamification_CreateGameRestrictionRule0_HTTP_Handler(srv Backoff
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationCreateGameRestrictionRule)
+		http.SetOperation(ctx, OperationBackofficeRiskCreateGameRestrictionRule)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.CreateGameRestrictionRule(ctx, req.(*BackofficeCreateGameRestrictionRuleRequest))
 		})
@@ -255,7 +255,7 @@ func _BackofficeGamification_CreateGameRestrictionRule0_HTTP_Handler(srv Backoff
 	}
 }
 
-func _BackofficeGamification_UpdateGameRestrictionRule0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_UpdateGameRestrictionRule0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeUpdateGameRestrictionRuleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -264,7 +264,7 @@ func _BackofficeGamification_UpdateGameRestrictionRule0_HTTP_Handler(srv Backoff
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationUpdateGameRestrictionRule)
+		http.SetOperation(ctx, OperationBackofficeRiskUpdateGameRestrictionRule)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateGameRestrictionRule(ctx, req.(*BackofficeUpdateGameRestrictionRuleRequest))
 		})
@@ -277,7 +277,7 @@ func _BackofficeGamification_UpdateGameRestrictionRule0_HTTP_Handler(srv Backoff
 	}
 }
 
-func _BackofficeGamification_DeleteGameRestrictionRule0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_DeleteGameRestrictionRule0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeDeleteGameRestrictionRuleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -286,7 +286,7 @@ func _BackofficeGamification_DeleteGameRestrictionRule0_HTTP_Handler(srv Backoff
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationDeleteGameRestrictionRule)
+		http.SetOperation(ctx, OperationBackofficeRiskDeleteGameRestrictionRule)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.DeleteGameRestrictionRule(ctx, req.(*BackofficeDeleteGameRestrictionRuleRequest))
 		})
@@ -299,7 +299,7 @@ func _BackofficeGamification_DeleteGameRestrictionRule0_HTTP_Handler(srv Backoff
 	}
 }
 
-func _BackofficeGamification_ListGameRestrictionRules0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_ListGameRestrictionRules0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeListGameRestrictionRulesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -308,7 +308,7 @@ func _BackofficeGamification_ListGameRestrictionRules0_HTTP_Handler(srv Backoffi
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationListGameRestrictionRules)
+		http.SetOperation(ctx, OperationBackofficeRiskListGameRestrictionRules)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListGameRestrictionRules(ctx, req.(*BackofficeListGameRestrictionRulesRequest))
 		})
@@ -321,7 +321,7 @@ func _BackofficeGamification_ListGameRestrictionRules0_HTTP_Handler(srv Backoffi
 	}
 }
 
-func _BackofficeGamification_GetGameRestrictionRule0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_GetGameRestrictionRule0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeGetGameRestrictionRuleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -330,7 +330,7 @@ func _BackofficeGamification_GetGameRestrictionRule0_HTTP_Handler(srv Backoffice
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationGetGameRestrictionRule)
+		http.SetOperation(ctx, OperationBackofficeRiskGetGameRestrictionRule)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetGameRestrictionRule(ctx, req.(*BackofficeGetGameRestrictionRuleRequest))
 		})
@@ -343,7 +343,7 @@ func _BackofficeGamification_GetGameRestrictionRule0_HTTP_Handler(srv Backoffice
 	}
 }
 
-func _BackofficeGamification_UpdateGameRestrictionRulePriority0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_UpdateGameRestrictionRulePriority0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeUpdateGameRestrictionRulePriorityRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -352,7 +352,7 @@ func _BackofficeGamification_UpdateGameRestrictionRulePriority0_HTTP_Handler(srv
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationUpdateGameRestrictionRulePriority)
+		http.SetOperation(ctx, OperationBackofficeRiskUpdateGameRestrictionRulePriority)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateGameRestrictionRulePriority(ctx, req.(*BackofficeUpdateGameRestrictionRulePriorityRequest))
 		})
@@ -365,7 +365,7 @@ func _BackofficeGamification_UpdateGameRestrictionRulePriority0_HTTP_Handler(srv
 	}
 }
 
-func _BackofficeGamification_UpdateGameRestrictionRuleStatus0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_UpdateGameRestrictionRuleStatus0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeUpdateGameRestrictionRuleStatusRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -374,7 +374,7 @@ func _BackofficeGamification_UpdateGameRestrictionRuleStatus0_HTTP_Handler(srv B
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationUpdateGameRestrictionRuleStatus)
+		http.SetOperation(ctx, OperationBackofficeRiskUpdateGameRestrictionRuleStatus)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateGameRestrictionRuleStatus(ctx, req.(*BackofficeUpdateGameRestrictionRuleStatusRequest))
 		})
@@ -387,7 +387,7 @@ func _BackofficeGamification_UpdateGameRestrictionRuleStatus0_HTTP_Handler(srv B
 	}
 }
 
-func _BackofficeGamification_GetBonusBuyConfig0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_GetBonusBuyConfig0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeGetBonusBuyConfigRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -396,7 +396,7 @@ func _BackofficeGamification_GetBonusBuyConfig0_HTTP_Handler(srv BackofficeGamif
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationGetBonusBuyConfig)
+		http.SetOperation(ctx, OperationBackofficeRiskGetBonusBuyConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetBonusBuyConfig(ctx, req.(*BackofficeGetBonusBuyConfigRequest))
 		})
@@ -409,7 +409,7 @@ func _BackofficeGamification_GetBonusBuyConfig0_HTTP_Handler(srv BackofficeGamif
 	}
 }
 
-func _BackofficeGamification_UpdateBonusBuyConfig0_HTTP_Handler(srv BackofficeGamificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeRisk_UpdateBonusBuyConfig0_HTTP_Handler(srv BackofficeRiskHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeUpdateBonusBuyConfigRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -418,7 +418,7 @@ func _BackofficeGamification_UpdateBonusBuyConfig0_HTTP_Handler(srv BackofficeGa
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeGamificationUpdateBonusBuyConfig)
+		http.SetOperation(ctx, OperationBackofficeRiskUpdateBonusBuyConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateBonusBuyConfig(ctx, req.(*BackofficeUpdateBonusBuyConfigRequest))
 		})
@@ -431,7 +431,7 @@ func _BackofficeGamification_UpdateBonusBuyConfig0_HTTP_Handler(srv BackofficeGa
 	}
 }
 
-type BackofficeGamificationHTTPClient interface {
+type BackofficeRiskHTTPClient interface {
 	// CreateClaimRule === Claim Rules ===
 	CreateClaimRule(ctx context.Context, req *BackofficeCreateClaimRuleRequest, opts ...http.CallOption) (rsp *v1.CreateClaimRuleResponse, err error)
 	// CreateGameRestrictionRule === Game Restriction Rules ===
@@ -453,20 +453,20 @@ type BackofficeGamificationHTTPClient interface {
 	UpdateGameRestrictionRuleStatus(ctx context.Context, req *BackofficeUpdateGameRestrictionRuleStatusRequest, opts ...http.CallOption) (rsp *v1.UpdateGameRestrictionRuleStatusResponse, err error)
 }
 
-type BackofficeGamificationHTTPClientImpl struct {
+type BackofficeRiskHTTPClientImpl struct {
 	cc *http.Client
 }
 
-func NewBackofficeGamificationHTTPClient(client *http.Client) BackofficeGamificationHTTPClient {
-	return &BackofficeGamificationHTTPClientImpl{client}
+func NewBackofficeRiskHTTPClient(client *http.Client) BackofficeRiskHTTPClient {
+	return &BackofficeRiskHTTPClientImpl{client}
 }
 
 // CreateClaimRule === Claim Rules ===
-func (c *BackofficeGamificationHTTPClientImpl) CreateClaimRule(ctx context.Context, in *BackofficeCreateClaimRuleRequest, opts ...http.CallOption) (*v1.CreateClaimRuleResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) CreateClaimRule(ctx context.Context, in *BackofficeCreateClaimRuleRequest, opts ...http.CallOption) (*v1.CreateClaimRuleResponse, error) {
 	var out v1.CreateClaimRuleResponse
-	pattern := "/v1/backoffice/gamification/claim-rule/create"
+	pattern := "/v1/backoffice/risk/claim-rule/create"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationCreateClaimRule))
+	opts = append(opts, http.Operation(OperationBackofficeRiskCreateClaimRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -476,11 +476,11 @@ func (c *BackofficeGamificationHTTPClientImpl) CreateClaimRule(ctx context.Conte
 }
 
 // CreateGameRestrictionRule === Game Restriction Rules ===
-func (c *BackofficeGamificationHTTPClientImpl) CreateGameRestrictionRule(ctx context.Context, in *BackofficeCreateGameRestrictionRuleRequest, opts ...http.CallOption) (*v1.CreateGameRestrictionRuleResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) CreateGameRestrictionRule(ctx context.Context, in *BackofficeCreateGameRestrictionRuleRequest, opts ...http.CallOption) (*v1.CreateGameRestrictionRuleResponse, error) {
 	var out v1.CreateGameRestrictionRuleResponse
-	pattern := "/v1/backoffice/gamification/game-restriction-rule/create"
+	pattern := "/v1/backoffice/risk/game-restriction-rule/create"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationCreateGameRestrictionRule))
+	opts = append(opts, http.Operation(OperationBackofficeRiskCreateGameRestrictionRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -489,11 +489,11 @@ func (c *BackofficeGamificationHTTPClientImpl) CreateGameRestrictionRule(ctx con
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) DeleteClaimRule(ctx context.Context, in *BackofficeDeleteClaimRuleRequest, opts ...http.CallOption) (*v1.DeleteClaimRuleResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) DeleteClaimRule(ctx context.Context, in *BackofficeDeleteClaimRuleRequest, opts ...http.CallOption) (*v1.DeleteClaimRuleResponse, error) {
 	var out v1.DeleteClaimRuleResponse
-	pattern := "/v1/backoffice/gamification/claim-rule/delete"
+	pattern := "/v1/backoffice/risk/claim-rule/delete"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationDeleteClaimRule))
+	opts = append(opts, http.Operation(OperationBackofficeRiskDeleteClaimRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -502,11 +502,11 @@ func (c *BackofficeGamificationHTTPClientImpl) DeleteClaimRule(ctx context.Conte
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) DeleteGameRestrictionRule(ctx context.Context, in *BackofficeDeleteGameRestrictionRuleRequest, opts ...http.CallOption) (*v1.DeleteGameRestrictionRuleResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) DeleteGameRestrictionRule(ctx context.Context, in *BackofficeDeleteGameRestrictionRuleRequest, opts ...http.CallOption) (*v1.DeleteGameRestrictionRuleResponse, error) {
 	var out v1.DeleteGameRestrictionRuleResponse
-	pattern := "/v1/backoffice/gamification/game-restriction-rule/delete"
+	pattern := "/v1/backoffice/risk/game-restriction-rule/delete"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationDeleteGameRestrictionRule))
+	opts = append(opts, http.Operation(OperationBackofficeRiskDeleteGameRestrictionRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -516,11 +516,11 @@ func (c *BackofficeGamificationHTTPClientImpl) DeleteGameRestrictionRule(ctx con
 }
 
 // GetBonusBuyConfig === Bonus Buy Config ===
-func (c *BackofficeGamificationHTTPClientImpl) GetBonusBuyConfig(ctx context.Context, in *BackofficeGetBonusBuyConfigRequest, opts ...http.CallOption) (*v1.GetBonusBuyConfigResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) GetBonusBuyConfig(ctx context.Context, in *BackofficeGetBonusBuyConfigRequest, opts ...http.CallOption) (*v1.GetBonusBuyConfigResponse, error) {
 	var out v1.GetBonusBuyConfigResponse
-	pattern := "/v1/backoffice/gamification/bonus-buy-config/get"
+	pattern := "/v1/backoffice/risk/bonus-buy-config/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationGetBonusBuyConfig))
+	opts = append(opts, http.Operation(OperationBackofficeRiskGetBonusBuyConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -529,11 +529,11 @@ func (c *BackofficeGamificationHTTPClientImpl) GetBonusBuyConfig(ctx context.Con
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) GetClaimRule(ctx context.Context, in *BackofficeGetClaimRuleRequest, opts ...http.CallOption) (*v1.GetClaimRuleResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) GetClaimRule(ctx context.Context, in *BackofficeGetClaimRuleRequest, opts ...http.CallOption) (*v1.GetClaimRuleResponse, error) {
 	var out v1.GetClaimRuleResponse
-	pattern := "/v1/backoffice/gamification/claim-rule/get"
+	pattern := "/v1/backoffice/risk/claim-rule/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationGetClaimRule))
+	opts = append(opts, http.Operation(OperationBackofficeRiskGetClaimRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -542,11 +542,11 @@ func (c *BackofficeGamificationHTTPClientImpl) GetClaimRule(ctx context.Context,
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) GetGameRestrictionRule(ctx context.Context, in *BackofficeGetGameRestrictionRuleRequest, opts ...http.CallOption) (*v1.GetGameRestrictionRuleResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) GetGameRestrictionRule(ctx context.Context, in *BackofficeGetGameRestrictionRuleRequest, opts ...http.CallOption) (*v1.GetGameRestrictionRuleResponse, error) {
 	var out v1.GetGameRestrictionRuleResponse
-	pattern := "/v1/backoffice/gamification/game-restriction-rule/get"
+	pattern := "/v1/backoffice/risk/game-restriction-rule/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationGetGameRestrictionRule))
+	opts = append(opts, http.Operation(OperationBackofficeRiskGetGameRestrictionRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -555,11 +555,11 @@ func (c *BackofficeGamificationHTTPClientImpl) GetGameRestrictionRule(ctx contex
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) ListClaimRules(ctx context.Context, in *BackofficeListClaimRulesRequest, opts ...http.CallOption) (*v1.ListClaimRulesResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) ListClaimRules(ctx context.Context, in *BackofficeListClaimRulesRequest, opts ...http.CallOption) (*v1.ListClaimRulesResponse, error) {
 	var out v1.ListClaimRulesResponse
-	pattern := "/v1/backoffice/gamification/claim-rule/list"
+	pattern := "/v1/backoffice/risk/claim-rule/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationListClaimRules))
+	opts = append(opts, http.Operation(OperationBackofficeRiskListClaimRules))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -568,11 +568,11 @@ func (c *BackofficeGamificationHTTPClientImpl) ListClaimRules(ctx context.Contex
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) ListGameRestrictionRules(ctx context.Context, in *BackofficeListGameRestrictionRulesRequest, opts ...http.CallOption) (*v1.ListGameRestrictionRulesResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) ListGameRestrictionRules(ctx context.Context, in *BackofficeListGameRestrictionRulesRequest, opts ...http.CallOption) (*v1.ListGameRestrictionRulesResponse, error) {
 	var out v1.ListGameRestrictionRulesResponse
-	pattern := "/v1/backoffice/gamification/game-restriction-rule/list"
+	pattern := "/v1/backoffice/risk/game-restriction-rule/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationListGameRestrictionRules))
+	opts = append(opts, http.Operation(OperationBackofficeRiskListGameRestrictionRules))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -581,11 +581,11 @@ func (c *BackofficeGamificationHTTPClientImpl) ListGameRestrictionRules(ctx cont
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) UpdateBonusBuyConfig(ctx context.Context, in *BackofficeUpdateBonusBuyConfigRequest, opts ...http.CallOption) (*v1.UpdateBonusBuyConfigResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) UpdateBonusBuyConfig(ctx context.Context, in *BackofficeUpdateBonusBuyConfigRequest, opts ...http.CallOption) (*v1.UpdateBonusBuyConfigResponse, error) {
 	var out v1.UpdateBonusBuyConfigResponse
-	pattern := "/v1/backoffice/gamification/bonus-buy-config/update"
+	pattern := "/v1/backoffice/risk/bonus-buy-config/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationUpdateBonusBuyConfig))
+	opts = append(opts, http.Operation(OperationBackofficeRiskUpdateBonusBuyConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -594,11 +594,11 @@ func (c *BackofficeGamificationHTTPClientImpl) UpdateBonusBuyConfig(ctx context.
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) UpdateClaimRule(ctx context.Context, in *BackofficeUpdateClaimRuleRequest, opts ...http.CallOption) (*v1.UpdateClaimRuleResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) UpdateClaimRule(ctx context.Context, in *BackofficeUpdateClaimRuleRequest, opts ...http.CallOption) (*v1.UpdateClaimRuleResponse, error) {
 	var out v1.UpdateClaimRuleResponse
-	pattern := "/v1/backoffice/gamification/claim-rule/update"
+	pattern := "/v1/backoffice/risk/claim-rule/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationUpdateClaimRule))
+	opts = append(opts, http.Operation(OperationBackofficeRiskUpdateClaimRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -607,11 +607,11 @@ func (c *BackofficeGamificationHTTPClientImpl) UpdateClaimRule(ctx context.Conte
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) UpdateClaimRulePriority(ctx context.Context, in *BackofficeUpdateClaimRulePriorityRequest, opts ...http.CallOption) (*v1.UpdateClaimRulePriorityResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) UpdateClaimRulePriority(ctx context.Context, in *BackofficeUpdateClaimRulePriorityRequest, opts ...http.CallOption) (*v1.UpdateClaimRulePriorityResponse, error) {
 	var out v1.UpdateClaimRulePriorityResponse
-	pattern := "/v1/backoffice/gamification/claim-rule/priority/update"
+	pattern := "/v1/backoffice/risk/claim-rule/priority/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationUpdateClaimRulePriority))
+	opts = append(opts, http.Operation(OperationBackofficeRiskUpdateClaimRulePriority))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -620,11 +620,11 @@ func (c *BackofficeGamificationHTTPClientImpl) UpdateClaimRulePriority(ctx conte
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) UpdateClaimRuleStatus(ctx context.Context, in *BackofficeUpdateClaimRuleStatusRequest, opts ...http.CallOption) (*v1.UpdateClaimRuleStatusResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) UpdateClaimRuleStatus(ctx context.Context, in *BackofficeUpdateClaimRuleStatusRequest, opts ...http.CallOption) (*v1.UpdateClaimRuleStatusResponse, error) {
 	var out v1.UpdateClaimRuleStatusResponse
-	pattern := "/v1/backoffice/gamification/claim-rule/status/update"
+	pattern := "/v1/backoffice/risk/claim-rule/status/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationUpdateClaimRuleStatus))
+	opts = append(opts, http.Operation(OperationBackofficeRiskUpdateClaimRuleStatus))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -633,11 +633,11 @@ func (c *BackofficeGamificationHTTPClientImpl) UpdateClaimRuleStatus(ctx context
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) UpdateGameRestrictionRule(ctx context.Context, in *BackofficeUpdateGameRestrictionRuleRequest, opts ...http.CallOption) (*v1.UpdateGameRestrictionRuleResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) UpdateGameRestrictionRule(ctx context.Context, in *BackofficeUpdateGameRestrictionRuleRequest, opts ...http.CallOption) (*v1.UpdateGameRestrictionRuleResponse, error) {
 	var out v1.UpdateGameRestrictionRuleResponse
-	pattern := "/v1/backoffice/gamification/game-restriction-rule/update"
+	pattern := "/v1/backoffice/risk/game-restriction-rule/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationUpdateGameRestrictionRule))
+	opts = append(opts, http.Operation(OperationBackofficeRiskUpdateGameRestrictionRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -646,11 +646,11 @@ func (c *BackofficeGamificationHTTPClientImpl) UpdateGameRestrictionRule(ctx con
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) UpdateGameRestrictionRulePriority(ctx context.Context, in *BackofficeUpdateGameRestrictionRulePriorityRequest, opts ...http.CallOption) (*v1.UpdateGameRestrictionRulePriorityResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) UpdateGameRestrictionRulePriority(ctx context.Context, in *BackofficeUpdateGameRestrictionRulePriorityRequest, opts ...http.CallOption) (*v1.UpdateGameRestrictionRulePriorityResponse, error) {
 	var out v1.UpdateGameRestrictionRulePriorityResponse
-	pattern := "/v1/backoffice/gamification/game-restriction-rule/priority/update"
+	pattern := "/v1/backoffice/risk/game-restriction-rule/priority/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationUpdateGameRestrictionRulePriority))
+	opts = append(opts, http.Operation(OperationBackofficeRiskUpdateGameRestrictionRulePriority))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -659,11 +659,11 @@ func (c *BackofficeGamificationHTTPClientImpl) UpdateGameRestrictionRulePriority
 	return &out, nil
 }
 
-func (c *BackofficeGamificationHTTPClientImpl) UpdateGameRestrictionRuleStatus(ctx context.Context, in *BackofficeUpdateGameRestrictionRuleStatusRequest, opts ...http.CallOption) (*v1.UpdateGameRestrictionRuleStatusResponse, error) {
+func (c *BackofficeRiskHTTPClientImpl) UpdateGameRestrictionRuleStatus(ctx context.Context, in *BackofficeUpdateGameRestrictionRuleStatusRequest, opts ...http.CallOption) (*v1.UpdateGameRestrictionRuleStatusResponse, error) {
 	var out v1.UpdateGameRestrictionRuleStatusResponse
-	pattern := "/v1/backoffice/gamification/game-restriction-rule/status/update"
+	pattern := "/v1/backoffice/risk/game-restriction-rule/status/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGamificationUpdateGameRestrictionRuleStatus))
+	opts = append(opts, http.Operation(OperationBackofficeRiskUpdateGameRestrictionRuleStatus))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -1,0 +1,226 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "common/common.proto";
+import "risk/service/v1/risk.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// Risk rules management for backoffice.
+// Proxies the risk-service admin APIs with operator context injection
+// and HTTP bindings for the admin console.
+//
+// Only admin CRUD operations are exposed here. Runtime APIs
+// (CheckClaimEligibility, CheckGameRestriction, RecordClaim) are called
+// directly by wallet-service and game-service and are NOT proxied.
+service BackofficeRisk {
+  // === Claim Rules ===
+  rpc CreateClaimRule(BackofficeCreateClaimRuleRequest) returns (api.risk.service.v1.CreateClaimRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/claim-rule/create"
+      body: "*"
+    };
+  }
+
+  rpc UpdateClaimRule(BackofficeUpdateClaimRuleRequest) returns (api.risk.service.v1.UpdateClaimRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/claim-rule/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteClaimRule(BackofficeDeleteClaimRuleRequest) returns (api.risk.service.v1.DeleteClaimRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/claim-rule/delete"
+      body: "*"
+    };
+  }
+
+  rpc ListClaimRules(BackofficeListClaimRulesRequest) returns (api.risk.service.v1.ListClaimRulesResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/claim-rule/list"
+      body: "*"
+    };
+  }
+
+  rpc GetClaimRule(BackofficeGetClaimRuleRequest) returns (api.risk.service.v1.GetClaimRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/claim-rule/get"
+      body: "*"
+    };
+  }
+
+  rpc UpdateClaimRulePriority(BackofficeUpdateClaimRulePriorityRequest) returns (api.risk.service.v1.UpdateClaimRulePriorityResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/claim-rule/priority/update"
+      body: "*"
+    };
+  }
+
+  rpc UpdateClaimRuleStatus(BackofficeUpdateClaimRuleStatusRequest) returns (api.risk.service.v1.UpdateClaimRuleStatusResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/claim-rule/status/update"
+      body: "*"
+    };
+  }
+
+  // === Game Restriction Rules ===
+  rpc CreateGameRestrictionRule(BackofficeCreateGameRestrictionRuleRequest) returns (api.risk.service.v1.CreateGameRestrictionRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/game-restriction-rule/create"
+      body: "*"
+    };
+  }
+
+  rpc UpdateGameRestrictionRule(BackofficeUpdateGameRestrictionRuleRequest) returns (api.risk.service.v1.UpdateGameRestrictionRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/game-restriction-rule/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteGameRestrictionRule(BackofficeDeleteGameRestrictionRuleRequest) returns (api.risk.service.v1.DeleteGameRestrictionRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/game-restriction-rule/delete"
+      body: "*"
+    };
+  }
+
+  rpc ListGameRestrictionRules(BackofficeListGameRestrictionRulesRequest) returns (api.risk.service.v1.ListGameRestrictionRulesResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/game-restriction-rule/list"
+      body: "*"
+    };
+  }
+
+  rpc GetGameRestrictionRule(BackofficeGetGameRestrictionRuleRequest) returns (api.risk.service.v1.GetGameRestrictionRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/game-restriction-rule/get"
+      body: "*"
+    };
+  }
+
+  rpc UpdateGameRestrictionRulePriority(BackofficeUpdateGameRestrictionRulePriorityRequest) returns (api.risk.service.v1.UpdateGameRestrictionRulePriorityResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/game-restriction-rule/priority/update"
+      body: "*"
+    };
+  }
+
+  rpc UpdateGameRestrictionRuleStatus(BackofficeUpdateGameRestrictionRuleStatusRequest) returns (api.risk.service.v1.UpdateGameRestrictionRuleStatusResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/game-restriction-rule/status/update"
+      body: "*"
+    };
+  }
+
+  // === Bonus Buy Config ===
+  rpc GetBonusBuyConfig(BackofficeGetBonusBuyConfigRequest) returns (api.risk.service.v1.GetBonusBuyConfigResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/bonus-buy-config/get"
+      body: "*"
+    };
+  }
+
+  rpc UpdateBonusBuyConfig(BackofficeUpdateBonusBuyConfigRequest) returns (api.risk.service.v1.UpdateBonusBuyConfigResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/risk/bonus-buy-config/update"
+      body: "*"
+    };
+  }
+}
+
+// === Claim Rule Requests ===
+
+message BackofficeCreateClaimRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  api.risk.service.v1.ClaimRule rule = 2;
+}
+
+message BackofficeUpdateClaimRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  api.risk.service.v1.ClaimRule rule = 2;
+}
+
+message BackofficeDeleteClaimRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message BackofficeListClaimRulesRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message BackofficeGetClaimRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message BackofficeUpdateClaimRulePriorityRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+  int32 priority = 3;
+}
+
+message BackofficeUpdateClaimRuleStatusRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+  api.risk.service.v1.RuleStatus status = 3;
+}
+
+// === Game Restriction Rule Requests ===
+
+message BackofficeCreateGameRestrictionRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  api.risk.service.v1.GameRestrictionRule rule = 2;
+}
+
+message BackofficeUpdateGameRestrictionRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  api.risk.service.v1.GameRestrictionRule rule = 2;
+}
+
+message BackofficeDeleteGameRestrictionRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message BackofficeListGameRestrictionRulesRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message BackofficeGetGameRestrictionRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message BackofficeUpdateGameRestrictionRulePriorityRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+  int32 priority = 3;
+}
+
+message BackofficeUpdateGameRestrictionRuleStatusRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+  api.risk.service.v1.RuleStatus status = 3;
+}
+
+// === Bonus Buy Config Requests ===
+
+message BackofficeGetBonusBuyConfigRequest {
+  api.common.OperatorContext target_operator_context = 1;
+}
+
+message BackofficeUpdateBonusBuyConfigRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  bool enabled = 2;
+}
