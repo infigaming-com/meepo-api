@@ -130,4 +130,8 @@ enum ErrorReason {
   SIMULATE_GLOBAL_POSTBACK_FAILED = 130105;
   LIST_GLOBAL_POSTBACK_LOGS_FAILED = 130106;
   POSTBACK_URL_BLOCKED = 130107 [(errors.code) = 400];
+
+  // User profile sync — emitted by the UserProfileUpdateEvent subscriber
+  // when applying a batched profile change (email, mobile, ...) fails.
+  PROCESS_USER_PROFILE_UPDATE_FAILED = 130109;
 }

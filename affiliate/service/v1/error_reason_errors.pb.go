@@ -1326,3 +1326,19 @@ func IsPostbackUrlBlocked(err error) bool {
 func ErrorPostbackUrlBlocked(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_POSTBACK_URL_BLOCKED.String(), fmt.Sprintf(format, args...))
 }
+
+// User profile sync — emitted by the UserProfileUpdateEvent subscriber
+// when applying a batched profile change (email, mobile, ...) fails.
+func IsProcessUserProfileUpdateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_PROFILE_UPDATE_FAILED.String() && e.Code == 500
+}
+
+// User profile sync — emitted by the UserProfileUpdateEvent subscriber
+// when applying a batched profile change (email, mobile, ...) fails.
+func ErrorProcessUserProfileUpdateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_PROFILE_UPDATE_FAILED.String(), fmt.Sprintf(format, args...))
+}
