@@ -62,6 +62,47 @@ message UserStatusUpdateEvent {
 	int64 updated_at = 6;
 }
 
+// UserProfileField enumerates which profile attribute changed inside a
+// UserFieldChange. Add new values as more fields need downstream sync;
+// subscribers must handle USER_PROFILE_FIELD_UNSPECIFIED gracefully so they
+// stay forward-compatible with publishers emitting unknown new values.
+enum UserProfileField {
+	USER_PROFILE_FIELD_UNSPECIFIED = 0;
+	USER_PROFILE_FIELD_EMAIL = 1;
+	USER_PROFILE_FIELD_MOBILE = 2;
+}
+
+// UserFieldChange carries one before/after of a single user profile field,
+// grouped inside UserProfileUpdateEvent.
+message UserFieldChange {
+	UserProfileField field = 1;
+	string old_value = 2;
+	string new_value = 3;
+}
+
+// UserProfileUpdateEvent is emitted when one or more of a user's profile
+// fields (email, mobile, and future additions like firstname, address, dob)
+// change in a single user-service transaction.
+//
+// The `changes` list batches every field that was updated in that transaction,
+// so subscribers observe them atomically — a partial publish is impossible
+// (either the entire batch lands or none does). Extensible: new fields just
+// add new entries to the list without any proto change.
+//
+// Field domains are disjoint from UserStatusUpdateEvent (login_banned,
+// withdraw_banned, game_banned, locked, kyc_level), so subscribers only need
+// to handle the events they care about without worrying about overlap.
+//
+// Not emitted on registration (AddUserEvent is the seed). Subscribers must
+// use updated_at for last-write-wins to defend against out-of-order or
+// duplicate delivery.
+message UserProfileUpdateEvent {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	repeated UserFieldChange changes = 3;
+	int64 updated_at = 4;
+}
+
 // UserIdentitySubmitEvent is emitted when a user submits identity documents for KYC Level 3 verification.
 message UserIdentitySubmitEvent {
 	int64 user_id = 1;

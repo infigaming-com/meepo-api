@@ -9489,6 +9489,8 @@ func (m *ListUsersResponse) validate(all bool) error {
 
 	// no validation rules for PageSize
 
+	// no validation rules for ShowPlayerContact
+
 	if len(errors) > 0 {
 		return ListUsersResponseMultiError(errors)
 	}
@@ -10755,6 +10757,10 @@ func (m *OperatorSettings) validate(all bool) error {
 
 	if m.ReferralLossRevShareMode != nil {
 		// no validation rules for ReferralLossRevShareMode
+	}
+
+	if m.ShowPlayerContactToAffiliate != nil {
+		// no validation rules for ShowPlayerContactToAffiliate
 	}
 
 	if len(errors) > 0 {
@@ -18324,6 +18330,10 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 	// no validation rules for CommissionReportingCurrency
 
 	// no validation rules for Roi
+
+	// no validation rules for Email
+
+	// no validation rules for Mobile
 
 	if len(errors) > 0 {
 		return ListUsersResponse_UserMultiError(errors)

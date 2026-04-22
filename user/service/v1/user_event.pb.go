@@ -22,6 +22,59 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// UserProfileField enumerates which profile attribute changed inside a
+// UserFieldChange. Add new values as more fields need downstream sync;
+// subscribers must handle USER_PROFILE_FIELD_UNSPECIFIED gracefully so they
+// stay forward-compatible with publishers emitting unknown new values.
+type UserProfileField int32
+
+const (
+	UserProfileField_USER_PROFILE_FIELD_UNSPECIFIED UserProfileField = 0
+	UserProfileField_USER_PROFILE_FIELD_EMAIL       UserProfileField = 1
+	UserProfileField_USER_PROFILE_FIELD_MOBILE      UserProfileField = 2
+)
+
+// Enum value maps for UserProfileField.
+var (
+	UserProfileField_name = map[int32]string{
+		0: "USER_PROFILE_FIELD_UNSPECIFIED",
+		1: "USER_PROFILE_FIELD_EMAIL",
+		2: "USER_PROFILE_FIELD_MOBILE",
+	}
+	UserProfileField_value = map[string]int32{
+		"USER_PROFILE_FIELD_UNSPECIFIED": 0,
+		"USER_PROFILE_FIELD_EMAIL":       1,
+		"USER_PROFILE_FIELD_MOBILE":      2,
+	}
+)
+
+func (x UserProfileField) Enum() *UserProfileField {
+	p := new(UserProfileField)
+	*p = x
+	return p
+}
+
+func (x UserProfileField) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UserProfileField) Descriptor() protoreflect.EnumDescriptor {
+	return file_user_service_v1_user_event_proto_enumTypes[0].Descriptor()
+}
+
+func (UserProfileField) Type() protoreflect.EnumType {
+	return &file_user_service_v1_user_event_proto_enumTypes[0]
+}
+
+func (x UserProfileField) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UserProfileField.Descriptor instead.
+func (UserProfileField) EnumDescriptor() ([]byte, []int) {
+	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{0}
+}
+
 type EventRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
@@ -454,6 +507,152 @@ func (x *UserStatusUpdateEvent) GetUpdatedAt() int64 {
 	return 0
 }
 
+// UserFieldChange carries one before/after of a single user profile field,
+// grouped inside UserProfileUpdateEvent.
+type UserFieldChange struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Field         UserProfileField       `protobuf:"varint,1,opt,name=field,proto3,enum=api.user.service.v1.UserProfileField" json:"field,omitempty"`
+	OldValue      string                 `protobuf:"bytes,2,opt,name=old_value,json=oldValue,proto3" json:"old_value,omitempty"`
+	NewValue      string                 `protobuf:"bytes,3,opt,name=new_value,json=newValue,proto3" json:"new_value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserFieldChange) Reset() {
+	*x = UserFieldChange{}
+	mi := &file_user_service_v1_user_event_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserFieldChange) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserFieldChange) ProtoMessage() {}
+
+func (x *UserFieldChange) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_event_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserFieldChange.ProtoReflect.Descriptor instead.
+func (*UserFieldChange) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UserFieldChange) GetField() UserProfileField {
+	if x != nil {
+		return x.Field
+	}
+	return UserProfileField_USER_PROFILE_FIELD_UNSPECIFIED
+}
+
+func (x *UserFieldChange) GetOldValue() string {
+	if x != nil {
+		return x.OldValue
+	}
+	return ""
+}
+
+func (x *UserFieldChange) GetNewValue() string {
+	if x != nil {
+		return x.NewValue
+	}
+	return ""
+}
+
+// UserProfileUpdateEvent is emitted when one or more of a user's profile
+// fields (email, mobile, and future additions like firstname, address, dob)
+// change in a single user-service transaction.
+//
+// The `changes` list batches every field that was updated in that transaction,
+// so subscribers observe them atomically — a partial publish is impossible
+// (either the entire batch lands or none does). Extensible: new fields just
+// add new entries to the list without any proto change.
+//
+// Field domains are disjoint from UserStatusUpdateEvent (login_banned,
+// withdraw_banned, game_banned, locked, kyc_level), so subscribers only need
+// to handle the events they care about without worrying about overlap.
+//
+// Not emitted on registration (AddUserEvent is the seed). Subscribers must
+// use updated_at for last-write-wins to defend against out-of-order or
+// duplicate delivery.
+type UserProfileUpdateEvent struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Changes         []*UserFieldChange      `protobuf:"bytes,3,rep,name=changes,proto3" json:"changes,omitempty"`
+	UpdatedAt       int64                   `protobuf:"varint,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UserProfileUpdateEvent) Reset() {
+	*x = UserProfileUpdateEvent{}
+	mi := &file_user_service_v1_user_event_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserProfileUpdateEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserProfileUpdateEvent) ProtoMessage() {}
+
+func (x *UserProfileUpdateEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_event_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserProfileUpdateEvent.ProtoReflect.Descriptor instead.
+func (*UserProfileUpdateEvent) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UserProfileUpdateEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserProfileUpdateEvent) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *UserProfileUpdateEvent) GetChanges() []*UserFieldChange {
+	if x != nil {
+		return x.Changes
+	}
+	return nil
+}
+
+func (x *UserProfileUpdateEvent) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
 // UserIdentitySubmitEvent is emitted when a user submits identity documents for KYC Level 3 verification.
 type UserIdentitySubmitEvent struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
@@ -472,7 +671,7 @@ type UserIdentitySubmitEvent struct {
 
 func (x *UserIdentitySubmitEvent) Reset() {
 	*x = UserIdentitySubmitEvent{}
-	mi := &file_user_service_v1_user_event_proto_msgTypes[5]
+	mi := &file_user_service_v1_user_event_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -484,7 +683,7 @@ func (x *UserIdentitySubmitEvent) String() string {
 func (*UserIdentitySubmitEvent) ProtoMessage() {}
 
 func (x *UserIdentitySubmitEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_event_proto_msgTypes[5]
+	mi := &file_user_service_v1_user_event_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -497,7 +696,7 @@ func (x *UserIdentitySubmitEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserIdentitySubmitEvent.ProtoReflect.Descriptor instead.
 func (*UserIdentitySubmitEvent) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{5}
+	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UserIdentitySubmitEvent) GetUserId() int64 {
@@ -610,7 +809,17 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\told_value\x18\x04 \x01(\tR\boldValue\x12\x1b\n" +
 	"\tnew_value\x18\x05 \x01(\tR\bnewValue\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\x03R\tupdatedAt\"\xdd\x02\n" +
+	"updated_at\x18\x06 \x01(\x03R\tupdatedAt\"\x88\x01\n" +
+	"\x0fUserFieldChange\x12;\n" +
+	"\x05field\x18\x01 \x01(\x0e2%.api.user.service.v1.UserProfileFieldR\x05field\x12\x1b\n" +
+	"\told_value\x18\x02 \x01(\tR\boldValue\x12\x1b\n" +
+	"\tnew_value\x18\x03 \x01(\tR\bnewValue\"\xd8\x01\n" +
+	"\x16UserProfileUpdateEvent\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12>\n" +
+	"\achanges\x18\x03 \x03(\v2$.api.user.service.v1.UserFieldChangeR\achanges\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x04 \x01(\x03R\tupdatedAt\"\xdd\x02\n" +
 	"\x17UserIdentitySubmitEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -622,7 +831,11 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\aid_type\x18\a \x01(\tR\x06idType\x12\x1b\n" +
 	"\tid_number\x18\b \x01(\tR\bidNumber\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\t \x01(\x03R\tcreatedAt2]\n" +
+	"created_at\x18\t \x01(\x03R\tcreatedAt*s\n" +
+	"\x10UserProfileField\x12\"\n" +
+	"\x1eUSER_PROFILE_FIELD_UNSPECIFIED\x10\x00\x12\x1c\n" +
+	"\x18USER_PROFILE_FIELD_EMAIL\x10\x01\x12\x1d\n" +
+	"\x19USER_PROFILE_FIELD_MOBILE\x10\x022]\n" +
 	"\tUserEvent\x12P\n" +
 	"\x05Event\x12!.api.user.service.v1.EventRequest\x1a\".api.user.service.v1.EventResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
@@ -639,25 +852,32 @@ func file_user_service_v1_user_event_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_user_event_proto_rawDescData
 }
 
-var file_user_service_v1_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_user_service_v1_user_event_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_user_service_v1_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_user_service_v1_user_event_proto_goTypes = []any{
-	(*EventRequest)(nil),            // 0: api.user.service.v1.EventRequest
-	(*EventResponse)(nil),           // 1: api.user.service.v1.EventResponse
-	(*AddUserEvent)(nil),            // 2: api.user.service.v1.AddUserEvent
-	(*AddOperatorEvent)(nil),        // 3: api.user.service.v1.AddOperatorEvent
-	(*UserStatusUpdateEvent)(nil),   // 4: api.user.service.v1.UserStatusUpdateEvent
-	(*UserIdentitySubmitEvent)(nil), // 5: api.user.service.v1.UserIdentitySubmitEvent
-	(*common.OperatorContext)(nil),  // 6: api.common.OperatorContext
+	(UserProfileField)(0),           // 0: api.user.service.v1.UserProfileField
+	(*EventRequest)(nil),            // 1: api.user.service.v1.EventRequest
+	(*EventResponse)(nil),           // 2: api.user.service.v1.EventResponse
+	(*AddUserEvent)(nil),            // 3: api.user.service.v1.AddUserEvent
+	(*AddOperatorEvent)(nil),        // 4: api.user.service.v1.AddOperatorEvent
+	(*UserStatusUpdateEvent)(nil),   // 5: api.user.service.v1.UserStatusUpdateEvent
+	(*UserFieldChange)(nil),         // 6: api.user.service.v1.UserFieldChange
+	(*UserProfileUpdateEvent)(nil),  // 7: api.user.service.v1.UserProfileUpdateEvent
+	(*UserIdentitySubmitEvent)(nil), // 8: api.user.service.v1.UserIdentitySubmitEvent
+	(*common.OperatorContext)(nil),  // 9: api.common.OperatorContext
 }
 var file_user_service_v1_user_event_proto_depIdxs = []int32{
-	6, // 0: api.user.service.v1.UserStatusUpdateEvent.operator_context:type_name -> api.common.OperatorContext
-	0, // 1: api.user.service.v1.UserEvent.Event:input_type -> api.user.service.v1.EventRequest
-	1, // 2: api.user.service.v1.UserEvent.Event:output_type -> api.user.service.v1.EventResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	9, // 0: api.user.service.v1.UserStatusUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	0, // 1: api.user.service.v1.UserFieldChange.field:type_name -> api.user.service.v1.UserProfileField
+	9, // 2: api.user.service.v1.UserProfileUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	6, // 3: api.user.service.v1.UserProfileUpdateEvent.changes:type_name -> api.user.service.v1.UserFieldChange
+	1, // 4: api.user.service.v1.UserEvent.Event:input_type -> api.user.service.v1.EventRequest
+	2, // 5: api.user.service.v1.UserEvent.Event:output_type -> api.user.service.v1.EventResponse
+	5, // [5:6] is the sub-list for method output_type
+	4, // [4:5] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_user_event_proto_init() }
@@ -671,13 +891,14 @@ func file_user_service_v1_user_event_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_event_proto_rawDesc), len(file_user_service_v1_user_event_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   6,
+			NumEnums:      1,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_user_service_v1_user_event_proto_goTypes,
 		DependencyIndexes: file_user_service_v1_user_event_proto_depIdxs,
+		EnumInfos:         file_user_service_v1_user_event_proto_enumTypes,
 		MessageInfos:      file_user_service_v1_user_event_proto_msgTypes,
 	}.Build()
 	File_user_service_v1_user_event_proto = out.File

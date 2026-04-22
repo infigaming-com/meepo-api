@@ -14415,6 +14415,12 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                showPlayerContact:
+                    type: boolean
+                    description: |-
+                        whether email/mobile fields are populated for this response; controlled by
+                         OperatorSettings.show_player_contact_to_affiliate for affiliate-role callers,
+                         always true for operator-role callers
         api.affiliate.service.v1.ListUsersResponse_User:
             type: object
             properties:
@@ -14492,6 +14498,12 @@ components:
                 roi:
                     type: string
                     description: percentage, ngr / commission
+                email:
+                    type: string
+                    description: empty string when show_player_contact=false
+                mobile:
+                    type: string
+                    description: empty string when show_player_contact=false
         api.affiliate.service.v1.LossRevenueShare:
             type: object
             properties:
@@ -14541,6 +14553,9 @@ components:
                 referralLossRevShareMode:
                     type: string
                     description: '"cross_currency_hedging" or "independent_by_currency"'
+                showPlayerContactToAffiliate:
+                    type: boolean
+                    description: whether affiliates can see referred players' email/mobile in the players list
         api.affiliate.service.v1.Params:
             type: object
             properties:

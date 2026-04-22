@@ -4586,13 +4586,17 @@ func (x *ListUsersRequest) GetOperatorContextFilters() *common.OperatorContextFi
 }
 
 type ListUsersResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Users         []*ListUsersResponse_User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
-	Total         int32                     `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page          int32                     `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                     `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state    protoimpl.MessageState    `protogen:"open.v1"`
+	Users    []*ListUsersResponse_User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	Total    int32                     `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page     int32                     `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize int32                     `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// whether email/mobile fields are populated for this response; controlled by
+	// OperatorSettings.show_player_contact_to_affiliate for affiliate-role callers,
+	// always true for operator-role callers
+	ShowPlayerContact bool `protobuf:"varint,5,opt,name=show_player_contact,json=showPlayerContact,proto3" json:"show_player_contact,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ListUsersResponse) Reset() {
@@ -4651,6 +4655,13 @@ func (x *ListUsersResponse) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
+}
+
+func (x *ListUsersResponse) GetShowPlayerContact() bool {
+	if x != nil {
+		return x.ShowPlayerContact
+	}
+	return false
 }
 
 type ExportUsersRequest struct {
@@ -5223,8 +5234,10 @@ type OperatorSettings struct {
 	ThirdPartyGameRate string `protobuf:"bytes,2,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"`
 	// "cross_currency_hedging" or "independent_by_currency"
 	ReferralLossRevShareMode *string `protobuf:"bytes,3,opt,name=referral_loss_rev_share_mode,json=referralLossRevShareMode,proto3,oneof" json:"referral_loss_rev_share_mode,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// whether affiliates can see referred players' email/mobile in the players list
+	ShowPlayerContactToAffiliate *bool `protobuf:"varint,4,opt,name=show_player_contact_to_affiliate,json=showPlayerContactToAffiliate,proto3,oneof" json:"show_player_contact_to_affiliate,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *OperatorSettings) Reset() {
@@ -5276,6 +5289,13 @@ func (x *OperatorSettings) GetReferralLossRevShareMode() string {
 		return *x.ReferralLossRevShareMode
 	}
 	return ""
+}
+
+func (x *OperatorSettings) GetShowPlayerContactToAffiliate() bool {
+	if x != nil && x.ShowPlayerContactToAffiliate != nil {
+		return *x.ShowPlayerContactToAffiliate
+	}
+	return false
 }
 
 type GetOperatorSettingsResponse struct {
@@ -9951,7 +9971,11 @@ type ListUsersResponse_User struct {
 	CommissionUsd                                 string `protobuf:"bytes,31,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
 	CommissionReportingCurrency                   string `protobuf:"bytes,32,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
 	// percentage, ngr / commission
-	Roi           string `protobuf:"bytes,33,opt,name=roi,proto3" json:"roi,omitempty"`
+	Roi string `protobuf:"bytes,33,opt,name=roi,proto3" json:"roi,omitempty"`
+	// empty string when show_player_contact=false
+	Email string `protobuf:"bytes,34,opt,name=email,proto3" json:"email,omitempty"`
+	// empty string when show_player_contact=false
+	Mobile        string `protobuf:"bytes,35,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -10213,6 +10237,20 @@ func (x *ListUsersResponse_User) GetCommissionReportingCurrency() string {
 func (x *ListUsersResponse_User) GetRoi() string {
 	if x != nil {
 		return x.Roi
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetMobile() string {
+	if x != nil {
+		return x.Mobile
 	}
 	return ""
 }
@@ -11912,12 +11950,13 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\r_affiliate_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xe4\r\n" +
+	"_page_size\"\xc2\x0e\n" +
 	"\x11ListUsersResponse\x12F\n" +
 	"\x05users\x18\x01 \x03(\v20.api.affiliate.service.v1.ListUsersResponse.UserR\x05users\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xbf\f\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12.\n" +
+	"\x13show_player_contact\x18\x05 \x01(\bR\x11showPlayerContact\x1a\xed\f\n" +
 	"\x04User\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12!\n" +
@@ -11953,7 +11992,9 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x16ngr_reporting_currency\x18\x1e \x01(\tR\x14ngrReportingCurrency\x12%\n" +
 	"\x0ecommission_usd\x18\x1f \x01(\tR\rcommissionUsd\x12B\n" +
 	"\x1dcommission_reporting_currency\x18  \x01(\tR\x1bcommissionReportingCurrency\x12\x10\n" +
-	"\x03roi\x18! \x01(\tR\x03roi\"\xd5\x05\n" +
+	"\x03roi\x18! \x01(\tR\x03roi\x12\x14\n" +
+	"\x05email\x18\" \x01(\tR\x05email\x12\x16\n" +
+	"\x06mobile\x18# \x01(\tR\x06mobile\"\xd5\x05\n" +
 	"\x12ExportUsersRequest\x12\x1c\n" +
 	"\tcountries\x18\x01 \x03(\tR\tcountries\x12@\n" +
 	"\x0eftd_start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\fftdStartTime\x12<\n" +
@@ -12045,12 +12086,14 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"campaignId\"\xcc\x01\n" +
 	"\x1aGetOperatorSettingsRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xdd\x01\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xcf\x02\n" +
 	"\x10OperatorSettings\x120\n" +
 	"\x14payment_channel_rate\x18\x01 \x01(\tR\x12paymentChannelRate\x121\n" +
 	"\x15third_party_game_rate\x18\x02 \x01(\tR\x12thirdPartyGameRate\x12C\n" +
-	"\x1creferral_loss_rev_share_mode\x18\x03 \x01(\tH\x00R\x18referralLossRevShareMode\x88\x01\x01B\x1f\n" +
-	"\x1d_referral_loss_rev_share_mode\"v\n" +
+	"\x1creferral_loss_rev_share_mode\x18\x03 \x01(\tH\x00R\x18referralLossRevShareMode\x88\x01\x01\x12K\n" +
+	" show_player_contact_to_affiliate\x18\x04 \x01(\bH\x01R\x1cshowPlayerContactToAffiliate\x88\x01\x01B\x1f\n" +
+	"\x1d_referral_loss_rev_share_modeB#\n" +
+	"!_show_player_contact_to_affiliate\"v\n" +
 	"\x1bGetOperatorSettingsResponse\x12W\n" +
 	"\x11operator_settings\x18\x01 \x01(\v2*.api.affiliate.service.v1.OperatorSettingsR\x10operatorSettings\"\xa8\x02\n" +
 	"\x1dUpdateOperatorSettingsRequest\x12Y\n" +

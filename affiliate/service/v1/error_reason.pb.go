@@ -138,6 +138,14 @@ const (
 	ErrorReason_SIMULATE_GLOBAL_POSTBACK_FAILED  ErrorReason = 130105
 	ErrorReason_LIST_GLOBAL_POSTBACK_LOGS_FAILED ErrorReason = 130106
 	ErrorReason_POSTBACK_URL_BLOCKED             ErrorReason = 130107
+	// User profile sync — emitted by the UserProfileUpdateEvent subscriber
+	// when applying a batched profile change (email, mobile, ...) fails.
+	// Note: 130108 is USER_REFERRAL_CODE_ALREADY_EXISTS above, so this is 130109.
+	ErrorReason_PROCESS_USER_PROFILE_UPDATE_FAILED ErrorReason = 130109
+	// 4xx variant of LIST_AFFILIATE_USERS_FAILED for caller misuse (page_size
+	// over cap, missing initiator context, etc.) so clients don't see 5xx
+	// alerts for what is their own fixable input.
+	ErrorReason_LIST_AFFILIATE_USERS_INVALID_ARGUMENT ErrorReason = 130110
 )
 
 // Enum value maps for ErrorReason.
@@ -252,6 +260,8 @@ var (
 		130105: "SIMULATE_GLOBAL_POSTBACK_FAILED",
 		130106: "LIST_GLOBAL_POSTBACK_LOGS_FAILED",
 		130107: "POSTBACK_URL_BLOCKED",
+		130109: "PROCESS_USER_PROFILE_UPDATE_FAILED",
+		130110: "LIST_AFFILIATE_USERS_INVALID_ARGUMENT",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                         0,
@@ -363,6 +373,8 @@ var (
 		"SIMULATE_GLOBAL_POSTBACK_FAILED":                     130105,
 		"LIST_GLOBAL_POSTBACK_LOGS_FAILED":                    130106,
 		"POSTBACK_URL_BLOCKED":                                130107,
+		"PROCESS_USER_PROFILE_UPDATE_FAILED":                  130109,
+		"LIST_AFFILIATE_USERS_INVALID_ARGUMENT":               130110,
 	}
 )
 
@@ -397,7 +409,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xe3\x1e\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xc0\x1f\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -507,7 +519,9 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x19GLOBAL_POSTBACK_NOT_FOUND\x10\xb8\xf8\a\x12%\n" +
 	"\x1fSIMULATE_GLOBAL_POSTBACK_FAILED\x10\xb9\xf8\a\x12&\n" +
 	" LIST_GLOBAL_POSTBACK_LOGS_FAILED\x10\xba\xf8\a\x12 \n" +
-	"\x14POSTBACK_URL_BLOCKED\x10\xbb\xf8\a\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x14POSTBACK_URL_BLOCKED\x10\xbb\xf8\a\x1a\x04\xa8E\x90\x03\x12(\n" +
+	"\"PROCESS_USER_PROFILE_UPDATE_FAILED\x10\xbd\xf8\a\x121\n" +
+	"%LIST_AFFILIATE_USERS_INVALID_ARGUMENT\x10\xbe\xf8\a\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

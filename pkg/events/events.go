@@ -343,6 +343,7 @@ const UserStatusUpdateTopic = "user.status.update"
 
 const UserIdentitySubmitTopic = "user.identity.submit"
 
+
 // UserIdentitySubmitEvent is published when a user submits identity documents for KYC Level 3 verification.
 type UserIdentitySubmitEvent struct {
 	UserID             int64  `json:"user_id"`
