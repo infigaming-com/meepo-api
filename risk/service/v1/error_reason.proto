@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package api.gamification.service.v1;
+package api.risk.service.v1;
 
 import "errors/errors.proto";
 
-option go_package = "github.com/infigaming-com/meepo-api/gamification/service/v1;v1";
+option go_package = "github.com/infigaming-com/meepo-api/risk/service/v1;v1";
 option java_multiple_files = true;
-option java_package = "api.gamification.service.v1";
+option java_package = "api.risk.service.v1";
 
 enum ErrorReason {
   option (errors.default_code) = 500;

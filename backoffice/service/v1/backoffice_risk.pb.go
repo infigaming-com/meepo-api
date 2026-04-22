@@ -2,13 +2,13 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v5.29.3
-// source: backoffice/service/v1/backoffice_gamification.proto
+// source: backoffice/service/v1/backoffice_risk.proto
 
 package v1
 
 import (
 	common "github.com/infigaming-com/meepo-api/common"
-	v1 "github.com/infigaming-com/meepo-api/gamification/service/v1"
+	v1 "github.com/infigaming-com/meepo-api/risk/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -34,7 +34,7 @@ type BackofficeCreateClaimRuleRequest struct {
 
 func (x *BackofficeCreateClaimRuleRequest) Reset() {
 	*x = BackofficeCreateClaimRuleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[0]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46,7 +46,7 @@ func (x *BackofficeCreateClaimRuleRequest) String() string {
 func (*BackofficeCreateClaimRuleRequest) ProtoMessage() {}
 
 func (x *BackofficeCreateClaimRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[0]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59,7 +59,7 @@ func (x *BackofficeCreateClaimRuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackofficeCreateClaimRuleRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeCreateClaimRuleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{0}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *BackofficeCreateClaimRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -86,7 +86,7 @@ type BackofficeUpdateClaimRuleRequest struct {
 
 func (x *BackofficeUpdateClaimRuleRequest) Reset() {
 	*x = BackofficeUpdateClaimRuleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[1]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -98,7 +98,7 @@ func (x *BackofficeUpdateClaimRuleRequest) String() string {
 func (*BackofficeUpdateClaimRuleRequest) ProtoMessage() {}
 
 func (x *BackofficeUpdateClaimRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[1]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -111,7 +111,7 @@ func (x *BackofficeUpdateClaimRuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackofficeUpdateClaimRuleRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeUpdateClaimRuleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{1}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *BackofficeUpdateClaimRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -138,7 +138,7 @@ type BackofficeDeleteClaimRuleRequest struct {
 
 func (x *BackofficeDeleteClaimRuleRequest) Reset() {
 	*x = BackofficeDeleteClaimRuleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[2]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -150,7 +150,7 @@ func (x *BackofficeDeleteClaimRuleRequest) String() string {
 func (*BackofficeDeleteClaimRuleRequest) ProtoMessage() {}
 
 func (x *BackofficeDeleteClaimRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[2]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -163,7 +163,7 @@ func (x *BackofficeDeleteClaimRuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackofficeDeleteClaimRuleRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeDeleteClaimRuleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{2}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *BackofficeDeleteClaimRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -191,7 +191,7 @@ type BackofficeListClaimRulesRequest struct {
 
 func (x *BackofficeListClaimRulesRequest) Reset() {
 	*x = BackofficeListClaimRulesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[3]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -203,7 +203,7 @@ func (x *BackofficeListClaimRulesRequest) String() string {
 func (*BackofficeListClaimRulesRequest) ProtoMessage() {}
 
 func (x *BackofficeListClaimRulesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[3]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -216,7 +216,7 @@ func (x *BackofficeListClaimRulesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackofficeListClaimRulesRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeListClaimRulesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{3}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *BackofficeListClaimRulesRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -250,7 +250,7 @@ type BackofficeGetClaimRuleRequest struct {
 
 func (x *BackofficeGetClaimRuleRequest) Reset() {
 	*x = BackofficeGetClaimRuleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[4]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -262,7 +262,7 @@ func (x *BackofficeGetClaimRuleRequest) String() string {
 func (*BackofficeGetClaimRuleRequest) ProtoMessage() {}
 
 func (x *BackofficeGetClaimRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[4]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -275,7 +275,7 @@ func (x *BackofficeGetClaimRuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackofficeGetClaimRuleRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeGetClaimRuleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{4}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *BackofficeGetClaimRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -303,7 +303,7 @@ type BackofficeUpdateClaimRulePriorityRequest struct {
 
 func (x *BackofficeUpdateClaimRulePriorityRequest) Reset() {
 	*x = BackofficeUpdateClaimRulePriorityRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[5]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -315,7 +315,7 @@ func (x *BackofficeUpdateClaimRulePriorityRequest) String() string {
 func (*BackofficeUpdateClaimRulePriorityRequest) ProtoMessage() {}
 
 func (x *BackofficeUpdateClaimRulePriorityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[5]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -328,7 +328,7 @@ func (x *BackofficeUpdateClaimRulePriorityRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use BackofficeUpdateClaimRulePriorityRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeUpdateClaimRulePriorityRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{5}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *BackofficeUpdateClaimRulePriorityRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -356,14 +356,14 @@ type BackofficeUpdateClaimRuleStatusRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	RuleId                int64                   `protobuf:"varint,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
-	Status                v1.RuleStatus           `protobuf:"varint,3,opt,name=status,proto3,enum=api.gamification.service.v1.RuleStatus" json:"status,omitempty"`
+	Status                v1.RuleStatus           `protobuf:"varint,3,opt,name=status,proto3,enum=api.risk.service.v1.RuleStatus" json:"status,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BackofficeUpdateClaimRuleStatusRequest) Reset() {
 	*x = BackofficeUpdateClaimRuleStatusRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -375,7 +375,7 @@ func (x *BackofficeUpdateClaimRuleStatusRequest) String() string {
 func (*BackofficeUpdateClaimRuleStatusRequest) ProtoMessage() {}
 
 func (x *BackofficeUpdateClaimRuleStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -388,7 +388,7 @@ func (x *BackofficeUpdateClaimRuleStatusRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use BackofficeUpdateClaimRuleStatusRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeUpdateClaimRuleStatusRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{6}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *BackofficeUpdateClaimRuleStatusRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -422,7 +422,7 @@ type BackofficeCreateGameRestrictionRuleRequest struct {
 
 func (x *BackofficeCreateGameRestrictionRuleRequest) Reset() {
 	*x = BackofficeCreateGameRestrictionRuleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -434,7 +434,7 @@ func (x *BackofficeCreateGameRestrictionRuleRequest) String() string {
 func (*BackofficeCreateGameRestrictionRuleRequest) ProtoMessage() {}
 
 func (x *BackofficeCreateGameRestrictionRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -447,7 +447,7 @@ func (x *BackofficeCreateGameRestrictionRuleRequest) ProtoReflect() protoreflect
 
 // Deprecated: Use BackofficeCreateGameRestrictionRuleRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeCreateGameRestrictionRuleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{7}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *BackofficeCreateGameRestrictionRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -474,7 +474,7 @@ type BackofficeUpdateGameRestrictionRuleRequest struct {
 
 func (x *BackofficeUpdateGameRestrictionRuleRequest) Reset() {
 	*x = BackofficeUpdateGameRestrictionRuleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -486,7 +486,7 @@ func (x *BackofficeUpdateGameRestrictionRuleRequest) String() string {
 func (*BackofficeUpdateGameRestrictionRuleRequest) ProtoMessage() {}
 
 func (x *BackofficeUpdateGameRestrictionRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -499,7 +499,7 @@ func (x *BackofficeUpdateGameRestrictionRuleRequest) ProtoReflect() protoreflect
 
 // Deprecated: Use BackofficeUpdateGameRestrictionRuleRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeUpdateGameRestrictionRuleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{8}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *BackofficeUpdateGameRestrictionRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -526,7 +526,7 @@ type BackofficeDeleteGameRestrictionRuleRequest struct {
 
 func (x *BackofficeDeleteGameRestrictionRuleRequest) Reset() {
 	*x = BackofficeDeleteGameRestrictionRuleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -538,7 +538,7 @@ func (x *BackofficeDeleteGameRestrictionRuleRequest) String() string {
 func (*BackofficeDeleteGameRestrictionRuleRequest) ProtoMessage() {}
 
 func (x *BackofficeDeleteGameRestrictionRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -551,7 +551,7 @@ func (x *BackofficeDeleteGameRestrictionRuleRequest) ProtoReflect() protoreflect
 
 // Deprecated: Use BackofficeDeleteGameRestrictionRuleRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeDeleteGameRestrictionRuleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{9}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *BackofficeDeleteGameRestrictionRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -579,7 +579,7 @@ type BackofficeListGameRestrictionRulesRequest struct {
 
 func (x *BackofficeListGameRestrictionRulesRequest) Reset() {
 	*x = BackofficeListGameRestrictionRulesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -591,7 +591,7 @@ func (x *BackofficeListGameRestrictionRulesRequest) String() string {
 func (*BackofficeListGameRestrictionRulesRequest) ProtoMessage() {}
 
 func (x *BackofficeListGameRestrictionRulesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -604,7 +604,7 @@ func (x *BackofficeListGameRestrictionRulesRequest) ProtoReflect() protoreflect.
 
 // Deprecated: Use BackofficeListGameRestrictionRulesRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeListGameRestrictionRulesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{10}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *BackofficeListGameRestrictionRulesRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -638,7 +638,7 @@ type BackofficeGetGameRestrictionRuleRequest struct {
 
 func (x *BackofficeGetGameRestrictionRuleRequest) Reset() {
 	*x = BackofficeGetGameRestrictionRuleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -650,7 +650,7 @@ func (x *BackofficeGetGameRestrictionRuleRequest) String() string {
 func (*BackofficeGetGameRestrictionRuleRequest) ProtoMessage() {}
 
 func (x *BackofficeGetGameRestrictionRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -663,7 +663,7 @@ func (x *BackofficeGetGameRestrictionRuleRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use BackofficeGetGameRestrictionRuleRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeGetGameRestrictionRuleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{11}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *BackofficeGetGameRestrictionRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -691,7 +691,7 @@ type BackofficeUpdateGameRestrictionRulePriorityRequest struct {
 
 func (x *BackofficeUpdateGameRestrictionRulePriorityRequest) Reset() {
 	*x = BackofficeUpdateGameRestrictionRulePriorityRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -703,7 +703,7 @@ func (x *BackofficeUpdateGameRestrictionRulePriorityRequest) String() string {
 func (*BackofficeUpdateGameRestrictionRulePriorityRequest) ProtoMessage() {}
 
 func (x *BackofficeUpdateGameRestrictionRulePriorityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -716,7 +716,7 @@ func (x *BackofficeUpdateGameRestrictionRulePriorityRequest) ProtoReflect() prot
 
 // Deprecated: Use BackofficeUpdateGameRestrictionRulePriorityRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeUpdateGameRestrictionRulePriorityRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{12}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *BackofficeUpdateGameRestrictionRulePriorityRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -744,14 +744,14 @@ type BackofficeUpdateGameRestrictionRuleStatusRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	RuleId                int64                   `protobuf:"varint,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
-	Status                v1.RuleStatus           `protobuf:"varint,3,opt,name=status,proto3,enum=api.gamification.service.v1.RuleStatus" json:"status,omitempty"`
+	Status                v1.RuleStatus           `protobuf:"varint,3,opt,name=status,proto3,enum=api.risk.service.v1.RuleStatus" json:"status,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BackofficeUpdateGameRestrictionRuleStatusRequest) Reset() {
 	*x = BackofficeUpdateGameRestrictionRuleStatusRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -763,7 +763,7 @@ func (x *BackofficeUpdateGameRestrictionRuleStatusRequest) String() string {
 func (*BackofficeUpdateGameRestrictionRuleStatusRequest) ProtoMessage() {}
 
 func (x *BackofficeUpdateGameRestrictionRuleStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -776,7 +776,7 @@ func (x *BackofficeUpdateGameRestrictionRuleStatusRequest) ProtoReflect() protor
 
 // Deprecated: Use BackofficeUpdateGameRestrictionRuleStatusRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeUpdateGameRestrictionRuleStatusRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{13}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *BackofficeUpdateGameRestrictionRuleStatusRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -809,7 +809,7 @@ type BackofficeGetBonusBuyConfigRequest struct {
 
 func (x *BackofficeGetBonusBuyConfigRequest) Reset() {
 	*x = BackofficeGetBonusBuyConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -821,7 +821,7 @@ func (x *BackofficeGetBonusBuyConfigRequest) String() string {
 func (*BackofficeGetBonusBuyConfigRequest) ProtoMessage() {}
 
 func (x *BackofficeGetBonusBuyConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -834,7 +834,7 @@ func (x *BackofficeGetBonusBuyConfigRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use BackofficeGetBonusBuyConfigRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeGetBonusBuyConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{14}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *BackofficeGetBonusBuyConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -854,7 +854,7 @@ type BackofficeUpdateBonusBuyConfigRequest struct {
 
 func (x *BackofficeUpdateBonusBuyConfigRequest) Reset() {
 	*x = BackofficeUpdateBonusBuyConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -866,7 +866,7 @@ func (x *BackofficeUpdateBonusBuyConfigRequest) String() string {
 func (*BackofficeUpdateBonusBuyConfigRequest) ProtoMessage() {}
 
 func (x *BackofficeUpdateBonusBuyConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_gamification_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_risk_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -879,7 +879,7 @@ func (x *BackofficeUpdateBonusBuyConfigRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use BackofficeUpdateBonusBuyConfigRequest.ProtoReflect.Descriptor instead.
 func (*BackofficeUpdateBonusBuyConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP(), []int{15}
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *BackofficeUpdateBonusBuyConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -896,17 +896,17 @@ func (x *BackofficeUpdateBonusBuyConfigRequest) GetEnabled() bool {
 	return false
 }
 
-var File_backoffice_service_v1_backoffice_gamification_proto protoreflect.FileDescriptor
+var File_backoffice_service_v1_backoffice_risk_proto protoreflect.FileDescriptor
 
-const file_backoffice_service_v1_backoffice_gamification_proto_rawDesc = "" +
+const file_backoffice_service_v1_backoffice_risk_proto_rawDesc = "" +
 	"\n" +
-	"3backoffice/service/v1/backoffice_gamification.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a*gamification/service/v1/gamification.proto\"\xb3\x01\n" +
+	"+backoffice/service/v1/backoffice_risk.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a\x1arisk/service/v1/risk.proto\"\xab\x01\n" +
 	" BackofficeCreateClaimRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12:\n" +
-	"\x04rule\x18\x02 \x01(\v2&.api.gamification.service.v1.ClaimRuleR\x04rule\"\xb3\x01\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x122\n" +
+	"\x04rule\x18\x02 \x01(\v2\x1e.api.risk.service.v1.ClaimRuleR\x04rule\"\xab\x01\n" +
 	" BackofficeUpdateClaimRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12:\n" +
-	"\x04rule\x18\x02 \x01(\v2&.api.gamification.service.v1.ClaimRuleR\x04rule\"\x90\x01\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x122\n" +
+	"\x04rule\x18\x02 \x01(\v2\x1e.api.risk.service.v1.ClaimRuleR\x04rule\"\x90\x01\n" +
 	" BackofficeDeleteClaimRuleRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\"\xa7\x01\n" +
@@ -920,17 +920,17 @@ const file_backoffice_service_v1_backoffice_gamification_proto_rawDesc = "" +
 	"(BackofficeUpdateClaimRulePriorityRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x12\x1a\n" +
-	"\bpriority\x18\x03 \x01(\x05R\bpriority\"\xd7\x01\n" +
+	"\bpriority\x18\x03 \x01(\x05R\bpriority\"\xcf\x01\n" +
 	"&BackofficeUpdateClaimRuleStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
-	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x12?\n" +
-	"\x06status\x18\x03 \x01(\x0e2'.api.gamification.service.v1.RuleStatusR\x06status\"\xc7\x01\n" +
+	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x127\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1f.api.risk.service.v1.RuleStatusR\x06status\"\xbf\x01\n" +
 	"*BackofficeCreateGameRestrictionRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12D\n" +
-	"\x04rule\x18\x02 \x01(\v20.api.gamification.service.v1.GameRestrictionRuleR\x04rule\"\xc7\x01\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12<\n" +
+	"\x04rule\x18\x02 \x01(\v2(.api.risk.service.v1.GameRestrictionRuleR\x04rule\"\xbf\x01\n" +
 	"*BackofficeUpdateGameRestrictionRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12D\n" +
-	"\x04rule\x18\x02 \x01(\v20.api.gamification.service.v1.GameRestrictionRuleR\x04rule\"\x9a\x01\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12<\n" +
+	"\x04rule\x18\x02 \x01(\v2(.api.risk.service.v1.GameRestrictionRuleR\x04rule\"\x9a\x01\n" +
 	"*BackofficeDeleteGameRestrictionRuleRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\"\xb1\x01\n" +
@@ -944,49 +944,49 @@ const file_backoffice_service_v1_backoffice_gamification_proto_rawDesc = "" +
 	"2BackofficeUpdateGameRestrictionRulePriorityRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x12\x1a\n" +
-	"\bpriority\x18\x03 \x01(\x05R\bpriority\"\xe1\x01\n" +
+	"\bpriority\x18\x03 \x01(\x05R\bpriority\"\xd9\x01\n" +
 	"0BackofficeUpdateGameRestrictionRuleStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
-	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x12?\n" +
-	"\x06status\x18\x03 \x01(\x0e2'.api.gamification.service.v1.RuleStatusR\x06status\"y\n" +
+	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x127\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1f.api.risk.service.v1.RuleStatusR\x06status\"y\n" +
 	"\"BackofficeGetBonusBuyConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\x96\x01\n" +
 	"%BackofficeUpdateBonusBuyConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x18\n" +
-	"\aenabled\x18\x02 \x01(\bR\aenabled2\xb7\x1b\n" +
-	"\x16BackofficeGamification\x12\xbe\x01\n" +
-	"\x0fCreateClaimRule\x12;.api.backoffice.service.v1.BackofficeCreateClaimRuleRequest\x1a4.api.gamification.service.v1.CreateClaimRuleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/gamification/claim-rule/create\x12\xbe\x01\n" +
-	"\x0fUpdateClaimRule\x12;.api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest\x1a4.api.gamification.service.v1.UpdateClaimRuleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/gamification/claim-rule/update\x12\xbe\x01\n" +
-	"\x0fDeleteClaimRule\x12;.api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest\x1a4.api.gamification.service.v1.DeleteClaimRuleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/gamification/claim-rule/delete\x12\xb9\x01\n" +
-	"\x0eListClaimRules\x12:.api.backoffice.service.v1.BackofficeListClaimRulesRequest\x1a3.api.gamification.service.v1.ListClaimRulesResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/gamification/claim-rule/list\x12\xb2\x01\n" +
-	"\fGetClaimRule\x128.api.backoffice.service.v1.BackofficeGetClaimRuleRequest\x1a1.api.gamification.service.v1.GetClaimRuleResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/gamification/claim-rule/get\x12\xdf\x01\n" +
-	"\x17UpdateClaimRulePriority\x12C.api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest\x1a<.api.gamification.service.v1.UpdateClaimRulePriorityResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/v1/backoffice/gamification/claim-rule/priority/update\x12\xd7\x01\n" +
-	"\x15UpdateClaimRuleStatus\x12A.api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest\x1a:.api.gamification.service.v1.UpdateClaimRuleStatusResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/gamification/claim-rule/status/update\x12\xe7\x01\n" +
-	"\x19CreateGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest\x1a>.api.gamification.service.v1.CreateGameRestrictionRuleResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/gamification/game-restriction-rule/create\x12\xe7\x01\n" +
-	"\x19UpdateGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest\x1a>.api.gamification.service.v1.UpdateGameRestrictionRuleResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/gamification/game-restriction-rule/update\x12\xe7\x01\n" +
-	"\x19DeleteGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest\x1a>.api.gamification.service.v1.DeleteGameRestrictionRuleResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/gamification/game-restriction-rule/delete\x12\xe2\x01\n" +
-	"\x18ListGameRestrictionRules\x12D.api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest\x1a=.api.gamification.service.v1.ListGameRestrictionRulesResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/v1/backoffice/gamification/game-restriction-rule/list\x12\xdb\x01\n" +
-	"\x16GetGameRestrictionRule\x12B.api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest\x1a;.api.gamification.service.v1.GetGameRestrictionRuleResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/v1/backoffice/gamification/game-restriction-rule/get\x12\x88\x02\n" +
-	"!UpdateGameRestrictionRulePriority\x12M.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest\x1aF.api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse\"L\x82\xd3\xe4\x93\x02F:\x01*\"A/v1/backoffice/gamification/game-restriction-rule/priority/update\x12\x80\x02\n" +
-	"\x1fUpdateGameRestrictionRuleStatus\x12K.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest\x1aD.api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse\"J\x82\xd3\xe4\x93\x02D:\x01*\"?/v1/backoffice/gamification/game-restriction-rule/status/update\x12\xc7\x01\n" +
-	"\x11GetBonusBuyConfig\x12=.api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest\x1a6.api.gamification.service.v1.GetBonusBuyConfigResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/gamification/bonus-buy-config/get\x12\xd3\x01\n" +
-	"\x14UpdateBonusBuyConfig\x12@.api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest\x1a9.api.gamification.service.v1.UpdateBonusBuyConfigResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/gamification/bonus-buy-config/updateB[\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled2\xaf\x19\n" +
+	"\x0eBackofficeRisk\x12\xae\x01\n" +
+	"\x0fCreateClaimRule\x12;.api.backoffice.service.v1.BackofficeCreateClaimRuleRequest\x1a,.api.risk.service.v1.CreateClaimRuleResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/risk/claim-rule/create\x12\xae\x01\n" +
+	"\x0fUpdateClaimRule\x12;.api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest\x1a,.api.risk.service.v1.UpdateClaimRuleResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/risk/claim-rule/update\x12\xae\x01\n" +
+	"\x0fDeleteClaimRule\x12;.api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest\x1a,.api.risk.service.v1.DeleteClaimRuleResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/risk/claim-rule/delete\x12\xa9\x01\n" +
+	"\x0eListClaimRules\x12:.api.backoffice.service.v1.BackofficeListClaimRulesRequest\x1a+.api.risk.service.v1.ListClaimRulesResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/risk/claim-rule/list\x12\xa2\x01\n" +
+	"\fGetClaimRule\x128.api.backoffice.service.v1.BackofficeGetClaimRuleRequest\x1a).api.risk.service.v1.GetClaimRuleResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/risk/claim-rule/get\x12\xcf\x01\n" +
+	"\x17UpdateClaimRulePriority\x12C.api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest\x1a4.api.risk.service.v1.UpdateClaimRulePriorityResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/risk/claim-rule/priority/update\x12\xc7\x01\n" +
+	"\x15UpdateClaimRuleStatus\x12A.api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest\x1a2.api.risk.service.v1.UpdateClaimRuleStatusResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/risk/claim-rule/status/update\x12\xd7\x01\n" +
+	"\x19CreateGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest\x1a6.api.risk.service.v1.CreateGameRestrictionRuleResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/risk/game-restriction-rule/create\x12\xd7\x01\n" +
+	"\x19UpdateGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest\x1a6.api.risk.service.v1.UpdateGameRestrictionRuleResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/risk/game-restriction-rule/update\x12\xd7\x01\n" +
+	"\x19DeleteGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest\x1a6.api.risk.service.v1.DeleteGameRestrictionRuleResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/risk/game-restriction-rule/delete\x12\xd2\x01\n" +
+	"\x18ListGameRestrictionRules\x12D.api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest\x1a5.api.risk.service.v1.ListGameRestrictionRulesResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/risk/game-restriction-rule/list\x12\xcb\x01\n" +
+	"\x16GetGameRestrictionRule\x12B.api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest\x1a3.api.risk.service.v1.GetGameRestrictionRuleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/risk/game-restriction-rule/get\x12\xf8\x01\n" +
+	"!UpdateGameRestrictionRulePriority\x12M.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest\x1a>.api.risk.service.v1.UpdateGameRestrictionRulePriorityResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/v1/backoffice/risk/game-restriction-rule/priority/update\x12\xf0\x01\n" +
+	"\x1fUpdateGameRestrictionRuleStatus\x12K.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest\x1a<.api.risk.service.v1.UpdateGameRestrictionRuleStatusResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/risk/game-restriction-rule/status/update\x12\xb7\x01\n" +
+	"\x11GetBonusBuyConfig\x12=.api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest\x1a..api.risk.service.v1.GetBonusBuyConfigResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/risk/bonus-buy-config/get\x12\xc3\x01\n" +
+	"\x14UpdateBonusBuyConfig\x12@.api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest\x1a1.api.risk.service.v1.UpdateBonusBuyConfigResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/risk/bonus-buy-config/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
-	file_backoffice_service_v1_backoffice_gamification_proto_rawDescOnce sync.Once
-	file_backoffice_service_v1_backoffice_gamification_proto_rawDescData []byte
+	file_backoffice_service_v1_backoffice_risk_proto_rawDescOnce sync.Once
+	file_backoffice_service_v1_backoffice_risk_proto_rawDescData []byte
 )
 
-func file_backoffice_service_v1_backoffice_gamification_proto_rawDescGZIP() []byte {
-	file_backoffice_service_v1_backoffice_gamification_proto_rawDescOnce.Do(func() {
-		file_backoffice_service_v1_backoffice_gamification_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_gamification_proto_rawDesc), len(file_backoffice_service_v1_backoffice_gamification_proto_rawDesc)))
+func file_backoffice_service_v1_backoffice_risk_proto_rawDescGZIP() []byte {
+	file_backoffice_service_v1_backoffice_risk_proto_rawDescOnce.Do(func() {
+		file_backoffice_service_v1_backoffice_risk_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_risk_proto_rawDesc), len(file_backoffice_service_v1_backoffice_risk_proto_rawDesc)))
 	})
-	return file_backoffice_service_v1_backoffice_gamification_proto_rawDescData
+	return file_backoffice_service_v1_backoffice_risk_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_gamification_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
-var file_backoffice_service_v1_backoffice_gamification_proto_goTypes = []any{
+var file_backoffice_service_v1_backoffice_risk_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_backoffice_service_v1_backoffice_risk_proto_goTypes = []any{
 	(*BackofficeCreateClaimRuleRequest)(nil),                   // 0: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest
 	(*BackofficeUpdateClaimRuleRequest)(nil),                   // 1: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest
 	(*BackofficeDeleteClaimRuleRequest)(nil),                   // 2: api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest
@@ -1004,81 +1004,81 @@ var file_backoffice_service_v1_backoffice_gamification_proto_goTypes = []any{
 	(*BackofficeGetBonusBuyConfigRequest)(nil),                 // 14: api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest
 	(*BackofficeUpdateBonusBuyConfigRequest)(nil),              // 15: api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest
 	(*common.OperatorContext)(nil),                             // 16: api.common.OperatorContext
-	(*v1.ClaimRule)(nil),                                       // 17: api.gamification.service.v1.ClaimRule
-	(v1.RuleStatus)(0),                                         // 18: api.gamification.service.v1.RuleStatus
-	(*v1.GameRestrictionRule)(nil),                             // 19: api.gamification.service.v1.GameRestrictionRule
-	(*v1.CreateClaimRuleResponse)(nil),                         // 20: api.gamification.service.v1.CreateClaimRuleResponse
-	(*v1.UpdateClaimRuleResponse)(nil),                         // 21: api.gamification.service.v1.UpdateClaimRuleResponse
-	(*v1.DeleteClaimRuleResponse)(nil),                         // 22: api.gamification.service.v1.DeleteClaimRuleResponse
-	(*v1.ListClaimRulesResponse)(nil),                          // 23: api.gamification.service.v1.ListClaimRulesResponse
-	(*v1.GetClaimRuleResponse)(nil),                            // 24: api.gamification.service.v1.GetClaimRuleResponse
-	(*v1.UpdateClaimRulePriorityResponse)(nil),                 // 25: api.gamification.service.v1.UpdateClaimRulePriorityResponse
-	(*v1.UpdateClaimRuleStatusResponse)(nil),                   // 26: api.gamification.service.v1.UpdateClaimRuleStatusResponse
-	(*v1.CreateGameRestrictionRuleResponse)(nil),               // 27: api.gamification.service.v1.CreateGameRestrictionRuleResponse
-	(*v1.UpdateGameRestrictionRuleResponse)(nil),               // 28: api.gamification.service.v1.UpdateGameRestrictionRuleResponse
-	(*v1.DeleteGameRestrictionRuleResponse)(nil),               // 29: api.gamification.service.v1.DeleteGameRestrictionRuleResponse
-	(*v1.ListGameRestrictionRulesResponse)(nil),                // 30: api.gamification.service.v1.ListGameRestrictionRulesResponse
-	(*v1.GetGameRestrictionRuleResponse)(nil),                  // 31: api.gamification.service.v1.GetGameRestrictionRuleResponse
-	(*v1.UpdateGameRestrictionRulePriorityResponse)(nil),       // 32: api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse
-	(*v1.UpdateGameRestrictionRuleStatusResponse)(nil),         // 33: api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse
-	(*v1.GetBonusBuyConfigResponse)(nil),                       // 34: api.gamification.service.v1.GetBonusBuyConfigResponse
-	(*v1.UpdateBonusBuyConfigResponse)(nil),                    // 35: api.gamification.service.v1.UpdateBonusBuyConfigResponse
+	(*v1.ClaimRule)(nil),                                       // 17: api.risk.service.v1.ClaimRule
+	(v1.RuleStatus)(0),                                         // 18: api.risk.service.v1.RuleStatus
+	(*v1.GameRestrictionRule)(nil),                             // 19: api.risk.service.v1.GameRestrictionRule
+	(*v1.CreateClaimRuleResponse)(nil),                         // 20: api.risk.service.v1.CreateClaimRuleResponse
+	(*v1.UpdateClaimRuleResponse)(nil),                         // 21: api.risk.service.v1.UpdateClaimRuleResponse
+	(*v1.DeleteClaimRuleResponse)(nil),                         // 22: api.risk.service.v1.DeleteClaimRuleResponse
+	(*v1.ListClaimRulesResponse)(nil),                          // 23: api.risk.service.v1.ListClaimRulesResponse
+	(*v1.GetClaimRuleResponse)(nil),                            // 24: api.risk.service.v1.GetClaimRuleResponse
+	(*v1.UpdateClaimRulePriorityResponse)(nil),                 // 25: api.risk.service.v1.UpdateClaimRulePriorityResponse
+	(*v1.UpdateClaimRuleStatusResponse)(nil),                   // 26: api.risk.service.v1.UpdateClaimRuleStatusResponse
+	(*v1.CreateGameRestrictionRuleResponse)(nil),               // 27: api.risk.service.v1.CreateGameRestrictionRuleResponse
+	(*v1.UpdateGameRestrictionRuleResponse)(nil),               // 28: api.risk.service.v1.UpdateGameRestrictionRuleResponse
+	(*v1.DeleteGameRestrictionRuleResponse)(nil),               // 29: api.risk.service.v1.DeleteGameRestrictionRuleResponse
+	(*v1.ListGameRestrictionRulesResponse)(nil),                // 30: api.risk.service.v1.ListGameRestrictionRulesResponse
+	(*v1.GetGameRestrictionRuleResponse)(nil),                  // 31: api.risk.service.v1.GetGameRestrictionRuleResponse
+	(*v1.UpdateGameRestrictionRulePriorityResponse)(nil),       // 32: api.risk.service.v1.UpdateGameRestrictionRulePriorityResponse
+	(*v1.UpdateGameRestrictionRuleStatusResponse)(nil),         // 33: api.risk.service.v1.UpdateGameRestrictionRuleStatusResponse
+	(*v1.GetBonusBuyConfigResponse)(nil),                       // 34: api.risk.service.v1.GetBonusBuyConfigResponse
+	(*v1.UpdateBonusBuyConfigResponse)(nil),                    // 35: api.risk.service.v1.UpdateBonusBuyConfigResponse
 }
-var file_backoffice_service_v1_backoffice_gamification_proto_depIdxs = []int32{
+var file_backoffice_service_v1_backoffice_risk_proto_depIdxs = []int32{
 	16, // 0: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 1: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.rule:type_name -> api.gamification.service.v1.ClaimRule
+	17, // 1: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.rule:type_name -> api.risk.service.v1.ClaimRule
 	16, // 2: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 3: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.rule:type_name -> api.gamification.service.v1.ClaimRule
+	17, // 3: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.rule:type_name -> api.risk.service.v1.ClaimRule
 	16, // 4: api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 5: api.backoffice.service.v1.BackofficeListClaimRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 6: api.backoffice.service.v1.BackofficeGetClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 7: api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 8: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 9: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.status:type_name -> api.gamification.service.v1.RuleStatus
+	18, // 9: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.status:type_name -> api.risk.service.v1.RuleStatus
 	16, // 10: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	19, // 11: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
+	19, // 11: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.rule:type_name -> api.risk.service.v1.GameRestrictionRule
 	16, // 12: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	19, // 13: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
+	19, // 13: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.rule:type_name -> api.risk.service.v1.GameRestrictionRule
 	16, // 14: api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 15: api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 16: api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 17: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 18: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 19: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.status:type_name -> api.gamification.service.v1.RuleStatus
+	18, // 19: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.status:type_name -> api.risk.service.v1.RuleStatus
 	16, // 20: api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 21: api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	0,  // 22: api.backoffice.service.v1.BackofficeGamification.CreateClaimRule:input_type -> api.backoffice.service.v1.BackofficeCreateClaimRuleRequest
-	1,  // 23: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRule:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest
-	2,  // 24: api.backoffice.service.v1.BackofficeGamification.DeleteClaimRule:input_type -> api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest
-	3,  // 25: api.backoffice.service.v1.BackofficeGamification.ListClaimRules:input_type -> api.backoffice.service.v1.BackofficeListClaimRulesRequest
-	4,  // 26: api.backoffice.service.v1.BackofficeGamification.GetClaimRule:input_type -> api.backoffice.service.v1.BackofficeGetClaimRuleRequest
-	5,  // 27: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRulePriority:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest
-	6,  // 28: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRuleStatus:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest
-	7,  // 29: api.backoffice.service.v1.BackofficeGamification.CreateGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest
-	8,  // 30: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest
-	9,  // 31: api.backoffice.service.v1.BackofficeGamification.DeleteGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest
-	10, // 32: api.backoffice.service.v1.BackofficeGamification.ListGameRestrictionRules:input_type -> api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest
-	11, // 33: api.backoffice.service.v1.BackofficeGamification.GetGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest
-	12, // 34: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRulePriority:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest
-	13, // 35: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRuleStatus:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest
-	14, // 36: api.backoffice.service.v1.BackofficeGamification.GetBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest
-	15, // 37: api.backoffice.service.v1.BackofficeGamification.UpdateBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest
-	20, // 38: api.backoffice.service.v1.BackofficeGamification.CreateClaimRule:output_type -> api.gamification.service.v1.CreateClaimRuleResponse
-	21, // 39: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRule:output_type -> api.gamification.service.v1.UpdateClaimRuleResponse
-	22, // 40: api.backoffice.service.v1.BackofficeGamification.DeleteClaimRule:output_type -> api.gamification.service.v1.DeleteClaimRuleResponse
-	23, // 41: api.backoffice.service.v1.BackofficeGamification.ListClaimRules:output_type -> api.gamification.service.v1.ListClaimRulesResponse
-	24, // 42: api.backoffice.service.v1.BackofficeGamification.GetClaimRule:output_type -> api.gamification.service.v1.GetClaimRuleResponse
-	25, // 43: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRulePriority:output_type -> api.gamification.service.v1.UpdateClaimRulePriorityResponse
-	26, // 44: api.backoffice.service.v1.BackofficeGamification.UpdateClaimRuleStatus:output_type -> api.gamification.service.v1.UpdateClaimRuleStatusResponse
-	27, // 45: api.backoffice.service.v1.BackofficeGamification.CreateGameRestrictionRule:output_type -> api.gamification.service.v1.CreateGameRestrictionRuleResponse
-	28, // 46: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRule:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleResponse
-	29, // 47: api.backoffice.service.v1.BackofficeGamification.DeleteGameRestrictionRule:output_type -> api.gamification.service.v1.DeleteGameRestrictionRuleResponse
-	30, // 48: api.backoffice.service.v1.BackofficeGamification.ListGameRestrictionRules:output_type -> api.gamification.service.v1.ListGameRestrictionRulesResponse
-	31, // 49: api.backoffice.service.v1.BackofficeGamification.GetGameRestrictionRule:output_type -> api.gamification.service.v1.GetGameRestrictionRuleResponse
-	32, // 50: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRulePriority:output_type -> api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse
-	33, // 51: api.backoffice.service.v1.BackofficeGamification.UpdateGameRestrictionRuleStatus:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse
-	34, // 52: api.backoffice.service.v1.BackofficeGamification.GetBonusBuyConfig:output_type -> api.gamification.service.v1.GetBonusBuyConfigResponse
-	35, // 53: api.backoffice.service.v1.BackofficeGamification.UpdateBonusBuyConfig:output_type -> api.gamification.service.v1.UpdateBonusBuyConfigResponse
+	0,  // 22: api.backoffice.service.v1.BackofficeRisk.CreateClaimRule:input_type -> api.backoffice.service.v1.BackofficeCreateClaimRuleRequest
+	1,  // 23: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRule:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest
+	2,  // 24: api.backoffice.service.v1.BackofficeRisk.DeleteClaimRule:input_type -> api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest
+	3,  // 25: api.backoffice.service.v1.BackofficeRisk.ListClaimRules:input_type -> api.backoffice.service.v1.BackofficeListClaimRulesRequest
+	4,  // 26: api.backoffice.service.v1.BackofficeRisk.GetClaimRule:input_type -> api.backoffice.service.v1.BackofficeGetClaimRuleRequest
+	5,  // 27: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRulePriority:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest
+	6,  // 28: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRuleStatus:input_type -> api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest
+	7,  // 29: api.backoffice.service.v1.BackofficeRisk.CreateGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest
+	8,  // 30: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest
+	9,  // 31: api.backoffice.service.v1.BackofficeRisk.DeleteGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest
+	10, // 32: api.backoffice.service.v1.BackofficeRisk.ListGameRestrictionRules:input_type -> api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest
+	11, // 33: api.backoffice.service.v1.BackofficeRisk.GetGameRestrictionRule:input_type -> api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest
+	12, // 34: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRulePriority:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest
+	13, // 35: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRuleStatus:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest
+	14, // 36: api.backoffice.service.v1.BackofficeRisk.GetBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest
+	15, // 37: api.backoffice.service.v1.BackofficeRisk.UpdateBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest
+	20, // 38: api.backoffice.service.v1.BackofficeRisk.CreateClaimRule:output_type -> api.risk.service.v1.CreateClaimRuleResponse
+	21, // 39: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRule:output_type -> api.risk.service.v1.UpdateClaimRuleResponse
+	22, // 40: api.backoffice.service.v1.BackofficeRisk.DeleteClaimRule:output_type -> api.risk.service.v1.DeleteClaimRuleResponse
+	23, // 41: api.backoffice.service.v1.BackofficeRisk.ListClaimRules:output_type -> api.risk.service.v1.ListClaimRulesResponse
+	24, // 42: api.backoffice.service.v1.BackofficeRisk.GetClaimRule:output_type -> api.risk.service.v1.GetClaimRuleResponse
+	25, // 43: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRulePriority:output_type -> api.risk.service.v1.UpdateClaimRulePriorityResponse
+	26, // 44: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRuleStatus:output_type -> api.risk.service.v1.UpdateClaimRuleStatusResponse
+	27, // 45: api.backoffice.service.v1.BackofficeRisk.CreateGameRestrictionRule:output_type -> api.risk.service.v1.CreateGameRestrictionRuleResponse
+	28, // 46: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRule:output_type -> api.risk.service.v1.UpdateGameRestrictionRuleResponse
+	29, // 47: api.backoffice.service.v1.BackofficeRisk.DeleteGameRestrictionRule:output_type -> api.risk.service.v1.DeleteGameRestrictionRuleResponse
+	30, // 48: api.backoffice.service.v1.BackofficeRisk.ListGameRestrictionRules:output_type -> api.risk.service.v1.ListGameRestrictionRulesResponse
+	31, // 49: api.backoffice.service.v1.BackofficeRisk.GetGameRestrictionRule:output_type -> api.risk.service.v1.GetGameRestrictionRuleResponse
+	32, // 50: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRulePriority:output_type -> api.risk.service.v1.UpdateGameRestrictionRulePriorityResponse
+	33, // 51: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRuleStatus:output_type -> api.risk.service.v1.UpdateGameRestrictionRuleStatusResponse
+	34, // 52: api.backoffice.service.v1.BackofficeRisk.GetBonusBuyConfig:output_type -> api.risk.service.v1.GetBonusBuyConfigResponse
+	35, // 53: api.backoffice.service.v1.BackofficeRisk.UpdateBonusBuyConfig:output_type -> api.risk.service.v1.UpdateBonusBuyConfigResponse
 	38, // [38:54] is the sub-list for method output_type
 	22, // [22:38] is the sub-list for method input_type
 	22, // [22:22] is the sub-list for extension type_name
@@ -1086,26 +1086,26 @@ var file_backoffice_service_v1_backoffice_gamification_proto_depIdxs = []int32{
 	0,  // [0:22] is the sub-list for field type_name
 }
 
-func init() { file_backoffice_service_v1_backoffice_gamification_proto_init() }
-func file_backoffice_service_v1_backoffice_gamification_proto_init() {
-	if File_backoffice_service_v1_backoffice_gamification_proto != nil {
+func init() { file_backoffice_service_v1_backoffice_risk_proto_init() }
+func file_backoffice_service_v1_backoffice_risk_proto_init() {
+	if File_backoffice_service_v1_backoffice_risk_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_gamification_proto_rawDesc), len(file_backoffice_service_v1_backoffice_gamification_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_risk_proto_rawDesc), len(file_backoffice_service_v1_backoffice_risk_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_backoffice_service_v1_backoffice_gamification_proto_goTypes,
-		DependencyIndexes: file_backoffice_service_v1_backoffice_gamification_proto_depIdxs,
-		MessageInfos:      file_backoffice_service_v1_backoffice_gamification_proto_msgTypes,
+		GoTypes:           file_backoffice_service_v1_backoffice_risk_proto_goTypes,
+		DependencyIndexes: file_backoffice_service_v1_backoffice_risk_proto_depIdxs,
+		MessageInfos:      file_backoffice_service_v1_backoffice_risk_proto_msgTypes,
 	}.Build()
-	File_backoffice_service_v1_backoffice_gamification_proto = out.File
-	file_backoffice_service_v1_backoffice_gamification_proto_goTypes = nil
-	file_backoffice_service_v1_backoffice_gamification_proto_depIdxs = nil
+	File_backoffice_service_v1_backoffice_risk_proto = out.File
+	file_backoffice_service_v1_backoffice_risk_proto_goTypes = nil
+	file_backoffice_service_v1_backoffice_risk_proto_depIdxs = nil
 }
