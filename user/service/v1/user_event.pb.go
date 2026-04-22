@@ -454,38 +454,43 @@ func (x *UserStatusUpdateEvent) GetUpdatedAt() int64 {
 	return 0
 }
 
-// UserContactUpdatedEvent is emitted when a user's current contact info
-// (email or mobile) is modified via UpdateUser. It is NOT emitted on registration —
-// subscribers should treat AddUserEvent as the initial seed for these fields.
-// Subscribers must use updated_at for last-write-wins to defend against out-of-order delivery.
-type UserContactUpdatedEvent struct {
-	state  protoimpl.MessageState `protogen:"open.v1"`
-	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// Current email after update (empty string if unset)
-	Email string `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	// Current mobile after update (empty string if unset)
-	Mobile string `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	// Millisecond Unix timestamp of the update
-	UpdatedAt       int64                   `protobuf:"varint,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+// UserProfileUpdateEvent is emitted when a user's profile field (email, mobile,
+// firstname, lastname, etc.) is modified post-registration. Shape mirrors
+// UserStatusUpdateEvent — one event per field change, extensible via `field`
+// without proto changes. Not emitted on registration (AddUserEvent is the seed).
+//
+// Subscribers must use updated_at for last-write-wins to defend against
+// out-of-order or duplicate delivery.
+//
+// Currently published fields: "email", "mobile". Publishers add cases here as
+// more profile fields need downstream sync; subscribers add cases as they care.
+type UserProfileUpdateEvent struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// field name that was updated (e.g. "email", "mobile", "firstname")
+	Field         string `protobuf:"bytes,3,opt,name=field,proto3" json:"field,omitempty"`
+	OldValue      string `protobuf:"bytes,4,opt,name=old_value,json=oldValue,proto3" json:"old_value,omitempty"`
+	NewValue      string `protobuf:"bytes,5,opt,name=new_value,json=newValue,proto3" json:"new_value,omitempty"`
+	UpdatedAt     int64  `protobuf:"varint,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserContactUpdatedEvent) Reset() {
-	*x = UserContactUpdatedEvent{}
+func (x *UserProfileUpdateEvent) Reset() {
+	*x = UserProfileUpdateEvent{}
 	mi := &file_user_service_v1_user_event_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserContactUpdatedEvent) String() string {
+func (x *UserProfileUpdateEvent) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserContactUpdatedEvent) ProtoMessage() {}
+func (*UserProfileUpdateEvent) ProtoMessage() {}
 
-func (x *UserContactUpdatedEvent) ProtoReflect() protoreflect.Message {
+func (x *UserProfileUpdateEvent) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_event_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -497,44 +502,51 @@ func (x *UserContactUpdatedEvent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserContactUpdatedEvent.ProtoReflect.Descriptor instead.
-func (*UserContactUpdatedEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserProfileUpdateEvent.ProtoReflect.Descriptor instead.
+func (*UserProfileUpdateEvent) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *UserContactUpdatedEvent) GetUserId() int64 {
+func (x *UserProfileUpdateEvent) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *UserContactUpdatedEvent) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *UserContactUpdatedEvent) GetMobile() string {
-	if x != nil {
-		return x.Mobile
-	}
-	return ""
-}
-
-func (x *UserContactUpdatedEvent) GetUpdatedAt() int64 {
-	if x != nil {
-		return x.UpdatedAt
-	}
-	return 0
-}
-
-func (x *UserContactUpdatedEvent) GetOperatorContext() *common.OperatorContext {
+func (x *UserProfileUpdateEvent) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *UserProfileUpdateEvent) GetField() string {
+	if x != nil {
+		return x.Field
+	}
+	return ""
+}
+
+func (x *UserProfileUpdateEvent) GetOldValue() string {
+	if x != nil {
+		return x.OldValue
+	}
+	return ""
+}
+
+func (x *UserProfileUpdateEvent) GetNewValue() string {
+	if x != nil {
+		return x.NewValue
+	}
+	return ""
+}
+
+func (x *UserProfileUpdateEvent) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
 }
 
 // UserIdentitySubmitEvent is emitted when a user submits identity documents for KYC Level 3 verification.
@@ -693,14 +705,15 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\told_value\x18\x04 \x01(\tR\boldValue\x12\x1b\n" +
 	"\tnew_value\x18\x05 \x01(\tR\bnewValue\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\x03R\tupdatedAt\"\xc7\x01\n" +
-	"\x17UserContactUpdatedEvent\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\x03 \x01(\tR\x06mobile\x12\x1d\n" +
+	"updated_at\x18\x06 \x01(\x03R\tupdatedAt\"\xe8\x01\n" +
+	"\x16UserProfileUpdateEvent\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x14\n" +
+	"\x05field\x18\x03 \x01(\tR\x05field\x12\x1b\n" +
+	"\told_value\x18\x04 \x01(\tR\boldValue\x12\x1b\n" +
+	"\tnew_value\x18\x05 \x01(\tR\bnewValue\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x04 \x01(\x03R\tupdatedAt\x12F\n" +
-	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xdd\x02\n" +
+	"updated_at\x18\x06 \x01(\x03R\tupdatedAt\"\xdd\x02\n" +
 	"\x17UserIdentitySubmitEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -736,13 +749,13 @@ var file_user_service_v1_user_event_proto_goTypes = []any{
 	(*AddUserEvent)(nil),            // 2: api.user.service.v1.AddUserEvent
 	(*AddOperatorEvent)(nil),        // 3: api.user.service.v1.AddOperatorEvent
 	(*UserStatusUpdateEvent)(nil),   // 4: api.user.service.v1.UserStatusUpdateEvent
-	(*UserContactUpdatedEvent)(nil), // 5: api.user.service.v1.UserContactUpdatedEvent
+	(*UserProfileUpdateEvent)(nil),  // 5: api.user.service.v1.UserProfileUpdateEvent
 	(*UserIdentitySubmitEvent)(nil), // 6: api.user.service.v1.UserIdentitySubmitEvent
 	(*common.OperatorContext)(nil),  // 7: api.common.OperatorContext
 }
 var file_user_service_v1_user_event_proto_depIdxs = []int32{
 	7, // 0: api.user.service.v1.UserStatusUpdateEvent.operator_context:type_name -> api.common.OperatorContext
-	7, // 1: api.user.service.v1.UserContactUpdatedEvent.operator_context:type_name -> api.common.OperatorContext
+	7, // 1: api.user.service.v1.UserProfileUpdateEvent.operator_context:type_name -> api.common.OperatorContext
 	0, // 2: api.user.service.v1.UserEvent.Event:input_type -> api.user.service.v1.EventRequest
 	1, // 3: api.user.service.v1.UserEvent.Event:output_type -> api.user.service.v1.EventResponse
 	3, // [3:4] is the sub-list for method output_type

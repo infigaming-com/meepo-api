@@ -624,22 +624,22 @@ var _ interface {
 	ErrorName() string
 } = UserStatusUpdateEventValidationError{}
 
-// Validate checks the field values on UserContactUpdatedEvent with the rules
+// Validate checks the field values on UserProfileUpdateEvent with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UserContactUpdatedEvent) Validate() error {
+func (m *UserProfileUpdateEvent) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UserContactUpdatedEvent with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on UserProfileUpdateEvent with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// UserContactUpdatedEventMultiError, or nil if none found.
-func (m *UserContactUpdatedEvent) ValidateAll() error {
+// UserProfileUpdateEventMultiError, or nil if none found.
+func (m *UserProfileUpdateEvent) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UserContactUpdatedEvent) validate(all bool) error {
+func (m *UserProfileUpdateEvent) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -648,17 +648,11 @@ func (m *UserContactUpdatedEvent) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	// no validation rules for Email
-
-	// no validation rules for Mobile
-
-	// no validation rules for UpdatedAt
-
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UserContactUpdatedEventValidationError{
+				errors = append(errors, UserProfileUpdateEventValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -666,7 +660,7 @@ func (m *UserContactUpdatedEvent) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UserContactUpdatedEventValidationError{
+				errors = append(errors, UserProfileUpdateEventValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -675,7 +669,7 @@ func (m *UserContactUpdatedEvent) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return UserContactUpdatedEventValidationError{
+			return UserProfileUpdateEventValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -683,20 +677,28 @@ func (m *UserContactUpdatedEvent) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Field
+
+	// no validation rules for OldValue
+
+	// no validation rules for NewValue
+
+	// no validation rules for UpdatedAt
+
 	if len(errors) > 0 {
-		return UserContactUpdatedEventMultiError(errors)
+		return UserProfileUpdateEventMultiError(errors)
 	}
 
 	return nil
 }
 
-// UserContactUpdatedEventMultiError is an error wrapping multiple validation
-// errors returned by UserContactUpdatedEvent.ValidateAll() if the designated
+// UserProfileUpdateEventMultiError is an error wrapping multiple validation
+// errors returned by UserProfileUpdateEvent.ValidateAll() if the designated
 // constraints aren't met.
-type UserContactUpdatedEventMultiError []error
+type UserProfileUpdateEventMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UserContactUpdatedEventMultiError) Error() string {
+func (m UserProfileUpdateEventMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -705,11 +707,11 @@ func (m UserContactUpdatedEventMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UserContactUpdatedEventMultiError) AllErrors() []error { return m }
+func (m UserProfileUpdateEventMultiError) AllErrors() []error { return m }
 
-// UserContactUpdatedEventValidationError is the validation error returned by
-// UserContactUpdatedEvent.Validate if the designated constraints aren't met.
-type UserContactUpdatedEventValidationError struct {
+// UserProfileUpdateEventValidationError is the validation error returned by
+// UserProfileUpdateEvent.Validate if the designated constraints aren't met.
+type UserProfileUpdateEventValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -717,24 +719,24 @@ type UserContactUpdatedEventValidationError struct {
 }
 
 // Field function returns field value.
-func (e UserContactUpdatedEventValidationError) Field() string { return e.field }
+func (e UserProfileUpdateEventValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UserContactUpdatedEventValidationError) Reason() string { return e.reason }
+func (e UserProfileUpdateEventValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UserContactUpdatedEventValidationError) Cause() error { return e.cause }
+func (e UserProfileUpdateEventValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UserContactUpdatedEventValidationError) Key() bool { return e.key }
+func (e UserProfileUpdateEventValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UserContactUpdatedEventValidationError) ErrorName() string {
-	return "UserContactUpdatedEventValidationError"
+func (e UserProfileUpdateEventValidationError) ErrorName() string {
+	return "UserProfileUpdateEventValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e UserContactUpdatedEventValidationError) Error() string {
+func (e UserProfileUpdateEventValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -746,14 +748,14 @@ func (e UserContactUpdatedEventValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUserContactUpdatedEvent.%s: %s%s",
+		"invalid %sUserProfileUpdateEvent.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UserContactUpdatedEventValidationError{}
+var _ error = UserProfileUpdateEventValidationError{}
 
 var _ interface {
 	Field() string
@@ -761,7 +763,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UserContactUpdatedEventValidationError{}
+} = UserProfileUpdateEventValidationError{}
 
 // Validate checks the field values on UserIdentitySubmitEvent with the rules
 // defined in the proto definition for this message. If any rules are
