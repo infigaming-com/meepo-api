@@ -2207,209 +2207,6 @@ func (x *UpdateBonusBuyConfigResponse) GetConfig() *BonusBuyConfig {
 	return nil
 }
 
-type GetRuleHierarchyConfigRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// "claim_rule" | "game_restriction_rule"
-	RuleType        string                  `protobuf:"bytes,1,opt,name=rule_type,json=ruleType,proto3" json:"rule_type,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *GetRuleHierarchyConfigRequest) Reset() {
-	*x = GetRuleHierarchyConfigRequest{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[35]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetRuleHierarchyConfigRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetRuleHierarchyConfigRequest) ProtoMessage() {}
-
-func (x *GetRuleHierarchyConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[35]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetRuleHierarchyConfigRequest.ProtoReflect.Descriptor instead.
-func (*GetRuleHierarchyConfigRequest) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{35}
-}
-
-func (x *GetRuleHierarchyConfigRequest) GetRuleType() string {
-	if x != nil {
-		return x.RuleType
-	}
-	return ""
-}
-
-func (x *GetRuleHierarchyConfigRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
-type GetRuleHierarchyConfigResponse struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	FollowParent bool                   `protobuf:"varint,1,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
-	// "system" | "retailer" | "company" | "operator"
-	Level         string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetRuleHierarchyConfigResponse) Reset() {
-	*x = GetRuleHierarchyConfigResponse{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[36]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetRuleHierarchyConfigResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetRuleHierarchyConfigResponse) ProtoMessage() {}
-
-func (x *GetRuleHierarchyConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[36]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetRuleHierarchyConfigResponse.ProtoReflect.Descriptor instead.
-func (*GetRuleHierarchyConfigResponse) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{36}
-}
-
-func (x *GetRuleHierarchyConfigResponse) GetFollowParent() bool {
-	if x != nil {
-		return x.FollowParent
-	}
-	return false
-}
-
-func (x *GetRuleHierarchyConfigResponse) GetLevel() string {
-	if x != nil {
-		return x.Level
-	}
-	return ""
-}
-
-type UpdateRuleHierarchyConfigRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// "claim_rule" | "game_restriction_rule"
-	RuleType        string                  `protobuf:"bytes,1,opt,name=rule_type,json=ruleType,proto3" json:"rule_type,omitempty"`
-	FollowParent    bool                    `protobuf:"varint,2,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *UpdateRuleHierarchyConfigRequest) Reset() {
-	*x = UpdateRuleHierarchyConfigRequest{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[37]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateRuleHierarchyConfigRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateRuleHierarchyConfigRequest) ProtoMessage() {}
-
-func (x *UpdateRuleHierarchyConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[37]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateRuleHierarchyConfigRequest.ProtoReflect.Descriptor instead.
-func (*UpdateRuleHierarchyConfigRequest) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{37}
-}
-
-func (x *UpdateRuleHierarchyConfigRequest) GetRuleType() string {
-	if x != nil {
-		return x.RuleType
-	}
-	return ""
-}
-
-func (x *UpdateRuleHierarchyConfigRequest) GetFollowParent() bool {
-	if x != nil {
-		return x.FollowParent
-	}
-	return false
-}
-
-func (x *UpdateRuleHierarchyConfigRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
-type UpdateRuleHierarchyConfigResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateRuleHierarchyConfigResponse) Reset() {
-	*x = UpdateRuleHierarchyConfigResponse{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[38]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateRuleHierarchyConfigResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateRuleHierarchyConfigResponse) ProtoMessage() {}
-
-func (x *UpdateRuleHierarchyConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[38]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateRuleHierarchyConfigResponse.ProtoReflect.Descriptor instead.
-func (*UpdateRuleHierarchyConfigResponse) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{38}
-}
-
 type CheckClaimEligibilityRequest struct {
 	state  protoimpl.MessageState `protogen:"open.v1"`
 	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -2425,7 +2222,7 @@ type CheckClaimEligibilityRequest struct {
 
 func (x *CheckClaimEligibilityRequest) Reset() {
 	*x = CheckClaimEligibilityRequest{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[39]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2437,7 +2234,7 @@ func (x *CheckClaimEligibilityRequest) String() string {
 func (*CheckClaimEligibilityRequest) ProtoMessage() {}
 
 func (x *CheckClaimEligibilityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[39]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2450,7 +2247,7 @@ func (x *CheckClaimEligibilityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckClaimEligibilityRequest.ProtoReflect.Descriptor instead.
 func (*CheckClaimEligibilityRequest) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{39}
+	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *CheckClaimEligibilityRequest) GetUserId() int64 {
@@ -2506,7 +2303,7 @@ type CheckClaimEligibilityResponse struct {
 
 func (x *CheckClaimEligibilityResponse) Reset() {
 	*x = CheckClaimEligibilityResponse{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[40]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2518,7 +2315,7 @@ func (x *CheckClaimEligibilityResponse) String() string {
 func (*CheckClaimEligibilityResponse) ProtoMessage() {}
 
 func (x *CheckClaimEligibilityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[40]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2531,7 +2328,7 @@ func (x *CheckClaimEligibilityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckClaimEligibilityResponse.ProtoReflect.Descriptor instead.
 func (*CheckClaimEligibilityResponse) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{40}
+	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *CheckClaimEligibilityResponse) GetEligible() bool {
@@ -2572,7 +2369,7 @@ type CheckGameRestrictionRequest struct {
 
 func (x *CheckGameRestrictionRequest) Reset() {
 	*x = CheckGameRestrictionRequest{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[41]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2584,7 +2381,7 @@ func (x *CheckGameRestrictionRequest) String() string {
 func (*CheckGameRestrictionRequest) ProtoMessage() {}
 
 func (x *CheckGameRestrictionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[41]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2597,7 +2394,7 @@ func (x *CheckGameRestrictionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckGameRestrictionRequest.ProtoReflect.Descriptor instead.
 func (*CheckGameRestrictionRequest) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{41}
+	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *CheckGameRestrictionRequest) GetUserId() int64 {
@@ -2653,7 +2450,7 @@ type CheckGameRestrictionResponse struct {
 
 func (x *CheckGameRestrictionResponse) Reset() {
 	*x = CheckGameRestrictionResponse{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[42]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2665,7 +2462,7 @@ func (x *CheckGameRestrictionResponse) String() string {
 func (*CheckGameRestrictionResponse) ProtoMessage() {}
 
 func (x *CheckGameRestrictionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[42]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2678,7 +2475,7 @@ func (x *CheckGameRestrictionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckGameRestrictionResponse.ProtoReflect.Descriptor instead.
 func (*CheckGameRestrictionResponse) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{42}
+	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *CheckGameRestrictionResponse) GetAllowed() bool {
@@ -2719,7 +2516,7 @@ type RecordClaimRequest struct {
 
 func (x *RecordClaimRequest) Reset() {
 	*x = RecordClaimRequest{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[43]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2731,7 +2528,7 @@ func (x *RecordClaimRequest) String() string {
 func (*RecordClaimRequest) ProtoMessage() {}
 
 func (x *RecordClaimRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[43]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2744,7 +2541,7 @@ func (x *RecordClaimRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordClaimRequest.ProtoReflect.Descriptor instead.
 func (*RecordClaimRequest) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{43}
+	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *RecordClaimRequest) GetUserId() int64 {
@@ -2811,7 +2608,7 @@ type RecordClaimResponse struct {
 
 func (x *RecordClaimResponse) Reset() {
 	*x = RecordClaimResponse{}
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[44]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2823,7 +2620,7 @@ func (x *RecordClaimResponse) String() string {
 func (*RecordClaimResponse) ProtoMessage() {}
 
 func (x *RecordClaimResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamification_service_v1_gamification_proto_msgTypes[44]
+	mi := &file_gamification_service_v1_gamification_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2836,7 +2633,7 @@ func (x *RecordClaimResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordClaimResponse.ProtoReflect.Descriptor instead.
 func (*RecordClaimResponse) Descriptor() ([]byte, []int) {
-	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{44}
+	return file_gamification_service_v1_gamification_proto_rawDescGZIP(), []int{40}
 }
 
 var File_gamification_service_v1_gamification_proto protoreflect.FileDescriptor
@@ -2996,18 +2793,7 @@ const file_gamification_service_v1_gamification_proto_rawDesc = "" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\"c\n" +
 	"\x1cUpdateBonusBuyConfigResponse\x12C\n" +
-	"\x06config\x18\x01 \x01(\v2+.api.gamification.service.v1.BonusBuyConfigR\x06config\"\x84\x01\n" +
-	"\x1dGetRuleHierarchyConfigRequest\x12\x1b\n" +
-	"\trule_type\x18\x01 \x01(\tR\bruleType\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"[\n" +
-	"\x1eGetRuleHierarchyConfigResponse\x12#\n" +
-	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\x12\x14\n" +
-	"\x05level\x18\x02 \x01(\tR\x05level\"\xac\x01\n" +
-	" UpdateRuleHierarchyConfigRequest\x12\x1b\n" +
-	"\trule_type\x18\x01 \x01(\tR\bruleType\x12#\n" +
-	"\rfollow_parent\x18\x02 \x01(\bR\ffollowParent\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"#\n" +
-	"!UpdateRuleHierarchyConfigResponse\"\xf9\x01\n" +
+	"\x06config\x18\x01 \x01(\v2+.api.gamification.service.v1.BonusBuyConfigR\x06config\"\xf9\x01\n" +
 	"\x1cCheckClaimEligibilityRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
@@ -3051,7 +2837,7 @@ const file_gamification_service_v1_gamification_proto_rawDesc = "" +
 	"\n" +
 	"RuleStatus\x12\x16\n" +
 	"\x12RULE_STATUS_ACTIVE\x10\x00\x12\x18\n" +
-	"\x14RULE_STATUS_DISABLED\x10\x012\xe5\x17\n" +
+	"\x14RULE_STATUS_DISABLED\x10\x012\xb4\x15\n" +
 	"\x13GamificationService\x12|\n" +
 	"\x0fCreateClaimRule\x123.api.gamification.service.v1.CreateClaimRuleRequest\x1a4.api.gamification.service.v1.CreateClaimRuleResponse\x12|\n" +
 	"\x0fUpdateClaimRule\x123.api.gamification.service.v1.UpdateClaimRuleRequest\x1a4.api.gamification.service.v1.UpdateClaimRuleResponse\x12|\n" +
@@ -3068,9 +2854,7 @@ const file_gamification_service_v1_gamification_proto_rawDesc = "" +
 	"!UpdateGameRestrictionRulePriority\x12E.api.gamification.service.v1.UpdateGameRestrictionRulePriorityRequest\x1aF.api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse\x12\xac\x01\n" +
 	"\x1fUpdateGameRestrictionRuleStatus\x12C.api.gamification.service.v1.UpdateGameRestrictionRuleStatusRequest\x1aD.api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse\x12\x82\x01\n" +
 	"\x11GetBonusBuyConfig\x125.api.gamification.service.v1.GetBonusBuyConfigRequest\x1a6.api.gamification.service.v1.GetBonusBuyConfigResponse\x12\x8b\x01\n" +
-	"\x14UpdateBonusBuyConfig\x128.api.gamification.service.v1.UpdateBonusBuyConfigRequest\x1a9.api.gamification.service.v1.UpdateBonusBuyConfigResponse\x12\x91\x01\n" +
-	"\x16GetRuleHierarchyConfig\x12:.api.gamification.service.v1.GetRuleHierarchyConfigRequest\x1a;.api.gamification.service.v1.GetRuleHierarchyConfigResponse\x12\x9a\x01\n" +
-	"\x19UpdateRuleHierarchyConfig\x12=.api.gamification.service.v1.UpdateRuleHierarchyConfigRequest\x1a>.api.gamification.service.v1.UpdateRuleHierarchyConfigResponse\x12\x8e\x01\n" +
+	"\x14UpdateBonusBuyConfig\x128.api.gamification.service.v1.UpdateBonusBuyConfigRequest\x1a9.api.gamification.service.v1.UpdateBonusBuyConfigResponse\x12\x8e\x01\n" +
 	"\x15CheckClaimEligibility\x129.api.gamification.service.v1.CheckClaimEligibilityRequest\x1a:.api.gamification.service.v1.CheckClaimEligibilityResponse\x12\x8b\x01\n" +
 	"\x14CheckGameRestriction\x128.api.gamification.service.v1.CheckGameRestrictionRequest\x1a9.api.gamification.service.v1.CheckGameRestrictionResponse\x12p\n" +
 	"\vRecordClaim\x12/.api.gamification.service.v1.RecordClaimRequest\x1a0.api.gamification.service.v1.RecordClaimResponseB_\n" +
@@ -3089,7 +2873,7 @@ func file_gamification_service_v1_gamification_proto_rawDescGZIP() []byte {
 }
 
 var file_gamification_service_v1_gamification_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_gamification_service_v1_gamification_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
+var file_gamification_service_v1_gamification_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_gamification_service_v1_gamification_proto_goTypes = []any{
 	(TargetObject)(0),                                 // 0: api.gamification.service.v1.TargetObject
 	(RuleStatus)(0),                                   // 1: api.gamification.service.v1.RuleStatus
@@ -3128,107 +2912,97 @@ var file_gamification_service_v1_gamification_proto_goTypes = []any{
 	(*GetBonusBuyConfigResponse)(nil),                 // 34: api.gamification.service.v1.GetBonusBuyConfigResponse
 	(*UpdateBonusBuyConfigRequest)(nil),               // 35: api.gamification.service.v1.UpdateBonusBuyConfigRequest
 	(*UpdateBonusBuyConfigResponse)(nil),              // 36: api.gamification.service.v1.UpdateBonusBuyConfigResponse
-	(*GetRuleHierarchyConfigRequest)(nil),             // 37: api.gamification.service.v1.GetRuleHierarchyConfigRequest
-	(*GetRuleHierarchyConfigResponse)(nil),            // 38: api.gamification.service.v1.GetRuleHierarchyConfigResponse
-	(*UpdateRuleHierarchyConfigRequest)(nil),          // 39: api.gamification.service.v1.UpdateRuleHierarchyConfigRequest
-	(*UpdateRuleHierarchyConfigResponse)(nil),         // 40: api.gamification.service.v1.UpdateRuleHierarchyConfigResponse
-	(*CheckClaimEligibilityRequest)(nil),              // 41: api.gamification.service.v1.CheckClaimEligibilityRequest
-	(*CheckClaimEligibilityResponse)(nil),             // 42: api.gamification.service.v1.CheckClaimEligibilityResponse
-	(*CheckGameRestrictionRequest)(nil),               // 43: api.gamification.service.v1.CheckGameRestrictionRequest
-	(*CheckGameRestrictionResponse)(nil),              // 44: api.gamification.service.v1.CheckGameRestrictionResponse
-	(*RecordClaimRequest)(nil),                        // 45: api.gamification.service.v1.RecordClaimRequest
-	(*RecordClaimResponse)(nil),                       // 46: api.gamification.service.v1.RecordClaimResponse
-	(*common.OperatorContext)(nil),                    // 47: api.common.OperatorContext
+	(*CheckClaimEligibilityRequest)(nil),              // 37: api.gamification.service.v1.CheckClaimEligibilityRequest
+	(*CheckClaimEligibilityResponse)(nil),             // 38: api.gamification.service.v1.CheckClaimEligibilityResponse
+	(*CheckGameRestrictionRequest)(nil),               // 39: api.gamification.service.v1.CheckGameRestrictionRequest
+	(*CheckGameRestrictionResponse)(nil),              // 40: api.gamification.service.v1.CheckGameRestrictionResponse
+	(*RecordClaimRequest)(nil),                        // 41: api.gamification.service.v1.RecordClaimRequest
+	(*RecordClaimResponse)(nil),                       // 42: api.gamification.service.v1.RecordClaimResponse
+	(*common.OperatorContext)(nil),                    // 43: api.common.OperatorContext
 }
 var file_gamification_service_v1_gamification_proto_depIdxs = []int32{
 	0,  // 0: api.gamification.service.v1.ClaimRule.target_object:type_name -> api.gamification.service.v1.TargetObject
 	1,  // 1: api.gamification.service.v1.ClaimRule.status:type_name -> api.gamification.service.v1.RuleStatus
 	0,  // 2: api.gamification.service.v1.GameRestrictionRule.target_object:type_name -> api.gamification.service.v1.TargetObject
 	1,  // 3: api.gamification.service.v1.GameRestrictionRule.status:type_name -> api.gamification.service.v1.RuleStatus
-	47, // 4: api.gamification.service.v1.CreateClaimRuleRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 4: api.gamification.service.v1.CreateClaimRuleRequest.operator_context:type_name -> api.common.OperatorContext
 	2,  // 5: api.gamification.service.v1.CreateClaimRuleRequest.rule:type_name -> api.gamification.service.v1.ClaimRule
 	2,  // 6: api.gamification.service.v1.CreateClaimRuleResponse.rule:type_name -> api.gamification.service.v1.ClaimRule
-	47, // 7: api.gamification.service.v1.UpdateClaimRuleRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 7: api.gamification.service.v1.UpdateClaimRuleRequest.operator_context:type_name -> api.common.OperatorContext
 	2,  // 8: api.gamification.service.v1.UpdateClaimRuleRequest.rule:type_name -> api.gamification.service.v1.ClaimRule
 	2,  // 9: api.gamification.service.v1.UpdateClaimRuleResponse.rule:type_name -> api.gamification.service.v1.ClaimRule
-	47, // 10: api.gamification.service.v1.DeleteClaimRuleRequest.operator_context:type_name -> api.common.OperatorContext
-	47, // 11: api.gamification.service.v1.ListClaimRulesRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 10: api.gamification.service.v1.DeleteClaimRuleRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 11: api.gamification.service.v1.ListClaimRulesRequest.operator_context:type_name -> api.common.OperatorContext
 	2,  // 12: api.gamification.service.v1.ListClaimRulesResponse.rules:type_name -> api.gamification.service.v1.ClaimRule
-	47, // 13: api.gamification.service.v1.GetClaimRuleRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 13: api.gamification.service.v1.GetClaimRuleRequest.operator_context:type_name -> api.common.OperatorContext
 	2,  // 14: api.gamification.service.v1.GetClaimRuleResponse.rule:type_name -> api.gamification.service.v1.ClaimRule
-	47, // 15: api.gamification.service.v1.UpdateClaimRulePriorityRequest.operator_context:type_name -> api.common.OperatorContext
-	47, // 16: api.gamification.service.v1.UpdateClaimRuleStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 15: api.gamification.service.v1.UpdateClaimRulePriorityRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 16: api.gamification.service.v1.UpdateClaimRuleStatusRequest.operator_context:type_name -> api.common.OperatorContext
 	1,  // 17: api.gamification.service.v1.UpdateClaimRuleStatusRequest.status:type_name -> api.gamification.service.v1.RuleStatus
-	47, // 18: api.gamification.service.v1.CreateGameRestrictionRuleRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 18: api.gamification.service.v1.CreateGameRestrictionRuleRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 19: api.gamification.service.v1.CreateGameRestrictionRuleRequest.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
 	3,  // 20: api.gamification.service.v1.CreateGameRestrictionRuleResponse.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
-	47, // 21: api.gamification.service.v1.UpdateGameRestrictionRuleRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 21: api.gamification.service.v1.UpdateGameRestrictionRuleRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 22: api.gamification.service.v1.UpdateGameRestrictionRuleRequest.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
 	3,  // 23: api.gamification.service.v1.UpdateGameRestrictionRuleResponse.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
-	47, // 24: api.gamification.service.v1.DeleteGameRestrictionRuleRequest.operator_context:type_name -> api.common.OperatorContext
-	47, // 25: api.gamification.service.v1.ListGameRestrictionRulesRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 24: api.gamification.service.v1.DeleteGameRestrictionRuleRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 25: api.gamification.service.v1.ListGameRestrictionRulesRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 26: api.gamification.service.v1.ListGameRestrictionRulesResponse.rules:type_name -> api.gamification.service.v1.GameRestrictionRule
-	47, // 27: api.gamification.service.v1.GetGameRestrictionRuleRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 27: api.gamification.service.v1.GetGameRestrictionRuleRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 28: api.gamification.service.v1.GetGameRestrictionRuleResponse.rule:type_name -> api.gamification.service.v1.GameRestrictionRule
-	47, // 29: api.gamification.service.v1.UpdateGameRestrictionRulePriorityRequest.operator_context:type_name -> api.common.OperatorContext
-	47, // 30: api.gamification.service.v1.UpdateGameRestrictionRuleStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 29: api.gamification.service.v1.UpdateGameRestrictionRulePriorityRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 30: api.gamification.service.v1.UpdateGameRestrictionRuleStatusRequest.operator_context:type_name -> api.common.OperatorContext
 	1,  // 31: api.gamification.service.v1.UpdateGameRestrictionRuleStatusRequest.status:type_name -> api.gamification.service.v1.RuleStatus
-	47, // 32: api.gamification.service.v1.GetBonusBuyConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 32: api.gamification.service.v1.GetBonusBuyConfigRequest.operator_context:type_name -> api.common.OperatorContext
 	4,  // 33: api.gamification.service.v1.GetBonusBuyConfigResponse.config:type_name -> api.gamification.service.v1.BonusBuyConfig
-	47, // 34: api.gamification.service.v1.UpdateBonusBuyConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 34: api.gamification.service.v1.UpdateBonusBuyConfigRequest.operator_context:type_name -> api.common.OperatorContext
 	4,  // 35: api.gamification.service.v1.UpdateBonusBuyConfigResponse.config:type_name -> api.gamification.service.v1.BonusBuyConfig
-	47, // 36: api.gamification.service.v1.GetRuleHierarchyConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	47, // 37: api.gamification.service.v1.UpdateRuleHierarchyConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	47, // 38: api.gamification.service.v1.CheckClaimEligibilityRequest.operator_context:type_name -> api.common.OperatorContext
-	47, // 39: api.gamification.service.v1.CheckGameRestrictionRequest.operator_context:type_name -> api.common.OperatorContext
-	47, // 40: api.gamification.service.v1.RecordClaimRequest.operator_context:type_name -> api.common.OperatorContext
-	5,  // 41: api.gamification.service.v1.GamificationService.CreateClaimRule:input_type -> api.gamification.service.v1.CreateClaimRuleRequest
-	7,  // 42: api.gamification.service.v1.GamificationService.UpdateClaimRule:input_type -> api.gamification.service.v1.UpdateClaimRuleRequest
-	9,  // 43: api.gamification.service.v1.GamificationService.DeleteClaimRule:input_type -> api.gamification.service.v1.DeleteClaimRuleRequest
-	11, // 44: api.gamification.service.v1.GamificationService.ListClaimRules:input_type -> api.gamification.service.v1.ListClaimRulesRequest
-	13, // 45: api.gamification.service.v1.GamificationService.GetClaimRule:input_type -> api.gamification.service.v1.GetClaimRuleRequest
-	15, // 46: api.gamification.service.v1.GamificationService.UpdateClaimRulePriority:input_type -> api.gamification.service.v1.UpdateClaimRulePriorityRequest
-	17, // 47: api.gamification.service.v1.GamificationService.UpdateClaimRuleStatus:input_type -> api.gamification.service.v1.UpdateClaimRuleStatusRequest
-	19, // 48: api.gamification.service.v1.GamificationService.CreateGameRestrictionRule:input_type -> api.gamification.service.v1.CreateGameRestrictionRuleRequest
-	21, // 49: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRule:input_type -> api.gamification.service.v1.UpdateGameRestrictionRuleRequest
-	23, // 50: api.gamification.service.v1.GamificationService.DeleteGameRestrictionRule:input_type -> api.gamification.service.v1.DeleteGameRestrictionRuleRequest
-	25, // 51: api.gamification.service.v1.GamificationService.ListGameRestrictionRules:input_type -> api.gamification.service.v1.ListGameRestrictionRulesRequest
-	27, // 52: api.gamification.service.v1.GamificationService.GetGameRestrictionRule:input_type -> api.gamification.service.v1.GetGameRestrictionRuleRequest
-	29, // 53: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRulePriority:input_type -> api.gamification.service.v1.UpdateGameRestrictionRulePriorityRequest
-	31, // 54: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRuleStatus:input_type -> api.gamification.service.v1.UpdateGameRestrictionRuleStatusRequest
-	33, // 55: api.gamification.service.v1.GamificationService.GetBonusBuyConfig:input_type -> api.gamification.service.v1.GetBonusBuyConfigRequest
-	35, // 56: api.gamification.service.v1.GamificationService.UpdateBonusBuyConfig:input_type -> api.gamification.service.v1.UpdateBonusBuyConfigRequest
-	37, // 57: api.gamification.service.v1.GamificationService.GetRuleHierarchyConfig:input_type -> api.gamification.service.v1.GetRuleHierarchyConfigRequest
-	39, // 58: api.gamification.service.v1.GamificationService.UpdateRuleHierarchyConfig:input_type -> api.gamification.service.v1.UpdateRuleHierarchyConfigRequest
-	41, // 59: api.gamification.service.v1.GamificationService.CheckClaimEligibility:input_type -> api.gamification.service.v1.CheckClaimEligibilityRequest
-	43, // 60: api.gamification.service.v1.GamificationService.CheckGameRestriction:input_type -> api.gamification.service.v1.CheckGameRestrictionRequest
-	45, // 61: api.gamification.service.v1.GamificationService.RecordClaim:input_type -> api.gamification.service.v1.RecordClaimRequest
-	6,  // 62: api.gamification.service.v1.GamificationService.CreateClaimRule:output_type -> api.gamification.service.v1.CreateClaimRuleResponse
-	8,  // 63: api.gamification.service.v1.GamificationService.UpdateClaimRule:output_type -> api.gamification.service.v1.UpdateClaimRuleResponse
-	10, // 64: api.gamification.service.v1.GamificationService.DeleteClaimRule:output_type -> api.gamification.service.v1.DeleteClaimRuleResponse
-	12, // 65: api.gamification.service.v1.GamificationService.ListClaimRules:output_type -> api.gamification.service.v1.ListClaimRulesResponse
-	14, // 66: api.gamification.service.v1.GamificationService.GetClaimRule:output_type -> api.gamification.service.v1.GetClaimRuleResponse
-	16, // 67: api.gamification.service.v1.GamificationService.UpdateClaimRulePriority:output_type -> api.gamification.service.v1.UpdateClaimRulePriorityResponse
-	18, // 68: api.gamification.service.v1.GamificationService.UpdateClaimRuleStatus:output_type -> api.gamification.service.v1.UpdateClaimRuleStatusResponse
-	20, // 69: api.gamification.service.v1.GamificationService.CreateGameRestrictionRule:output_type -> api.gamification.service.v1.CreateGameRestrictionRuleResponse
-	22, // 70: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRule:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleResponse
-	24, // 71: api.gamification.service.v1.GamificationService.DeleteGameRestrictionRule:output_type -> api.gamification.service.v1.DeleteGameRestrictionRuleResponse
-	26, // 72: api.gamification.service.v1.GamificationService.ListGameRestrictionRules:output_type -> api.gamification.service.v1.ListGameRestrictionRulesResponse
-	28, // 73: api.gamification.service.v1.GamificationService.GetGameRestrictionRule:output_type -> api.gamification.service.v1.GetGameRestrictionRuleResponse
-	30, // 74: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRulePriority:output_type -> api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse
-	32, // 75: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRuleStatus:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse
-	34, // 76: api.gamification.service.v1.GamificationService.GetBonusBuyConfig:output_type -> api.gamification.service.v1.GetBonusBuyConfigResponse
-	36, // 77: api.gamification.service.v1.GamificationService.UpdateBonusBuyConfig:output_type -> api.gamification.service.v1.UpdateBonusBuyConfigResponse
-	38, // 78: api.gamification.service.v1.GamificationService.GetRuleHierarchyConfig:output_type -> api.gamification.service.v1.GetRuleHierarchyConfigResponse
-	40, // 79: api.gamification.service.v1.GamificationService.UpdateRuleHierarchyConfig:output_type -> api.gamification.service.v1.UpdateRuleHierarchyConfigResponse
-	42, // 80: api.gamification.service.v1.GamificationService.CheckClaimEligibility:output_type -> api.gamification.service.v1.CheckClaimEligibilityResponse
-	44, // 81: api.gamification.service.v1.GamificationService.CheckGameRestriction:output_type -> api.gamification.service.v1.CheckGameRestrictionResponse
-	46, // 82: api.gamification.service.v1.GamificationService.RecordClaim:output_type -> api.gamification.service.v1.RecordClaimResponse
-	62, // [62:83] is the sub-list for method output_type
-	41, // [41:62] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	43, // 36: api.gamification.service.v1.CheckClaimEligibilityRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 37: api.gamification.service.v1.CheckGameRestrictionRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 38: api.gamification.service.v1.RecordClaimRequest.operator_context:type_name -> api.common.OperatorContext
+	5,  // 39: api.gamification.service.v1.GamificationService.CreateClaimRule:input_type -> api.gamification.service.v1.CreateClaimRuleRequest
+	7,  // 40: api.gamification.service.v1.GamificationService.UpdateClaimRule:input_type -> api.gamification.service.v1.UpdateClaimRuleRequest
+	9,  // 41: api.gamification.service.v1.GamificationService.DeleteClaimRule:input_type -> api.gamification.service.v1.DeleteClaimRuleRequest
+	11, // 42: api.gamification.service.v1.GamificationService.ListClaimRules:input_type -> api.gamification.service.v1.ListClaimRulesRequest
+	13, // 43: api.gamification.service.v1.GamificationService.GetClaimRule:input_type -> api.gamification.service.v1.GetClaimRuleRequest
+	15, // 44: api.gamification.service.v1.GamificationService.UpdateClaimRulePriority:input_type -> api.gamification.service.v1.UpdateClaimRulePriorityRequest
+	17, // 45: api.gamification.service.v1.GamificationService.UpdateClaimRuleStatus:input_type -> api.gamification.service.v1.UpdateClaimRuleStatusRequest
+	19, // 46: api.gamification.service.v1.GamificationService.CreateGameRestrictionRule:input_type -> api.gamification.service.v1.CreateGameRestrictionRuleRequest
+	21, // 47: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRule:input_type -> api.gamification.service.v1.UpdateGameRestrictionRuleRequest
+	23, // 48: api.gamification.service.v1.GamificationService.DeleteGameRestrictionRule:input_type -> api.gamification.service.v1.DeleteGameRestrictionRuleRequest
+	25, // 49: api.gamification.service.v1.GamificationService.ListGameRestrictionRules:input_type -> api.gamification.service.v1.ListGameRestrictionRulesRequest
+	27, // 50: api.gamification.service.v1.GamificationService.GetGameRestrictionRule:input_type -> api.gamification.service.v1.GetGameRestrictionRuleRequest
+	29, // 51: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRulePriority:input_type -> api.gamification.service.v1.UpdateGameRestrictionRulePriorityRequest
+	31, // 52: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRuleStatus:input_type -> api.gamification.service.v1.UpdateGameRestrictionRuleStatusRequest
+	33, // 53: api.gamification.service.v1.GamificationService.GetBonusBuyConfig:input_type -> api.gamification.service.v1.GetBonusBuyConfigRequest
+	35, // 54: api.gamification.service.v1.GamificationService.UpdateBonusBuyConfig:input_type -> api.gamification.service.v1.UpdateBonusBuyConfigRequest
+	37, // 55: api.gamification.service.v1.GamificationService.CheckClaimEligibility:input_type -> api.gamification.service.v1.CheckClaimEligibilityRequest
+	39, // 56: api.gamification.service.v1.GamificationService.CheckGameRestriction:input_type -> api.gamification.service.v1.CheckGameRestrictionRequest
+	41, // 57: api.gamification.service.v1.GamificationService.RecordClaim:input_type -> api.gamification.service.v1.RecordClaimRequest
+	6,  // 58: api.gamification.service.v1.GamificationService.CreateClaimRule:output_type -> api.gamification.service.v1.CreateClaimRuleResponse
+	8,  // 59: api.gamification.service.v1.GamificationService.UpdateClaimRule:output_type -> api.gamification.service.v1.UpdateClaimRuleResponse
+	10, // 60: api.gamification.service.v1.GamificationService.DeleteClaimRule:output_type -> api.gamification.service.v1.DeleteClaimRuleResponse
+	12, // 61: api.gamification.service.v1.GamificationService.ListClaimRules:output_type -> api.gamification.service.v1.ListClaimRulesResponse
+	14, // 62: api.gamification.service.v1.GamificationService.GetClaimRule:output_type -> api.gamification.service.v1.GetClaimRuleResponse
+	16, // 63: api.gamification.service.v1.GamificationService.UpdateClaimRulePriority:output_type -> api.gamification.service.v1.UpdateClaimRulePriorityResponse
+	18, // 64: api.gamification.service.v1.GamificationService.UpdateClaimRuleStatus:output_type -> api.gamification.service.v1.UpdateClaimRuleStatusResponse
+	20, // 65: api.gamification.service.v1.GamificationService.CreateGameRestrictionRule:output_type -> api.gamification.service.v1.CreateGameRestrictionRuleResponse
+	22, // 66: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRule:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleResponse
+	24, // 67: api.gamification.service.v1.GamificationService.DeleteGameRestrictionRule:output_type -> api.gamification.service.v1.DeleteGameRestrictionRuleResponse
+	26, // 68: api.gamification.service.v1.GamificationService.ListGameRestrictionRules:output_type -> api.gamification.service.v1.ListGameRestrictionRulesResponse
+	28, // 69: api.gamification.service.v1.GamificationService.GetGameRestrictionRule:output_type -> api.gamification.service.v1.GetGameRestrictionRuleResponse
+	30, // 70: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRulePriority:output_type -> api.gamification.service.v1.UpdateGameRestrictionRulePriorityResponse
+	32, // 71: api.gamification.service.v1.GamificationService.UpdateGameRestrictionRuleStatus:output_type -> api.gamification.service.v1.UpdateGameRestrictionRuleStatusResponse
+	34, // 72: api.gamification.service.v1.GamificationService.GetBonusBuyConfig:output_type -> api.gamification.service.v1.GetBonusBuyConfigResponse
+	36, // 73: api.gamification.service.v1.GamificationService.UpdateBonusBuyConfig:output_type -> api.gamification.service.v1.UpdateBonusBuyConfigResponse
+	38, // 74: api.gamification.service.v1.GamificationService.CheckClaimEligibility:output_type -> api.gamification.service.v1.CheckClaimEligibilityResponse
+	40, // 75: api.gamification.service.v1.GamificationService.CheckGameRestriction:output_type -> api.gamification.service.v1.CheckGameRestrictionResponse
+	42, // 76: api.gamification.service.v1.GamificationService.RecordClaim:output_type -> api.gamification.service.v1.RecordClaimResponse
+	58, // [58:77] is the sub-list for method output_type
+	39, // [39:58] is the sub-list for method input_type
+	39, // [39:39] is the sub-list for extension type_name
+	39, // [39:39] is the sub-list for extension extendee
+	0,  // [0:39] is the sub-list for field type_name
 }
 
 func init() { file_gamification_service_v1_gamification_proto_init() }
@@ -3242,7 +3016,7 @@ func file_gamification_service_v1_gamification_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gamification_service_v1_gamification_proto_rawDesc), len(file_gamification_service_v1_gamification_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   45,
+			NumMessages:   41,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

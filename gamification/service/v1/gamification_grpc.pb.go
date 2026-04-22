@@ -35,8 +35,6 @@ const (
 	GamificationService_UpdateGameRestrictionRuleStatus_FullMethodName   = "/api.gamification.service.v1.GamificationService/UpdateGameRestrictionRuleStatus"
 	GamificationService_GetBonusBuyConfig_FullMethodName                 = "/api.gamification.service.v1.GamificationService/GetBonusBuyConfig"
 	GamificationService_UpdateBonusBuyConfig_FullMethodName              = "/api.gamification.service.v1.GamificationService/UpdateBonusBuyConfig"
-	GamificationService_GetRuleHierarchyConfig_FullMethodName            = "/api.gamification.service.v1.GamificationService/GetRuleHierarchyConfig"
-	GamificationService_UpdateRuleHierarchyConfig_FullMethodName         = "/api.gamification.service.v1.GamificationService/UpdateRuleHierarchyConfig"
 	GamificationService_CheckClaimEligibility_FullMethodName             = "/api.gamification.service.v1.GamificationService/CheckClaimEligibility"
 	GamificationService_CheckGameRestriction_FullMethodName              = "/api.gamification.service.v1.GamificationService/CheckGameRestriction"
 	GamificationService_RecordClaim_FullMethodName                       = "/api.gamification.service.v1.GamificationService/RecordClaim"
@@ -65,9 +63,6 @@ type GamificationServiceClient interface {
 	// === Bonus Buy Config ===
 	GetBonusBuyConfig(ctx context.Context, in *GetBonusBuyConfigRequest, opts ...grpc.CallOption) (*GetBonusBuyConfigResponse, error)
 	UpdateBonusBuyConfig(ctx context.Context, in *UpdateBonusBuyConfigRequest, opts ...grpc.CallOption) (*UpdateBonusBuyConfigResponse, error)
-	// === Rule Hierarchy Config ===
-	GetRuleHierarchyConfig(ctx context.Context, in *GetRuleHierarchyConfigRequest, opts ...grpc.CallOption) (*GetRuleHierarchyConfigResponse, error)
-	UpdateRuleHierarchyConfig(ctx context.Context, in *UpdateRuleHierarchyConfigRequest, opts ...grpc.CallOption) (*UpdateRuleHierarchyConfigResponse, error)
 	// === Runtime Checks ===
 	// Default when no rule matches: REJECT (CLAIM_RULE_NOT_CONFIGURED). Callers must have an active rule for this user's segment.
 	CheckClaimEligibility(ctx context.Context, in *CheckClaimEligibilityRequest, opts ...grpc.CallOption) (*CheckClaimEligibilityResponse, error)
@@ -245,26 +240,6 @@ func (c *gamificationServiceClient) UpdateBonusBuyConfig(ctx context.Context, in
 	return out, nil
 }
 
-func (c *gamificationServiceClient) GetRuleHierarchyConfig(ctx context.Context, in *GetRuleHierarchyConfigRequest, opts ...grpc.CallOption) (*GetRuleHierarchyConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRuleHierarchyConfigResponse)
-	err := c.cc.Invoke(ctx, GamificationService_GetRuleHierarchyConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gamificationServiceClient) UpdateRuleHierarchyConfig(ctx context.Context, in *UpdateRuleHierarchyConfigRequest, opts ...grpc.CallOption) (*UpdateRuleHierarchyConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateRuleHierarchyConfigResponse)
-	err := c.cc.Invoke(ctx, GamificationService_UpdateRuleHierarchyConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *gamificationServiceClient) CheckClaimEligibility(ctx context.Context, in *CheckClaimEligibilityRequest, opts ...grpc.CallOption) (*CheckClaimEligibilityResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CheckClaimEligibilityResponse)
@@ -318,9 +293,6 @@ type GamificationServiceServer interface {
 	// === Bonus Buy Config ===
 	GetBonusBuyConfig(context.Context, *GetBonusBuyConfigRequest) (*GetBonusBuyConfigResponse, error)
 	UpdateBonusBuyConfig(context.Context, *UpdateBonusBuyConfigRequest) (*UpdateBonusBuyConfigResponse, error)
-	// === Rule Hierarchy Config ===
-	GetRuleHierarchyConfig(context.Context, *GetRuleHierarchyConfigRequest) (*GetRuleHierarchyConfigResponse, error)
-	UpdateRuleHierarchyConfig(context.Context, *UpdateRuleHierarchyConfigRequest) (*UpdateRuleHierarchyConfigResponse, error)
 	// === Runtime Checks ===
 	// Default when no rule matches: REJECT (CLAIM_RULE_NOT_CONFIGURED). Callers must have an active rule for this user's segment.
 	CheckClaimEligibility(context.Context, *CheckClaimEligibilityRequest) (*CheckClaimEligibilityResponse, error)
@@ -385,12 +357,6 @@ func (UnimplementedGamificationServiceServer) GetBonusBuyConfig(context.Context,
 }
 func (UnimplementedGamificationServiceServer) UpdateBonusBuyConfig(context.Context, *UpdateBonusBuyConfigRequest) (*UpdateBonusBuyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateBonusBuyConfig not implemented")
-}
-func (UnimplementedGamificationServiceServer) GetRuleHierarchyConfig(context.Context, *GetRuleHierarchyConfigRequest) (*GetRuleHierarchyConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetRuleHierarchyConfig not implemented")
-}
-func (UnimplementedGamificationServiceServer) UpdateRuleHierarchyConfig(context.Context, *UpdateRuleHierarchyConfigRequest) (*UpdateRuleHierarchyConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateRuleHierarchyConfig not implemented")
 }
 func (UnimplementedGamificationServiceServer) CheckClaimEligibility(context.Context, *CheckClaimEligibilityRequest) (*CheckClaimEligibilityResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckClaimEligibility not implemented")
@@ -710,42 +676,6 @@ func _GamificationService_UpdateBonusBuyConfig_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GamificationService_GetRuleHierarchyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRuleHierarchyConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GamificationServiceServer).GetRuleHierarchyConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GamificationService_GetRuleHierarchyConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GamificationServiceServer).GetRuleHierarchyConfig(ctx, req.(*GetRuleHierarchyConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GamificationService_UpdateRuleHierarchyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateRuleHierarchyConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GamificationServiceServer).UpdateRuleHierarchyConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GamificationService_UpdateRuleHierarchyConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GamificationServiceServer).UpdateRuleHierarchyConfig(ctx, req.(*UpdateRuleHierarchyConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _GamificationService_CheckClaimEligibility_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CheckClaimEligibilityRequest)
 	if err := dec(in); err != nil {
@@ -870,14 +800,6 @@ var GamificationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBonusBuyConfig",
 			Handler:    _GamificationService_UpdateBonusBuyConfig_Handler,
-		},
-		{
-			MethodName: "GetRuleHierarchyConfig",
-			Handler:    _GamificationService_GetRuleHierarchyConfig_Handler,
-		},
-		{
-			MethodName: "UpdateRuleHierarchyConfig",
-			Handler:    _GamificationService_UpdateRuleHierarchyConfig_Handler,
 		},
 		{
 			MethodName: "CheckClaimEligibility",
