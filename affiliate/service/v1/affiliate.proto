@@ -194,11 +194,6 @@ service Affiliate {
 
     rpc UpdateOperatorSettings(UpdateOperatorSettingsRequest) returns (UpdateOperatorSettingsResponse) {}
 
-    // BackfillUserContact enqueues a one-shot task that syncs current_email /
-    // current_mobile for existing affiliate_users rows that pre-date pub/sub sync
-    // (contact_updated_at = 0). Internal gRPC-only: ops-triggered via grpcurl.
-    rpc BackfillUserContact(BackfillUserContactRequest) returns (BackfillUserContactResponse) {}
-
     // -------------- Dashboard --------------
 
     // GetAffiliateDashboard returns aggregated dashboard metrics with comparison to previous period
@@ -1240,12 +1235,6 @@ message UpdateOperatorSettingsRequest {
 }
 
 message UpdateOperatorSettingsResponse {
-}
-
-message BackfillUserContactRequest {
-}
-
-message BackfillUserContactResponse {
 }
 
 // -------------- Dashboard --------------
