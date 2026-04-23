@@ -66,6 +66,26 @@ const (
 	ErrorReason_OTP_PROVIDER_PERMISSION_DENIED         ErrorReason = 90412
 	ErrorReason_OTP_PROVIDER_BINDING_PERMISSION_DENIED ErrorReason = 90413
 	ErrorReason_OTP_PROVIDER_BINDING_INVALID_COUNTRY   ErrorReason = 90414
+	// Marketing SMS errors (90500-90599) — EngageLab NEWSMS delivery.
+	ErrorReason_SEND_SMS_FAILED                     ErrorReason = 90500
+	ErrorReason_SEND_SMS_NO_PROVIDER                ErrorReason = 90501
+	ErrorReason_SEND_SMS_NO_TEMPLATE                ErrorReason = 90502
+	ErrorReason_SEND_SMS_INVALID_RECIPIENT          ErrorReason = 90503
+	ErrorReason_SEND_SMS_RATE_LIMITED               ErrorReason = 90504
+	ErrorReason_SMS_PROVIDER_NOT_FOUND              ErrorReason = 90505
+	ErrorReason_SMS_PROVIDER_ALREADY_EXISTS         ErrorReason = 90506
+	ErrorReason_SMS_PROVIDER_INVALID                ErrorReason = 90507
+	ErrorReason_SMS_PROVIDER_ERROR                  ErrorReason = 90508
+	ErrorReason_SMS_PROVIDER_BINDING_NOT_FOUND      ErrorReason = 90509
+	ErrorReason_SMS_PROVIDER_BINDING_ALREADY_EXISTS ErrorReason = 90510
+	ErrorReason_SMS_SENDER_ID_NOT_FOUND             ErrorReason = 90511
+	ErrorReason_SMS_SENDER_ID_ALREADY_EXISTS        ErrorReason = 90512
+	ErrorReason_SMS_SENDER_ID_INVALID               ErrorReason = 90513
+	ErrorReason_SMS_SENDER_ID_NOT_APPROVED          ErrorReason = 90514
+	ErrorReason_SMS_TEMPLATE_NOT_FOUND              ErrorReason = 90515
+	ErrorReason_SMS_TEMPLATE_ALREADY_EXISTS         ErrorReason = 90516
+	ErrorReason_SMS_TEMPLATE_INVALID                ErrorReason = 90517
+	ErrorReason_SMS_TEMPLATE_NOT_APPROVED           ErrorReason = 90518
 )
 
 // Enum value maps for ErrorReason.
@@ -108,6 +128,25 @@ var (
 		90412: "OTP_PROVIDER_PERMISSION_DENIED",
 		90413: "OTP_PROVIDER_BINDING_PERMISSION_DENIED",
 		90414: "OTP_PROVIDER_BINDING_INVALID_COUNTRY",
+		90500: "SEND_SMS_FAILED",
+		90501: "SEND_SMS_NO_PROVIDER",
+		90502: "SEND_SMS_NO_TEMPLATE",
+		90503: "SEND_SMS_INVALID_RECIPIENT",
+		90504: "SEND_SMS_RATE_LIMITED",
+		90505: "SMS_PROVIDER_NOT_FOUND",
+		90506: "SMS_PROVIDER_ALREADY_EXISTS",
+		90507: "SMS_PROVIDER_INVALID",
+		90508: "SMS_PROVIDER_ERROR",
+		90509: "SMS_PROVIDER_BINDING_NOT_FOUND",
+		90510: "SMS_PROVIDER_BINDING_ALREADY_EXISTS",
+		90511: "SMS_SENDER_ID_NOT_FOUND",
+		90512: "SMS_SENDER_ID_ALREADY_EXISTS",
+		90513: "SMS_SENDER_ID_INVALID",
+		90514: "SMS_SENDER_ID_NOT_APPROVED",
+		90515: "SMS_TEMPLATE_NOT_FOUND",
+		90516: "SMS_TEMPLATE_ALREADY_EXISTS",
+		90517: "SMS_TEMPLATE_INVALID",
+		90518: "SMS_TEMPLATE_NOT_APPROVED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                            0,
@@ -147,6 +186,25 @@ var (
 		"OTP_PROVIDER_PERMISSION_DENIED":         90412,
 		"OTP_PROVIDER_BINDING_PERMISSION_DENIED": 90413,
 		"OTP_PROVIDER_BINDING_INVALID_COUNTRY":   90414,
+		"SEND_SMS_FAILED":                        90500,
+		"SEND_SMS_NO_PROVIDER":                   90501,
+		"SEND_SMS_NO_TEMPLATE":                   90502,
+		"SEND_SMS_INVALID_RECIPIENT":             90503,
+		"SEND_SMS_RATE_LIMITED":                  90504,
+		"SMS_PROVIDER_NOT_FOUND":                 90505,
+		"SMS_PROVIDER_ALREADY_EXISTS":            90506,
+		"SMS_PROVIDER_INVALID":                   90507,
+		"SMS_PROVIDER_ERROR":                     90508,
+		"SMS_PROVIDER_BINDING_NOT_FOUND":         90509,
+		"SMS_PROVIDER_BINDING_ALREADY_EXISTS":    90510,
+		"SMS_SENDER_ID_NOT_FOUND":                90511,
+		"SMS_SENDER_ID_ALREADY_EXISTS":           90512,
+		"SMS_SENDER_ID_INVALID":                  90513,
+		"SMS_SENDER_ID_NOT_APPROVED":             90514,
+		"SMS_TEMPLATE_NOT_FOUND":                 90515,
+		"SMS_TEMPLATE_ALREADY_EXISTS":            90516,
+		"SMS_TEMPLATE_INVALID":                   90517,
+		"SMS_TEMPLATE_NOT_APPROVED":              90518,
 	}
 )
 
@@ -181,8 +239,7 @@ var File_push_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\xd2\n" +
-	"\n" +
+	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\xea\x0f\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12INVALID_TIME_RANGE\x10\x91\xbf\x05\x12\x1e\n" +
@@ -220,7 +277,26 @@ const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	"#OTP_PROVIDER_BINDING_ALREADY_EXISTS\x10\xab\xc2\x05\x1a\x04\xa8E\x99\x03\x12*\n" +
 	"\x1eOTP_PROVIDER_PERMISSION_DENIED\x10\xac\xc2\x05\x1a\x04\xa8E\x93\x03\x122\n" +
 	"&OTP_PROVIDER_BINDING_PERMISSION_DENIED\x10\xad\xc2\x05\x1a\x04\xa8E\x93\x03\x120\n" +
-	"$OTP_PROVIDER_BINDING_INVALID_COUNTRY\x10\xae\xc2\x05\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BO\n" +
+	"$OTP_PROVIDER_BINDING_INVALID_COUNTRY\x10\xae\xc2\x05\x1a\x04\xa8E\x90\x03\x12\x15\n" +
+	"\x0fSEND_SMS_FAILED\x10\x84\xc3\x05\x12\x1a\n" +
+	"\x14SEND_SMS_NO_PROVIDER\x10\x85\xc3\x05\x12\x1a\n" +
+	"\x14SEND_SMS_NO_TEMPLATE\x10\x86\xc3\x05\x12&\n" +
+	"\x1aSEND_SMS_INVALID_RECIPIENT\x10\x87\xc3\x05\x1a\x04\xa8E\x90\x03\x12!\n" +
+	"\x15SEND_SMS_RATE_LIMITED\x10\x88\xc3\x05\x1a\x04\xa8E\xad\x03\x12\x1c\n" +
+	"\x16SMS_PROVIDER_NOT_FOUND\x10\x89\xc3\x05\x12'\n" +
+	"\x1bSMS_PROVIDER_ALREADY_EXISTS\x10\x8a\xc3\x05\x1a\x04\xa8E\x99\x03\x12 \n" +
+	"\x14SMS_PROVIDER_INVALID\x10\x8b\xc3\x05\x1a\x04\xa8E\x90\x03\x12\x18\n" +
+	"\x12SMS_PROVIDER_ERROR\x10\x8c\xc3\x05\x12$\n" +
+	"\x1eSMS_PROVIDER_BINDING_NOT_FOUND\x10\x8d\xc3\x05\x12/\n" +
+	"#SMS_PROVIDER_BINDING_ALREADY_EXISTS\x10\x8e\xc3\x05\x1a\x04\xa8E\x99\x03\x12\x1d\n" +
+	"\x17SMS_SENDER_ID_NOT_FOUND\x10\x8f\xc3\x05\x12(\n" +
+	"\x1cSMS_SENDER_ID_ALREADY_EXISTS\x10\x90\xc3\x05\x1a\x04\xa8E\x99\x03\x12!\n" +
+	"\x15SMS_SENDER_ID_INVALID\x10\x91\xc3\x05\x1a\x04\xa8E\x90\x03\x12&\n" +
+	"\x1aSMS_SENDER_ID_NOT_APPROVED\x10\x92\xc3\x05\x1a\x04\xa8E\x90\x03\x12\x1c\n" +
+	"\x16SMS_TEMPLATE_NOT_FOUND\x10\x93\xc3\x05\x12'\n" +
+	"\x1bSMS_TEMPLATE_ALREADY_EXISTS\x10\x94\xc3\x05\x1a\x04\xa8E\x99\x03\x12 \n" +
+	"\x14SMS_TEMPLATE_INVALID\x10\x95\xc3\x05\x1a\x04\xa8E\x90\x03\x12%\n" +
+	"\x19SMS_TEMPLATE_NOT_APPROVED\x10\x96\xc3\x05\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (
