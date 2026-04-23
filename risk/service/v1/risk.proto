@@ -60,6 +60,12 @@ message ClaimRule {
   int64 segment_id = 5;
   string segment_name = 6;
 
+  // Which reward_type values this rule applies to. Empty = applies to ALL
+  // reward types (backwards-compatible default). Non-empty = only matches
+  // CheckClaimEligibility requests whose reward_type is in the list.
+  // Examples: ["vip_reward"], ["promo_code","deposit_reward"], [].
+  repeated string applicable_reward_types = 7;
+
   // Account restrictions
   bool require_kyc = 10;
   bool require_phone = 11;
