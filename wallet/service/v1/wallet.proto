@@ -181,6 +181,16 @@ service Wallet {
 		};
 	}
 
+	// GetPlayerSwapConfig returns the effective user-swap config for the currently
+	// authenticated player — operator resolved from the auth token. Used by the
+	// player frontend to render fee / allowed currencies / bonus-clearing notice.
+	rpc GetPlayerSwapConfig(GetPlayerSwapConfigRequest) returns (GetPlayerSwapConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/user-swap/player-config"
+			body: "*"
+		};
+	}
+
 	// SetAppDownloadRewardConfig full-replaces the app download reward config for an operator.
 	// All existing country entries are deleted and replaced with the provided list.
 	// follow_parent is operator-level: when true, the operator inherits the parent's entire list.
@@ -2903,4 +2913,15 @@ message UserSwapResponse {
 	// Two linked balance transaction ids (swap_out / swap_in).
 	int64 source_balance_transaction_id = 6;
 	int64 target_balance_transaction_id = 7;
+}
+
+message GetPlayerSwapConfigRequest {}
+
+message GetPlayerSwapConfigResponse {
+	// Effective swap config (inherited through the operator hierarchy).
+	// Empty/zero-valued when no operator in the chain has a config with follow_parent=false.
+	UserSwapConfig config = 1;
+	// Aggregated user-swap feature flag — AND across self + all ancestors.
+	// When false the frontend should hide the swap entry point entirely.
+	bool aggregated_enabled = 2;
 }

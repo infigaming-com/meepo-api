@@ -28,6 +28,7 @@ const OperationWalletGetAppDownloadRewardStatus = "/api.wallet.service.v1.Wallet
 const OperationWalletGetCurrencies = "/api.wallet.service.v1.Wallet/GetCurrencies"
 const OperationWalletGetExchangeRatesWithBaseCurrency = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
 const OperationWalletGetGamificationConfig = "/api.wallet.service.v1.Wallet/GetGamificationConfig"
+const OperationWalletGetPlayerSwapConfig = "/api.wallet.service.v1.Wallet/GetPlayerSwapConfig"
 const OperationWalletGetPromoCodeInfo = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
 const OperationWalletGetUserBalanceDetails = "/api.wallet.service.v1.Wallet/GetUserBalanceDetails"
 const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBalances"
@@ -59,6 +60,10 @@ type WalletHTTPServer interface {
 	// Scoped to the caller's operator context (from middleware). Returns only enabled and
 	// non-hidden currencies, matching backoffice behavior.
 	GetGamificationConfig(context.Context, *GetGamificationConfigRequest) (*GetGamificationConfigResponse, error)
+	// GetPlayerSwapConfig GetPlayerSwapConfig returns the effective user-swap config for the currently
+	// authenticated player — operator resolved from the auth token. Used by the
+	// player frontend to render fee / allowed currencies / bonus-clearing notice.
+	GetPlayerSwapConfig(context.Context, *GetPlayerSwapConfigRequest) (*GetPlayerSwapConfigResponse, error)
 	// GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	GetPromoCodeInfo(context.Context, *GetPromoCodeInfoRequest) (*GetPromoCodeInfoResponse, error)
 	// GetUserBalanceDetails GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
@@ -90,6 +95,7 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/exchange-rates/base-currency", _Wallet_GetExchangeRatesWithBaseCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/currencies/get", _Wallet_GetCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/user-swap", _Wallet_UserSwap0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/user-swap/player-config", _Wallet_GetPlayerSwapConfig0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/app-download-reward/claim", _Wallet_ClaimAppDownloadReward0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/app-download-reward/status", _Wallet_GetAppDownloadRewardStatus0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/promo-code/info", _Wallet_GetPromoCodeInfo0_HTTP_Handler(srv))
@@ -209,6 +215,28 @@ func _Wallet_UserSwap0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context)
 			return err
 		}
 		reply := out.(*UserSwapResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Wallet_GetPlayerSwapConfig0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetPlayerSwapConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletGetPlayerSwapConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetPlayerSwapConfig(ctx, req.(*GetPlayerSwapConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetPlayerSwapConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -478,6 +506,10 @@ type WalletHTTPClient interface {
 	// Scoped to the caller's operator context (from middleware). Returns only enabled and
 	// non-hidden currencies, matching backoffice behavior.
 	GetGamificationConfig(ctx context.Context, req *GetGamificationConfigRequest, opts ...http.CallOption) (rsp *GetGamificationConfigResponse, err error)
+	// GetPlayerSwapConfig GetPlayerSwapConfig returns the effective user-swap config for the currently
+	// authenticated player — operator resolved from the auth token. Used by the
+	// player frontend to render fee / allowed currencies / bonus-clearing notice.
+	GetPlayerSwapConfig(ctx context.Context, req *GetPlayerSwapConfigRequest, opts ...http.CallOption) (rsp *GetPlayerSwapConfigResponse, err error)
 	// GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	GetPromoCodeInfo(ctx context.Context, req *GetPromoCodeInfoRequest, opts ...http.CallOption) (rsp *GetPromoCodeInfoResponse, err error)
 	// GetUserBalanceDetails GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
@@ -632,6 +664,22 @@ func (c *WalletHTTPClientImpl) GetGamificationConfig(ctx context.Context, in *Ge
 	pattern := "/v1/wallet/gamification/config/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletGetGamificationConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetPlayerSwapConfig GetPlayerSwapConfig returns the effective user-swap config for the currently
+// authenticated player — operator resolved from the auth token. Used by the
+// player frontend to render fee / allowed currencies / bonus-clearing notice.
+func (c *WalletHTTPClientImpl) GetPlayerSwapConfig(ctx context.Context, in *GetPlayerSwapConfigRequest, opts ...http.CallOption) (*GetPlayerSwapConfigResponse, error) {
+	var out GetPlayerSwapConfigResponse
+	pattern := "/v1/wallet/user-swap/player-config"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletGetPlayerSwapConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

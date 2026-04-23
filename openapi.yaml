@@ -11789,6 +11789,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.UserSwapResponse'
+    /v1/wallet/user-swap/player-config:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                GetPlayerSwapConfig returns the effective user-swap config for the currently
+                 authenticated player — operator resolved from the auth token. Used by the
+                 player frontend to render fee / allowed currencies / bonus-clearing notice.
+            operationId: Wallet_GetPlayerSwapConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetPlayerSwapConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetPlayerSwapConfigResponse'
 components:
     schemas:
         api.affiliate.service.v1.AdvancedOptions:
@@ -35170,6 +35192,23 @@ components:
                 bankrollUsd:
                     type: string
                     description: bankroll in USD (only for co-operation mode site-level operators, 0 otherwise)
+        api.wallet.service.v1.GetPlayerSwapConfigRequest:
+            type: object
+            properties: {}
+        api.wallet.service.v1.GetPlayerSwapConfigResponse:
+            type: object
+            properties:
+                config:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.UserSwapConfig'
+                    description: |-
+                        Effective swap config (inherited through the operator hierarchy).
+                         Empty/zero-valued when no operator in the chain has a config with follow_parent=false.
+                aggregatedEnabled:
+                    type: boolean
+                    description: |-
+                        Aggregated user-swap feature flag — AND across self + all ancestors.
+                         When false the frontend should hide the swap entry point entirely.
         api.wallet.service.v1.GetPromoCodeInfoRequest:
             type: object
             properties:
@@ -36245,6 +36284,16 @@ components:
         api.wallet.service.v1.SetFICAThresholdConfigResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.SwapFeeOverride:
+            type: object
+            properties:
+                currency:
+                    type: string
+                    description: Source currency code. When a user swaps FROM this currency, `fee_rate` applies.
+                feeRate:
+                    type: string
+                    description: 'Fee rate as a decimal string (e.g. "0.01" = 1%). Range: [0, 1).'
+            description: SwapFeeOverride overrides the default swap fee rate for a specific source currency.
         api.wallet.service.v1.TurnoverCondition:
             type: object
             properties:
@@ -36318,6 +36367,35 @@ components:
                     type: string
                 maximumOperatorBonusWithdrawalAmount:
                     type: string
+        api.wallet.service.v1.UserSwapConfig:
+            type: object
+            properties:
+                bonusesClearedOnSwap:
+                    type: boolean
+                    description: When true, swapping cash forfeits all bonuses (operator + provider) of the source currency.
+                defaultSwapFee:
+                    type: string
+                    description: Default swap fee rate as a decimal string. Deducted from the source cash.
+                feeOverrides:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.SwapFeeOverride'
+                    description: Per-source-currency overrides on top of default_swap_fee.
+                allowedSwapOut:
+                    type: array
+                    items:
+                        type: string
+                    description: Currencies allowed as swap source. Empty list = none allowed.
+                allowedSwapIn:
+                    type: array
+                    items:
+                        type: string
+                    description: Currencies allowed as swap target. Empty list = none allowed.
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: UserSwapConfig is the operator-level template inherited by descendants when follow_parent=true.
         api.wallet.service.v1.UserSwapRequest:
             type: object
             properties:
