@@ -2341,16 +2341,16 @@ func ErrorUserSwapDisabled(format string, args ...interface{}) *errors.Error {
 	return errors.New(403, ErrorReason_USER_SWAP_DISABLED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsUserSwapCurrencyNotAllowed(err error) bool {
+func IsUserSwapSourceCurrencyNotAllowed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_SWAP_CURRENCY_NOT_ALLOWED.String() && e.Code == 400
+	return e.Reason == ErrorReason_USER_SWAP_SOURCE_CURRENCY_NOT_ALLOWED.String() && e.Code == 400
 }
 
-func ErrorUserSwapCurrencyNotAllowed(format string, args ...interface{}) *errors.Error {
-	return errors.New(400, ErrorReason_USER_SWAP_CURRENCY_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
+func ErrorUserSwapSourceCurrencyNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_USER_SWAP_SOURCE_CURRENCY_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserSwapAmountExceedsWithdrawable(err error) bool {
@@ -2375,4 +2375,16 @@ func IsUserSwapFailed(err error) bool {
 
 func ErrorUserSwapFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_USER_SWAP_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserSwapTargetCurrencyNotAllowed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED.String() && e.Code == 400
+}
+
+func ErrorUserSwapTargetCurrencyNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
 }
