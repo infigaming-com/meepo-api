@@ -16369,7 +16369,7 @@ func (x *GetUserSwapEnabledResponse) GetAggregatedEnabled() bool {
 	return false
 }
 
-type SetUserSwapConfigRequest struct {
+type SetUserSwapTemplateRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
@@ -16380,20 +16380,20 @@ type SetUserSwapConfigRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetUserSwapConfigRequest) Reset() {
-	*x = SetUserSwapConfigRequest{}
+func (x *SetUserSwapTemplateRequest) Reset() {
+	*x = SetUserSwapTemplateRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[200]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetUserSwapConfigRequest) String() string {
+func (x *SetUserSwapTemplateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetUserSwapConfigRequest) ProtoMessage() {}
+func (*SetUserSwapTemplateRequest) ProtoMessage() {}
 
-func (x *SetUserSwapConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *SetUserSwapTemplateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[200]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -16405,59 +16405,59 @@ func (x *SetUserSwapConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetUserSwapConfigRequest.ProtoReflect.Descriptor instead.
-func (*SetUserSwapConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetUserSwapTemplateRequest.ProtoReflect.Descriptor instead.
+func (*SetUserSwapTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{200}
 }
 
-func (x *SetUserSwapConfigRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+func (x *SetUserSwapTemplateRequest) GetInitiatorOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.InitiatorOperatorContext
 	}
 	return nil
 }
 
-func (x *SetUserSwapConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *SetUserSwapTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *SetUserSwapConfigRequest) GetFollowParent() bool {
+func (x *SetUserSwapTemplateRequest) GetFollowParent() bool {
 	if x != nil && x.FollowParent != nil {
 		return *x.FollowParent
 	}
 	return false
 }
 
-func (x *SetUserSwapConfigRequest) GetConfig() *UserSwapConfig {
+func (x *SetUserSwapTemplateRequest) GetConfig() *UserSwapConfig {
 	if x != nil {
 		return x.Config
 	}
 	return nil
 }
 
-type SetUserSwapConfigResponse struct {
+type SetUserSwapTemplateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetUserSwapConfigResponse) Reset() {
-	*x = SetUserSwapConfigResponse{}
+func (x *SetUserSwapTemplateResponse) Reset() {
+	*x = SetUserSwapTemplateResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[201]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetUserSwapConfigResponse) String() string {
+func (x *SetUserSwapTemplateResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetUserSwapConfigResponse) ProtoMessage() {}
+func (*SetUserSwapTemplateResponse) ProtoMessage() {}
 
-func (x *SetUserSwapConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *SetUserSwapTemplateResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[201]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -16469,12 +16469,12 @@ func (x *SetUserSwapConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetUserSwapConfigResponse.ProtoReflect.Descriptor instead.
-func (*SetUserSwapConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetUserSwapTemplateResponse.ProtoReflect.Descriptor instead.
+func (*SetUserSwapTemplateResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{201}
 }
 
-type GetUserSwapConfigRequest struct {
+type GetUserSwapTemplateRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
@@ -16482,20 +16482,20 @@ type GetUserSwapConfigRequest struct {
 	sizeCache                protoimpl.SizeCache
 }
 
-func (x *GetUserSwapConfigRequest) Reset() {
-	*x = GetUserSwapConfigRequest{}
+func (x *GetUserSwapTemplateRequest) Reset() {
+	*x = GetUserSwapTemplateRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[202]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetUserSwapConfigRequest) String() string {
+func (x *GetUserSwapTemplateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetUserSwapConfigRequest) ProtoMessage() {}
+func (*GetUserSwapTemplateRequest) ProtoMessage() {}
 
-func (x *GetUserSwapConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *GetUserSwapTemplateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[202]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -16507,26 +16507,26 @@ func (x *GetUserSwapConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetUserSwapConfigRequest.ProtoReflect.Descriptor instead.
-func (*GetUserSwapConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserSwapTemplateRequest.ProtoReflect.Descriptor instead.
+func (*GetUserSwapTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{202}
 }
 
-func (x *GetUserSwapConfigRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+func (x *GetUserSwapTemplateRequest) GetInitiatorOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.InitiatorOperatorContext
 	}
 	return nil
 }
 
-func (x *GetUserSwapConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *GetUserSwapTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-type GetUserSwapConfigResponse struct {
+type GetUserSwapTemplateResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Operator-level follow_parent toggle. true = using parent's config.
 	FollowParent bool `protobuf:"varint,1,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
@@ -16542,20 +16542,20 @@ type GetUserSwapConfigResponse struct {
 	sizeCache                 protoimpl.SizeCache
 }
 
-func (x *GetUserSwapConfigResponse) Reset() {
-	*x = GetUserSwapConfigResponse{}
+func (x *GetUserSwapTemplateResponse) Reset() {
+	*x = GetUserSwapTemplateResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[203]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetUserSwapConfigResponse) String() string {
+func (x *GetUserSwapTemplateResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetUserSwapConfigResponse) ProtoMessage() {}
+func (*GetUserSwapTemplateResponse) ProtoMessage() {}
 
-func (x *GetUserSwapConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *GetUserSwapTemplateResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[203]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -16567,40 +16567,40 @@ func (x *GetUserSwapConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetUserSwapConfigResponse.ProtoReflect.Descriptor instead.
-func (*GetUserSwapConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserSwapTemplateResponse.ProtoReflect.Descriptor instead.
+func (*GetUserSwapTemplateResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{203}
 }
 
-func (x *GetUserSwapConfigResponse) GetFollowParent() bool {
+func (x *GetUserSwapTemplateResponse) GetFollowParent() bool {
 	if x != nil {
 		return x.FollowParent
 	}
 	return false
 }
 
-func (x *GetUserSwapConfigResponse) GetCustomConfig() *UserSwapConfig {
+func (x *GetUserSwapTemplateResponse) GetCustomConfig() *UserSwapConfig {
 	if x != nil {
 		return x.CustomConfig
 	}
 	return nil
 }
 
-func (x *GetUserSwapConfigResponse) GetDefaultConfig() *UserSwapConfig {
+func (x *GetUserSwapTemplateResponse) GetDefaultConfig() *UserSwapConfig {
 	if x != nil {
 		return x.DefaultConfig
 	}
 	return nil
 }
 
-func (x *GetUserSwapConfigResponse) GetInheritedOperatorContext() *common.OperatorContext {
+func (x *GetUserSwapTemplateResponse) GetInheritedOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.InheritedOperatorContext
 	}
 	return nil
 }
 
-func (x *GetUserSwapConfigResponse) GetInheritedFromOperatorName() string {
+func (x *GetUserSwapTemplateResponse) GetInheritedFromOperatorName() string {
 	if x != nil {
 		return x.InheritedFromOperatorName
 	}
@@ -21696,18 +21696,18 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"e\n" +
 	"\x1aGetUserSwapEnabledResponse\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12-\n" +
-	"\x12aggregated_enabled\x18\x02 \x01(\bR\x11aggregatedEnabled\"\xc5\x02\n" +
-	"\x18SetUserSwapConfigRequest\x12Y\n" +
+	"\x12aggregated_enabled\x18\x02 \x01(\bR\x11aggregatedEnabled\"\xc7\x02\n" +
+	"\x1aSetUserSwapTemplateRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12(\n" +
 	"\rfollow_parent\x18\x03 \x01(\bH\x00R\ffollowParent\x88\x01\x01\x12=\n" +
 	"\x06config\x18\x04 \x01(\v2%.api.wallet.service.v1.UserSwapConfigR\x06configB\x10\n" +
-	"\x0e_follow_parent\"\x1b\n" +
-	"\x19SetUserSwapConfigResponse\"\xca\x01\n" +
-	"\x18GetUserSwapConfigRequest\x12Y\n" +
+	"\x0e_follow_parent\"\x1d\n" +
+	"\x1bSetUserSwapTemplateResponse\"\xcc\x01\n" +
+	"\x1aGetUserSwapTemplateRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xf6\x02\n" +
-	"\x19GetUserSwapConfigResponse\x12#\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xf8\x02\n" +
+	"\x1bGetUserSwapTemplateResponse\x12#\n" +
 	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\x12J\n" +
 	"\rcustom_config\x18\x02 \x01(\v2%.api.wallet.service.v1.UserSwapConfigR\fcustomConfig\x12L\n" +
 	"\x0edefault_config\x18\x03 \x01(\v2%.api.wallet.service.v1.UserSwapConfigR\rdefaultConfig\x12Y\n" +
@@ -21738,7 +21738,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1dWITHDRAW_SCENARIO_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18WITHDRAW_SCENARIO_PLAYER\x10\x01\x12\x1f\n" +
 	"\x1bWITHDRAW_SCENARIO_AFFILIATE\x10\x02\x12\x1e\n" +
-	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xd3o\n" +
+	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xdfo\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -21787,9 +21787,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1cDeleteDepositRewardSequences\x12:.api.wallet.service.v1.DeleteDepositRewardSequencesRequest\x1a;.api.wallet.service.v1.DeleteDepositRewardSequencesResponse\"\x00\x12\x87\x01\n" +
 	"\x16GetDepositRewardConfig\x124.api.wallet.service.v1.GetDepositRewardConfigRequest\x1a5.api.wallet.service.v1.GetDepositRewardConfigResponse\"\x00\x12{\n" +
 	"\x12SetUserSwapEnabled\x120.api.wallet.service.v1.SetUserSwapEnabledRequest\x1a1.api.wallet.service.v1.SetUserSwapEnabledResponse\"\x00\x12{\n" +
-	"\x12GetUserSwapEnabled\x120.api.wallet.service.v1.GetUserSwapEnabledRequest\x1a1.api.wallet.service.v1.GetUserSwapEnabledResponse\"\x00\x12x\n" +
-	"\x11SetUserSwapConfig\x12/.api.wallet.service.v1.SetUserSwapConfigRequest\x1a0.api.wallet.service.v1.SetUserSwapConfigResponse\"\x00\x12x\n" +
-	"\x11GetUserSwapConfig\x12/.api.wallet.service.v1.GetUserSwapConfigRequest\x1a0.api.wallet.service.v1.GetUserSwapConfigResponse\"\x00\x12|\n" +
+	"\x12GetUserSwapEnabled\x120.api.wallet.service.v1.GetUserSwapEnabledRequest\x1a1.api.wallet.service.v1.GetUserSwapEnabledResponse\"\x00\x12~\n" +
+	"\x13SetUserSwapTemplate\x121.api.wallet.service.v1.SetUserSwapTemplateRequest\x1a2.api.wallet.service.v1.SetUserSwapTemplateResponse\"\x00\x12~\n" +
+	"\x13GetUserSwapTemplate\x121.api.wallet.service.v1.GetUserSwapTemplateRequest\x1a2.api.wallet.service.v1.GetUserSwapTemplateResponse\"\x00\x12|\n" +
 	"\bUserSwap\x12&.api.wallet.service.v1.UserSwapRequest\x1a'.api.wallet.service.v1.UserSwapResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/wallet/user-swap\x12\xab\x01\n" +
 	"\x13GetPlayerSwapConfig\x121.api.wallet.service.v1.GetPlayerSwapConfigRequest\x1a2.api.wallet.service.v1.GetPlayerSwapConfigResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/wallet/user-swap/player-config\x12\x93\x01\n" +
 	"\x1aSetAppDownloadRewardConfig\x128.api.wallet.service.v1.SetAppDownloadRewardConfigRequest\x1a9.api.wallet.service.v1.SetAppDownloadRewardConfigResponse\"\x00\x12\x93\x01\n" +
@@ -22060,10 +22060,10 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*SetUserSwapEnabledResponse)(nil),                                   // 198: api.wallet.service.v1.SetUserSwapEnabledResponse
 	(*GetUserSwapEnabledRequest)(nil),                                    // 199: api.wallet.service.v1.GetUserSwapEnabledRequest
 	(*GetUserSwapEnabledResponse)(nil),                                   // 200: api.wallet.service.v1.GetUserSwapEnabledResponse
-	(*SetUserSwapConfigRequest)(nil),                                     // 201: api.wallet.service.v1.SetUserSwapConfigRequest
-	(*SetUserSwapConfigResponse)(nil),                                    // 202: api.wallet.service.v1.SetUserSwapConfigResponse
-	(*GetUserSwapConfigRequest)(nil),                                     // 203: api.wallet.service.v1.GetUserSwapConfigRequest
-	(*GetUserSwapConfigResponse)(nil),                                    // 204: api.wallet.service.v1.GetUserSwapConfigResponse
+	(*SetUserSwapTemplateRequest)(nil),                                   // 201: api.wallet.service.v1.SetUserSwapTemplateRequest
+	(*SetUserSwapTemplateResponse)(nil),                                  // 202: api.wallet.service.v1.SetUserSwapTemplateResponse
+	(*GetUserSwapTemplateRequest)(nil),                                   // 203: api.wallet.service.v1.GetUserSwapTemplateRequest
+	(*GetUserSwapTemplateResponse)(nil),                                  // 204: api.wallet.service.v1.GetUserSwapTemplateResponse
 	(*UserSwapRequest)(nil),                                              // 205: api.wallet.service.v1.UserSwapRequest
 	(*UserSwapResponse)(nil),                                             // 206: api.wallet.service.v1.UserSwapResponse
 	(*GetPlayerSwapConfigRequest)(nil),                                   // 207: api.wallet.service.v1.GetPlayerSwapConfigRequest
@@ -22353,14 +22353,14 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	233, // 229: api.wallet.service.v1.SetUserSwapEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
 	233, // 230: api.wallet.service.v1.GetUserSwapEnabledRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	233, // 231: api.wallet.service.v1.GetUserSwapEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
-	233, // 232: api.wallet.service.v1.SetUserSwapConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	233, // 233: api.wallet.service.v1.SetUserSwapConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	196, // 234: api.wallet.service.v1.SetUserSwapConfigRequest.config:type_name -> api.wallet.service.v1.UserSwapConfig
-	233, // 235: api.wallet.service.v1.GetUserSwapConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	233, // 236: api.wallet.service.v1.GetUserSwapConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	196, // 237: api.wallet.service.v1.GetUserSwapConfigResponse.custom_config:type_name -> api.wallet.service.v1.UserSwapConfig
-	196, // 238: api.wallet.service.v1.GetUserSwapConfigResponse.default_config:type_name -> api.wallet.service.v1.UserSwapConfig
-	233, // 239: api.wallet.service.v1.GetUserSwapConfigResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	233, // 232: api.wallet.service.v1.SetUserSwapTemplateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	233, // 233: api.wallet.service.v1.SetUserSwapTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	196, // 234: api.wallet.service.v1.SetUserSwapTemplateRequest.config:type_name -> api.wallet.service.v1.UserSwapConfig
+	233, // 235: api.wallet.service.v1.GetUserSwapTemplateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	233, // 236: api.wallet.service.v1.GetUserSwapTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	196, // 237: api.wallet.service.v1.GetUserSwapTemplateResponse.custom_config:type_name -> api.wallet.service.v1.UserSwapConfig
+	196, // 238: api.wallet.service.v1.GetUserSwapTemplateResponse.default_config:type_name -> api.wallet.service.v1.UserSwapConfig
+	233, // 239: api.wallet.service.v1.GetUserSwapTemplateResponse.inherited_operator_context:type_name -> api.common.OperatorContext
 	233, // 240: api.wallet.service.v1.UserSwapRequest.operator_context:type_name -> api.common.OperatorContext
 	196, // 241: api.wallet.service.v1.GetPlayerSwapConfigResponse.config:type_name -> api.wallet.service.v1.UserSwapConfig
 	234, // 242: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
@@ -22426,8 +22426,8 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	88,  // 302: api.wallet.service.v1.Wallet.GetDepositRewardConfig:input_type -> api.wallet.service.v1.GetDepositRewardConfigRequest
 	197, // 303: api.wallet.service.v1.Wallet.SetUserSwapEnabled:input_type -> api.wallet.service.v1.SetUserSwapEnabledRequest
 	199, // 304: api.wallet.service.v1.Wallet.GetUserSwapEnabled:input_type -> api.wallet.service.v1.GetUserSwapEnabledRequest
-	201, // 305: api.wallet.service.v1.Wallet.SetUserSwapConfig:input_type -> api.wallet.service.v1.SetUserSwapConfigRequest
-	203, // 306: api.wallet.service.v1.Wallet.GetUserSwapConfig:input_type -> api.wallet.service.v1.GetUserSwapConfigRequest
+	201, // 305: api.wallet.service.v1.Wallet.SetUserSwapTemplate:input_type -> api.wallet.service.v1.SetUserSwapTemplateRequest
+	203, // 306: api.wallet.service.v1.Wallet.GetUserSwapTemplate:input_type -> api.wallet.service.v1.GetUserSwapTemplateRequest
 	205, // 307: api.wallet.service.v1.Wallet.UserSwap:input_type -> api.wallet.service.v1.UserSwapRequest
 	207, // 308: api.wallet.service.v1.Wallet.GetPlayerSwapConfig:input_type -> api.wallet.service.v1.GetPlayerSwapConfigRequest
 	168, // 309: api.wallet.service.v1.Wallet.SetAppDownloadRewardConfig:input_type -> api.wallet.service.v1.SetAppDownloadRewardConfigRequest
@@ -22526,8 +22526,8 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	89,  // 402: api.wallet.service.v1.Wallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
 	198, // 403: api.wallet.service.v1.Wallet.SetUserSwapEnabled:output_type -> api.wallet.service.v1.SetUserSwapEnabledResponse
 	200, // 404: api.wallet.service.v1.Wallet.GetUserSwapEnabled:output_type -> api.wallet.service.v1.GetUserSwapEnabledResponse
-	202, // 405: api.wallet.service.v1.Wallet.SetUserSwapConfig:output_type -> api.wallet.service.v1.SetUserSwapConfigResponse
-	204, // 406: api.wallet.service.v1.Wallet.GetUserSwapConfig:output_type -> api.wallet.service.v1.GetUserSwapConfigResponse
+	202, // 405: api.wallet.service.v1.Wallet.SetUserSwapTemplate:output_type -> api.wallet.service.v1.SetUserSwapTemplateResponse
+	204, // 406: api.wallet.service.v1.Wallet.GetUserSwapTemplate:output_type -> api.wallet.service.v1.GetUserSwapTemplateResponse
 	206, // 407: api.wallet.service.v1.Wallet.UserSwap:output_type -> api.wallet.service.v1.UserSwapResponse
 	208, // 408: api.wallet.service.v1.Wallet.GetPlayerSwapConfig:output_type -> api.wallet.service.v1.GetPlayerSwapConfigResponse
 	169, // 409: api.wallet.service.v1.Wallet.SetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.SetAppDownloadRewardConfigResponse

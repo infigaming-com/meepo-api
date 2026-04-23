@@ -163,12 +163,12 @@ service Wallet {
 	// GetUserSwapEnabled returns both the operator's own flag and the aggregated result across the hierarchy.
 	rpc GetUserSwapEnabled(GetUserSwapEnabledRequest) returns (GetUserSwapEnabledResponse) {}
 
-	// SetUserSwapConfig full-replaces the user-swap configuration template for an operator.
+	// SetUserSwapTemplate full-replaces the user-swap configuration template for an operator.
 	// follow_parent is operator-level: when true, the operator inherits the nearest ancestor's config.
-	rpc SetUserSwapConfig(SetUserSwapConfigRequest) returns (SetUserSwapConfigResponse) {}
+	rpc SetUserSwapTemplate(SetUserSwapTemplateRequest) returns (SetUserSwapTemplateResponse) {}
 
-	// GetUserSwapConfig returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
-	rpc GetUserSwapConfig(GetUserSwapConfigRequest) returns (GetUserSwapConfigResponse) {}
+	// GetUserSwapTemplate returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
+	rpc GetUserSwapTemplate(GetUserSwapTemplateRequest) returns (GetUserSwapTemplateResponse) {}
 
 	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
 	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
@@ -2861,7 +2861,7 @@ message GetUserSwapEnabledResponse {
 	bool aggregated_enabled = 2;
 }
 
-message SetUserSwapConfigRequest {
+message SetUserSwapTemplateRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
 	// Operator-level toggle. When true, the operator inherits the parent's config.
@@ -2869,14 +2869,14 @@ message SetUserSwapConfigRequest {
 	UserSwapConfig config = 4;
 }
 
-message SetUserSwapConfigResponse {}
+message SetUserSwapTemplateResponse {}
 
-message GetUserSwapConfigRequest {
+message GetUserSwapTemplateRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
 }
 
-message GetUserSwapConfigResponse {
+message GetUserSwapTemplateResponse {
 	// Operator-level follow_parent toggle. true = using parent's config.
 	bool follow_parent = 1;
 	// Operator's own config (empty fields when follow_parent=true and never customized).

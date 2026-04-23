@@ -2292,29 +2292,29 @@ func ErrorGameBonusRestricted(format string, args ...interface{}) *errors.Error 
 }
 
 // user swap
-func IsSetUserSwapConfigFailed(err error) bool {
+func IsSetUserSwapTemplateFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_SET_USER_SWAP_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_SET_USER_SWAP_TEMPLATE_FAILED.String() && e.Code == 500
 }
 
 // user swap
-func ErrorSetUserSwapConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_SET_USER_SWAP_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorSetUserSwapTemplateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_USER_SWAP_TEMPLATE_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsGetUserSwapConfigFailed(err error) bool {
+func IsGetUserSwapTemplateFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GET_USER_SWAP_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_GET_USER_SWAP_TEMPLATE_FAILED.String() && e.Code == 500
 }
 
-func ErrorGetUserSwapConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_GET_USER_SWAP_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorGetUserSwapTemplateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_SWAP_TEMPLATE_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsSetUserSwapEnabledFailed(err error) bool {

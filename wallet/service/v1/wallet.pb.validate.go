@@ -29611,22 +29611,22 @@ var _ interface {
 	ErrorName() string
 } = GetUserSwapEnabledResponseValidationError{}
 
-// Validate checks the field values on SetUserSwapConfigRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on SetUserSwapTemplateRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SetUserSwapConfigRequest) Validate() error {
+func (m *SetUserSwapTemplateRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SetUserSwapConfigRequest with the
+// ValidateAll checks the field values on SetUserSwapTemplateRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// SetUserSwapConfigRequestMultiError, or nil if none found.
-func (m *SetUserSwapConfigRequest) ValidateAll() error {
+// SetUserSwapTemplateRequestMultiError, or nil if none found.
+func (m *SetUserSwapTemplateRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SetUserSwapConfigRequest) validate(all bool) error {
+func (m *SetUserSwapTemplateRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -29637,7 +29637,7 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SetUserSwapConfigRequestValidationError{
+				errors = append(errors, SetUserSwapTemplateRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29645,7 +29645,7 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SetUserSwapConfigRequestValidationError{
+				errors = append(errors, SetUserSwapTemplateRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29654,7 +29654,7 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SetUserSwapConfigRequestValidationError{
+			return SetUserSwapTemplateRequestValidationError{
 				field:  "InitiatorOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -29666,7 +29666,7 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SetUserSwapConfigRequestValidationError{
+				errors = append(errors, SetUserSwapTemplateRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29674,7 +29674,7 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SetUserSwapConfigRequestValidationError{
+				errors = append(errors, SetUserSwapTemplateRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29683,7 +29683,7 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SetUserSwapConfigRequestValidationError{
+			return SetUserSwapTemplateRequestValidationError{
 				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -29695,7 +29695,7 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 		switch v := interface{}(m.GetConfig()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SetUserSwapConfigRequestValidationError{
+				errors = append(errors, SetUserSwapTemplateRequestValidationError{
 					field:  "Config",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29703,7 +29703,7 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SetUserSwapConfigRequestValidationError{
+				errors = append(errors, SetUserSwapTemplateRequestValidationError{
 					field:  "Config",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29712,7 +29712,7 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetConfig()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SetUserSwapConfigRequestValidationError{
+			return SetUserSwapTemplateRequestValidationError{
 				field:  "Config",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -29725,19 +29725,19 @@ func (m *SetUserSwapConfigRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return SetUserSwapConfigRequestMultiError(errors)
+		return SetUserSwapTemplateRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// SetUserSwapConfigRequestMultiError is an error wrapping multiple validation
-// errors returned by SetUserSwapConfigRequest.ValidateAll() if the designated
-// constraints aren't met.
-type SetUserSwapConfigRequestMultiError []error
+// SetUserSwapTemplateRequestMultiError is an error wrapping multiple
+// validation errors returned by SetUserSwapTemplateRequest.ValidateAll() if
+// the designated constraints aren't met.
+type SetUserSwapTemplateRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SetUserSwapConfigRequestMultiError) Error() string {
+func (m SetUserSwapTemplateRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -29746,11 +29746,11 @@ func (m SetUserSwapConfigRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SetUserSwapConfigRequestMultiError) AllErrors() []error { return m }
+func (m SetUserSwapTemplateRequestMultiError) AllErrors() []error { return m }
 
-// SetUserSwapConfigRequestValidationError is the validation error returned by
-// SetUserSwapConfigRequest.Validate if the designated constraints aren't met.
-type SetUserSwapConfigRequestValidationError struct {
+// SetUserSwapTemplateRequestValidationError is the validation error returned
+// by SetUserSwapTemplateRequest.Validate if the designated constraints aren't met.
+type SetUserSwapTemplateRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -29758,24 +29758,24 @@ type SetUserSwapConfigRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SetUserSwapConfigRequestValidationError) Field() string { return e.field }
+func (e SetUserSwapTemplateRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SetUserSwapConfigRequestValidationError) Reason() string { return e.reason }
+func (e SetUserSwapTemplateRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SetUserSwapConfigRequestValidationError) Cause() error { return e.cause }
+func (e SetUserSwapTemplateRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SetUserSwapConfigRequestValidationError) Key() bool { return e.key }
+func (e SetUserSwapTemplateRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SetUserSwapConfigRequestValidationError) ErrorName() string {
-	return "SetUserSwapConfigRequestValidationError"
+func (e SetUserSwapTemplateRequestValidationError) ErrorName() string {
+	return "SetUserSwapTemplateRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SetUserSwapConfigRequestValidationError) Error() string {
+func (e SetUserSwapTemplateRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -29787,14 +29787,14 @@ func (e SetUserSwapConfigRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetUserSwapConfigRequest.%s: %s%s",
+		"invalid %sSetUserSwapTemplateRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SetUserSwapConfigRequestValidationError{}
+var _ error = SetUserSwapTemplateRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -29802,24 +29802,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SetUserSwapConfigRequestValidationError{}
+} = SetUserSwapTemplateRequestValidationError{}
 
-// Validate checks the field values on SetUserSwapConfigResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on SetUserSwapTemplateResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SetUserSwapConfigResponse) Validate() error {
+func (m *SetUserSwapTemplateResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SetUserSwapConfigResponse with the
+// ValidateAll checks the field values on SetUserSwapTemplateResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// SetUserSwapConfigResponseMultiError, or nil if none found.
-func (m *SetUserSwapConfigResponse) ValidateAll() error {
+// SetUserSwapTemplateResponseMultiError, or nil if none found.
+func (m *SetUserSwapTemplateResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SetUserSwapConfigResponse) validate(all bool) error {
+func (m *SetUserSwapTemplateResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -29827,19 +29827,19 @@ func (m *SetUserSwapConfigResponse) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return SetUserSwapConfigResponseMultiError(errors)
+		return SetUserSwapTemplateResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// SetUserSwapConfigResponseMultiError is an error wrapping multiple validation
-// errors returned by SetUserSwapConfigResponse.ValidateAll() if the
-// designated constraints aren't met.
-type SetUserSwapConfigResponseMultiError []error
+// SetUserSwapTemplateResponseMultiError is an error wrapping multiple
+// validation errors returned by SetUserSwapTemplateResponse.ValidateAll() if
+// the designated constraints aren't met.
+type SetUserSwapTemplateResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SetUserSwapConfigResponseMultiError) Error() string {
+func (m SetUserSwapTemplateResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -29848,11 +29848,12 @@ func (m SetUserSwapConfigResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SetUserSwapConfigResponseMultiError) AllErrors() []error { return m }
+func (m SetUserSwapTemplateResponseMultiError) AllErrors() []error { return m }
 
-// SetUserSwapConfigResponseValidationError is the validation error returned by
-// SetUserSwapConfigResponse.Validate if the designated constraints aren't met.
-type SetUserSwapConfigResponseValidationError struct {
+// SetUserSwapTemplateResponseValidationError is the validation error returned
+// by SetUserSwapTemplateResponse.Validate if the designated constraints
+// aren't met.
+type SetUserSwapTemplateResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -29860,24 +29861,24 @@ type SetUserSwapConfigResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SetUserSwapConfigResponseValidationError) Field() string { return e.field }
+func (e SetUserSwapTemplateResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SetUserSwapConfigResponseValidationError) Reason() string { return e.reason }
+func (e SetUserSwapTemplateResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SetUserSwapConfigResponseValidationError) Cause() error { return e.cause }
+func (e SetUserSwapTemplateResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SetUserSwapConfigResponseValidationError) Key() bool { return e.key }
+func (e SetUserSwapTemplateResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SetUserSwapConfigResponseValidationError) ErrorName() string {
-	return "SetUserSwapConfigResponseValidationError"
+func (e SetUserSwapTemplateResponseValidationError) ErrorName() string {
+	return "SetUserSwapTemplateResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SetUserSwapConfigResponseValidationError) Error() string {
+func (e SetUserSwapTemplateResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -29889,14 +29890,14 @@ func (e SetUserSwapConfigResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetUserSwapConfigResponse.%s: %s%s",
+		"invalid %sSetUserSwapTemplateResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SetUserSwapConfigResponseValidationError{}
+var _ error = SetUserSwapTemplateResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -29904,24 +29905,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SetUserSwapConfigResponseValidationError{}
+} = SetUserSwapTemplateResponseValidationError{}
 
-// Validate checks the field values on GetUserSwapConfigRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on GetUserSwapTemplateRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetUserSwapConfigRequest) Validate() error {
+func (m *GetUserSwapTemplateRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetUserSwapConfigRequest with the
+// ValidateAll checks the field values on GetUserSwapTemplateRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetUserSwapConfigRequestMultiError, or nil if none found.
-func (m *GetUserSwapConfigRequest) ValidateAll() error {
+// GetUserSwapTemplateRequestMultiError, or nil if none found.
+func (m *GetUserSwapTemplateRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetUserSwapConfigRequest) validate(all bool) error {
+func (m *GetUserSwapTemplateRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -29932,7 +29933,7 @@ func (m *GetUserSwapConfigRequest) validate(all bool) error {
 		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetUserSwapConfigRequestValidationError{
+				errors = append(errors, GetUserSwapTemplateRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29940,7 +29941,7 @@ func (m *GetUserSwapConfigRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetUserSwapConfigRequestValidationError{
+				errors = append(errors, GetUserSwapTemplateRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29949,7 +29950,7 @@ func (m *GetUserSwapConfigRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetUserSwapConfigRequestValidationError{
+			return GetUserSwapTemplateRequestValidationError{
 				field:  "InitiatorOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -29961,7 +29962,7 @@ func (m *GetUserSwapConfigRequest) validate(all bool) error {
 		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetUserSwapConfigRequestValidationError{
+				errors = append(errors, GetUserSwapTemplateRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29969,7 +29970,7 @@ func (m *GetUserSwapConfigRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetUserSwapConfigRequestValidationError{
+				errors = append(errors, GetUserSwapTemplateRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -29978,7 +29979,7 @@ func (m *GetUserSwapConfigRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetUserSwapConfigRequestValidationError{
+			return GetUserSwapTemplateRequestValidationError{
 				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -29987,19 +29988,19 @@ func (m *GetUserSwapConfigRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetUserSwapConfigRequestMultiError(errors)
+		return GetUserSwapTemplateRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetUserSwapConfigRequestMultiError is an error wrapping multiple validation
-// errors returned by GetUserSwapConfigRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetUserSwapConfigRequestMultiError []error
+// GetUserSwapTemplateRequestMultiError is an error wrapping multiple
+// validation errors returned by GetUserSwapTemplateRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetUserSwapTemplateRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetUserSwapConfigRequestMultiError) Error() string {
+func (m GetUserSwapTemplateRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -30008,11 +30009,11 @@ func (m GetUserSwapConfigRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetUserSwapConfigRequestMultiError) AllErrors() []error { return m }
+func (m GetUserSwapTemplateRequestMultiError) AllErrors() []error { return m }
 
-// GetUserSwapConfigRequestValidationError is the validation error returned by
-// GetUserSwapConfigRequest.Validate if the designated constraints aren't met.
-type GetUserSwapConfigRequestValidationError struct {
+// GetUserSwapTemplateRequestValidationError is the validation error returned
+// by GetUserSwapTemplateRequest.Validate if the designated constraints aren't met.
+type GetUserSwapTemplateRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -30020,24 +30021,24 @@ type GetUserSwapConfigRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetUserSwapConfigRequestValidationError) Field() string { return e.field }
+func (e GetUserSwapTemplateRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetUserSwapConfigRequestValidationError) Reason() string { return e.reason }
+func (e GetUserSwapTemplateRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetUserSwapConfigRequestValidationError) Cause() error { return e.cause }
+func (e GetUserSwapTemplateRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetUserSwapConfigRequestValidationError) Key() bool { return e.key }
+func (e GetUserSwapTemplateRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetUserSwapConfigRequestValidationError) ErrorName() string {
-	return "GetUserSwapConfigRequestValidationError"
+func (e GetUserSwapTemplateRequestValidationError) ErrorName() string {
+	return "GetUserSwapTemplateRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetUserSwapConfigRequestValidationError) Error() string {
+func (e GetUserSwapTemplateRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -30049,14 +30050,14 @@ func (e GetUserSwapConfigRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetUserSwapConfigRequest.%s: %s%s",
+		"invalid %sGetUserSwapTemplateRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetUserSwapConfigRequestValidationError{}
+var _ error = GetUserSwapTemplateRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -30064,24 +30065,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetUserSwapConfigRequestValidationError{}
+} = GetUserSwapTemplateRequestValidationError{}
 
-// Validate checks the field values on GetUserSwapConfigResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on GetUserSwapTemplateResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetUserSwapConfigResponse) Validate() error {
+func (m *GetUserSwapTemplateResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetUserSwapConfigResponse with the
+// ValidateAll checks the field values on GetUserSwapTemplateResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetUserSwapConfigResponseMultiError, or nil if none found.
-func (m *GetUserSwapConfigResponse) ValidateAll() error {
+// GetUserSwapTemplateResponseMultiError, or nil if none found.
+func (m *GetUserSwapTemplateResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetUserSwapConfigResponse) validate(all bool) error {
+func (m *GetUserSwapTemplateResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -30094,7 +30095,7 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 		switch v := interface{}(m.GetCustomConfig()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetUserSwapConfigResponseValidationError{
+				errors = append(errors, GetUserSwapTemplateResponseValidationError{
 					field:  "CustomConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -30102,7 +30103,7 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetUserSwapConfigResponseValidationError{
+				errors = append(errors, GetUserSwapTemplateResponseValidationError{
 					field:  "CustomConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -30111,7 +30112,7 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetCustomConfig()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetUserSwapConfigResponseValidationError{
+			return GetUserSwapTemplateResponseValidationError{
 				field:  "CustomConfig",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -30123,7 +30124,7 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 		switch v := interface{}(m.GetDefaultConfig()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetUserSwapConfigResponseValidationError{
+				errors = append(errors, GetUserSwapTemplateResponseValidationError{
 					field:  "DefaultConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -30131,7 +30132,7 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetUserSwapConfigResponseValidationError{
+				errors = append(errors, GetUserSwapTemplateResponseValidationError{
 					field:  "DefaultConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -30140,7 +30141,7 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetDefaultConfig()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetUserSwapConfigResponseValidationError{
+			return GetUserSwapTemplateResponseValidationError{
 				field:  "DefaultConfig",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -30152,7 +30153,7 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 		switch v := interface{}(m.GetInheritedOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetUserSwapConfigResponseValidationError{
+				errors = append(errors, GetUserSwapTemplateResponseValidationError{
 					field:  "InheritedOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -30160,7 +30161,7 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetUserSwapConfigResponseValidationError{
+				errors = append(errors, GetUserSwapTemplateResponseValidationError{
 					field:  "InheritedOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -30169,7 +30170,7 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetInheritedOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetUserSwapConfigResponseValidationError{
+			return GetUserSwapTemplateResponseValidationError{
 				field:  "InheritedOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -30180,19 +30181,19 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 	// no validation rules for InheritedFromOperatorName
 
 	if len(errors) > 0 {
-		return GetUserSwapConfigResponseMultiError(errors)
+		return GetUserSwapTemplateResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetUserSwapConfigResponseMultiError is an error wrapping multiple validation
-// errors returned by GetUserSwapConfigResponse.ValidateAll() if the
-// designated constraints aren't met.
-type GetUserSwapConfigResponseMultiError []error
+// GetUserSwapTemplateResponseMultiError is an error wrapping multiple
+// validation errors returned by GetUserSwapTemplateResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetUserSwapTemplateResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetUserSwapConfigResponseMultiError) Error() string {
+func (m GetUserSwapTemplateResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -30201,11 +30202,12 @@ func (m GetUserSwapConfigResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetUserSwapConfigResponseMultiError) AllErrors() []error { return m }
+func (m GetUserSwapTemplateResponseMultiError) AllErrors() []error { return m }
 
-// GetUserSwapConfigResponseValidationError is the validation error returned by
-// GetUserSwapConfigResponse.Validate if the designated constraints aren't met.
-type GetUserSwapConfigResponseValidationError struct {
+// GetUserSwapTemplateResponseValidationError is the validation error returned
+// by GetUserSwapTemplateResponse.Validate if the designated constraints
+// aren't met.
+type GetUserSwapTemplateResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -30213,24 +30215,24 @@ type GetUserSwapConfigResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetUserSwapConfigResponseValidationError) Field() string { return e.field }
+func (e GetUserSwapTemplateResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetUserSwapConfigResponseValidationError) Reason() string { return e.reason }
+func (e GetUserSwapTemplateResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetUserSwapConfigResponseValidationError) Cause() error { return e.cause }
+func (e GetUserSwapTemplateResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetUserSwapConfigResponseValidationError) Key() bool { return e.key }
+func (e GetUserSwapTemplateResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetUserSwapConfigResponseValidationError) ErrorName() string {
-	return "GetUserSwapConfigResponseValidationError"
+func (e GetUserSwapTemplateResponseValidationError) ErrorName() string {
+	return "GetUserSwapTemplateResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetUserSwapConfigResponseValidationError) Error() string {
+func (e GetUserSwapTemplateResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -30242,14 +30244,14 @@ func (e GetUserSwapConfigResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetUserSwapConfigResponse.%s: %s%s",
+		"invalid %sGetUserSwapTemplateResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetUserSwapConfigResponseValidationError{}
+var _ error = GetUserSwapTemplateResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -30257,7 +30259,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetUserSwapConfigResponseValidationError{}
+} = GetUserSwapTemplateResponseValidationError{}
 
 // Validate checks the field values on UserSwapRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
