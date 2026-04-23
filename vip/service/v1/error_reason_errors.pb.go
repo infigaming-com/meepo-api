@@ -22,3 +22,17 @@ func IsUnspecified(err error) bool {
 func ErrorUnspecified(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UNSPECIFIED.String(), fmt.Sprintf(format, args...))
 }
+
+// Claim rejected by risk-service rule (KYC/email/phone/IP/device/same-type).
+func IsBonusClaimRejected(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BONUS_CLAIM_REJECTED.String() && e.Code == 403
+}
+
+// Claim rejected by risk-service rule (KYC/email/phone/IP/device/same-type).
+func ErrorBonusClaimRejected(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_BONUS_CLAIM_REJECTED.String(), fmt.Sprintf(format, args...))
+}

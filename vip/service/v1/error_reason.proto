@@ -11,4 +11,6 @@ enum ErrorReason {
   option (errors.default_code) = 500;
 
   UNSPECIFIED = 0;
+  // Claim rejected by risk-service rule (KYC/email/phone/IP/device/same-type).
+  BONUS_CLAIM_REJECTED = 170001 [(errors.code) = 403];
 }
