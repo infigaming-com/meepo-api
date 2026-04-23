@@ -1649,6 +1649,224 @@ var _ interface {
 	ErrorName() string
 } = ListBetTickerConfigResponseValidationError{}
 
+// Validate checks the field values on GetWebPushConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWebPushConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWebPushConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWebPushConfigRequestMultiError, or nil if none found.
+func (m *GetWebPushConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWebPushConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetWebPushConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWebPushConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by GetWebPushConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetWebPushConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWebPushConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWebPushConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetWebPushConfigRequestValidationError is the validation error returned by
+// GetWebPushConfigRequest.Validate if the designated constraints aren't met.
+type GetWebPushConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWebPushConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWebPushConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWebPushConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWebPushConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWebPushConfigRequestValidationError) ErrorName() string {
+	return "GetWebPushConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWebPushConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWebPushConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWebPushConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWebPushConfigRequestValidationError{}
+
+// Validate checks the field values on GetWebPushConfigResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWebPushConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWebPushConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWebPushConfigResponseMultiError, or nil if none found.
+func (m *GetWebPushConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWebPushConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ApiKey
+
+	// no validation rules for AuthDomain
+
+	// no validation rules for ProjectId
+
+	// no validation rules for StorageBucket
+
+	// no validation rules for MessagingSenderId
+
+	// no validation rules for AppId
+
+	// no validation rules for VapidKey
+
+	if len(errors) > 0 {
+		return GetWebPushConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWebPushConfigResponseMultiError is an error wrapping multiple validation
+// errors returned by GetWebPushConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetWebPushConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWebPushConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWebPushConfigResponseMultiError) AllErrors() []error { return m }
+
+// GetWebPushConfigResponseValidationError is the validation error returned by
+// GetWebPushConfigResponse.Validate if the designated constraints aren't met.
+type GetWebPushConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWebPushConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWebPushConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWebPushConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWebPushConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWebPushConfigResponseValidationError) ErrorName() string {
+	return "GetWebPushConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWebPushConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWebPushConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWebPushConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWebPushConfigResponseValidationError{}
+
 // Validate checks the field values on SendWebPushRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

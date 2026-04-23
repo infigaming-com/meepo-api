@@ -10159,6 +10159,64 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
+    /v1/push/web-push/config:
+        post:
+            tags:
+                - Push
+            description: |-
+                GetWebPushConfig returns the Firebase JS SDK configuration for the current
+                 environment. The frontend calls this once on init and caches it in
+                 sessionStorage so the Service Worker never needs hardcoded credentials.
+            operationId: Push_GetWebPushConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.GetWebPushConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.GetWebPushConfigResponse'
+    /v1/push/web-push/device/register:
+        post:
+            tags:
+                - Push
+            operationId: Push_RegisterWebPushDevice
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.RegisterWebPushDeviceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.RegisterWebPushDeviceResponse'
+    /v1/push/web-push/device/unregister:
+        post:
+            tags:
+                - Push
+            operationId: Push_UnregisterWebPushDevice
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.UnregisterWebPushDeviceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UnregisterWebPushDeviceResponse'
     /v1/report/customer-record/get:
         post:
             tags:
@@ -29758,6 +29816,30 @@ components:
                         $ref: '#/components/schemas/api.push.service.v1.MessageTypeInfo'
                     description: List of all supported message types with display names
             description: Response for GetSupportedMessageTypes.
+        api.push.service.v1.GetWebPushConfigRequest:
+            type: object
+            properties: {}
+            description: |-
+                GetWebPushConfig — returns the Firebase JS SDK config for the running
+                 environment. The VAPID key (public half only) is also included so the
+                 frontend can call getToken() without a separate round-trip.
+        api.push.service.v1.GetWebPushConfigResponse:
+            type: object
+            properties:
+                apiKey:
+                    type: string
+                authDomain:
+                    type: string
+                projectId:
+                    type: string
+                storageBucket:
+                    type: string
+                messagingSenderId:
+                    type: string
+                appId:
+                    type: string
+                vapidKey:
+                    type: string
         api.push.service.v1.ListBetTickerConfigResponse:
             type: object
             properties:
@@ -30371,6 +30453,22 @@ components:
                  specific OTP Provider and scoped to a business scenario (template_type).
                  Templates are resolved per (operator, country, template_type, language) with
                  fallback to "global" country and "en" language.
+        api.push.service.v1.RegisterWebPushDeviceRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                operatorId:
+                    type: string
+                fcmToken:
+                    type: string
+                platform:
+                    type: string
+        api.push.service.v1.RegisterWebPushDeviceResponse:
+            type: object
+            properties:
+                deviceId:
+                    type: string
         api.push.service.v1.SMSChannelRate:
             type: object
             properties:
@@ -30485,6 +30583,14 @@ components:
                     type: string
                     description: Error details if delivery failed (empty on success)
             description: Response for TestNotificationChannel.
+        api.push.service.v1.UnregisterWebPushDeviceRequest:
+            type: object
+            properties:
+                fcmToken:
+                    type: string
+        api.push.service.v1.UnregisterWebPushDeviceResponse:
+            type: object
+            properties: {}
         api.push.service.v1.UpdateBetTickerConfigResponse:
             type: object
             properties: {}
@@ -37798,6 +37904,7 @@ tags:
       description: |-
         Payment Service
          Provides methods for managing payment methods, channels, and transactions
+    - name: Push
     - name: ReportService
       description: |-
         ============================================================================
