@@ -82,9 +82,13 @@ type WalletHTTPServer interface {
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error)
 	// UserSwap UserSwap swaps the user's withdrawable cash from source currency to target currency.
-	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
-	// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
-	// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+	// Player-only endpoint: the caller's user id and operator context are resolved
+	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+	// optional — when absent, the token-derived context is used. Only the
+	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding
+	// credit transactions. The target credit is created with
+	// cash_turnover_threshold=0 (immediately withdrawable).
 	UserSwap(context.Context, *UserSwapRequest) (*UserSwapResponse, error)
 }
 
@@ -528,9 +532,13 @@ type WalletHTTPClient interface {
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(ctx context.Context, req *ListResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *ListResponsibleGamblingConfigsResponse, err error)
 	// UserSwap UserSwap swaps the user's withdrawable cash from source currency to target currency.
-	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
-	// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
-	// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+	// Player-only endpoint: the caller's user id and operator context are resolved
+	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+	// optional — when absent, the token-derived context is used. Only the
+	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding
+	// credit transactions. The target credit is created with
+	// cash_turnover_threshold=0 (immediately withdrawable).
 	UserSwap(ctx context.Context, req *UserSwapRequest, opts ...http.CallOption) (rsp *UserSwapResponse, err error)
 }
 
@@ -778,9 +786,13 @@ func (c *WalletHTTPClientImpl) ListResponsibleGamblingConfigs(ctx context.Contex
 }
 
 // UserSwap UserSwap swaps the user's withdrawable cash from source currency to target currency.
-// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
-// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
-// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+// Player-only endpoint: the caller's user id and operator context are resolved
+// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+// optional — when absent, the token-derived context is used. Only the
+// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+// produces two balance transactions (swap_out + swap_in) plus corresponding
+// credit transactions. The target credit is created with
+// cash_turnover_threshold=0 (immediately withdrawable).
 func (c *WalletHTTPClientImpl) UserSwap(ctx context.Context, in *UserSwapRequest, opts ...http.CallOption) (*UserSwapResponse, error) {
 	var out UserSwapResponse
 	pattern := "/v1/wallet/user-swap"

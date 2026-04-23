@@ -165,12 +165,23 @@ service Wallet {
 	rpc SetUserSwapTemplate(SetUserSwapTemplateRequest) returns (SetUserSwapTemplateResponse) {}
 
 	// GetUserSwapConfig returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
+	//
+	// Side-effect on first access: wallet-service lazy-inserts the target
+	// operator's config row, and player paths additionally lazy-insert the
+	// system-level row. Per rollout policy the system row defaults to
+	// `user_swap_enabled=true`, so the first access of a fresh deployment flips
+	// the system-level aggregate on. Every other level defaults off. Callers
+	// treating GET as strictly read-only should be aware.
 	rpc GetUserSwapConfig(GetUserSwapConfigRequest) returns (GetUserSwapConfigResponse) {}
 
 	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
-	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
-	// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
-	// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+	// Player-only endpoint: the caller's user id and operator context are resolved
+	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+	// optional — when absent, the token-derived context is used. Only the
+	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding
+	// credit transactions. The target credit is created with
+	// cash_turnover_threshold=0 (immediately withdrawable).
 	rpc UserSwap(UserSwapRequest) returns (UserSwapResponse) {
 		option (google.api.http) = {
 			post: "/v1/wallet/user-swap"

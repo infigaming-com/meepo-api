@@ -11829,9 +11829,13 @@ paths:
                 - Wallet
             description: |-
                 UserSwap swaps the user's withdrawable cash from source currency to target currency.
-                 Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
-                 produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
-                 The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+                 Player-only endpoint: the caller's user id and operator context are resolved
+                 from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+                 optional — when absent, the token-derived context is used. Only the
+                 withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+                 produces two balance transactions (swap_out + swap_in) plus corresponding
+                 credit transactions. The target credit is created with
+                 cash_turnover_threshold=0 (immediately withdrawable).
             operationId: Wallet_UserSwap
             requestBody:
                 content:

@@ -210,11 +210,22 @@ type WalletClient interface {
 	// follow_parent is operator-level: when true, the operator inherits the nearest ancestor's config.
 	SetUserSwapTemplate(ctx context.Context, in *SetUserSwapTemplateRequest, opts ...grpc.CallOption) (*SetUserSwapTemplateResponse, error)
 	// GetUserSwapConfig returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
+	//
+	// Side-effect on first access: wallet-service lazy-inserts the target
+	// operator's config row, and player paths additionally lazy-insert the
+	// system-level row. Per rollout policy the system row defaults to
+	// `user_swap_enabled=true`, so the first access of a fresh deployment flips
+	// the system-level aggregate on. Every other level defaults off. Callers
+	// treating GET as strictly read-only should be aware.
 	GetUserSwapConfig(ctx context.Context, in *GetUserSwapConfigRequest, opts ...grpc.CallOption) (*GetUserSwapConfigResponse, error)
 	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
-	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
-	// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
-	// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+	// Player-only endpoint: the caller's user id and operator context are resolved
+	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+	// optional — when absent, the token-derived context is used. Only the
+	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding
+	// credit transactions. The target credit is created with
+	// cash_turnover_threshold=0 (immediately withdrawable).
 	UserSwap(ctx context.Context, in *UserSwapRequest, opts ...grpc.CallOption) (*UserSwapResponse, error)
 	// GetPlayerSwapConfig returns the effective user-swap config for the currently
 	// authenticated player — operator resolved from the auth token. Used by the
@@ -1424,11 +1435,22 @@ type WalletServer interface {
 	// follow_parent is operator-level: when true, the operator inherits the nearest ancestor's config.
 	SetUserSwapTemplate(context.Context, *SetUserSwapTemplateRequest) (*SetUserSwapTemplateResponse, error)
 	// GetUserSwapConfig returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
+	//
+	// Side-effect on first access: wallet-service lazy-inserts the target
+	// operator's config row, and player paths additionally lazy-insert the
+	// system-level row. Per rollout policy the system row defaults to
+	// `user_swap_enabled=true`, so the first access of a fresh deployment flips
+	// the system-level aggregate on. Every other level defaults off. Callers
+	// treating GET as strictly read-only should be aware.
 	GetUserSwapConfig(context.Context, *GetUserSwapConfigRequest) (*GetUserSwapConfigResponse, error)
 	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
-	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
-	// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
-	// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+	// Player-only endpoint: the caller's user id and operator context are resolved
+	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+	// optional — when absent, the token-derived context is used. Only the
+	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding
+	// credit transactions. The target credit is created with
+	// cash_turnover_threshold=0 (immediately withdrawable).
 	UserSwap(context.Context, *UserSwapRequest) (*UserSwapResponse, error)
 	// GetPlayerSwapConfig returns the effective user-swap config for the currently
 	// authenticated player — operator resolved from the auth token. Used by the
