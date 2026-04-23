@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package api.push.service.v1;
 
+import "google/api/annotations.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/push/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.push.service.v1";
@@ -21,9 +23,32 @@ service Push {
 	rpc ListBetTickerConfig(ListBetTickerConfigRequest) returns (ListBetTickerConfigResponse) {}
 
 	// Web Push APIs
+	// SendWebPush is gRPC-only (called internally by other services).
 	rpc SendWebPush(SendWebPushRequest) returns (SendWebPushResponse) {}
-	rpc RegisterWebPushDevice(RegisterWebPushDeviceRequest) returns (RegisterWebPushDeviceResponse) {}
-	rpc UnregisterWebPushDevice(UnregisterWebPushDeviceRequest) returns (UnregisterWebPushDeviceResponse) {}
+
+	// GetWebPushConfig returns the Firebase JS SDK configuration for the current
+	// environment. The frontend calls this once on init and caches it in
+	// sessionStorage so the Service Worker never needs hardcoded credentials.
+	rpc GetWebPushConfig(GetWebPushConfigRequest) returns (GetWebPushConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/push/web-push/config"
+			body: "*"
+		};
+	}
+
+	rpc RegisterWebPushDevice(RegisterWebPushDeviceRequest) returns (RegisterWebPushDeviceResponse) {
+		option (google.api.http) = {
+			post: "/v1/push/web-push/device/register"
+			body: "*"
+		};
+	}
+
+	rpc UnregisterWebPushDevice(UnregisterWebPushDeviceRequest) returns (UnregisterWebPushDeviceResponse) {
+		option (google.api.http) = {
+			post: "/v1/push/web-push/device/unregister"
+			body: "*"
+		};
+	}
 }
 
 message EmailAttachment {
@@ -151,6 +176,21 @@ message ListBetTickerConfigResponse {
 }
 
 // ============== Web Push Messages ==============
+
+// GetWebPushConfig — returns the Firebase JS SDK config for the running
+// environment. The VAPID key (public half only) is also included so the
+// frontend can call getToken() without a separate round-trip.
+message GetWebPushConfigRequest {}
+
+message GetWebPushConfigResponse {
+	string api_key              = 1;
+	string auth_domain          = 2;
+	string project_id           = 3;
+	string storage_bucket       = 4;
+	string messaging_sender_id  = 5;
+	string app_id               = 6;
+	string vapid_key            = 7;
+}
 
 message SendWebPushRequest {
 	string title = 1;
