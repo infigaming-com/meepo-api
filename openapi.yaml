@@ -36284,16 +36284,6 @@ components:
         api.wallet.service.v1.SetFICAThresholdConfigResponse:
             type: object
             properties: {}
-        api.wallet.service.v1.SwapFeeOverride:
-            type: object
-            properties:
-                currency:
-                    type: string
-                    description: Source currency code. When a user swaps FROM this currency, `fee_rate` applies.
-                feeRate:
-                    type: string
-                    description: 'Fee rate as a decimal string (e.g. "0.01" = 1%). Range: [0, 1).'
-            description: SwapFeeOverride overrides the default swap fee rate for a specific source currency.
         api.wallet.service.v1.TurnoverCondition:
             type: object
             properties:
@@ -36377,10 +36367,12 @@ components:
                     type: string
                     description: Default swap fee rate as a decimal string. Deducted from the source cash.
                 feeOverrides:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.SwapFeeOverride'
-                    description: Per-source-currency overrides on top of default_swap_fee.
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: |-
+                        Per-source-currency overrides on top of default_swap_fee.
+                         Key: source currency code. Value: fee rate as decimal string (e.g. "0.01" = 1%, range [0, 1)).
                 allowedSwapOut:
                     type: array
                     items:

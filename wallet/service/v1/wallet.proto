@@ -2810,14 +2810,6 @@ message FreeRewardBOItem {
 
 // ─── User Swap ──────────────────────────────────────────────────────────────
 
-// SwapFeeOverride overrides the default swap fee rate for a specific source currency.
-message SwapFeeOverride {
-	// Source currency code. When a user swaps FROM this currency, `fee_rate` applies.
-	string currency = 1;
-	// Fee rate as a decimal string (e.g. "0.01" = 1%). Range: [0, 1).
-	string fee_rate = 2;
-}
-
 // UserSwapConfig is the operator-level template inherited by descendants when follow_parent=true.
 message UserSwapConfig {
 	// When true, swapping cash forfeits all bonuses (operator + provider) of the source currency.
@@ -2825,7 +2817,8 @@ message UserSwapConfig {
 	// Default swap fee rate as a decimal string. Deducted from the source cash.
 	string default_swap_fee = 2;
 	// Per-source-currency overrides on top of default_swap_fee.
-	repeated SwapFeeOverride fee_overrides = 3;
+	// Key: source currency code. Value: fee rate as decimal string (e.g. "0.01" = 1%, range [0, 1)).
+	map<string, string> fee_overrides = 3;
 	// Currencies allowed as swap source. Empty list = none allowed.
 	repeated string allowed_swap_out = 4;
 	// Currencies allowed as swap target. Empty list = none allowed.
