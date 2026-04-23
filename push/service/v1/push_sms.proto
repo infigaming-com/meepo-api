@@ -1,0 +1,659 @@
+syntax = "proto3";
+
+package api.push.service.v1;
+
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/push/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.push.service.v1";
+
+// PushSMS service for marketing/notification SMS delivery.
+//
+// ## Why separate from PushOTP?
+//
+// EngageLab exposes two distinct products for SMS delivery:
+//
+//   - OTP API (otp.api.engagelab.cc/v1/codes) — bundles OTP code injection,
+//     per-recipient rate limits, and OTP-specific template types. Covered by PushOTP.
+//
+//   - NEWSMS API (smsapi.engagelab.com/v1/messages) — general SMS delivery for
+//     marketing/utility messages. Template.id is MANDATORY (no raw-text mode),
+//     templates and sender IDs are independently reviewed resources. Covered here.
+//
+// Mixing them into one schema would pollute OTP's code/ttl fields, require a
+// "usage" column on every row, and break the one-callback-schema-per-provider
+// invariant. Keeping them split costs one extra table set but preserves clean
+// semantics and independent rate-limit/cost models.
+//
+// ## Architecture (4-layer model)
+//
+//   Provider     — EngageLab NEWSMS credentials (dev_key, dev_secret). Created
+//                  once per business account, reusable across countries.
+//   Binding      — Maps a Provider to an operator+country for routing; holds
+//                  phone-prefix filters and per-(op,country) priority.
+//   SenderID     — Branded signature (EngageLab sign_id). Independent review
+//                  workflow; one sender ID may back many templates.
+//   Template     — Message content stored + mirrored on EngageLab. Carries
+//                  external_template_id, variable schema, optional sender_id
+//                  reference. Used by CRM campaigns via template_code.
+//
+// ## Send-time routing chain (same as OTP):
+//
+//   For each level: operator -> company -> retailer -> system:
+//     1. (level_id, country, enabled=true) ORDER BY priority ASC
+//     2. (level_id, "global", enabled=true) ORDER BY priority ASC
+//   Phone prefix check applied within each binding (empty = match all).
+//
+// ## Template resolution chain:
+//
+//   For each level: operator -> company -> retailer -> system:
+//     1. (level_id, country, template_code, language)
+//     2. (level_id, country, template_code, "en")
+//     3. (level_id, "global", template_code, language)
+//     4. (level_id, "global", template_code, "en")
+//
+// Only templates with review_status=APPROVED are eligible for send.
+service PushSMS {
+  // ====== Inter-service: SMS delivery ======
+  // SendMarketingSMS sends one or many recipients in a single EngageLab call.
+  // Uses (campaign_id, user_id) as idempotency key when both are non-zero.
+  rpc SendMarketingSMS(SendMarketingSMSRequest) returns (SendMarketingSMSResponse) {}
+
+  // ====== Backoffice: Provider CRUD ======
+  rpc CreateSMSProvider(CreateSMSProviderRequest) returns (CreateSMSProviderResponse) {}
+  rpc UpdateSMSProvider(UpdateSMSProviderRequest) returns (UpdateSMSProviderResponse) {}
+  rpc DeleteSMSProvider(DeleteSMSProviderRequest) returns (DeleteSMSProviderResponse) {}
+  rpc GetSMSProvider(GetSMSProviderRequest) returns (GetSMSProviderResponse) {}
+  rpc ListSMSProviders(ListSMSProvidersRequest) returns (ListSMSProvidersResponse) {}
+
+  // ====== Backoffice: Provider Binding CRUD ======
+  rpc CreateSMSProviderBinding(CreateSMSProviderBindingRequest) returns (CreateSMSProviderBindingResponse) {}
+  rpc UpdateSMSProviderBinding(UpdateSMSProviderBindingRequest) returns (UpdateSMSProviderBindingResponse) {}
+  rpc DeleteSMSProviderBinding(DeleteSMSProviderBindingRequest) returns (DeleteSMSProviderBindingResponse) {}
+  rpc ListSMSProviderBindings(ListSMSProviderBindingsRequest) returns (ListSMSProviderBindingsResponse) {}
+  rpc ListSMSBindingCountries(ListSMSBindingCountriesRequest) returns (ListSMSBindingCountriesResponse) {}
+  rpc CheckSMSBindingCountry(CheckSMSBindingCountryRequest) returns (CheckSMSBindingCountryResponse) {}
+
+  // ====== Backoffice: Sender ID CRUD ======
+  // Sender IDs (EngageLab "signatures") are reviewed independently. They attach
+  // to templates either at template-creation time or via UpdateSMSTemplate.
+  rpc CreateSMSSenderID(CreateSMSSenderIDRequest) returns (CreateSMSSenderIDResponse) {}
+  rpc DeleteSMSSenderID(DeleteSMSSenderIDRequest) returns (DeleteSMSSenderIDResponse) {}
+  rpc GetSMSSenderID(GetSMSSenderIDRequest) returns (GetSMSSenderIDResponse) {}
+  rpc ListSMSSenderIDs(ListSMSSenderIDsRequest) returns (ListSMSSenderIDsResponse) {}
+  rpc SyncSMSSenderIDStatus(SyncSMSSenderIDStatusRequest) returns (SyncSMSSenderIDStatusResponse) {}
+
+  // ====== Backoffice: Template CRUD ======
+  // A Create call both persists the local row AND pushes the template to the
+  // provider for review; review_status starts at PENDING and must be synced
+  // until APPROVED before the template can be used for sending.
+  rpc CreateSMSTemplate(CreateSMSTemplateRequest) returns (CreateSMSTemplateResponse) {}
+  rpc UpdateSMSTemplate(UpdateSMSTemplateRequest) returns (UpdateSMSTemplateResponse) {}
+  rpc DeleteSMSTemplate(DeleteSMSTemplateRequest) returns (DeleteSMSTemplateResponse) {}
+  rpc GetSMSTemplate(GetSMSTemplateRequest) returns (GetSMSTemplateResponse) {}
+  rpc ListSMSTemplates(ListSMSTemplatesRequest) returns (ListSMSTemplatesResponse) {}
+  rpc SyncSMSTemplateStatus(SyncSMSTemplateStatusRequest) returns (SyncSMSTemplateStatusResponse) {}
+
+  // ====== Backoffice: Send logs ======
+  rpc ListSMSSendLogs(ListSMSSendLogsRequest) returns (ListSMSSendLogsResponse) {}
+}
+
+// ============ Enums ============
+
+// SMSProviderType enumerates supported third-party SMS delivery providers.
+enum SMSProviderType {
+  SMS_PROVIDER_TYPE_UNSPECIFIED = 0;
+  SMS_PROVIDER_TYPE_ENGAGELAB_NEWSMS = 1;  // EngageLab NEWSMS (smsapi.engagelab.com)
+}
+
+// SMSTemplateType mirrors EngageLab's template_type. Marketing templates
+// typically face stricter review and may be blocked in some countries/carriers.
+enum SMSTemplateType {
+  SMS_TEMPLATE_TYPE_UNSPECIFIED = 0;
+  SMS_TEMPLATE_TYPE_MARKETING = 1;  // Promotional content
+  SMS_TEMPLATE_TYPE_UTILITY = 2;    // Transactional/notification content
+}
+
+// SMSReviewStatus mirrors EngageLab's 1/2/3 status for templates and sender IDs.
+enum SMSReviewStatus {
+  SMS_REVIEW_STATUS_UNSPECIFIED = 0;
+  SMS_REVIEW_STATUS_PENDING = 1;   // Submitted, awaiting review
+  SMS_REVIEW_STATUS_APPROVED = 2;  // Ready for use
+  SMS_REVIEW_STATUS_REJECTED = 3;  // Fix and resubmit on provider platform
+}
+
+// SMSSignPosition: where the sender ID is placed relative to the message body.
+// Mirrors EngageLab sign_position (1=prefix, 2=suffix).
+enum SMSSignPosition {
+  SMS_SIGN_POSITION_UNSPECIFIED = 0;
+  SMS_SIGN_POSITION_PREFIX = 1;
+  SMS_SIGN_POSITION_SUFFIX = 2;
+}
+
+// ============ SendMarketingSMS (inter-service) ============
+
+// SendMarketingSMSRequest requests SMS delivery through the configured provider.
+//
+// ## Idempotency
+// When campaign_id > 0 and user_id > 0, a unique index on (campaign_id, user_id)
+// in sms_send_logs enforces at-most-once delivery per campaign per user. A
+// second call with the same pair returns the prior result with deduplicated=true.
+//
+// ## Template requirement
+// EngageLab NEWSMS does NOT support raw-text sending; template_code is required.
+// The service resolves template_code to a local SMSTemplate, verifies its
+// review_status=APPROVED, and forwards external_template_id + template_params
+// to EngageLab. template_params must satisfy all placeholders in the template.
+message SendMarketingSMSRequest {
+  // Target phone numbers in E.164 format (+<country><number>). EngageLab accepts
+  // up to 1000 recipients per call; we cap at a lower limit server-side.
+  repeated string recipients = 1;
+
+  // Caller/owner hierarchy. Used for routing (operator -> company -> retailer ->
+  // system) and for log attribution. operator_id is the user's operator.
+  int64 operator_id = 2;
+  int64 company_operator_id = 3;
+  int64 retailer_operator_id = 4;
+
+  // User ID of the single target (when recipients has length 1). Zero for true
+  // batch mode; in that case per-recipient user attribution is not tracked.
+  int64 user_id = 5;
+
+  // ISO 3166-1 alpha-2 country code, used for binding and template resolution.
+  // Falls back to "global" routing when no country-specific match exists.
+  string country = 6;
+
+  // BCP-47 language code, used for template fallback (e.g., "pt", "zh", "en").
+  string language = 7;
+
+  // Business template code (CRM references this, not the EngageLab template_id).
+  // Resolved via the template routing chain to find an APPROVED SMSTemplate
+  // whose external_template_id is sent to EngageLab.
+  string template_code = 8;
+
+  // Variables forwarded to EngageLab template.params. Keys must match the
+  // placeholders declared in the template content (e.g., "name", "code").
+  map<string, string> template_params = 9;
+
+  // CRM correlation. When both > 0, (campaign_id, user_id) is the idempotency
+  // key. execution_id is logged for traceability but not part of the key.
+  int64 campaign_id = 10;
+  int64 execution_id = 11;
+
+  // Plan name forwarded to EngageLab (optional; used for grouping in their
+  // console). If empty, we fill with "campaign-<campaign_id>" server-side.
+  string plan_name = 12;
+
+  // Unix seconds for scheduled send. Zero or unset = send immediately.
+  // EngageLab supports delayed send via schedule_time field.
+  optional int64 schedule_time = 13;
+}
+
+message SendMarketingSMSResponse {
+  // EngageLab plan_id — groups all recipients of a single send call.
+  string plan_id = 1;
+  // Number of recipients in the request (post server-side validation).
+  int32 total_count = 2;
+  // Number of recipients accepted by EngageLab (post provider validation).
+  int32 accepted_count = 3;
+  // Per-recipient message_id when recipients.size == 1 and delivery succeeded.
+  string message_id = 4;
+  // Per-recipient results. Populated on batch calls, or on single call failure.
+  repeated SMSRecipientResult results = 5;
+  // True when the call short-circuited via (campaign_id, user_id) idempotency.
+  bool deduplicated = 6;
+  // Provider name used (e.g., "engagelab_newsms"). For observability.
+  string provider_name = 7;
+  // Local template_id (SMSTemplate.id) that was resolved and used.
+  int64 template_id = 8;
+}
+
+message SMSRecipientResult {
+  string recipient = 1;
+  string message_id = 2;
+  string status = 3;      // "accepted" | "failed"
+  string error = 4;       // EngageLab error message when status=failed
+  int32 error_code = 5;   // EngageLab error code
+}
+
+// ============ Provider CRUD ============
+
+// SMSProviderInfo represents a third-party SMS delivery provider configuration.
+//
+// A Provider holds the API credentials for a third-party service and is decoupled
+// from country routing — use SMSProviderBinding to map to operator+country.
+// Credentials are encrypted at rest and NEVER returned in responses.
+message SMSProviderInfo {
+  int64 id = 1;
+  // Deprecated: use operator_context. Equals operator_context.real_operator_id.
+  int64 owner_operator_id = 2;
+  SMSProviderType provider_type = 3;
+  string name = 4;
+  // True when credentials are configured. Actual values are never returned.
+  bool has_credentials = 5;
+  // JSON string of non-sensitive config (base_url, timeout_seconds,
+  // fallback_cost_usd, markup_percent, callback_username).
+  string config = 6;
+  // Countries this provider supports. Empty = all countries.
+  repeated string supported_countries = 7;
+  int64 created_at = 8;
+  int64 updated_at = 9;
+  common.OperatorContext operator_context = 10;
+}
+
+message CreateSMSProviderRequest {
+  // Deprecated: use operator_context. Ignored when operator_context is set.
+  int64 owner_operator_id = 1;
+  SMSProviderType provider_type = 2;
+  string name = 3;
+  // Plain JSON with credentials. Encrypted (AES-256-GCM) before storage.
+  // EngageLab NEWSMS example: {"dev_key":"xxx","dev_secret":"yyy"}.
+  string credentials_json = 4;
+  string config = 5;
+  repeated string supported_countries = 6;
+  common.OperatorContext operator_context = 7;
+}
+
+message CreateSMSProviderResponse {
+  SMSProviderInfo provider = 1;
+}
+
+message UpdateSMSProviderRequest {
+  int64 id = 1;
+  optional string name = 2;
+  optional string credentials_json = 3;
+  optional string config = 4;
+  repeated string supported_countries = 5;
+  optional bool clear_supported_countries = 6;
+  common.OperatorContextFilters operator_context_filters = 7;
+}
+
+message UpdateSMSProviderResponse {}
+
+message DeleteSMSProviderRequest {
+  int64 id = 1;
+  common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message DeleteSMSProviderResponse {}
+
+message GetSMSProviderRequest {
+  int64 id = 1;
+  common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message GetSMSProviderResponse {
+  SMSProviderInfo provider = 1;
+}
+
+message ListSMSProvidersRequest {
+  // Deprecated: visibility driven by operator_context_filters.
+  int64 owner_operator_id = 1;
+  optional SMSProviderType provider_type = 2;
+  optional string country = 3;
+  int32 page = 4;
+  int32 page_size = 5;
+  common.OperatorContextFilters operator_context_filters = 6;
+}
+
+message ListSMSProvidersResponse {
+  repeated SMSProviderInfo providers = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+// ============ Provider Binding CRUD ============
+
+// SMSProviderBindingInfo maps a provider to (operator, country) for routing.
+// Lower priority value wins; phone_prefixes further narrow the match.
+message SMSProviderBindingInfo {
+  int64 id = 1;
+  int64 target_operator_id = 2;
+  int64 provider_id = 3;
+  string country = 4;           // ISO alpha-2 or "global"
+  bool enabled = 5;
+  int32 priority = 6;
+  repeated string phone_prefixes = 7;
+  int64 created_at = 8;
+  int64 updated_at = 9;
+  SMSProviderInfo provider = 10;
+  int64 created_by_operator_id = 11;
+  string created_by_operator_name = 12;
+  string created_by_operator_type = 13;
+  common.OperatorContext operator_context = 14;
+}
+
+message CreateSMSProviderBindingRequest {
+  int64 target_operator_id = 1;
+  int64 provider_id = 2;
+  string country = 3;
+  bool enabled = 4;
+  int32 priority = 5;
+  repeated string phone_prefixes = 6;
+  int64 created_by_operator_id = 7;
+  string created_by_operator_name = 8;
+  string created_by_operator_type = 9;
+  common.OperatorContext operator_context = 10;
+}
+
+message CreateSMSProviderBindingResponse {
+  SMSProviderBindingInfo binding = 1;
+}
+
+message UpdateSMSProviderBindingRequest {
+  int64 id = 1;
+  optional bool enabled = 2;
+  optional int32 priority = 3;
+  repeated string phone_prefixes = 4;
+  optional bool clear_phone_prefixes = 5;
+  common.OperatorContextFilters operator_context_filters = 6;
+}
+
+message UpdateSMSProviderBindingResponse {}
+
+message DeleteSMSProviderBindingRequest {
+  int64 id = 1;
+  common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message DeleteSMSProviderBindingResponse {}
+
+message ListSMSProviderBindingsRequest {
+  int64 target_operator_id = 1;
+  optional string country = 2;
+  optional int64 provider_id = 3;
+  optional bool enabled = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+  common.OperatorContextFilters operator_context_filters = 7;
+}
+
+message ListSMSProviderBindingsResponse {
+  repeated SMSProviderBindingInfo bindings = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message ListSMSBindingCountriesRequest {
+  int64 target_operator_id = 1;
+  optional bool enabled = 2;
+  common.OperatorContextFilters operator_context_filters = 3;
+}
+
+message ListSMSBindingCountriesResponse {
+  repeated string countries = 1;
+  int32 total = 2;
+}
+
+message CheckSMSBindingCountryRequest {
+  int64 target_operator_id = 1;
+  string country = 2;
+  common.OperatorContextFilters operator_context_filters = 3;
+}
+
+message CheckSMSBindingCountryResponse {
+  bool configured = 1;
+}
+
+// ============ Sender ID CRUD ============
+
+// SMSSenderIDInfo represents a branded sender signature reviewed by the provider.
+//
+// EngageLab treats the sender ID (sign_name) as an independently audited resource:
+// first submitted via POST /v1/sign-configs, approved asynchronously, then
+// attached to templates for delivery. Our local mirror tracks the external
+// sign_id for reference and the review_status for gate-keeping sends.
+//
+// NOTE: Once approved, EngageLab sign names cannot be renamed in-place. Changes
+// require creating a new sender ID record and migrating template references.
+message SMSSenderIDInfo {
+  int64 id = 1;
+  int64 provider_id = 2;
+  // Display name and value shown to the end-user (max 60 chars, forbidden: "[]").
+  string name = 3;
+  // EngageLab sign_id. Populated after successful submission to the provider.
+  string external_sign_id = 4;
+  SMSReviewStatus review_status = 5;
+  // Audit remark from EngageLab (populated for rejected status).
+  string audit_remark = 6;
+  // Number of templates currently referencing this sender ID (informational).
+  int32 related_template_count = 7;
+  int64 created_at = 8;
+  int64 updated_at = 9;
+  common.OperatorContext operator_context = 10;
+}
+
+message CreateSMSSenderIDRequest {
+  int64 provider_id = 1;
+  // 2-60 chars. Forbidden chars: [, ], (Chinese brackets).
+  string name = 2;
+  common.OperatorContext operator_context = 3;
+}
+
+message CreateSMSSenderIDResponse {
+  SMSSenderIDInfo sender_id = 1;
+}
+
+message DeleteSMSSenderIDRequest {
+  int64 id = 1;
+  common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message DeleteSMSSenderIDResponse {}
+
+message GetSMSSenderIDRequest {
+  int64 id = 1;
+  common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message GetSMSSenderIDResponse {
+  SMSSenderIDInfo sender_id = 1;
+}
+
+message ListSMSSenderIDsRequest {
+  optional int64 provider_id = 1;
+  optional SMSReviewStatus review_status = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  common.OperatorContextFilters operator_context_filters = 5;
+}
+
+message ListSMSSenderIDsResponse {
+  repeated SMSSenderIDInfo sender_ids = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+// SyncSMSSenderIDStatusRequest pulls the latest review status from the provider
+// and updates the local record's review_status + audit_remark.
+message SyncSMSSenderIDStatusRequest {
+  int64 id = 1;
+}
+
+message SyncSMSSenderIDStatusResponse {
+  SMSReviewStatus review_status = 1;
+  string audit_remark = 2;
+}
+
+// ============ Template CRUD ============
+
+// SMSTemplateInfo represents a local SMS template mirrored to EngageLab.
+//
+// On Create, the service submits the template to EngageLab and stores the
+// returned external_template_id; review_status starts as PENDING. Only
+// APPROVED templates are eligible for SendMarketingSMS.
+//
+// Placeholders use single-brace syntax (e.g., "{name}" or "{code}") to match
+// EngageLab's own template variable format.
+message SMSTemplateInfo {
+  int64 id = 1;
+  int64 provider_id = 2;
+  // Business template code (CRM references this). Unique per (operator, country,
+  // template_code, language).
+  string template_code = 3;
+  string name = 4;
+  SMSTemplateType template_type = 5;
+  // Full template body with {placeholder} markers.
+  string content = 6;
+  // Comma-separated ISO alpha-2 codes (EngageLab native format, e.g., "US,BR,JP").
+  string country_codes = 7;
+  // ISO 3166-1 alpha-2 code used by our routing chain.
+  string country = 8;
+  string language = 9;
+  // EngageLab template_id, populated after successful submission.
+  string external_template_id = 10;
+  // Reference to an approved local SMSSenderID. Zero = no signature attached.
+  int64 sender_id_ref = 11;
+  SMSSignPosition sign_position = 12;
+  SMSReviewStatus review_status = 13;
+  string audit_remark = 14;
+  bool enabled = 15;
+  int64 created_at = 16;
+  int64 updated_at = 17;
+  common.OperatorContext operator_context = 18;
+}
+
+message CreateSMSTemplateRequest {
+  int64 provider_id = 1;
+  string template_code = 2;
+  string name = 3;
+  SMSTemplateType template_type = 4;
+  string content = 5;
+  string country_codes = 6;
+  string country = 7;
+  string language = 8;
+  // Optional: attach an approved sender ID at creation time.
+  int64 sender_id_ref = 9;
+  SMSSignPosition sign_position = 10;
+  bool enabled = 11;
+  common.OperatorContext operator_context = 12;
+}
+
+message CreateSMSTemplateResponse {
+  SMSTemplateInfo template = 1;
+}
+
+// UpdateSMSTemplateRequest edits local-only fields AND, when content/signature
+// changes, resubmits the template to EngageLab (review_status resets to PENDING).
+message UpdateSMSTemplateRequest {
+  int64 id = 1;
+  optional string name = 2;
+  optional string content = 3;
+  optional string country_codes = 4;
+  optional int64 sender_id_ref = 5;
+  optional SMSSignPosition sign_position = 6;
+  optional bool enabled = 7;
+  common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message UpdateSMSTemplateResponse {}
+
+message DeleteSMSTemplateRequest {
+  int64 id = 1;
+  common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message DeleteSMSTemplateResponse {}
+
+message GetSMSTemplateRequest {
+  int64 id = 1;
+  common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message GetSMSTemplateResponse {
+  SMSTemplateInfo template = 1;
+}
+
+message ListSMSTemplatesRequest {
+  optional string country = 1;
+  optional int64 provider_id = 2;
+  optional SMSTemplateType template_type = 3;
+  optional SMSReviewStatus review_status = 4;
+  optional bool enabled = 5;
+  optional string template_code = 6;
+  int32 page = 7;
+  int32 page_size = 8;
+  common.OperatorContextFilters operator_context_filters = 9;
+}
+
+message ListSMSTemplatesResponse {
+  repeated SMSTemplateInfo templates = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message SyncSMSTemplateStatusRequest {
+  int64 id = 1;
+}
+
+message SyncSMSTemplateStatusResponse {
+  SMSReviewStatus review_status = 1;
+  string audit_remark = 2;
+}
+
+// ============ Send Logs ============
+
+// SMSSendLogInfo represents a single marketing SMS delivery attempt.
+// Append-only records used for auditing, cost accounting, and debugging.
+//
+// Two status axes:
+//   status          — our local state: "sent" | "failed" | "dispatching"
+//   delivery_status — provider-reported state: "pending" | "delivered" | "failed"
+//
+// cost_source distinguishes fallback estimates from provider-callback truth.
+message SMSSendLogInfo {
+  int64 id = 1;
+  int64 operator_id = 2;
+  int64 company_operator_id = 3;
+  int64 retailer_operator_id = 4;
+  int64 provider_id = 5;
+  int64 template_id = 6;
+  int64 campaign_id = 7;
+  int64 execution_id = 8;
+  int64 user_id = 9;
+  // Masked: "+1***5678" (full value stored internally for resend diagnostics).
+  string recipient_masked = 10;
+  string country = 11;
+  // EngageLab plan_id — same for all recipients in one send call.
+  string plan_id = 12;
+  // EngageLab per-recipient message_id.
+  string external_message_id = 13;
+  string status = 14;
+  string error_message = 15;
+  int32 error_code = 16;
+  // Decimal string (e.g., "0.005").
+  string unit_cost = 17;
+  string cost_currency = 18;
+  // "default_fallback" | "callback".
+  string cost_source = 19;
+  string delivery_status = 20;
+  int32 delivery_error_code = 21;
+  int64 callback_received_at = 22;
+  int64 created_at = 23;
+}
+
+message ListSMSSendLogsRequest {
+  int64 operator_id = 1;
+  optional int64 campaign_id = 2;
+  optional int64 user_id = 3;
+  optional string status = 4;
+  optional string delivery_status = 5;
+  optional string external_message_id = 6;
+  int64 start_time = 7;  // Unix ms inclusive
+  int64 end_time = 8;    // Unix ms inclusive
+  int32 page = 9;
+  int32 page_size = 10;
+  common.OperatorContextFilters operator_context_filters = 11;
+}
+
+message ListSMSSendLogsResponse {
+  repeated SMSSendLogInfo logs = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
