@@ -29782,6 +29782,8 @@ func (m *GetUserSwapConfigResponse) validate(all bool) error {
 
 	// no validation rules for AggregatedEnabled
 
+	// no validation rules for ParentEnabled
+
 	if len(errors) > 0 {
 		return GetUserSwapConfigResponseMultiError(errors)
 	}

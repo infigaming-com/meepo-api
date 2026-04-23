@@ -35449,6 +35449,12 @@ components:
                 aggregatedEnabled:
                     type: boolean
                     description: AND of self and all ancestors — the flag the backend actually enforces.
+                parentEnabled:
+                    type: boolean
+                    description: |-
+                        AND of ancestors only (excludes self). Lets the BO UI distinguish
+                         "self is off" from "some ancestor is off" without re-deriving it from
+                         `enabled` and `aggregated_enabled`.
         api.wallet.service.v1.GetWalletConfigRequest:
             type: object
             properties: {}

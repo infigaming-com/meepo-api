@@ -16382,8 +16382,12 @@ type GetUserSwapConfigResponse struct {
 	Enabled bool `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// AND of self and all ancestors — the flag the backend actually enforces.
 	AggregatedEnabled bool `protobuf:"varint,7,opt,name=aggregated_enabled,json=aggregatedEnabled,proto3" json:"aggregated_enabled,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// AND of ancestors only (excludes self). Lets the BO UI distinguish
+	// "self is off" from "some ancestor is off" without re-deriving it from
+	// `enabled` and `aggregated_enabled`.
+	ParentEnabled bool `protobuf:"varint,8,opt,name=parent_enabled,json=parentEnabled,proto3" json:"parent_enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserSwapConfigResponse) Reset() {
@@ -16461,6 +16465,13 @@ func (x *GetUserSwapConfigResponse) GetEnabled() bool {
 func (x *GetUserSwapConfigResponse) GetAggregatedEnabled() bool {
 	if x != nil {
 		return x.AggregatedEnabled
+	}
+	return false
+}
+
+func (x *GetUserSwapConfigResponse) GetParentEnabled() bool {
+	if x != nil {
+		return x.ParentEnabled
 	}
 	return false
 }
@@ -21558,7 +21569,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1bSetUserSwapTemplateResponse\"\xca\x01\n" +
 	"\x18GetUserSwapConfigRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xbf\x03\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xe6\x03\n" +
 	"\x19GetUserSwapConfigResponse\x12#\n" +
 	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\x12J\n" +
 	"\rcustom_config\x18\x02 \x01(\v2%.api.wallet.service.v1.UserSwapConfigR\fcustomConfig\x12L\n" +
@@ -21566,7 +21577,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ainherited_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x18inheritedOperatorContext\x12?\n" +
 	"\x1cinherited_from_operator_name\x18\x05 \x01(\tR\x19inheritedFromOperatorName\x12\x18\n" +
 	"\aenabled\x18\x06 \x01(\bR\aenabled\x12-\n" +
-	"\x12aggregated_enabled\x18\a \x01(\bR\x11aggregatedEnabled\"\xcc\x01\n" +
+	"\x12aggregated_enabled\x18\a \x01(\bR\x11aggregatedEnabled\x12%\n" +
+	"\x0eparent_enabled\x18\b \x01(\bR\rparentEnabled\"\xcc\x01\n" +
 	"\x0fUserSwapRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12'\n" +
 	"\x0fsource_currency\x18\x02 \x01(\tR\x0esourceCurrency\x12'\n" +
