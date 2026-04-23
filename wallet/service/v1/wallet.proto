@@ -2880,6 +2880,10 @@ message GetUserSwapConfigResponse {
 	bool enabled = 6;
 	// AND of self and all ancestors — the flag the backend actually enforces.
 	bool aggregated_enabled = 7;
+	// AND of ancestors only (excludes self). Lets the BO UI distinguish
+	// "self is off" from "some ancestor is off" without re-deriving it from
+	// `enabled` and `aggregated_enabled`.
+	bool parent_enabled = 8;
 }
 
 message UserSwapRequest {
