@@ -34,6 +34,7 @@ const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBal
 const OperationWalletGetUserDepositRewardSequence = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
 const OperationWalletGetWalletConfig = "/api.wallet.service.v1.Wallet/GetWalletConfig"
 const OperationWalletListResponsibleGamblingConfigs = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
+const OperationWalletUserSwap = "/api.wallet.service.v1.Wallet/UserSwap"
 
 type WalletHTTPServer interface {
 	// AddResponsibleGamblingConfig AddResponsibleGamblingConfig adds gambling config for a user's currency
@@ -75,6 +76,11 @@ type WalletHTTPServer interface {
 	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error)
+	// UserSwap UserSwap swaps the user's withdrawable cash from source currency to target currency.
+	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
+	// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+	UserSwap(context.Context, *UserSwapRequest) (*UserSwapResponse, error)
 }
 
 func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
@@ -83,6 +89,7 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/balance/details", _Wallet_GetUserBalanceDetails0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/exchange-rates/base-currency", _Wallet_GetExchangeRatesWithBaseCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/currencies/get", _Wallet_GetCurrencies0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/user-swap", _Wallet_UserSwap0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/app-download-reward/claim", _Wallet_ClaimAppDownloadReward0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/app-download-reward/status", _Wallet_GetAppDownloadRewardStatus0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/promo-code/info", _Wallet_GetPromoCodeInfo0_HTTP_Handler(srv))
@@ -180,6 +187,28 @@ func _Wallet_GetCurrencies0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Con
 			return err
 		}
 		reply := out.(*GetCurrenciesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Wallet_UserSwap0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UserSwapRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletUserSwap)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UserSwap(ctx, req.(*UserSwapRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UserSwapResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -466,6 +495,11 @@ type WalletHTTPClient interface {
 	GetWalletConfig(ctx context.Context, req *GetWalletConfigRequest, opts ...http.CallOption) (rsp *GetWalletConfigResponse, err error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(ctx context.Context, req *ListResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *ListResponsibleGamblingConfigsResponse, err error)
+	// UserSwap UserSwap swaps the user's withdrawable cash from source currency to target currency.
+	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
+	// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+	UserSwap(ctx context.Context, req *UserSwapRequest, opts ...http.CallOption) (rsp *UserSwapResponse, err error)
 }
 
 type WalletHTTPClientImpl struct {
@@ -687,6 +721,23 @@ func (c *WalletHTTPClientImpl) ListResponsibleGamblingConfigs(ctx context.Contex
 	pattern := "/v1/wallet/responsible-gambling/configs/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletListResponsibleGamblingConfigs))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// UserSwap UserSwap swaps the user's withdrawable cash from source currency to target currency.
+// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
+// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+func (c *WalletHTTPClientImpl) UserSwap(ctx context.Context, in *UserSwapRequest, opts ...http.CallOption) (*UserSwapResponse, error) {
+	var out UserSwapResponse
+	pattern := "/v1/wallet/user-swap"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletUserSwap))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

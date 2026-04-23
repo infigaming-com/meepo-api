@@ -156,6 +156,31 @@ service Wallet {
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (GetDepositRewardConfigResponse) {}
 
+	// SetUserSwapEnabled toggles the operator-level user-swap feature flag.
+	// Aggregated enable is `AND` across self and all ancestors (see GetUserSwapEnabled).
+	rpc SetUserSwapEnabled(SetUserSwapEnabledRequest) returns (SetUserSwapEnabledResponse) {}
+
+	// GetUserSwapEnabled returns both the operator's own flag and the aggregated result across the hierarchy.
+	rpc GetUserSwapEnabled(GetUserSwapEnabledRequest) returns (GetUserSwapEnabledResponse) {}
+
+	// SetUserSwapConfig full-replaces the user-swap configuration template for an operator.
+	// follow_parent is operator-level: when true, the operator inherits the nearest ancestor's config.
+	rpc SetUserSwapConfig(SetUserSwapConfigRequest) returns (SetUserSwapConfigResponse) {}
+
+	// GetUserSwapConfig returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
+	rpc GetUserSwapConfig(GetUserSwapConfigRequest) returns (GetUserSwapConfigResponse) {}
+
+	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
+	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
+	// The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+	rpc UserSwap(UserSwapRequest) returns (UserSwapResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/user-swap"
+			body: "*"
+		};
+	}
+
 	// SetAppDownloadRewardConfig full-replaces the app download reward config for an operator.
 	// All existing country entries are deleted and replaced with the provided list.
 	// follow_parent is operator-level: when true, the operator inherits the parent's entire list.
@@ -2774,4 +2799,108 @@ message FreeRewardBOItem {
 	int64 completed_at = 22;
 	// When revoked, 0 = not revoked (reserved for future revoke feature)
 	int64 revoked_at = 23;
+}
+
+// ─── User Swap ──────────────────────────────────────────────────────────────
+
+// SwapFeeOverride overrides the default swap fee rate for a specific source currency.
+message SwapFeeOverride {
+	// Source currency code. When a user swaps FROM this currency, `fee_rate` applies.
+	string currency = 1;
+	// Fee rate as a decimal string (e.g. "0.01" = 1%). Range: [0, 1).
+	string fee_rate = 2;
+}
+
+// UserSwapConfig is the operator-level template inherited by descendants when follow_parent=true.
+message UserSwapConfig {
+	// When true, swapping cash forfeits all bonuses (operator + provider) of the source currency.
+	bool bonuses_cleared_on_swap = 1;
+	// Default swap fee rate as a decimal string. Deducted from the source cash.
+	string default_swap_fee = 2;
+	// Per-source-currency overrides on top of default_swap_fee.
+	repeated SwapFeeOverride fee_overrides = 3;
+	// Currencies allowed as swap source. Empty list = none allowed.
+	repeated string allowed_swap_out = 4;
+	// Currencies allowed as swap target. Empty list = none allowed.
+	repeated string allowed_swap_in = 5;
+	int64 created_at = 6;
+	int64 updated_at = 7;
+}
+
+message SetUserSwapEnabledRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	bool enabled = 3;
+}
+
+message SetUserSwapEnabledResponse {
+	bool enabled = 1;
+	// Aggregated result after applying self + ancestors.
+	bool aggregated_enabled = 2;
+}
+
+message GetUserSwapEnabledRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetUserSwapEnabledResponse {
+	// Operator's own flag.
+	bool enabled = 1;
+	// AND of self and all ancestors — final effective flag.
+	bool aggregated_enabled = 2;
+}
+
+message SetUserSwapConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	// Operator-level toggle. When true, the operator inherits the parent's config.
+	optional bool follow_parent = 3;
+	UserSwapConfig config = 4;
+}
+
+message SetUserSwapConfigResponse {}
+
+message GetUserSwapConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetUserSwapConfigResponse {
+	// Operator-level follow_parent toggle. true = using parent's config.
+	bool follow_parent = 1;
+	// Operator's own config (empty fields when follow_parent=true and never customized).
+	UserSwapConfig custom_config = 2;
+	// Inherited config from the nearest ancestor with follow_parent=false.
+	UserSwapConfig default_config = 3;
+	// The ancestor operator context that default_config comes from.
+	api.common.OperatorContext inherited_operator_context = 4;
+	// Display name of the ancestor operator.
+	string inherited_from_operator_name = 5;
+}
+
+message UserSwapRequest {
+	api.common.OperatorContext operator_context = 1;
+	// Source currency (must be in effective config.allowed_swap_out).
+	string source_currency = 2;
+	// Target currency (must be in effective config.allowed_swap_in).
+	string target_currency = 3;
+	// Amount of source cash to swap. Must not exceed the user's withdrawable cash in source currency.
+	string cash_amount = 4;
+}
+
+message UserSwapResponse {
+	// Source balance after swap.
+	string source_cash = 1;
+	// Target balance after swap.
+	string target_cash = 2;
+	// Actual fee deducted from source cash (in source currency).
+	string fee_amount = 3;
+	// Exchange rate used (source → target, applied after fee).
+	string exchange_rate = 4;
+	// Net amount credited to target (cash_amount - fee, converted at exchange_rate).
+	string target_cash_amount = 5;
+	// Two linked balance transaction ids (swap_out / swap_in).
+	int64 source_balance_transaction_id = 6;
+	int64 target_balance_transaction_id = 7;
 }

@@ -11766,6 +11766,29 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListResponsibleGamblingConfigsResponse'
+    /v1/wallet/user-swap:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                UserSwap swaps the user's withdrawable cash from source currency to target currency.
+                 Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+                 produces two balance transactions (swap_out + swap_in) plus corresponding credit transactions.
+                 The target credit is created with cash_turnover_threshold=0 (immediately withdrawable).
+            operationId: Wallet_UserSwap
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.UserSwapRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UserSwapResponse'
 components:
     schemas:
         api.affiliate.service.v1.AdvancedOptions:
@@ -36294,6 +36317,43 @@ components:
                 operatorBonusTurnoverThreshold:
                     type: string
                 maximumOperatorBonusWithdrawalAmount:
+                    type: string
+        api.wallet.service.v1.UserSwapRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                sourceCurrency:
+                    type: string
+                    description: Source currency (must be in effective config.allowed_swap_out).
+                targetCurrency:
+                    type: string
+                    description: Target currency (must be in effective config.allowed_swap_in).
+                cashAmount:
+                    type: string
+                    description: Amount of source cash to swap. Must not exceed the user's withdrawable cash in source currency.
+        api.wallet.service.v1.UserSwapResponse:
+            type: object
+            properties:
+                sourceCash:
+                    type: string
+                    description: Source balance after swap.
+                targetCash:
+                    type: string
+                    description: Target balance after swap.
+                feeAmount:
+                    type: string
+                    description: Actual fee deducted from source cash (in source currency).
+                exchangeRate:
+                    type: string
+                    description: Exchange rate used (source → target, applied after fee).
+                targetCashAmount:
+                    type: string
+                    description: Net amount credited to target (cash_amount - fee, converted at exchange_rate).
+                sourceBalanceTransactionId:
+                    type: string
+                    description: Two linked balance transaction ids (swap_out / swap_in).
+                targetBalanceTransactionId:
                     type: string
         api.wallet.service.v1.VerificationStatusCondition:
             type: object
