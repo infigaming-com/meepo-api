@@ -112,6 +112,7 @@ const (
 	Wallet_GetWalletConfig_FullMethodName                     = "/api.wallet.service.v1.Wallet/GetWalletConfig"
 	Wallet_GetGamificationConfig_FullMethodName               = "/api.wallet.service.v1.Wallet/GetGamificationConfig"
 	Wallet_BatchGetUserFinancialMetrics_FullMethodName        = "/api.wallet.service.v1.Wallet/BatchGetUserFinancialMetrics"
+	Wallet_BatchGetUserGameTransactionsSummary_FullMethodName = "/api.wallet.service.v1.Wallet/BatchGetUserGameTransactionsSummary"
 	Wallet_ManualAdjustCreditTurnoverField_FullMethodName     = "/api.wallet.service.v1.Wallet/ManualAdjustCreditTurnoverField"
 	Wallet_ListUserFreeRewards_FullMethodName                 = "/api.wallet.service.v1.Wallet/ListUserFreeRewards"
 	Wallet_ListUserFreeRewardsBO_FullMethodName               = "/api.wallet.service.v1.Wallet/ListUserFreeRewardsBO"
@@ -331,6 +332,9 @@ type WalletClient interface {
 	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(ctx context.Context, in *BatchGetUserFinancialMetricsRequest, opts ...grpc.CallOption) (*BatchGetUserFinancialMetricsResponse, error)
+	// BatchGetUserGameTransactionsSummary returns aggregated GGR/NGR (USD and reporting
+	// currency) for up to 10,000 users, for CRM segment evaluation.
+	BatchGetUserGameTransactionsSummary(ctx context.Context, in *BatchGetUserGameTransactionsSummaryRequest, opts ...grpc.CallOption) (*BatchGetUserGameTransactionsSummaryResponse, error)
 	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
 	ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*ManualAdjustCreditTurnoverFieldResponse, error)
 	// ListUserFreeRewards returns free spin and free bet details for a user
@@ -1285,6 +1289,16 @@ func (c *walletClient) BatchGetUserFinancialMetrics(ctx context.Context, in *Bat
 	return out, nil
 }
 
+func (c *walletClient) BatchGetUserGameTransactionsSummary(ctx context.Context, in *BatchGetUserGameTransactionsSummaryRequest, opts ...grpc.CallOption) (*BatchGetUserGameTransactionsSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetUserGameTransactionsSummaryResponse)
+	err := c.cc.Invoke(ctx, Wallet_BatchGetUserGameTransactionsSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*ManualAdjustCreditTurnoverFieldResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ManualAdjustCreditTurnoverFieldResponse)
@@ -1556,6 +1570,9 @@ type WalletServer interface {
 	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error)
+	// BatchGetUserGameTransactionsSummary returns aggregated GGR/NGR (USD and reporting
+	// currency) for up to 10,000 users, for CRM segment evaluation.
+	BatchGetUserGameTransactionsSummary(context.Context, *BatchGetUserGameTransactionsSummaryRequest) (*BatchGetUserGameTransactionsSummaryResponse, error)
 	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
 	ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*ManualAdjustCreditTurnoverFieldResponse, error)
 	// ListUserFreeRewards returns free spin and free bet details for a user
@@ -1857,6 +1874,9 @@ func (UnimplementedWalletServer) GetGamificationConfig(context.Context, *GetGami
 }
 func (UnimplementedWalletServer) BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BatchGetUserFinancialMetrics not implemented")
+}
+func (UnimplementedWalletServer) BatchGetUserGameTransactionsSummary(context.Context, *BatchGetUserGameTransactionsSummaryRequest) (*BatchGetUserGameTransactionsSummaryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchGetUserGameTransactionsSummary not implemented")
 }
 func (UnimplementedWalletServer) ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*ManualAdjustCreditTurnoverFieldResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ManualAdjustCreditTurnoverField not implemented")
@@ -3571,6 +3591,24 @@ func _Wallet_BatchGetUserFinancialMetrics_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_BatchGetUserGameTransactionsSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetUserGameTransactionsSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).BatchGetUserGameTransactionsSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_BatchGetUserGameTransactionsSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).BatchGetUserGameTransactionsSummary(ctx, req.(*BatchGetUserGameTransactionsSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_ManualAdjustCreditTurnoverField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ManualAdjustCreditTurnoverFieldRequest)
 	if err := dec(in); err != nil {
@@ -4057,6 +4095,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BatchGetUserFinancialMetrics",
 			Handler:    _Wallet_BatchGetUserFinancialMetrics_Handler,
+		},
+		{
+			MethodName: "BatchGetUserGameTransactionsSummary",
+			Handler:    _Wallet_BatchGetUserGameTransactionsSummary_Handler,
 		},
 		{
 			MethodName: "ManualAdjustCreditTurnoverField",
