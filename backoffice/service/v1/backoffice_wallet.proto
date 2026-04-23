@@ -194,6 +194,30 @@ service BackofficeWallet {
 		};
 	}
 
+	// SetUserSwapEnabled toggles the operator-level user-swap feature flag for the target operator.
+	rpc SetUserSwapEnabled(SetUserSwapEnabledRequest) returns (wallet.service.v1.SetUserSwapEnabledResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/user-swap/enabled/set"
+			body: "*"
+		};
+	}
+
+	// SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
+	rpc SetUserSwapTemplate(SetUserSwapTemplateRequest) returns (wallet.service.v1.SetUserSwapTemplateResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/user-swap/template/set"
+			body: "*"
+		};
+	}
+
+	// GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
+	rpc GetUserSwapConfig(GetUserSwapConfigRequest) returns (wallet.service.v1.GetUserSwapConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/user-swap/config/get"
+			body: "*"
+		};
+	}
+
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	rpc CreatePromoCodeCampaign(CreatePromoCodeCampaignRequest) returns (wallet.service.v1.CreatePromoCodeCampaignResponse) {
 		option (google.api.http) = {
@@ -812,6 +836,22 @@ message DeleteDepositRewardSequencesRequest {
 message GetDepositRewardConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
+}
+
+message SetUserSwapEnabledRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	bool enabled = 2;
+}
+
+message SetUserSwapTemplateRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	// Operator-level toggle. When true, the operator inherits the parent's template.
+	optional bool follow_parent = 2;
+	wallet.service.v1.UserSwapConfig config = 3;
+}
+
+message GetUserSwapConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
 }
 
 message GetGamificationCurrencyConfigRequest {

@@ -45,6 +45,9 @@ const (
 	BackofficeWallet_GetDepositRewardConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
 	BackofficeWallet_SetAppDownloadRewardConfig_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/SetAppDownloadRewardConfig"
 	BackofficeWallet_GetAppDownloadRewardConfig_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/GetAppDownloadRewardConfig"
+	BackofficeWallet_SetUserSwapEnabled_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/SetUserSwapEnabled"
+	BackofficeWallet_SetUserSwapTemplate_FullMethodName                   = "/api.backoffice.service.v1.BackofficeWallet/SetUserSwapTemplate"
+	BackofficeWallet_GetUserSwapConfig_FullMethodName                     = "/api.backoffice.service.v1.BackofficeWallet/GetUserSwapConfig"
 	BackofficeWallet_CreatePromoCodeCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/CreatePromoCodeCampaign"
 	BackofficeWallet_UpdatePromoCodeCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaign"
 	BackofficeWallet_UpdatePromoCodeCampaignStatus_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaignStatus"
@@ -131,6 +134,12 @@ type BackofficeWalletClient interface {
 	SetAppDownloadRewardConfig(ctx context.Context, in *SetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*v1.SetAppDownloadRewardConfigResponse, error)
 	// Get app download reward config for a target operator
 	GetAppDownloadRewardConfig(ctx context.Context, in *GetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetAppDownloadRewardConfigResponse, error)
+	// SetUserSwapEnabled toggles the operator-level user-swap feature flag for the target operator.
+	SetUserSwapEnabled(ctx context.Context, in *SetUserSwapEnabledRequest, opts ...grpc.CallOption) (*v1.SetUserSwapEnabledResponse, error)
+	// SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
+	SetUserSwapTemplate(ctx context.Context, in *SetUserSwapTemplateRequest, opts ...grpc.CallOption) (*v1.SetUserSwapTemplateResponse, error)
+	// GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
+	GetUserSwapConfig(ctx context.Context, in *GetUserSwapConfigRequest, opts ...grpc.CallOption) (*v1.GetUserSwapConfigResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(ctx context.Context, in *CreatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*v1.CreatePromoCodeCampaignResponse, error)
 	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
@@ -448,6 +457,36 @@ func (c *backofficeWalletClient) GetAppDownloadRewardConfig(ctx context.Context,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetAppDownloadRewardConfigResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_GetAppDownloadRewardConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) SetUserSwapEnabled(ctx context.Context, in *SetUserSwapEnabledRequest, opts ...grpc.CallOption) (*v1.SetUserSwapEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetUserSwapEnabledResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_SetUserSwapEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) SetUserSwapTemplate(ctx context.Context, in *SetUserSwapTemplateRequest, opts ...grpc.CallOption) (*v1.SetUserSwapTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetUserSwapTemplateResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_SetUserSwapTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) GetUserSwapConfig(ctx context.Context, in *GetUserSwapConfigRequest, opts ...grpc.CallOption) (*v1.GetUserSwapConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetUserSwapConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetUserSwapConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -808,6 +847,12 @@ type BackofficeWalletServer interface {
 	SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*v1.SetAppDownloadRewardConfigResponse, error)
 	// Get app download reward config for a target operator
 	GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*v1.GetAppDownloadRewardConfigResponse, error)
+	// SetUserSwapEnabled toggles the operator-level user-swap feature flag for the target operator.
+	SetUserSwapEnabled(context.Context, *SetUserSwapEnabledRequest) (*v1.SetUserSwapEnabledResponse, error)
+	// SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
+	SetUserSwapTemplate(context.Context, *SetUserSwapTemplateRequest) (*v1.SetUserSwapTemplateResponse, error)
+	// GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
+	GetUserSwapConfig(context.Context, *GetUserSwapConfigRequest) (*v1.GetUserSwapConfigResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*v1.CreatePromoCodeCampaignResponse, error)
 	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
@@ -955,6 +1000,15 @@ func (UnimplementedBackofficeWalletServer) SetAppDownloadRewardConfig(context.Co
 }
 func (UnimplementedBackofficeWalletServer) GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*v1.GetAppDownloadRewardConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAppDownloadRewardConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) SetUserSwapEnabled(context.Context, *SetUserSwapEnabledRequest) (*v1.SetUserSwapEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetUserSwapEnabled not implemented")
+}
+func (UnimplementedBackofficeWalletServer) SetUserSwapTemplate(context.Context, *SetUserSwapTemplateRequest) (*v1.SetUserSwapTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetUserSwapTemplate not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GetUserSwapConfig(context.Context, *GetUserSwapConfigRequest) (*v1.GetUserSwapConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserSwapConfig not implemented")
 }
 func (UnimplementedBackofficeWalletServer) CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*v1.CreatePromoCodeCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreatePromoCodeCampaign not implemented")
@@ -1513,6 +1567,60 @@ func _BackofficeWallet_GetAppDownloadRewardConfig_Handler(srv interface{}, ctx c
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeWalletServer).GetAppDownloadRewardConfig(ctx, req.(*GetAppDownloadRewardConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_SetUserSwapEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserSwapEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).SetUserSwapEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_SetUserSwapEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).SetUserSwapEnabled(ctx, req.(*SetUserSwapEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_SetUserSwapTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserSwapTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).SetUserSwapTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_SetUserSwapTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).SetUserSwapTemplate(ctx, req.(*SetUserSwapTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_GetUserSwapConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserSwapConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GetUserSwapConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GetUserSwapConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GetUserSwapConfig(ctx, req.(*GetUserSwapConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2163,6 +2271,18 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAppDownloadRewardConfig",
 			Handler:    _BackofficeWallet_GetAppDownloadRewardConfig_Handler,
+		},
+		{
+			MethodName: "SetUserSwapEnabled",
+			Handler:    _BackofficeWallet_SetUserSwapEnabled_Handler,
+		},
+		{
+			MethodName: "SetUserSwapTemplate",
+			Handler:    _BackofficeWallet_SetUserSwapTemplate_Handler,
+		},
+		{
+			MethodName: "GetUserSwapConfig",
+			Handler:    _BackofficeWallet_GetUserSwapConfig_Handler,
 		},
 		{
 			MethodName: "CreatePromoCodeCampaign",
