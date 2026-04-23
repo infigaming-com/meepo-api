@@ -462,3 +462,233 @@ func IsOtpProviderBindingInvalidCountry(err error) bool {
 func ErrorOtpProviderBindingInvalidCountry(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_OTP_PROVIDER_BINDING_INVALID_COUNTRY.String(), fmt.Sprintf(format, args...))
 }
+
+// Marketing SMS errors (90500-90599) — EngageLab NEWSMS delivery.
+func IsSendSmsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_SMS_FAILED.String() && e.Code == 500
+}
+
+// Marketing SMS errors (90500-90599) — EngageLab NEWSMS delivery.
+func ErrorSendSmsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SEND_SMS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSendSmsNoProvider(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_SMS_NO_PROVIDER.String() && e.Code == 500
+}
+
+func ErrorSendSmsNoProvider(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SEND_SMS_NO_PROVIDER.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSendSmsNoTemplate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_SMS_NO_TEMPLATE.String() && e.Code == 500
+}
+
+func ErrorSendSmsNoTemplate(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SEND_SMS_NO_TEMPLATE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSendSmsInvalidRecipient(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_SMS_INVALID_RECIPIENT.String() && e.Code == 400
+}
+
+func ErrorSendSmsInvalidRecipient(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_SEND_SMS_INVALID_RECIPIENT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSendSmsRateLimited(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_SMS_RATE_LIMITED.String() && e.Code == 429
+}
+
+func ErrorSendSmsRateLimited(format string, args ...interface{}) *errors.Error {
+	return errors.New(429, ErrorReason_SEND_SMS_RATE_LIMITED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsProviderNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_PROVIDER_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorSmsProviderNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SMS_PROVIDER_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsProviderAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_PROVIDER_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorSmsProviderAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_SMS_PROVIDER_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsProviderInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_PROVIDER_INVALID.String() && e.Code == 400
+}
+
+func ErrorSmsProviderInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_SMS_PROVIDER_INVALID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsProviderError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_PROVIDER_ERROR.String() && e.Code == 500
+}
+
+func ErrorSmsProviderError(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SMS_PROVIDER_ERROR.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsProviderBindingNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_PROVIDER_BINDING_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorSmsProviderBindingNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SMS_PROVIDER_BINDING_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsProviderBindingAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_PROVIDER_BINDING_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorSmsProviderBindingAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_SMS_PROVIDER_BINDING_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsSenderIdNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_SENDER_ID_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorSmsSenderIdNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SMS_SENDER_ID_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsSenderIdAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_SENDER_ID_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorSmsSenderIdAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_SMS_SENDER_ID_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsSenderIdInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_SENDER_ID_INVALID.String() && e.Code == 400
+}
+
+func ErrorSmsSenderIdInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_SMS_SENDER_ID_INVALID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsSenderIdNotApproved(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_SENDER_ID_NOT_APPROVED.String() && e.Code == 400
+}
+
+func ErrorSmsSenderIdNotApproved(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_SMS_SENDER_ID_NOT_APPROVED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsTemplateNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_TEMPLATE_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorSmsTemplateNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SMS_TEMPLATE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsTemplateAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_TEMPLATE_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorSmsTemplateAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_SMS_TEMPLATE_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsTemplateInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_TEMPLATE_INVALID.String() && e.Code == 400
+}
+
+func ErrorSmsTemplateInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_SMS_TEMPLATE_INVALID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSmsTemplateNotApproved(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SMS_TEMPLATE_NOT_APPROVED.String() && e.Code == 400
+}
+
+func ErrorSmsTemplateNotApproved(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_SMS_TEMPLATE_NOT_APPROVED.String(), fmt.Sprintf(format, args...))
+}
