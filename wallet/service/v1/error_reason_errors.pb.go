@@ -2290,3 +2290,101 @@ func IsGameBonusRestricted(err error) bool {
 func ErrorGameBonusRestricted(format string, args ...interface{}) *errors.Error {
 	return errors.New(403, ErrorReason_GAME_BONUS_RESTRICTED.String(), fmt.Sprintf(format, args...))
 }
+
+// user swap
+func IsSetUserSwapTemplateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_USER_SWAP_TEMPLATE_FAILED.String() && e.Code == 500
+}
+
+// user swap
+func ErrorSetUserSwapTemplateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_USER_SWAP_TEMPLATE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserSwapConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_SWAP_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserSwapConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_SWAP_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetUserSwapEnabledFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_USER_SWAP_ENABLED_FAILED.String() && e.Code == 500
+}
+
+func ErrorSetUserSwapEnabledFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_USER_SWAP_ENABLED_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserSwapDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_SWAP_DISABLED.String() && e.Code == 403
+}
+
+func ErrorUserSwapDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_USER_SWAP_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserSwapSourceCurrencyNotAllowed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_SWAP_SOURCE_CURRENCY_NOT_ALLOWED.String() && e.Code == 400
+}
+
+func ErrorUserSwapSourceCurrencyNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_USER_SWAP_SOURCE_CURRENCY_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserSwapAmountExceedsWithdrawable(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_SWAP_AMOUNT_EXCEEDS_WITHDRAWABLE.String() && e.Code == 400
+}
+
+func ErrorUserSwapAmountExceedsWithdrawable(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_USER_SWAP_AMOUNT_EXCEEDS_WITHDRAWABLE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserSwapFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_SWAP_FAILED.String() && e.Code == 500
+}
+
+func ErrorUserSwapFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_SWAP_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserSwapTargetCurrencyNotAllowed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED.String() && e.Code == 400
+}
+
+func ErrorUserSwapTargetCurrencyNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
+}

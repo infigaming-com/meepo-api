@@ -63,6 +63,11 @@ const (
 	Wallet_SetDepositRewardSequences_FullMethodName           = "/api.wallet.service.v1.Wallet/SetDepositRewardSequences"
 	Wallet_DeleteDepositRewardSequences_FullMethodName        = "/api.wallet.service.v1.Wallet/DeleteDepositRewardSequences"
 	Wallet_GetDepositRewardConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetDepositRewardConfig"
+	Wallet_SetUserSwapEnabled_FullMethodName                  = "/api.wallet.service.v1.Wallet/SetUserSwapEnabled"
+	Wallet_SetUserSwapTemplate_FullMethodName                 = "/api.wallet.service.v1.Wallet/SetUserSwapTemplate"
+	Wallet_GetUserSwapConfig_FullMethodName                   = "/api.wallet.service.v1.Wallet/GetUserSwapConfig"
+	Wallet_UserSwap_FullMethodName                            = "/api.wallet.service.v1.Wallet/UserSwap"
+	Wallet_GetPlayerSwapConfig_FullMethodName                 = "/api.wallet.service.v1.Wallet/GetPlayerSwapConfig"
 	Wallet_SetAppDownloadRewardConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/SetAppDownloadRewardConfig"
 	Wallet_GetAppDownloadRewardConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/GetAppDownloadRewardConfig"
 	Wallet_ClaimAppDownloadReward_FullMethodName              = "/api.wallet.service.v1.Wallet/ClaimAppDownloadReward"
@@ -198,6 +203,34 @@ type WalletClient interface {
 	DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*GetDepositRewardConfigResponse, error)
+	// SetUserSwapEnabled toggles the operator-level user-swap feature flag.
+	// Aggregated enable is `AND` across self and all ancestors (surfaced on GetUserSwapConfig).
+	SetUserSwapEnabled(ctx context.Context, in *SetUserSwapEnabledRequest, opts ...grpc.CallOption) (*SetUserSwapEnabledResponse, error)
+	// SetUserSwapTemplate full-replaces the user-swap configuration template for an operator.
+	// follow_parent is operator-level: when true, the operator inherits the nearest ancestor's config.
+	SetUserSwapTemplate(ctx context.Context, in *SetUserSwapTemplateRequest, opts ...grpc.CallOption) (*SetUserSwapTemplateResponse, error)
+	// GetUserSwapConfig returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
+	//
+	// Side-effect on first access: wallet-service lazy-inserts the target
+	// operator's config row, and player paths additionally lazy-insert the
+	// system-level row. Per rollout policy the system row defaults to
+	// `user_swap_enabled=true`, so the first access of a fresh deployment flips
+	// the system-level aggregate on. Every other level defaults off. Callers
+	// treating GET as strictly read-only should be aware.
+	GetUserSwapConfig(ctx context.Context, in *GetUserSwapConfigRequest, opts ...grpc.CallOption) (*GetUserSwapConfigResponse, error)
+	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
+	// Player-only endpoint: the caller's user id and operator context are resolved
+	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+	// optional — when absent, the token-derived context is used. Only the
+	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding
+	// credit transactions. The target credit is created with
+	// cash_turnover_threshold=0 (immediately withdrawable).
+	UserSwap(ctx context.Context, in *UserSwapRequest, opts ...grpc.CallOption) (*UserSwapResponse, error)
+	// GetPlayerSwapConfig returns the effective user-swap config for the currently
+	// authenticated player — operator resolved from the auth token. Used by the
+	// player frontend to render fee / allowed currencies / bonus-clearing notice.
+	GetPlayerSwapConfig(ctx context.Context, in *GetPlayerSwapConfigRequest, opts ...grpc.CallOption) (*GetPlayerSwapConfigResponse, error)
 	// SetAppDownloadRewardConfig full-replaces the app download reward config for an operator.
 	// All existing country entries are deleted and replaced with the provided list.
 	// follow_parent is operator-level: when true, the operator inherits the parent's entire list.
@@ -755,6 +788,56 @@ func (c *walletClient) GetDepositRewardConfig(ctx context.Context, in *GetDeposi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetDepositRewardConfigResponse)
 	err := c.cc.Invoke(ctx, Wallet_GetDepositRewardConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) SetUserSwapEnabled(ctx context.Context, in *SetUserSwapEnabledRequest, opts ...grpc.CallOption) (*SetUserSwapEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserSwapEnabledResponse)
+	err := c.cc.Invoke(ctx, Wallet_SetUserSwapEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) SetUserSwapTemplate(ctx context.Context, in *SetUserSwapTemplateRequest, opts ...grpc.CallOption) (*SetUserSwapTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserSwapTemplateResponse)
+	err := c.cc.Invoke(ctx, Wallet_SetUserSwapTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetUserSwapConfig(ctx context.Context, in *GetUserSwapConfigRequest, opts ...grpc.CallOption) (*GetUserSwapConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserSwapConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetUserSwapConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) UserSwap(ctx context.Context, in *UserSwapRequest, opts ...grpc.CallOption) (*UserSwapResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserSwapResponse)
+	err := c.cc.Invoke(ctx, Wallet_UserSwap_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetPlayerSwapConfig(ctx context.Context, in *GetPlayerSwapConfigRequest, opts ...grpc.CallOption) (*GetPlayerSwapConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPlayerSwapConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetPlayerSwapConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1345,6 +1428,34 @@ type WalletServer interface {
 	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*GetDepositRewardConfigResponse, error)
+	// SetUserSwapEnabled toggles the operator-level user-swap feature flag.
+	// Aggregated enable is `AND` across self and all ancestors (surfaced on GetUserSwapConfig).
+	SetUserSwapEnabled(context.Context, *SetUserSwapEnabledRequest) (*SetUserSwapEnabledResponse, error)
+	// SetUserSwapTemplate full-replaces the user-swap configuration template for an operator.
+	// follow_parent is operator-level: when true, the operator inherits the nearest ancestor's config.
+	SetUserSwapTemplate(context.Context, *SetUserSwapTemplateRequest) (*SetUserSwapTemplateResponse, error)
+	// GetUserSwapConfig returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
+	//
+	// Side-effect on first access: wallet-service lazy-inserts the target
+	// operator's config row, and player paths additionally lazy-insert the
+	// system-level row. Per rollout policy the system row defaults to
+	// `user_swap_enabled=true`, so the first access of a fresh deployment flips
+	// the system-level aggregate on. Every other level defaults off. Callers
+	// treating GET as strictly read-only should be aware.
+	GetUserSwapConfig(context.Context, *GetUserSwapConfigRequest) (*GetUserSwapConfigResponse, error)
+	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
+	// Player-only endpoint: the caller's user id and operator context are resolved
+	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+	// optional — when absent, the token-derived context is used. Only the
+	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+	// produces two balance transactions (swap_out + swap_in) plus corresponding
+	// credit transactions. The target credit is created with
+	// cash_turnover_threshold=0 (immediately withdrawable).
+	UserSwap(context.Context, *UserSwapRequest) (*UserSwapResponse, error)
+	// GetPlayerSwapConfig returns the effective user-swap config for the currently
+	// authenticated player — operator resolved from the auth token. Used by the
+	// player frontend to render fee / allowed currencies / bonus-clearing notice.
+	GetPlayerSwapConfig(context.Context, *GetPlayerSwapConfigRequest) (*GetPlayerSwapConfigResponse, error)
 	// SetAppDownloadRewardConfig full-replaces the app download reward config for an operator.
 	// All existing country entries are deleted and replaced with the provided list.
 	// follow_parent is operator-level: when true, the operator inherits the parent's entire list.
@@ -1599,6 +1710,21 @@ func (UnimplementedWalletServer) DeleteDepositRewardSequences(context.Context, *
 }
 func (UnimplementedWalletServer) GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*GetDepositRewardConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDepositRewardConfig not implemented")
+}
+func (UnimplementedWalletServer) SetUserSwapEnabled(context.Context, *SetUserSwapEnabledRequest) (*SetUserSwapEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetUserSwapEnabled not implemented")
+}
+func (UnimplementedWalletServer) SetUserSwapTemplate(context.Context, *SetUserSwapTemplateRequest) (*SetUserSwapTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetUserSwapTemplate not implemented")
+}
+func (UnimplementedWalletServer) GetUserSwapConfig(context.Context, *GetUserSwapConfigRequest) (*GetUserSwapConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserSwapConfig not implemented")
+}
+func (UnimplementedWalletServer) UserSwap(context.Context, *UserSwapRequest) (*UserSwapResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UserSwap not implemented")
+}
+func (UnimplementedWalletServer) GetPlayerSwapConfig(context.Context, *GetPlayerSwapConfigRequest) (*GetPlayerSwapConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPlayerSwapConfig not implemented")
 }
 func (UnimplementedWalletServer) SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*SetAppDownloadRewardConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetAppDownloadRewardConfig not implemented")
@@ -2559,6 +2685,96 @@ func _Wallet_GetDepositRewardConfig_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GetDepositRewardConfig(ctx, req.(*GetDepositRewardConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_SetUserSwapEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserSwapEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).SetUserSwapEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_SetUserSwapEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).SetUserSwapEnabled(ctx, req.(*SetUserSwapEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_SetUserSwapTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserSwapTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).SetUserSwapTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_SetUserSwapTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).SetUserSwapTemplate(ctx, req.(*SetUserSwapTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetUserSwapConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserSwapConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetUserSwapConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetUserSwapConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetUserSwapConfig(ctx, req.(*GetUserSwapConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_UserSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).UserSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_UserSwap_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).UserSwap(ctx, req.(*UserSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetPlayerSwapConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlayerSwapConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetPlayerSwapConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetPlayerSwapConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetPlayerSwapConfig(ctx, req.(*GetPlayerSwapConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3645,6 +3861,26 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDepositRewardConfig",
 			Handler:    _Wallet_GetDepositRewardConfig_Handler,
+		},
+		{
+			MethodName: "SetUserSwapEnabled",
+			Handler:    _Wallet_SetUserSwapEnabled_Handler,
+		},
+		{
+			MethodName: "SetUserSwapTemplate",
+			Handler:    _Wallet_SetUserSwapTemplate_Handler,
+		},
+		{
+			MethodName: "GetUserSwapConfig",
+			Handler:    _Wallet_GetUserSwapConfig_Handler,
+		},
+		{
+			MethodName: "UserSwap",
+			Handler:    _Wallet_UserSwap_Handler,
+		},
+		{
+			MethodName: "GetPlayerSwapConfig",
+			Handler:    _Wallet_GetPlayerSwapConfig_Handler,
 		},
 		{
 			MethodName: "SetAppDownloadRewardConfig",

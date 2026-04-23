@@ -15997,6 +15997,735 @@ func (x *FreeRewardBOItem) GetRevokedAt() int64 {
 	return 0
 }
 
+// UserSwapConfig is the operator-level template inherited by descendants when follow_parent=true.
+type UserSwapConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// When true, swapping cash forfeits all bonuses (operator + provider) of the source currency.
+	BonusesClearedOnSwap bool `protobuf:"varint,1,opt,name=bonuses_cleared_on_swap,json=bonusesClearedOnSwap,proto3" json:"bonuses_cleared_on_swap,omitempty"`
+	// Default swap fee rate as a decimal string. Deducted from the source cash.
+	DefaultSwapFee string `protobuf:"bytes,2,opt,name=default_swap_fee,json=defaultSwapFee,proto3" json:"default_swap_fee,omitempty"`
+	// Per-source-currency overrides on top of default_swap_fee.
+	// Key: source currency code. Value: fee rate as decimal string (e.g. "0.01" = 1%, range [0, 1)).
+	FeeOverrides map[string]string `protobuf:"bytes,3,rep,name=fee_overrides,json=feeOverrides,proto3" json:"fee_overrides,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Currencies allowed as swap source. Empty list = none allowed.
+	AllowedSwapOut []string `protobuf:"bytes,4,rep,name=allowed_swap_out,json=allowedSwapOut,proto3" json:"allowed_swap_out,omitempty"`
+	// Currencies allowed as swap target. Empty list = none allowed.
+	AllowedSwapIn []string `protobuf:"bytes,5,rep,name=allowed_swap_in,json=allowedSwapIn,proto3" json:"allowed_swap_in,omitempty"`
+	CreatedAt     int64    `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64    `protobuf:"varint,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserSwapConfig) Reset() {
+	*x = UserSwapConfig{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[194]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserSwapConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserSwapConfig) ProtoMessage() {}
+
+func (x *UserSwapConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[194]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserSwapConfig.ProtoReflect.Descriptor instead.
+func (*UserSwapConfig) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{194}
+}
+
+func (x *UserSwapConfig) GetBonusesClearedOnSwap() bool {
+	if x != nil {
+		return x.BonusesClearedOnSwap
+	}
+	return false
+}
+
+func (x *UserSwapConfig) GetDefaultSwapFee() string {
+	if x != nil {
+		return x.DefaultSwapFee
+	}
+	return ""
+}
+
+func (x *UserSwapConfig) GetFeeOverrides() map[string]string {
+	if x != nil {
+		return x.FeeOverrides
+	}
+	return nil
+}
+
+func (x *UserSwapConfig) GetAllowedSwapOut() []string {
+	if x != nil {
+		return x.AllowedSwapOut
+	}
+	return nil
+}
+
+func (x *UserSwapConfig) GetAllowedSwapIn() []string {
+	if x != nil {
+		return x.AllowedSwapIn
+	}
+	return nil
+}
+
+func (x *UserSwapConfig) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *UserSwapConfig) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+type SetUserSwapEnabledRequest struct {
+	state                    protoimpl.MessageState  `protogen:"open.v1"`
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Enabled                  bool                    `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *SetUserSwapEnabledRequest) Reset() {
+	*x = SetUserSwapEnabledRequest{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[195]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserSwapEnabledRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserSwapEnabledRequest) ProtoMessage() {}
+
+func (x *SetUserSwapEnabledRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[195]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserSwapEnabledRequest.ProtoReflect.Descriptor instead.
+func (*SetUserSwapEnabledRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{195}
+}
+
+func (x *SetUserSwapEnabledRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InitiatorOperatorContext
+	}
+	return nil
+}
+
+func (x *SetUserSwapEnabledRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *SetUserSwapEnabledRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+type SetUserSwapEnabledResponse struct {
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Aggregated result after applying self + ancestors.
+	AggregatedEnabled bool `protobuf:"varint,2,opt,name=aggregated_enabled,json=aggregatedEnabled,proto3" json:"aggregated_enabled,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *SetUserSwapEnabledResponse) Reset() {
+	*x = SetUserSwapEnabledResponse{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[196]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserSwapEnabledResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserSwapEnabledResponse) ProtoMessage() {}
+
+func (x *SetUserSwapEnabledResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[196]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserSwapEnabledResponse.ProtoReflect.Descriptor instead.
+func (*SetUserSwapEnabledResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{196}
+}
+
+func (x *SetUserSwapEnabledResponse) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *SetUserSwapEnabledResponse) GetAggregatedEnabled() bool {
+	if x != nil {
+		return x.AggregatedEnabled
+	}
+	return false
+}
+
+type SetUserSwapTemplateRequest struct {
+	state                    protoimpl.MessageState  `protogen:"open.v1"`
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// Operator-level toggle. When true, the operator inherits the parent's config.
+	FollowParent  *bool           `protobuf:"varint,3,opt,name=follow_parent,json=followParent,proto3,oneof" json:"follow_parent,omitempty"`
+	Config        *UserSwapConfig `protobuf:"bytes,4,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserSwapTemplateRequest) Reset() {
+	*x = SetUserSwapTemplateRequest{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[197]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserSwapTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserSwapTemplateRequest) ProtoMessage() {}
+
+func (x *SetUserSwapTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[197]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserSwapTemplateRequest.ProtoReflect.Descriptor instead.
+func (*SetUserSwapTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{197}
+}
+
+func (x *SetUserSwapTemplateRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InitiatorOperatorContext
+	}
+	return nil
+}
+
+func (x *SetUserSwapTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *SetUserSwapTemplateRequest) GetFollowParent() bool {
+	if x != nil && x.FollowParent != nil {
+		return *x.FollowParent
+	}
+	return false
+}
+
+func (x *SetUserSwapTemplateRequest) GetConfig() *UserSwapConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+type SetUserSwapTemplateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserSwapTemplateResponse) Reset() {
+	*x = SetUserSwapTemplateResponse{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[198]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserSwapTemplateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserSwapTemplateResponse) ProtoMessage() {}
+
+func (x *SetUserSwapTemplateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[198]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserSwapTemplateResponse.ProtoReflect.Descriptor instead.
+func (*SetUserSwapTemplateResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{198}
+}
+
+type GetUserSwapConfigRequest struct {
+	state                    protoimpl.MessageState  `protogen:"open.v1"`
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *GetUserSwapConfigRequest) Reset() {
+	*x = GetUserSwapConfigRequest{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[199]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserSwapConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserSwapConfigRequest) ProtoMessage() {}
+
+func (x *GetUserSwapConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[199]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserSwapConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetUserSwapConfigRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{199}
+}
+
+func (x *GetUserSwapConfigRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InitiatorOperatorContext
+	}
+	return nil
+}
+
+func (x *GetUserSwapConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+type GetUserSwapConfigResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Operator-level follow_parent toggle. true = using parent's config.
+	FollowParent bool `protobuf:"varint,1,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
+	// Operator's own config (empty fields when follow_parent=true and never customized).
+	CustomConfig *UserSwapConfig `protobuf:"bytes,2,opt,name=custom_config,json=customConfig,proto3" json:"custom_config,omitempty"`
+	// Inherited config from the nearest ancestor with follow_parent=false.
+	DefaultConfig *UserSwapConfig `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
+	// The ancestor operator context that default_config comes from.
+	InheritedOperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=inherited_operator_context,json=inheritedOperatorContext,proto3" json:"inherited_operator_context,omitempty"`
+	// Display name of the ancestor operator.
+	InheritedFromOperatorName string `protobuf:"bytes,5,opt,name=inherited_from_operator_name,json=inheritedFromOperatorName,proto3" json:"inherited_from_operator_name,omitempty"`
+	// The operator's own user-swap feature flag (maps to operator_wallet_configs.user_swap_enabled).
+	Enabled bool `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// AND of self and all ancestors — the flag the backend actually enforces.
+	AggregatedEnabled bool `protobuf:"varint,7,opt,name=aggregated_enabled,json=aggregatedEnabled,proto3" json:"aggregated_enabled,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GetUserSwapConfigResponse) Reset() {
+	*x = GetUserSwapConfigResponse{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[200]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserSwapConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserSwapConfigResponse) ProtoMessage() {}
+
+func (x *GetUserSwapConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[200]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserSwapConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetUserSwapConfigResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{200}
+}
+
+func (x *GetUserSwapConfigResponse) GetFollowParent() bool {
+	if x != nil {
+		return x.FollowParent
+	}
+	return false
+}
+
+func (x *GetUserSwapConfigResponse) GetCustomConfig() *UserSwapConfig {
+	if x != nil {
+		return x.CustomConfig
+	}
+	return nil
+}
+
+func (x *GetUserSwapConfigResponse) GetDefaultConfig() *UserSwapConfig {
+	if x != nil {
+		return x.DefaultConfig
+	}
+	return nil
+}
+
+func (x *GetUserSwapConfigResponse) GetInheritedOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InheritedOperatorContext
+	}
+	return nil
+}
+
+func (x *GetUserSwapConfigResponse) GetInheritedFromOperatorName() string {
+	if x != nil {
+		return x.InheritedFromOperatorName
+	}
+	return ""
+}
+
+func (x *GetUserSwapConfigResponse) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *GetUserSwapConfigResponse) GetAggregatedEnabled() bool {
+	if x != nil {
+		return x.AggregatedEnabled
+	}
+	return false
+}
+
+type UserSwapRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// Source currency (must be in effective config.allowed_swap_out).
+	SourceCurrency string `protobuf:"bytes,2,opt,name=source_currency,json=sourceCurrency,proto3" json:"source_currency,omitempty"`
+	// Target currency (must be in effective config.allowed_swap_in).
+	TargetCurrency string `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	// Amount of source cash to swap. Must not exceed the user's withdrawable cash in source currency.
+	CashAmount    string `protobuf:"bytes,4,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserSwapRequest) Reset() {
+	*x = UserSwapRequest{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[201]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserSwapRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserSwapRequest) ProtoMessage() {}
+
+func (x *UserSwapRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[201]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserSwapRequest.ProtoReflect.Descriptor instead.
+func (*UserSwapRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{201}
+}
+
+func (x *UserSwapRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *UserSwapRequest) GetSourceCurrency() string {
+	if x != nil {
+		return x.SourceCurrency
+	}
+	return ""
+}
+
+func (x *UserSwapRequest) GetTargetCurrency() string {
+	if x != nil {
+		return x.TargetCurrency
+	}
+	return ""
+}
+
+func (x *UserSwapRequest) GetCashAmount() string {
+	if x != nil {
+		return x.CashAmount
+	}
+	return ""
+}
+
+type UserSwapResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Source balance after swap.
+	SourceCash string `protobuf:"bytes,1,opt,name=source_cash,json=sourceCash,proto3" json:"source_cash,omitempty"`
+	// Target balance after swap.
+	TargetCash string `protobuf:"bytes,2,opt,name=target_cash,json=targetCash,proto3" json:"target_cash,omitempty"`
+	// Actual fee deducted from source cash (in source currency).
+	FeeAmount string `protobuf:"bytes,3,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
+	// Exchange rate used (source → target, applied after fee).
+	ExchangeRate string `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	// Net amount credited to target (cash_amount - fee, converted at exchange_rate).
+	TargetCashAmount string `protobuf:"bytes,5,opt,name=target_cash_amount,json=targetCashAmount,proto3" json:"target_cash_amount,omitempty"`
+	// Two linked balance transaction ids (swap_out / swap_in).
+	SourceBalanceTransactionId int64 `protobuf:"varint,6,opt,name=source_balance_transaction_id,json=sourceBalanceTransactionId,proto3" json:"source_balance_transaction_id,omitempty"`
+	TargetBalanceTransactionId int64 `protobuf:"varint,7,opt,name=target_balance_transaction_id,json=targetBalanceTransactionId,proto3" json:"target_balance_transaction_id,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
+}
+
+func (x *UserSwapResponse) Reset() {
+	*x = UserSwapResponse{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[202]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserSwapResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserSwapResponse) ProtoMessage() {}
+
+func (x *UserSwapResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[202]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserSwapResponse.ProtoReflect.Descriptor instead.
+func (*UserSwapResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{202}
+}
+
+func (x *UserSwapResponse) GetSourceCash() string {
+	if x != nil {
+		return x.SourceCash
+	}
+	return ""
+}
+
+func (x *UserSwapResponse) GetTargetCash() string {
+	if x != nil {
+		return x.TargetCash
+	}
+	return ""
+}
+
+func (x *UserSwapResponse) GetFeeAmount() string {
+	if x != nil {
+		return x.FeeAmount
+	}
+	return ""
+}
+
+func (x *UserSwapResponse) GetExchangeRate() string {
+	if x != nil {
+		return x.ExchangeRate
+	}
+	return ""
+}
+
+func (x *UserSwapResponse) GetTargetCashAmount() string {
+	if x != nil {
+		return x.TargetCashAmount
+	}
+	return ""
+}
+
+func (x *UserSwapResponse) GetSourceBalanceTransactionId() int64 {
+	if x != nil {
+		return x.SourceBalanceTransactionId
+	}
+	return 0
+}
+
+func (x *UserSwapResponse) GetTargetBalanceTransactionId() int64 {
+	if x != nil {
+		return x.TargetBalanceTransactionId
+	}
+	return 0
+}
+
+type GetPlayerSwapConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPlayerSwapConfigRequest) Reset() {
+	*x = GetPlayerSwapConfigRequest{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[203]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPlayerSwapConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlayerSwapConfigRequest) ProtoMessage() {}
+
+func (x *GetPlayerSwapConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[203]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlayerSwapConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetPlayerSwapConfigRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{203}
+}
+
+type GetPlayerSwapConfigResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Effective swap config (inherited through the operator hierarchy).
+	// Empty/zero-valued when no operator in the chain has a config with follow_parent=false.
+	Config *UserSwapConfig `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	// Aggregated user-swap feature flag — AND across self + all ancestors.
+	// When false the frontend should hide the swap entry point entirely.
+	AggregatedEnabled bool `protobuf:"varint,2,opt,name=aggregated_enabled,json=aggregatedEnabled,proto3" json:"aggregated_enabled,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GetPlayerSwapConfigResponse) Reset() {
+	*x = GetPlayerSwapConfigResponse{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[204]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPlayerSwapConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlayerSwapConfigResponse) ProtoMessage() {}
+
+func (x *GetPlayerSwapConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[204]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlayerSwapConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetPlayerSwapConfigResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{204}
+}
+
+func (x *GetPlayerSwapConfigResponse) GetConfig() *UserSwapConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+func (x *GetPlayerSwapConfigResponse) GetAggregatedEnabled() bool {
+	if x != nil {
+		return x.AggregatedEnabled
+	}
+	return false
+}
+
 type GetUserBalancesResponse_Balance struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Currency          string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -16011,7 +16740,7 @@ type GetUserBalancesResponse_Balance struct {
 
 func (x *GetUserBalancesResponse_Balance) Reset() {
 	*x = GetUserBalancesResponse_Balance{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[194]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[205]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16023,7 +16752,7 @@ func (x *GetUserBalancesResponse_Balance) String() string {
 func (*GetUserBalancesResponse_Balance) ProtoMessage() {}
 
 func (x *GetUserBalancesResponse_Balance) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[194]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[205]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16099,7 +16828,7 @@ type GetWalletsResponse_TotalAssets struct {
 
 func (x *GetWalletsResponse_TotalAssets) Reset() {
 	*x = GetWalletsResponse_TotalAssets{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[195]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[206]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16111,7 +16840,7 @@ func (x *GetWalletsResponse_TotalAssets) String() string {
 func (*GetWalletsResponse_TotalAssets) ProtoMessage() {}
 
 func (x *GetWalletsResponse_TotalAssets) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[195]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[206]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16236,7 +16965,7 @@ type GetWalletsResponse_Credit struct {
 
 func (x *GetWalletsResponse_Credit) Reset() {
 	*x = GetWalletsResponse_Credit{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[196]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[207]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16248,7 +16977,7 @@ func (x *GetWalletsResponse_Credit) String() string {
 func (*GetWalletsResponse_Credit) ProtoMessage() {}
 
 func (x *GetWalletsResponse_Credit) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[196]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[207]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16464,7 +17193,7 @@ type GetWalletsResponse_Wallet struct {
 
 func (x *GetWalletsResponse_Wallet) Reset() {
 	*x = GetWalletsResponse_Wallet{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[197]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[208]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16476,7 +17205,7 @@ func (x *GetWalletsResponse_Wallet) String() string {
 func (*GetWalletsResponse_Wallet) ProtoMessage() {}
 
 func (x *GetWalletsResponse_Wallet) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[197]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[208]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16712,7 +17441,7 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) Reset() {
 	*x = ListWalletBalanceTransactionsResponse_BalanceTransaction{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[198]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[209]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16724,7 +17453,7 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) String() stri
 func (*ListWalletBalanceTransactionsResponse_BalanceTransaction) ProtoMessage() {}
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[198]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[209]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16967,7 +17696,7 @@ type GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction struct {
 
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) Reset() {
 	*x = GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[199]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[210]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16979,7 +17708,7 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) String() 
 func (*GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) ProtoMessage() {}
 
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[199]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[210]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17266,7 +17995,7 @@ type GetWalletCreditTransactionsResponse_CreditTransaction struct {
 
 func (x *GetWalletCreditTransactionsResponse_CreditTransaction) Reset() {
 	*x = GetWalletCreditTransactionsResponse_CreditTransaction{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[200]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[211]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17278,7 +18007,7 @@ func (x *GetWalletCreditTransactionsResponse_CreditTransaction) String() string 
 func (*GetWalletCreditTransactionsResponse_CreditTransaction) ProtoMessage() {}
 
 func (x *GetWalletCreditTransactionsResponse_CreditTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[200]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[211]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17342,7 +18071,7 @@ type ListUserTransactionSummariesResponse_UserTransactionSummary struct {
 
 func (x *ListUserTransactionSummariesResponse_UserTransactionSummary) Reset() {
 	*x = ListUserTransactionSummariesResponse_UserTransactionSummary{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[203]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[214]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17354,7 +18083,7 @@ func (x *ListUserTransactionSummariesResponse_UserTransactionSummary) String() s
 func (*ListUserTransactionSummariesResponse_UserTransactionSummary) ProtoMessage() {}
 
 func (x *ListUserTransactionSummariesResponse_UserTransactionSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[203]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[214]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17471,7 +18200,7 @@ type RewardSequence_TierConfig struct {
 
 func (x *RewardSequence_TierConfig) Reset() {
 	*x = RewardSequence_TierConfig{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[204]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[215]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17483,7 +18212,7 @@ func (x *RewardSequence_TierConfig) String() string {
 func (*RewardSequence_TierConfig) ProtoMessage() {}
 
 func (x *RewardSequence_TierConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[204]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[215]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17574,7 +18303,7 @@ type UserBalanceDetail_Credit struct {
 
 func (x *UserBalanceDetail_Credit) Reset() {
 	*x = UserBalanceDetail_Credit{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[205]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[216]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17586,7 +18315,7 @@ func (x *UserBalanceDetail_Credit) String() string {
 func (*UserBalanceDetail_Credit) ProtoMessage() {}
 
 func (x *UserBalanceDetail_Credit) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[205]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[216]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17704,7 +18433,7 @@ type ListCustomerRecordsResponse_CustomerRecord struct {
 
 func (x *ListCustomerRecordsResponse_CustomerRecord) Reset() {
 	*x = ListCustomerRecordsResponse_CustomerRecord{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[206]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[217]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17716,7 +18445,7 @@ func (x *ListCustomerRecordsResponse_CustomerRecord) String() string {
 func (*ListCustomerRecordsResponse_CustomerRecord) ProtoMessage() {}
 
 func (x *ListCustomerRecordsResponse_CustomerRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[206]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[217]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17862,7 +18591,7 @@ type FICAThresholdConfig_Config struct {
 
 func (x *FICAThresholdConfig_Config) Reset() {
 	*x = FICAThresholdConfig_Config{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[207]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[218]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17874,7 +18603,7 @@ func (x *FICAThresholdConfig_Config) String() string {
 func (*FICAThresholdConfig_Config) ProtoMessage() {}
 
 func (x *FICAThresholdConfig_Config) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[207]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[218]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17936,7 +18665,7 @@ type ListFICAThresholdTransactionsResponse_FICAThresholdTransaction struct {
 
 func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) Reset() {
 	*x = ListFICAThresholdTransactionsResponse_FICAThresholdTransaction{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[209]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[220]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17948,7 +18677,7 @@ func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) String(
 func (*ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) ProtoMessage() {}
 
 func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[209]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[220]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18137,7 +18866,7 @@ type ListBalancesByUserIdsResponse_Balance struct {
 
 func (x *ListBalancesByUserIdsResponse_Balance) Reset() {
 	*x = ListBalancesByUserIdsResponse_Balance{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[210]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[221]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18149,7 +18878,7 @@ func (x *ListBalancesByUserIdsResponse_Balance) String() string {
 func (*ListBalancesByUserIdsResponse_Balance) ProtoMessage() {}
 
 func (x *ListBalancesByUserIdsResponse_Balance) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[210]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[221]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18214,7 +18943,7 @@ type ListBalancesByUserIdsResponse_UserBalanceDetail struct {
 
 func (x *ListBalancesByUserIdsResponse_UserBalanceDetail) Reset() {
 	*x = ListBalancesByUserIdsResponse_UserBalanceDetail{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[211]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[222]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18226,7 +18955,7 @@ func (x *ListBalancesByUserIdsResponse_UserBalanceDetail) String() string {
 func (*ListBalancesByUserIdsResponse_UserBalanceDetail) ProtoMessage() {}
 
 func (x *ListBalancesByUserIdsResponse_UserBalanceDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[211]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[222]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18363,7 +19092,7 @@ type ListManualJournalEntriesResponse_ManualJournalEntry struct {
 
 func (x *ListManualJournalEntriesResponse_ManualJournalEntry) Reset() {
 	*x = ListManualJournalEntriesResponse_ManualJournalEntry{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[213]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[224]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18375,7 +19104,7 @@ func (x *ListManualJournalEntriesResponse_ManualJournalEntry) String() string {
 func (*ListManualJournalEntriesResponse_ManualJournalEntry) ProtoMessage() {}
 
 func (x *ListManualJournalEntriesResponse_ManualJournalEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[213]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[224]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18552,7 +19281,7 @@ type ListTimeRangeDepositCreditsResponse_Credit struct {
 
 func (x *ListTimeRangeDepositCreditsResponse_Credit) Reset() {
 	*x = ListTimeRangeDepositCreditsResponse_Credit{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[214]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[225]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18564,7 +19293,7 @@ func (x *ListTimeRangeDepositCreditsResponse_Credit) String() string {
 func (*ListTimeRangeDepositCreditsResponse_Credit) ProtoMessage() {}
 
 func (x *ListTimeRangeDepositCreditsResponse_Credit) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[214]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[225]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18734,7 +19463,7 @@ type ListUserOverviewResponse_UserOverview struct {
 
 func (x *ListUserOverviewResponse_UserOverview) Reset() {
 	*x = ListUserOverviewResponse_UserOverview{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[215]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[226]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18746,7 +19475,7 @@ func (x *ListUserOverviewResponse_UserOverview) String() string {
 func (*ListUserOverviewResponse_UserOverview) ProtoMessage() {}
 
 func (x *ListUserOverviewResponse_UserOverview) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[215]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[226]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -18811,7 +19540,7 @@ type BatchGetUserFinancialMetricsResponse_UserMetrics struct {
 
 func (x *BatchGetUserFinancialMetricsResponse_UserMetrics) Reset() {
 	*x = BatchGetUserFinancialMetricsResponse_UserMetrics{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[216]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[227]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -18823,7 +19552,7 @@ func (x *BatchGetUserFinancialMetricsResponse_UserMetrics) String() string {
 func (*BatchGetUserFinancialMetricsResponse_UserMetrics) ProtoMessage() {}
 
 func (x *BatchGetUserFinancialMetricsResponse_UserMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[216]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[227]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -20799,12 +21528,71 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"updated_at\x18\x15 \x01(\x03R\tupdatedAt\x12!\n" +
 	"\fcompleted_at\x18\x16 \x01(\x03R\vcompletedAt\x12\x1d\n" +
 	"\n" +
-	"revoked_at\x18\x17 \x01(\x03R\trevokedAt*\x94\x01\n" +
+	"revoked_at\x18\x17 \x01(\x03R\trevokedAt\"\xa0\x03\n" +
+	"\x0eUserSwapConfig\x125\n" +
+	"\x17bonuses_cleared_on_swap\x18\x01 \x01(\bR\x14bonusesClearedOnSwap\x12(\n" +
+	"\x10default_swap_fee\x18\x02 \x01(\tR\x0edefaultSwapFee\x12\\\n" +
+	"\rfee_overrides\x18\x03 \x03(\v27.api.wallet.service.v1.UserSwapConfig.FeeOverridesEntryR\ffeeOverrides\x12(\n" +
+	"\x10allowed_swap_out\x18\x04 \x03(\tR\x0eallowedSwapOut\x12&\n" +
+	"\x0fallowed_swap_in\x18\x05 \x03(\tR\rallowedSwapIn\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\a \x01(\x03R\tupdatedAt\x1a?\n" +
+	"\x11FeeOverridesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe5\x01\n" +
+	"\x19SetUserSwapEnabledRequest\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x18\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"e\n" +
+	"\x1aSetUserSwapEnabledResponse\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12-\n" +
+	"\x12aggregated_enabled\x18\x02 \x01(\bR\x11aggregatedEnabled\"\xc7\x02\n" +
+	"\x1aSetUserSwapTemplateRequest\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12(\n" +
+	"\rfollow_parent\x18\x03 \x01(\bH\x00R\ffollowParent\x88\x01\x01\x12=\n" +
+	"\x06config\x18\x04 \x01(\v2%.api.wallet.service.v1.UserSwapConfigR\x06configB\x10\n" +
+	"\x0e_follow_parent\"\x1d\n" +
+	"\x1bSetUserSwapTemplateResponse\"\xca\x01\n" +
+	"\x18GetUserSwapConfigRequest\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xbf\x03\n" +
+	"\x19GetUserSwapConfigResponse\x12#\n" +
+	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\x12J\n" +
+	"\rcustom_config\x18\x02 \x01(\v2%.api.wallet.service.v1.UserSwapConfigR\fcustomConfig\x12L\n" +
+	"\x0edefault_config\x18\x03 \x01(\v2%.api.wallet.service.v1.UserSwapConfigR\rdefaultConfig\x12Y\n" +
+	"\x1ainherited_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x18inheritedOperatorContext\x12?\n" +
+	"\x1cinherited_from_operator_name\x18\x05 \x01(\tR\x19inheritedFromOperatorName\x12\x18\n" +
+	"\aenabled\x18\x06 \x01(\bR\aenabled\x12-\n" +
+	"\x12aggregated_enabled\x18\a \x01(\bR\x11aggregatedEnabled\"\xcc\x01\n" +
+	"\x0fUserSwapRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12'\n" +
+	"\x0fsource_currency\x18\x02 \x01(\tR\x0esourceCurrency\x12'\n" +
+	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\x12\x1f\n" +
+	"\vcash_amount\x18\x04 \x01(\tR\n" +
+	"cashAmount\"\xcc\x02\n" +
+	"\x10UserSwapResponse\x12\x1f\n" +
+	"\vsource_cash\x18\x01 \x01(\tR\n" +
+	"sourceCash\x12\x1f\n" +
+	"\vtarget_cash\x18\x02 \x01(\tR\n" +
+	"targetCash\x12\x1d\n" +
+	"\n" +
+	"fee_amount\x18\x03 \x01(\tR\tfeeAmount\x12#\n" +
+	"\rexchange_rate\x18\x04 \x01(\tR\fexchangeRate\x12,\n" +
+	"\x12target_cash_amount\x18\x05 \x01(\tR\x10targetCashAmount\x12A\n" +
+	"\x1dsource_balance_transaction_id\x18\x06 \x01(\x03R\x1asourceBalanceTransactionId\x12A\n" +
+	"\x1dtarget_balance_transaction_id\x18\a \x01(\x03R\x1atargetBalanceTransactionId\"\x1c\n" +
+	"\x1aGetPlayerSwapConfigRequest\"\x8b\x01\n" +
+	"\x1bGetPlayerSwapConfigResponse\x12=\n" +
+	"\x06config\x18\x01 \x01(\v2%.api.wallet.service.v1.UserSwapConfigR\x06config\x12-\n" +
+	"\x12aggregated_enabled\x18\x02 \x01(\bR\x11aggregatedEnabled*\x94\x01\n" +
 	"\x10WithdrawScenario\x12!\n" +
 	"\x1dWITHDRAW_SCENARIO_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18WITHDRAW_SCENARIO_PLAYER\x10\x01\x12\x1f\n" +
 	"\x1bWITHDRAW_SCENARIO_AFFILIATE\x10\x02\x12\x1e\n" +
-	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xb9i\n" +
+	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xdcn\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -20851,7 +21639,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"#GetOperatorBalanceTransactionsByIds\x12A.api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsRequest\x1aB.api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsResponse\"\x00\x12\x90\x01\n" +
 	"\x19SetDepositRewardSequences\x127.api.wallet.service.v1.SetDepositRewardSequencesRequest\x1a8.api.wallet.service.v1.SetDepositRewardSequencesResponse\"\x00\x12\x99\x01\n" +
 	"\x1cDeleteDepositRewardSequences\x12:.api.wallet.service.v1.DeleteDepositRewardSequencesRequest\x1a;.api.wallet.service.v1.DeleteDepositRewardSequencesResponse\"\x00\x12\x87\x01\n" +
-	"\x16GetDepositRewardConfig\x124.api.wallet.service.v1.GetDepositRewardConfigRequest\x1a5.api.wallet.service.v1.GetDepositRewardConfigResponse\"\x00\x12\x93\x01\n" +
+	"\x16GetDepositRewardConfig\x124.api.wallet.service.v1.GetDepositRewardConfigRequest\x1a5.api.wallet.service.v1.GetDepositRewardConfigResponse\"\x00\x12{\n" +
+	"\x12SetUserSwapEnabled\x120.api.wallet.service.v1.SetUserSwapEnabledRequest\x1a1.api.wallet.service.v1.SetUserSwapEnabledResponse\"\x00\x12~\n" +
+	"\x13SetUserSwapTemplate\x121.api.wallet.service.v1.SetUserSwapTemplateRequest\x1a2.api.wallet.service.v1.SetUserSwapTemplateResponse\"\x00\x12x\n" +
+	"\x11GetUserSwapConfig\x12/.api.wallet.service.v1.GetUserSwapConfigRequest\x1a0.api.wallet.service.v1.GetUserSwapConfigResponse\"\x00\x12|\n" +
+	"\bUserSwap\x12&.api.wallet.service.v1.UserSwapRequest\x1a'.api.wallet.service.v1.UserSwapResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/wallet/user-swap\x12\xab\x01\n" +
+	"\x13GetPlayerSwapConfig\x121.api.wallet.service.v1.GetPlayerSwapConfigRequest\x1a2.api.wallet.service.v1.GetPlayerSwapConfigResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/wallet/user-swap/player-config\x12\x93\x01\n" +
 	"\x1aSetAppDownloadRewardConfig\x128.api.wallet.service.v1.SetAppDownloadRewardConfigRequest\x1a9.api.wallet.service.v1.SetAppDownloadRewardConfigResponse\"\x00\x12\x93\x01\n" +
 	"\x1aGetAppDownloadRewardConfig\x128.api.wallet.service.v1.GetAppDownloadRewardConfigRequest\x1a9.api.wallet.service.v1.GetAppDownloadRewardConfigResponse\"\x00\x12\xb6\x01\n" +
 	"\x16ClaimAppDownloadReward\x124.api.wallet.service.v1.ClaimAppDownloadRewardRequest\x1a5.api.wallet.service.v1.ClaimAppDownloadRewardResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/wallet/app-download-reward/claim\x12\xc3\x01\n" +
@@ -20917,7 +21710,7 @@ func file_wallet_service_v1_wallet_proto_rawDescGZIP() []byte {
 }
 
 var file_wallet_service_v1_wallet_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_wallet_service_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 218)
+var file_wallet_service_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 230)
 var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(WithdrawScenario)(0),                                                // 0: api.wallet.service.v1.WithdrawScenario
 	(*GetUserBalancesRequest)(nil),                                       // 1: api.wallet.service.v1.GetUserBalancesRequest
@@ -21114,496 +21907,531 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*ListUserFreeRewardsBOResponse)(nil),                                // 192: api.wallet.service.v1.ListUserFreeRewardsBOResponse
 	(*FreeRewardSummary)(nil),                                            // 193: api.wallet.service.v1.FreeRewardSummary
 	(*FreeRewardBOItem)(nil),                                             // 194: api.wallet.service.v1.FreeRewardBOItem
-	(*GetUserBalancesResponse_Balance)(nil),                              // 195: api.wallet.service.v1.GetUserBalancesResponse.Balance
-	(*GetWalletsResponse_TotalAssets)(nil),                               // 196: api.wallet.service.v1.GetWalletsResponse.TotalAssets
-	(*GetWalletsResponse_Credit)(nil),                                    // 197: api.wallet.service.v1.GetWalletsResponse.Credit
-	(*GetWalletsResponse_Wallet)(nil),                                    // 198: api.wallet.service.v1.GetWalletsResponse.Wallet
-	(*ListWalletBalanceTransactionsResponse_BalanceTransaction)(nil),     // 199: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
-	(*GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction)(nil), // 200: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction
-	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil),        // 201: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	nil, // 202: api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
-	nil, // 203: api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse.ExchangeRatesEntry
-	(*ListUserTransactionSummariesResponse_UserTransactionSummary)(nil), // 204: api.wallet.service.v1.ListUserTransactionSummariesResponse.UserTransactionSummary
-	(*RewardSequence_TierConfig)(nil),                                   // 205: api.wallet.service.v1.RewardSequence.TierConfig
-	(*UserBalanceDetail_Credit)(nil),                                    // 206: api.wallet.service.v1.UserBalanceDetail.Credit
-	(*ListCustomerRecordsResponse_CustomerRecord)(nil),                  // 207: api.wallet.service.v1.ListCustomerRecordsResponse.CustomerRecord
-	(*FICAThresholdConfig_Config)(nil),                                  // 208: api.wallet.service.v1.FICAThresholdConfig.Config
-	nil,                                                                 // 209: api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntry
-	(*ListFICAThresholdTransactionsResponse_FICAThresholdTransaction)(nil), // 210: api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransaction
-	(*ListBalancesByUserIdsResponse_Balance)(nil),                          // 211: api.wallet.service.v1.ListBalancesByUserIdsResponse.Balance
-	(*ListBalancesByUserIdsResponse_UserBalanceDetail)(nil),                // 212: api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetail
-	nil, // 213: api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetailsEntry
-	(*ListManualJournalEntriesResponse_ManualJournalEntry)(nil), // 214: api.wallet.service.v1.ListManualJournalEntriesResponse.ManualJournalEntry
-	(*ListTimeRangeDepositCreditsResponse_Credit)(nil),          // 215: api.wallet.service.v1.ListTimeRangeDepositCreditsResponse.Credit
-	(*ListUserOverviewResponse_UserOverview)(nil),               // 216: api.wallet.service.v1.ListUserOverviewResponse.UserOverview
-	(*BatchGetUserFinancialMetricsResponse_UserMetrics)(nil),    // 217: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetrics
-	nil,                                           // 218: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetricsEntry
-	(*common.OperatorContext)(nil),                // 219: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                 // 220: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil),         // 221: api.common.OperatorContextFilters
-	(*FreeSpinConfig)(nil),                        // 222: api.wallet.service.v1.FreeSpinConfig
-	(*FreeBetConfig)(nil),                         // 223: api.wallet.service.v1.FreeBetConfig
-	(*CreatePromoCodeCampaignRequest)(nil),        // 224: api.wallet.service.v1.CreatePromoCodeCampaignRequest
-	(*UpdatePromoCodeCampaignRequest)(nil),        // 225: api.wallet.service.v1.UpdatePromoCodeCampaignRequest
-	(*UpdatePromoCodeCampaignStatusRequest)(nil),  // 226: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest
-	(*ListPromoCodeCampaignsRequest)(nil),         // 227: api.wallet.service.v1.ListPromoCodeCampaignsRequest
-	(*ListPromoCodeCampaignDetailsRequest)(nil),   // 228: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest
-	(*GenerateOneTimePromoCodesRequest)(nil),      // 229: api.wallet.service.v1.GenerateOneTimePromoCodesRequest
-	(*GenerateUniversalPromoCodesRequest)(nil),    // 230: api.wallet.service.v1.GenerateUniversalPromoCodesRequest
-	(*ListUniversalCodeUsagesRequest)(nil),        // 231: api.wallet.service.v1.ListUniversalCodeUsagesRequest
-	(*ExportPromoCodesRequest)(nil),               // 232: api.wallet.service.v1.ExportPromoCodesRequest
-	(*GetPromoCodeInfoRequest)(nil),               // 233: api.wallet.service.v1.GetPromoCodeInfoRequest
-	(*ClaimPromoCodeRequest)(nil),                 // 234: api.wallet.service.v1.ClaimPromoCodeRequest
-	(*CreatePromoCodeCampaignResponse)(nil),       // 235: api.wallet.service.v1.CreatePromoCodeCampaignResponse
-	(*UpdatePromoCodeCampaignResponse)(nil),       // 236: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
-	(*UpdatePromoCodeCampaignStatusResponse)(nil), // 237: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
-	(*ListPromoCodeCampaignsResponse)(nil),        // 238: api.wallet.service.v1.ListPromoCodeCampaignsResponse
-	(*ListPromoCodeCampaignDetailsResponse)(nil),  // 239: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
-	(*GenerateOneTimePromoCodesResponse)(nil),     // 240: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
-	(*GenerateUniversalPromoCodesResponse)(nil),   // 241: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
-	(*ListUniversalCodeUsagesResponse)(nil),       // 242: api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	(*ExportPromoCodesResponse)(nil),              // 243: api.wallet.service.v1.ExportPromoCodesResponse
-	(*GetPromoCodeInfoResponse)(nil),              // 244: api.wallet.service.v1.GetPromoCodeInfoResponse
-	(*ClaimPromoCodeResponse)(nil),                // 245: api.wallet.service.v1.ClaimPromoCodeResponse
+	(*UserSwapConfig)(nil),                                               // 195: api.wallet.service.v1.UserSwapConfig
+	(*SetUserSwapEnabledRequest)(nil),                                    // 196: api.wallet.service.v1.SetUserSwapEnabledRequest
+	(*SetUserSwapEnabledResponse)(nil),                                   // 197: api.wallet.service.v1.SetUserSwapEnabledResponse
+	(*SetUserSwapTemplateRequest)(nil),                                   // 198: api.wallet.service.v1.SetUserSwapTemplateRequest
+	(*SetUserSwapTemplateResponse)(nil),                                  // 199: api.wallet.service.v1.SetUserSwapTemplateResponse
+	(*GetUserSwapConfigRequest)(nil),                                     // 200: api.wallet.service.v1.GetUserSwapConfigRequest
+	(*GetUserSwapConfigResponse)(nil),                                    // 201: api.wallet.service.v1.GetUserSwapConfigResponse
+	(*UserSwapRequest)(nil),                                              // 202: api.wallet.service.v1.UserSwapRequest
+	(*UserSwapResponse)(nil),                                             // 203: api.wallet.service.v1.UserSwapResponse
+	(*GetPlayerSwapConfigRequest)(nil),                                   // 204: api.wallet.service.v1.GetPlayerSwapConfigRequest
+	(*GetPlayerSwapConfigResponse)(nil),                                  // 205: api.wallet.service.v1.GetPlayerSwapConfigResponse
+	(*GetUserBalancesResponse_Balance)(nil),                              // 206: api.wallet.service.v1.GetUserBalancesResponse.Balance
+	(*GetWalletsResponse_TotalAssets)(nil),                               // 207: api.wallet.service.v1.GetWalletsResponse.TotalAssets
+	(*GetWalletsResponse_Credit)(nil),                                    // 208: api.wallet.service.v1.GetWalletsResponse.Credit
+	(*GetWalletsResponse_Wallet)(nil),                                    // 209: api.wallet.service.v1.GetWalletsResponse.Wallet
+	(*ListWalletBalanceTransactionsResponse_BalanceTransaction)(nil),     // 210: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
+	(*GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction)(nil), // 211: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction
+	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil),        // 212: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
+	nil, // 213: api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	nil, // 214: api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse.ExchangeRatesEntry
+	(*ListUserTransactionSummariesResponse_UserTransactionSummary)(nil), // 215: api.wallet.service.v1.ListUserTransactionSummariesResponse.UserTransactionSummary
+	(*RewardSequence_TierConfig)(nil),                                   // 216: api.wallet.service.v1.RewardSequence.TierConfig
+	(*UserBalanceDetail_Credit)(nil),                                    // 217: api.wallet.service.v1.UserBalanceDetail.Credit
+	(*ListCustomerRecordsResponse_CustomerRecord)(nil),                  // 218: api.wallet.service.v1.ListCustomerRecordsResponse.CustomerRecord
+	(*FICAThresholdConfig_Config)(nil),                                  // 219: api.wallet.service.v1.FICAThresholdConfig.Config
+	nil,                                                                 // 220: api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntry
+	(*ListFICAThresholdTransactionsResponse_FICAThresholdTransaction)(nil), // 221: api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransaction
+	(*ListBalancesByUserIdsResponse_Balance)(nil),                          // 222: api.wallet.service.v1.ListBalancesByUserIdsResponse.Balance
+	(*ListBalancesByUserIdsResponse_UserBalanceDetail)(nil),                // 223: api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetail
+	nil, // 224: api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetailsEntry
+	(*ListManualJournalEntriesResponse_ManualJournalEntry)(nil), // 225: api.wallet.service.v1.ListManualJournalEntriesResponse.ManualJournalEntry
+	(*ListTimeRangeDepositCreditsResponse_Credit)(nil),          // 226: api.wallet.service.v1.ListTimeRangeDepositCreditsResponse.Credit
+	(*ListUserOverviewResponse_UserOverview)(nil),               // 227: api.wallet.service.v1.ListUserOverviewResponse.UserOverview
+	(*BatchGetUserFinancialMetricsResponse_UserMetrics)(nil),    // 228: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetrics
+	nil,                                           // 229: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetricsEntry
+	nil,                                           // 230: api.wallet.service.v1.UserSwapConfig.FeeOverridesEntry
+	(*common.OperatorContext)(nil),                // 231: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),                 // 232: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),         // 233: api.common.OperatorContextFilters
+	(*FreeSpinConfig)(nil),                        // 234: api.wallet.service.v1.FreeSpinConfig
+	(*FreeBetConfig)(nil),                         // 235: api.wallet.service.v1.FreeBetConfig
+	(*CreatePromoCodeCampaignRequest)(nil),        // 236: api.wallet.service.v1.CreatePromoCodeCampaignRequest
+	(*UpdatePromoCodeCampaignRequest)(nil),        // 237: api.wallet.service.v1.UpdatePromoCodeCampaignRequest
+	(*UpdatePromoCodeCampaignStatusRequest)(nil),  // 238: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest
+	(*ListPromoCodeCampaignsRequest)(nil),         // 239: api.wallet.service.v1.ListPromoCodeCampaignsRequest
+	(*ListPromoCodeCampaignDetailsRequest)(nil),   // 240: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest
+	(*GenerateOneTimePromoCodesRequest)(nil),      // 241: api.wallet.service.v1.GenerateOneTimePromoCodesRequest
+	(*GenerateUniversalPromoCodesRequest)(nil),    // 242: api.wallet.service.v1.GenerateUniversalPromoCodesRequest
+	(*ListUniversalCodeUsagesRequest)(nil),        // 243: api.wallet.service.v1.ListUniversalCodeUsagesRequest
+	(*ExportPromoCodesRequest)(nil),               // 244: api.wallet.service.v1.ExportPromoCodesRequest
+	(*GetPromoCodeInfoRequest)(nil),               // 245: api.wallet.service.v1.GetPromoCodeInfoRequest
+	(*ClaimPromoCodeRequest)(nil),                 // 246: api.wallet.service.v1.ClaimPromoCodeRequest
+	(*CreatePromoCodeCampaignResponse)(nil),       // 247: api.wallet.service.v1.CreatePromoCodeCampaignResponse
+	(*UpdatePromoCodeCampaignResponse)(nil),       // 248: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
+	(*UpdatePromoCodeCampaignStatusResponse)(nil), // 249: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
+	(*ListPromoCodeCampaignsResponse)(nil),        // 250: api.wallet.service.v1.ListPromoCodeCampaignsResponse
+	(*ListPromoCodeCampaignDetailsResponse)(nil),  // 251: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
+	(*GenerateOneTimePromoCodesResponse)(nil),     // 252: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
+	(*GenerateUniversalPromoCodesResponse)(nil),   // 253: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
+	(*ListUniversalCodeUsagesResponse)(nil),       // 254: api.wallet.service.v1.ListUniversalCodeUsagesResponse
+	(*ExportPromoCodesResponse)(nil),              // 255: api.wallet.service.v1.ExportPromoCodesResponse
+	(*GetPromoCodeInfoResponse)(nil),              // 256: api.wallet.service.v1.GetPromoCodeInfoResponse
+	(*ClaimPromoCodeResponse)(nil),                // 257: api.wallet.service.v1.ClaimPromoCodeResponse
 }
 var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
-	195, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
-	219, // 1: api.wallet.service.v1.CreditRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 2: api.wallet.service.v1.CreditRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 3: api.wallet.service.v1.DebitRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 4: api.wallet.service.v1.GameDebitRequest.operator_context:type_name -> api.common.OperatorContext
+	206, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
+	231, // 1: api.wallet.service.v1.CreditRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 2: api.wallet.service.v1.CreditRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 3: api.wallet.service.v1.DebitRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 4: api.wallet.service.v1.GameDebitRequest.operator_context:type_name -> api.common.OperatorContext
 	10,  // 5: api.wallet.service.v1.GameDebitResponse.affected_credits:type_name -> api.wallet.service.v1.AffectedCredit
-	219, // 6: api.wallet.service.v1.GameCreditRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 6: api.wallet.service.v1.GameCreditRequest.operator_context:type_name -> api.common.OperatorContext
 	10,  // 7: api.wallet.service.v1.GameCreditResponse.affected_credits:type_name -> api.wallet.service.v1.AffectedCredit
-	219, // 8: api.wallet.service.v1.ChannelInfo.operator_context:type_name -> api.common.OperatorContext
-	219, // 9: api.wallet.service.v1.FreezeRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 8: api.wallet.service.v1.ChannelInfo.operator_context:type_name -> api.common.OperatorContext
+	231, // 9: api.wallet.service.v1.FreezeRequest.operator_context:type_name -> api.common.OperatorContext
 	14,  // 10: api.wallet.service.v1.RollbackRequest.channel_info:type_name -> api.wallet.service.v1.ChannelInfo
 	10,  // 11: api.wallet.service.v1.RollbackResponse.affected_credits:type_name -> api.wallet.service.v1.AffectedCredit
-	219, // 12: api.wallet.service.v1.GetWalletsRequest.operator_context:type_name -> api.common.OperatorContext
-	196, // 13: api.wallet.service.v1.GetWalletsResponse.total_assets:type_name -> api.wallet.service.v1.GetWalletsResponse.TotalAssets
-	198, // 14: api.wallet.service.v1.GetWalletsResponse.wallets:type_name -> api.wallet.service.v1.GetWalletsResponse.Wallet
-	220, // 15: api.wallet.service.v1.ListWalletBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 16: api.wallet.service.v1.ListWalletBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 17: api.wallet.service.v1.ListWalletBalanceTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
-	199, // 18: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.balance_transactions:type_name -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
-	219, // 19: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsRequest.operator_context:type_name -> api.common.OperatorContext
-	200, // 20: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.balance_transactions:type_name -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction
-	219, // 21: api.wallet.service.v1.GetWalletCreditTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
-	201, // 22: api.wallet.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	202, // 23: api.wallet.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
-	203, // 24: api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse.exchange_rates:type_name -> api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse.ExchangeRatesEntry
-	220, // 25: api.wallet.service.v1.GetUserTransactionSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 26: api.wallet.service.v1.GetUserTransactionSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 27: api.wallet.service.v1.GetUserTransactionSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	220, // 28: api.wallet.service.v1.ListUserTransactionSummariesRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 29: api.wallet.service.v1.ListUserTransactionSummariesRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 30: api.wallet.service.v1.ListUserTransactionSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	204, // 31: api.wallet.service.v1.ListUserTransactionSummariesResponse.user_transaction_summaries:type_name -> api.wallet.service.v1.ListUserTransactionSummariesResponse.UserTransactionSummary
-	220, // 32: api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 33: api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 34: api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 12: api.wallet.service.v1.GetWalletsRequest.operator_context:type_name -> api.common.OperatorContext
+	207, // 13: api.wallet.service.v1.GetWalletsResponse.total_assets:type_name -> api.wallet.service.v1.GetWalletsResponse.TotalAssets
+	209, // 14: api.wallet.service.v1.GetWalletsResponse.wallets:type_name -> api.wallet.service.v1.GetWalletsResponse.Wallet
+	232, // 15: api.wallet.service.v1.ListWalletBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 16: api.wallet.service.v1.ListWalletBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 17: api.wallet.service.v1.ListWalletBalanceTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
+	210, // 18: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.balance_transactions:type_name -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
+	231, // 19: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsRequest.operator_context:type_name -> api.common.OperatorContext
+	211, // 20: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.balance_transactions:type_name -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction
+	231, // 21: api.wallet.service.v1.GetWalletCreditTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
+	212, // 22: api.wallet.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
+	213, // 23: api.wallet.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	214, // 24: api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse.exchange_rates:type_name -> api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse.ExchangeRatesEntry
+	232, // 25: api.wallet.service.v1.GetUserTransactionSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 26: api.wallet.service.v1.GetUserTransactionSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 27: api.wallet.service.v1.GetUserTransactionSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	232, // 28: api.wallet.service.v1.ListUserTransactionSummariesRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 29: api.wallet.service.v1.ListUserTransactionSummariesRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 30: api.wallet.service.v1.ListUserTransactionSummariesRequest.operator_context:type_name -> api.common.OperatorContext
+	215, // 31: api.wallet.service.v1.ListUserTransactionSummariesResponse.user_transaction_summaries:type_name -> api.wallet.service.v1.ListUserTransactionSummariesResponse.UserTransactionSummary
+	232, // 32: api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 33: api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 34: api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest.operator_context:type_name -> api.common.OperatorContext
 	39,  // 35: api.wallet.service.v1.AddCurrencyRequest.currency:type_name -> api.wallet.service.v1.Currency
-	219, // 36: api.wallet.service.v1.AddCurrencyRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 37: api.wallet.service.v1.GetCurrenciesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 36: api.wallet.service.v1.AddCurrencyRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 37: api.wallet.service.v1.GetCurrenciesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	39,  // 38: api.wallet.service.v1.GetCurrenciesResponse.currencies:type_name -> api.wallet.service.v1.Currency
-	219, // 39: api.wallet.service.v1.ListCurrenciesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 40: api.wallet.service.v1.ListCurrenciesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 39: api.wallet.service.v1.ListCurrenciesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 40: api.wallet.service.v1.ListCurrenciesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	39,  // 41: api.wallet.service.v1.ListCurrenciesResponse.currencies:type_name -> api.wallet.service.v1.Currency
-	219, // 42: api.wallet.service.v1.UpdateOperatorCurrencyRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 43: api.wallet.service.v1.UpdateOperatorCurrencyRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 44: api.wallet.service.v1.UpdateUserCurrencyRequest.operator_context:type_name -> api.common.OperatorContext
-	221, // 45: api.wallet.service.v1.ListBottomOperatorBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	219, // 46: api.wallet.service.v1.ListBottomOperatorBalancesRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 47: api.wallet.service.v1.OperatorBalance.operator_context:type_name -> api.common.OperatorContext
+	231, // 42: api.wallet.service.v1.UpdateOperatorCurrencyRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 43: api.wallet.service.v1.UpdateOperatorCurrencyRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 44: api.wallet.service.v1.UpdateUserCurrencyRequest.operator_context:type_name -> api.common.OperatorContext
+	233, // 45: api.wallet.service.v1.ListBottomOperatorBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	231, // 46: api.wallet.service.v1.ListBottomOperatorBalancesRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 47: api.wallet.service.v1.OperatorBalance.operator_context:type_name -> api.common.OperatorContext
 	53,  // 48: api.wallet.service.v1.ListBottomOperatorBalancesResponse.operator_balances:type_name -> api.wallet.service.v1.OperatorBalance
-	221, // 49: api.wallet.service.v1.ListCompanyOperatorBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	219, // 50: api.wallet.service.v1.ListCompanyOperatorBalancesRequest.operator_context:type_name -> api.common.OperatorContext
+	233, // 49: api.wallet.service.v1.ListCompanyOperatorBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	231, // 50: api.wallet.service.v1.ListCompanyOperatorBalancesRequest.operator_context:type_name -> api.common.OperatorContext
 	53,  // 51: api.wallet.service.v1.ListCompanyOperatorBalancesResponse.operator_balances:type_name -> api.wallet.service.v1.OperatorBalance
-	219, // 52: api.wallet.service.v1.OperatorTransferRequest.source_operator_context:type_name -> api.common.OperatorContext
-	219, // 53: api.wallet.service.v1.OperatorTransferRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 54: api.wallet.service.v1.OperatorSwapRequest.source_operator_context:type_name -> api.common.OperatorContext
-	219, // 55: api.wallet.service.v1.OperatorSwapRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 56: api.wallet.service.v1.OperatorSwapRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 57: api.wallet.service.v1.OperatorFreezeRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 58: api.wallet.service.v1.OperatorFreezeRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 59: api.wallet.service.v1.OperatorFreezeRequest.channel_operator_context:type_name -> api.common.OperatorContext
-	219, // 60: api.wallet.service.v1.OperatorRollbackRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 61: api.wallet.service.v1.OperatorRollbackRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 62: api.wallet.service.v1.OperatorSettleRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 63: api.wallet.service.v1.OperatorSettleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 64: api.wallet.service.v1.GetOperatorBalanceRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 52: api.wallet.service.v1.OperatorTransferRequest.source_operator_context:type_name -> api.common.OperatorContext
+	231, // 53: api.wallet.service.v1.OperatorTransferRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 54: api.wallet.service.v1.OperatorSwapRequest.source_operator_context:type_name -> api.common.OperatorContext
+	231, // 55: api.wallet.service.v1.OperatorSwapRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 56: api.wallet.service.v1.OperatorSwapRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 57: api.wallet.service.v1.OperatorFreezeRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 58: api.wallet.service.v1.OperatorFreezeRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 59: api.wallet.service.v1.OperatorFreezeRequest.channel_operator_context:type_name -> api.common.OperatorContext
+	231, // 60: api.wallet.service.v1.OperatorRollbackRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 61: api.wallet.service.v1.OperatorRollbackRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 62: api.wallet.service.v1.OperatorSettleRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 63: api.wallet.service.v1.OperatorSettleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 64: api.wallet.service.v1.GetOperatorBalanceRequest.operator_context:type_name -> api.common.OperatorContext
 	53,  // 65: api.wallet.service.v1.GetOperatorBalanceResponse.operator_balances:type_name -> api.wallet.service.v1.OperatorBalance
-	221, // 66: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	220, // 67: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 68: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 69: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 70: api.wallet.service.v1.OperatorBalanceTransaction.operator_context:type_name -> api.common.OperatorContext
-	220, // 71: api.wallet.service.v1.OperatorBalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	220, // 72: api.wallet.service.v1.OperatorBalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	233, // 66: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	232, // 67: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 68: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 69: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 70: api.wallet.service.v1.OperatorBalanceTransaction.operator_context:type_name -> api.common.OperatorContext
+	232, // 71: api.wallet.service.v1.OperatorBalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	232, // 72: api.wallet.service.v1.OperatorBalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
 	70,  // 73: api.wallet.service.v1.ListOperatorBalanceTransactionsResponse.transactions:type_name -> api.wallet.service.v1.OperatorBalanceTransaction
-	219, // 74: api.wallet.service.v1.OperatorDebitRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 75: api.wallet.service.v1.OperatorBalanceAdjustRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 76: api.wallet.service.v1.UpdateOperatorBalanceRequest.initial_operator_context:type_name -> api.common.OperatorContext
-	219, // 77: api.wallet.service.v1.UpdateOperatorBalanceRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 78: api.wallet.service.v1.GetOperatorTransactionSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 79: api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 74: api.wallet.service.v1.OperatorDebitRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 75: api.wallet.service.v1.OperatorBalanceAdjustRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 76: api.wallet.service.v1.UpdateOperatorBalanceRequest.initial_operator_context:type_name -> api.common.OperatorContext
+	231, // 77: api.wallet.service.v1.UpdateOperatorBalanceRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 78: api.wallet.service.v1.GetOperatorTransactionSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 79: api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsRequest.operator_context:type_name -> api.common.OperatorContext
 	70,  // 80: api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsResponse.transactions:type_name -> api.wallet.service.v1.OperatorBalanceTransaction
-	205, // 81: api.wallet.service.v1.RewardSequence.tier_configs:type_name -> api.wallet.service.v1.RewardSequence.TierConfig
-	220, // 82: api.wallet.service.v1.RewardSequence.start_time:type_name -> google.protobuf.Timestamp
-	220, // 83: api.wallet.service.v1.RewardSequence.end_time:type_name -> google.protobuf.Timestamp
+	216, // 81: api.wallet.service.v1.RewardSequence.tier_configs:type_name -> api.wallet.service.v1.RewardSequence.TierConfig
+	232, // 82: api.wallet.service.v1.RewardSequence.start_time:type_name -> google.protobuf.Timestamp
+	232, // 83: api.wallet.service.v1.RewardSequence.end_time:type_name -> google.protobuf.Timestamp
 	82,  // 84: api.wallet.service.v1.DepositRewardConfig.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
 	82,  // 85: api.wallet.service.v1.DepositRewardConfig.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	220, // 86: api.wallet.service.v1.DepositRewardConfig.created_at:type_name -> google.protobuf.Timestamp
-	220, // 87: api.wallet.service.v1.DepositRewardConfig.updated_at:type_name -> google.protobuf.Timestamp
-	219, // 88: api.wallet.service.v1.SetDepositRewardSequencesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 89: api.wallet.service.v1.SetDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	232, // 86: api.wallet.service.v1.DepositRewardConfig.created_at:type_name -> google.protobuf.Timestamp
+	232, // 87: api.wallet.service.v1.DepositRewardConfig.updated_at:type_name -> google.protobuf.Timestamp
+	231, // 88: api.wallet.service.v1.SetDepositRewardSequencesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 89: api.wallet.service.v1.SetDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	82,  // 90: api.wallet.service.v1.SetDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
 	82,  // 91: api.wallet.service.v1.SetDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
-	219, // 92: api.wallet.service.v1.DeleteDepositRewardSequencesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 93: api.wallet.service.v1.DeleteDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 94: api.wallet.service.v1.GetDepositRewardConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 95: api.wallet.service.v1.GetDepositRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 96: api.wallet.service.v1.GetDepositRewardConfigResponse.custom_operator_context:type_name -> api.common.OperatorContext
-	219, // 97: api.wallet.service.v1.GetDepositRewardConfigResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	231, // 92: api.wallet.service.v1.DeleteDepositRewardSequencesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 93: api.wallet.service.v1.DeleteDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 94: api.wallet.service.v1.GetDepositRewardConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 95: api.wallet.service.v1.GetDepositRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 96: api.wallet.service.v1.GetDepositRewardConfigResponse.custom_operator_context:type_name -> api.common.OperatorContext
+	231, // 97: api.wallet.service.v1.GetDepositRewardConfigResponse.inherited_operator_context:type_name -> api.common.OperatorContext
 	83,  // 98: api.wallet.service.v1.GetDepositRewardConfigResponse.default_deposit_reward_config:type_name -> api.wallet.service.v1.DepositRewardConfig
 	83,  // 99: api.wallet.service.v1.GetDepositRewardConfigResponse.custom_deposit_reward_config:type_name -> api.wallet.service.v1.DepositRewardConfig
 	82,  // 100: api.wallet.service.v1.GetUserDepositRewardSequenceResponse.current_reward_sequence:type_name -> api.wallet.service.v1.RewardSequence
-	219, // 101: api.wallet.service.v1.GetGamificationCurrencyConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 102: api.wallet.service.v1.GetGamificationCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 101: api.wallet.service.v1.GetGamificationCurrencyConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 102: api.wallet.service.v1.GetGamificationCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	98,  // 103: api.wallet.service.v1.GetGamificationConfigResponse.operator_currency_configs:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
 	93,  // 104: api.wallet.service.v1.GetGamificationCurrencyConfigResponse.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
 	98,  // 105: api.wallet.service.v1.GetGamificationCurrencyConfigResponse.operator_currency_configs:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
-	219, // 106: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 107: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 106: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 107: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	98,  // 108: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest.operator_currency_config:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
-	219, // 109: api.wallet.service.v1.PushBetLimitsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 110: api.wallet.service.v1.PullBetLimitsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 111: api.wallet.service.v1.PullBetLimitsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 112: api.wallet.service.v1.UpdateWalletConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 113: api.wallet.service.v1.UpdateWalletConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 109: api.wallet.service.v1.PushBetLimitsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 110: api.wallet.service.v1.PullBetLimitsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 111: api.wallet.service.v1.PullBetLimitsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 112: api.wallet.service.v1.UpdateWalletConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 113: api.wallet.service.v1.UpdateWalletConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	93,  // 114: api.wallet.service.v1.UpdateWalletConfigRequest.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
-	206, // 115: api.wallet.service.v1.UserBalanceDetail.credits:type_name -> api.wallet.service.v1.UserBalanceDetail.Credit
+	217, // 115: api.wallet.service.v1.UserBalanceDetail.credits:type_name -> api.wallet.service.v1.UserBalanceDetail.Credit
 	111, // 116: api.wallet.service.v1.GetUserBalanceDetailsResponse.detail:type_name -> api.wallet.service.v1.UserBalanceDetail
-	219, // 117: api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	220, // 118: api.wallet.service.v1.ResponsibleGamblingConfig.deposit_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	220, // 119: api.wallet.service.v1.ResponsibleGamblingConfig.withdrawal_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	220, // 120: api.wallet.service.v1.ResponsibleGamblingConfig.daily_play_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	220, // 121: api.wallet.service.v1.ResponsibleGamblingConfig.weekly_play_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	220, // 122: api.wallet.service.v1.ResponsibleGamblingConfig.monthly_play_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	220, // 123: api.wallet.service.v1.ResponsibleGamblingConfig.daily_loss_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	220, // 124: api.wallet.service.v1.ResponsibleGamblingConfig.weekly_loss_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	220, // 125: api.wallet.service.v1.ResponsibleGamblingConfig.monthly_loss_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	219, // 126: api.wallet.service.v1.ListResponsibleGamblingConfigsRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 117: api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	232, // 118: api.wallet.service.v1.ResponsibleGamblingConfig.deposit_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	232, // 119: api.wallet.service.v1.ResponsibleGamblingConfig.withdrawal_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	232, // 120: api.wallet.service.v1.ResponsibleGamblingConfig.daily_play_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	232, // 121: api.wallet.service.v1.ResponsibleGamblingConfig.weekly_play_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	232, // 122: api.wallet.service.v1.ResponsibleGamblingConfig.monthly_play_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	232, // 123: api.wallet.service.v1.ResponsibleGamblingConfig.daily_loss_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	232, // 124: api.wallet.service.v1.ResponsibleGamblingConfig.weekly_loss_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	232, // 125: api.wallet.service.v1.ResponsibleGamblingConfig.monthly_loss_limit_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	231, // 126: api.wallet.service.v1.ListResponsibleGamblingConfigsRequest.operator_context:type_name -> api.common.OperatorContext
 	117, // 127: api.wallet.service.v1.ListResponsibleGamblingConfigsResponse.responsible_gambling_configs:type_name -> api.wallet.service.v1.ResponsibleGamblingConfig
 	118, // 128: api.wallet.service.v1.ListResponsibleGamblingConfigsResponse.responsible_gambling_statuses:type_name -> api.wallet.service.v1.ResponsibleGamblingStatus
-	219, // 129: api.wallet.service.v1.GetResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 129: api.wallet.service.v1.GetResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
 	117, // 130: api.wallet.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_config:type_name -> api.wallet.service.v1.ResponsibleGamblingConfig
-	220, // 131: api.wallet.service.v1.ListCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 132: api.wallet.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 133: api.wallet.service.v1.ListCustomerRecordsRequest.operator_context:type_name -> api.common.OperatorContext
-	221, // 134: api.wallet.service.v1.ListCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	207, // 135: api.wallet.service.v1.ListCustomerRecordsResponse.customer_records:type_name -> api.wallet.service.v1.ListCustomerRecordsResponse.CustomerRecord
-	220, // 136: api.wallet.service.v1.ExportCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 137: api.wallet.service.v1.ExportCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 138: api.wallet.service.v1.ExportCustomerRecordsRequest.operator_context:type_name -> api.common.OperatorContext
-	221, // 139: api.wallet.service.v1.ExportCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	208, // 140: api.wallet.service.v1.FICAThresholdConfig.configs:type_name -> api.wallet.service.v1.FICAThresholdConfig.Config
+	232, // 131: api.wallet.service.v1.ListCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 132: api.wallet.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 133: api.wallet.service.v1.ListCustomerRecordsRequest.operator_context:type_name -> api.common.OperatorContext
+	233, // 134: api.wallet.service.v1.ListCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	218, // 135: api.wallet.service.v1.ListCustomerRecordsResponse.customer_records:type_name -> api.wallet.service.v1.ListCustomerRecordsResponse.CustomerRecord
+	232, // 136: api.wallet.service.v1.ExportCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 137: api.wallet.service.v1.ExportCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 138: api.wallet.service.v1.ExportCustomerRecordsRequest.operator_context:type_name -> api.common.OperatorContext
+	233, // 139: api.wallet.service.v1.ExportCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	219, // 140: api.wallet.service.v1.FICAThresholdConfig.configs:type_name -> api.wallet.service.v1.FICAThresholdConfig.Config
 	127, // 141: api.wallet.service.v1.SetFICAThresholdConfigRequest.fica_threshold_config:type_name -> api.wallet.service.v1.FICAThresholdConfig
-	219, // 142: api.wallet.service.v1.SetFICAThresholdConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 143: api.wallet.service.v1.SetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 144: api.wallet.service.v1.GetFICAThresholdConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 145: api.wallet.service.v1.GetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	209, // 146: api.wallet.service.v1.GetFICAThresholdConfigResponse.fica_threshold_configs:type_name -> api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntry
-	220, // 147: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 148: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 149: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 150: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	210, // 151: api.wallet.service.v1.ListFICAThresholdTransactionsResponse.threshold_transactions:type_name -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransaction
-	220, // 152: api.wallet.service.v1.ExportFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 153: api.wallet.service.v1.ExportFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 154: api.wallet.service.v1.ExportFICAThresholdTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 155: api.wallet.service.v1.ExportFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 156: api.wallet.service.v1.ListBalancesByUserIdsRequest.operator_context:type_name -> api.common.OperatorContext
-	213, // 157: api.wallet.service.v1.ListBalancesByUserIdsResponse.user_balance_details:type_name -> api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetailsEntry
-	220, // 158: api.wallet.service.v1.ListManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 159: api.wallet.service.v1.ListManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
-	221, // 160: api.wallet.service.v1.ListManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	219, // 161: api.wallet.service.v1.ListManualJournalEntriesRequest.operator_context:type_name -> api.common.OperatorContext
-	214, // 162: api.wallet.service.v1.ListManualJournalEntriesResponse.manual_journal_entries:type_name -> api.wallet.service.v1.ListManualJournalEntriesResponse.ManualJournalEntry
-	220, // 163: api.wallet.service.v1.ExportManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 164: api.wallet.service.v1.ExportManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
-	221, // 165: api.wallet.service.v1.ExportManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	219, // 166: api.wallet.service.v1.ExportManualJournalEntriesRequest.operator_context:type_name -> api.common.OperatorContext
-	220, // 167: api.wallet.service.v1.ListTimeRangeDepositCreditsRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 168: api.wallet.service.v1.ListTimeRangeDepositCreditsRequest.end_time:type_name -> google.protobuf.Timestamp
-	219, // 169: api.wallet.service.v1.ListTimeRangeDepositCreditsRequest.operator_context:type_name -> api.common.OperatorContext
-	215, // 170: api.wallet.service.v1.ListTimeRangeDepositCreditsResponse.credits:type_name -> api.wallet.service.v1.ListTimeRangeDepositCreditsResponse.Credit
-	220, // 171: api.wallet.service.v1.ListUserOverviewRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 172: api.wallet.service.v1.ListUserOverviewRequest.end_time:type_name -> google.protobuf.Timestamp
-	216, // 173: api.wallet.service.v1.ListUserOverviewResponse.user_overviews:type_name -> api.wallet.service.v1.ListUserOverviewResponse.UserOverview
-	219, // 174: api.wallet.service.v1.CreditFreespinWinRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 142: api.wallet.service.v1.SetFICAThresholdConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 143: api.wallet.service.v1.SetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 144: api.wallet.service.v1.GetFICAThresholdConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 145: api.wallet.service.v1.GetFICAThresholdConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	220, // 146: api.wallet.service.v1.GetFICAThresholdConfigResponse.fica_threshold_configs:type_name -> api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntry
+	232, // 147: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 148: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 149: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 150: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	221, // 151: api.wallet.service.v1.ListFICAThresholdTransactionsResponse.threshold_transactions:type_name -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransaction
+	232, // 152: api.wallet.service.v1.ExportFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 153: api.wallet.service.v1.ExportFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 154: api.wallet.service.v1.ExportFICAThresholdTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 155: api.wallet.service.v1.ExportFICAThresholdTransactionsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 156: api.wallet.service.v1.ListBalancesByUserIdsRequest.operator_context:type_name -> api.common.OperatorContext
+	224, // 157: api.wallet.service.v1.ListBalancesByUserIdsResponse.user_balance_details:type_name -> api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetailsEntry
+	232, // 158: api.wallet.service.v1.ListManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 159: api.wallet.service.v1.ListManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
+	233, // 160: api.wallet.service.v1.ListManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	231, // 161: api.wallet.service.v1.ListManualJournalEntriesRequest.operator_context:type_name -> api.common.OperatorContext
+	225, // 162: api.wallet.service.v1.ListManualJournalEntriesResponse.manual_journal_entries:type_name -> api.wallet.service.v1.ListManualJournalEntriesResponse.ManualJournalEntry
+	232, // 163: api.wallet.service.v1.ExportManualJournalEntriesRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 164: api.wallet.service.v1.ExportManualJournalEntriesRequest.end_time:type_name -> google.protobuf.Timestamp
+	233, // 165: api.wallet.service.v1.ExportManualJournalEntriesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	231, // 166: api.wallet.service.v1.ExportManualJournalEntriesRequest.operator_context:type_name -> api.common.OperatorContext
+	232, // 167: api.wallet.service.v1.ListTimeRangeDepositCreditsRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 168: api.wallet.service.v1.ListTimeRangeDepositCreditsRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 169: api.wallet.service.v1.ListTimeRangeDepositCreditsRequest.operator_context:type_name -> api.common.OperatorContext
+	226, // 170: api.wallet.service.v1.ListTimeRangeDepositCreditsResponse.credits:type_name -> api.wallet.service.v1.ListTimeRangeDepositCreditsResponse.Credit
+	232, // 171: api.wallet.service.v1.ListUserOverviewRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 172: api.wallet.service.v1.ListUserOverviewRequest.end_time:type_name -> google.protobuf.Timestamp
+	227, // 173: api.wallet.service.v1.ListUserOverviewResponse.user_overviews:type_name -> api.wallet.service.v1.ListUserOverviewResponse.UserOverview
+	231, // 174: api.wallet.service.v1.CreditFreespinWinRequest.operator_context:type_name -> api.common.OperatorContext
 	10,  // 175: api.wallet.service.v1.CreditFreespinWinResponse.affected_credits:type_name -> api.wallet.service.v1.AffectedCredit
-	219, // 176: api.wallet.service.v1.CreditFreeBetWinRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 176: api.wallet.service.v1.CreditFreeBetWinRequest.operator_context:type_name -> api.common.OperatorContext
 	10,  // 177: api.wallet.service.v1.CreditFreeBetWinResponse.affected_credits:type_name -> api.wallet.service.v1.AffectedCredit
-	219, // 178: api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	220, // 179: api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 180: api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 178: api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	232, // 179: api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 180: api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
 	153, // 181: api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse.transaction_stats:type_name -> api.wallet.service.v1.TransactionStats
-	219, // 182: api.wallet.service.v1.BatchGetUserFinancialMetricsRequest.operator_context:type_name -> api.common.OperatorContext
-	218, // 183: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.user_metrics:type_name -> api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetricsEntry
-	219, // 184: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 182: api.wallet.service.v1.BatchGetUserFinancialMetricsRequest.operator_context:type_name -> api.common.OperatorContext
+	229, // 183: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.user_metrics:type_name -> api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetricsEntry
+	231, // 184: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	161, // 185: api.wallet.service.v1.ListUserFreeRewardsResponse.free_spins:type_name -> api.wallet.service.v1.FreeSpinDetail
 	163, // 186: api.wallet.service.v1.ListUserFreeRewardsResponse.free_bets:type_name -> api.wallet.service.v1.FreeBetDetail
 	162, // 187: api.wallet.service.v1.FreeSpinDetail.rewards:type_name -> api.wallet.service.v1.FreeSpinRewardDetail
 	164, // 188: api.wallet.service.v1.FreeBetDetail.rewards:type_name -> api.wallet.service.v1.FreeBetRewardDetail
 	165, // 189: api.wallet.service.v1.AppDownloadRewardConfigs.bonus_money_config:type_name -> api.wallet.service.v1.AppDownloadBonusMoneyConfig
-	222, // 190: api.wallet.service.v1.AppDownloadRewardConfigs.free_spin_config:type_name -> api.wallet.service.v1.FreeSpinConfig
-	223, // 191: api.wallet.service.v1.AppDownloadRewardConfigs.free_bet_config:type_name -> api.wallet.service.v1.FreeBetConfig
+	234, // 190: api.wallet.service.v1.AppDownloadRewardConfigs.free_spin_config:type_name -> api.wallet.service.v1.FreeSpinConfig
+	235, // 191: api.wallet.service.v1.AppDownloadRewardConfigs.free_bet_config:type_name -> api.wallet.service.v1.FreeBetConfig
 	166, // 192: api.wallet.service.v1.AppDownloadRewardConfigItem.reward_configs:type_name -> api.wallet.service.v1.AppDownloadRewardConfigs
-	220, // 193: api.wallet.service.v1.AppDownloadRewardConfigItem.created_at:type_name -> google.protobuf.Timestamp
-	220, // 194: api.wallet.service.v1.AppDownloadRewardConfigItem.updated_at:type_name -> google.protobuf.Timestamp
-	219, // 195: api.wallet.service.v1.SetAppDownloadRewardConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 196: api.wallet.service.v1.SetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	232, // 193: api.wallet.service.v1.AppDownloadRewardConfigItem.created_at:type_name -> google.protobuf.Timestamp
+	232, // 194: api.wallet.service.v1.AppDownloadRewardConfigItem.updated_at:type_name -> google.protobuf.Timestamp
+	231, // 195: api.wallet.service.v1.SetAppDownloadRewardConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 196: api.wallet.service.v1.SetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	167, // 197: api.wallet.service.v1.SetAppDownloadRewardConfigRequest.configs:type_name -> api.wallet.service.v1.AppDownloadRewardConfigItem
-	219, // 198: api.wallet.service.v1.GetAppDownloadRewardConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	219, // 199: api.wallet.service.v1.GetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 198: api.wallet.service.v1.GetAppDownloadRewardConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 199: api.wallet.service.v1.GetAppDownloadRewardConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	167, // 200: api.wallet.service.v1.GetAppDownloadRewardConfigResponse.custom_configs:type_name -> api.wallet.service.v1.AppDownloadRewardConfigItem
 	167, // 201: api.wallet.service.v1.GetAppDownloadRewardConfigResponse.default_configs:type_name -> api.wallet.service.v1.AppDownloadRewardConfigItem
-	219, // 202: api.wallet.service.v1.GetAppDownloadRewardConfigResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	231, // 202: api.wallet.service.v1.GetAppDownloadRewardConfigResponse.inherited_operator_context:type_name -> api.common.OperatorContext
 	166, // 203: api.wallet.service.v1.GetAppDownloadRewardStatusResponse.reward_configs:type_name -> api.wallet.service.v1.AppDownloadRewardConfigs
-	219, // 204: api.wallet.service.v1.GetCompanyFinancialSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	220, // 205: api.wallet.service.v1.GetCompanyFinancialSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
-	220, // 206: api.wallet.service.v1.GetCompanyFinancialSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
+	231, // 204: api.wallet.service.v1.GetCompanyFinancialSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	232, // 205: api.wallet.service.v1.GetCompanyFinancialSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
+	232, // 206: api.wallet.service.v1.GetCompanyFinancialSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
 	178, // 207: api.wallet.service.v1.GetCompanyFinancialSummaryResponse.summary:type_name -> api.wallet.service.v1.CompanyFinancialSummary
-	219, // 208: api.wallet.service.v1.GameBatchBetAndSettleRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 208: api.wallet.service.v1.GameBatchBetAndSettleRequest.operator_context:type_name -> api.common.OperatorContext
 	180, // 209: api.wallet.service.v1.GameBatchBetAndSettleRequest.bets:type_name -> api.wallet.service.v1.BatchBetItem
 	181, // 210: api.wallet.service.v1.GameBatchBetAndSettleRequest.wins:type_name -> api.wallet.service.v1.BatchWinItem
 	183, // 211: api.wallet.service.v1.GameBatchBetAndSettleResponse.bet_results:type_name -> api.wallet.service.v1.BatchTransactionResult
 	183, // 212: api.wallet.service.v1.GameBatchBetAndSettleResponse.win_results:type_name -> api.wallet.service.v1.BatchTransactionResult
 	10,  // 213: api.wallet.service.v1.GameBatchBetAndSettleResponse.bet_affected_credits:type_name -> api.wallet.service.v1.AffectedCredit
 	10,  // 214: api.wallet.service.v1.GameBatchBetAndSettleResponse.win_affected_credits:type_name -> api.wallet.service.v1.AffectedCredit
-	221, // 215: api.wallet.service.v1.ListOperatorWithdrawableAmountsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	219, // 216: api.wallet.service.v1.ListOperatorWithdrawableAmountsRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 217: api.wallet.service.v1.OperatorWithdrawableAmount.operator_context:type_name -> api.common.OperatorContext
+	233, // 215: api.wallet.service.v1.ListOperatorWithdrawableAmountsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	231, // 216: api.wallet.service.v1.ListOperatorWithdrawableAmountsRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 217: api.wallet.service.v1.OperatorWithdrawableAmount.operator_context:type_name -> api.common.OperatorContext
 	185, // 218: api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse.items:type_name -> api.wallet.service.v1.OperatorWithdrawableAmount
-	219, // 219: api.wallet.service.v1.GetOperatorWithdrawCheckInfoRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 219: api.wallet.service.v1.GetOperatorWithdrawCheckInfoRequest.operator_context:type_name -> api.common.OperatorContext
 	0,   // 220: api.wallet.service.v1.GetOperatorWithdrawCheckInfoRequest.withdraw_scenario:type_name -> api.wallet.service.v1.WithdrawScenario
-	219, // 221: api.wallet.service.v1.GetOperatorWithdrawableAmountRequest.operator_context:type_name -> api.common.OperatorContext
-	219, // 222: api.wallet.service.v1.ListUserFreeRewardsBORequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 221: api.wallet.service.v1.GetOperatorWithdrawableAmountRequest.operator_context:type_name -> api.common.OperatorContext
+	231, // 222: api.wallet.service.v1.ListUserFreeRewardsBORequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	194, // 223: api.wallet.service.v1.ListUserFreeRewardsBOResponse.items:type_name -> api.wallet.service.v1.FreeRewardBOItem
 	193, // 224: api.wallet.service.v1.ListUserFreeRewardsBOResponse.summary:type_name -> api.wallet.service.v1.FreeRewardSummary
 	162, // 225: api.wallet.service.v1.FreeRewardBOItem.free_spin_rewards:type_name -> api.wallet.service.v1.FreeSpinRewardDetail
 	164, // 226: api.wallet.service.v1.FreeRewardBOItem.free_bet_rewards:type_name -> api.wallet.service.v1.FreeBetRewardDetail
-	220, // 227: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
-	220, // 228: api.wallet.service.v1.GetWalletsResponse.Credit.free_spin_expired_at:type_name -> google.protobuf.Timestamp
-	220, // 229: api.wallet.service.v1.GetWalletsResponse.Credit.free_bet_expired_at:type_name -> google.protobuf.Timestamp
-	197, // 230: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
-	220, // 231: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	220, // 232: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	220, // 233: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
-	220, // 234: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
-	222, // 235: api.wallet.service.v1.RewardSequence.TierConfig.free_spin_config:type_name -> api.wallet.service.v1.FreeSpinConfig
-	223, // 236: api.wallet.service.v1.RewardSequence.TierConfig.free_bet_config:type_name -> api.wallet.service.v1.FreeBetConfig
-	220, // 237: api.wallet.service.v1.ListCustomerRecordsResponse.CustomerRecord.date_time:type_name -> google.protobuf.Timestamp
-	127, // 238: api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntry.value:type_name -> api.wallet.service.v1.FICAThresholdConfig
-	220, // 239: api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransaction.transaction_time:type_name -> google.protobuf.Timestamp
-	211, // 240: api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetail.balances:type_name -> api.wallet.service.v1.ListBalancesByUserIdsResponse.Balance
-	212, // 241: api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetailsEntry.value:type_name -> api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetail
-	220, // 242: api.wallet.service.v1.ListManualJournalEntriesResponse.ManualJournalEntry.transaction_time:type_name -> google.protobuf.Timestamp
-	217, // 243: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetricsEntry.value:type_name -> api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetrics
-	1,   // 244: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
-	3,   // 245: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
-	110, // 246: api.wallet.service.v1.Wallet.GetUserBalanceDetails:input_type -> api.wallet.service.v1.GetUserBalanceDetailsRequest
-	5,   // 247: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
-	7,   // 248: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
-	9,   // 249: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
-	12,  // 250: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
-	179, // 251: api.wallet.service.v1.Wallet.GameBatchBetAndSettle:input_type -> api.wallet.service.v1.GameBatchBetAndSettleRequest
-	15,  // 252: api.wallet.service.v1.Wallet.Freeze:input_type -> api.wallet.service.v1.FreezeRequest
-	17,  // 253: api.wallet.service.v1.Wallet.Settle:input_type -> api.wallet.service.v1.SettleRequest
-	19,  // 254: api.wallet.service.v1.Wallet.Rollback:input_type -> api.wallet.service.v1.RollbackRequest
-	21,  // 255: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
-	23,  // 256: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:input_type -> api.wallet.service.v1.ListWalletBalanceTransactionsRequest
-	25,  // 257: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:input_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsRequest
-	27,  // 258: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
-	29,  // 259: api.wallet.service.v1.Wallet.GetExchangeRates:input_type -> api.wallet.service.v1.GetExchangeRatesRequest
-	31,  // 260: api.wallet.service.v1.Wallet.GetExchangeRatesWithBaseCurrency:input_type -> api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest
-	33,  // 261: api.wallet.service.v1.Wallet.GetUserTransactionSummary:input_type -> api.wallet.service.v1.GetUserTransactionSummaryRequest
-	35,  // 262: api.wallet.service.v1.Wallet.ListUserTransactionSummaries:input_type -> api.wallet.service.v1.ListUserTransactionSummariesRequest
-	37,  // 263: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:input_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest
-	40,  // 264: api.wallet.service.v1.Wallet.AddCurrency:input_type -> api.wallet.service.v1.AddCurrencyRequest
-	42,  // 265: api.wallet.service.v1.Wallet.UpdateCurrency:input_type -> api.wallet.service.v1.UpdateCurrencyRequest
-	44,  // 266: api.wallet.service.v1.Wallet.GetCurrencies:input_type -> api.wallet.service.v1.GetCurrenciesRequest
-	46,  // 267: api.wallet.service.v1.Wallet.ListCurrencies:input_type -> api.wallet.service.v1.ListCurrenciesRequest
-	48,  // 268: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:input_type -> api.wallet.service.v1.UpdateOperatorCurrencyRequest
-	50,  // 269: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
-	52,  // 270: api.wallet.service.v1.Wallet.ListBottomOperatorBalances:input_type -> api.wallet.service.v1.ListBottomOperatorBalancesRequest
-	55,  // 271: api.wallet.service.v1.Wallet.ListCompanyOperatorBalances:input_type -> api.wallet.service.v1.ListCompanyOperatorBalancesRequest
-	57,  // 272: api.wallet.service.v1.Wallet.OperatorTransfer:input_type -> api.wallet.service.v1.OperatorTransferRequest
-	59,  // 273: api.wallet.service.v1.Wallet.OperatorSwap:input_type -> api.wallet.service.v1.OperatorSwapRequest
-	61,  // 274: api.wallet.service.v1.Wallet.OperatorFreeze:input_type -> api.wallet.service.v1.OperatorFreezeRequest
-	63,  // 275: api.wallet.service.v1.Wallet.OperatorRollback:input_type -> api.wallet.service.v1.OperatorRollbackRequest
-	65,  // 276: api.wallet.service.v1.Wallet.OperatorSettle:input_type -> api.wallet.service.v1.OperatorSettleRequest
-	67,  // 277: api.wallet.service.v1.Wallet.GetOperatorBalance:input_type -> api.wallet.service.v1.GetOperatorBalanceRequest
-	69,  // 278: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:input_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsRequest
-	72,  // 279: api.wallet.service.v1.Wallet.OperatorDebit:input_type -> api.wallet.service.v1.OperatorDebitRequest
-	74,  // 280: api.wallet.service.v1.Wallet.OperatorBalanceAdjust:input_type -> api.wallet.service.v1.OperatorBalanceAdjustRequest
-	76,  // 281: api.wallet.service.v1.Wallet.UpdateOperatorBalance:input_type -> api.wallet.service.v1.UpdateOperatorBalanceRequest
-	78,  // 282: api.wallet.service.v1.Wallet.GetOperatorTransactionSummary:input_type -> api.wallet.service.v1.GetOperatorTransactionSummaryRequest
-	176, // 283: api.wallet.service.v1.Wallet.GetCompanyFinancialSummary:input_type -> api.wallet.service.v1.GetCompanyFinancialSummaryRequest
-	80,  // 284: api.wallet.service.v1.Wallet.GetOperatorBalanceTransactionsByIds:input_type -> api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsRequest
-	84,  // 285: api.wallet.service.v1.Wallet.SetDepositRewardSequences:input_type -> api.wallet.service.v1.SetDepositRewardSequencesRequest
-	86,  // 286: api.wallet.service.v1.Wallet.DeleteDepositRewardSequences:input_type -> api.wallet.service.v1.DeleteDepositRewardSequencesRequest
-	88,  // 287: api.wallet.service.v1.Wallet.GetDepositRewardConfig:input_type -> api.wallet.service.v1.GetDepositRewardConfigRequest
-	168, // 288: api.wallet.service.v1.Wallet.SetAppDownloadRewardConfig:input_type -> api.wallet.service.v1.SetAppDownloadRewardConfigRequest
-	170, // 289: api.wallet.service.v1.Wallet.GetAppDownloadRewardConfig:input_type -> api.wallet.service.v1.GetAppDownloadRewardConfigRequest
-	172, // 290: api.wallet.service.v1.Wallet.ClaimAppDownloadReward:input_type -> api.wallet.service.v1.ClaimAppDownloadRewardRequest
-	174, // 291: api.wallet.service.v1.Wallet.GetAppDownloadRewardStatus:input_type -> api.wallet.service.v1.GetAppDownloadRewardStatusRequest
-	224, // 292: api.wallet.service.v1.Wallet.CreatePromoCodeCampaign:input_type -> api.wallet.service.v1.CreatePromoCodeCampaignRequest
-	225, // 293: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaign:input_type -> api.wallet.service.v1.UpdatePromoCodeCampaignRequest
-	226, // 294: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaignStatus:input_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest
-	227, // 295: api.wallet.service.v1.Wallet.ListPromoCodeCampaigns:input_type -> api.wallet.service.v1.ListPromoCodeCampaignsRequest
-	228, // 296: api.wallet.service.v1.Wallet.ListPromoCodeCampaignDetails:input_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest
-	229, // 297: api.wallet.service.v1.Wallet.GenerateOneTimePromoCodes:input_type -> api.wallet.service.v1.GenerateOneTimePromoCodesRequest
-	230, // 298: api.wallet.service.v1.Wallet.GenerateUniversalPromoCodes:input_type -> api.wallet.service.v1.GenerateUniversalPromoCodesRequest
-	231, // 299: api.wallet.service.v1.Wallet.ListUniversalCodeUsages:input_type -> api.wallet.service.v1.ListUniversalCodeUsagesRequest
-	232, // 300: api.wallet.service.v1.Wallet.ExportPromoCodes:input_type -> api.wallet.service.v1.ExportPromoCodesRequest
-	233, // 301: api.wallet.service.v1.Wallet.GetPromoCodeInfo:input_type -> api.wallet.service.v1.GetPromoCodeInfoRequest
-	234, // 302: api.wallet.service.v1.Wallet.ClaimPromoCode:input_type -> api.wallet.service.v1.ClaimPromoCodeRequest
-	90,  // 303: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:input_type -> api.wallet.service.v1.GetUserDepositRewardSequenceRequest
-	92,  // 304: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:input_type -> api.wallet.service.v1.GetGamificationCurrencyConfigRequest
-	100, // 305: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:input_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest
-	102, // 306: api.wallet.service.v1.Wallet.PushBetLimitsToBottomOperators:input_type -> api.wallet.service.v1.PushBetLimitsRequest
-	104, // 307: api.wallet.service.v1.Wallet.PullBetLimitsFromSystem:input_type -> api.wallet.service.v1.PullBetLimitsRequest
-	106, // 308: api.wallet.service.v1.Wallet.UpdateWalletConfig:input_type -> api.wallet.service.v1.UpdateWalletConfigRequest
-	108, // 309: api.wallet.service.v1.Wallet.BonusTransfer:input_type -> api.wallet.service.v1.BonusTransferRequest
-	113, // 310: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:input_type -> api.wallet.service.v1.AddResponsibleGamblingConfigRequest
-	115, // 311: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:input_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest
-	119, // 312: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:input_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsRequest
-	121, // 313: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:input_type -> api.wallet.service.v1.GetResponsibleGamblingConfigRequest
-	123, // 314: api.wallet.service.v1.Wallet.ListCustomerRecords:input_type -> api.wallet.service.v1.ListCustomerRecordsRequest
-	125, // 315: api.wallet.service.v1.Wallet.ExportCustomerRecords:input_type -> api.wallet.service.v1.ExportCustomerRecordsRequest
-	128, // 316: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:input_type -> api.wallet.service.v1.SetFICAThresholdConfigRequest
-	130, // 317: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:input_type -> api.wallet.service.v1.GetFICAThresholdConfigRequest
-	132, // 318: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:input_type -> api.wallet.service.v1.ListFICAThresholdTransactionsRequest
-	134, // 319: api.wallet.service.v1.Wallet.ExportFICAThresholdTransactions:input_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsRequest
-	136, // 320: api.wallet.service.v1.Wallet.ListBalancesByUserIds:input_type -> api.wallet.service.v1.ListBalancesByUserIdsRequest
-	138, // 321: api.wallet.service.v1.Wallet.ListManualJournalEntries:input_type -> api.wallet.service.v1.ListManualJournalEntriesRequest
-	140, // 322: api.wallet.service.v1.Wallet.ExportManualJournalEntries:input_type -> api.wallet.service.v1.ExportManualJournalEntriesRequest
-	142, // 323: api.wallet.service.v1.Wallet.ListTimeRangeDepositCredits:input_type -> api.wallet.service.v1.ListTimeRangeDepositCreditsRequest
-	144, // 324: api.wallet.service.v1.Wallet.ListUserOverview:input_type -> api.wallet.service.v1.ListUserOverviewRequest
-	146, // 325: api.wallet.service.v1.Wallet.GetUserGameTransactionsSummary:input_type -> api.wallet.service.v1.GetUserGameTransactionsSummaryRequest
-	148, // 326: api.wallet.service.v1.Wallet.CreditFreespinWin:input_type -> api.wallet.service.v1.CreditFreespinWinRequest
-	150, // 327: api.wallet.service.v1.Wallet.CreditFreeBetWin:input_type -> api.wallet.service.v1.CreditFreeBetWinRequest
-	152, // 328: api.wallet.service.v1.Wallet.GetOperatorUserFinancialSummary:input_type -> api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest
-	94,  // 329: api.wallet.service.v1.Wallet.GetWalletConfig:input_type -> api.wallet.service.v1.GetWalletConfigRequest
-	96,  // 330: api.wallet.service.v1.Wallet.GetGamificationConfig:input_type -> api.wallet.service.v1.GetGamificationConfigRequest
-	155, // 331: api.wallet.service.v1.Wallet.BatchGetUserFinancialMetrics:input_type -> api.wallet.service.v1.BatchGetUserFinancialMetricsRequest
-	157, // 332: api.wallet.service.v1.Wallet.ManualAdjustCreditTurnoverField:input_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest
-	159, // 333: api.wallet.service.v1.Wallet.ListUserFreeRewards:input_type -> api.wallet.service.v1.ListUserFreeRewardsRequest
-	191, // 334: api.wallet.service.v1.Wallet.ListUserFreeRewardsBO:input_type -> api.wallet.service.v1.ListUserFreeRewardsBORequest
-	184, // 335: api.wallet.service.v1.Wallet.ListOperatorWithdrawableAmounts:input_type -> api.wallet.service.v1.ListOperatorWithdrawableAmountsRequest
-	187, // 336: api.wallet.service.v1.Wallet.GetOperatorWithdrawCheckInfo:input_type -> api.wallet.service.v1.GetOperatorWithdrawCheckInfoRequest
-	189, // 337: api.wallet.service.v1.Wallet.GetOperatorWithdrawableAmount:input_type -> api.wallet.service.v1.GetOperatorWithdrawableAmountRequest
-	2,   // 338: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
-	4,   // 339: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
-	112, // 340: api.wallet.service.v1.Wallet.GetUserBalanceDetails:output_type -> api.wallet.service.v1.GetUserBalanceDetailsResponse
-	6,   // 341: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
-	8,   // 342: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
-	11,  // 343: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
-	13,  // 344: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
-	182, // 345: api.wallet.service.v1.Wallet.GameBatchBetAndSettle:output_type -> api.wallet.service.v1.GameBatchBetAndSettleResponse
-	16,  // 346: api.wallet.service.v1.Wallet.Freeze:output_type -> api.wallet.service.v1.FreezeResponse
-	18,  // 347: api.wallet.service.v1.Wallet.Settle:output_type -> api.wallet.service.v1.SettleResponse
-	20,  // 348: api.wallet.service.v1.Wallet.Rollback:output_type -> api.wallet.service.v1.RollbackResponse
-	22,  // 349: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
-	24,  // 350: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:output_type -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse
-	26,  // 351: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse
-	28,  // 352: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
-	30,  // 353: api.wallet.service.v1.Wallet.GetExchangeRates:output_type -> api.wallet.service.v1.GetExchangeRatesResponse
-	32,  // 354: api.wallet.service.v1.Wallet.GetExchangeRatesWithBaseCurrency:output_type -> api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse
-	34,  // 355: api.wallet.service.v1.Wallet.GetUserTransactionSummary:output_type -> api.wallet.service.v1.GetUserTransactionSummaryResponse
-	36,  // 356: api.wallet.service.v1.Wallet.ListUserTransactionSummaries:output_type -> api.wallet.service.v1.ListUserTransactionSummariesResponse
-	38,  // 357: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:output_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse
-	41,  // 358: api.wallet.service.v1.Wallet.AddCurrency:output_type -> api.wallet.service.v1.AddCurrencyResponse
-	43,  // 359: api.wallet.service.v1.Wallet.UpdateCurrency:output_type -> api.wallet.service.v1.UpdateCurrencyResponse
-	45,  // 360: api.wallet.service.v1.Wallet.GetCurrencies:output_type -> api.wallet.service.v1.GetCurrenciesResponse
-	47,  // 361: api.wallet.service.v1.Wallet.ListCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
-	49,  // 362: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
-	51,  // 363: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
-	54,  // 364: api.wallet.service.v1.Wallet.ListBottomOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
-	56,  // 365: api.wallet.service.v1.Wallet.ListCompanyOperatorBalances:output_type -> api.wallet.service.v1.ListCompanyOperatorBalancesResponse
-	58,  // 366: api.wallet.service.v1.Wallet.OperatorTransfer:output_type -> api.wallet.service.v1.OperatorTransferResponse
-	60,  // 367: api.wallet.service.v1.Wallet.OperatorSwap:output_type -> api.wallet.service.v1.OperatorSwapResponse
-	62,  // 368: api.wallet.service.v1.Wallet.OperatorFreeze:output_type -> api.wallet.service.v1.OperatorFreezeResponse
-	64,  // 369: api.wallet.service.v1.Wallet.OperatorRollback:output_type -> api.wallet.service.v1.OperatorRollbackResponse
-	66,  // 370: api.wallet.service.v1.Wallet.OperatorSettle:output_type -> api.wallet.service.v1.OperatorSettleResponse
-	68,  // 371: api.wallet.service.v1.Wallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
-	71,  // 372: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:output_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsResponse
-	73,  // 373: api.wallet.service.v1.Wallet.OperatorDebit:output_type -> api.wallet.service.v1.OperatorDebitResponse
-	75,  // 374: api.wallet.service.v1.Wallet.OperatorBalanceAdjust:output_type -> api.wallet.service.v1.OperatorBalanceAdjustResponse
-	77,  // 375: api.wallet.service.v1.Wallet.UpdateOperatorBalance:output_type -> api.wallet.service.v1.UpdateOperatorBalanceResponse
-	79,  // 376: api.wallet.service.v1.Wallet.GetOperatorTransactionSummary:output_type -> api.wallet.service.v1.GetOperatorTransactionSummaryResponse
-	177, // 377: api.wallet.service.v1.Wallet.GetCompanyFinancialSummary:output_type -> api.wallet.service.v1.GetCompanyFinancialSummaryResponse
-	81,  // 378: api.wallet.service.v1.Wallet.GetOperatorBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsResponse
-	85,  // 379: api.wallet.service.v1.Wallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
-	87,  // 380: api.wallet.service.v1.Wallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
-	89,  // 381: api.wallet.service.v1.Wallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
-	169, // 382: api.wallet.service.v1.Wallet.SetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.SetAppDownloadRewardConfigResponse
-	171, // 383: api.wallet.service.v1.Wallet.GetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.GetAppDownloadRewardConfigResponse
-	173, // 384: api.wallet.service.v1.Wallet.ClaimAppDownloadReward:output_type -> api.wallet.service.v1.ClaimAppDownloadRewardResponse
-	175, // 385: api.wallet.service.v1.Wallet.GetAppDownloadRewardStatus:output_type -> api.wallet.service.v1.GetAppDownloadRewardStatusResponse
-	235, // 386: api.wallet.service.v1.Wallet.CreatePromoCodeCampaign:output_type -> api.wallet.service.v1.CreatePromoCodeCampaignResponse
-	236, // 387: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaign:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignResponse
-	237, // 388: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaignStatus:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
-	238, // 389: api.wallet.service.v1.Wallet.ListPromoCodeCampaigns:output_type -> api.wallet.service.v1.ListPromoCodeCampaignsResponse
-	239, // 390: api.wallet.service.v1.Wallet.ListPromoCodeCampaignDetails:output_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
-	240, // 391: api.wallet.service.v1.Wallet.GenerateOneTimePromoCodes:output_type -> api.wallet.service.v1.GenerateOneTimePromoCodesResponse
-	241, // 392: api.wallet.service.v1.Wallet.GenerateUniversalPromoCodes:output_type -> api.wallet.service.v1.GenerateUniversalPromoCodesResponse
-	242, // 393: api.wallet.service.v1.Wallet.ListUniversalCodeUsages:output_type -> api.wallet.service.v1.ListUniversalCodeUsagesResponse
-	243, // 394: api.wallet.service.v1.Wallet.ExportPromoCodes:output_type -> api.wallet.service.v1.ExportPromoCodesResponse
-	244, // 395: api.wallet.service.v1.Wallet.GetPromoCodeInfo:output_type -> api.wallet.service.v1.GetPromoCodeInfoResponse
-	245, // 396: api.wallet.service.v1.Wallet.ClaimPromoCode:output_type -> api.wallet.service.v1.ClaimPromoCodeResponse
-	91,  // 397: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:output_type -> api.wallet.service.v1.GetUserDepositRewardSequenceResponse
-	99,  // 398: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
-	101, // 399: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	103, // 400: api.wallet.service.v1.Wallet.PushBetLimitsToBottomOperators:output_type -> api.wallet.service.v1.PushBetLimitsResponse
-	105, // 401: api.wallet.service.v1.Wallet.PullBetLimitsFromSystem:output_type -> api.wallet.service.v1.PullBetLimitsResponse
-	107, // 402: api.wallet.service.v1.Wallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
-	109, // 403: api.wallet.service.v1.Wallet.BonusTransfer:output_type -> api.wallet.service.v1.BonusTransferResponse
-	114, // 404: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:output_type -> api.wallet.service.v1.AddResponsibleGamblingConfigResponse
-	116, // 405: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
-	120, // 406: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
-	122, // 407: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:output_type -> api.wallet.service.v1.GetResponsibleGamblingConfigResponse
-	124, // 408: api.wallet.service.v1.Wallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
-	126, // 409: api.wallet.service.v1.Wallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
-	129, // 410: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
-	131, // 411: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
-	133, // 412: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
-	135, // 413: api.wallet.service.v1.Wallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
-	137, // 414: api.wallet.service.v1.Wallet.ListBalancesByUserIds:output_type -> api.wallet.service.v1.ListBalancesByUserIdsResponse
-	139, // 415: api.wallet.service.v1.Wallet.ListManualJournalEntries:output_type -> api.wallet.service.v1.ListManualJournalEntriesResponse
-	141, // 416: api.wallet.service.v1.Wallet.ExportManualJournalEntries:output_type -> api.wallet.service.v1.ExportManualJournalEntriesResponse
-	143, // 417: api.wallet.service.v1.Wallet.ListTimeRangeDepositCredits:output_type -> api.wallet.service.v1.ListTimeRangeDepositCreditsResponse
-	145, // 418: api.wallet.service.v1.Wallet.ListUserOverview:output_type -> api.wallet.service.v1.ListUserOverviewResponse
-	147, // 419: api.wallet.service.v1.Wallet.GetUserGameTransactionsSummary:output_type -> api.wallet.service.v1.GetUserGameTransactionsSummaryResponse
-	149, // 420: api.wallet.service.v1.Wallet.CreditFreespinWin:output_type -> api.wallet.service.v1.CreditFreespinWinResponse
-	151, // 421: api.wallet.service.v1.Wallet.CreditFreeBetWin:output_type -> api.wallet.service.v1.CreditFreeBetWinResponse
-	154, // 422: api.wallet.service.v1.Wallet.GetOperatorUserFinancialSummary:output_type -> api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse
-	95,  // 423: api.wallet.service.v1.Wallet.GetWalletConfig:output_type -> api.wallet.service.v1.GetWalletConfigResponse
-	97,  // 424: api.wallet.service.v1.Wallet.GetGamificationConfig:output_type -> api.wallet.service.v1.GetGamificationConfigResponse
-	156, // 425: api.wallet.service.v1.Wallet.BatchGetUserFinancialMetrics:output_type -> api.wallet.service.v1.BatchGetUserFinancialMetricsResponse
-	158, // 426: api.wallet.service.v1.Wallet.ManualAdjustCreditTurnoverField:output_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
-	160, // 427: api.wallet.service.v1.Wallet.ListUserFreeRewards:output_type -> api.wallet.service.v1.ListUserFreeRewardsResponse
-	192, // 428: api.wallet.service.v1.Wallet.ListUserFreeRewardsBO:output_type -> api.wallet.service.v1.ListUserFreeRewardsBOResponse
-	186, // 429: api.wallet.service.v1.Wallet.ListOperatorWithdrawableAmounts:output_type -> api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
-	188, // 430: api.wallet.service.v1.Wallet.GetOperatorWithdrawCheckInfo:output_type -> api.wallet.service.v1.GetOperatorWithdrawCheckInfoResponse
-	190, // 431: api.wallet.service.v1.Wallet.GetOperatorWithdrawableAmount:output_type -> api.wallet.service.v1.GetOperatorWithdrawableAmountResponse
-	338, // [338:432] is the sub-list for method output_type
-	244, // [244:338] is the sub-list for method input_type
-	244, // [244:244] is the sub-list for extension type_name
-	244, // [244:244] is the sub-list for extension extendee
-	0,   // [0:244] is the sub-list for field type_name
+	230, // 227: api.wallet.service.v1.UserSwapConfig.fee_overrides:type_name -> api.wallet.service.v1.UserSwapConfig.FeeOverridesEntry
+	231, // 228: api.wallet.service.v1.SetUserSwapEnabledRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 229: api.wallet.service.v1.SetUserSwapEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
+	231, // 230: api.wallet.service.v1.SetUserSwapTemplateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 231: api.wallet.service.v1.SetUserSwapTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	195, // 232: api.wallet.service.v1.SetUserSwapTemplateRequest.config:type_name -> api.wallet.service.v1.UserSwapConfig
+	231, // 233: api.wallet.service.v1.GetUserSwapConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	231, // 234: api.wallet.service.v1.GetUserSwapConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	195, // 235: api.wallet.service.v1.GetUserSwapConfigResponse.custom_config:type_name -> api.wallet.service.v1.UserSwapConfig
+	195, // 236: api.wallet.service.v1.GetUserSwapConfigResponse.default_config:type_name -> api.wallet.service.v1.UserSwapConfig
+	231, // 237: api.wallet.service.v1.GetUserSwapConfigResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	231, // 238: api.wallet.service.v1.UserSwapRequest.operator_context:type_name -> api.common.OperatorContext
+	195, // 239: api.wallet.service.v1.GetPlayerSwapConfigResponse.config:type_name -> api.wallet.service.v1.UserSwapConfig
+	232, // 240: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
+	232, // 241: api.wallet.service.v1.GetWalletsResponse.Credit.free_spin_expired_at:type_name -> google.protobuf.Timestamp
+	232, // 242: api.wallet.service.v1.GetWalletsResponse.Credit.free_bet_expired_at:type_name -> google.protobuf.Timestamp
+	208, // 243: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
+	232, // 244: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	232, // 245: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	232, // 246: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	232, // 247: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
+	234, // 248: api.wallet.service.v1.RewardSequence.TierConfig.free_spin_config:type_name -> api.wallet.service.v1.FreeSpinConfig
+	235, // 249: api.wallet.service.v1.RewardSequence.TierConfig.free_bet_config:type_name -> api.wallet.service.v1.FreeBetConfig
+	232, // 250: api.wallet.service.v1.ListCustomerRecordsResponse.CustomerRecord.date_time:type_name -> google.protobuf.Timestamp
+	127, // 251: api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntry.value:type_name -> api.wallet.service.v1.FICAThresholdConfig
+	232, // 252: api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransaction.transaction_time:type_name -> google.protobuf.Timestamp
+	222, // 253: api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetail.balances:type_name -> api.wallet.service.v1.ListBalancesByUserIdsResponse.Balance
+	223, // 254: api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetailsEntry.value:type_name -> api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetail
+	232, // 255: api.wallet.service.v1.ListManualJournalEntriesResponse.ManualJournalEntry.transaction_time:type_name -> google.protobuf.Timestamp
+	228, // 256: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetricsEntry.value:type_name -> api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetrics
+	1,   // 257: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
+	3,   // 258: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
+	110, // 259: api.wallet.service.v1.Wallet.GetUserBalanceDetails:input_type -> api.wallet.service.v1.GetUserBalanceDetailsRequest
+	5,   // 260: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
+	7,   // 261: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
+	9,   // 262: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
+	12,  // 263: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
+	179, // 264: api.wallet.service.v1.Wallet.GameBatchBetAndSettle:input_type -> api.wallet.service.v1.GameBatchBetAndSettleRequest
+	15,  // 265: api.wallet.service.v1.Wallet.Freeze:input_type -> api.wallet.service.v1.FreezeRequest
+	17,  // 266: api.wallet.service.v1.Wallet.Settle:input_type -> api.wallet.service.v1.SettleRequest
+	19,  // 267: api.wallet.service.v1.Wallet.Rollback:input_type -> api.wallet.service.v1.RollbackRequest
+	21,  // 268: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
+	23,  // 269: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:input_type -> api.wallet.service.v1.ListWalletBalanceTransactionsRequest
+	25,  // 270: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:input_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsRequest
+	27,  // 271: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
+	29,  // 272: api.wallet.service.v1.Wallet.GetExchangeRates:input_type -> api.wallet.service.v1.GetExchangeRatesRequest
+	31,  // 273: api.wallet.service.v1.Wallet.GetExchangeRatesWithBaseCurrency:input_type -> api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest
+	33,  // 274: api.wallet.service.v1.Wallet.GetUserTransactionSummary:input_type -> api.wallet.service.v1.GetUserTransactionSummaryRequest
+	35,  // 275: api.wallet.service.v1.Wallet.ListUserTransactionSummaries:input_type -> api.wallet.service.v1.ListUserTransactionSummariesRequest
+	37,  // 276: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:input_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest
+	40,  // 277: api.wallet.service.v1.Wallet.AddCurrency:input_type -> api.wallet.service.v1.AddCurrencyRequest
+	42,  // 278: api.wallet.service.v1.Wallet.UpdateCurrency:input_type -> api.wallet.service.v1.UpdateCurrencyRequest
+	44,  // 279: api.wallet.service.v1.Wallet.GetCurrencies:input_type -> api.wallet.service.v1.GetCurrenciesRequest
+	46,  // 280: api.wallet.service.v1.Wallet.ListCurrencies:input_type -> api.wallet.service.v1.ListCurrenciesRequest
+	48,  // 281: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:input_type -> api.wallet.service.v1.UpdateOperatorCurrencyRequest
+	50,  // 282: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
+	52,  // 283: api.wallet.service.v1.Wallet.ListBottomOperatorBalances:input_type -> api.wallet.service.v1.ListBottomOperatorBalancesRequest
+	55,  // 284: api.wallet.service.v1.Wallet.ListCompanyOperatorBalances:input_type -> api.wallet.service.v1.ListCompanyOperatorBalancesRequest
+	57,  // 285: api.wallet.service.v1.Wallet.OperatorTransfer:input_type -> api.wallet.service.v1.OperatorTransferRequest
+	59,  // 286: api.wallet.service.v1.Wallet.OperatorSwap:input_type -> api.wallet.service.v1.OperatorSwapRequest
+	61,  // 287: api.wallet.service.v1.Wallet.OperatorFreeze:input_type -> api.wallet.service.v1.OperatorFreezeRequest
+	63,  // 288: api.wallet.service.v1.Wallet.OperatorRollback:input_type -> api.wallet.service.v1.OperatorRollbackRequest
+	65,  // 289: api.wallet.service.v1.Wallet.OperatorSettle:input_type -> api.wallet.service.v1.OperatorSettleRequest
+	67,  // 290: api.wallet.service.v1.Wallet.GetOperatorBalance:input_type -> api.wallet.service.v1.GetOperatorBalanceRequest
+	69,  // 291: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:input_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsRequest
+	72,  // 292: api.wallet.service.v1.Wallet.OperatorDebit:input_type -> api.wallet.service.v1.OperatorDebitRequest
+	74,  // 293: api.wallet.service.v1.Wallet.OperatorBalanceAdjust:input_type -> api.wallet.service.v1.OperatorBalanceAdjustRequest
+	76,  // 294: api.wallet.service.v1.Wallet.UpdateOperatorBalance:input_type -> api.wallet.service.v1.UpdateOperatorBalanceRequest
+	78,  // 295: api.wallet.service.v1.Wallet.GetOperatorTransactionSummary:input_type -> api.wallet.service.v1.GetOperatorTransactionSummaryRequest
+	176, // 296: api.wallet.service.v1.Wallet.GetCompanyFinancialSummary:input_type -> api.wallet.service.v1.GetCompanyFinancialSummaryRequest
+	80,  // 297: api.wallet.service.v1.Wallet.GetOperatorBalanceTransactionsByIds:input_type -> api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsRequest
+	84,  // 298: api.wallet.service.v1.Wallet.SetDepositRewardSequences:input_type -> api.wallet.service.v1.SetDepositRewardSequencesRequest
+	86,  // 299: api.wallet.service.v1.Wallet.DeleteDepositRewardSequences:input_type -> api.wallet.service.v1.DeleteDepositRewardSequencesRequest
+	88,  // 300: api.wallet.service.v1.Wallet.GetDepositRewardConfig:input_type -> api.wallet.service.v1.GetDepositRewardConfigRequest
+	196, // 301: api.wallet.service.v1.Wallet.SetUserSwapEnabled:input_type -> api.wallet.service.v1.SetUserSwapEnabledRequest
+	198, // 302: api.wallet.service.v1.Wallet.SetUserSwapTemplate:input_type -> api.wallet.service.v1.SetUserSwapTemplateRequest
+	200, // 303: api.wallet.service.v1.Wallet.GetUserSwapConfig:input_type -> api.wallet.service.v1.GetUserSwapConfigRequest
+	202, // 304: api.wallet.service.v1.Wallet.UserSwap:input_type -> api.wallet.service.v1.UserSwapRequest
+	204, // 305: api.wallet.service.v1.Wallet.GetPlayerSwapConfig:input_type -> api.wallet.service.v1.GetPlayerSwapConfigRequest
+	168, // 306: api.wallet.service.v1.Wallet.SetAppDownloadRewardConfig:input_type -> api.wallet.service.v1.SetAppDownloadRewardConfigRequest
+	170, // 307: api.wallet.service.v1.Wallet.GetAppDownloadRewardConfig:input_type -> api.wallet.service.v1.GetAppDownloadRewardConfigRequest
+	172, // 308: api.wallet.service.v1.Wallet.ClaimAppDownloadReward:input_type -> api.wallet.service.v1.ClaimAppDownloadRewardRequest
+	174, // 309: api.wallet.service.v1.Wallet.GetAppDownloadRewardStatus:input_type -> api.wallet.service.v1.GetAppDownloadRewardStatusRequest
+	236, // 310: api.wallet.service.v1.Wallet.CreatePromoCodeCampaign:input_type -> api.wallet.service.v1.CreatePromoCodeCampaignRequest
+	237, // 311: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaign:input_type -> api.wallet.service.v1.UpdatePromoCodeCampaignRequest
+	238, // 312: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaignStatus:input_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest
+	239, // 313: api.wallet.service.v1.Wallet.ListPromoCodeCampaigns:input_type -> api.wallet.service.v1.ListPromoCodeCampaignsRequest
+	240, // 314: api.wallet.service.v1.Wallet.ListPromoCodeCampaignDetails:input_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest
+	241, // 315: api.wallet.service.v1.Wallet.GenerateOneTimePromoCodes:input_type -> api.wallet.service.v1.GenerateOneTimePromoCodesRequest
+	242, // 316: api.wallet.service.v1.Wallet.GenerateUniversalPromoCodes:input_type -> api.wallet.service.v1.GenerateUniversalPromoCodesRequest
+	243, // 317: api.wallet.service.v1.Wallet.ListUniversalCodeUsages:input_type -> api.wallet.service.v1.ListUniversalCodeUsagesRequest
+	244, // 318: api.wallet.service.v1.Wallet.ExportPromoCodes:input_type -> api.wallet.service.v1.ExportPromoCodesRequest
+	245, // 319: api.wallet.service.v1.Wallet.GetPromoCodeInfo:input_type -> api.wallet.service.v1.GetPromoCodeInfoRequest
+	246, // 320: api.wallet.service.v1.Wallet.ClaimPromoCode:input_type -> api.wallet.service.v1.ClaimPromoCodeRequest
+	90,  // 321: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:input_type -> api.wallet.service.v1.GetUserDepositRewardSequenceRequest
+	92,  // 322: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:input_type -> api.wallet.service.v1.GetGamificationCurrencyConfigRequest
+	100, // 323: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:input_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest
+	102, // 324: api.wallet.service.v1.Wallet.PushBetLimitsToBottomOperators:input_type -> api.wallet.service.v1.PushBetLimitsRequest
+	104, // 325: api.wallet.service.v1.Wallet.PullBetLimitsFromSystem:input_type -> api.wallet.service.v1.PullBetLimitsRequest
+	106, // 326: api.wallet.service.v1.Wallet.UpdateWalletConfig:input_type -> api.wallet.service.v1.UpdateWalletConfigRequest
+	108, // 327: api.wallet.service.v1.Wallet.BonusTransfer:input_type -> api.wallet.service.v1.BonusTransferRequest
+	113, // 328: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:input_type -> api.wallet.service.v1.AddResponsibleGamblingConfigRequest
+	115, // 329: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:input_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest
+	119, // 330: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:input_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsRequest
+	121, // 331: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:input_type -> api.wallet.service.v1.GetResponsibleGamblingConfigRequest
+	123, // 332: api.wallet.service.v1.Wallet.ListCustomerRecords:input_type -> api.wallet.service.v1.ListCustomerRecordsRequest
+	125, // 333: api.wallet.service.v1.Wallet.ExportCustomerRecords:input_type -> api.wallet.service.v1.ExportCustomerRecordsRequest
+	128, // 334: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:input_type -> api.wallet.service.v1.SetFICAThresholdConfigRequest
+	130, // 335: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:input_type -> api.wallet.service.v1.GetFICAThresholdConfigRequest
+	132, // 336: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:input_type -> api.wallet.service.v1.ListFICAThresholdTransactionsRequest
+	134, // 337: api.wallet.service.v1.Wallet.ExportFICAThresholdTransactions:input_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsRequest
+	136, // 338: api.wallet.service.v1.Wallet.ListBalancesByUserIds:input_type -> api.wallet.service.v1.ListBalancesByUserIdsRequest
+	138, // 339: api.wallet.service.v1.Wallet.ListManualJournalEntries:input_type -> api.wallet.service.v1.ListManualJournalEntriesRequest
+	140, // 340: api.wallet.service.v1.Wallet.ExportManualJournalEntries:input_type -> api.wallet.service.v1.ExportManualJournalEntriesRequest
+	142, // 341: api.wallet.service.v1.Wallet.ListTimeRangeDepositCredits:input_type -> api.wallet.service.v1.ListTimeRangeDepositCreditsRequest
+	144, // 342: api.wallet.service.v1.Wallet.ListUserOverview:input_type -> api.wallet.service.v1.ListUserOverviewRequest
+	146, // 343: api.wallet.service.v1.Wallet.GetUserGameTransactionsSummary:input_type -> api.wallet.service.v1.GetUserGameTransactionsSummaryRequest
+	148, // 344: api.wallet.service.v1.Wallet.CreditFreespinWin:input_type -> api.wallet.service.v1.CreditFreespinWinRequest
+	150, // 345: api.wallet.service.v1.Wallet.CreditFreeBetWin:input_type -> api.wallet.service.v1.CreditFreeBetWinRequest
+	152, // 346: api.wallet.service.v1.Wallet.GetOperatorUserFinancialSummary:input_type -> api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest
+	94,  // 347: api.wallet.service.v1.Wallet.GetWalletConfig:input_type -> api.wallet.service.v1.GetWalletConfigRequest
+	96,  // 348: api.wallet.service.v1.Wallet.GetGamificationConfig:input_type -> api.wallet.service.v1.GetGamificationConfigRequest
+	155, // 349: api.wallet.service.v1.Wallet.BatchGetUserFinancialMetrics:input_type -> api.wallet.service.v1.BatchGetUserFinancialMetricsRequest
+	157, // 350: api.wallet.service.v1.Wallet.ManualAdjustCreditTurnoverField:input_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest
+	159, // 351: api.wallet.service.v1.Wallet.ListUserFreeRewards:input_type -> api.wallet.service.v1.ListUserFreeRewardsRequest
+	191, // 352: api.wallet.service.v1.Wallet.ListUserFreeRewardsBO:input_type -> api.wallet.service.v1.ListUserFreeRewardsBORequest
+	184, // 353: api.wallet.service.v1.Wallet.ListOperatorWithdrawableAmounts:input_type -> api.wallet.service.v1.ListOperatorWithdrawableAmountsRequest
+	187, // 354: api.wallet.service.v1.Wallet.GetOperatorWithdrawCheckInfo:input_type -> api.wallet.service.v1.GetOperatorWithdrawCheckInfoRequest
+	189, // 355: api.wallet.service.v1.Wallet.GetOperatorWithdrawableAmount:input_type -> api.wallet.service.v1.GetOperatorWithdrawableAmountRequest
+	2,   // 356: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
+	4,   // 357: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
+	112, // 358: api.wallet.service.v1.Wallet.GetUserBalanceDetails:output_type -> api.wallet.service.v1.GetUserBalanceDetailsResponse
+	6,   // 359: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
+	8,   // 360: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
+	11,  // 361: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
+	13,  // 362: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
+	182, // 363: api.wallet.service.v1.Wallet.GameBatchBetAndSettle:output_type -> api.wallet.service.v1.GameBatchBetAndSettleResponse
+	16,  // 364: api.wallet.service.v1.Wallet.Freeze:output_type -> api.wallet.service.v1.FreezeResponse
+	18,  // 365: api.wallet.service.v1.Wallet.Settle:output_type -> api.wallet.service.v1.SettleResponse
+	20,  // 366: api.wallet.service.v1.Wallet.Rollback:output_type -> api.wallet.service.v1.RollbackResponse
+	22,  // 367: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
+	24,  // 368: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:output_type -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse
+	26,  // 369: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse
+	28,  // 370: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
+	30,  // 371: api.wallet.service.v1.Wallet.GetExchangeRates:output_type -> api.wallet.service.v1.GetExchangeRatesResponse
+	32,  // 372: api.wallet.service.v1.Wallet.GetExchangeRatesWithBaseCurrency:output_type -> api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse
+	34,  // 373: api.wallet.service.v1.Wallet.GetUserTransactionSummary:output_type -> api.wallet.service.v1.GetUserTransactionSummaryResponse
+	36,  // 374: api.wallet.service.v1.Wallet.ListUserTransactionSummaries:output_type -> api.wallet.service.v1.ListUserTransactionSummariesResponse
+	38,  // 375: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:output_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse
+	41,  // 376: api.wallet.service.v1.Wallet.AddCurrency:output_type -> api.wallet.service.v1.AddCurrencyResponse
+	43,  // 377: api.wallet.service.v1.Wallet.UpdateCurrency:output_type -> api.wallet.service.v1.UpdateCurrencyResponse
+	45,  // 378: api.wallet.service.v1.Wallet.GetCurrencies:output_type -> api.wallet.service.v1.GetCurrenciesResponse
+	47,  // 379: api.wallet.service.v1.Wallet.ListCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
+	49,  // 380: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
+	51,  // 381: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
+	54,  // 382: api.wallet.service.v1.Wallet.ListBottomOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
+	56,  // 383: api.wallet.service.v1.Wallet.ListCompanyOperatorBalances:output_type -> api.wallet.service.v1.ListCompanyOperatorBalancesResponse
+	58,  // 384: api.wallet.service.v1.Wallet.OperatorTransfer:output_type -> api.wallet.service.v1.OperatorTransferResponse
+	60,  // 385: api.wallet.service.v1.Wallet.OperatorSwap:output_type -> api.wallet.service.v1.OperatorSwapResponse
+	62,  // 386: api.wallet.service.v1.Wallet.OperatorFreeze:output_type -> api.wallet.service.v1.OperatorFreezeResponse
+	64,  // 387: api.wallet.service.v1.Wallet.OperatorRollback:output_type -> api.wallet.service.v1.OperatorRollbackResponse
+	66,  // 388: api.wallet.service.v1.Wallet.OperatorSettle:output_type -> api.wallet.service.v1.OperatorSettleResponse
+	68,  // 389: api.wallet.service.v1.Wallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
+	71,  // 390: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:output_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsResponse
+	73,  // 391: api.wallet.service.v1.Wallet.OperatorDebit:output_type -> api.wallet.service.v1.OperatorDebitResponse
+	75,  // 392: api.wallet.service.v1.Wallet.OperatorBalanceAdjust:output_type -> api.wallet.service.v1.OperatorBalanceAdjustResponse
+	77,  // 393: api.wallet.service.v1.Wallet.UpdateOperatorBalance:output_type -> api.wallet.service.v1.UpdateOperatorBalanceResponse
+	79,  // 394: api.wallet.service.v1.Wallet.GetOperatorTransactionSummary:output_type -> api.wallet.service.v1.GetOperatorTransactionSummaryResponse
+	177, // 395: api.wallet.service.v1.Wallet.GetCompanyFinancialSummary:output_type -> api.wallet.service.v1.GetCompanyFinancialSummaryResponse
+	81,  // 396: api.wallet.service.v1.Wallet.GetOperatorBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsResponse
+	85,  // 397: api.wallet.service.v1.Wallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
+	87,  // 398: api.wallet.service.v1.Wallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
+	89,  // 399: api.wallet.service.v1.Wallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
+	197, // 400: api.wallet.service.v1.Wallet.SetUserSwapEnabled:output_type -> api.wallet.service.v1.SetUserSwapEnabledResponse
+	199, // 401: api.wallet.service.v1.Wallet.SetUserSwapTemplate:output_type -> api.wallet.service.v1.SetUserSwapTemplateResponse
+	201, // 402: api.wallet.service.v1.Wallet.GetUserSwapConfig:output_type -> api.wallet.service.v1.GetUserSwapConfigResponse
+	203, // 403: api.wallet.service.v1.Wallet.UserSwap:output_type -> api.wallet.service.v1.UserSwapResponse
+	205, // 404: api.wallet.service.v1.Wallet.GetPlayerSwapConfig:output_type -> api.wallet.service.v1.GetPlayerSwapConfigResponse
+	169, // 405: api.wallet.service.v1.Wallet.SetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.SetAppDownloadRewardConfigResponse
+	171, // 406: api.wallet.service.v1.Wallet.GetAppDownloadRewardConfig:output_type -> api.wallet.service.v1.GetAppDownloadRewardConfigResponse
+	173, // 407: api.wallet.service.v1.Wallet.ClaimAppDownloadReward:output_type -> api.wallet.service.v1.ClaimAppDownloadRewardResponse
+	175, // 408: api.wallet.service.v1.Wallet.GetAppDownloadRewardStatus:output_type -> api.wallet.service.v1.GetAppDownloadRewardStatusResponse
+	247, // 409: api.wallet.service.v1.Wallet.CreatePromoCodeCampaign:output_type -> api.wallet.service.v1.CreatePromoCodeCampaignResponse
+	248, // 410: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaign:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignResponse
+	249, // 411: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaignStatus:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
+	250, // 412: api.wallet.service.v1.Wallet.ListPromoCodeCampaigns:output_type -> api.wallet.service.v1.ListPromoCodeCampaignsResponse
+	251, // 413: api.wallet.service.v1.Wallet.ListPromoCodeCampaignDetails:output_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
+	252, // 414: api.wallet.service.v1.Wallet.GenerateOneTimePromoCodes:output_type -> api.wallet.service.v1.GenerateOneTimePromoCodesResponse
+	253, // 415: api.wallet.service.v1.Wallet.GenerateUniversalPromoCodes:output_type -> api.wallet.service.v1.GenerateUniversalPromoCodesResponse
+	254, // 416: api.wallet.service.v1.Wallet.ListUniversalCodeUsages:output_type -> api.wallet.service.v1.ListUniversalCodeUsagesResponse
+	255, // 417: api.wallet.service.v1.Wallet.ExportPromoCodes:output_type -> api.wallet.service.v1.ExportPromoCodesResponse
+	256, // 418: api.wallet.service.v1.Wallet.GetPromoCodeInfo:output_type -> api.wallet.service.v1.GetPromoCodeInfoResponse
+	257, // 419: api.wallet.service.v1.Wallet.ClaimPromoCode:output_type -> api.wallet.service.v1.ClaimPromoCodeResponse
+	91,  // 420: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:output_type -> api.wallet.service.v1.GetUserDepositRewardSequenceResponse
+	99,  // 421: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
+	101, // 422: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
+	103, // 423: api.wallet.service.v1.Wallet.PushBetLimitsToBottomOperators:output_type -> api.wallet.service.v1.PushBetLimitsResponse
+	105, // 424: api.wallet.service.v1.Wallet.PullBetLimitsFromSystem:output_type -> api.wallet.service.v1.PullBetLimitsResponse
+	107, // 425: api.wallet.service.v1.Wallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
+	109, // 426: api.wallet.service.v1.Wallet.BonusTransfer:output_type -> api.wallet.service.v1.BonusTransferResponse
+	114, // 427: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:output_type -> api.wallet.service.v1.AddResponsibleGamblingConfigResponse
+	116, // 428: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
+	120, // 429: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
+	122, // 430: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:output_type -> api.wallet.service.v1.GetResponsibleGamblingConfigResponse
+	124, // 431: api.wallet.service.v1.Wallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
+	126, // 432: api.wallet.service.v1.Wallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
+	129, // 433: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
+	131, // 434: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
+	133, // 435: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
+	135, // 436: api.wallet.service.v1.Wallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
+	137, // 437: api.wallet.service.v1.Wallet.ListBalancesByUserIds:output_type -> api.wallet.service.v1.ListBalancesByUserIdsResponse
+	139, // 438: api.wallet.service.v1.Wallet.ListManualJournalEntries:output_type -> api.wallet.service.v1.ListManualJournalEntriesResponse
+	141, // 439: api.wallet.service.v1.Wallet.ExportManualJournalEntries:output_type -> api.wallet.service.v1.ExportManualJournalEntriesResponse
+	143, // 440: api.wallet.service.v1.Wallet.ListTimeRangeDepositCredits:output_type -> api.wallet.service.v1.ListTimeRangeDepositCreditsResponse
+	145, // 441: api.wallet.service.v1.Wallet.ListUserOverview:output_type -> api.wallet.service.v1.ListUserOverviewResponse
+	147, // 442: api.wallet.service.v1.Wallet.GetUserGameTransactionsSummary:output_type -> api.wallet.service.v1.GetUserGameTransactionsSummaryResponse
+	149, // 443: api.wallet.service.v1.Wallet.CreditFreespinWin:output_type -> api.wallet.service.v1.CreditFreespinWinResponse
+	151, // 444: api.wallet.service.v1.Wallet.CreditFreeBetWin:output_type -> api.wallet.service.v1.CreditFreeBetWinResponse
+	154, // 445: api.wallet.service.v1.Wallet.GetOperatorUserFinancialSummary:output_type -> api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse
+	95,  // 446: api.wallet.service.v1.Wallet.GetWalletConfig:output_type -> api.wallet.service.v1.GetWalletConfigResponse
+	97,  // 447: api.wallet.service.v1.Wallet.GetGamificationConfig:output_type -> api.wallet.service.v1.GetGamificationConfigResponse
+	156, // 448: api.wallet.service.v1.Wallet.BatchGetUserFinancialMetrics:output_type -> api.wallet.service.v1.BatchGetUserFinancialMetricsResponse
+	158, // 449: api.wallet.service.v1.Wallet.ManualAdjustCreditTurnoverField:output_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
+	160, // 450: api.wallet.service.v1.Wallet.ListUserFreeRewards:output_type -> api.wallet.service.v1.ListUserFreeRewardsResponse
+	192, // 451: api.wallet.service.v1.Wallet.ListUserFreeRewardsBO:output_type -> api.wallet.service.v1.ListUserFreeRewardsBOResponse
+	186, // 452: api.wallet.service.v1.Wallet.ListOperatorWithdrawableAmounts:output_type -> api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse
+	188, // 453: api.wallet.service.v1.Wallet.GetOperatorWithdrawCheckInfo:output_type -> api.wallet.service.v1.GetOperatorWithdrawCheckInfoResponse
+	190, // 454: api.wallet.service.v1.Wallet.GetOperatorWithdrawableAmount:output_type -> api.wallet.service.v1.GetOperatorWithdrawableAmountResponse
+	356, // [356:455] is the sub-list for method output_type
+	257, // [257:356] is the sub-list for method input_type
+	257, // [257:257] is the sub-list for extension type_name
+	257, // [257:257] is the sub-list for extension extendee
+	0,   // [0:257] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_proto_init() }
@@ -21661,15 +22489,16 @@ func file_wallet_service_v1_wallet_proto_init() {
 	file_wallet_service_v1_wallet_proto_msgTypes[180].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[183].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[190].OneofWrappers = []any{}
-	file_wallet_service_v1_wallet_proto_msgTypes[196].OneofWrappers = []any{}
-	file_wallet_service_v1_wallet_proto_msgTypes[204].OneofWrappers = []any{}
+	file_wallet_service_v1_wallet_proto_msgTypes[197].OneofWrappers = []any{}
+	file_wallet_service_v1_wallet_proto_msgTypes[207].OneofWrappers = []any{}
+	file_wallet_service_v1_wallet_proto_msgTypes[215].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wallet_service_v1_wallet_proto_rawDesc), len(file_wallet_service_v1_wallet_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   218,
+			NumMessages:   230,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

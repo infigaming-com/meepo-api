@@ -9479,6 +9479,63 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
+    /v1/backoffice/wallet/user-swap/config/get:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
+            operationId: BackofficeWallet_GetUserSwapConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetUserSwapConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserSwapConfigResponse'
+    /v1/backoffice/wallet/user-swap/enabled/set:
+        post:
+            tags:
+                - BackofficeWallet
+            description: SetUserSwapEnabled toggles the operator-level user-swap feature flag for the target operator.
+            operationId: BackofficeWallet_SetUserSwapEnabled
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetUserSwapEnabledRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.SetUserSwapEnabledResponse'
+    /v1/backoffice/wallet/user-swap/template/set:
+        post:
+            tags:
+                - BackofficeWallet
+            description: SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
+            operationId: BackofficeWallet_SetUserSwapTemplate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetUserSwapTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.SetUserSwapTemplateResponse'
     /v1/bcpay/deposit/add:
         post:
             tags:
@@ -11766,6 +11823,55 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListResponsibleGamblingConfigsResponse'
+    /v1/wallet/user-swap:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                UserSwap swaps the user's withdrawable cash from source currency to target currency.
+                 Player-only endpoint: the caller's user id and operator context are resolved
+                 from the auth token (`mctx.UserInfo`); `operator_context` on the request is
+                 optional — when absent, the token-derived context is used. Only the
+                 withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
+                 produces two balance transactions (swap_out + swap_in) plus corresponding
+                 credit transactions. The target credit is created with
+                 cash_turnover_threshold=0 (immediately withdrawable).
+            operationId: Wallet_UserSwap
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.UserSwapRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UserSwapResponse'
+    /v1/wallet/user-swap/player-config:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                GetPlayerSwapConfig returns the effective user-swap config for the currently
+                 authenticated player — operator resolved from the auth token. Used by the
+                 player frontend to render fee / allowed currencies / bonus-clearing notice.
+            operationId: Wallet_GetPlayerSwapConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetPlayerSwapConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetPlayerSwapConfigResponse'
 components:
     schemas:
         api.affiliate.service.v1.AdvancedOptions:
@@ -19545,6 +19651,11 @@ components:
                     type: boolean
                     description: If true, only return segments where the user is currently a member
             description: Get all segments a specific user belongs to.
+        api.backoffice.service.v1.GetUserSwapConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetUserTagsRequest:
             type: object
             properties:
@@ -25234,6 +25345,23 @@ components:
             properties:
                 settings:
                     $ref: '#/components/schemas/api.user.service.v1.SwapFeeSettings'
+        api.backoffice.service.v1.SetUserSwapEnabledRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                enabled:
+                    type: boolean
+        api.backoffice.service.v1.SetUserSwapTemplateRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                followParent:
+                    type: boolean
+                    description: Operator-level toggle. When true, the operator inherits the parent's template.
+                config:
+                    $ref: '#/components/schemas/api.wallet.service.v1.UserSwapConfig'
         api.backoffice.service.v1.SetUserTagsRequest:
             type: object
             properties:
@@ -35147,6 +35275,23 @@ components:
                 bankrollUsd:
                     type: string
                     description: bankroll in USD (only for co-operation mode site-level operators, 0 otherwise)
+        api.wallet.service.v1.GetPlayerSwapConfigRequest:
+            type: object
+            properties: {}
+        api.wallet.service.v1.GetPlayerSwapConfigResponse:
+            type: object
+            properties:
+                config:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.UserSwapConfig'
+                    description: |-
+                        Effective swap config (inherited through the operator hierarchy).
+                         Empty/zero-valued when no operator in the chain has a config with follow_parent=false.
+                aggregatedEnabled:
+                    type: boolean
+                    description: |-
+                        Aggregated user-swap feature flag — AND across self + all ancestors.
+                         When false the frontend should hide the swap entry point entirely.
         api.wallet.service.v1.GetPromoCodeInfoRequest:
             type: object
             properties:
@@ -35277,6 +35422,33 @@ components:
                     format: int32
                 currentRewardSequence:
                     $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.wallet.service.v1.GetUserSwapConfigResponse:
+            type: object
+            properties:
+                followParent:
+                    type: boolean
+                    description: Operator-level follow_parent toggle. true = using parent's config.
+                customConfig:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.UserSwapConfig'
+                    description: Operator's own config (empty fields when follow_parent=true and never customized).
+                defaultConfig:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.UserSwapConfig'
+                    description: Inherited config from the nearest ancestor with follow_parent=false.
+                inheritedOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: The ancestor operator context that default_config comes from.
+                inheritedFromOperatorName:
+                    type: string
+                    description: Display name of the ancestor operator.
+                enabled:
+                    type: boolean
+                    description: The operator's own user-swap feature flag (maps to operator_wallet_configs.user_swap_enabled).
+                aggregatedEnabled:
+                    type: boolean
+                    description: AND of self and all ancestors — the flag the backend actually enforces.
         api.wallet.service.v1.GetWalletConfigRequest:
             type: object
             properties: {}
@@ -36222,6 +36394,17 @@ components:
         api.wallet.service.v1.SetFICAThresholdConfigResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.SetUserSwapEnabledResponse:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                aggregatedEnabled:
+                    type: boolean
+                    description: Aggregated result after applying self + ancestors.
+        api.wallet.service.v1.SetUserSwapTemplateResponse:
+            type: object
+            properties: {}
         api.wallet.service.v1.TurnoverCondition:
             type: object
             properties:
@@ -36294,6 +36477,74 @@ components:
                 operatorBonusTurnoverThreshold:
                     type: string
                 maximumOperatorBonusWithdrawalAmount:
+                    type: string
+        api.wallet.service.v1.UserSwapConfig:
+            type: object
+            properties:
+                bonusesClearedOnSwap:
+                    type: boolean
+                    description: When true, swapping cash forfeits all bonuses (operator + provider) of the source currency.
+                defaultSwapFee:
+                    type: string
+                    description: Default swap fee rate as a decimal string. Deducted from the source cash.
+                feeOverrides:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: |-
+                        Per-source-currency overrides on top of default_swap_fee.
+                         Key: source currency code. Value: fee rate as decimal string (e.g. "0.01" = 1%, range [0, 1)).
+                allowedSwapOut:
+                    type: array
+                    items:
+                        type: string
+                    description: Currencies allowed as swap source. Empty list = none allowed.
+                allowedSwapIn:
+                    type: array
+                    items:
+                        type: string
+                    description: Currencies allowed as swap target. Empty list = none allowed.
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: UserSwapConfig is the operator-level template inherited by descendants when follow_parent=true.
+        api.wallet.service.v1.UserSwapRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                sourceCurrency:
+                    type: string
+                    description: Source currency (must be in effective config.allowed_swap_out).
+                targetCurrency:
+                    type: string
+                    description: Target currency (must be in effective config.allowed_swap_in).
+                cashAmount:
+                    type: string
+                    description: Amount of source cash to swap. Must not exceed the user's withdrawable cash in source currency.
+        api.wallet.service.v1.UserSwapResponse:
+            type: object
+            properties:
+                sourceCash:
+                    type: string
+                    description: Source balance after swap.
+                targetCash:
+                    type: string
+                    description: Target balance after swap.
+                feeAmount:
+                    type: string
+                    description: Actual fee deducted from source cash (in source currency).
+                exchangeRate:
+                    type: string
+                    description: Exchange rate used (source → target, applied after fee).
+                targetCashAmount:
+                    type: string
+                    description: Net amount credited to target (cash_amount - fee, converted at exchange_rate).
+                sourceBalanceTransactionId:
+                    type: string
+                    description: Two linked balance transaction ids (swap_out / swap_in).
+                targetBalanceTransactionId:
                     type: string
         api.wallet.service.v1.VerificationStatusCondition:
             type: object

@@ -37,6 +37,7 @@ const OperationBackofficeWalletGetFICAThresholdConfig = "/api.backoffice.service
 const OperationBackofficeWalletGetGamificationCurrencyConfig = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
 const OperationBackofficeWalletGetOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
 const OperationBackofficeWalletGetOperatorWithdrawableAmount = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorWithdrawableAmount"
+const OperationBackofficeWalletGetUserSwapConfig = "/api.backoffice.service.v1.BackofficeWallet/GetUserSwapConfig"
 const OperationBackofficeWalletGetWalletCreditTransactions = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
 const OperationBackofficeWalletGetWalletCredits = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
 const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
@@ -68,6 +69,8 @@ const OperationBackofficeWalletPushBetLimitsToBottomOperators = "/api.backoffice
 const OperationBackofficeWalletSetAppDownloadRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/SetAppDownloadRewardConfig"
 const OperationBackofficeWalletSetDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
 const OperationBackofficeWalletSetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
+const OperationBackofficeWalletSetUserSwapEnabled = "/api.backoffice.service.v1.BackofficeWallet/SetUserSwapEnabled"
+const OperationBackofficeWalletSetUserSwapTemplate = "/api.backoffice.service.v1.BackofficeWallet/SetUserSwapTemplate"
 const OperationBackofficeWalletUpdateOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 const OperationBackofficeWalletUpdateOperatorCurrencyConfig = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
 const OperationBackofficeWalletUpdatePromoCodeCampaign = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaign"
@@ -111,6 +114,8 @@ type BackofficeWalletHTTPServer interface {
 	GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
 	// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
 	GetOperatorWithdrawableAmount(context.Context, *BOGetOperatorWithdrawableAmountRequest) (*v1.GetOperatorWithdrawableAmountResponse, error)
+	// GetUserSwapConfig GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
+	GetUserSwapConfig(context.Context, *GetUserSwapConfigRequest) (*v1.GetUserSwapConfigResponse, error)
 	// GetWalletCreditTransactions Get credit transaction details by credit ID
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	// GetWalletCredits Get wallet credit/debit transaction history for a user
@@ -176,6 +181,10 @@ type BackofficeWalletHTTPServer interface {
 	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
 	// SetFICAThresholdConfig SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
 	SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*v1.SetFICAThresholdConfigResponse, error)
+	// SetUserSwapEnabled SetUserSwapEnabled toggles the operator-level user-swap feature flag for the target operator.
+	SetUserSwapEnabled(context.Context, *SetUserSwapEnabledRequest) (*v1.SetUserSwapEnabledResponse, error)
+	// SetUserSwapTemplate SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
+	SetUserSwapTemplate(context.Context, *SetUserSwapTemplateRequest) (*v1.SetUserSwapTemplateResponse, error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// UpdateOperatorCurrencyConfig UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -219,6 +228,9 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/deposit-reward/config/get", _BackofficeWallet_GetDepositRewardConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/app-download-reward/config/set", _BackofficeWallet_SetAppDownloadRewardConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/app-download-reward/config/get", _BackofficeWallet_GetAppDownloadRewardConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/user-swap/enabled/set", _BackofficeWallet_SetUserSwapEnabled0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/user-swap/template/set", _BackofficeWallet_SetUserSwapTemplate0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/user-swap/config/get", _BackofficeWallet_GetUserSwapConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/campaign/create", _BackofficeWallet_CreatePromoCodeCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/campaign/update", _BackofficeWallet_UpdatePromoCodeCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/campaign/status/update", _BackofficeWallet_UpdatePromoCodeCampaignStatus0_HTTP_Handler(srv))
@@ -797,6 +809,72 @@ func _BackofficeWallet_GetAppDownloadRewardConfig0_HTTP_Handler(srv BackofficeWa
 			return err
 		}
 		reply := out.(*v1.GetAppDownloadRewardConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_SetUserSwapEnabled0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetUserSwapEnabledRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletSetUserSwapEnabled)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetUserSwapEnabled(ctx, req.(*SetUserSwapEnabledRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.SetUserSwapEnabledResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_SetUserSwapTemplate0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetUserSwapTemplateRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletSetUserSwapTemplate)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetUserSwapTemplate(ctx, req.(*SetUserSwapTemplateRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.SetUserSwapTemplateResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_GetUserSwapConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserSwapConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletGetUserSwapConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserSwapConfig(ctx, req.(*GetUserSwapConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetUserSwapConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1496,6 +1574,8 @@ type BackofficeWalletHTTPClient interface {
 	GetOperatorBalance(ctx context.Context, req *GetOperatorBalanceRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalanceResponse, err error)
 	// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
 	GetOperatorWithdrawableAmount(ctx context.Context, req *BOGetOperatorWithdrawableAmountRequest, opts ...http.CallOption) (rsp *v1.GetOperatorWithdrawableAmountResponse, err error)
+	// GetUserSwapConfig GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
+	GetUserSwapConfig(ctx context.Context, req *GetUserSwapConfigRequest, opts ...http.CallOption) (rsp *v1.GetUserSwapConfigResponse, err error)
 	// GetWalletCreditTransactions Get credit transaction details by credit ID
 	GetWalletCreditTransactions(ctx context.Context, req *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (rsp *GetWalletCreditTransactionsResponse, err error)
 	// GetWalletCredits Get wallet credit/debit transaction history for a user
@@ -1561,6 +1641,10 @@ type BackofficeWalletHTTPClient interface {
 	SetDepositRewardSequences(ctx context.Context, req *SetDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.SetDepositRewardSequencesResponse, err error)
 	// SetFICAThresholdConfig SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
 	SetFICAThresholdConfig(ctx context.Context, req *SetFICAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.SetFICAThresholdConfigResponse, err error)
+	// SetUserSwapEnabled SetUserSwapEnabled toggles the operator-level user-swap feature flag for the target operator.
+	SetUserSwapEnabled(ctx context.Context, req *SetUserSwapEnabledRequest, opts ...http.CallOption) (rsp *v1.SetUserSwapEnabledResponse, err error)
+	// SetUserSwapTemplate SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
+	SetUserSwapTemplate(ctx context.Context, req *SetUserSwapTemplateRequest, opts ...http.CallOption) (rsp *v1.SetUserSwapTemplateResponse, err error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, req *UpdateOperatorBalanceRequest, opts ...http.CallOption) (rsp *UpdateOperatorBalanceResponse, err error)
 	// UpdateOperatorCurrencyConfig UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -1815,6 +1899,20 @@ func (c *BackofficeWalletHTTPClientImpl) GetOperatorWithdrawableAmount(ctx conte
 	pattern := "/v1/backoffice/wallet/operator/withdrawable-amount"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletGetOperatorWithdrawableAmount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetUserSwapConfig GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
+func (c *BackofficeWalletHTTPClientImpl) GetUserSwapConfig(ctx context.Context, in *GetUserSwapConfigRequest, opts ...http.CallOption) (*v1.GetUserSwapConfigResponse, error) {
+	var out v1.GetUserSwapConfigResponse
+	pattern := "/v1/backoffice/wallet/user-swap/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetUserSwapConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -2252,6 +2350,34 @@ func (c *BackofficeWalletHTTPClientImpl) SetFICAThresholdConfig(ctx context.Cont
 	pattern := "/v1/backoffice/wallet/fica/config/set"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletSetFICAThresholdConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SetUserSwapEnabled SetUserSwapEnabled toggles the operator-level user-swap feature flag for the target operator.
+func (c *BackofficeWalletHTTPClientImpl) SetUserSwapEnabled(ctx context.Context, in *SetUserSwapEnabledRequest, opts ...http.CallOption) (*v1.SetUserSwapEnabledResponse, error) {
+	var out v1.SetUserSwapEnabledResponse
+	pattern := "/v1/backoffice/wallet/user-swap/enabled/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletSetUserSwapEnabled))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SetUserSwapTemplate SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
+func (c *BackofficeWalletHTTPClientImpl) SetUserSwapTemplate(ctx context.Context, in *SetUserSwapTemplateRequest, opts ...http.CallOption) (*v1.SetUserSwapTemplateResponse, error) {
+	var out v1.SetUserSwapTemplateResponse
+	pattern := "/v1/backoffice/wallet/user-swap/template/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletSetUserSwapTemplate))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
