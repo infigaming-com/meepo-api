@@ -157,18 +157,15 @@ service Wallet {
 	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (GetDepositRewardConfigResponse) {}
 
 	// SetUserSwapEnabled toggles the operator-level user-swap feature flag.
-	// Aggregated enable is `AND` across self and all ancestors (see GetUserSwapEnabled).
+	// Aggregated enable is `AND` across self and all ancestors (surfaced on GetUserSwapConfig).
 	rpc SetUserSwapEnabled(SetUserSwapEnabledRequest) returns (SetUserSwapEnabledResponse) {}
-
-	// GetUserSwapEnabled returns both the operator's own flag and the aggregated result across the hierarchy.
-	rpc GetUserSwapEnabled(GetUserSwapEnabledRequest) returns (GetUserSwapEnabledResponse) {}
 
 	// SetUserSwapTemplate full-replaces the user-swap configuration template for an operator.
 	// follow_parent is operator-level: when true, the operator inherits the nearest ancestor's config.
 	rpc SetUserSwapTemplate(SetUserSwapTemplateRequest) returns (SetUserSwapTemplateResponse) {}
 
-	// GetUserSwapTemplate returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
-	rpc GetUserSwapTemplate(GetUserSwapTemplateRequest) returns (GetUserSwapTemplateResponse) {}
+	// GetUserSwapConfig returns the operator's custom config and the inherited default config from the nearest ancestor with follow_parent=false.
+	rpc GetUserSwapConfig(GetUserSwapConfigRequest) returns (GetUserSwapConfigResponse) {}
 
 	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
 	// Only the withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
@@ -2849,18 +2846,6 @@ message SetUserSwapEnabledResponse {
 	bool aggregated_enabled = 2;
 }
 
-message GetUserSwapEnabledRequest {
-	api.common.OperatorContext initiator_operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
-}
-
-message GetUserSwapEnabledResponse {
-	// Operator's own flag.
-	bool enabled = 1;
-	// AND of self and all ancestors — final effective flag.
-	bool aggregated_enabled = 2;
-}
-
 message SetUserSwapTemplateRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
@@ -2871,12 +2856,12 @@ message SetUserSwapTemplateRequest {
 
 message SetUserSwapTemplateResponse {}
 
-message GetUserSwapTemplateRequest {
+message GetUserSwapConfigRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
 }
 
-message GetUserSwapTemplateResponse {
+message GetUserSwapConfigResponse {
 	// Operator-level follow_parent toggle. true = using parent's config.
 	bool follow_parent = 1;
 	// Operator's own config (empty fields when follow_parent=true and never customized).
@@ -2887,6 +2872,10 @@ message GetUserSwapTemplateResponse {
 	api.common.OperatorContext inherited_operator_context = 4;
 	// Display name of the ancestor operator.
 	string inherited_from_operator_name = 5;
+	// The operator's own user-swap feature flag (maps to operator_wallet_configs.user_swap_enabled).
+	bool enabled = 6;
+	// AND of self and all ancestors — the flag the backend actually enforces.
+	bool aggregated_enabled = 7;
 }
 
 message UserSwapRequest {

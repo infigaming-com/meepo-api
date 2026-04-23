@@ -2305,16 +2305,16 @@ func ErrorSetUserSwapTemplateFailed(format string, args ...interface{}) *errors.
 	return errors.New(500, ErrorReason_SET_USER_SWAP_TEMPLATE_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsGetUserSwapTemplateFailed(err error) bool {
+func IsGetUserSwapConfigFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GET_USER_SWAP_TEMPLATE_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_GET_USER_SWAP_CONFIG_FAILED.String() && e.Code == 500
 }
 
-func ErrorGetUserSwapTemplateFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_GET_USER_SWAP_TEMPLATE_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorGetUserSwapConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_SWAP_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsSetUserSwapEnabledFailed(err error) bool {

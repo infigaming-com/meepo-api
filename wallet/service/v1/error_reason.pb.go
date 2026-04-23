@@ -217,7 +217,7 @@ const (
 	ErrorReason_GAME_BONUS_RESTRICTED                                           ErrorReason = 30189
 	// user swap
 	ErrorReason_SET_USER_SWAP_TEMPLATE_FAILED         ErrorReason = 30190
-	ErrorReason_GET_USER_SWAP_TEMPLATE_FAILED         ErrorReason = 30191
+	ErrorReason_GET_USER_SWAP_CONFIG_FAILED           ErrorReason = 30191
 	ErrorReason_SET_USER_SWAP_ENABLED_FAILED          ErrorReason = 30192
 	ErrorReason_USER_SWAP_DISABLED                    ErrorReason = 30193
 	ErrorReason_USER_SWAP_SOURCE_CURRENCY_NOT_ALLOWED ErrorReason = 30194
@@ -420,7 +420,7 @@ var (
 		30188: "BONUS_CLAIM_REJECTED",
 		30189: "GAME_BONUS_RESTRICTED",
 		30190: "SET_USER_SWAP_TEMPLATE_FAILED",
-		30191: "GET_USER_SWAP_TEMPLATE_FAILED",
+		30191: "GET_USER_SWAP_CONFIG_FAILED",
 		30192: "SET_USER_SWAP_ENABLED_FAILED",
 		30193: "USER_SWAP_DISABLED",
 		30194: "USER_SWAP_SOURCE_CURRENCY_NOT_ALLOWED",
@@ -620,7 +620,7 @@ var (
 		"BONUS_CLAIM_REJECTED":                                            30188,
 		"GAME_BONUS_RESTRICTED":                                           30189,
 		"SET_USER_SWAP_TEMPLATE_FAILED":                                   30190,
-		"GET_USER_SWAP_TEMPLATE_FAILED":                                   30191,
+		"GET_USER_SWAP_CONFIG_FAILED":                                     30191,
 		"SET_USER_SWAP_ENABLED_FAILED":                                    30192,
 		"USER_SWAP_DISABLED":                                              30193,
 		"USER_SWAP_SOURCE_CURRENCY_NOT_ALLOWED":                           30194,
@@ -661,7 +661,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x88<\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x86<\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -853,8 +853,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x17CASH_BET_LIMIT_EXCEEDED\x10\xeb\xeb\x01\x12 \n" +
 	"\x14BONUS_CLAIM_REJECTED\x10\xec\xeb\x01\x1a\x04\xa8E\x93\x03\x12!\n" +
 	"\x15GAME_BONUS_RESTRICTED\x10\xed\xeb\x01\x1a\x04\xa8E\x93\x03\x12#\n" +
-	"\x1dSET_USER_SWAP_TEMPLATE_FAILED\x10\xee\xeb\x01\x12#\n" +
-	"\x1dGET_USER_SWAP_TEMPLATE_FAILED\x10\xef\xeb\x01\x12\"\n" +
+	"\x1dSET_USER_SWAP_TEMPLATE_FAILED\x10\xee\xeb\x01\x12!\n" +
+	"\x1bGET_USER_SWAP_CONFIG_FAILED\x10\xef\xeb\x01\x12\"\n" +
 	"\x1cSET_USER_SWAP_ENABLED_FAILED\x10\xf0\xeb\x01\x12\x1e\n" +
 	"\x12USER_SWAP_DISABLED\x10\xf1\xeb\x01\x1a\x04\xa8E\x93\x03\x121\n" +
 	"%USER_SWAP_SOURCE_CURRENCY_NOT_ALLOWED\x10\xf2\xeb\x01\x1a\x04\xa8E\x90\x03\x121\n" +
