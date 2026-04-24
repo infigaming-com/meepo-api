@@ -23137,6 +23137,268 @@ var _ interface {
 	ErrorName() string
 } = BatchGetUserFinancialMetricsResponseValidationError{}
 
+// Validate checks the field values on
+// BatchGetUserGameTransactionsSummaryRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BatchGetUserGameTransactionsSummaryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BatchGetUserGameTransactionsSummaryRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// BatchGetUserGameTransactionsSummaryRequestMultiError, or nil if none found.
+func (m *BatchGetUserGameTransactionsSummaryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchGetUserGameTransactionsSummaryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.SettlementCurrency != nil {
+		// no validation rules for SettlementCurrency
+	}
+
+	if len(errors) > 0 {
+		return BatchGetUserGameTransactionsSummaryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchGetUserGameTransactionsSummaryRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// BatchGetUserGameTransactionsSummaryRequest.ValidateAll() if the designated
+// constraints aren't met.
+type BatchGetUserGameTransactionsSummaryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchGetUserGameTransactionsSummaryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchGetUserGameTransactionsSummaryRequestMultiError) AllErrors() []error { return m }
+
+// BatchGetUserGameTransactionsSummaryRequestValidationError is the validation
+// error returned by BatchGetUserGameTransactionsSummaryRequest.Validate if
+// the designated constraints aren't met.
+type BatchGetUserGameTransactionsSummaryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchGetUserGameTransactionsSummaryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BatchGetUserGameTransactionsSummaryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BatchGetUserGameTransactionsSummaryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BatchGetUserGameTransactionsSummaryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BatchGetUserGameTransactionsSummaryRequestValidationError) ErrorName() string {
+	return "BatchGetUserGameTransactionsSummaryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BatchGetUserGameTransactionsSummaryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchGetUserGameTransactionsSummaryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchGetUserGameTransactionsSummaryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchGetUserGameTransactionsSummaryRequestValidationError{}
+
+// Validate checks the field values on
+// BatchGetUserGameTransactionsSummaryResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BatchGetUserGameTransactionsSummaryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BatchGetUserGameTransactionsSummaryResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// BatchGetUserGameTransactionsSummaryResponseMultiError, or nil if none found.
+func (m *BatchGetUserGameTransactionsSummaryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchGetUserGameTransactionsSummaryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	{
+		sorted_keys := make([]string, len(m.GetUserSummaries()))
+		i := 0
+		for key := range m.GetUserSummaries() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetUserSummaries()[key]
+			_ = val
+
+			// no validation rules for UserSummaries[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, BatchGetUserGameTransactionsSummaryResponseValidationError{
+							field:  fmt.Sprintf("UserSummaries[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, BatchGetUserGameTransactionsSummaryResponseValidationError{
+							field:  fmt.Sprintf("UserSummaries[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return BatchGetUserGameTransactionsSummaryResponseValidationError{
+						field:  fmt.Sprintf("UserSummaries[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return BatchGetUserGameTransactionsSummaryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchGetUserGameTransactionsSummaryResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// BatchGetUserGameTransactionsSummaryResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BatchGetUserGameTransactionsSummaryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchGetUserGameTransactionsSummaryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchGetUserGameTransactionsSummaryResponseMultiError) AllErrors() []error { return m }
+
+// BatchGetUserGameTransactionsSummaryResponseValidationError is the validation
+// error returned by BatchGetUserGameTransactionsSummaryResponse.Validate if
+// the designated constraints aren't met.
+type BatchGetUserGameTransactionsSummaryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchGetUserGameTransactionsSummaryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BatchGetUserGameTransactionsSummaryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BatchGetUserGameTransactionsSummaryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BatchGetUserGameTransactionsSummaryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BatchGetUserGameTransactionsSummaryResponseValidationError) ErrorName() string {
+	return "BatchGetUserGameTransactionsSummaryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BatchGetUserGameTransactionsSummaryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchGetUserGameTransactionsSummaryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchGetUserGameTransactionsSummaryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchGetUserGameTransactionsSummaryResponseValidationError{}
+
 // Validate checks the field values on ManualAdjustCreditTurnoverFieldRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
@@ -33362,3 +33624,129 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BatchGetUserFinancialMetricsResponse_UserMetricsValidationError{}
+
+// Validate checks the field values on
+// BatchGetUserGameTransactionsSummaryResponse_UserSummary with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BatchGetUserGameTransactionsSummaryResponse_UserSummary) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BatchGetUserGameTransactionsSummaryResponse_UserSummary with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BatchGetUserGameTransactionsSummaryResponse_UserSummaryMultiError, or nil
+// if none found.
+func (m *BatchGetUserGameTransactionsSummaryResponse_UserSummary) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchGetUserGameTransactionsSummaryResponse_UserSummary) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GgrUsd
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for NgrUsd
+
+	// no validation rules for NgrReportingCurrency
+
+	if len(errors) > 0 {
+		return BatchGetUserGameTransactionsSummaryResponse_UserSummaryMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchGetUserGameTransactionsSummaryResponse_UserSummaryMultiError is an
+// error wrapping multiple validation errors returned by
+// BatchGetUserGameTransactionsSummaryResponse_UserSummary.ValidateAll() if
+// the designated constraints aren't met.
+type BatchGetUserGameTransactionsSummaryResponse_UserSummaryMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchGetUserGameTransactionsSummaryResponse_UserSummaryMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchGetUserGameTransactionsSummaryResponse_UserSummaryMultiError) AllErrors() []error {
+	return m
+}
+
+// BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError is
+// the validation error returned by
+// BatchGetUserGameTransactionsSummaryResponse_UserSummary.Validate if the
+// designated constraints aren't met.
+type BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError) ErrorName() string {
+	return "BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchGetUserGameTransactionsSummaryResponse_UserSummary.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchGetUserGameTransactionsSummaryResponse_UserSummaryValidationError{}

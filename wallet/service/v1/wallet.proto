@@ -399,6 +399,10 @@ service Wallet {
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	rpc BatchGetUserFinancialMetrics(BatchGetUserFinancialMetricsRequest) returns (BatchGetUserFinancialMetricsResponse) {}
 
+	// BatchGetUserGameTransactionsSummary returns aggregated GGR/NGR (USD and reporting
+	// currency) for up to 10,000 users, for CRM segment evaluation.
+	rpc BatchGetUserGameTransactionsSummary(BatchGetUserGameTransactionsSummaryRequest) returns (BatchGetUserGameTransactionsSummaryResponse) {}
+
 	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
 	rpc ManualAdjustCreditTurnoverField(ManualAdjustCreditTurnoverFieldRequest) returns (ManualAdjustCreditTurnoverFieldResponse) {}
 
@@ -2194,6 +2198,25 @@ message BatchGetUserFinancialMetricsResponse {
 	}
 	// user_id -> metrics
 	map<string, UserMetrics> user_metrics = 1;
+}
+
+// BatchGetUserGameTransactionsSummary - CRM segment evaluation
+message BatchGetUserGameTransactionsSummaryRequest {
+	// Max 10000 user_ids per call; server rejects larger requests.
+	repeated int64 user_ids = 1;
+	// Optional. Omit to aggregate across all the user's settlement currencies.
+	optional string settlement_currency = 2;
+}
+
+message BatchGetUserGameTransactionsSummaryResponse {
+	message UserSummary {
+		string ggr_usd = 1;
+		string ggr_reporting_currency = 2;
+		string ngr_usd = 3;
+		string ngr_reporting_currency = 4;
+	}
+	// user_id -> summary
+	map<string, UserSummary> user_summaries = 1;
 }
 
 message ManualAdjustCreditTurnoverFieldRequest {

@@ -2388,3 +2388,15 @@ func IsUserSwapTargetCurrencyNotAllowed(err error) bool {
 func ErrorUserSwapTargetCurrencyNotAllowed(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidUserIds(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_USER_IDS.String() && e.Code == 400
+}
+
+func ErrorInvalidUserIds(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_USER_IDS.String(), fmt.Sprintf(format, args...))
+}
