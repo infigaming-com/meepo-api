@@ -224,6 +224,7 @@ const (
 	ErrorReason_USER_SWAP_AMOUNT_EXCEEDS_WITHDRAWABLE ErrorReason = 30195
 	ErrorReason_USER_SWAP_FAILED                      ErrorReason = 30196
 	ErrorReason_USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED ErrorReason = 30197
+	ErrorReason_INVALID_USER_IDS                      ErrorReason = 30198
 )
 
 // Enum value maps for ErrorReason.
@@ -427,6 +428,7 @@ var (
 		30195: "USER_SWAP_AMOUNT_EXCEEDS_WITHDRAWABLE",
 		30196: "USER_SWAP_FAILED",
 		30197: "USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED",
+		30198: "INVALID_USER_IDS",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -627,6 +629,7 @@ var (
 		"USER_SWAP_AMOUNT_EXCEEDS_WITHDRAWABLE":                           30195,
 		"USER_SWAP_FAILED":                                                30196,
 		"USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED":                           30197,
+		"INVALID_USER_IDS":                                                30198,
 	}
 )
 
@@ -661,7 +664,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x86<\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xa4<\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -860,7 +863,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"%USER_SWAP_SOURCE_CURRENCY_NOT_ALLOWED\x10\xf2\xeb\x01\x1a\x04\xa8E\x90\x03\x121\n" +
 	"%USER_SWAP_AMOUNT_EXCEEDS_WITHDRAWABLE\x10\xf3\xeb\x01\x1a\x04\xa8E\x90\x03\x12\x16\n" +
 	"\x10USER_SWAP_FAILED\x10\xf4\xeb\x01\x121\n" +
-	"%USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED\x10\xf5\xeb\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
+	"%USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED\x10\xf5\xeb\x01\x1a\x04\xa8E\x90\x03\x12\x1c\n" +
+	"\x10INVALID_USER_IDS\x10\xf6\xeb\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
