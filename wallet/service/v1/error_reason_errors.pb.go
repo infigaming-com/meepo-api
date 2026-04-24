@@ -2400,3 +2400,149 @@ func IsInvalidUserIds(err error) bool {
 func ErrorInvalidUserIds(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_INVALID_USER_IDS.String(), fmt.Sprintf(format, args...))
 }
+
+// operator sub-account (Polymarket & future custody products)
+func IsInvalidSubAccountProductType(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_SUB_ACCOUNT_PRODUCT_TYPE.String() && e.Code == 400
+}
+
+// operator sub-account (Polymarket & future custody products)
+func ErrorInvalidSubAccountProductType(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_SUB_ACCOUNT_PRODUCT_TYPE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorSubAccountFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_SUB_ACCOUNT_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorSubAccountFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_SUB_ACCOUNT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEnableOperatorSubAccountFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ENABLE_OPERATOR_SUB_ACCOUNT_FAILED.String() && e.Code == 500
+}
+
+func ErrorEnableOperatorSubAccountFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ENABLE_OPERATOR_SUB_ACCOUNT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDisableOperatorSubAccountFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DISABLE_OPERATOR_SUB_ACCOUNT_FAILED.String() && e.Code == 500
+}
+
+func ErrorDisableOperatorSubAccountFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DISABLE_OPERATOR_SUB_ACCOUNT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSubAccountNotEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SUB_ACCOUNT_NOT_ENABLED.String() && e.Code == 403
+}
+
+func ErrorSubAccountNotEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_SUB_ACCOUNT_NOT_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSubAccountInsufficientOrDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SUB_ACCOUNT_INSUFFICIENT_OR_DISABLED.String() && e.Code == 400
+}
+
+func ErrorSubAccountInsufficientOrDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_SUB_ACCOUNT_INSUFFICIENT_OR_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSubAccountTransferFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SUB_ACCOUNT_TRANSFER_FAILED.String() && e.Code == 500
+}
+
+func ErrorSubAccountTransferFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SUB_ACCOUNT_TRANSFER_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSubAccountAdjustFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SUB_ACCOUNT_ADJUST_FAILED.String() && e.Code == 500
+}
+
+func ErrorSubAccountAdjustFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SUB_ACCOUNT_ADJUST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidSubAccountCurrency(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_SUB_ACCOUNT_CURRENCY.String() && e.Code == 400
+}
+
+func ErrorInvalidSubAccountCurrency(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_SUB_ACCOUNT_CURRENCY.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListOperatorSubAccountTransactionsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_OPERATOR_SUB_ACCOUNT_TRANSACTIONS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListOperatorSubAccountTransactionsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_OPERATOR_SUB_ACCOUNT_TRANSACTIONS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddOperatorSubAccountTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_OPERATOR_SUB_ACCOUNT_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddOperatorSubAccountTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_OPERATOR_SUB_ACCOUNT_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorSubAccountFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_SUB_ACCOUNT_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorSubAccountFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_SUB_ACCOUNT_FAILED.String(), fmt.Sprintf(format, args...))
+}
