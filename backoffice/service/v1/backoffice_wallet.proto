@@ -136,6 +136,50 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+	// ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// EnableOperatorSubAccount turns on a sub-account row for the (operator, product_type) pair.
+	// "No row == disabled"; Enable inserts a zeroed row with enabled=true. Idempotent.
+	rpc EnableOperatorSubAccount(EnableOperatorSubAccountRequest) returns (EnableOperatorSubAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/enable"
+			body: "*"
+		};
+	}
+	// DisableOperatorSubAccount sets enabled=false on an existing row, keeping the row for joinable history.
+	rpc DisableOperatorSubAccount(DisableOperatorSubAccountRequest) returns (DisableOperatorSubAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/disable"
+			body: "*"
+		};
+	}
+	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+	rpc SubAccountTransfer(SubAccountTransferRequest) returns (SubAccountTransferResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/transfer"
+			body: "*"
+		};
+	}
+	// SubAccountAdjust manually credits/debits the sub-account (system-level only).
+	rpc SubAccountAdjust(SubAccountAdjustRequest) returns (SubAccountAdjustResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/adjust"
+			body: "*"
+		};
+	}
+	// GetOperatorSubAccount returns the current row(s) for the operator (optionally filtered by product_type).
+	rpc GetOperatorSubAccount(GetOperatorSubAccountRequest) returns (wallet.service.v1.GetOperatorSubAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/get"
+			body: "*"
+		};
+	}
+	// ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
+	rpc ListOperatorSubAccountTransactions(ListOperatorSubAccountTransactionsRequest) returns (wallet.service.v1.ListOperatorSubAccountTransactionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/transactions/list"
+			body: "*"
+		};
+	}
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	rpc ListOperatorBalanceTransactions(ListOperatorBalanceTransactionsRequest) returns (ListOperatorBalanceTransactionsResponse) {
 		option (google.api.http) = {
@@ -759,6 +803,88 @@ message OperatorBalanceAdjustResponse {
 	int64 transaction_id = 1;
 	// resulting balance after adjustment
 	string cash = 2;
+}
+
+// ===== Operator Sub-Account messages (BO entry-level; wallet-side adds reporting_currency etc.) =====
+
+message EnableOperatorSubAccountRequest {
+	api.common.OperatorContext operator_context = 1;
+	// e.g. "polymarket"; valid set is defined in wallet-service sub_account_rules.go
+	string product_type = 2;
+}
+
+message EnableOperatorSubAccountResponse {
+	bool enabled = 1;
+	string currency = 2;
+	string cash = 3;
+}
+
+message DisableOperatorSubAccountRequest {
+	api.common.OperatorContext operator_context = 1;
+	string product_type = 2;
+}
+
+message DisableOperatorSubAccountResponse {
+	bool enabled = 1;
+}
+
+message SubAccountTransferRequest {
+	api.common.OperatorContext operator_context = 1;
+	string product_type = 2;
+	// must equal the rule's currency for the product (e.g. USDC for polymarket)
+	string currency = 3;
+	// positive amount; direction picks main->sub or sub->main
+	string cash_amount = 4;
+	enum Direction {
+		DIRECTION_UNSPECIFIED = 0;
+		DIRECTION_TO_SUB_ACCOUNT = 1;
+		DIRECTION_FROM_SUB_ACCOUNT = 2;
+	}
+	Direction direction = 5;
+	// idempotency key — caller-supplied; reusing the same value returns the prior result
+	int64 external_transaction_id = 6;
+	string memo = 7;
+}
+
+message SubAccountTransferResponse {
+	int64 operator_transaction_id = 1;
+	int64 sub_account_transaction_id = 2;
+	string operator_cash = 3;
+	string sub_account_cash = 4;
+}
+
+message SubAccountAdjustRequest {
+	api.common.OperatorContext operator_context = 1;
+	string product_type = 2;
+	string currency = 3;
+	// "sub_account_adjust_credit" or "sub_account_adjust_debit"
+	string transaction_type = 4;
+	// always positive; direction derived from transaction_type
+	string cash_amount = 5;
+	int64 external_transaction_id = 6;
+	string memo = 7;
+}
+
+message SubAccountAdjustResponse {
+	int64 transaction_id = 1;
+	string cash = 2;
+}
+
+message GetOperatorSubAccountRequest {
+	api.common.OperatorContext operator_context = 1;
+	// empty = return all product_types for this operator
+	optional string product_type = 2;
+}
+
+message ListOperatorSubAccountTransactionsRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional string product_type = 2;
+	optional string currency = 3;
+	repeated string transaction_types = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	optional int32 page = 7;
+	optional int32 page_size = 8;
 }
 
 message ListOperatorBalanceTransactionsRequest {

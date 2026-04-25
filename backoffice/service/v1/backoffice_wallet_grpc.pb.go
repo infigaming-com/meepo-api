@@ -37,6 +37,12 @@ const (
 	BackofficeWallet_OperatorBalanceRollback_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceRollback"
 	BackofficeWallet_OperatorBalanceSettle_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
 	BackofficeWallet_OperatorBalanceAdjust_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceAdjust"
+	BackofficeWallet_EnableOperatorSubAccount_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/EnableOperatorSubAccount"
+	BackofficeWallet_DisableOperatorSubAccount_FullMethodName             = "/api.backoffice.service.v1.BackofficeWallet/DisableOperatorSubAccount"
+	BackofficeWallet_SubAccountTransfer_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/SubAccountTransfer"
+	BackofficeWallet_SubAccountAdjust_FullMethodName                      = "/api.backoffice.service.v1.BackofficeWallet/SubAccountAdjust"
+	BackofficeWallet_GetOperatorSubAccount_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorSubAccount"
+	BackofficeWallet_ListOperatorSubAccountTransactions_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorSubAccountTransactions"
 	BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 	BackofficeWallet_UpdateOperatorBalance_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 	BackofficeWallet_GetOperatorBalance_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
@@ -118,6 +124,20 @@ type BackofficeWalletClient interface {
 	OperatorBalanceSettle(ctx context.Context, in *OperatorBalanceSettleRequest, opts ...grpc.CallOption) (*OperatorBalanceSettleResponse, error)
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
 	OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...grpc.CallOption) (*OperatorBalanceAdjustResponse, error)
+	// ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// EnableOperatorSubAccount turns on a sub-account row for the (operator, product_type) pair.
+	// "No row == disabled"; Enable inserts a zeroed row with enabled=true. Idempotent.
+	EnableOperatorSubAccount(ctx context.Context, in *EnableOperatorSubAccountRequest, opts ...grpc.CallOption) (*EnableOperatorSubAccountResponse, error)
+	// DisableOperatorSubAccount sets enabled=false on an existing row, keeping the row for joinable history.
+	DisableOperatorSubAccount(ctx context.Context, in *DisableOperatorSubAccountRequest, opts ...grpc.CallOption) (*DisableOperatorSubAccountResponse, error)
+	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+	SubAccountTransfer(ctx context.Context, in *SubAccountTransferRequest, opts ...grpc.CallOption) (*SubAccountTransferResponse, error)
+	// SubAccountAdjust manually credits/debits the sub-account (system-level only).
+	SubAccountAdjust(ctx context.Context, in *SubAccountAdjustRequest, opts ...grpc.CallOption) (*SubAccountAdjustResponse, error)
+	// GetOperatorSubAccount returns the current row(s) for the operator (optionally filtered by product_type).
+	GetOperatorSubAccount(ctx context.Context, in *GetOperatorSubAccountRequest, opts ...grpc.CallOption) (*v1.GetOperatorSubAccountResponse, error)
+	// ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
+	ListOperatorSubAccountTransactions(ctx context.Context, in *ListOperatorSubAccountTransactionsRequest, opts ...grpc.CallOption) (*v1.ListOperatorSubAccountTransactionsResponse, error)
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorBalanceTransactionsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
@@ -377,6 +397,66 @@ func (c *backofficeWalletClient) OperatorBalanceAdjust(ctx context.Context, in *
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(OperatorBalanceAdjustResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_OperatorBalanceAdjust_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) EnableOperatorSubAccount(ctx context.Context, in *EnableOperatorSubAccountRequest, opts ...grpc.CallOption) (*EnableOperatorSubAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnableOperatorSubAccountResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_EnableOperatorSubAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) DisableOperatorSubAccount(ctx context.Context, in *DisableOperatorSubAccountRequest, opts ...grpc.CallOption) (*DisableOperatorSubAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DisableOperatorSubAccountResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_DisableOperatorSubAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) SubAccountTransfer(ctx context.Context, in *SubAccountTransferRequest, opts ...grpc.CallOption) (*SubAccountTransferResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SubAccountTransferResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_SubAccountTransfer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) SubAccountAdjust(ctx context.Context, in *SubAccountAdjustRequest, opts ...grpc.CallOption) (*SubAccountAdjustResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SubAccountAdjustResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_SubAccountAdjust_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) GetOperatorSubAccount(ctx context.Context, in *GetOperatorSubAccountRequest, opts ...grpc.CallOption) (*v1.GetOperatorSubAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorSubAccountResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetOperatorSubAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ListOperatorSubAccountTransactions(ctx context.Context, in *ListOperatorSubAccountTransactionsRequest, opts ...grpc.CallOption) (*v1.ListOperatorSubAccountTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListOperatorSubAccountTransactionsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListOperatorSubAccountTransactions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -831,6 +911,20 @@ type BackofficeWalletServer interface {
 	OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error)
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
 	OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error)
+	// ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// EnableOperatorSubAccount turns on a sub-account row for the (operator, product_type) pair.
+	// "No row == disabled"; Enable inserts a zeroed row with enabled=true. Idempotent.
+	EnableOperatorSubAccount(context.Context, *EnableOperatorSubAccountRequest) (*EnableOperatorSubAccountResponse, error)
+	// DisableOperatorSubAccount sets enabled=false on an existing row, keeping the row for joinable history.
+	DisableOperatorSubAccount(context.Context, *DisableOperatorSubAccountRequest) (*DisableOperatorSubAccountResponse, error)
+	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+	SubAccountTransfer(context.Context, *SubAccountTransferRequest) (*SubAccountTransferResponse, error)
+	// SubAccountAdjust manually credits/debits the sub-account (system-level only).
+	SubAccountAdjust(context.Context, *SubAccountAdjustRequest) (*SubAccountAdjustResponse, error)
+	// GetOperatorSubAccount returns the current row(s) for the operator (optionally filtered by product_type).
+	GetOperatorSubAccount(context.Context, *GetOperatorSubAccountRequest) (*v1.GetOperatorSubAccountResponse, error)
+	// ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
+	ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*v1.ListOperatorSubAccountTransactionsResponse, error)
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
@@ -976,6 +1070,24 @@ func (UnimplementedBackofficeWalletServer) OperatorBalanceSettle(context.Context
 }
 func (UnimplementedBackofficeWalletServer) OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method OperatorBalanceAdjust not implemented")
+}
+func (UnimplementedBackofficeWalletServer) EnableOperatorSubAccount(context.Context, *EnableOperatorSubAccountRequest) (*EnableOperatorSubAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EnableOperatorSubAccount not implemented")
+}
+func (UnimplementedBackofficeWalletServer) DisableOperatorSubAccount(context.Context, *DisableOperatorSubAccountRequest) (*DisableOperatorSubAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DisableOperatorSubAccount not implemented")
+}
+func (UnimplementedBackofficeWalletServer) SubAccountTransfer(context.Context, *SubAccountTransferRequest) (*SubAccountTransferResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SubAccountTransfer not implemented")
+}
+func (UnimplementedBackofficeWalletServer) SubAccountAdjust(context.Context, *SubAccountAdjustRequest) (*SubAccountAdjustResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SubAccountAdjust not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GetOperatorSubAccount(context.Context, *GetOperatorSubAccountRequest) (*v1.GetOperatorSubAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorSubAccount not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*v1.ListOperatorSubAccountTransactionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperatorSubAccountTransactions not implemented")
 }
 func (UnimplementedBackofficeWalletServer) ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorBalanceTransactions not implemented")
@@ -1423,6 +1535,114 @@ func _BackofficeWallet_OperatorBalanceAdjust_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeWalletServer).OperatorBalanceAdjust(ctx, req.(*OperatorBalanceAdjustRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_EnableOperatorSubAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableOperatorSubAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).EnableOperatorSubAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_EnableOperatorSubAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).EnableOperatorSubAccount(ctx, req.(*EnableOperatorSubAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_DisableOperatorSubAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DisableOperatorSubAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).DisableOperatorSubAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_DisableOperatorSubAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).DisableOperatorSubAccount(ctx, req.(*DisableOperatorSubAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_SubAccountTransfer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubAccountTransferRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).SubAccountTransfer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_SubAccountTransfer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).SubAccountTransfer(ctx, req.(*SubAccountTransferRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_SubAccountAdjust_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubAccountAdjustRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).SubAccountAdjust(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_SubAccountAdjust_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).SubAccountAdjust(ctx, req.(*SubAccountAdjustRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_GetOperatorSubAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorSubAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GetOperatorSubAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GetOperatorSubAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GetOperatorSubAccount(ctx, req.(*GetOperatorSubAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ListOperatorSubAccountTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorSubAccountTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListOperatorSubAccountTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListOperatorSubAccountTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListOperatorSubAccountTransactions(ctx, req.(*ListOperatorSubAccountTransactionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2239,6 +2459,30 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OperatorBalanceAdjust",
 			Handler:    _BackofficeWallet_OperatorBalanceAdjust_Handler,
+		},
+		{
+			MethodName: "EnableOperatorSubAccount",
+			Handler:    _BackofficeWallet_EnableOperatorSubAccount_Handler,
+		},
+		{
+			MethodName: "DisableOperatorSubAccount",
+			Handler:    _BackofficeWallet_DisableOperatorSubAccount_Handler,
+		},
+		{
+			MethodName: "SubAccountTransfer",
+			Handler:    _BackofficeWallet_SubAccountTransfer_Handler,
+		},
+		{
+			MethodName: "SubAccountAdjust",
+			Handler:    _BackofficeWallet_SubAccountAdjust_Handler,
+		},
+		{
+			MethodName: "GetOperatorSubAccount",
+			Handler:    _BackofficeWallet_GetOperatorSubAccount_Handler,
+		},
+		{
+			MethodName: "ListOperatorSubAccountTransactions",
+			Handler:    _BackofficeWallet_ListOperatorSubAccountTransactions_Handler,
 		},
 		{
 			MethodName: "ListOperatorBalanceTransactions",
