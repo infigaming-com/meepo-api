@@ -2290,3 +2290,15 @@ func IsGameBonusRestricted(err error) bool {
 func ErrorGameBonusRestricted(format string, args ...interface{}) *errors.Error {
 	return errors.New(403, ErrorReason_GAME_BONUS_RESTRICTED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidBatchSize(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_BATCH_SIZE.String() && e.Code == 400
+}
+
+func ErrorInvalidBatchSize(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_BATCH_SIZE.String(), fmt.Sprintf(format, args...))
+}

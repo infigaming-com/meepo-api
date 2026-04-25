@@ -201,4 +201,5 @@ enum ErrorReason {
   CASH_BET_LIMIT_EXCEEDED = 30187;
   BONUS_CLAIM_REJECTED = 30188 [(errors.code) = 403];
   GAME_BONUS_RESTRICTED = 30189 [(errors.code) = 403];
+  INVALID_BATCH_SIZE = 30190 [(errors.code) = 400];
 }
