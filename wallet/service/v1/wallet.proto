@@ -1501,6 +1501,9 @@ message SubAccountAdjustRequest {
 	string cash_amount = 6;
 	int64 external_transaction_id = 7;
 	string memo = 8;
+	// who initiates this adjustment — used by wallet for defense-in-depth RBAC
+	// even though the BO layer is the primary gate.
+	api.common.OperatorContext initiator_operator_context = 9;
 }
 
 message SubAccountAdjustResponse {
