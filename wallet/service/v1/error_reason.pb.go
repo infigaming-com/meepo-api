@@ -215,7 +215,7 @@ const (
 	ErrorReason_CASH_BET_LIMIT_EXCEEDED                                         ErrorReason = 30187
 	ErrorReason_BONUS_CLAIM_REJECTED                                            ErrorReason = 30188
 	ErrorReason_GAME_BONUS_RESTRICTED                                           ErrorReason = 30189
-	ErrorReason_INVALID_BATCH_SIZE                                              ErrorReason = 30190
+	ErrorReason_INVALID_BATCH_SIZE                                              ErrorReason = 30199
 )
 
 // Enum value maps for ErrorReason.
@@ -411,7 +411,7 @@ var (
 		30187: "CASH_BET_LIMIT_EXCEEDED",
 		30188: "BONUS_CLAIM_REJECTED",
 		30189: "GAME_BONUS_RESTRICTED",
-		30190: "INVALID_BATCH_SIZE",
+		30199: "INVALID_BATCH_SIZE",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -604,7 +604,7 @@ var (
 		"CASH_BET_LIMIT_EXCEEDED":                                         30187,
 		"BONUS_CLAIM_REJECTED":                                            30188,
 		"GAME_BONUS_RESTRICTED":                                           30189,
-		"INVALID_BATCH_SIZE":                                              30190,
+		"INVALID_BATCH_SIZE":                                              30199,
 	}
 )
 
@@ -831,7 +831,7 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x17CASH_BET_LIMIT_EXCEEDED\x10\xeb\xeb\x01\x12 \n" +
 	"\x14BONUS_CLAIM_REJECTED\x10\xec\xeb\x01\x1a\x04\xa8E\x93\x03\x12!\n" +
 	"\x15GAME_BONUS_RESTRICTED\x10\xed\xeb\x01\x1a\x04\xa8E\x93\x03\x12\x1e\n" +
-	"\x12INVALID_BATCH_SIZE\x10\xee\xeb\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x12INVALID_BATCH_SIZE\x10\xf7\xeb\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
