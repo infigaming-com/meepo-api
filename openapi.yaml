@@ -11668,6 +11668,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetCurrenciesResponse'
+    /v1/wallet/deposit-reward/sequences/preview:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+                 for the operator+currency. Used by the registration page; operator is resolved from the Origin
+                 header and the endpoint does not require authentication.
+            operationId: Wallet_GetDepositRewardSequencesPreview
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetDepositRewardSequencesPreviewRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetDepositRewardSequencesPreviewResponse'
     /v1/wallet/deposit-reward/user-sequence:
         post:
             tags:
@@ -31637,6 +31659,15 @@ components:
                     type: string
                 segmentName:
                     type: string
+                applicableRewardTypes:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Which reward_type values this rule applies to. Empty = applies to ALL
+                         reward types (backwards-compatible default). Non-empty = only matches
+                         CheckClaimEligibility requests whose reward_type is in the list.
+                         Examples: ["vip_reward"], ["promo_code","deposit_reward"], [].
                 requireKyc:
                     type: boolean
                     description: Account restrictions
@@ -35184,6 +35215,38 @@ components:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
                 customDepositRewardConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
+        api.wallet.service.v1.GetDepositRewardSequencesPreviewRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                    description: Currency selected on the registration page; required.
+        api.wallet.service.v1.GetDepositRewardSequencesPreviewResponse:
+            type: object
+            properties:
+                currency:
+                    type: string
+                welcomeRewardEnabled:
+                    type: boolean
+                dailyRewardEnabled:
+                    type: boolean
+                welcomeRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                    description: |-
+                        Sequences are server-side filtered to enabled + currently within start/end window,
+                         sorted by serial number.
+                dailyRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                welcomeRewardSequencesMinCount:
+                    type: integer
+                    format: int32
+                dailyRewardSequencesMinCount:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest:
             type: object
             properties:

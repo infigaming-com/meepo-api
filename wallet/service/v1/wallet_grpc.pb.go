@@ -85,6 +85,7 @@ const (
 	Wallet_GetPromoCodeInfo_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
 	Wallet_ClaimPromoCode_FullMethodName                      = "/api.wallet.service.v1.Wallet/ClaimPromoCode"
 	Wallet_GetUserDepositRewardSequence_FullMethodName        = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
+	Wallet_GetDepositRewardSequencesPreview_FullMethodName    = "/api.wallet.service.v1.Wallet/GetDepositRewardSequencesPreview"
 	Wallet_GetGamificationCurrencyConfig_FullMethodName       = "/api.wallet.service.v1.Wallet/GetGamificationCurrencyConfig"
 	Wallet_UpdateOperatorCurrencyConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
 	Wallet_PushBetLimitsToBottomOperators_FullMethodName      = "/api.wallet.service.v1.Wallet/PushBetLimitsToBottomOperators"
@@ -274,6 +275,10 @@ type WalletClient interface {
 	ClaimPromoCode(ctx context.Context, in *ClaimPromoCodeRequest, opts ...grpc.CallOption) (*ClaimPromoCodeResponse, error)
 	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(ctx context.Context, in *GetUserDepositRewardSequenceRequest, opts ...grpc.CallOption) (*GetUserDepositRewardSequenceResponse, error)
+	// GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+	// for the operator+currency. Used by the registration page; operator is resolved from the Origin
+	// header and the endpoint does not require authentication.
+	GetDepositRewardSequencesPreview(ctx context.Context, in *GetDepositRewardSequencesPreviewRequest, opts ...grpc.CallOption) (*GetDepositRewardSequencesPreviewResponse, error)
 	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
@@ -1023,6 +1028,16 @@ func (c *walletClient) GetUserDepositRewardSequence(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *walletClient) GetDepositRewardSequencesPreview(ctx context.Context, in *GetDepositRewardSequencesPreviewRequest, opts ...grpc.CallOption) (*GetDepositRewardSequencesPreviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDepositRewardSequencesPreviewResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetDepositRewardSequencesPreview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*GetGamificationCurrencyConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetGamificationCurrencyConfigResponse)
@@ -1526,6 +1541,10 @@ type WalletServer interface {
 	ClaimPromoCode(context.Context, *ClaimPromoCodeRequest) (*ClaimPromoCodeResponse, error)
 	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(context.Context, *GetUserDepositRewardSequenceRequest) (*GetUserDepositRewardSequenceResponse, error)
+	// GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+	// for the operator+currency. Used by the registration page; operator is resolved from the Origin
+	// header and the endpoint does not require authentication.
+	GetDepositRewardSequencesPreview(context.Context, *GetDepositRewardSequencesPreviewRequest) (*GetDepositRewardSequencesPreviewResponse, error)
 	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
@@ -1812,6 +1831,9 @@ func (UnimplementedWalletServer) ClaimPromoCode(context.Context, *ClaimPromoCode
 }
 func (UnimplementedWalletServer) GetUserDepositRewardSequence(context.Context, *GetUserDepositRewardSequenceRequest) (*GetUserDepositRewardSequenceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserDepositRewardSequence not implemented")
+}
+func (UnimplementedWalletServer) GetDepositRewardSequencesPreview(context.Context, *GetDepositRewardSequencesPreviewRequest) (*GetDepositRewardSequencesPreviewResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDepositRewardSequencesPreview not implemented")
 }
 func (UnimplementedWalletServer) GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*GetGamificationCurrencyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGamificationCurrencyConfig not implemented")
@@ -3127,6 +3149,24 @@ func _Wallet_GetUserDepositRewardSequence_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetDepositRewardSequencesPreview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDepositRewardSequencesPreviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetDepositRewardSequencesPreview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetDepositRewardSequencesPreview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetDepositRewardSequencesPreview(ctx, req.(*GetDepositRewardSequencesPreviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_GetGamificationCurrencyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGamificationCurrencyConfigRequest)
 	if err := dec(in); err != nil {
@@ -4027,6 +4067,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserDepositRewardSequence",
 			Handler:    _Wallet_GetUserDepositRewardSequence_Handler,
+		},
+		{
+			MethodName: "GetDepositRewardSequencesPreview",
+			Handler:    _Wallet_GetDepositRewardSequencesPreview_Handler,
 		},
 		{
 			MethodName: "GetGamificationCurrencyConfig",
