@@ -8963,12 +8963,12 @@ type ListLiveEventsRequest struct {
 	//
 	// ```
 	//
-	// Example D — multi-sport pre-match top-league widget (Soccer + Basketball + Tennis + Baseball):
+	// Example D — pre-match tennis top-league widget:
 	//
 	// ```json
 	//
 	//	{
-	//	  "sportID": "1,2,6,7",
+	//	  "sportID": "6",
 	//	  "isLive": "false",
 	//	  "eventType": "Fixture",
 	//	  "take": "10",
