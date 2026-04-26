@@ -226,6 +226,7 @@ const (
 	ErrorReason_USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED ErrorReason = 30197
 	ErrorReason_INVALID_USER_IDS                      ErrorReason = 30198
 	ErrorReason_INVALID_BATCH_SIZE                    ErrorReason = 30199
+	ErrorReason_INVALID_CURRENCY                      ErrorReason = 30200
 )
 
 // Enum value maps for ErrorReason.
@@ -431,6 +432,7 @@ var (
 		30197: "USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED",
 		30198: "INVALID_USER_IDS",
 		30199: "INVALID_BATCH_SIZE",
+		30200: "INVALID_CURRENCY",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -633,6 +635,7 @@ var (
 		"USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED":                           30197,
 		"INVALID_USER_IDS":                                                30198,
 		"INVALID_BATCH_SIZE":                                              30199,
+		"INVALID_CURRENCY":                                                30200,
 	}
 )
 
@@ -667,7 +670,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xc4<\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xe2<\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -868,7 +871,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x10USER_SWAP_FAILED\x10\xf4\xeb\x01\x121\n" +
 	"%USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED\x10\xf5\xeb\x01\x1a\x04\xa8E\x90\x03\x12\x1c\n" +
 	"\x10INVALID_USER_IDS\x10\xf6\xeb\x01\x1a\x04\xa8E\x90\x03\x12\x1e\n" +
-	"\x12INVALID_BATCH_SIZE\x10\xf7\xeb\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x12INVALID_BATCH_SIZE\x10\xf7\xeb\x01\x1a\x04\xa8E\x90\x03\x12\x1c\n" +
+	"\x10INVALID_CURRENCY\x10\xf8\xeb\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

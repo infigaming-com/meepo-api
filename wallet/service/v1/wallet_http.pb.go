@@ -26,6 +26,7 @@ const OperationWalletClaimPromoCode = "/api.wallet.service.v1.Wallet/ClaimPromoC
 const OperationWalletDeleteResponsibleGamblingConfig = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
 const OperationWalletGetAppDownloadRewardStatus = "/api.wallet.service.v1.Wallet/GetAppDownloadRewardStatus"
 const OperationWalletGetCurrencies = "/api.wallet.service.v1.Wallet/GetCurrencies"
+const OperationWalletGetDepositRewardSequencesPreview = "/api.wallet.service.v1.Wallet/GetDepositRewardSequencesPreview"
 const OperationWalletGetExchangeRatesWithBaseCurrency = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
 const OperationWalletGetGamificationConfig = "/api.wallet.service.v1.Wallet/GetGamificationConfig"
 const OperationWalletGetPlayerSwapConfig = "/api.wallet.service.v1.Wallet/GetPlayerSwapConfig"
@@ -54,6 +55,10 @@ type WalletHTTPServer interface {
 	// for the app download reward and the reward details for their country.
 	GetAppDownloadRewardStatus(context.Context, *GetAppDownloadRewardStatusRequest) (*GetAppDownloadRewardStatusResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
+	// GetDepositRewardSequencesPreview GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+	// for the operator+currency. Used by the registration page; operator is resolved from the Origin
+	// header and the endpoint does not require authentication.
+	GetDepositRewardSequencesPreview(context.Context, *GetDepositRewardSequencesPreviewRequest) (*GetDepositRewardSequencesPreviewResponse, error)
 	GetExchangeRatesWithBaseCurrency(context.Context, *GetExchangeRatesWithBaseCurrencyRequest) (*GetExchangeRatesWithBaseCurrencyResponse, error)
 	// GetGamificationConfig GetGamificationConfig returns the per-currency gamification config (bet limits,
 	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
@@ -105,6 +110,7 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/promo-code/info", _Wallet_GetPromoCodeInfo0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/promo-code/claim", _Wallet_ClaimPromoCode0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/deposit-reward/user-sequence", _Wallet_GetUserDepositRewardSequence0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/deposit-reward/sequences/preview", _Wallet_GetDepositRewardSequencesPreview0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/bonus-transfer", _Wallet_BonusTransfer0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/responsible-gambling/config/add", _Wallet_AddResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/responsible-gambling/config/delete", _Wallet_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv))
@@ -355,6 +361,28 @@ func _Wallet_GetUserDepositRewardSequence0_HTTP_Handler(srv WalletHTTPServer) fu
 	}
 }
 
+func _Wallet_GetDepositRewardSequencesPreview0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetDepositRewardSequencesPreviewRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletGetDepositRewardSequencesPreview)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetDepositRewardSequencesPreview(ctx, req.(*GetDepositRewardSequencesPreviewRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetDepositRewardSequencesPreviewResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Wallet_BonusTransfer0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BonusTransferRequest
@@ -504,6 +532,10 @@ type WalletHTTPClient interface {
 	// for the app download reward and the reward details for their country.
 	GetAppDownloadRewardStatus(ctx context.Context, req *GetAppDownloadRewardStatusRequest, opts ...http.CallOption) (rsp *GetAppDownloadRewardStatusResponse, err error)
 	GetCurrencies(ctx context.Context, req *GetCurrenciesRequest, opts ...http.CallOption) (rsp *GetCurrenciesResponse, err error)
+	// GetDepositRewardSequencesPreview GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+	// for the operator+currency. Used by the registration page; operator is resolved from the Origin
+	// header and the endpoint does not require authentication.
+	GetDepositRewardSequencesPreview(ctx context.Context, req *GetDepositRewardSequencesPreviewRequest, opts ...http.CallOption) (rsp *GetDepositRewardSequencesPreviewResponse, err error)
 	GetExchangeRatesWithBaseCurrency(ctx context.Context, req *GetExchangeRatesWithBaseCurrencyRequest, opts ...http.CallOption) (rsp *GetExchangeRatesWithBaseCurrencyResponse, err error)
 	// GetGamificationConfig GetGamificationConfig returns the per-currency gamification config (bet limits,
 	// bonus rules, wagering requirements) plus the operator-level clear-bonus-on-withdrawal flag.
@@ -642,6 +674,22 @@ func (c *WalletHTTPClientImpl) GetCurrencies(ctx context.Context, in *GetCurrenc
 	pattern := "/v1/wallet/currencies/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletGetCurrencies))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetDepositRewardSequencesPreview GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+// for the operator+currency. Used by the registration page; operator is resolved from the Origin
+// header and the endpoint does not require authentication.
+func (c *WalletHTTPClientImpl) GetDepositRewardSequencesPreview(ctx context.Context, in *GetDepositRewardSequencesPreviewRequest, opts ...http.CallOption) (*GetDepositRewardSequencesPreviewResponse, error) {
+	var out GetDepositRewardSequencesPreviewResponse
+	pattern := "/v1/wallet/deposit-reward/sequences/preview"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletGetDepositRewardSequencesPreview))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

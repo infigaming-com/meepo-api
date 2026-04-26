@@ -282,6 +282,16 @@ service Wallet {
 		};
 	}
 
+	// GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+	// for the operator+currency. Used by the registration page; operator is resolved from the Origin
+	// header and the endpoint does not require authentication.
+	rpc GetDepositRewardSequencesPreview(GetDepositRewardSequencesPreviewRequest) returns (GetDepositRewardSequencesPreviewResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/deposit-reward/sequences/preview"
+			body: "*"
+		};
+	}
+
 	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	rpc GetGamificationCurrencyConfig(GetGamificationCurrencyConfigRequest) returns (GetGamificationCurrencyConfigResponse) {}
 
@@ -1546,6 +1556,27 @@ message GetUserDepositRewardSequenceResponse {
 	int32 welcome_reward_count = 2;
 	int32 daily_reward_count = 3;
 	RewardSequence current_reward_sequence = 4;
+}
+
+message GetDepositRewardSequencesPreviewRequest {
+	// Currency selected on the registration page; required.
+	string currency = 1;
+}
+
+message GetDepositRewardSequencesPreviewResponse {
+	string currency = 1;
+	bool welcome_reward_enabled = 2;
+	bool daily_reward_enabled = 3;
+	// Effective sequences a player will experience for the requested currency. Server-side
+	// processing: filter to enabled + currently within start/end window, sort by serial
+	// number, then truncate to the operator-wide cap (smallest valid-sequence count across
+	// currencies in the effective config; currencies with zero valid sequences are excluded
+	// when computing the cap — same semantics that GetUserDepositRewardSequence gates user
+	// eligibility on). Anything above the cap is unreachable for players, so the preview
+	// drops it. The slice length itself communicates the count; clients can render the
+	// response directly.
+	repeated RewardSequence welcome_reward_sequences = 4;
+	repeated RewardSequence daily_reward_sequences = 5;
 }
 
 message GetGamificationCurrencyConfigRequest {
