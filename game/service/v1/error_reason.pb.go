@@ -54,6 +54,7 @@ const (
 	ErrorReason_USER_GAME_DISABLED_BY_ACCOUNT_SETTING     ErrorReason = 40026
 	ErrorReason_OPERATOR_STATUS_INVALID                   ErrorReason = 40027
 	ErrorReason_GAME_BONUS_RESTRICTED                     ErrorReason = 40028
+	ErrorReason_GAME_FREESPIN_PLAYER_NO_ACTIVE            ErrorReason = 40029
 )
 
 // Enum value maps for ErrorReason.
@@ -88,6 +89,7 @@ var (
 		40026: "USER_GAME_DISABLED_BY_ACCOUNT_SETTING",
 		40027: "OPERATOR_STATUS_INVALID",
 		40028: "GAME_BONUS_RESTRICTED",
+		40029: "GAME_FREESPIN_PLAYER_NO_ACTIVE",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                               0,
@@ -119,6 +121,7 @@ var (
 		"USER_GAME_DISABLED_BY_ACCOUNT_SETTING":     40026,
 		"OPERATOR_STATUS_INVALID":                   40027,
 		"GAME_BONUS_RESTRICTED":                     40028,
+		"GAME_FREESPIN_PLAYER_NO_ACTIVE":            40029,
 	}
 )
 
@@ -153,7 +156,7 @@ var File_game_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xa4\a\n" +
+	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xd0\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12GAME_BET_NOT_FOUND\x10\xc1\xb8\x02\x12\x1b\n" +
@@ -183,7 +186,8 @@ const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\x0fUSER_NO_DEPOSIT\x10ٸ\x02\x12+\n" +
 	"%USER_GAME_DISABLED_BY_ACCOUNT_SETTING\x10ڸ\x02\x12\x1d\n" +
 	"\x17OPERATOR_STATUS_INVALID\x10۸\x02\x12!\n" +
-	"\x15GAME_BONUS_RESTRICTED\x10ܸ\x02\x1a\x04\xa8E\x93\x03\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x15GAME_BONUS_RESTRICTED\x10ܸ\x02\x1a\x04\xa8E\x93\x03\x12*\n" +
+	"\x1eGAME_FREESPIN_PLAYER_NO_ACTIVE\x10ݸ\x02\x1a\x04\xa8E\x94\x03\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
