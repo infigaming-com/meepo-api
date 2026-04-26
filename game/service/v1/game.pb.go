@@ -8978,6 +8978,22 @@ type ListLiveEventsRequest struct {
 	//	}
 	//
 	// ```
+	//
+	// Example E — list events for a specific league by `leagueID` (e.g. a league landing page):
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "1",
+	//	  "isLive": "false",
+	//	  "eventType": "Fixture",
+	//	  "take": "20",
+	//	  "skip": "0",
+	//	  "locale": "en",
+	//	  "leagueID": "2627"
+	//	}
+	//
+	// ```
 	RequestPayload *structpb.Struct `protobuf:"bytes,2,opt,name=request_payload,json=requestPayload,proto3" json:"request_payload,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache

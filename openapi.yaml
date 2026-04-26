@@ -29164,6 +29164,20 @@ components:
                            "isTopLeague": "true"
                          }
                          ```
+
+                         Example E — list events for a specific league by `leagueID` (e.g. a league landing page):
+
+                         ```json
+                         {
+                           "sportID": "1",
+                           "isLive": "false",
+                           "eventType": "Fixture",
+                           "take": "20",
+                           "skip": "0",
+                           "locale": "en",
+                           "leagueID": "2627"
+                         }
+                         ```
             description: |-
                 ListLiveEvents - list events (in-play and pre-match) of a sports/live-betting game by proxying
                  `request_payload` to the upstream aggregator's events endpoint.

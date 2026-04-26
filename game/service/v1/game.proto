@@ -1886,6 +1886,20 @@ message ListLiveEventsRequest {
 	//   "isTopLeague": "true"
 	// }
 	// ```
+	//
+	// Example E — list events for a specific league by `leagueID` (e.g. a league landing page):
+	//
+	// ```json
+	// {
+	//   "sportID": "1",
+	//   "isLive": "false",
+	//   "eventType": "Fixture",
+	//   "take": "20",
+	//   "skip": "0",
+	//   "locale": "en",
+	//   "leagueID": "2627"
+	// }
+	// ```
 	google.protobuf.Struct request_payload = 2;
 }
 
