@@ -29178,6 +29178,19 @@ components:
                            "leagueID": "2627"
                          }
                          ```
+
+                         Example F — list outright (championship / futures) markets, e.g. a Soccer "winner" board:
+
+                         ```json
+                         {
+                           "sportID": "1",
+                           "isLive": "false",
+                           "eventType": "Outright",
+                           "take": "20",
+                           "skip": "0",
+                           "locale": "en"
+                         }
+                         ```
             description: |-
                 ListLiveEvents - list events (in-play and pre-match) of a sports/live-betting game by proxying
                  `request_payload` to the upstream aggregator's events endpoint.

@@ -8994,6 +8994,21 @@ type ListLiveEventsRequest struct {
 	//	}
 	//
 	// ```
+	//
+	// Example F — list outright (championship / futures) markets, e.g. a Soccer "winner" board:
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "1",
+	//	  "isLive": "false",
+	//	  "eventType": "Outright",
+	//	  "take": "20",
+	//	  "skip": "0",
+	//	  "locale": "en"
+	//	}
+	//
+	// ```
 	RequestPayload *structpb.Struct `protobuf:"bytes,2,opt,name=request_payload,json=requestPayload,proto3" json:"request_payload,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache

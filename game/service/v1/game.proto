@@ -1900,6 +1900,19 @@ message ListLiveEventsRequest {
 	//   "leagueID": "2627"
 	// }
 	// ```
+	//
+	// Example F — list outright (championship / futures) markets, e.g. a Soccer "winner" board:
+	//
+	// ```json
+	// {
+	//   "sportID": "1",
+	//   "isLive": "false",
+	//   "eventType": "Outright",
+	//   "take": "20",
+	//   "skip": "0",
+	//   "locale": "en"
+	// }
+	// ```
 	google.protobuf.Struct request_payload = 2;
 }
 
