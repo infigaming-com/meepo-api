@@ -8894,7 +8894,7 @@ func (x *GetGameInfoResponse) GetGameInfo() *GameInfo {
 // | ---           | ---    | ---      | ---                                                                                                  |
 // | `sportID`     | string | yes      | Sport ID, or a comma-separated list of sport IDs (e.g. `"1"`, `"1,2,6,7"`) — see "Sport IDs" below.  |
 // | `isLive`      | string | yes      | `"true"` (in-play / live) or `"false"` (pre-match / early).                                          |
-// | `eventType`   | string | yes      | `"fixture"` (head-to-head match) or `"outright"` (championship / futures). Case-insensitive.         |
+// | `eventType`   | string | yes      | `"Fixture"` (head-to-head match) or `"Outright"` (championship / futures). Case-insensitive.         |
 // | `take`        | string | yes      | Page size — positive integer as a string, e.g. `"10"`, `"50"`.                                       |
 // | `skip`        | string | yes      | Page offset — non-negative integer as a string, e.g. `"0"`, `"20"`.                                  |
 // | `locale`      | string | yes      | 2-letter language code, e.g. `"en"`, `"zh"`, `"ja"`, `"ko"`, `"th"`, `"vi"`, `"pt"`, `"es"`.         |
@@ -8923,7 +8923,7 @@ type ListLiveEventsRequest struct {
 	//	{
 	//	  "sportID": "2",
 	//	  "isLive": "true",
-	//	  "eventType": "fixture",
+	//	  "eventType": "Fixture",
 	//	  "take": "10",
 	//	  "skip": "0",
 	//	  "locale": "en"
@@ -8938,7 +8938,7 @@ type ListLiveEventsRequest struct {
 	//	{
 	//	  "sportID": "2",
 	//	  "isLive": "true",
-	//	  "eventType": "fixture",
+	//	  "eventType": "Fixture",
 	//	  "take": "20",
 	//	  "skip": "20",
 	//	  "locale": "en",
@@ -8954,7 +8954,7 @@ type ListLiveEventsRequest struct {
 	//	{
 	//	  "sportID": "1",
 	//	  "isLive": "false",
-	//	  "eventType": "fixture",
+	//	  "eventType": "Fixture",
 	//	  "take": "1",
 	//	  "skip": "0",
 	//	  "locale": "en",
@@ -8970,7 +8970,7 @@ type ListLiveEventsRequest struct {
 	//	{
 	//	  "sportID": "1,2,6,7",
 	//	  "isLive": "false",
-	//	  "eventType": "fixture",
+	//	  "eventType": "Fixture",
 	//	  "take": "10",
 	//	  "skip": "0",
 	//	  "locale": "en",
