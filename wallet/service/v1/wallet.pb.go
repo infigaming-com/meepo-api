@@ -7834,10 +7834,11 @@ type GetDepositRewardSequencesPreviewResponse struct {
 	// Effective sequences a player will experience for the requested currency. Server-side
 	// processing: filter to enabled + currently within start/end window, sort by serial
 	// number, then truncate to the operator-wide cap (smallest valid-sequence count across
-	// all currencies in the effective config — same cap that GetUserDepositRewardSequence
-	// gates user eligibility on). Anything above the cap is unreachable for players, so the
-	// preview drops it. The slice length itself communicates the count; clients can render
-	// the response directly.
+	// currencies in the effective config; currencies with zero valid sequences are excluded
+	// when computing the cap — same semantics that GetUserDepositRewardSequence gates user
+	// eligibility on). Anything above the cap is unreachable for players, so the preview
+	// drops it. The slice length itself communicates the count; clients can render the
+	// response directly.
 	WelcomeRewardSequences []*RewardSequence `protobuf:"bytes,4,rep,name=welcome_reward_sequences,json=welcomeRewardSequences,proto3" json:"welcome_reward_sequences,omitempty"`
 	DailyRewardSequences   []*RewardSequence `protobuf:"bytes,5,rep,name=daily_reward_sequences,json=dailyRewardSequences,proto3" json:"daily_reward_sequences,omitempty"`
 	unknownFields          protoimpl.UnknownFields
