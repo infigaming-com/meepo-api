@@ -8890,17 +8890,17 @@ func (x *GetGameInfoResponse) GetGameInfo() *GameInfo {
 //
 // ## request_payload fields (forwarded verbatim to the provider)
 //
-// | Field         | Type   | Required | Description                                                            |
-// | ---           | ---    | ---      | ---                                                                    |
-// | `sportID`     | string | yes      | Sport ID filter — see "Sport IDs" below.                               |
-// | `isLive`      | string | yes      | `"true"` for in-play (live) events, `"false"` for pre-match (early).   |
-// | `eventType`   | string | yes      | `"Fixture"` (head-to-head) or `"Outright"` (championship/futures).     |
-// | `take`        | string | yes      | Page size — number of events to return.                                |
-// | `skip`        | string | yes      | Page offset — number of events to skip.                                |
-// | `locale`      | string | yes      | 2-letter language code (e.g. `"en"`, `"zh"`).                          |
-// | `leagueID`    | string | no       | Filter by a specific league ID.                                        |
-// | `eventID`     | string | no       | Filter by a specific event ID.                                         |
-// | `isTopLeague` | string | no       | Limit to provider-flagged top leagues.                                 |
+// | Field         | Type   | Required | Allowed values / format                                                                              |
+// | ---           | ---    | ---      | ---                                                                                                  |
+// | `sportID`     | string | yes      | Sport ID — see "Sport IDs" below.                                                                    |
+// | `isLive`      | string | yes      | `"true"` (in-play / live) or `"false"` (pre-match / early).                                          |
+// | `eventType`   | string | yes      | `"Fixture"` (head-to-head match) or `"Outright"` (championship / futures).                           |
+// | `take`        | string | yes      | Page size — positive integer as a string, e.g. `"10"`, `"50"`.                                       |
+// | `skip`        | string | yes      | Page offset — non-negative integer as a string, e.g. `"0"`, `"20"`.                                  |
+// | `locale`      | string | yes      | 2-letter language code, e.g. `"en"`, `"zh"`, `"ja"`, `"ko"`, `"th"`, `"vi"`, `"pt"`, `"es"`.         |
+// | `leagueID`    | string | no       | Provider-assigned league ID (numeric string). Empty string `""` or omitted = no league filter.       |
+// | `eventID`     | string | no       | Provider-assigned event ID (numeric string). Empty string `""` or omitted = no event filter.         |
+// | `isTopLeague` | string | no       | `"true"` to return only provider-flagged top leagues; `"false"` or empty `""` = no top-league filter. |
 //
 // ## Sport IDs (subset; the provider's full list may change over time)
 //
@@ -8916,7 +8916,7 @@ type ListLiveEventsRequest struct {
 	// Filter payload forwarded as-is to the upstream aggregator. Field shape follows the provider's API
 	// (see the table in the message-level docs above).
 	//
-	// Example — pull up to 10 in-play basketball head-to-head events, in English:
+	// Example A — pull up to 10 in-play basketball head-to-head events, in English (no optional filters):
 	//
 	// ```json
 	//
@@ -8926,15 +8926,42 @@ type ListLiveEventsRequest struct {
 	//	  "eventType": "Fixture",
 	//	  "take": "10",
 	//	  "skip": "0",
-	//	  "locale": "en",
-	//	  "leagueID": "",
-	//	  "eventID": "",
-	//	  "isTopLeague": ""
+	//	  "locale": "en"
 	//	}
 	//
 	// ```
 	//
-	// An empty payload returns the aggregator's default event list.
+	// Example B — same query, but limited to top leagues only and second page of 20 results:
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "2",
+	//	  "isLive": "true",
+	//	  "eventType": "Fixture",
+	//	  "take": "20",
+	//	  "skip": "20",
+	//	  "locale": "en",
+	//	  "isTopLeague": "true"
+	//	}
+	//
+	// ```
+	//
+	// Example C — fetch a specific event (e.g. for refresh) by `eventID`:
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "1",
+	//	  "isLive": "false",
+	//	  "eventType": "Fixture",
+	//	  "take": "1",
+	//	  "skip": "0",
+	//	  "locale": "en",
+	//	  "eventID": "123456789"
+	//	}
+	//
+	// ```
 	RequestPayload *structpb.Struct `protobuf:"bytes,2,opt,name=request_payload,json=requestPayload,proto3" json:"request_payload,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
