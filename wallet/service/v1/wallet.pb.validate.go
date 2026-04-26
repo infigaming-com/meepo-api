@@ -26495,6 +26495,359 @@ var _ interface {
 	ErrorName() string
 } = GetCompanyFinancialSummaryResponseValidationError{}
 
+// Validate checks the field values on BatchGetCompanyFinancialSummariesRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *BatchGetCompanyFinancialSummariesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BatchGetCompanyFinancialSummariesRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// BatchGetCompanyFinancialSummariesRequestMultiError, or nil if none found.
+func (m *BatchGetCompanyFinancialSummariesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchGetCompanyFinancialSummariesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BatchGetCompanyFinancialSummariesRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BatchGetCompanyFinancialSummariesRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BatchGetCompanyFinancialSummariesRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BatchGetCompanyFinancialSummariesRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BatchGetCompanyFinancialSummariesRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BatchGetCompanyFinancialSummariesRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BatchGetCompanyFinancialSummariesRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BatchGetCompanyFinancialSummariesRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BatchGetCompanyFinancialSummariesRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return BatchGetCompanyFinancialSummariesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchGetCompanyFinancialSummariesRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// BatchGetCompanyFinancialSummariesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type BatchGetCompanyFinancialSummariesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchGetCompanyFinancialSummariesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchGetCompanyFinancialSummariesRequestMultiError) AllErrors() []error { return m }
+
+// BatchGetCompanyFinancialSummariesRequestValidationError is the validation
+// error returned by BatchGetCompanyFinancialSummariesRequest.Validate if the
+// designated constraints aren't met.
+type BatchGetCompanyFinancialSummariesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchGetCompanyFinancialSummariesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BatchGetCompanyFinancialSummariesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BatchGetCompanyFinancialSummariesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BatchGetCompanyFinancialSummariesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BatchGetCompanyFinancialSummariesRequestValidationError) ErrorName() string {
+	return "BatchGetCompanyFinancialSummariesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BatchGetCompanyFinancialSummariesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchGetCompanyFinancialSummariesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchGetCompanyFinancialSummariesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchGetCompanyFinancialSummariesRequestValidationError{}
+
+// Validate checks the field values on
+// BatchGetCompanyFinancialSummariesResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BatchGetCompanyFinancialSummariesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// BatchGetCompanyFinancialSummariesResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// BatchGetCompanyFinancialSummariesResponseMultiError, or nil if none found.
+func (m *BatchGetCompanyFinancialSummariesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchGetCompanyFinancialSummariesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	{
+		sorted_keys := make([]int64, len(m.GetSummaries()))
+		i := 0
+		for key := range m.GetSummaries() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetSummaries()[key]
+			_ = val
+
+			// no validation rules for Summaries[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, BatchGetCompanyFinancialSummariesResponseValidationError{
+							field:  fmt.Sprintf("Summaries[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, BatchGetCompanyFinancialSummariesResponseValidationError{
+							field:  fmt.Sprintf("Summaries[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return BatchGetCompanyFinancialSummariesResponseValidationError{
+						field:  fmt.Sprintf("Summaries[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return BatchGetCompanyFinancialSummariesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchGetCompanyFinancialSummariesResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// BatchGetCompanyFinancialSummariesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BatchGetCompanyFinancialSummariesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchGetCompanyFinancialSummariesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchGetCompanyFinancialSummariesResponseMultiError) AllErrors() []error { return m }
+
+// BatchGetCompanyFinancialSummariesResponseValidationError is the validation
+// error returned by BatchGetCompanyFinancialSummariesResponse.Validate if the
+// designated constraints aren't met.
+type BatchGetCompanyFinancialSummariesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchGetCompanyFinancialSummariesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BatchGetCompanyFinancialSummariesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BatchGetCompanyFinancialSummariesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BatchGetCompanyFinancialSummariesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BatchGetCompanyFinancialSummariesResponseValidationError) ErrorName() string {
+	return "BatchGetCompanyFinancialSummariesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BatchGetCompanyFinancialSummariesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchGetCompanyFinancialSummariesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchGetCompanyFinancialSummariesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchGetCompanyFinancialSummariesResponseValidationError{}
+
 // Validate checks the field values on CompanyFinancialSummary with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

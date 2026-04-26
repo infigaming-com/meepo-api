@@ -211,4 +211,5 @@ enum ErrorReason {
   USER_SWAP_FAILED = 30196;
   USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED = 30197 [(errors.code) = 400];
   INVALID_USER_IDS = 30198 [(errors.code) = 400];
+  INVALID_BATCH_SIZE = 30199 [(errors.code) = 400];
 }

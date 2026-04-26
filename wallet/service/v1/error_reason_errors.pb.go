@@ -2400,3 +2400,15 @@ func IsInvalidUserIds(err error) bool {
 func ErrorInvalidUserIds(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_INVALID_USER_IDS.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidBatchSize(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_BATCH_SIZE.String() && e.Code == 400
+}
+
+func ErrorInvalidBatchSize(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_BATCH_SIZE.String(), fmt.Sprintf(format, args...))
+}
