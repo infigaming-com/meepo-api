@@ -144,6 +144,11 @@ service Wallet {
 	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
 	rpc GetCompanyFinancialSummary(GetCompanyFinancialSummaryRequest) returns (GetCompanyFinancialSummaryResponse) {}
 
+	// BatchGetCompanyFinancialSummaries returns financial summaries for multiple company operators in one call.
+	// Designed for list views that don't need max_withdrawable; the company_max_withdrawable_usd and
+	// custody_max_withdrawable_usd fields are left empty in the batch response.
+	rpc BatchGetCompanyFinancialSummaries(BatchGetCompanyFinancialSummariesRequest) returns (BatchGetCompanyFinancialSummariesResponse) {}
+
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	rpc GetOperatorBalanceTransactionsByIds(GetOperatorBalanceTransactionsByIdsRequest) returns (GetOperatorBalanceTransactionsByIdsResponse) {}
 
@@ -2499,6 +2504,21 @@ message GetCompanyFinancialSummaryRequest {
 
 message GetCompanyFinancialSummaryResponse {
 	CompanyFinancialSummary summary = 1;
+}
+
+message BatchGetCompanyFinancialSummariesRequest {
+	api.common.OperatorContext operator_context = 1;
+	// company operator ids to fetch summaries for. Hard-capped at 200 entries server-side.
+	repeated int64 company_operator_ids = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+}
+
+message BatchGetCompanyFinancialSummariesResponse {
+	// keyed by company_operator_id. company_max_withdrawable_usd and custody_max_withdrawable_usd
+	// are NOT computed in the batch response (left empty); use the single-company GetCompanyFinancialSummary
+	// when MW is needed.
+	map<int64, CompanyFinancialSummary> summaries = 1;
 }
 
 message CompanyFinancialSummary {
