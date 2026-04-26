@@ -1567,8 +1567,13 @@ message GetDepositRewardSequencesPreviewResponse {
 	string currency = 1;
 	bool welcome_reward_enabled = 2;
 	bool daily_reward_enabled = 3;
-	// Sequences are server-side filtered to enabled + currently within start/end window,
-	// sorted by serial number.
+	// Effective sequences a player will experience for the requested currency. Server-side
+	// processing: filter to enabled + currently within start/end window, sort by serial
+	// number, then truncate to the operator-wide cap (smallest valid-sequence count across
+	// all currencies in the effective config — same cap that GetUserDepositRewardSequence
+	// gates user eligibility on). Anything above the cap is unreachable for players, so the
+	// preview drops it. The slice length itself communicates the count; clients can render
+	// the response directly.
 	repeated RewardSequence welcome_reward_sequences = 4;
 	repeated RewardSequence daily_reward_sequences = 5;
 }

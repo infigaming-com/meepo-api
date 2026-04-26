@@ -2412,3 +2412,15 @@ func IsInvalidBatchSize(err error) bool {
 func ErrorInvalidBatchSize(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_INVALID_BATCH_SIZE.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidCurrency(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CURRENCY.String() && e.Code == 400
+}
+
+func ErrorInvalidCurrency(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_CURRENCY.String(), fmt.Sprintf(format, args...))
+}

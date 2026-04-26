@@ -7831,8 +7831,13 @@ type GetDepositRewardSequencesPreviewResponse struct {
 	Currency             string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	WelcomeRewardEnabled bool                   `protobuf:"varint,2,opt,name=welcome_reward_enabled,json=welcomeRewardEnabled,proto3" json:"welcome_reward_enabled,omitempty"`
 	DailyRewardEnabled   bool                   `protobuf:"varint,3,opt,name=daily_reward_enabled,json=dailyRewardEnabled,proto3" json:"daily_reward_enabled,omitempty"`
-	// Sequences are server-side filtered to enabled + currently within start/end window,
-	// sorted by serial number.
+	// Effective sequences a player will experience for the requested currency. Server-side
+	// processing: filter to enabled + currently within start/end window, sort by serial
+	// number, then truncate to the operator-wide cap (smallest valid-sequence count across
+	// all currencies in the effective config — same cap that GetUserDepositRewardSequence
+	// gates user eligibility on). Anything above the cap is unreachable for players, so the
+	// preview drops it. The slice length itself communicates the count; clients can render
+	// the response directly.
 	WelcomeRewardSequences []*RewardSequence `protobuf:"bytes,4,rep,name=welcome_reward_sequences,json=welcomeRewardSequences,proto3" json:"welcome_reward_sequences,omitempty"`
 	DailyRewardSequences   []*RewardSequence `protobuf:"bytes,5,rep,name=daily_reward_sequences,json=dailyRewardSequences,proto3" json:"daily_reward_sequences,omitempty"`
 	unknownFields          protoimpl.UnknownFields
