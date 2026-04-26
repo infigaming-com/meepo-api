@@ -91,6 +91,8 @@ service Game {
 		};
 	};
 
+	// List in-play events for a live-betting game by proxying to the upstream aggregator. Responses are cached for 30 seconds.
+	// See ListLiveEventsRequest for details.
 	rpc ListLiveEvents(ListLiveEventsRequest) returns (ListLiveEventsResponse) {
 		option (google.api.http) = {
 			post: "/v1/game/live-events/list"
@@ -1795,12 +1797,127 @@ message GetGameInfoResponse {
 	GameInfo game_info = 1;
 }
 
+// ListLiveEvents - list events (in-play and pre-match) of a sports/live-betting game by proxying
+// `request_payload` to the upstream aggregator's events endpoint.
+//
+// Behavior:
+// - The upstream endpoint and provider credentials are resolved from `game_id`.
+// - `request_payload` is forwarded as-is; the operator's API key/secret are used to sign the call.
+// - Responses are cached for 30 seconds keyed by `game_id` + payload hash and shared across operators.
+//
+// ## request_payload fields (forwarded verbatim to the provider)
+//
+// | Field         | Type   | Required | Description                                                            |
+// | ---           | ---    | ---      | ---                                                                    |
+// | `sportID`     | string | yes      | Sport ID filter — see "Sport IDs" below.                               |
+// | `isLive`      | string | yes      | `"true"` for in-play (live) events, `"false"` for pre-match (early).   |
+// | `eventType`   | string | yes      | `"Fixture"` (head-to-head) or `"Outright"` (championship/futures).     |
+// | `take`        | string | yes      | Page size — number of events to return.                                |
+// | `skip`        | string | yes      | Page offset — number of events to skip.                                |
+// | `locale`      | string | yes      | 2-letter language code (e.g. `"en"`, `"zh"`).                          |
+// | `leagueID`    | string | no       | Filter by a specific league ID.                                        |
+// | `eventID`     | string | no       | Filter by a specific event ID.                                         |
+// | `isTopLeague` | string | no       | Limit to provider-flagged top leagues.                                 |
+//
+// ## Sport IDs (subset; the provider's full list may change over time)
+//
+// `1` Soccer, `2` Basketball, `3` American Football, `6` Tennis, `7` Baseball, `8` Ice Hockey,
+// `10` Handball, `11` Rugby League, `12` Golf, `13` Snooker / Pool, `14` Motor Racing, `15` Darts,
+// `19` Volleyball, `20` Boxing, `25` Futsal, `26` Table Tennis, `34` Badminton, `35` Rugby Union,
+// `43` MMA, `59` Cricket, `61` Horse Racing, `64` E-Sports, `66` Greyhounds, `82` Muay Thai,
+// `136` Kabaddi, `220` LOL, `221` DOTA2, `228` Valorant, `229` KOG, `230` CS2.
 message ListLiveEventsRequest {
+	// Game ID identifying which live/sports product to query (used to resolve the upstream endpoint and credentials).
 	string game_id = 1;
+	// Filter payload forwarded as-is to the upstream aggregator. Field shape follows the provider's API
+	// (see the table in the message-level docs above).
+	//
+	// Example — pull up to 10 in-play basketball head-to-head events, in English:
+	//
+	// ```json
+	// {
+	//   "sportID": "2",
+	//   "isLive": "true",
+	//   "eventType": "Fixture",
+	//   "take": "10",
+	//   "skip": "0",
+	//   "locale": "en",
+	//   "leagueID": "",
+	//   "eventID": "",
+	//   "isTopLeague": ""
+	// }
+	// ```
+	//
+	// An empty payload returns the aggregator's default event list.
 	google.protobuf.Struct request_payload = 2;
 }
 
+// ListLiveEventsResponse - events returned by the upstream aggregator (passed through without schema enforcement).
+//
+// ## Common event fields (provider-defined)
+//
+// - `_id` — event ID.
+// - `IsLive` — whether the event is currently in-play.
+// - `IsSuspended` — whether the event is temporarily suspended.
+// - `IsTopLeague` — whether the event belongs to a provider-flagged top league (informational only).
+// - `LeagueId` / `MasterLeagueId` — league IDs (`MasterLeagueId` is stable across seasons; usable for league logo lookup).
+// - `SportId` — sport ID (see ListLiveEventsRequest).
+// - `StartEventDate` — scheduled start time.
+// - `Status` — event status enum: `0` NotStarted, `1` InProgress, `2` RaceOff, `3` Resulted, `4` Cancelled.
+// - `Type` — `"Fixture"` or `"Outright"`.
+// - `EventName` / `BetslipLine` / `SportName` / `LeagueName` / `regionCode` / `regionName` — display fields.
+// - `TotalActiveMarketsCount` — number of active markets on the event.
+// - `Participants[]` — `{_id, Name, VenueRole}` (team / player info; `VenueRole` indicates country or region).
+// - `Score` — `{HomeScore, AwayScore}` for in-play events.
+// - `Markets[]` — `{_id, Name, IsSuspended, LeagueId, StartDate, MarketType, Selections}`.
+//   - `MarketType` — `{_id, Name}` (e.g. handicap / over-under / moneyline).
+// - `Selections[]` — `{_id, BetslipLine, IsDisabled, Name, IsOption, TrueOdds, OutcomeType, Points, Status, DisplayOdds}`.
+//   - `IsOption` — whether this is the main handicap line or a derived (alternate) line.
+//   - `TrueOdds` — true odds in decimal (European) format.
+//   - `OutcomeType` — UI hint, e.g. `"Over"` / `"Under"`, `"Home"` / `"Away"` / `"Tie"`.
+//   - `Points` — handicap / line value for the selection.
+//   - `DisplayOdds` — `{Decimal, HK, Indo, Malay}`. `Decimal` is also the settlement format.
+//
+// On upstream errors, an entry may instead carry `errorMessage`, `errorCode`,
+// `errorMessages[].{message, parameterName, providedValue}`, and `sessionId` for support diagnostics.
 message ListLiveEventsResponse {
+	// Event objects passed through from the aggregator. See the message-level docs for the field schema.
+	//
+	// ```json
+	// [
+	//   {
+	//     "_id": "evt_12345",
+	//     "SportId": 2,
+	//     "LeagueName": "NBA",
+	//     "EventName": "Lakers vs Celtics",
+	//     "StartEventDate": "2026-04-26T20:00:00Z",
+	//     "Status": 1,
+	//     "Type": "Fixture",
+	//     "Participants": [
+	//       {"_id": "t_1", "Name": "Lakers", "VenueRole": "Home"},
+	//       {"_id": "t_2", "Name": "Celtics", "VenueRole": "Away"}
+	//     ],
+	//     "Score": {"HomeScore": 42, "AwayScore": 38},
+	//     "Markets": [
+	//       {
+	//         "_id": "mkt_1",
+	//         "Name": "Moneyline",
+	//         "MarketType": {"_id": "mt_ml", "Name": "Moneyline"},
+	//         "Selections": [
+	//           {
+	//             "_id": "sel_1",
+	//             "Name": "Lakers",
+	//             "OutcomeType": "Home",
+	//             "TrueOdds": 1.85,
+	//             "DisplayOdds": {"Decimal": "1.85", "HK": "0.85", "Indo": "-1.18", "Malay": "0.85"},
+	//             "Status": 1
+	//           }
+	//         ]
+	//       }
+	//     ]
+	//   }
+	// ]
+	// ```
 	repeated google.protobuf.Struct events = 1;
 }
 
