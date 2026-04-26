@@ -35241,12 +35241,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
-                welcomeRewardSequencesMinCount:
-                    type: integer
-                    format: int32
-                dailyRewardSequencesMinCount:
-                    type: integer
-                    format: int32
         api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest:
             type: object
             properties:

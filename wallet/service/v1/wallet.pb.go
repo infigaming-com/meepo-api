@@ -7833,12 +7833,10 @@ type GetDepositRewardSequencesPreviewResponse struct {
 	DailyRewardEnabled   bool                   `protobuf:"varint,3,opt,name=daily_reward_enabled,json=dailyRewardEnabled,proto3" json:"daily_reward_enabled,omitempty"`
 	// Sequences are server-side filtered to enabled + currently within start/end window,
 	// sorted by serial number.
-	WelcomeRewardSequences         []*RewardSequence `protobuf:"bytes,4,rep,name=welcome_reward_sequences,json=welcomeRewardSequences,proto3" json:"welcome_reward_sequences,omitempty"`
-	DailyRewardSequences           []*RewardSequence `protobuf:"bytes,5,rep,name=daily_reward_sequences,json=dailyRewardSequences,proto3" json:"daily_reward_sequences,omitempty"`
-	WelcomeRewardSequencesMinCount int32             `protobuf:"varint,6,opt,name=welcome_reward_sequences_min_count,json=welcomeRewardSequencesMinCount,proto3" json:"welcome_reward_sequences_min_count,omitempty"`
-	DailyRewardSequencesMinCount   int32             `protobuf:"varint,7,opt,name=daily_reward_sequences_min_count,json=dailyRewardSequencesMinCount,proto3" json:"daily_reward_sequences_min_count,omitempty"`
-	unknownFields                  protoimpl.UnknownFields
-	sizeCache                      protoimpl.SizeCache
+	WelcomeRewardSequences []*RewardSequence `protobuf:"bytes,4,rep,name=welcome_reward_sequences,json=welcomeRewardSequences,proto3" json:"welcome_reward_sequences,omitempty"`
+	DailyRewardSequences   []*RewardSequence `protobuf:"bytes,5,rep,name=daily_reward_sequences,json=dailyRewardSequences,proto3" json:"daily_reward_sequences,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetDepositRewardSequencesPreviewResponse) Reset() {
@@ -7904,20 +7902,6 @@ func (x *GetDepositRewardSequencesPreviewResponse) GetDailyRewardSequences() []*
 		return x.DailyRewardSequences
 	}
 	return nil
-}
-
-func (x *GetDepositRewardSequencesPreviewResponse) GetWelcomeRewardSequencesMinCount() int32 {
-	if x != nil {
-		return x.WelcomeRewardSequencesMinCount
-	}
-	return 0
-}
-
-func (x *GetDepositRewardSequencesPreviewResponse) GetDailyRewardSequencesMinCount() int32 {
-	if x != nil {
-		return x.DailyRewardSequencesMinCount
-	}
-	return 0
 }
 
 type GetGamificationCurrencyConfigRequest struct {
@@ -21007,15 +20991,13 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x12daily_reward_count\x18\x03 \x01(\x05R\x10dailyRewardCount\x12]\n" +
 	"\x17current_reward_sequence\x18\x04 \x01(\v2%.api.wallet.service.v1.RewardSequenceR\x15currentRewardSequence\"E\n" +
 	"'GetDepositRewardSequencesPreviewRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\x80\x04\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\xec\x02\n" +
 	"(GetDepositRewardSequencesPreviewResponse\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x124\n" +
 	"\x16welcome_reward_enabled\x18\x02 \x01(\bR\x14welcomeRewardEnabled\x120\n" +
 	"\x14daily_reward_enabled\x18\x03 \x01(\bR\x12dailyRewardEnabled\x12_\n" +
 	"\x18welcome_reward_sequences\x18\x04 \x03(\v2%.api.wallet.service.v1.RewardSequenceR\x16welcomeRewardSequences\x12[\n" +
-	"\x16daily_reward_sequences\x18\x05 \x03(\v2%.api.wallet.service.v1.RewardSequenceR\x14dailyRewardSequences\x12J\n" +
-	"\"welcome_reward_sequences_min_count\x18\x06 \x01(\x05R\x1ewelcomeRewardSequencesMinCount\x12F\n" +
-	" daily_reward_sequences_min_count\x18\a \x01(\x05R\x1cdailyRewardSequencesMinCount\"\xd6\x01\n" +
+	"\x16daily_reward_sequences\x18\x05 \x03(\v2%.api.wallet.service.v1.RewardSequenceR\x14dailyRewardSequences\"\xd6\x01\n" +
 	"$GetGamificationCurrencyConfigRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xfc\x01\n" +

@@ -13568,10 +13568,6 @@ func (m *GetDepositRewardSequencesPreviewResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for WelcomeRewardSequencesMinCount
-
-	// no validation rules for DailyRewardSequencesMinCount
-
 	if len(errors) > 0 {
 		return GetDepositRewardSequencesPreviewResponseMultiError(errors)
 	}

@@ -1571,8 +1571,6 @@ message GetDepositRewardSequencesPreviewResponse {
 	// sorted by serial number.
 	repeated RewardSequence welcome_reward_sequences = 4;
 	repeated RewardSequence daily_reward_sequences = 5;
-	int32 welcome_reward_sequences_min_count = 6;
-	int32 daily_reward_sequences_min_count = 7;
 }
 
 message GetGamificationCurrencyConfigRequest {
