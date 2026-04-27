@@ -4790,24 +4790,22 @@ var _ interface {
 	ErrorName() string
 } = ListOperatorSubAccountTransactionsRequestValidationError{}
 
-// Validate checks the field values on
-// GetOperatorWinningCommissionConfigRequest with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *GetOperatorWinningCommissionConfigRequest) Validate() error {
+// Validate checks the field values on GetPredictionSettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPredictionSettingsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// GetOperatorWinningCommissionConfigRequest with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// GetOperatorWinningCommissionConfigRequestMultiError, or nil if none found.
-func (m *GetOperatorWinningCommissionConfigRequest) ValidateAll() error {
+// ValidateAll checks the field values on GetPredictionSettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPredictionSettingsRequestMultiError, or nil if none found.
+func (m *GetPredictionSettingsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetOperatorWinningCommissionConfigRequest) validate(all bool) error {
+func (m *GetPredictionSettingsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4815,20 +4813,19 @@ func (m *GetOperatorWinningCommissionConfigRequest) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return GetOperatorWinningCommissionConfigRequestMultiError(errors)
+		return GetPredictionSettingsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetOperatorWinningCommissionConfigRequestMultiError is an error wrapping
-// multiple validation errors returned by
-// GetOperatorWinningCommissionConfigRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetOperatorWinningCommissionConfigRequestMultiError []error
+// GetPredictionSettingsRequestMultiError is an error wrapping multiple
+// validation errors returned by GetPredictionSettingsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetPredictionSettingsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetOperatorWinningCommissionConfigRequestMultiError) Error() string {
+func (m GetPredictionSettingsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4837,12 +4834,12 @@ func (m GetOperatorWinningCommissionConfigRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetOperatorWinningCommissionConfigRequestMultiError) AllErrors() []error { return m }
+func (m GetPredictionSettingsRequestMultiError) AllErrors() []error { return m }
 
-// GetOperatorWinningCommissionConfigRequestValidationError is the validation
-// error returned by GetOperatorWinningCommissionConfigRequest.Validate if the
-// designated constraints aren't met.
-type GetOperatorWinningCommissionConfigRequestValidationError struct {
+// GetPredictionSettingsRequestValidationError is the validation error returned
+// by GetPredictionSettingsRequest.Validate if the designated constraints
+// aren't met.
+type GetPredictionSettingsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4850,24 +4847,24 @@ type GetOperatorWinningCommissionConfigRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetOperatorWinningCommissionConfigRequestValidationError) Field() string { return e.field }
+func (e GetPredictionSettingsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetOperatorWinningCommissionConfigRequestValidationError) Reason() string { return e.reason }
+func (e GetPredictionSettingsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetOperatorWinningCommissionConfigRequestValidationError) Cause() error { return e.cause }
+func (e GetPredictionSettingsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetOperatorWinningCommissionConfigRequestValidationError) Key() bool { return e.key }
+func (e GetPredictionSettingsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetOperatorWinningCommissionConfigRequestValidationError) ErrorName() string {
-	return "GetOperatorWinningCommissionConfigRequestValidationError"
+func (e GetPredictionSettingsRequestValidationError) ErrorName() string {
+	return "GetPredictionSettingsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetOperatorWinningCommissionConfigRequestValidationError) Error() string {
+func (e GetPredictionSettingsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4879,14 +4876,14 @@ func (e GetOperatorWinningCommissionConfigRequestValidationError) Error() string
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetOperatorWinningCommissionConfigRequest.%s: %s%s",
+		"invalid %sGetPredictionSettingsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetOperatorWinningCommissionConfigRequestValidationError{}
+var _ error = GetPredictionSettingsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -4894,26 +4891,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetOperatorWinningCommissionConfigRequestValidationError{}
+} = GetPredictionSettingsRequestValidationError{}
 
-// Validate checks the field values on
-// SetOperatorWinningCommissionConfigRequest with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *SetOperatorWinningCommissionConfigRequest) Validate() error {
+// Validate checks the field values on SetPredictionSettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetPredictionSettingsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// SetOperatorWinningCommissionConfigRequest with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// SetOperatorWinningCommissionConfigRequestMultiError, or nil if none found.
-func (m *SetOperatorWinningCommissionConfigRequest) ValidateAll() error {
+// ValidateAll checks the field values on SetPredictionSettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetPredictionSettingsRequestMultiError, or nil if none found.
+func (m *SetPredictionSettingsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SetOperatorWinningCommissionConfigRequest) validate(all bool) error {
+func (m *SetPredictionSettingsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4923,20 +4918,19 @@ func (m *SetOperatorWinningCommissionConfigRequest) validate(all bool) error {
 	// no validation rules for CommissionRate
 
 	if len(errors) > 0 {
-		return SetOperatorWinningCommissionConfigRequestMultiError(errors)
+		return SetPredictionSettingsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// SetOperatorWinningCommissionConfigRequestMultiError is an error wrapping
-// multiple validation errors returned by
-// SetOperatorWinningCommissionConfigRequest.ValidateAll() if the designated
-// constraints aren't met.
-type SetOperatorWinningCommissionConfigRequestMultiError []error
+// SetPredictionSettingsRequestMultiError is an error wrapping multiple
+// validation errors returned by SetPredictionSettingsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type SetPredictionSettingsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SetOperatorWinningCommissionConfigRequestMultiError) Error() string {
+func (m SetPredictionSettingsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4945,12 +4939,12 @@ func (m SetOperatorWinningCommissionConfigRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SetOperatorWinningCommissionConfigRequestMultiError) AllErrors() []error { return m }
+func (m SetPredictionSettingsRequestMultiError) AllErrors() []error { return m }
 
-// SetOperatorWinningCommissionConfigRequestValidationError is the validation
-// error returned by SetOperatorWinningCommissionConfigRequest.Validate if the
-// designated constraints aren't met.
-type SetOperatorWinningCommissionConfigRequestValidationError struct {
+// SetPredictionSettingsRequestValidationError is the validation error returned
+// by SetPredictionSettingsRequest.Validate if the designated constraints
+// aren't met.
+type SetPredictionSettingsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4958,24 +4952,24 @@ type SetOperatorWinningCommissionConfigRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SetOperatorWinningCommissionConfigRequestValidationError) Field() string { return e.field }
+func (e SetPredictionSettingsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SetOperatorWinningCommissionConfigRequestValidationError) Reason() string { return e.reason }
+func (e SetPredictionSettingsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SetOperatorWinningCommissionConfigRequestValidationError) Cause() error { return e.cause }
+func (e SetPredictionSettingsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SetOperatorWinningCommissionConfigRequestValidationError) Key() bool { return e.key }
+func (e SetPredictionSettingsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SetOperatorWinningCommissionConfigRequestValidationError) ErrorName() string {
-	return "SetOperatorWinningCommissionConfigRequestValidationError"
+func (e SetPredictionSettingsRequestValidationError) ErrorName() string {
+	return "SetPredictionSettingsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SetOperatorWinningCommissionConfigRequestValidationError) Error() string {
+func (e SetPredictionSettingsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4987,14 +4981,14 @@ func (e SetOperatorWinningCommissionConfigRequestValidationError) Error() string
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetOperatorWinningCommissionConfigRequest.%s: %s%s",
+		"invalid %sSetPredictionSettingsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SetOperatorWinningCommissionConfigRequestValidationError{}
+var _ error = SetPredictionSettingsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -5002,7 +4996,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SetOperatorWinningCommissionConfigRequestValidationError{}
+} = SetPredictionSettingsRequestValidationError{}
 
 // Validate checks the field values on ListOperatorBalanceTransactionsRequest
 // with the rules defined in the proto definition for this message. If any

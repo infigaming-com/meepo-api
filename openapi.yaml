@@ -9175,49 +9175,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SubAccountAdjustResponse'
-    /v1/backoffice/wallet/operator/sub-account/commission-config/get:
-        post:
-            tags:
-                - BackofficeWallet
-            description: |-
-                GetOperatorWinningCommissionConfig returns the operator's commission-rate
-                 row plus the effective rate after walking follow_parent. RBAC:
-                 finance_adjust_custody_balance:read.
-            operationId: BackofficeWallet_GetOperatorWinningCommissionConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorWinningCommissionConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorWinningCommissionConfigResponse'
-    /v1/backoffice/wallet/operator/sub-account/commission-config/set:
-        post:
-            tags:
-                - BackofficeWallet
-            description: |-
-                SetOperatorWinningCommissionConfig writes the operator's commission-rate
-                 row. System-only; RBAC: finance_adjust_custody_balance:write.
-            operationId: BackofficeWallet_SetOperatorWinningCommissionConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorWinningCommissionConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.SetOperatorWinningCommissionConfigResponse'
     /v1/backoffice/wallet/operator/sub-account/transactions/list:
         post:
             tags:
@@ -9380,6 +9337,48 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse'
+    /v1/backoffice/wallet/prediction/settings/get:
+        post:
+            tags:
+                - BackofficeWallet
+            description: |-
+                GetPredictionSettings returns the platform-level settings for the
+                 "prediction" sub-account product. RBAC: finance_adjust_custody_balance:read.
+            operationId: BackofficeWallet_GetPredictionSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPredictionSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetPredictionSettingsResponse'
+    /v1/backoffice/wallet/prediction/settings/set:
+        post:
+            tags:
+                - BackofficeWallet
+            description: |-
+                SetPredictionSettings writes platform-level prediction settings.
+                 System-only; RBAC: finance_adjust_custody_balance:write.
+            operationId: BackofficeWallet_SetPredictionSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetPredictionSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.SetPredictionSettingsResponse'
     /v1/backoffice/wallet/promo-code/campaign/create:
         post:
             tags:
@@ -18982,13 +18981,6 @@ components:
                     type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-        api.backoffice.service.v1.GetOperatorWinningCommissionConfigRequest:
-            type: object
-            properties: {}
-            description: |-
-                GetOperatorWinningCommissionConfigRequest reads the system-default
-                 commission rate. v1 only ships the system-level row; per-operator
-                 inheritance is reserved for the wallet RPC (future work).
         api.backoffice.service.v1.GetOverviewDashboardRequest:
             type: object
             properties:
@@ -19167,6 +19159,13 @@ components:
                     type: string
                 averageBetAmountReportingCurrency:
                     type: string
+        api.backoffice.service.v1.GetPredictionSettingsRequest:
+            type: object
+            properties: {}
+            description: |-
+                GetPredictionSettingsRequest reads the platform-level prediction settings.
+                 v1 only ships the system-default row; per-operator inheritance is reserved
+                 for the wallet RPC (future work).
         api.backoffice.service.v1.GetReferralPlanRequest:
             type: object
             properties:
@@ -25497,15 +25496,15 @@ components:
             type: object
             properties: {}
             description: SetOperatorTagsResponse is an empty message indicating successful tag addition.
-        api.backoffice.service.v1.SetOperatorWinningCommissionConfigRequest:
+        api.backoffice.service.v1.SetPredictionSettingsRequest:
             type: object
             properties:
                 commissionRate:
                     type: string
                     description: Plain ratio (0.10 = 10%).
             description: |-
-                SetOperatorWinningCommissionConfigRequest writes the system-default
-                 commission rate. System-only via RBAC.
+                SetPredictionSettingsRequest writes platform-level prediction settings.
+                 System-only via RBAC.
         api.backoffice.service.v1.SetReferralPlanRequest:
             type: object
             properties:
@@ -35569,11 +35568,6 @@ components:
                     type: string
                 totalCashReportingCurrency:
                     type: string
-        api.wallet.service.v1.GetOperatorWinningCommissionConfigResponse:
-            type: object
-            properties:
-                config:
-                    $ref: '#/components/schemas/api.wallet.service.v1.OperatorWinningCommissionConfig'
         api.wallet.service.v1.GetOperatorWithdrawableAmountResponse:
             type: object
             properties:
@@ -35611,6 +35605,11 @@ components:
                     description: |-
                         Aggregated user-swap feature flag — AND across self + all ancestors.
                          When false the frontend should hide the swap entry point entirely.
+        api.wallet.service.v1.GetPredictionSettingsResponse:
+            type: object
+            properties:
+                settings:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PredictionSettings'
         api.wallet.service.v1.GetPromoCodeInfoRequest:
             type: object
             properties:
@@ -36530,34 +36529,6 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
-        api.wallet.service.v1.OperatorWinningCommissionConfig:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                followParent:
-                    type: boolean
-                    description: |-
-                        RESERVED for future hierarchy inheritance. Today the only row in use is
-                         the system-default (real_operator_id=0) and is read verbatim —
-                         follow_parent has no effect. Always written false at system level.
-                commissionRate:
-                    type: string
-                    description: commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a percentage.
-                createdAt:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
-            description: |-
-                OperatorWinningCommissionConfig is the commission-rate config row.
-
-                 v1 scope: only the system-default row (real_operator_id=0) exists; every
-                 caller reads/writes that row and GameCredit applies its commission_rate.
-                 follow_parent and per-operator rows are RESERVED — schema and proto fields
-                 are wired up for future hierarchy inheritance, but no resolution happens
-                 today.
         api.wallet.service.v1.OperatorWithdrawableAmount:
             type: object
             properties:
@@ -36600,6 +36571,27 @@ components:
                 operatorBalanceFreezeUsd:
                     type: string
                     description: operator_balance_freeze (System-initiated manual freeze)
+        api.wallet.service.v1.PredictionSettings:
+            type: object
+            properties:
+                commissionRate:
+                    type: string
+                    description: |-
+                        commission_rate is the share the platform takes from a winning bet's
+                         net profit, applied on GameCredit when net_win > 0. Plain ratio
+                         (e.g. "0.10" = 10%), NOT a percentage.
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: |-
+                PredictionSettings captures platform-level configuration for the
+                 "prediction" sub-account product family (Polymarket today; future
+                 prediction-market vendors slot in without proto change). v1 ships only
+                 commission_rate; future product-wide settings (vendor whitelist, fee
+                 schedule) extend this message.
         api.wallet.service.v1.PromoCodeBonusMoneyConfig:
             type: object
             properties:
@@ -36903,11 +36895,11 @@ components:
         api.wallet.service.v1.SetFICAThresholdConfigResponse:
             type: object
             properties: {}
-        api.wallet.service.v1.SetOperatorWinningCommissionConfigResponse:
+        api.wallet.service.v1.SetPredictionSettingsResponse:
             type: object
             properties:
-                config:
-                    $ref: '#/components/schemas/api.wallet.service.v1.OperatorWinningCommissionConfig'
+                settings:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PredictionSettings'
         api.wallet.service.v1.SetUserSwapEnabledResponse:
             type: object
             properties:

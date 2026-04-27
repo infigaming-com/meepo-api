@@ -41,8 +41,8 @@ const (
 	BackofficeWallet_SubAccountAdjust_FullMethodName                      = "/api.backoffice.service.v1.BackofficeWallet/SubAccountAdjust"
 	BackofficeWallet_ListOperatorSubAccounts_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorSubAccounts"
 	BackofficeWallet_ListOperatorSubAccountTransactions_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorSubAccountTransactions"
-	BackofficeWallet_GetOperatorWinningCommissionConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorWinningCommissionConfig"
-	BackofficeWallet_SetOperatorWinningCommissionConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/SetOperatorWinningCommissionConfig"
+	BackofficeWallet_GetPredictionSettings_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/GetPredictionSettings"
+	BackofficeWallet_SetPredictionSettings_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/SetPredictionSettings"
 	BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 	BackofficeWallet_UpdateOperatorBalance_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 	BackofficeWallet_GetOperatorBalance_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
@@ -140,13 +140,12 @@ type BackofficeWalletClient interface {
 	ListOperatorSubAccounts(ctx context.Context, in *ListOperatorSubAccountsRequest, opts ...grpc.CallOption) (*v1.ListOperatorSubAccountsResponse, error)
 	// ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
 	ListOperatorSubAccountTransactions(ctx context.Context, in *ListOperatorSubAccountTransactionsRequest, opts ...grpc.CallOption) (*v1.ListOperatorSubAccountTransactionsResponse, error)
-	// GetOperatorWinningCommissionConfig returns the operator's commission-rate
-	// row plus the effective rate after walking follow_parent. RBAC:
-	// finance_adjust_custody_balance:read.
-	GetOperatorWinningCommissionConfig(ctx context.Context, in *GetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorWinningCommissionConfigResponse, error)
-	// SetOperatorWinningCommissionConfig writes the operator's commission-rate
-	// row. System-only; RBAC: finance_adjust_custody_balance:write.
-	SetOperatorWinningCommissionConfig(ctx context.Context, in *SetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorWinningCommissionConfigResponse, error)
+	// GetPredictionSettings returns the platform-level settings for the
+	// "prediction" sub-account product. RBAC: finance_adjust_custody_balance:read.
+	GetPredictionSettings(ctx context.Context, in *GetPredictionSettingsRequest, opts ...grpc.CallOption) (*v1.GetPredictionSettingsResponse, error)
+	// SetPredictionSettings writes platform-level prediction settings.
+	// System-only; RBAC: finance_adjust_custody_balance:write.
+	SetPredictionSettings(ctx context.Context, in *SetPredictionSettingsRequest, opts ...grpc.CallOption) (*v1.SetPredictionSettingsResponse, error)
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorBalanceTransactionsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
@@ -452,20 +451,20 @@ func (c *backofficeWalletClient) ListOperatorSubAccountTransactions(ctx context.
 	return out, nil
 }
 
-func (c *backofficeWalletClient) GetOperatorWinningCommissionConfig(ctx context.Context, in *GetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorWinningCommissionConfigResponse, error) {
+func (c *backofficeWalletClient) GetPredictionSettings(ctx context.Context, in *GetPredictionSettingsRequest, opts ...grpc.CallOption) (*v1.GetPredictionSettingsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.GetOperatorWinningCommissionConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeWallet_GetOperatorWinningCommissionConfig_FullMethodName, in, out, cOpts...)
+	out := new(v1.GetPredictionSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetPredictionSettings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeWalletClient) SetOperatorWinningCommissionConfig(ctx context.Context, in *SetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorWinningCommissionConfigResponse, error) {
+func (c *backofficeWalletClient) SetPredictionSettings(ctx context.Context, in *SetPredictionSettingsRequest, opts ...grpc.CallOption) (*v1.SetPredictionSettingsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.SetOperatorWinningCommissionConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeWallet_SetOperatorWinningCommissionConfig_FullMethodName, in, out, cOpts...)
+	out := new(v1.SetPredictionSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_SetPredictionSettings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -936,13 +935,12 @@ type BackofficeWalletServer interface {
 	ListOperatorSubAccounts(context.Context, *ListOperatorSubAccountsRequest) (*v1.ListOperatorSubAccountsResponse, error)
 	// ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
 	ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*v1.ListOperatorSubAccountTransactionsResponse, error)
-	// GetOperatorWinningCommissionConfig returns the operator's commission-rate
-	// row plus the effective rate after walking follow_parent. RBAC:
-	// finance_adjust_custody_balance:read.
-	GetOperatorWinningCommissionConfig(context.Context, *GetOperatorWinningCommissionConfigRequest) (*v1.GetOperatorWinningCommissionConfigResponse, error)
-	// SetOperatorWinningCommissionConfig writes the operator's commission-rate
-	// row. System-only; RBAC: finance_adjust_custody_balance:write.
-	SetOperatorWinningCommissionConfig(context.Context, *SetOperatorWinningCommissionConfigRequest) (*v1.SetOperatorWinningCommissionConfigResponse, error)
+	// GetPredictionSettings returns the platform-level settings for the
+	// "prediction" sub-account product. RBAC: finance_adjust_custody_balance:read.
+	GetPredictionSettings(context.Context, *GetPredictionSettingsRequest) (*v1.GetPredictionSettingsResponse, error)
+	// SetPredictionSettings writes platform-level prediction settings.
+	// System-only; RBAC: finance_adjust_custody_balance:write.
+	SetPredictionSettings(context.Context, *SetPredictionSettingsRequest) (*v1.SetPredictionSettingsResponse, error)
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
@@ -1101,11 +1099,11 @@ func (UnimplementedBackofficeWalletServer) ListOperatorSubAccounts(context.Conte
 func (UnimplementedBackofficeWalletServer) ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*v1.ListOperatorSubAccountTransactionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorSubAccountTransactions not implemented")
 }
-func (UnimplementedBackofficeWalletServer) GetOperatorWinningCommissionConfig(context.Context, *GetOperatorWinningCommissionConfigRequest) (*v1.GetOperatorWinningCommissionConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetOperatorWinningCommissionConfig not implemented")
+func (UnimplementedBackofficeWalletServer) GetPredictionSettings(context.Context, *GetPredictionSettingsRequest) (*v1.GetPredictionSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPredictionSettings not implemented")
 }
-func (UnimplementedBackofficeWalletServer) SetOperatorWinningCommissionConfig(context.Context, *SetOperatorWinningCommissionConfigRequest) (*v1.SetOperatorWinningCommissionConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetOperatorWinningCommissionConfig not implemented")
+func (UnimplementedBackofficeWalletServer) SetPredictionSettings(context.Context, *SetPredictionSettingsRequest) (*v1.SetPredictionSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPredictionSettings not implemented")
 }
 func (UnimplementedBackofficeWalletServer) ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorBalanceTransactions not implemented")
@@ -1629,38 +1627,38 @@ func _BackofficeWallet_ListOperatorSubAccountTransactions_Handler(srv interface{
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeWallet_GetOperatorWinningCommissionConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOperatorWinningCommissionConfigRequest)
+func _BackofficeWallet_GetPredictionSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPredictionSettingsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeWalletServer).GetOperatorWinningCommissionConfig(ctx, in)
+		return srv.(BackofficeWalletServer).GetPredictionSettings(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeWallet_GetOperatorWinningCommissionConfig_FullMethodName,
+		FullMethod: BackofficeWallet_GetPredictionSettings_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).GetOperatorWinningCommissionConfig(ctx, req.(*GetOperatorWinningCommissionConfigRequest))
+		return srv.(BackofficeWalletServer).GetPredictionSettings(ctx, req.(*GetPredictionSettingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeWallet_SetOperatorWinningCommissionConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetOperatorWinningCommissionConfigRequest)
+func _BackofficeWallet_SetPredictionSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPredictionSettingsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeWalletServer).SetOperatorWinningCommissionConfig(ctx, in)
+		return srv.(BackofficeWalletServer).SetPredictionSettings(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeWallet_SetOperatorWinningCommissionConfig_FullMethodName,
+		FullMethod: BackofficeWallet_SetPredictionSettings_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).SetOperatorWinningCommissionConfig(ctx, req.(*SetOperatorWinningCommissionConfigRequest))
+		return srv.(BackofficeWalletServer).SetPredictionSettings(ctx, req.(*SetPredictionSettingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2495,12 +2493,12 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeWallet_ListOperatorSubAccountTransactions_Handler,
 		},
 		{
-			MethodName: "GetOperatorWinningCommissionConfig",
-			Handler:    _BackofficeWallet_GetOperatorWinningCommissionConfig_Handler,
+			MethodName: "GetPredictionSettings",
+			Handler:    _BackofficeWallet_GetPredictionSettings_Handler,
 		},
 		{
-			MethodName: "SetOperatorWinningCommissionConfig",
-			Handler:    _BackofficeWallet_SetOperatorWinningCommissionConfig_Handler,
+			MethodName: "SetPredictionSettings",
+			Handler:    _BackofficeWallet_SetPredictionSettings_Handler,
 		},
 		{
 			MethodName: "ListOperatorBalanceTransactions",

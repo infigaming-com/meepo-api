@@ -2546,3 +2546,39 @@ func IsUpdateOperatorSubAccountFailed(err error) bool {
 func ErrorUpdateOperatorSubAccountFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UPDATE_OPERATOR_SUB_ACCOUNT_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetPredictionSettingsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_PREDICTION_SETTINGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetPredictionSettingsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PREDICTION_SETTINGS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetPredictionSettingsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_PREDICTION_SETTINGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorSetPredictionSettingsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_PREDICTION_SETTINGS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidCommissionRate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_COMMISSION_RATE.String() && e.Code == 400
+}
+
+func ErrorInvalidCommissionRate(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_COMMISSION_RATE.String(), fmt.Sprintf(format, args...))
+}
