@@ -567,10 +567,10 @@ message GameDebitRequest {
 	string game_id = 13;
 	// product_type triggers operator sub-account debit in the same transaction when non-empty.
 	// Valid values are defined in wallet-service internal/data/sub_account_rules.go (e.g. "polymarket").
+	// Wallet computes the sub-account-currency amount itself from `amount` +
+	// `settlement_currency` via the same exchange rates it uses for cash_amount_usd —
+	// caller does not (and should not) supply it.
 	optional string product_type = 14;
-	// USDC amount to debit from the operator sub-account. Required when product_type is non-empty.
-	// Caller (game-service) is responsible for computing the correct amount.
-	optional string sub_account_amount = 15;
 }
 
 message AffectedCredit {
@@ -631,11 +631,10 @@ message GameCreditRequest {
 	int64 round_id = 13;
 	string game_id = 14;
 	// product_type triggers operator sub-account credit in the same transaction when non-empty.
-	// Must match the product_type used in the paired GameDebit.
+	// Must match the product_type used in the paired GameDebit. Wallet computes
+	// the sub-account-currency payout itself from `amount` + `settlement_currency`
+	// — caller does not (and should not) supply it.
 	optional string product_type = 15;
-	// USDC amount to credit to the operator sub-account. Required when product_type is non-empty.
-	// Caller (game-service) computes this from the upstream settlement result.
-	optional string sub_account_payout = 16;
 }
 
 message GameCreditResponse {

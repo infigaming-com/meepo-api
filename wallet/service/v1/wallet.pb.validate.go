@@ -1112,10 +1112,6 @@ func (m *GameDebitRequest) validate(all bool) error {
 		// no validation rules for ProductType
 	}
 
-	if m.SubAccountAmount != nil {
-		// no validation rules for SubAccountAmount
-	}
-
 	if len(errors) > 0 {
 		return GameDebitRequestMultiError(errors)
 	}
@@ -1575,10 +1571,6 @@ func (m *GameCreditRequest) validate(all bool) error {
 
 	if m.ProductType != nil {
 		// no validation rules for ProductType
-	}
-
-	if m.SubAccountPayout != nil {
-		// no validation rules for SubAccountPayout
 	}
 
 	if len(errors) > 0 {

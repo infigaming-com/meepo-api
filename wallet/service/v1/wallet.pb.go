@@ -752,12 +752,12 @@ type GameDebitRequest struct {
 	GameId          string                  `protobuf:"bytes,13,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	// product_type triggers operator sub-account debit in the same transaction when non-empty.
 	// Valid values are defined in wallet-service internal/data/sub_account_rules.go (e.g. "polymarket").
-	ProductType *string `protobuf:"bytes,14,opt,name=product_type,json=productType,proto3,oneof" json:"product_type,omitempty"`
-	// USDC amount to debit from the operator sub-account. Required when product_type is non-empty.
-	// Caller (game-service) is responsible for computing the correct amount.
-	SubAccountAmount *string `protobuf:"bytes,15,opt,name=sub_account_amount,json=subAccountAmount,proto3,oneof" json:"sub_account_amount,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Wallet computes the sub-account-currency amount itself from `amount` +
+	// `settlement_currency` via the same exchange rates it uses for cash_amount_usd —
+	// caller does not (and should not) supply it.
+	ProductType   *string `protobuf:"bytes,14,opt,name=product_type,json=productType,proto3,oneof" json:"product_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GameDebitRequest) Reset() {
@@ -884,13 +884,6 @@ func (x *GameDebitRequest) GetGameId() string {
 func (x *GameDebitRequest) GetProductType() string {
 	if x != nil && x.ProductType != nil {
 		return *x.ProductType
-	}
-	return ""
-}
-
-func (x *GameDebitRequest) GetSubAccountAmount() string {
-	if x != nil && x.SubAccountAmount != nil {
-		return *x.SubAccountAmount
 	}
 	return ""
 }
@@ -1251,13 +1244,12 @@ type GameCreditRequest struct {
 	RoundId                           int64                   `protobuf:"varint,13,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	GameId                            string                  `protobuf:"bytes,14,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	// product_type triggers operator sub-account credit in the same transaction when non-empty.
-	// Must match the product_type used in the paired GameDebit.
-	ProductType *string `protobuf:"bytes,15,opt,name=product_type,json=productType,proto3,oneof" json:"product_type,omitempty"`
-	// USDC amount to credit to the operator sub-account. Required when product_type is non-empty.
-	// Caller (game-service) computes this from the upstream settlement result.
-	SubAccountPayout *string `protobuf:"bytes,16,opt,name=sub_account_payout,json=subAccountPayout,proto3,oneof" json:"sub_account_payout,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Must match the product_type used in the paired GameDebit. Wallet computes
+	// the sub-account-currency payout itself from `amount` + `settlement_currency`
+	// — caller does not (and should not) supply it.
+	ProductType   *string `protobuf:"bytes,15,opt,name=product_type,json=productType,proto3,oneof" json:"product_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GameCreditRequest) Reset() {
@@ -1391,13 +1383,6 @@ func (x *GameCreditRequest) GetGameId() string {
 func (x *GameCreditRequest) GetProductType() string {
 	if x != nil && x.ProductType != nil {
 		return *x.ProductType
-	}
-	return ""
-}
-
-func (x *GameCreditRequest) GetSubAccountPayout() string {
-	if x != nil && x.SubAccountPayout != nil {
-		return *x.SubAccountPayout
 	}
 	return ""
 }
@@ -21276,7 +21261,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\acomment\x18\t \x01(\tR\acommentB\x11\n" +
 	"\x0f_transaction_id\"6\n" +
 	"\rDebitResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\x93\x05\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xc9\x04\n" +
 	"\x10GameDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
@@ -21292,11 +21277,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0fallow_overdraft\x18\v \x01(\bH\x00R\x0eallowOverdraft\x88\x01\x01\x12\x19\n" +
 	"\bround_id\x18\f \x01(\x03R\aroundId\x12\x17\n" +
 	"\agame_id\x18\r \x01(\tR\x06gameId\x12&\n" +
-	"\fproduct_type\x18\x0e \x01(\tH\x01R\vproductType\x88\x01\x01\x121\n" +
-	"\x12sub_account_amount\x18\x0f \x01(\tH\x02R\x10subAccountAmount\x88\x01\x01B\x12\n" +
+	"\fproduct_type\x18\x0e \x01(\tH\x01R\vproductType\x88\x01\x01B\x12\n" +
 	"\x10_allow_overdraftB\x0f\n" +
-	"\r_product_typeB\x15\n" +
-	"\x13_sub_account_amount\"\xa6\b\n" +
+	"\r_product_type\"\xa6\b\n" +
 	"\x0eAffectedCredit\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12/\n" +
 	"\x13settlement_currency\x18\x02 \x01(\tR\x12settlementCurrency\x12\x16\n" +
@@ -21336,7 +21319,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ecash_amount_reporting_currency\x18\f \x01(\tR\x1bcashAmountReportingCurrency\x12V\n" +
 	"(operator_bonus_amount_reporting_currency\x18\r \x01(\tR$operatorBonusAmountReportingCurrency\x12V\n" +
 	"(provider_bonus_amount_reporting_currency\x18\x0e \x01(\tR$providerBonusAmountReportingCurrency\x12P\n" +
-	"\x10affected_credits\x18\x0f \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\x9e\x06\n" +
+	"\x10affected_credits\x18\x0f \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\xd4\x05\n" +
 	"\x11GameCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
@@ -21353,11 +21336,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"$original_transaction_turnover_amount\x18\f \x01(\tR!originalTransactionTurnoverAmount\x12\x19\n" +
 	"\bround_id\x18\r \x01(\x03R\aroundId\x12\x17\n" +
 	"\agame_id\x18\x0e \x01(\tR\x06gameId\x12&\n" +
-	"\fproduct_type\x18\x0f \x01(\tH\x01R\vproductType\x88\x01\x01\x121\n" +
-	"\x12sub_account_payout\x18\x10 \x01(\tH\x02R\x10subAccountPayout\x88\x01\x01B\x1c\n" +
+	"\fproduct_type\x18\x0f \x01(\tH\x01R\vproductType\x88\x01\x01B\x1c\n" +
 	"\x1a_original_transaction_typeB\x0f\n" +
-	"\r_product_typeB\x15\n" +
-	"\x13_sub_account_payout\"\xe7\a\n" +
+	"\r_product_type\"\xe7\a\n" +
 	"\x12GameCreditResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
 	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate\x12\x12\n" +
