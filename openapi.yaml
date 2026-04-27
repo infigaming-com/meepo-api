@@ -25555,6 +25555,11 @@ components:
                     description: always positive; direction derived from transaction_type
                 memo:
                     type: string
+                idempotencyKey:
+                    type: string
+                    description: |-
+                        Caller-supplied unique key for idempotent retry. BO forwards verbatim;
+                         wallet enforces uniqueness via partial UNIQUE.
         api.backoffice.service.v1.SubAccountAdjustResponse:
             type: object
             properties:

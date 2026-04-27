@@ -4249,6 +4249,8 @@ func (m *SubAccountAdjustRequest) validate(all bool) error {
 
 	// no validation rules for Memo
 
+	// no validation rules for IdempotencyKey
+
 	if len(errors) > 0 {
 		return SubAccountAdjustRequestMultiError(errors)
 	}

@@ -1463,8 +1463,6 @@ message OperatorBalanceAdjustResponse {
 message SubAccountTransferRequest {
 	// The operator that owns the sub-account; transfer moves cash between this
 	// operator's main wallet (operator_balance) and its sub-account in a single tx.
-	// RBAC (only the operator itself or its company may initiate) is enforced by
-	// the BO layer; wallet-service trusts the caller.
 	api.common.OperatorContext target_operator_context = 1;
 	string product_type = 2;
 	// currency must equal the rule's Currency for this product_type (e.g. USDC for polymarket).
@@ -1478,6 +1476,11 @@ message SubAccountTransferRequest {
 	}
 	Direction direction = 5;
 	string memo = 6;
+	// Initiator that issued the transfer. Used for mode-aware RBAC at the
+	// wallet biz layer (defense-in-depth — BO already gates, but wallet
+	// re-checks so an internal RPC caller can't bypass): individual mode
+	// requires operator/company; co-operation mode requires system.
+	api.common.OperatorContext initiator_operator_context = 7;
 }
 
 message SubAccountTransferResponse {
@@ -1499,6 +1502,12 @@ message SubAccountAdjustRequest {
 	// always positive; direction derived from transaction_type.
 	string cash_amount = 5;
 	string memo = 6;
+	// Caller-supplied unique key for idempotent retry. Required: a network
+	// blip on a system-only manual debit/credit + admin clicks again would
+	// otherwise double-charge with no rolledback record to reconcile against.
+	// Wallet enforces uniqueness via a partial UNIQUE on
+	// (transaction_type, idempotency_key) WHERE idempotency_key != ''.
+	string idempotency_key = 7;
 }
 
 message SubAccountAdjustResponse {

@@ -10920,6 +10920,35 @@ func (m *SubAccountTransferRequest) validate(all bool) error {
 
 	// no validation rules for Memo
 
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SubAccountTransferRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SubAccountTransferRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SubAccountTransferRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return SubAccountTransferRequestMultiError(errors)
 	}
@@ -11170,6 +11199,8 @@ func (m *SubAccountAdjustRequest) validate(all bool) error {
 	// no validation rules for CashAmount
 
 	// no validation rules for Memo
+
+	// no validation rules for IdempotencyKey
 
 	if len(errors) > 0 {
 		return SubAccountAdjustRequestMultiError(errors)
