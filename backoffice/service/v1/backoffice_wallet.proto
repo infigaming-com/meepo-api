@@ -137,21 +137,8 @@ service BackofficeWallet {
 		};
 	}
 	// ===== Operator Sub-Account (Polymarket and future custody products) =====
-	// EnableOperatorSubAccount turns on a sub-account row for the (operator, product_type) pair.
-	// "No row == disabled"; Enable inserts a zeroed row with enabled=true. Idempotent.
-	rpc EnableOperatorSubAccount(EnableOperatorSubAccountRequest) returns (EnableOperatorSubAccountResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/sub-account/enable"
-			body: "*"
-		};
-	}
-	// DisableOperatorSubAccount sets enabled=false on an existing row, keeping the row for joinable history.
-	rpc DisableOperatorSubAccount(DisableOperatorSubAccountRequest) returns (DisableOperatorSubAccountResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/sub-account/disable"
-			body: "*"
-		};
-	}
+	// Sub-account row is lazily created on first SubAccountTransfer IN; no
+	// separate enable/disable RPC.
 	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
 	rpc SubAccountTransfer(SubAccountTransferRequest) returns (SubAccountTransferResponse) {
 		option (google.api.http) = {
@@ -807,29 +794,11 @@ message OperatorBalanceAdjustResponse {
 
 // ===== Operator Sub-Account messages (BO entry-level; wallet-side adds reporting_currency etc.) =====
 
-message EnableOperatorSubAccountRequest {
-	api.common.OperatorContext operator_context = 1;
-	// e.g. "polymarket"; valid set is defined in wallet-service sub_account_rules.go
-	string product_type = 2;
-}
-
-message EnableOperatorSubAccountResponse {
-	bool enabled = 1;
-	string currency = 2;
-	string cash = 3;
-}
-
-message DisableOperatorSubAccountRequest {
-	api.common.OperatorContext operator_context = 1;
-	string product_type = 2;
-}
-
-message DisableOperatorSubAccountResponse {
-	bool enabled = 1;
-}
-
 message SubAccountTransferRequest {
-	api.common.OperatorContext operator_context = 1;
+	// The operator that owns the sub-account; cash moves between this operator's
+	// main wallet and its sub-account. Only the operator itself or its company
+	// may initiate, enforced by BO RBAC (initiator is read from request context).
+	api.common.OperatorContext target_operator_context = 1;
 	string product_type = 2;
 	// must equal the rule's currency for the product (e.g. USDC for polymarket)
 	string currency = 3;
@@ -841,9 +810,7 @@ message SubAccountTransferRequest {
 		DIRECTION_FROM_SUB_ACCOUNT = 2;
 	}
 	Direction direction = 5;
-	// idempotency key — caller-supplied; reusing the same value returns the prior result
-	int64 external_transaction_id = 6;
-	string memo = 7;
+	string memo = 6;
 }
 
 message SubAccountTransferResponse {
@@ -854,15 +821,16 @@ message SubAccountTransferResponse {
 }
 
 message SubAccountAdjustRequest {
-	api.common.OperatorContext operator_context = 1;
+	// The operator whose sub-account is being adjusted. System-only operation,
+	// enforced by BO RBAC.
+	api.common.OperatorContext target_operator_context = 1;
 	string product_type = 2;
 	string currency = 3;
 	// "sub_account_adjust_credit" or "sub_account_adjust_debit"
 	string transaction_type = 4;
 	// always positive; direction derived from transaction_type
 	string cash_amount = 5;
-	int64 external_transaction_id = 6;
-	string memo = 7;
+	string memo = 6;
 }
 
 message SubAccountAdjustResponse {

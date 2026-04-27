@@ -137,11 +137,10 @@ service Wallet {
 
 	// ========== Operator Sub-Account (e.g. Polymarket and future custody products) ==========
 	// Sub-accounts are per-(operator, product_type, currency). Product rules live in
-	// wallet-service internal/data/sub_account_rules.go — currency is fixed per product.
-	// Default state: no row in DB == disabled. Calling EnableOperatorSubAccount inserts
-	// a zeroed row with enabled=true.
-	rpc EnableOperatorSubAccount (EnableOperatorSubAccountRequest) returns (EnableOperatorSubAccountResponse) {}
-	rpc DisableOperatorSubAccount (DisableOperatorSubAccountRequest) returns (DisableOperatorSubAccountResponse) {}
+	// wallet-service internal/data/sub_account_rules.go — allowed currencies are fixed per product.
+	// Lifecycle: row is lazily created on first SubAccountTransfer IN; other entry points
+	// (game_debit/credit/rollback/adjust) reject when the row is missing. There is no
+	// separate enable/disable RPC.
 	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account (both directions).
 	rpc SubAccountTransfer (SubAccountTransferRequest) returns (SubAccountTransferResponse) {}
 	// SubAccountAdjust manually credits/debits the sub-account (system-only).
@@ -555,7 +554,7 @@ message GameDebitRequest {
 	// Valid values are defined in wallet-service internal/data/sub_account_rules.go (e.g. "polymarket").
 	optional string product_type = 14;
 	// USDC amount to debit from the operator sub-account. Required when product_type is non-empty.
-	// Caller (oracle-service) is responsible for computing the correct amount.
+	// Caller (game-service) is responsible for computing the correct amount.
 	optional string sub_account_amount = 15;
 }
 
@@ -620,7 +619,7 @@ message GameCreditRequest {
 	// Must match the product_type used in the paired GameDebit.
 	optional string product_type = 15;
 	// USDC amount to credit to the operator sub-account. Required when product_type is non-empty.
-	// Caller (oracle-service) computes this from the on-chain settlement result.
+	// Caller (game-service) computes this from the upstream settlement result.
 	optional string sub_account_payout = 16;
 }
 
@@ -640,6 +639,13 @@ message GameCreditResponse {
 	string operator_bonus_amount_reporting_currency = 13;
 	string provider_bonus_amount_reporting_currency = 14;
 	repeated AffectedCredit affected_credits = 15;
+	// Winning commission deducted from the player's incoming amount (only set
+	// when product_type triggers commission and net_win > 0). Player's
+	// cash_amount above already reflects the deduction. Caller may use these
+	// fields for audit/logs; the authoritative ledger is winning_commission_records.
+	string winning_commission_amount = 16;
+	string winning_commission_amount_usd = 17;
+	string winning_commission_rate = 18;
 }
 
 message ChannelInfo {
@@ -1437,49 +1443,24 @@ message OperatorBalanceAdjustResponse {
 
 // ========== Operator Sub-Account messages ==========
 
-message EnableOperatorSubAccountRequest {
-	api.common.OperatorContext operator_context = 1;
-	// e.g. "polymarket" — must be a key in wallet-service sub_account_rules
-	string product_type = 2;
-}
-
-message EnableOperatorSubAccountResponse {
-	bool enabled = 1;
-	// currency is resolved from the product rule (e.g. "USDC" for polymarket)
-	string currency = 2;
-	string cash = 3;
-}
-
-message DisableOperatorSubAccountRequest {
-	api.common.OperatorContext operator_context = 1;
-	string product_type = 2;
-}
-
-message DisableOperatorSubAccountResponse {
-	bool enabled = 1;
-}
-
 message SubAccountTransferRequest {
-	// Direction is derived from the operator_context vs target_operator_context roles.
-	// operator_context must be the operator owning the sub-account.
-	api.common.OperatorContext operator_context = 1;
-	// Initiator context (who initiates this transfer) — typically a company.
-	api.common.OperatorContext initiator_operator_context = 2;
-	string product_type = 3;
+	// The operator that owns the sub-account; transfer moves cash between this
+	// operator's main wallet (operator_balance) and its sub-account in a single tx.
+	// RBAC (only the operator itself or its company may initiate) is enforced by
+	// the BO layer; wallet-service trusts the caller.
+	api.common.OperatorContext target_operator_context = 1;
+	string product_type = 2;
 	// currency must equal the rule's Currency for this product_type (e.g. USDC for polymarket).
-	string currency = 4;
-	string reporting_currency = 5;
+	string currency = 3;
 	// positive amount; direction indicates main->sub or sub->main.
-	string cash_amount = 6;
+	string cash_amount = 4;
 	enum Direction {
 		DIRECTION_UNSPECIFIED = 0;
 		DIRECTION_TO_SUB_ACCOUNT = 1;
 		DIRECTION_FROM_SUB_ACCOUNT = 2;
 	}
-	Direction direction = 7;
-	// idempotency key — caller-supplied; reusing the same value returns the prior result.
-	int64 external_transaction_id = 8;
-	string memo = 9;
+	Direction direction = 5;
+	string memo = 6;
 }
 
 message SubAccountTransferResponse {
@@ -1491,19 +1472,16 @@ message SubAccountTransferResponse {
 }
 
 message SubAccountAdjustRequest {
-	api.common.OperatorContext operator_context = 1;
+	// The operator whose sub-account is being adjusted. RBAC (system-only) is
+	// enforced by the BO layer; wallet-service trusts the caller.
+	api.common.OperatorContext target_operator_context = 1;
 	string product_type = 2;
 	string currency = 3;
-	string reporting_currency = 4;
 	// "sub_account_adjust_credit" or "sub_account_adjust_debit".
-	string transaction_type = 5;
+	string transaction_type = 4;
 	// always positive; direction derived from transaction_type.
-	string cash_amount = 6;
-	int64 external_transaction_id = 7;
-	string memo = 8;
-	// who initiates this adjustment — used by wallet for defense-in-depth RBAC
-	// even though the BO layer is the primary gate.
-	api.common.OperatorContext initiator_operator_context = 9;
+	string cash_amount = 5;
+	string memo = 6;
 }
 
 message SubAccountAdjustResponse {
@@ -1522,10 +1500,15 @@ message OperatorSubAccount {
 	string product_type = 2;
 	string currency = 3;
 	string cash = 4;
-	bool enabled = 5;
-	bool parent_enabled = 6;
-	google.protobuf.Timestamp created_at = 7;
-	google.protobuf.Timestamp updated_at = 8;
+	// Aggregated commission totals for this sub-account, sourced from
+	// winning_commission_records joined by real_operator_id + product_type.
+	string total_commissions_usd = 5;
+	string total_commissions_reporting_currency = 6;
+	// Same aggregates restricted to the current calendar month [month-start, now).
+	string commissions_this_month_usd = 7;
+	string commissions_this_month_reporting_currency = 8;
+	google.protobuf.Timestamp created_at = 9;
+	google.protobuf.Timestamp updated_at = 10;
 }
 
 message GetOperatorSubAccountResponse {
@@ -1547,21 +1530,42 @@ message ListOperatorSubAccountTransactionsRequest {
 
 message OperatorSubAccountTransaction {
 	int64 transaction_id = 1;
-	int64 external_transaction_id = 2;
+	// Player-side balance_transaction.id this row is paired with — applies to
+	// sub_account_game_debit / game_credit / game_rollback. 0 for transfer/adjust.
+	int64 player_transaction_id = 2;
 	int64 related_transaction_id = 3;
 	api.common.OperatorContext operator_context = 4;
 	string product_type = 5;
 	string currency = 6;
-	string transaction_type = 7;
-	string original_cash = 8;
-	string cash = 9;
-	string cash_amount = 10;
-	string status = 11;
-	string memo = 12;
+	string settlement_currency = 7;
+	string reporting_currency = 8;
+	string transaction_type = 9;
+	// Native-currency balance evolution.
+	string original_cash = 10;
+	string cash = 11;
+	string cash_amount = 12;
+	// USD / reporting amounts of THIS row's delta only (no stale balance
+	// snapshots — original_cash_usd/cash_usd would be reverse-calculated against
+	// a now-irrelevant rate). Pair with the exchange_rate fields below for audit.
+	string cash_amount_usd = 13;
+	string cash_amount_reporting_currency = 14;
+	// Winning commission attributed to this row (only populated on
+	// sub_account_game_credit when payout > bet). cash_amount is NOT reduced —
+	// commission is recorded for downstream operator/platform settlement.
+	string commission_amount = 15;
+	string commission_amount_usd = 16;
+	string commission_amount_reporting_currency = 17;
+	string commission_rate = 18;
+	// Rates captured at transaction time.
+	string exchange_rate = 19;
+	string usd_based_exchange_rate = 20;
+	string reporting_currency_exchange_rate = 21;
+	string status = 22;
+	string memo = 23;
 	// JSON-encoded metadata (e.g. polymarket event/order IDs)
-	string metadata = 13;
-	google.protobuf.Timestamp created_at = 14;
-	google.protobuf.Timestamp updated_at = 15;
+	string metadata = 24;
+	google.protobuf.Timestamp created_at = 25;
+	google.protobuf.Timestamp updated_at = 26;
 }
 
 message ListOperatorSubAccountTransactionsResponse {
@@ -1569,6 +1573,14 @@ message ListOperatorSubAccountTransactionsResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+	// Aggregates over the same WHERE clause as the paged query (operator +
+	// product_type + currency + time window), independent of page/page_size.
+	string total_commission_usd = 5;
+	string total_commission_reporting_currency = 6;
+	string total_transfer_in_usd = 7;
+	string total_transfer_out_usd = 8;
+	string total_payouts_received_usd = 9;
+	string total_bets_placed_usd = 10;
 }
 
 message UpdateOperatorBalanceRequest {

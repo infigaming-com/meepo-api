@@ -24,8 +24,6 @@ const OperationBackofficeWalletAddWalletCurrency = "/api.backoffice.service.v1.B
 const OperationBackofficeWalletCreatePromoCodeCampaign = "/api.backoffice.service.v1.BackofficeWallet/CreatePromoCodeCampaign"
 const OperationBackofficeWalletDeleteDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
 const OperationBackofficeWalletDeleteWalletResponsibleGamblingConfig = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
-const OperationBackofficeWalletDisableOperatorSubAccount = "/api.backoffice.service.v1.BackofficeWallet/DisableOperatorSubAccount"
-const OperationBackofficeWalletEnableOperatorSubAccount = "/api.backoffice.service.v1.BackofficeWallet/EnableOperatorSubAccount"
 const OperationBackofficeWalletExportCustomerRecords = "/api.backoffice.service.v1.BackofficeWallet/ExportCustomerRecords"
 const OperationBackofficeWalletExportFICAThresholdTransactions = "/api.backoffice.service.v1.BackofficeWallet/ExportFICAThresholdTransactions"
 const OperationBackofficeWalletExportManualJournalEntries = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
@@ -94,12 +92,6 @@ type BackofficeWalletHTTPServer interface {
 	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*v1.DeleteDepositRewardSequencesResponse, error)
 	// DeleteWalletResponsibleGamblingConfig DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteWalletResponsibleGamblingConfig(context.Context, *DeleteWalletResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
-	// DisableOperatorSubAccount DisableOperatorSubAccount sets enabled=false on an existing row, keeping the row for joinable history.
-	DisableOperatorSubAccount(context.Context, *DisableOperatorSubAccountRequest) (*DisableOperatorSubAccountResponse, error)
-	// EnableOperatorSubAccount ===== Operator Sub-Account (Polymarket and future custody products) =====
-	// EnableOperatorSubAccount turns on a sub-account row for the (operator, product_type) pair.
-	// "No row == disabled"; Enable inserts a zeroed row with enabled=true. Idempotent.
-	EnableOperatorSubAccount(context.Context, *EnableOperatorSubAccountRequest) (*EnableOperatorSubAccountResponse, error)
 	// ExportCustomerRecords ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ExportCustomerRecords(context.Context, *ExportCustomerRecordsRequest) (*v1.ExportCustomerRecordsResponse, error)
 	// ExportFICAThresholdTransactions ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
@@ -203,7 +195,10 @@ type BackofficeWalletHTTPServer interface {
 	SetUserSwapTemplate(context.Context, *SetUserSwapTemplateRequest) (*v1.SetUserSwapTemplateResponse, error)
 	// SubAccountAdjust SubAccountAdjust manually credits/debits the sub-account (system-level only).
 	SubAccountAdjust(context.Context, *SubAccountAdjustRequest) (*SubAccountAdjustResponse, error)
-	// SubAccountTransfer SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+	// SubAccountTransfer ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// Sub-account row is lazily created on first SubAccountTransfer IN; no
+	// separate enable/disable RPC.
+	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
 	SubAccountTransfer(context.Context, *SubAccountTransferRequest) (*SubAccountTransferResponse, error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
@@ -240,8 +235,6 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/operator/balance-rollback", _BackofficeWallet_OperatorBalanceRollback0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance-settle", _BackofficeWallet_OperatorBalanceSettle0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance-adjust", _BackofficeWallet_OperatorBalanceAdjust0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/operator/sub-account/enable", _BackofficeWallet_EnableOperatorSubAccount0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/operator/sub-account/disable", _BackofficeWallet_DisableOperatorSubAccount0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/sub-account/transfer", _BackofficeWallet_SubAccountTransfer0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/sub-account/adjust", _BackofficeWallet_SubAccountAdjust0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/sub-account/get", _BackofficeWallet_GetOperatorSubAccount0_HTTP_Handler(srv))
@@ -659,50 +652,6 @@ func _BackofficeWallet_OperatorBalanceAdjust0_HTTP_Handler(srv BackofficeWalletH
 			return err
 		}
 		reply := out.(*OperatorBalanceAdjustResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeWallet_EnableOperatorSubAccount0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in EnableOperatorSubAccountRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeWalletEnableOperatorSubAccount)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.EnableOperatorSubAccount(ctx, req.(*EnableOperatorSubAccountRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*EnableOperatorSubAccountResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeWallet_DisableOperatorSubAccount0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in DisableOperatorSubAccountRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeWalletDisableOperatorSubAccount)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DisableOperatorSubAccount(ctx, req.(*DisableOperatorSubAccountRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*DisableOperatorSubAccountResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1706,12 +1655,6 @@ type BackofficeWalletHTTPClient interface {
 	DeleteDepositRewardSequences(ctx context.Context, req *DeleteDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.DeleteDepositRewardSequencesResponse, err error)
 	// DeleteWalletResponsibleGamblingConfig DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteWalletResponsibleGamblingConfig(ctx context.Context, req *DeleteWalletResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *v1.DeleteResponsibleGamblingConfigResponse, err error)
-	// DisableOperatorSubAccount DisableOperatorSubAccount sets enabled=false on an existing row, keeping the row for joinable history.
-	DisableOperatorSubAccount(ctx context.Context, req *DisableOperatorSubAccountRequest, opts ...http.CallOption) (rsp *DisableOperatorSubAccountResponse, err error)
-	// EnableOperatorSubAccount ===== Operator Sub-Account (Polymarket and future custody products) =====
-	// EnableOperatorSubAccount turns on a sub-account row for the (operator, product_type) pair.
-	// "No row == disabled"; Enable inserts a zeroed row with enabled=true. Idempotent.
-	EnableOperatorSubAccount(ctx context.Context, req *EnableOperatorSubAccountRequest, opts ...http.CallOption) (rsp *EnableOperatorSubAccountResponse, err error)
 	// ExportCustomerRecords ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ExportCustomerRecords(ctx context.Context, req *ExportCustomerRecordsRequest, opts ...http.CallOption) (rsp *v1.ExportCustomerRecordsResponse, err error)
 	// ExportFICAThresholdTransactions ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
@@ -1815,7 +1758,10 @@ type BackofficeWalletHTTPClient interface {
 	SetUserSwapTemplate(ctx context.Context, req *SetUserSwapTemplateRequest, opts ...http.CallOption) (rsp *v1.SetUserSwapTemplateResponse, err error)
 	// SubAccountAdjust SubAccountAdjust manually credits/debits the sub-account (system-level only).
 	SubAccountAdjust(ctx context.Context, req *SubAccountAdjustRequest, opts ...http.CallOption) (rsp *SubAccountAdjustResponse, err error)
-	// SubAccountTransfer SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+	// SubAccountTransfer ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// Sub-account row is lazily created on first SubAccountTransfer IN; no
+	// separate enable/disable RPC.
+	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
 	SubAccountTransfer(ctx context.Context, req *SubAccountTransferRequest, opts ...http.CallOption) (rsp *SubAccountTransferResponse, err error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, req *UpdateOperatorBalanceRequest, opts ...http.CallOption) (rsp *UpdateOperatorBalanceResponse, err error)
@@ -1889,36 +1835,6 @@ func (c *BackofficeWalletHTTPClientImpl) DeleteWalletResponsibleGamblingConfig(c
 	pattern := "/v1/backoffice/wallet/responsible-gambling/config/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletDeleteWalletResponsibleGamblingConfig))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// DisableOperatorSubAccount DisableOperatorSubAccount sets enabled=false on an existing row, keeping the row for joinable history.
-func (c *BackofficeWalletHTTPClientImpl) DisableOperatorSubAccount(ctx context.Context, in *DisableOperatorSubAccountRequest, opts ...http.CallOption) (*DisableOperatorSubAccountResponse, error) {
-	var out DisableOperatorSubAccountResponse
-	pattern := "/v1/backoffice/wallet/operator/sub-account/disable"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletDisableOperatorSubAccount))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// EnableOperatorSubAccount ===== Operator Sub-Account (Polymarket and future custody products) =====
-// EnableOperatorSubAccount turns on a sub-account row for the (operator, product_type) pair.
-// "No row == disabled"; Enable inserts a zeroed row with enabled=true. Idempotent.
-func (c *BackofficeWalletHTTPClientImpl) EnableOperatorSubAccount(ctx context.Context, in *EnableOperatorSubAccountRequest, opts ...http.CallOption) (*EnableOperatorSubAccountResponse, error) {
-	var out EnableOperatorSubAccountResponse
-	pattern := "/v1/backoffice/wallet/operator/sub-account/enable"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletEnableOperatorSubAccount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -2630,7 +2546,10 @@ func (c *BackofficeWalletHTTPClientImpl) SubAccountAdjust(ctx context.Context, i
 	return &out, nil
 }
 
-// SubAccountTransfer SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+// SubAccountTransfer ===== Operator Sub-Account (Polymarket and future custody products) =====
+// Sub-account row is lazily created on first SubAccountTransfer IN; no
+// separate enable/disable RPC.
+// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
 func (c *BackofficeWalletHTTPClientImpl) SubAccountTransfer(ctx context.Context, in *SubAccountTransferRequest, opts ...http.CallOption) (*SubAccountTransferResponse, error) {
 	var out SubAccountTransferResponse
 	pattern := "/v1/backoffice/wallet/operator/sub-account/transfer"
