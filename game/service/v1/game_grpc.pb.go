@@ -131,6 +131,8 @@ type GameClient interface {
 	Play(ctx context.Context, in *PlayRequest, opts ...grpc.CallOption) (*PlayResponse, error)
 	Rollback(ctx context.Context, in *RollbackRequest, opts ...grpc.CallOption) (*RollbackResponse, error)
 	ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error)
+	// List in-play events for a live-betting game by proxying to the upstream aggregator. Responses are cached for 30 seconds.
+	// See ListLiveEventsRequest for details.
 	ListLiveEvents(ctx context.Context, in *ListLiveEventsRequest, opts ...grpc.CallOption) (*ListLiveEventsResponse, error)
 	ExportBets(ctx context.Context, in *ExportBetsRequest, opts ...grpc.CallOption) (*ExportBetsResponse, error)
 	BackofficeListGames(ctx context.Context, in *BackofficeListGamesRequest, opts ...grpc.CallOption) (*BackofficeListGamesResponse, error)
@@ -1160,6 +1162,8 @@ type GameServer interface {
 	Play(context.Context, *PlayRequest) (*PlayResponse, error)
 	Rollback(context.Context, *RollbackRequest) (*RollbackResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
+	// List in-play events for a live-betting game by proxying to the upstream aggregator. Responses are cached for 30 seconds.
+	// See ListLiveEventsRequest for details.
 	ListLiveEvents(context.Context, *ListLiveEventsRequest) (*ListLiveEventsResponse, error)
 	ExportBets(context.Context, *ExportBetsRequest) (*ExportBetsResponse, error)
 	BackofficeListGames(context.Context, *BackofficeListGamesRequest) (*BackofficeListGamesResponse, error)

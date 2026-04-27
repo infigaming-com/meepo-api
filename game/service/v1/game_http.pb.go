@@ -44,6 +44,8 @@ type GameHTTPServer interface {
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
 	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
+	// ListLiveEvents List in-play events for a live-betting game by proxying to the upstream aggregator. Responses are cached for 30 seconds.
+	// See ListLiveEventsRequest for details.
 	ListLiveEvents(context.Context, *ListLiveEventsRequest) (*ListLiveEventsResponse, error)
 	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
 	Play(context.Context, *PlayRequest) (*PlayResponse, error)
@@ -364,6 +366,8 @@ type GameHTTPClient interface {
 	ListBets(ctx context.Context, req *ListBetsRequest, opts ...http.CallOption) (rsp *ListBetsResponse, err error)
 	ListCategories(ctx context.Context, req *ListCategoriesRequest, opts ...http.CallOption) (rsp *ListCategoriesResponse, err error)
 	ListGames(ctx context.Context, req *ListGamesRequest, opts ...http.CallOption) (rsp *ListGamesResponse, err error)
+	// ListLiveEvents List in-play events for a live-betting game by proxying to the upstream aggregator. Responses are cached for 30 seconds.
+	// See ListLiveEventsRequest for details.
 	ListLiveEvents(ctx context.Context, req *ListLiveEventsRequest, opts ...http.CallOption) (rsp *ListLiveEventsResponse, err error)
 	ListProviders(ctx context.Context, req *ListProvidersRequest, opts ...http.CallOption) (rsp *ListProvidersResponse, err error)
 	Play(ctx context.Context, req *PlayRequest, opts ...http.CallOption) (rsp *PlayResponse, err error)
@@ -496,6 +500,8 @@ func (c *GameHTTPClientImpl) ListGames(ctx context.Context, in *ListGamesRequest
 	return &out, nil
 }
 
+// ListLiveEvents List in-play events for a live-betting game by proxying to the upstream aggregator. Responses are cached for 30 seconds.
+// See ListLiveEventsRequest for details.
 func (c *GameHTTPClientImpl) ListLiveEvents(ctx context.Context, in *ListLiveEventsRequest, opts ...http.CallOption) (*ListLiveEventsResponse, error) {
 	var out ListLiveEventsResponse
 	pattern := "/v1/game/live-events/list"

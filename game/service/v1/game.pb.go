@@ -8880,10 +8880,136 @@ func (x *GetGameInfoResponse) GetGameInfo() *GameInfo {
 	return nil
 }
 
+// ListLiveEvents - list events (in-play and pre-match) of a sports/live-betting game by proxying
+// `request_payload` to the upstream aggregator's events endpoint.
+//
+// Behavior:
+// - The upstream endpoint and provider credentials are resolved from `game_id`.
+// - `request_payload` is forwarded as-is; the operator's API key/secret are used to sign the call.
+// - Responses are cached for 30 seconds keyed by `game_id` + payload hash and shared across operators.
+//
+// ## request_payload fields (forwarded verbatim to the provider)
+//
+// | Field         | Type   | Required | Allowed values / format                                                                              |
+// | ---           | ---    | ---      | ---                                                                                                  |
+// | `sportID`     | string | yes      | Sport ID, or a comma-separated list of sport IDs (e.g. `"1"`, `"1,2,6,7"`) — see "Sport IDs" below.  |
+// | `isLive`      | string | yes      | `"true"` (in-play / live) or `"false"` (pre-match / early).                                          |
+// | `eventType`   | string | yes      | `"Fixture"` (head-to-head match) or `"Outright"` (championship / futures). Case-insensitive.         |
+// | `take`        | string | yes      | Page size — positive integer as a string, e.g. `"10"`, `"50"`.                                       |
+// | `skip`        | string | yes      | Page offset — non-negative integer as a string, e.g. `"0"`, `"20"`.                                  |
+// | `locale`      | string | yes      | 2-letter language code, e.g. `"en"`, `"zh"`, `"ja"`, `"ko"`, `"th"`, `"vi"`, `"pt"`, `"es"`.         |
+// | `leagueID`    | string | no       | Provider-assigned league ID (numeric string). Empty string `""` or omitted = no league filter.       |
+// | `eventID`     | string | no       | Provider-assigned event ID (numeric string). Empty string `""` or omitted = no event filter.         |
+// | `isTopLeague` | string | no       | `"true"` to return only provider-flagged top leagues; `"false"` or empty `""` = no top-league filter. |
+//
+// ## Sport IDs (subset; the provider's full list may change over time)
+//
+// `1` Soccer, `2` Basketball, `3` American Football, `6` Tennis, `7` Baseball, `8` Ice Hockey,
+// `10` Handball, `11` Rugby League, `12` Golf, `13` Snooker / Pool, `14` Motor Racing, `15` Darts,
+// `19` Volleyball, `20` Boxing, `25` Futsal, `26` Table Tennis, `34` Badminton, `35` Rugby Union,
+// `43` MMA, `59` Cricket, `61` Horse Racing, `64` E-Sports, `66` Greyhounds, `82` Muay Thai,
+// `136` Kabaddi, `220` LOL, `221` DOTA2, `228` Valorant, `229` KOG, `230` CS2.
 type ListLiveEventsRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	GameId         string                 `protobuf:"bytes,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	RequestPayload *structpb.Struct       `protobuf:"bytes,2,opt,name=request_payload,json=requestPayload,proto3" json:"request_payload,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Game ID identifying which live/sports product to query (used to resolve the upstream endpoint and credentials).
+	GameId string `protobuf:"bytes,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	// Filter payload forwarded as-is to the upstream aggregator. Field shape follows the provider's API
+	// (see the table in the message-level docs above).
+	//
+	// Example A — pull up to 10 in-play basketball head-to-head events, in English (no optional filters):
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "2",
+	//	  "isLive": "true",
+	//	  "eventType": "Fixture",
+	//	  "take": "10",
+	//	  "skip": "0",
+	//	  "locale": "en"
+	//	}
+	//
+	// ```
+	//
+	// Example B — same query, but limited to top leagues only and second page of 20 results:
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "2",
+	//	  "isLive": "true",
+	//	  "eventType": "Fixture",
+	//	  "take": "20",
+	//	  "skip": "20",
+	//	  "locale": "en",
+	//	  "isTopLeague": "true"
+	//	}
+	//
+	// ```
+	//
+	// Example C — fetch a specific event (e.g. for refresh) by `eventID`:
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "1",
+	//	  "isLive": "false",
+	//	  "eventType": "Fixture",
+	//	  "take": "1",
+	//	  "skip": "0",
+	//	  "locale": "en",
+	//	  "eventID": "123456789"
+	//	}
+	//
+	// ```
+	//
+	// Example D — pre-match tennis top-league widget:
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "6",
+	//	  "isLive": "false",
+	//	  "eventType": "Fixture",
+	//	  "take": "10",
+	//	  "skip": "0",
+	//	  "locale": "en",
+	//	  "isTopLeague": "true"
+	//	}
+	//
+	// ```
+	//
+	// Example E — list events for a specific league by `leagueID` (e.g. a league landing page):
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "1",
+	//	  "isLive": "false",
+	//	  "eventType": "Fixture",
+	//	  "take": "20",
+	//	  "skip": "0",
+	//	  "locale": "en",
+	//	  "leagueID": "2627"
+	//	}
+	//
+	// ```
+	//
+	// Example F — list outright (championship / futures) markets, e.g. a Soccer "winner" board:
+	//
+	// ```json
+	//
+	//	{
+	//	  "sportID": "1",
+	//	  "isLive": "false",
+	//	  "eventType": "Outright",
+	//	  "take": "20",
+	//	  "skip": "0",
+	//	  "locale": "en"
+	//	}
+	//
+	// ```
+	RequestPayload *structpb.Struct `protobuf:"bytes,2,opt,name=request_payload,json=requestPayload,proto3" json:"request_payload,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -8932,9 +9058,77 @@ func (x *ListLiveEventsRequest) GetRequestPayload() *structpb.Struct {
 	return nil
 }
 
+// ListLiveEventsResponse - events returned by the upstream aggregator (passed through without schema enforcement).
+//
+// ## Common event fields (provider-defined)
+//
+// - `_id` — event ID.
+// - `IsLive` — whether the event is currently in-play.
+// - `IsSuspended` — whether the event is temporarily suspended.
+// - `IsTopLeague` — whether the event belongs to a provider-flagged top league (informational only).
+// - `LeagueId` / `MasterLeagueId` — league IDs (`MasterLeagueId` is stable across seasons; usable for league logo lookup).
+// - `SportId` — sport ID (see ListLiveEventsRequest).
+// - `StartEventDate` — scheduled start time.
+// - `Status` — event status enum: `0` NotStarted, `1` InProgress, `2` RaceOff, `3` Resulted, `4` Cancelled.
+// - `Type` — `"Fixture"` or `"Outright"`.
+// - `EventName` / `BetslipLine` / `SportName` / `LeagueName` / `regionCode` / `regionName` — display fields.
+// - `TotalActiveMarketsCount` — number of active markets on the event.
+// - `Participants[]` — `{_id, Name, VenueRole}` (team / player info; `VenueRole` indicates country or region).
+// - `Score` — `{HomeScore, AwayScore}` for in-play events.
+// - `Markets[]` — `{_id, Name, IsSuspended, LeagueId, StartDate, MarketType, Selections}`.
+//   - `MarketType` — `{_id, Name}` (e.g. handicap / over-under / moneyline).
+//
+// - `Selections[]` — `{_id, BetslipLine, IsDisabled, Name, IsOption, TrueOdds, OutcomeType, Points, Status, DisplayOdds}`.
+//   - `IsOption` — whether this is the main handicap line or a derived (alternate) line.
+//   - `TrueOdds` — true odds in decimal (European) format.
+//   - `OutcomeType` — UI hint, e.g. `"Over"` / `"Under"`, `"Home"` / `"Away"` / `"Tie"`.
+//   - `Points` — handicap / line value for the selection.
+//   - `DisplayOdds` — `{Decimal, HK, Indo, Malay}`. `Decimal` is also the settlement format.
+//
+// On upstream errors, an entry may instead carry `errorMessage`, `errorCode`,
+// `errorMessages[].{message, parameterName, providedValue}`, and `sessionId` for support diagnostics.
 type ListLiveEventsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Events        []*structpb.Struct     `protobuf:"bytes,1,rep,name=events,proto3" json:"events,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Event objects passed through from the aggregator. See the message-level docs for the field schema.
+	//
+	// ```json
+	// [
+	//
+	//	{
+	//	  "_id": "evt_12345",
+	//	  "SportId": 2,
+	//	  "LeagueName": "NBA",
+	//	  "EventName": "Lakers vs Celtics",
+	//	  "StartEventDate": "2026-04-26T20:00:00Z",
+	//	  "Status": 1,
+	//	  "Type": "Fixture",
+	//	  "Participants": [
+	//	    {"_id": "t_1", "Name": "Lakers", "VenueRole": "Home"},
+	//	    {"_id": "t_2", "Name": "Celtics", "VenueRole": "Away"}
+	//	  ],
+	//	  "Score": {"HomeScore": 42, "AwayScore": 38},
+	//	  "Markets": [
+	//	    {
+	//	      "_id": "mkt_1",
+	//	      "Name": "Moneyline",
+	//	      "MarketType": {"_id": "mt_ml", "Name": "Moneyline"},
+	//	      "Selections": [
+	//	        {
+	//	          "_id": "sel_1",
+	//	          "Name": "Lakers",
+	//	          "OutcomeType": "Home",
+	//	          "TrueOdds": 1.85,
+	//	          "DisplayOdds": {"Decimal": "1.85", "HK": "0.85", "Indo": "-1.18", "Malay": "0.85"},
+	//	          "Status": 1
+	//	        }
+	//	      ]
+	//	    }
+	//	  ]
+	//	}
+	//
+	// ]
+	// ```
+	Events        []*structpb.Struct `protobuf:"bytes,1,rep,name=events,proto3" json:"events,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
