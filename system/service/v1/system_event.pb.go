@@ -130,8 +130,8 @@ const file_system_service_v1_system_event_proto_rawDesc = "" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
 	"\rEventResponse2c\n" +
 	"\vSystemEvent\x12T\n" +
-	"\x05Event\x12#.api.system.service.v1.EventRequest\x1a$.api.system.service.v1.EventResponse\"\x00B\\\n" +
-	"\x1eapi.system.image.pngservice.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
+	"\x05Event\x12#.api.system.service.v1.EventRequest\x1a$.api.system.service.v1.EventResponse\"\x00BS\n" +
+	"\x15api.system.service.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
 
 var (
 	file_system_service_v1_system_event_proto_rawDescOnce sync.Once

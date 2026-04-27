@@ -83,8 +83,8 @@ const file_vip_service_v1_error_reason_proto_rawDesc = "" +
 	"\x14BONUS_CLAIM_REJECTED\x10\x91\xb0\n" +
 	"\x1a\x04\xa8E\x93\x03\x12\x1f\n" +
 	"\x13NO_CLAIMABLE_REWARD\x10\x92\xb0\n" +
-	"\x1a\x04\xa8E\x94\x03\x1a\x04\xa0E\xf4\x03BP\n" +
-	"\x15api.wallet.service.v1P\x01Z5github.com/infigaming-com/meepo-api/vip/service/v1;v1b\x06proto3"
+	"\x1a\x04\xa8E\x94\x03\x1a\x04\xa0E\xf4\x03BM\n" +
+	"\x12api.vip.service.v1P\x01Z5github.com/infigaming-com/meepo-api/vip/service/v1;v1b\x06proto3"
 
 var (
 	file_vip_service_v1_error_reason_proto_rawDescOnce sync.Once
