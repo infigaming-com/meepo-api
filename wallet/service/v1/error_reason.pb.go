@@ -227,7 +227,7 @@ const (
 	ErrorReason_INVALID_USER_IDS                      ErrorReason = 30198
 	ErrorReason_INVALID_BATCH_SIZE                    ErrorReason = 30199
 	ErrorReason_INVALID_CURRENCY                      ErrorReason = 30200
-	// operator sub-account (Polymarket & future custody products)
+	// operator sub-account (custody products: prediction markets, etc.)
 	ErrorReason_INVALID_SUB_ACCOUNT_PRODUCT_TYPE              ErrorReason = 30201
 	ErrorReason_GET_OPERATOR_SUB_ACCOUNT_FAILED               ErrorReason = 30202
 	ErrorReason_SUB_ACCOUNT_NOT_ENABLED                       ErrorReason = 30203

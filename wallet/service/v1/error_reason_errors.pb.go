@@ -2425,7 +2425,7 @@ func ErrorInvalidCurrency(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_INVALID_CURRENCY.String(), fmt.Sprintf(format, args...))
 }
 
-// operator sub-account (Polymarket & future custody products)
+// operator sub-account (custody products: prediction markets, etc.)
 func IsInvalidSubAccountProductType(err error) bool {
 	if err == nil {
 		return false
@@ -2434,7 +2434,7 @@ func IsInvalidSubAccountProductType(err error) bool {
 	return e.Reason == ErrorReason_INVALID_SUB_ACCOUNT_PRODUCT_TYPE.String() && e.Code == 400
 }
 
-// operator sub-account (Polymarket & future custody products)
+// operator sub-account (custody products: prediction markets, etc.)
 func ErrorInvalidSubAccountProductType(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_INVALID_SUB_ACCOUNT_PRODUCT_TYPE.String(), fmt.Sprintf(format, args...))
 }

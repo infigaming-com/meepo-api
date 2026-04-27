@@ -136,7 +136,7 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
-	// ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// ===== Operator Sub-Account (custody products: prediction markets, etc.) =====
 	// Sub-account row is lazily created on first SubAccountTransfer IN; no
 	// separate enable/disable RPC.
 	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
@@ -169,6 +169,23 @@ service BackofficeWallet {
 	rpc ListOperatorSubAccountTransactions(ListOperatorSubAccountTransactionsRequest) returns (wallet.service.v1.ListOperatorSubAccountTransactionsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/sub-account/transactions/list"
+			body: "*"
+		};
+	}
+	// GetOperatorWinningCommissionConfig returns the operator's commission-rate
+	// row plus the effective rate after walking follow_parent. RBAC:
+	// finance_adjust_custody_balance:read.
+	rpc GetOperatorWinningCommissionConfig(GetOperatorWinningCommissionConfigRequest) returns (wallet.service.v1.GetOperatorWinningCommissionConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/commission-config/get"
+			body: "*"
+		};
+	}
+	// SetOperatorWinningCommissionConfig writes the operator's commission-rate
+	// row. System-only; RBAC: finance_adjust_custody_balance:write.
+	rpc SetOperatorWinningCommissionConfig(SetOperatorWinningCommissionConfigRequest) returns (wallet.service.v1.SetOperatorWinningCommissionConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/commission-config/set"
 			body: "*"
 		};
 	}
@@ -805,7 +822,7 @@ message SubAccountTransferRequest {
 	// may initiate, enforced by BO RBAC (initiator is read from request context).
 	api.common.OperatorContext target_operator_context = 1;
 	string product_type = 2;
-	// must equal the rule's currency for the product (e.g. USDC for polymarket)
+	// must equal the rule's currency for the product (e.g. USDC for "prediction")
 	string currency = 3;
 	// positive amount; direction picks main->sub or sub->main
 	string cash_amount = 4;
@@ -862,6 +879,19 @@ message ListOperatorSubAccountTransactionsRequest {
 	optional google.protobuf.Timestamp end_time = 6;
 	optional int32 page = 7;
 	optional int32 page_size = 8;
+}
+
+// GetOperatorWinningCommissionConfigRequest reads the system-default
+// commission rate. v1 only ships the system-level row; per-operator
+// inheritance is reserved for the wallet RPC (future work).
+message GetOperatorWinningCommissionConfigRequest {
+}
+
+// SetOperatorWinningCommissionConfigRequest writes the system-default
+// commission rate. System-only via RBAC.
+message SetOperatorWinningCommissionConfigRequest {
+	// Plain ratio (0.10 = 10%).
+	string commission_rate = 1;
 }
 
 message ListOperatorBalanceTransactionsRequest {

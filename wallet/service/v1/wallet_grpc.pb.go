@@ -60,6 +60,8 @@ const (
 	Wallet_SubAccountAdjust_FullMethodName                    = "/api.wallet.service.v1.Wallet/SubAccountAdjust"
 	Wallet_ListOperatorSubAccounts_FullMethodName             = "/api.wallet.service.v1.Wallet/ListOperatorSubAccounts"
 	Wallet_ListOperatorSubAccountTransactions_FullMethodName  = "/api.wallet.service.v1.Wallet/ListOperatorSubAccountTransactions"
+	Wallet_GetOperatorWinningCommissionConfig_FullMethodName  = "/api.wallet.service.v1.Wallet/GetOperatorWinningCommissionConfig"
+	Wallet_SetOperatorWinningCommissionConfig_FullMethodName  = "/api.wallet.service.v1.Wallet/SetOperatorWinningCommissionConfig"
 	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
 	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
 	Wallet_GetCompanyFinancialSummary_FullMethodName          = "/api.wallet.service.v1.Wallet/GetCompanyFinancialSummary"
@@ -196,7 +198,7 @@ type WalletClient interface {
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
 	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
 	OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...grpc.CallOption) (*OperatorBalanceAdjustResponse, error)
-	// ========== Operator Sub-Account (e.g. Polymarket and future custody products) ==========
+	// ========== Operator Sub-Account (custody products: prediction markets, etc.) ==========
 	// Sub-accounts are per-(operator, product_type, currency). Product rules live in
 	// wallet-service internal/data/sub_account_rules.go — allowed currencies are fixed per product.
 	// Lifecycle: row is lazily created on first SubAccountTransfer IN; other entry points
@@ -208,6 +210,16 @@ type WalletClient interface {
 	SubAccountAdjust(ctx context.Context, in *SubAccountAdjustRequest, opts ...grpc.CallOption) (*SubAccountAdjustResponse, error)
 	ListOperatorSubAccounts(ctx context.Context, in *ListOperatorSubAccountsRequest, opts ...grpc.CallOption) (*ListOperatorSubAccountsResponse, error)
 	ListOperatorSubAccountTransactions(ctx context.Context, in *ListOperatorSubAccountTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorSubAccountTransactionsResponse, error)
+	// GetOperatorWinningCommissionConfig returns the operator's own commission
+	// rate config (raw row) plus the effective rate after walking follow_parent
+	// up the hierarchy. The effective rate is what GameCredit actually applies
+	// when product_type triggers commission.
+	GetOperatorWinningCommissionConfig(ctx context.Context, in *GetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*GetOperatorWinningCommissionConfigResponse, error)
+	// SetOperatorWinningCommissionConfig writes the operator's commission rate
+	// config row. follow_parent=true ignores commission_rate and inherits from
+	// the nearest ancestor. System-only RPC; BO gates on the
+	// finance_adjust_custody_balance permission module.
+	SetOperatorWinningCommissionConfig(ctx context.Context, in *SetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*SetOperatorWinningCommissionConfigResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
@@ -788,6 +800,26 @@ func (c *walletClient) ListOperatorSubAccountTransactions(ctx context.Context, i
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListOperatorSubAccountTransactionsResponse)
 	err := c.cc.Invoke(ctx, Wallet_ListOperatorSubAccountTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetOperatorWinningCommissionConfig(ctx context.Context, in *GetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*GetOperatorWinningCommissionConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorWinningCommissionConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetOperatorWinningCommissionConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) SetOperatorWinningCommissionConfig(ctx context.Context, in *SetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*SetOperatorWinningCommissionConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOperatorWinningCommissionConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_SetOperatorWinningCommissionConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1514,7 +1546,7 @@ type WalletServer interface {
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
 	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
 	OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error)
-	// ========== Operator Sub-Account (e.g. Polymarket and future custody products) ==========
+	// ========== Operator Sub-Account (custody products: prediction markets, etc.) ==========
 	// Sub-accounts are per-(operator, product_type, currency). Product rules live in
 	// wallet-service internal/data/sub_account_rules.go — allowed currencies are fixed per product.
 	// Lifecycle: row is lazily created on first SubAccountTransfer IN; other entry points
@@ -1526,6 +1558,16 @@ type WalletServer interface {
 	SubAccountAdjust(context.Context, *SubAccountAdjustRequest) (*SubAccountAdjustResponse, error)
 	ListOperatorSubAccounts(context.Context, *ListOperatorSubAccountsRequest) (*ListOperatorSubAccountsResponse, error)
 	ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*ListOperatorSubAccountTransactionsResponse, error)
+	// GetOperatorWinningCommissionConfig returns the operator's own commission
+	// rate config (raw row) plus the effective rate after walking follow_parent
+	// up the hierarchy. The effective rate is what GameCredit actually applies
+	// when product_type triggers commission.
+	GetOperatorWinningCommissionConfig(context.Context, *GetOperatorWinningCommissionConfigRequest) (*GetOperatorWinningCommissionConfigResponse, error)
+	// SetOperatorWinningCommissionConfig writes the operator's commission rate
+	// config row. follow_parent=true ignores commission_rate and inherits from
+	// the nearest ancestor. System-only RPC; BO gates on the
+	// finance_adjust_custody_balance permission module.
+	SetOperatorWinningCommissionConfig(context.Context, *SetOperatorWinningCommissionConfigRequest) (*SetOperatorWinningCommissionConfigResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
@@ -1824,6 +1866,12 @@ func (UnimplementedWalletServer) ListOperatorSubAccounts(context.Context, *ListO
 }
 func (UnimplementedWalletServer) ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*ListOperatorSubAccountTransactionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorSubAccountTransactions not implemented")
+}
+func (UnimplementedWalletServer) GetOperatorWinningCommissionConfig(context.Context, *GetOperatorWinningCommissionConfigRequest) (*GetOperatorWinningCommissionConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorWinningCommissionConfig not implemented")
+}
+func (UnimplementedWalletServer) SetOperatorWinningCommissionConfig(context.Context, *SetOperatorWinningCommissionConfigRequest) (*SetOperatorWinningCommissionConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOperatorWinningCommissionConfig not implemented")
 }
 func (UnimplementedWalletServer) UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorBalance not implemented")
@@ -2775,6 +2823,42 @@ func _Wallet_ListOperatorSubAccountTransactions_Handler(srv interface{}, ctx con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).ListOperatorSubAccountTransactions(ctx, req.(*ListOperatorSubAccountTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetOperatorWinningCommissionConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorWinningCommissionConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetOperatorWinningCommissionConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetOperatorWinningCommissionConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetOperatorWinningCommissionConfig(ctx, req.(*GetOperatorWinningCommissionConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_SetOperatorWinningCommissionConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorWinningCommissionConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).SetOperatorWinningCommissionConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_SetOperatorWinningCommissionConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).SetOperatorWinningCommissionConfig(ctx, req.(*SetOperatorWinningCommissionConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4119,6 +4203,14 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperatorSubAccountTransactions",
 			Handler:    _Wallet_ListOperatorSubAccountTransactions_Handler,
+		},
+		{
+			MethodName: "GetOperatorWinningCommissionConfig",
+			Handler:    _Wallet_GetOperatorWinningCommissionConfig_Handler,
+		},
+		{
+			MethodName: "SetOperatorWinningCommissionConfig",
+			Handler:    _Wallet_SetOperatorWinningCommissionConfig_Handler,
 		},
 		{
 			MethodName: "UpdateOperatorBalance",

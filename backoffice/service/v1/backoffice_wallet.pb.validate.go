@@ -4790,6 +4790,220 @@ var _ interface {
 	ErrorName() string
 } = ListOperatorSubAccountTransactionsRequestValidationError{}
 
+// Validate checks the field values on
+// GetOperatorWinningCommissionConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorWinningCommissionConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetOperatorWinningCommissionConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetOperatorWinningCommissionConfigRequestMultiError, or nil if none found.
+func (m *GetOperatorWinningCommissionConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorWinningCommissionConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetOperatorWinningCommissionConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorWinningCommissionConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorWinningCommissionConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorWinningCommissionConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorWinningCommissionConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorWinningCommissionConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorWinningCommissionConfigRequestValidationError is the validation
+// error returned by GetOperatorWinningCommissionConfigRequest.Validate if the
+// designated constraints aren't met.
+type GetOperatorWinningCommissionConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorWinningCommissionConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorWinningCommissionConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorWinningCommissionConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorWinningCommissionConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorWinningCommissionConfigRequestValidationError) ErrorName() string {
+	return "GetOperatorWinningCommissionConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorWinningCommissionConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorWinningCommissionConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorWinningCommissionConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorWinningCommissionConfigRequestValidationError{}
+
+// Validate checks the field values on
+// SetOperatorWinningCommissionConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SetOperatorWinningCommissionConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// SetOperatorWinningCommissionConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// SetOperatorWinningCommissionConfigRequestMultiError, or nil if none found.
+func (m *SetOperatorWinningCommissionConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetOperatorWinningCommissionConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CommissionRate
+
+	if len(errors) > 0 {
+		return SetOperatorWinningCommissionConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetOperatorWinningCommissionConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// SetOperatorWinningCommissionConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SetOperatorWinningCommissionConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetOperatorWinningCommissionConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetOperatorWinningCommissionConfigRequestMultiError) AllErrors() []error { return m }
+
+// SetOperatorWinningCommissionConfigRequestValidationError is the validation
+// error returned by SetOperatorWinningCommissionConfigRequest.Validate if the
+// designated constraints aren't met.
+type SetOperatorWinningCommissionConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetOperatorWinningCommissionConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetOperatorWinningCommissionConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetOperatorWinningCommissionConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetOperatorWinningCommissionConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetOperatorWinningCommissionConfigRequestValidationError) ErrorName() string {
+	return "SetOperatorWinningCommissionConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetOperatorWinningCommissionConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetOperatorWinningCommissionConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetOperatorWinningCommissionConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetOperatorWinningCommissionConfigRequestValidationError{}
+
 // Validate checks the field values on ListOperatorBalanceTransactionsRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
