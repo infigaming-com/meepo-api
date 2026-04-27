@@ -660,6 +660,8 @@ message GameCreditResponse {
 	// fields for audit/logs; the authoritative ledger is winning_commission_records.
 	string winning_commission_amount = 16;
 	string winning_commission_amount_usd = 17;
+	// winning_commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a
+	// percentage — do not multiply by 100 on display.
 	string winning_commission_rate = 18;
 }
 
@@ -1574,7 +1576,11 @@ message OperatorSubAccountTransaction {
 	string commission_amount = 14;
 	string commission_amount_usd = 15;
 	string commission_amount_reporting_currency = 16;
+	// commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a percentage —
+	// do not multiply by 100 on display.
 	string commission_rate = 17;
+	// status: "settled" on insert; updated to "rollbacked" on the original
+	// sub_account_game_debit row when a paired GameRollback runs.
 	string status = 18;
 	string memo = 19;
 	google.protobuf.Timestamp created_at = 20;

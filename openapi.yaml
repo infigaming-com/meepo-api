@@ -36445,8 +36445,14 @@ components:
                     type: string
                 commissionRate:
                     type: string
+                    description: |-
+                        commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a percentage —
+                         do not multiply by 100 on display.
                 status:
                     type: string
+                    description: |-
+                        status: "settled" on insert; updated to "rollbacked" on the original
+                         sub_account_game_debit row when a paired GameRollback runs.
                 memo:
                     type: string
                 createdAt:

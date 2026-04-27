@@ -1425,9 +1425,11 @@ type GameCreditResponse struct {
 	// fields for audit/logs; the authoritative ledger is winning_commission_records.
 	WinningCommissionAmount    string `protobuf:"bytes,16,opt,name=winning_commission_amount,json=winningCommissionAmount,proto3" json:"winning_commission_amount,omitempty"`
 	WinningCommissionAmountUsd string `protobuf:"bytes,17,opt,name=winning_commission_amount_usd,json=winningCommissionAmountUsd,proto3" json:"winning_commission_amount_usd,omitempty"`
-	WinningCommissionRate      string `protobuf:"bytes,18,opt,name=winning_commission_rate,json=winningCommissionRate,proto3" json:"winning_commission_rate,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	// winning_commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a
+	// percentage — do not multiply by 100 on display.
+	WinningCommissionRate string `protobuf:"bytes,18,opt,name=winning_commission_rate,json=winningCommissionRate,proto3" json:"winning_commission_rate,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GameCreditResponse) Reset() {
@@ -7366,16 +7368,20 @@ type OperatorSubAccountTransaction struct {
 	// Winning commission attributed to this row (only populated on
 	// sub_account_game_credit when payout > bet). cash_amount is NOT reduced —
 	// commission is recorded for downstream operator/platform settlement.
-	CommissionAmount                  string                 `protobuf:"bytes,14,opt,name=commission_amount,json=commissionAmount,proto3" json:"commission_amount,omitempty"`
-	CommissionAmountUsd               string                 `protobuf:"bytes,15,opt,name=commission_amount_usd,json=commissionAmountUsd,proto3" json:"commission_amount_usd,omitempty"`
-	CommissionAmountReportingCurrency string                 `protobuf:"bytes,16,opt,name=commission_amount_reporting_currency,json=commissionAmountReportingCurrency,proto3" json:"commission_amount_reporting_currency,omitempty"`
-	CommissionRate                    string                 `protobuf:"bytes,17,opt,name=commission_rate,json=commissionRate,proto3" json:"commission_rate,omitempty"`
-	Status                            string                 `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"`
-	Memo                              string                 `protobuf:"bytes,19,opt,name=memo,proto3" json:"memo,omitempty"`
-	CreatedAt                         *timestamppb.Timestamp `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                         *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields                     protoimpl.UnknownFields
-	sizeCache                         protoimpl.SizeCache
+	CommissionAmount                  string `protobuf:"bytes,14,opt,name=commission_amount,json=commissionAmount,proto3" json:"commission_amount,omitempty"`
+	CommissionAmountUsd               string `protobuf:"bytes,15,opt,name=commission_amount_usd,json=commissionAmountUsd,proto3" json:"commission_amount_usd,omitempty"`
+	CommissionAmountReportingCurrency string `protobuf:"bytes,16,opt,name=commission_amount_reporting_currency,json=commissionAmountReportingCurrency,proto3" json:"commission_amount_reporting_currency,omitempty"`
+	// commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a percentage —
+	// do not multiply by 100 on display.
+	CommissionRate string `protobuf:"bytes,17,opt,name=commission_rate,json=commissionRate,proto3" json:"commission_rate,omitempty"`
+	// status: "settled" on insert; updated to "rollbacked" on the original
+	// sub_account_game_debit row when a paired GameRollback runs.
+	Status        string                 `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"`
+	Memo          string                 `protobuf:"bytes,19,opt,name=memo,proto3" json:"memo,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OperatorSubAccountTransaction) Reset() {
