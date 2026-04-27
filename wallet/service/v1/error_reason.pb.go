@@ -238,6 +238,9 @@ const (
 	ErrorReason_LIST_OPERATOR_SUB_ACCOUNT_TRANSACTIONS_FAILED ErrorReason = 30208
 	ErrorReason_ADD_OPERATOR_SUB_ACCOUNT_TRANSACTION_FAILED   ErrorReason = 30209
 	ErrorReason_UPDATE_OPERATOR_SUB_ACCOUNT_FAILED            ErrorReason = 30210
+	ErrorReason_GET_WINNING_COMMISSION_CONFIG_FAILED          ErrorReason = 30211
+	ErrorReason_SET_WINNING_COMMISSION_CONFIG_FAILED          ErrorReason = 30212
+	ErrorReason_INVALID_COMMISSION_RATE                       ErrorReason = 30213
 )
 
 // Enum value maps for ErrorReason.
@@ -454,6 +457,9 @@ var (
 		30208: "LIST_OPERATOR_SUB_ACCOUNT_TRANSACTIONS_FAILED",
 		30209: "ADD_OPERATOR_SUB_ACCOUNT_TRANSACTION_FAILED",
 		30210: "UPDATE_OPERATOR_SUB_ACCOUNT_FAILED",
+		30211: "GET_WINNING_COMMISSION_CONFIG_FAILED",
+		30212: "SET_WINNING_COMMISSION_CONFIG_FAILED",
+		30213: "INVALID_COMMISSION_RATE",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -667,6 +673,9 @@ var (
 		"LIST_OPERATOR_SUB_ACCOUNT_TRANSACTIONS_FAILED":                   30208,
 		"ADD_OPERATOR_SUB_ACCOUNT_TRANSACTION_FAILED":                     30209,
 		"UPDATE_OPERATOR_SUB_ACCOUNT_FAILED":                              30210,
+		"GET_WINNING_COMMISSION_CONFIG_FAILED":                            30211,
+		"SET_WINNING_COMMISSION_CONFIG_FAILED":                            30212,
+		"INVALID_COMMISSION_RATE":                                         30213,
 	}
 )
 
@@ -701,7 +710,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8e@\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8bA\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -913,7 +922,10 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1cINVALID_SUB_ACCOUNT_CURRENCY\x10\xff\xeb\x01\x1a\x04\xa8E\x90\x03\x123\n" +
 	"-LIST_OPERATOR_SUB_ACCOUNT_TRANSACTIONS_FAILED\x10\x80\xec\x01\x121\n" +
 	"+ADD_OPERATOR_SUB_ACCOUNT_TRANSACTION_FAILED\x10\x81\xec\x01\x12(\n" +
-	"\"UPDATE_OPERATOR_SUB_ACCOUNT_FAILED\x10\x82\xec\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\"UPDATE_OPERATOR_SUB_ACCOUNT_FAILED\x10\x82\xec\x01\x12*\n" +
+	"$GET_WINNING_COMMISSION_CONFIG_FAILED\x10\x83\xec\x01\x12*\n" +
+	"$SET_WINNING_COMMISSION_CONFIG_FAILED\x10\x84\xec\x01\x12#\n" +
+	"\x17INVALID_COMMISSION_RATE\x10\x85\xec\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
