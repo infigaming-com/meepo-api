@@ -881,17 +881,17 @@ message ListOperatorSubAccountTransactionsRequest {
 	optional int32 page_size = 8;
 }
 
+// GetOperatorWinningCommissionConfigRequest reads the system-default
+// commission rate. v1 only ships the system-level row; per-operator
+// inheritance is reserved for the wallet RPC (future work).
 message GetOperatorWinningCommissionConfigRequest {
-	// operator_context selects the row to read. real_operator_id=0 = the
-	// system-default row.
-	api.common.OperatorContext operator_context = 1;
 }
 
+// SetOperatorWinningCommissionConfigRequest writes the system-default
+// commission rate. System-only via RBAC.
 message SetOperatorWinningCommissionConfigRequest {
-	api.common.OperatorContext target_operator_context = 1;
-	bool follow_parent = 2;
-	// Plain ratio (0.10 = 10%). Ignored when follow_parent=true.
-	string commission_rate = 3;
+	// Plain ratio (0.10 = 10%).
+	string commission_rate = 1;
 }
 
 message ListOperatorBalanceTransactionsRequest {

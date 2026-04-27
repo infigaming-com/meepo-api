@@ -18984,13 +18984,11 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetOperatorWinningCommissionConfigRequest:
             type: object
-            properties:
-                operatorContext:
-                    allOf:
-                        - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: |-
-                        operator_context selects the row to read. real_operator_id=0 = the
-                         system-default row.
+            properties: {}
+            description: |-
+                GetOperatorWinningCommissionConfigRequest reads the system-default
+                 commission rate. v1 only ships the system-level row; per-operator
+                 inheritance is reserved for the wallet RPC (future work).
         api.backoffice.service.v1.GetOverviewDashboardRequest:
             type: object
             properties:
@@ -25502,13 +25500,12 @@ components:
         api.backoffice.service.v1.SetOperatorWinningCommissionConfigRequest:
             type: object
             properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                followParent:
-                    type: boolean
                 commissionRate:
                     type: string
-                    description: Plain ratio (0.10 = 10%). Ignored when follow_parent=true.
+                    description: Plain ratio (0.10 = 10%).
+            description: |-
+                SetOperatorWinningCommissionConfigRequest writes the system-default
+                 commission rate. System-only via RBAC.
         api.backoffice.service.v1.SetReferralPlanRequest:
             type: object
             properties:
@@ -35576,24 +35573,7 @@ components:
             type: object
             properties:
                 config:
-                    allOf:
-                        - $ref: '#/components/schemas/api.wallet.service.v1.OperatorWinningCommissionConfig'
-                    description: |-
-                        The row stored for this operator (raw — does not resolve follow_parent).
-                         Empty when no row has been set for this operator.
-                effectiveCommissionRate:
-                    type: string
-                    description: |-
-                        effective_commission_rate is the rate that actually applies after
-                         walking follow_parent up the hierarchy. This is what GameCredit
-                         uses when product_type triggers commission.
-                inheritedOperatorContext:
-                    allOf:
-                        - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: |-
-                        inherited_operator_context is the ancestor operator the effective rate
-                         was resolved from. Equal to operator_context in the request when the
-                         caller's own row is in use.
+                    $ref: '#/components/schemas/api.wallet.service.v1.OperatorWinningCommissionConfig'
         api.wallet.service.v1.GetOperatorWithdrawableAmountResponse:
             type: object
             properties:
@@ -36558,14 +36538,12 @@ components:
                 followParent:
                     type: boolean
                     description: |-
-                        follow_parent: when true, commission_rate is ignored and the active
-                         rate comes from the nearest ancestor (or the system row at
-                         real_operator_id=0). When false, commission_rate on this row is used.
+                        RESERVED for future hierarchy inheritance. Today the only row in use is
+                         the system-default (real_operator_id=0) and is read verbatim —
+                         follow_parent has no effect. Always written false at system level.
                 commissionRate:
                     type: string
-                    description: |-
-                        commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a percentage.
-                         Ignored when follow_parent=true.
+                    description: commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a percentage.
                 createdAt:
                     type: string
                     format: date-time
@@ -36573,10 +36551,13 @@ components:
                     type: string
                     format: date-time
             description: |-
-                OperatorWinningCommissionConfig is the per-operator commission-rate config
-                 row, follow_parent style for hierarchy resolution. The system-default row
-                 (real_operator_id=0) is seeded by migration; per-operator rows can be
-                 inserted later to override.
+                OperatorWinningCommissionConfig is the commission-rate config row.
+
+                 v1 scope: only the system-default row (real_operator_id=0) exists; every
+                 caller reads/writes that row and GameCredit applies its commission_rate.
+                 follow_parent and per-operator rows are RESERVED — schema and proto fields
+                 are wired up for future hierarchy inheritance, but no resolution happens
+                 today.
         api.wallet.service.v1.OperatorWithdrawableAmount:
             type: object
             properties:

@@ -1633,48 +1633,43 @@ message ListOperatorSubAccountTransactionsResponse {
 	OperatorSubAccountAggregates aggregates = 5;
 }
 
-// OperatorWinningCommissionConfig is the per-operator commission-rate config
-// row, follow_parent style for hierarchy resolution. The system-default row
-// (real_operator_id=0) is seeded by migration; per-operator rows can be
-// inserted later to override.
+// OperatorWinningCommissionConfig is the commission-rate config row.
+//
+// v1 scope: only the system-default row (real_operator_id=0) exists; every
+// caller reads/writes that row and GameCredit applies its commission_rate.
+// follow_parent and per-operator rows are RESERVED — schema and proto fields
+// are wired up for future hierarchy inheritance, but no resolution happens
+// today.
 message OperatorWinningCommissionConfig {
 	api.common.OperatorContext operator_context = 1;
-	// follow_parent: when true, commission_rate is ignored and the active
-	// rate comes from the nearest ancestor (or the system row at
-	// real_operator_id=0). When false, commission_rate on this row is used.
+	// RESERVED for future hierarchy inheritance. Today the only row in use is
+	// the system-default (real_operator_id=0) and is read verbatim —
+	// follow_parent has no effect. Always written false at system level.
 	bool follow_parent = 2;
 	// commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a percentage.
-	// Ignored when follow_parent=true.
 	string commission_rate = 3;
 	google.protobuf.Timestamp created_at = 4;
 	google.protobuf.Timestamp updated_at = 5;
 }
 
 message GetOperatorWinningCommissionConfigRequest {
-	// operator_context selects which operator's config row to read. Use
-	// real_operator_id=0 for the system-default row.
+	// operator_context is OPTIONAL. Empty (or real_operator_id=0) = read the
+	// system-default row. Non-system contexts are a forward-compat hook for
+	// per-operator overrides; today there are no per-operator rows.
 	api.common.OperatorContext operator_context = 1;
 }
 
 message GetOperatorWinningCommissionConfigResponse {
-	// The row stored for this operator (raw — does not resolve follow_parent).
-	// Empty when no row has been set for this operator.
 	OperatorWinningCommissionConfig config = 1;
-	// effective_commission_rate is the rate that actually applies after
-	// walking follow_parent up the hierarchy. This is what GameCredit
-	// uses when product_type triggers commission.
-	string effective_commission_rate = 2;
-	// inherited_operator_context is the ancestor operator the effective rate
-	// was resolved from. Equal to operator_context in the request when the
-	// caller's own row is in use.
-	api.common.OperatorContext inherited_operator_context = 3;
 }
 
 message SetOperatorWinningCommissionConfigRequest {
+	// target_operator_context is OPTIONAL. Empty (or real_operator_id=0) =
+	// write the system-default row.
 	api.common.OperatorContext target_operator_context = 1;
+	// RESERVED — see OperatorWinningCommissionConfig.follow_parent.
 	bool follow_parent = 2;
-	// commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a percentage.
-	// Ignored when follow_parent=true.
+	// Plain ratio (e.g. "0.10" = 10%).
 	string commission_rate = 3;
 }
 
