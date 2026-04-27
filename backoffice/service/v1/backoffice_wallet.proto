@@ -172,20 +172,19 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
-	// GetOperatorWinningCommissionConfig returns the operator's commission-rate
-	// row plus the effective rate after walking follow_parent. RBAC:
-	// finance_adjust_custody_balance:read.
-	rpc GetOperatorWinningCommissionConfig(GetOperatorWinningCommissionConfigRequest) returns (wallet.service.v1.GetOperatorWinningCommissionConfigResponse) {
+	// GetPredictionSettings returns the platform-level settings for the
+	// "prediction" sub-account product. RBAC: finance_adjust_custody_balance:read.
+	rpc GetPredictionSettings(GetPredictionSettingsRequest) returns (wallet.service.v1.GetPredictionSettingsResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/sub-account/commission-config/get"
+			post: "/v1/backoffice/wallet/prediction/settings/get"
 			body: "*"
 		};
 	}
-	// SetOperatorWinningCommissionConfig writes the operator's commission-rate
-	// row. System-only; RBAC: finance_adjust_custody_balance:write.
-	rpc SetOperatorWinningCommissionConfig(SetOperatorWinningCommissionConfigRequest) returns (wallet.service.v1.SetOperatorWinningCommissionConfigResponse) {
+	// SetPredictionSettings writes platform-level prediction settings.
+	// System-only; RBAC: finance_adjust_custody_balance:write.
+	rpc SetPredictionSettings(SetPredictionSettingsRequest) returns (wallet.service.v1.SetPredictionSettingsResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/sub-account/commission-config/set"
+			post: "/v1/backoffice/wallet/prediction/settings/set"
 			body: "*"
 		};
 	}
@@ -881,15 +880,15 @@ message ListOperatorSubAccountTransactionsRequest {
 	optional int32 page_size = 8;
 }
 
-// GetOperatorWinningCommissionConfigRequest reads the system-default
-// commission rate. v1 only ships the system-level row; per-operator
-// inheritance is reserved for the wallet RPC (future work).
-message GetOperatorWinningCommissionConfigRequest {
+// GetPredictionSettingsRequest reads the platform-level prediction settings.
+// v1 only ships the system-default row; per-operator inheritance is reserved
+// for the wallet RPC (future work).
+message GetPredictionSettingsRequest {
 }
 
-// SetOperatorWinningCommissionConfigRequest writes the system-default
-// commission rate. System-only via RBAC.
-message SetOperatorWinningCommissionConfigRequest {
+// SetPredictionSettingsRequest writes platform-level prediction settings.
+// System-only via RBAC.
+message SetPredictionSettingsRequest {
 	// Plain ratio (0.10 = 10%).
 	string commission_rate = 1;
 }

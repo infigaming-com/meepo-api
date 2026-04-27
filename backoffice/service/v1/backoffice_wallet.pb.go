@@ -2685,29 +2685,29 @@ func (x *ListOperatorSubAccountTransactionsRequest) GetPageSize() int32 {
 	return 0
 }
 
-// GetOperatorWinningCommissionConfigRequest reads the system-default
-// commission rate. v1 only ships the system-level row; per-operator
-// inheritance is reserved for the wallet RPC (future work).
-type GetOperatorWinningCommissionConfigRequest struct {
+// GetPredictionSettingsRequest reads the platform-level prediction settings.
+// v1 only ships the system-default row; per-operator inheritance is reserved
+// for the wallet RPC (future work).
+type GetPredictionSettingsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetOperatorWinningCommissionConfigRequest) Reset() {
-	*x = GetOperatorWinningCommissionConfigRequest{}
+func (x *GetPredictionSettingsRequest) Reset() {
+	*x = GetPredictionSettingsRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorWinningCommissionConfigRequest) String() string {
+func (x *GetPredictionSettingsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorWinningCommissionConfigRequest) ProtoMessage() {}
+func (*GetPredictionSettingsRequest) ProtoMessage() {}
 
-func (x *GetOperatorWinningCommissionConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *GetPredictionSettingsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2719,14 +2719,14 @@ func (x *GetOperatorWinningCommissionConfigRequest) ProtoReflect() protoreflect.
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorWinningCommissionConfigRequest.ProtoReflect.Descriptor instead.
-func (*GetOperatorWinningCommissionConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetPredictionSettingsRequest.ProtoReflect.Descriptor instead.
+func (*GetPredictionSettingsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{36}
 }
 
-// SetOperatorWinningCommissionConfigRequest writes the system-default
-// commission rate. System-only via RBAC.
-type SetOperatorWinningCommissionConfigRequest struct {
+// SetPredictionSettingsRequest writes platform-level prediction settings.
+// System-only via RBAC.
+type SetPredictionSettingsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Plain ratio (0.10 = 10%).
 	CommissionRate string `protobuf:"bytes,1,opt,name=commission_rate,json=commissionRate,proto3" json:"commission_rate,omitempty"`
@@ -2734,20 +2734,20 @@ type SetOperatorWinningCommissionConfigRequest struct {
 	sizeCache      protoimpl.SizeCache
 }
 
-func (x *SetOperatorWinningCommissionConfigRequest) Reset() {
-	*x = SetOperatorWinningCommissionConfigRequest{}
+func (x *SetPredictionSettingsRequest) Reset() {
+	*x = SetPredictionSettingsRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetOperatorWinningCommissionConfigRequest) String() string {
+func (x *SetPredictionSettingsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetOperatorWinningCommissionConfigRequest) ProtoMessage() {}
+func (*SetPredictionSettingsRequest) ProtoMessage() {}
 
-func (x *SetOperatorWinningCommissionConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *SetPredictionSettingsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2759,12 +2759,12 @@ func (x *SetOperatorWinningCommissionConfigRequest) ProtoReflect() protoreflect.
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetOperatorWinningCommissionConfigRequest.ProtoReflect.Descriptor instead.
-func (*SetOperatorWinningCommissionConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetPredictionSettingsRequest.ProtoReflect.Descriptor instead.
+func (*SetPredictionSettingsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{37}
 }
 
-func (x *SetOperatorWinningCommissionConfigRequest) GetCommissionRate() string {
+func (x *SetPredictionSettingsRequest) GetCommissionRate() string {
 	if x != nil {
 		return x.CommissionRate
 	}
@@ -6605,9 +6605,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"+\n" +
-	")GetOperatorWinningCommissionConfigRequest\"T\n" +
-	")SetOperatorWinningCommissionConfigRequest\x12'\n" +
+	"_page_size\"\x1e\n" +
+	"\x1cGetPredictionSettingsRequest\"G\n" +
+	"\x1cSetPredictionSettingsRequest\x12'\n" +
 	"\x0fcommission_rate\x18\x01 \x01(\tR\x0ecommissionRate\"\xc3\x04\n" +
 	"&ListOperatorBalanceTransactionsRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x123\n" +
@@ -6962,7 +6962,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x0e_expiring_soonB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size2\xedd\n" +
+	"_page_size2\xf9c\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -6985,9 +6985,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x12SubAccountTransfer\x124.api.backoffice.service.v1.SubAccountTransferRequest\x1a5.api.backoffice.service.v1.SubAccountTransferResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/wallet/operator/sub-account/transfer\x12\xb9\x01\n" +
 	"\x10SubAccountAdjust\x122.api.backoffice.service.v1.SubAccountAdjustRequest\x1a3.api.backoffice.service.v1.SubAccountAdjustResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/wallet/operator/sub-account/adjust\x12\xc9\x01\n" +
 	"\x17ListOperatorSubAccounts\x129.api.backoffice.service.v1.ListOperatorSubAccountsRequest\x1a6.api.wallet.service.v1.ListOperatorSubAccountsResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/wallet/operator/sub-accounts/list\x12\xf6\x01\n" +
-	"\"ListOperatorSubAccountTransactions\x12D.api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest\x1aA.api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse\"G\x82\xd3\xe4\x93\x02A:\x01*\"</v1/backoffice/wallet/operator/sub-account/transactions/list\x12\xfa\x01\n" +
-	"\"GetOperatorWinningCommissionConfig\x12D.api.backoffice.service.v1.GetOperatorWinningCommissionConfigRequest\x1aA.api.wallet.service.v1.GetOperatorWinningCommissionConfigResponse\"K\x82\xd3\xe4\x93\x02E:\x01*\"@/v1/backoffice/wallet/operator/sub-account/commission-config/get\x12\xfa\x01\n" +
-	"\"SetOperatorWinningCommissionConfig\x12D.api.backoffice.service.v1.SetOperatorWinningCommissionConfigRequest\x1aA.api.wallet.service.v1.SetOperatorWinningCommissionConfigResponse\"K\x82\xd3\xe4\x93\x02E:\x01*\"@/v1/backoffice/wallet/operator/sub-account/commission-config/set\x12\xe5\x01\n" +
+	"\"ListOperatorSubAccountTransactions\x12D.api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest\x1aA.api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse\"G\x82\xd3\xe4\x93\x02A:\x01*\"</v1/backoffice/wallet/operator/sub-account/transactions/list\x12\xc0\x01\n" +
+	"\x15GetPredictionSettings\x127.api.backoffice.service.v1.GetPredictionSettingsRequest\x1a4.api.wallet.service.v1.GetPredictionSettingsResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/prediction/settings/get\x12\xc0\x01\n" +
+	"\x15SetPredictionSettings\x127.api.backoffice.service.v1.SetPredictionSettingsRequest\x1a4.api.wallet.service.v1.SetPredictionSettingsResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/prediction/settings/set\x12\xe5\x01\n" +
 	"\x1fListOperatorBalanceTransactions\x12A.api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest\x1aB.api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/wallet/operator/transactions/list\x12\xc4\x01\n" +
 	"\x15UpdateOperatorBalance\x127.api.backoffice.service.v1.UpdateOperatorBalanceRequest\x1a8.api.backoffice.service.v1.UpdateOperatorBalanceResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/operator/balance/update\x12\xb4\x01\n" +
 	"\x12GetOperatorBalance\x124.api.backoffice.service.v1.GetOperatorBalanceRequest\x1a1.api.wallet.service.v1.GetOperatorBalanceResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/wallet/operator/balance/get\x12\xd1\x01\n" +
@@ -7083,8 +7083,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*SubAccountAdjustResponse)(nil),                                 // 34: api.backoffice.service.v1.SubAccountAdjustResponse
 	(*ListOperatorSubAccountsRequest)(nil),                           // 35: api.backoffice.service.v1.ListOperatorSubAccountsRequest
 	(*ListOperatorSubAccountTransactionsRequest)(nil),                // 36: api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest
-	(*GetOperatorWinningCommissionConfigRequest)(nil),                // 37: api.backoffice.service.v1.GetOperatorWinningCommissionConfigRequest
-	(*SetOperatorWinningCommissionConfigRequest)(nil),                // 38: api.backoffice.service.v1.SetOperatorWinningCommissionConfigRequest
+	(*GetPredictionSettingsRequest)(nil),                             // 37: api.backoffice.service.v1.GetPredictionSettingsRequest
+	(*SetPredictionSettingsRequest)(nil),                             // 38: api.backoffice.service.v1.SetPredictionSettingsRequest
 	(*ListOperatorBalanceTransactionsRequest)(nil),                   // 39: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
 	(*OperatorBalanceTransaction)(nil),                               // 40: api.backoffice.service.v1.OperatorBalanceTransaction
 	(*ListOperatorBalanceTransactionsResponse)(nil),                  // 41: api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
@@ -7152,8 +7152,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*v1.ListCompanyOperatorBalancesResponse)(nil),        // 103: api.wallet.service.v1.ListCompanyOperatorBalancesResponse
 	(*v1.ListOperatorSubAccountsResponse)(nil),            // 104: api.wallet.service.v1.ListOperatorSubAccountsResponse
 	(*v1.ListOperatorSubAccountTransactionsResponse)(nil), // 105: api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse
-	(*v1.GetOperatorWinningCommissionConfigResponse)(nil), // 106: api.wallet.service.v1.GetOperatorWinningCommissionConfigResponse
-	(*v1.SetOperatorWinningCommissionConfigResponse)(nil), // 107: api.wallet.service.v1.SetOperatorWinningCommissionConfigResponse
+	(*v1.GetPredictionSettingsResponse)(nil),              // 106: api.wallet.service.v1.GetPredictionSettingsResponse
+	(*v1.SetPredictionSettingsResponse)(nil),              // 107: api.wallet.service.v1.SetPredictionSettingsResponse
 	(*v1.GetOperatorBalanceResponse)(nil),                 // 108: api.wallet.service.v1.GetOperatorBalanceResponse
 	(*v1.SetDepositRewardSequencesResponse)(nil),          // 109: api.wallet.service.v1.SetDepositRewardSequencesResponse
 	(*v1.DeleteDepositRewardSequencesResponse)(nil),       // 110: api.wallet.service.v1.DeleteDepositRewardSequencesResponse
@@ -7313,8 +7313,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	33,  // 115: api.backoffice.service.v1.BackofficeWallet.SubAccountAdjust:input_type -> api.backoffice.service.v1.SubAccountAdjustRequest
 	35,  // 116: api.backoffice.service.v1.BackofficeWallet.ListOperatorSubAccounts:input_type -> api.backoffice.service.v1.ListOperatorSubAccountsRequest
 	36,  // 117: api.backoffice.service.v1.BackofficeWallet.ListOperatorSubAccountTransactions:input_type -> api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest
-	37,  // 118: api.backoffice.service.v1.BackofficeWallet.GetOperatorWinningCommissionConfig:input_type -> api.backoffice.service.v1.GetOperatorWinningCommissionConfigRequest
-	38,  // 119: api.backoffice.service.v1.BackofficeWallet.SetOperatorWinningCommissionConfig:input_type -> api.backoffice.service.v1.SetOperatorWinningCommissionConfigRequest
+	37,  // 118: api.backoffice.service.v1.BackofficeWallet.GetPredictionSettings:input_type -> api.backoffice.service.v1.GetPredictionSettingsRequest
+	38,  // 119: api.backoffice.service.v1.BackofficeWallet.SetPredictionSettings:input_type -> api.backoffice.service.v1.SetPredictionSettingsRequest
 	39,  // 120: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:input_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
 	42,  // 121: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:input_type -> api.backoffice.service.v1.UpdateOperatorBalanceRequest
 	44,  // 122: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:input_type -> api.backoffice.service.v1.GetOperatorBalanceRequest
@@ -7377,8 +7377,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	34,  // 179: api.backoffice.service.v1.BackofficeWallet.SubAccountAdjust:output_type -> api.backoffice.service.v1.SubAccountAdjustResponse
 	104, // 180: api.backoffice.service.v1.BackofficeWallet.ListOperatorSubAccounts:output_type -> api.wallet.service.v1.ListOperatorSubAccountsResponse
 	105, // 181: api.backoffice.service.v1.BackofficeWallet.ListOperatorSubAccountTransactions:output_type -> api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse
-	106, // 182: api.backoffice.service.v1.BackofficeWallet.GetOperatorWinningCommissionConfig:output_type -> api.wallet.service.v1.GetOperatorWinningCommissionConfigResponse
-	107, // 183: api.backoffice.service.v1.BackofficeWallet.SetOperatorWinningCommissionConfig:output_type -> api.wallet.service.v1.SetOperatorWinningCommissionConfigResponse
+	106, // 182: api.backoffice.service.v1.BackofficeWallet.GetPredictionSettings:output_type -> api.wallet.service.v1.GetPredictionSettingsResponse
+	107, // 183: api.backoffice.service.v1.BackofficeWallet.SetPredictionSettings:output_type -> api.wallet.service.v1.SetPredictionSettingsResponse
 	41,  // 184: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
 	43,  // 185: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
 	108, // 186: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse

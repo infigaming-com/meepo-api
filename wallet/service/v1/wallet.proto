@@ -148,16 +148,13 @@ service Wallet {
 	rpc ListOperatorSubAccounts (ListOperatorSubAccountsRequest) returns (ListOperatorSubAccountsResponse) {}
 	rpc ListOperatorSubAccountTransactions (ListOperatorSubAccountTransactionsRequest) returns (ListOperatorSubAccountTransactionsResponse) {}
 
-	// GetOperatorWinningCommissionConfig returns the operator's own commission
-	// rate config (raw row) plus the effective rate after walking follow_parent
-	// up the hierarchy. The effective rate is what GameCredit actually applies
-	// when product_type triggers commission.
-	rpc GetOperatorWinningCommissionConfig (GetOperatorWinningCommissionConfigRequest) returns (GetOperatorWinningCommissionConfigResponse) {}
-	// SetOperatorWinningCommissionConfig writes the operator's commission rate
-	// config row. follow_parent=true ignores commission_rate and inherits from
-	// the nearest ancestor. System-only RPC; BO gates on the
-	// finance_adjust_custody_balance permission module.
-	rpc SetOperatorWinningCommissionConfig (SetOperatorWinningCommissionConfigRequest) returns (SetOperatorWinningCommissionConfigResponse) {}
+	// GetPredictionSettings returns the platform-level settings for the
+	// "prediction" sub-account product (commission rate today; future
+	// product-wide settings slot in here).
+	rpc GetPredictionSettings (GetPredictionSettingsRequest) returns (GetPredictionSettingsResponse) {}
+	// SetPredictionSettings writes the platform-level prediction settings.
+	// System-only at the BO RBAC layer.
+	rpc SetPredictionSettings (SetPredictionSettingsRequest) returns (SetPredictionSettingsResponse) {}
 
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	rpc UpdateOperatorBalance(UpdateOperatorBalanceRequest) returns (UpdateOperatorBalanceResponse) {}
@@ -1633,48 +1630,42 @@ message ListOperatorSubAccountTransactionsResponse {
 	OperatorSubAccountAggregates aggregates = 5;
 }
 
-// OperatorWinningCommissionConfig is the commission-rate config row.
-//
-// v1 scope: only the system-default row (real_operator_id=0) exists; every
-// caller reads/writes that row and GameCredit applies its commission_rate.
-// follow_parent and per-operator rows are RESERVED — schema and proto fields
-// are wired up for future hierarchy inheritance, but no resolution happens
-// today.
-message OperatorWinningCommissionConfig {
-	api.common.OperatorContext operator_context = 1;
-	// RESERVED for future hierarchy inheritance. Today the only row in use is
-	// the system-default (real_operator_id=0) and is read verbatim —
-	// follow_parent has no effect. Always written false at system level.
-	bool follow_parent = 2;
-	// commission_rate is a plain ratio (e.g. "0.10" = 10%), NOT a percentage.
-	string commission_rate = 3;
-	google.protobuf.Timestamp created_at = 4;
-	google.protobuf.Timestamp updated_at = 5;
+// PredictionSettings captures platform-level configuration for the
+// "prediction" sub-account product family (Polymarket today; future
+// prediction-market vendors slot in without proto change). v1 ships only
+// commission_rate; future product-wide settings (vendor whitelist, fee
+// schedule) extend this message.
+message PredictionSettings {
+	// commission_rate is the share the platform takes from a winning bet's
+	// net profit, applied on GameCredit when net_win > 0. Plain ratio
+	// (e.g. "0.10" = 10%), NOT a percentage.
+	string commission_rate = 1;
+	google.protobuf.Timestamp created_at = 2;
+	google.protobuf.Timestamp updated_at = 3;
 }
 
-message GetOperatorWinningCommissionConfigRequest {
-	// operator_context is OPTIONAL. Empty (or real_operator_id=0) = read the
-	// system-default row. Non-system contexts are a forward-compat hook for
-	// per-operator overrides; today there are no per-operator rows.
+message GetPredictionSettingsRequest {
+	// operator_context is OPTIONAL — forward-compat hook for per-operator
+	// overrides. v1 always resolves to the system-default row regardless;
+	// the parameter is reserved so a future hierarchy walk can use it
+	// without a proto bump.
 	api.common.OperatorContext operator_context = 1;
 }
 
-message GetOperatorWinningCommissionConfigResponse {
-	OperatorWinningCommissionConfig config = 1;
+message GetPredictionSettingsResponse {
+	PredictionSettings settings = 1;
 }
 
-message SetOperatorWinningCommissionConfigRequest {
-	// target_operator_context is OPTIONAL. Empty (or real_operator_id=0) =
-	// write the system-default row.
+message SetPredictionSettingsRequest {
+	// target_operator_context is OPTIONAL (see Get). v1 always writes the
+	// system-default row.
 	api.common.OperatorContext target_operator_context = 1;
-	// RESERVED — see OperatorWinningCommissionConfig.follow_parent.
-	bool follow_parent = 2;
 	// Plain ratio (e.g. "0.10" = 10%).
-	string commission_rate = 3;
+	string commission_rate = 2;
 }
 
-message SetOperatorWinningCommissionConfigResponse {
-	OperatorWinningCommissionConfig config = 1;
+message SetPredictionSettingsResponse {
+	PredictionSettings settings = 1;
 }
 
 message UpdateOperatorBalanceRequest {
