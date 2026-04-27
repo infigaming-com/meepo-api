@@ -172,6 +172,23 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+	// GetOperatorWinningCommissionConfig returns the operator's commission-rate
+	// row plus the effective rate after walking follow_parent. RBAC:
+	// finance_adjust_custody_balance:read.
+	rpc GetOperatorWinningCommissionConfig(GetOperatorWinningCommissionConfigRequest) returns (wallet.service.v1.GetOperatorWinningCommissionConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/commission-config/get"
+			body: "*"
+		};
+	}
+	// SetOperatorWinningCommissionConfig writes the operator's commission-rate
+	// row. System-only; RBAC: finance_adjust_custody_balance:write.
+	rpc SetOperatorWinningCommissionConfig(SetOperatorWinningCommissionConfigRequest) returns (wallet.service.v1.SetOperatorWinningCommissionConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/commission-config/set"
+			body: "*"
+		};
+	}
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	rpc ListOperatorBalanceTransactions(ListOperatorBalanceTransactionsRequest) returns (ListOperatorBalanceTransactionsResponse) {
 		option (google.api.http) = {
@@ -862,6 +879,19 @@ message ListOperatorSubAccountTransactionsRequest {
 	optional google.protobuf.Timestamp end_time = 6;
 	optional int32 page = 7;
 	optional int32 page_size = 8;
+}
+
+message GetOperatorWinningCommissionConfigRequest {
+	// operator_context selects the row to read. real_operator_id=0 = the
+	// system-default row.
+	api.common.OperatorContext operator_context = 1;
+}
+
+message SetOperatorWinningCommissionConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	bool follow_parent = 2;
+	// Plain ratio (0.10 = 10%). Ignored when follow_parent=true.
+	string commission_rate = 3;
 }
 
 message ListOperatorBalanceTransactionsRequest {
