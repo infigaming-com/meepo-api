@@ -60,8 +60,8 @@ const (
 	Wallet_SubAccountAdjust_FullMethodName                    = "/api.wallet.service.v1.Wallet/SubAccountAdjust"
 	Wallet_ListOperatorSubAccounts_FullMethodName             = "/api.wallet.service.v1.Wallet/ListOperatorSubAccounts"
 	Wallet_ListOperatorSubAccountTransactions_FullMethodName  = "/api.wallet.service.v1.Wallet/ListOperatorSubAccountTransactions"
-	Wallet_GetOperatorWinningCommissionConfig_FullMethodName  = "/api.wallet.service.v1.Wallet/GetOperatorWinningCommissionConfig"
-	Wallet_SetOperatorWinningCommissionConfig_FullMethodName  = "/api.wallet.service.v1.Wallet/SetOperatorWinningCommissionConfig"
+	Wallet_GetPredictionSettings_FullMethodName               = "/api.wallet.service.v1.Wallet/GetPredictionSettings"
+	Wallet_SetPredictionSettings_FullMethodName               = "/api.wallet.service.v1.Wallet/SetPredictionSettings"
 	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
 	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
 	Wallet_GetCompanyFinancialSummary_FullMethodName          = "/api.wallet.service.v1.Wallet/GetCompanyFinancialSummary"
@@ -210,16 +210,13 @@ type WalletClient interface {
 	SubAccountAdjust(ctx context.Context, in *SubAccountAdjustRequest, opts ...grpc.CallOption) (*SubAccountAdjustResponse, error)
 	ListOperatorSubAccounts(ctx context.Context, in *ListOperatorSubAccountsRequest, opts ...grpc.CallOption) (*ListOperatorSubAccountsResponse, error)
 	ListOperatorSubAccountTransactions(ctx context.Context, in *ListOperatorSubAccountTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorSubAccountTransactionsResponse, error)
-	// GetOperatorWinningCommissionConfig returns the operator's own commission
-	// rate config (raw row) plus the effective rate after walking follow_parent
-	// up the hierarchy. The effective rate is what GameCredit actually applies
-	// when product_type triggers commission.
-	GetOperatorWinningCommissionConfig(ctx context.Context, in *GetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*GetOperatorWinningCommissionConfigResponse, error)
-	// SetOperatorWinningCommissionConfig writes the operator's commission rate
-	// config row. follow_parent=true ignores commission_rate and inherits from
-	// the nearest ancestor. System-only RPC; BO gates on the
-	// finance_adjust_custody_balance permission module.
-	SetOperatorWinningCommissionConfig(ctx context.Context, in *SetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*SetOperatorWinningCommissionConfigResponse, error)
+	// GetPredictionSettings returns the platform-level settings for the
+	// "prediction" sub-account product (commission rate today; future
+	// product-wide settings slot in here).
+	GetPredictionSettings(ctx context.Context, in *GetPredictionSettingsRequest, opts ...grpc.CallOption) (*GetPredictionSettingsResponse, error)
+	// SetPredictionSettings writes the platform-level prediction settings.
+	// System-only at the BO RBAC layer.
+	SetPredictionSettings(ctx context.Context, in *SetPredictionSettingsRequest, opts ...grpc.CallOption) (*SetPredictionSettingsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
@@ -806,20 +803,20 @@ func (c *walletClient) ListOperatorSubAccountTransactions(ctx context.Context, i
 	return out, nil
 }
 
-func (c *walletClient) GetOperatorWinningCommissionConfig(ctx context.Context, in *GetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*GetOperatorWinningCommissionConfigResponse, error) {
+func (c *walletClient) GetPredictionSettings(ctx context.Context, in *GetPredictionSettingsRequest, opts ...grpc.CallOption) (*GetPredictionSettingsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOperatorWinningCommissionConfigResponse)
-	err := c.cc.Invoke(ctx, Wallet_GetOperatorWinningCommissionConfig_FullMethodName, in, out, cOpts...)
+	out := new(GetPredictionSettingsResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetPredictionSettings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *walletClient) SetOperatorWinningCommissionConfig(ctx context.Context, in *SetOperatorWinningCommissionConfigRequest, opts ...grpc.CallOption) (*SetOperatorWinningCommissionConfigResponse, error) {
+func (c *walletClient) SetPredictionSettings(ctx context.Context, in *SetPredictionSettingsRequest, opts ...grpc.CallOption) (*SetPredictionSettingsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetOperatorWinningCommissionConfigResponse)
-	err := c.cc.Invoke(ctx, Wallet_SetOperatorWinningCommissionConfig_FullMethodName, in, out, cOpts...)
+	out := new(SetPredictionSettingsResponse)
+	err := c.cc.Invoke(ctx, Wallet_SetPredictionSettings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1558,16 +1555,13 @@ type WalletServer interface {
 	SubAccountAdjust(context.Context, *SubAccountAdjustRequest) (*SubAccountAdjustResponse, error)
 	ListOperatorSubAccounts(context.Context, *ListOperatorSubAccountsRequest) (*ListOperatorSubAccountsResponse, error)
 	ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*ListOperatorSubAccountTransactionsResponse, error)
-	// GetOperatorWinningCommissionConfig returns the operator's own commission
-	// rate config (raw row) plus the effective rate after walking follow_parent
-	// up the hierarchy. The effective rate is what GameCredit actually applies
-	// when product_type triggers commission.
-	GetOperatorWinningCommissionConfig(context.Context, *GetOperatorWinningCommissionConfigRequest) (*GetOperatorWinningCommissionConfigResponse, error)
-	// SetOperatorWinningCommissionConfig writes the operator's commission rate
-	// config row. follow_parent=true ignores commission_rate and inherits from
-	// the nearest ancestor. System-only RPC; BO gates on the
-	// finance_adjust_custody_balance permission module.
-	SetOperatorWinningCommissionConfig(context.Context, *SetOperatorWinningCommissionConfigRequest) (*SetOperatorWinningCommissionConfigResponse, error)
+	// GetPredictionSettings returns the platform-level settings for the
+	// "prediction" sub-account product (commission rate today; future
+	// product-wide settings slot in here).
+	GetPredictionSettings(context.Context, *GetPredictionSettingsRequest) (*GetPredictionSettingsResponse, error)
+	// SetPredictionSettings writes the platform-level prediction settings.
+	// System-only at the BO RBAC layer.
+	SetPredictionSettings(context.Context, *SetPredictionSettingsRequest) (*SetPredictionSettingsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
@@ -1867,11 +1861,11 @@ func (UnimplementedWalletServer) ListOperatorSubAccounts(context.Context, *ListO
 func (UnimplementedWalletServer) ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*ListOperatorSubAccountTransactionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorSubAccountTransactions not implemented")
 }
-func (UnimplementedWalletServer) GetOperatorWinningCommissionConfig(context.Context, *GetOperatorWinningCommissionConfigRequest) (*GetOperatorWinningCommissionConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetOperatorWinningCommissionConfig not implemented")
+func (UnimplementedWalletServer) GetPredictionSettings(context.Context, *GetPredictionSettingsRequest) (*GetPredictionSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPredictionSettings not implemented")
 }
-func (UnimplementedWalletServer) SetOperatorWinningCommissionConfig(context.Context, *SetOperatorWinningCommissionConfigRequest) (*SetOperatorWinningCommissionConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetOperatorWinningCommissionConfig not implemented")
+func (UnimplementedWalletServer) SetPredictionSettings(context.Context, *SetPredictionSettingsRequest) (*SetPredictionSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPredictionSettings not implemented")
 }
 func (UnimplementedWalletServer) UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorBalance not implemented")
@@ -2827,38 +2821,38 @@ func _Wallet_ListOperatorSubAccountTransactions_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_GetOperatorWinningCommissionConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOperatorWinningCommissionConfigRequest)
+func _Wallet_GetPredictionSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPredictionSettingsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).GetOperatorWinningCommissionConfig(ctx, in)
+		return srv.(WalletServer).GetPredictionSettings(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_GetOperatorWinningCommissionConfig_FullMethodName,
+		FullMethod: Wallet_GetPredictionSettings_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).GetOperatorWinningCommissionConfig(ctx, req.(*GetOperatorWinningCommissionConfigRequest))
+		return srv.(WalletServer).GetPredictionSettings(ctx, req.(*GetPredictionSettingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_SetOperatorWinningCommissionConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetOperatorWinningCommissionConfigRequest)
+func _Wallet_SetPredictionSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPredictionSettingsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).SetOperatorWinningCommissionConfig(ctx, in)
+		return srv.(WalletServer).SetPredictionSettings(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_SetOperatorWinningCommissionConfig_FullMethodName,
+		FullMethod: Wallet_SetPredictionSettings_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).SetOperatorWinningCommissionConfig(ctx, req.(*SetOperatorWinningCommissionConfigRequest))
+		return srv.(WalletServer).SetPredictionSettings(ctx, req.(*SetPredictionSettingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4205,12 +4199,12 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_ListOperatorSubAccountTransactions_Handler,
 		},
 		{
-			MethodName: "GetOperatorWinningCommissionConfig",
-			Handler:    _Wallet_GetOperatorWinningCommissionConfig_Handler,
+			MethodName: "GetPredictionSettings",
+			Handler:    _Wallet_GetPredictionSettings_Handler,
 		},
 		{
-			MethodName: "SetOperatorWinningCommissionConfig",
-			Handler:    _Wallet_SetOperatorWinningCommissionConfig_Handler,
+			MethodName: "SetPredictionSettings",
+			Handler:    _Wallet_SetPredictionSettings_Handler,
 		},
 		{
 			MethodName: "UpdateOperatorBalance",

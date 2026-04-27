@@ -36,8 +36,8 @@ const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.Ba
 const OperationBackofficeWalletGetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
 const OperationBackofficeWalletGetGamificationCurrencyConfig = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
 const OperationBackofficeWalletGetOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
-const OperationBackofficeWalletGetOperatorWinningCommissionConfig = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorWinningCommissionConfig"
 const OperationBackofficeWalletGetOperatorWithdrawableAmount = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorWithdrawableAmount"
+const OperationBackofficeWalletGetPredictionSettings = "/api.backoffice.service.v1.BackofficeWallet/GetPredictionSettings"
 const OperationBackofficeWalletGetUserSwapConfig = "/api.backoffice.service.v1.BackofficeWallet/GetUserSwapConfig"
 const OperationBackofficeWalletGetWalletCreditTransactions = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
 const OperationBackofficeWalletGetWalletCredits = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
@@ -72,7 +72,7 @@ const OperationBackofficeWalletPushBetLimitsToBottomOperators = "/api.backoffice
 const OperationBackofficeWalletSetAppDownloadRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/SetAppDownloadRewardConfig"
 const OperationBackofficeWalletSetDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
 const OperationBackofficeWalletSetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
-const OperationBackofficeWalletSetOperatorWinningCommissionConfig = "/api.backoffice.service.v1.BackofficeWallet/SetOperatorWinningCommissionConfig"
+const OperationBackofficeWalletSetPredictionSettings = "/api.backoffice.service.v1.BackofficeWallet/SetPredictionSettings"
 const OperationBackofficeWalletSetUserSwapEnabled = "/api.backoffice.service.v1.BackofficeWallet/SetUserSwapEnabled"
 const OperationBackofficeWalletSetUserSwapTemplate = "/api.backoffice.service.v1.BackofficeWallet/SetUserSwapTemplate"
 const OperationBackofficeWalletSubAccountAdjust = "/api.backoffice.service.v1.BackofficeWallet/SubAccountAdjust"
@@ -118,12 +118,11 @@ type BackofficeWalletHTTPServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
-	// GetOperatorWinningCommissionConfig GetOperatorWinningCommissionConfig returns the operator's commission-rate
-	// row plus the effective rate after walking follow_parent. RBAC:
-	// finance_adjust_custody_balance:read.
-	GetOperatorWinningCommissionConfig(context.Context, *GetOperatorWinningCommissionConfigRequest) (*v1.GetOperatorWinningCommissionConfigResponse, error)
 	// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
 	GetOperatorWithdrawableAmount(context.Context, *BOGetOperatorWithdrawableAmountRequest) (*v1.GetOperatorWithdrawableAmountResponse, error)
+	// GetPredictionSettings GetPredictionSettings returns the platform-level settings for the
+	// "prediction" sub-account product. RBAC: finance_adjust_custody_balance:read.
+	GetPredictionSettings(context.Context, *GetPredictionSettingsRequest) (*v1.GetPredictionSettingsResponse, error)
 	// GetUserSwapConfig GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
 	GetUserSwapConfig(context.Context, *GetUserSwapConfigRequest) (*v1.GetUserSwapConfigResponse, error)
 	// GetWalletCreditTransactions Get credit transaction details by credit ID
@@ -200,9 +199,9 @@ type BackofficeWalletHTTPServer interface {
 	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
 	// SetFICAThresholdConfig SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
 	SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*v1.SetFICAThresholdConfigResponse, error)
-	// SetOperatorWinningCommissionConfig SetOperatorWinningCommissionConfig writes the operator's commission-rate
-	// row. System-only; RBAC: finance_adjust_custody_balance:write.
-	SetOperatorWinningCommissionConfig(context.Context, *SetOperatorWinningCommissionConfigRequest) (*v1.SetOperatorWinningCommissionConfigResponse, error)
+	// SetPredictionSettings SetPredictionSettings writes platform-level prediction settings.
+	// System-only; RBAC: finance_adjust_custody_balance:write.
+	SetPredictionSettings(context.Context, *SetPredictionSettingsRequest) (*v1.SetPredictionSettingsResponse, error)
 	// SetUserSwapEnabled SetUserSwapEnabled toggles the operator-level user-swap feature flag for the target operator.
 	SetUserSwapEnabled(context.Context, *SetUserSwapEnabledRequest) (*v1.SetUserSwapEnabledResponse, error)
 	// SetUserSwapTemplate SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
@@ -253,8 +252,8 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/operator/sub-account/adjust", _BackofficeWallet_SubAccountAdjust0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/sub-accounts/list", _BackofficeWallet_ListOperatorSubAccounts0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/sub-account/transactions/list", _BackofficeWallet_ListOperatorSubAccountTransactions0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/operator/sub-account/commission-config/get", _BackofficeWallet_GetOperatorWinningCommissionConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/operator/sub-account/commission-config/set", _BackofficeWallet_SetOperatorWinningCommissionConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/prediction/settings/get", _BackofficeWallet_GetPredictionSettings0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/prediction/settings/set", _BackofficeWallet_SetPredictionSettings0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/transactions/list", _BackofficeWallet_ListOperatorBalanceTransactions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance/update", _BackofficeWallet_UpdateOperatorBalance0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance/get", _BackofficeWallet_GetOperatorBalance0_HTTP_Handler(srv))
@@ -760,46 +759,46 @@ func _BackofficeWallet_ListOperatorSubAccountTransactions0_HTTP_Handler(srv Back
 	}
 }
 
-func _BackofficeWallet_GetOperatorWinningCommissionConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_GetPredictionSettings0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetOperatorWinningCommissionConfigRequest
+		var in GetPredictionSettingsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletGetOperatorWinningCommissionConfig)
+		http.SetOperation(ctx, OperationBackofficeWalletGetPredictionSettings)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOperatorWinningCommissionConfig(ctx, req.(*GetOperatorWinningCommissionConfigRequest))
+			return srv.GetPredictionSettings(ctx, req.(*GetPredictionSettingsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.GetOperatorWinningCommissionConfigResponse)
+		reply := out.(*v1.GetPredictionSettingsResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _BackofficeWallet_SetOperatorWinningCommissionConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_SetPredictionSettings0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in SetOperatorWinningCommissionConfigRequest
+		var in SetPredictionSettingsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletSetOperatorWinningCommissionConfig)
+		http.SetOperation(ctx, OperationBackofficeWalletSetPredictionSettings)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.SetOperatorWinningCommissionConfig(ctx, req.(*SetOperatorWinningCommissionConfigRequest))
+			return srv.SetPredictionSettings(ctx, req.(*SetPredictionSettingsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.SetOperatorWinningCommissionConfigResponse)
+		reply := out.(*v1.SetPredictionSettingsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1739,12 +1738,11 @@ type BackofficeWalletHTTPClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, req *GetGamificationCurrencyConfigRequest, opts ...http.CallOption) (rsp *v1.GetGamificationCurrencyConfigResponse, err error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(ctx context.Context, req *GetOperatorBalanceRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalanceResponse, err error)
-	// GetOperatorWinningCommissionConfig GetOperatorWinningCommissionConfig returns the operator's commission-rate
-	// row plus the effective rate after walking follow_parent. RBAC:
-	// finance_adjust_custody_balance:read.
-	GetOperatorWinningCommissionConfig(ctx context.Context, req *GetOperatorWinningCommissionConfigRequest, opts ...http.CallOption) (rsp *v1.GetOperatorWinningCommissionConfigResponse, err error)
 	// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
 	GetOperatorWithdrawableAmount(ctx context.Context, req *BOGetOperatorWithdrawableAmountRequest, opts ...http.CallOption) (rsp *v1.GetOperatorWithdrawableAmountResponse, err error)
+	// GetPredictionSettings GetPredictionSettings returns the platform-level settings for the
+	// "prediction" sub-account product. RBAC: finance_adjust_custody_balance:read.
+	GetPredictionSettings(ctx context.Context, req *GetPredictionSettingsRequest, opts ...http.CallOption) (rsp *v1.GetPredictionSettingsResponse, err error)
 	// GetUserSwapConfig GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
 	GetUserSwapConfig(ctx context.Context, req *GetUserSwapConfigRequest, opts ...http.CallOption) (rsp *v1.GetUserSwapConfigResponse, err error)
 	// GetWalletCreditTransactions Get credit transaction details by credit ID
@@ -1821,9 +1819,9 @@ type BackofficeWalletHTTPClient interface {
 	SetDepositRewardSequences(ctx context.Context, req *SetDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.SetDepositRewardSequencesResponse, err error)
 	// SetFICAThresholdConfig SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
 	SetFICAThresholdConfig(ctx context.Context, req *SetFICAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.SetFICAThresholdConfigResponse, err error)
-	// SetOperatorWinningCommissionConfig SetOperatorWinningCommissionConfig writes the operator's commission-rate
-	// row. System-only; RBAC: finance_adjust_custody_balance:write.
-	SetOperatorWinningCommissionConfig(ctx context.Context, req *SetOperatorWinningCommissionConfigRequest, opts ...http.CallOption) (rsp *v1.SetOperatorWinningCommissionConfigResponse, err error)
+	// SetPredictionSettings SetPredictionSettings writes platform-level prediction settings.
+	// System-only; RBAC: finance_adjust_custody_balance:write.
+	SetPredictionSettings(ctx context.Context, req *SetPredictionSettingsRequest, opts ...http.CallOption) (rsp *v1.SetPredictionSettingsResponse, err error)
 	// SetUserSwapEnabled SetUserSwapEnabled toggles the operator-level user-swap feature flag for the target operator.
 	SetUserSwapEnabled(ctx context.Context, req *SetUserSwapEnabledRequest, opts ...http.CallOption) (rsp *v1.SetUserSwapEnabledResponse, err error)
 	// SetUserSwapTemplate SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
@@ -2083,14 +2081,12 @@ func (c *BackofficeWalletHTTPClientImpl) GetOperatorBalance(ctx context.Context,
 	return &out, nil
 }
 
-// GetOperatorWinningCommissionConfig GetOperatorWinningCommissionConfig returns the operator's commission-rate
-// row plus the effective rate after walking follow_parent. RBAC:
-// finance_adjust_custody_balance:read.
-func (c *BackofficeWalletHTTPClientImpl) GetOperatorWinningCommissionConfig(ctx context.Context, in *GetOperatorWinningCommissionConfigRequest, opts ...http.CallOption) (*v1.GetOperatorWinningCommissionConfigResponse, error) {
-	var out v1.GetOperatorWinningCommissionConfigResponse
-	pattern := "/v1/backoffice/wallet/operator/sub-account/commission-config/get"
+// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
+func (c *BackofficeWalletHTTPClientImpl) GetOperatorWithdrawableAmount(ctx context.Context, in *BOGetOperatorWithdrawableAmountRequest, opts ...http.CallOption) (*v1.GetOperatorWithdrawableAmountResponse, error) {
+	var out v1.GetOperatorWithdrawableAmountResponse
+	pattern := "/v1/backoffice/wallet/operator/withdrawable-amount"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletGetOperatorWinningCommissionConfig))
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetOperatorWithdrawableAmount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -2099,12 +2095,13 @@ func (c *BackofficeWalletHTTPClientImpl) GetOperatorWinningCommissionConfig(ctx 
 	return &out, nil
 }
 
-// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
-func (c *BackofficeWalletHTTPClientImpl) GetOperatorWithdrawableAmount(ctx context.Context, in *BOGetOperatorWithdrawableAmountRequest, opts ...http.CallOption) (*v1.GetOperatorWithdrawableAmountResponse, error) {
-	var out v1.GetOperatorWithdrawableAmountResponse
-	pattern := "/v1/backoffice/wallet/operator/withdrawable-amount"
+// GetPredictionSettings GetPredictionSettings returns the platform-level settings for the
+// "prediction" sub-account product. RBAC: finance_adjust_custody_balance:read.
+func (c *BackofficeWalletHTTPClientImpl) GetPredictionSettings(ctx context.Context, in *GetPredictionSettingsRequest, opts ...http.CallOption) (*v1.GetPredictionSettingsResponse, error) {
+	var out v1.GetPredictionSettingsResponse
+	pattern := "/v1/backoffice/wallet/prediction/settings/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletGetOperatorWithdrawableAmount))
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetPredictionSettings))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -2597,13 +2594,13 @@ func (c *BackofficeWalletHTTPClientImpl) SetFICAThresholdConfig(ctx context.Cont
 	return &out, nil
 }
 
-// SetOperatorWinningCommissionConfig SetOperatorWinningCommissionConfig writes the operator's commission-rate
-// row. System-only; RBAC: finance_adjust_custody_balance:write.
-func (c *BackofficeWalletHTTPClientImpl) SetOperatorWinningCommissionConfig(ctx context.Context, in *SetOperatorWinningCommissionConfigRequest, opts ...http.CallOption) (*v1.SetOperatorWinningCommissionConfigResponse, error) {
-	var out v1.SetOperatorWinningCommissionConfigResponse
-	pattern := "/v1/backoffice/wallet/operator/sub-account/commission-config/set"
+// SetPredictionSettings SetPredictionSettings writes platform-level prediction settings.
+// System-only; RBAC: finance_adjust_custody_balance:write.
+func (c *BackofficeWalletHTTPClientImpl) SetPredictionSettings(ctx context.Context, in *SetPredictionSettingsRequest, opts ...http.CallOption) (*v1.SetPredictionSettingsResponse, error) {
+	var out v1.SetPredictionSettingsResponse
+	pattern := "/v1/backoffice/wallet/prediction/settings/set"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletSetOperatorWinningCommissionConfig))
+	opts = append(opts, http.Operation(OperationBackofficeWalletSetPredictionSettings))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
