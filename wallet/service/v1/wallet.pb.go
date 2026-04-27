@@ -7573,6 +7573,12 @@ func (x *OperatorSubAccountTransaction) GetUpdatedAt() *timestamppb.Timestamp {
 // OperatorSubAccountAggregates groups the SUM-over-WHERE-clause totals
 // returned by ListOperatorSubAccountTransactions. Each metric is exposed
 // in both USD and the operator's reporting currency.
+//
+// total_commission_* / total_transfer_* / total_payouts_* / total_bets_*
+// are scoped to the request's WHERE clause (operator + product_type +
+// currency + time window). total_commissions_* / commissions_this_month_*
+// are independent: lifetime + current-calendar-month commission across
+// (operator scope + product_type), sourced from winning_commission_records.
 type OperatorSubAccountAggregates struct {
 	state                                 protoimpl.MessageState `protogen:"open.v1"`
 	TotalCommissionUsd                    string                 `protobuf:"bytes,1,opt,name=total_commission_usd,json=totalCommissionUsd,proto3" json:"total_commission_usd,omitempty"`
@@ -7585,6 +7591,10 @@ type OperatorSubAccountAggregates struct {
 	TotalPayoutsReceivedReportingCurrency string                 `protobuf:"bytes,8,opt,name=total_payouts_received_reporting_currency,json=totalPayoutsReceivedReportingCurrency,proto3" json:"total_payouts_received_reporting_currency,omitempty"`
 	TotalBetsPlacedUsd                    string                 `protobuf:"bytes,9,opt,name=total_bets_placed_usd,json=totalBetsPlacedUsd,proto3" json:"total_bets_placed_usd,omitempty"`
 	TotalBetsPlacedReportingCurrency      string                 `protobuf:"bytes,10,opt,name=total_bets_placed_reporting_currency,json=totalBetsPlacedReportingCurrency,proto3" json:"total_bets_placed_reporting_currency,omitempty"`
+	TotalCommissionsUsd                   string                 `protobuf:"bytes,11,opt,name=total_commissions_usd,json=totalCommissionsUsd,proto3" json:"total_commissions_usd,omitempty"`
+	TotalCommissionsReportingCurrency     string                 `protobuf:"bytes,12,opt,name=total_commissions_reporting_currency,json=totalCommissionsReportingCurrency,proto3" json:"total_commissions_reporting_currency,omitempty"`
+	CommissionsThisMonthUsd               string                 `protobuf:"bytes,13,opt,name=commissions_this_month_usd,json=commissionsThisMonthUsd,proto3" json:"commissions_this_month_usd,omitempty"`
+	CommissionsThisMonthReportingCurrency string                 `protobuf:"bytes,14,opt,name=commissions_this_month_reporting_currency,json=commissionsThisMonthReportingCurrency,proto3" json:"commissions_this_month_reporting_currency,omitempty"`
 	unknownFields                         protoimpl.UnknownFields
 	sizeCache                             protoimpl.SizeCache
 }
@@ -7689,15 +7699,41 @@ func (x *OperatorSubAccountAggregates) GetTotalBetsPlacedReportingCurrency() str
 	return ""
 }
 
+func (x *OperatorSubAccountAggregates) GetTotalCommissionsUsd() string {
+	if x != nil {
+		return x.TotalCommissionsUsd
+	}
+	return ""
+}
+
+func (x *OperatorSubAccountAggregates) GetTotalCommissionsReportingCurrency() string {
+	if x != nil {
+		return x.TotalCommissionsReportingCurrency
+	}
+	return ""
+}
+
+func (x *OperatorSubAccountAggregates) GetCommissionsThisMonthUsd() string {
+	if x != nil {
+		return x.CommissionsThisMonthUsd
+	}
+	return ""
+}
+
+func (x *OperatorSubAccountAggregates) GetCommissionsThisMonthReportingCurrency() string {
+	if x != nil {
+		return x.CommissionsThisMonthReportingCurrency
+	}
+	return ""
+}
+
 type ListOperatorSubAccountTransactionsResponse struct {
-	state        protoimpl.MessageState           `protogen:"open.v1"`
-	Transactions []*OperatorSubAccountTransaction `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"`
-	Total        int32                            `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page         int32                            `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize     int32                            `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Aggregates over the same WHERE clause as the paged query (operator +
-	// product_type + currency + time window), independent of page/page_size.
-	Aggregates    *OperatorSubAccountAggregates `protobuf:"bytes,5,opt,name=aggregates,proto3" json:"aggregates,omitempty"`
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	Transactions  []*OperatorSubAccountTransaction `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	Total         int32                            `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                            `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                            `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Aggregates    *OperatorSubAccountAggregates    `protobuf:"bytes,5,opt,name=aggregates,proto3" json:"aggregates,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -22414,7 +22450,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x14 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xc3\x05\n" +
+	"updated_at\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xdf\a\n" +
 	"\x1cOperatorSubAccountAggregates\x120\n" +
 	"\x14total_commission_usd\x18\x01 \x01(\tR\x12totalCommissionUsd\x12M\n" +
 	"#total_commission_reporting_currency\x18\x02 \x01(\tR totalCommissionReportingCurrency\x121\n" +
@@ -22426,7 +22462,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	")total_payouts_received_reporting_currency\x18\b \x01(\tR%totalPayoutsReceivedReportingCurrency\x121\n" +
 	"\x15total_bets_placed_usd\x18\t \x01(\tR\x12totalBetsPlacedUsd\x12N\n" +
 	"$total_bets_placed_reporting_currency\x18\n" +
-	" \x01(\tR totalBetsPlacedReportingCurrency\"\xa2\x02\n" +
+	" \x01(\tR totalBetsPlacedReportingCurrency\x122\n" +
+	"\x15total_commissions_usd\x18\v \x01(\tR\x13totalCommissionsUsd\x12O\n" +
+	"$total_commissions_reporting_currency\x18\f \x01(\tR!totalCommissionsReportingCurrency\x12;\n" +
+	"\x1acommissions_this_month_usd\x18\r \x01(\tR\x17commissionsThisMonthUsd\x12X\n" +
+	")commissions_this_month_reporting_currency\x18\x0e \x01(\tR%commissionsThisMonthReportingCurrency\"\xa2\x02\n" +
 	"*ListOperatorSubAccountTransactionsResponse\x12X\n" +
 	"\ftransactions\x18\x01 \x03(\v24.api.wallet.service.v1.OperatorSubAccountTransactionR\ftransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +

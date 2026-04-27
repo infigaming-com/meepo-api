@@ -12341,6 +12341,14 @@ func (m *OperatorSubAccountAggregates) validate(all bool) error {
 
 	// no validation rules for TotalBetsPlacedReportingCurrency
 
+	// no validation rules for TotalCommissionsUsd
+
+	// no validation rules for TotalCommissionsReportingCurrency
+
+	// no validation rules for CommissionsThisMonthUsd
+
+	// no validation rules for CommissionsThisMonthReportingCurrency
+
 	if len(errors) > 0 {
 		return OperatorSubAccountAggregatesMultiError(errors)
 	}
