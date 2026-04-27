@@ -31951,10 +31951,12 @@ components:
                     description: Reviewer comment visible to the player (typically set on rejection)
                 createdAt:
                     type: string
-                    description: Ticket creation time (Unix timestamp in seconds)
+                    description: Ticket creation time (UTC, RFC 3339 format, e.g. "2026-04-20T14:39:09.645Z")
+                    format: date-time
                 reviewedAt:
                     type: string
-                    description: Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
+                    description: Time when the ticket was reviewed (UTC, RFC 3339 format; null if not yet reviewed)
+                    format: date-time
             description: |-
                 PlayerGetTicketResponse - ticket detail visible to the player.
                  Fields are identical to PlayerListTicketsResponse.Ticket for consistency.
@@ -32027,10 +32029,12 @@ components:
                     description: Reviewer comment visible to the player (typically set on rejection to explain the reason)
                 createdAt:
                     type: string
-                    description: Ticket creation time (Unix timestamp in seconds)
+                    description: Ticket creation time (UTC, RFC 3339 format, e.g. "2026-04-20T14:39:09.645Z")
+                    format: date-time
                 reviewedAt:
                     type: string
-                    description: Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
+                    description: Time when the ticket was reviewed (UTC, RFC 3339 format; null if not yet reviewed)
+                    format: date-time
             description: Ticket summary visible to the player.
         api.review.service.v1.PrecheckWithdrawApprovalResponse:
             type: object
