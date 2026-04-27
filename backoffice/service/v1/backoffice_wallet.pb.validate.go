@@ -4435,22 +4435,22 @@ var _ interface {
 	ErrorName() string
 } = SubAccountAdjustResponseValidationError{}
 
-// Validate checks the field values on GetOperatorSubAccountRequest with the
+// Validate checks the field values on ListOperatorSubAccountsRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetOperatorSubAccountRequest) Validate() error {
+func (m *ListOperatorSubAccountsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetOperatorSubAccountRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetOperatorSubAccountRequestMultiError, or nil if none found.
-func (m *GetOperatorSubAccountRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListOperatorSubAccountsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListOperatorSubAccountsRequestMultiError, or nil if none found.
+func (m *ListOperatorSubAccountsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetOperatorSubAccountRequest) validate(all bool) error {
+func (m *ListOperatorSubAccountsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4461,7 +4461,7 @@ func (m *GetOperatorSubAccountRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetOperatorSubAccountRequestValidationError{
+				errors = append(errors, ListOperatorSubAccountsRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4469,7 +4469,7 @@ func (m *GetOperatorSubAccountRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetOperatorSubAccountRequestValidationError{
+				errors = append(errors, ListOperatorSubAccountsRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4478,7 +4478,7 @@ func (m *GetOperatorSubAccountRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetOperatorSubAccountRequestValidationError{
+			return ListOperatorSubAccountsRequestValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4491,19 +4491,19 @@ func (m *GetOperatorSubAccountRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetOperatorSubAccountRequestMultiError(errors)
+		return ListOperatorSubAccountsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetOperatorSubAccountRequestMultiError is an error wrapping multiple
-// validation errors returned by GetOperatorSubAccountRequest.ValidateAll() if
-// the designated constraints aren't met.
-type GetOperatorSubAccountRequestMultiError []error
+// ListOperatorSubAccountsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListOperatorSubAccountsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListOperatorSubAccountsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetOperatorSubAccountRequestMultiError) Error() string {
+func (m ListOperatorSubAccountsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4512,12 +4512,12 @@ func (m GetOperatorSubAccountRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetOperatorSubAccountRequestMultiError) AllErrors() []error { return m }
+func (m ListOperatorSubAccountsRequestMultiError) AllErrors() []error { return m }
 
-// GetOperatorSubAccountRequestValidationError is the validation error returned
-// by GetOperatorSubAccountRequest.Validate if the designated constraints
-// aren't met.
-type GetOperatorSubAccountRequestValidationError struct {
+// ListOperatorSubAccountsRequestValidationError is the validation error
+// returned by ListOperatorSubAccountsRequest.Validate if the designated
+// constraints aren't met.
+type ListOperatorSubAccountsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4525,24 +4525,24 @@ type GetOperatorSubAccountRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetOperatorSubAccountRequestValidationError) Field() string { return e.field }
+func (e ListOperatorSubAccountsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetOperatorSubAccountRequestValidationError) Reason() string { return e.reason }
+func (e ListOperatorSubAccountsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetOperatorSubAccountRequestValidationError) Cause() error { return e.cause }
+func (e ListOperatorSubAccountsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetOperatorSubAccountRequestValidationError) Key() bool { return e.key }
+func (e ListOperatorSubAccountsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetOperatorSubAccountRequestValidationError) ErrorName() string {
-	return "GetOperatorSubAccountRequestValidationError"
+func (e ListOperatorSubAccountsRequestValidationError) ErrorName() string {
+	return "ListOperatorSubAccountsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetOperatorSubAccountRequestValidationError) Error() string {
+func (e ListOperatorSubAccountsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4554,14 +4554,14 @@ func (e GetOperatorSubAccountRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetOperatorSubAccountRequest.%s: %s%s",
+		"invalid %sListOperatorSubAccountsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetOperatorSubAccountRequestValidationError{}
+var _ error = ListOperatorSubAccountsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -4569,7 +4569,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetOperatorSubAccountRequestValidationError{}
+} = ListOperatorSubAccountsRequestValidationError{}
 
 // Validate checks the field values on
 // ListOperatorSubAccountTransactionsRequest with the rules defined in the

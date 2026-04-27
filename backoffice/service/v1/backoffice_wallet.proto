@@ -153,10 +153,15 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
-	// GetOperatorSubAccount returns the current row(s) for the operator (optionally filtered by product_type).
-	rpc GetOperatorSubAccount(GetOperatorSubAccountRequest) returns (wallet.service.v1.GetOperatorSubAccountResponse) {
+	// ListOperatorSubAccounts returns sub-account rows under the caller's
+	// operator hierarchy (system/retailer/company can see all the bottom
+	// operators they cover; bottom operators see their own row only). The
+	// shape is intentionally a list — operator_context filtering walks the
+	// hierarchy via BuildOperatorContextQuery, and product_type is an
+	// optional further filter.
+	rpc ListOperatorSubAccounts(ListOperatorSubAccountsRequest) returns (wallet.service.v1.ListOperatorSubAccountsResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/sub-account/get"
+			post: "/v1/backoffice/wallet/operator/sub-accounts/list"
 			body: "*"
 		};
 	}
@@ -838,7 +843,7 @@ message SubAccountAdjustResponse {
 	string cash = 2;
 }
 
-message GetOperatorSubAccountRequest {
+message ListOperatorSubAccountsRequest {
 	api.common.OperatorContext operator_context = 1;
 	// empty = return all product_types for this operator
 	optional string product_type = 2;

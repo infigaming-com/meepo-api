@@ -9175,25 +9175,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SubAccountAdjustResponse'
-    /v1/backoffice/wallet/operator/sub-account/get:
-        post:
-            tags:
-                - BackofficeWallet
-            description: GetOperatorSubAccount returns the current row(s) for the operator (optionally filtered by product_type).
-            operationId: BackofficeWallet_GetOperatorSubAccount
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorSubAccountRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorSubAccountResponse'
     /v1/backoffice/wallet/operator/sub-account/transactions/list:
         post:
             tags:
@@ -9236,6 +9217,31 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SubAccountTransferResponse'
+    /v1/backoffice/wallet/operator/sub-accounts/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: |-
+                ListOperatorSubAccounts returns sub-account rows under the caller's
+                 operator hierarchy (system/retailer/company can see all the bottom
+                 operators they cover; bottom operators see their own row only). The
+                 shape is intentionally a list — operator_context filtering walks the
+                 hierarchy via BuildOperatorContextQuery, and product_type is an
+                 optional further filter.
+            operationId: BackofficeWallet_ListOperatorSubAccounts
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorSubAccountsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListOperatorSubAccountsResponse'
     /v1/backoffice/wallet/operator/swap:
         post:
             tags:
@@ -18877,14 +18883,6 @@ components:
             properties:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-        api.backoffice.service.v1.GetOperatorSubAccountRequest:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                productType:
-                    type: string
-                    description: empty = return all product_types for this operator
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -22201,6 +22199,14 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListOperatorSubAccountsRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                productType:
+                    type: string
+                    description: empty = return all product_types for this operator
         api.backoffice.service.v1.ListOperatorTicketsRequest:
             type: object
             properties:
@@ -35443,13 +35449,6 @@ components:
                     type: string
                 totalCashReportingCurrency:
                     type: string
-        api.wallet.service.v1.GetOperatorSubAccountResponse:
-            type: object
-            properties:
-                subAccounts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorSubAccount'
         api.wallet.service.v1.GetOperatorWithdrawableAmountResponse:
             type: object
             properties:
@@ -36099,6 +36098,13 @@ components:
                     type: string
                 totalBetsPlacedUsd:
                     type: string
+        api.wallet.service.v1.ListOperatorSubAccountsResponse:
+            type: object
+            properties:
+                subAccounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorSubAccount'
         api.wallet.service.v1.ListOperatorWithdrawableAmountsResponse:
             type: object
             properties:

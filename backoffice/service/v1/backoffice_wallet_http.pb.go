@@ -36,7 +36,6 @@ const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.Ba
 const OperationBackofficeWalletGetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
 const OperationBackofficeWalletGetGamificationCurrencyConfig = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
 const OperationBackofficeWalletGetOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
-const OperationBackofficeWalletGetOperatorSubAccount = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorSubAccount"
 const OperationBackofficeWalletGetOperatorWithdrawableAmount = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorWithdrawableAmount"
 const OperationBackofficeWalletGetUserSwapConfig = "/api.backoffice.service.v1.BackofficeWallet/GetUserSwapConfig"
 const OperationBackofficeWalletGetWalletCreditTransactions = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
@@ -49,6 +48,7 @@ const OperationBackofficeWalletListManualJournalEntries = "/api.backoffice.servi
 const OperationBackofficeWalletListOperatorBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 const OperationBackofficeWalletListOperatorBalances = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
 const OperationBackofficeWalletListOperatorSubAccountTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorSubAccountTransactions"
+const OperationBackofficeWalletListOperatorSubAccounts = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorSubAccounts"
 const OperationBackofficeWalletListOperatorWithdrawableAmounts = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorWithdrawableAmounts"
 const OperationBackofficeWalletListPromoCodeCampaignDetails = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaignDetails"
 const OperationBackofficeWalletListPromoCodeCampaigns = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaigns"
@@ -116,8 +116,6 @@ type BackofficeWalletHTTPServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
-	// GetOperatorSubAccount GetOperatorSubAccount returns the current row(s) for the operator (optionally filtered by product_type).
-	GetOperatorSubAccount(context.Context, *GetOperatorSubAccountRequest) (*v1.GetOperatorSubAccountResponse, error)
 	// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
 	GetOperatorWithdrawableAmount(context.Context, *BOGetOperatorWithdrawableAmountRequest) (*v1.GetOperatorWithdrawableAmountResponse, error)
 	// GetUserSwapConfig GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
@@ -142,6 +140,13 @@ type BackofficeWalletHTTPServer interface {
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
 	// ListOperatorSubAccountTransactions ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
 	ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*v1.ListOperatorSubAccountTransactionsResponse, error)
+	// ListOperatorSubAccounts ListOperatorSubAccounts returns sub-account rows under the caller's
+	// operator hierarchy (system/retailer/company can see all the bottom
+	// operators they cover; bottom operators see their own row only). The
+	// shape is intentionally a list — operator_context filtering walks the
+	// hierarchy via BuildOperatorContextQuery, and product_type is an
+	// optional further filter.
+	ListOperatorSubAccounts(context.Context, *ListOperatorSubAccountsRequest) (*v1.ListOperatorSubAccountsResponse, error)
 	// ListOperatorWithdrawableAmounts ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*v1.ListOperatorWithdrawableAmountsResponse, error)
 	// ListPromoCodeCampaignDetails ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
@@ -237,7 +242,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/operator/balance-adjust", _BackofficeWallet_OperatorBalanceAdjust0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/sub-account/transfer", _BackofficeWallet_SubAccountTransfer0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/sub-account/adjust", _BackofficeWallet_SubAccountAdjust0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/operator/sub-account/get", _BackofficeWallet_GetOperatorSubAccount0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/sub-accounts/list", _BackofficeWallet_ListOperatorSubAccounts0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/sub-account/transactions/list", _BackofficeWallet_ListOperatorSubAccountTransactions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/transactions/list", _BackofficeWallet_ListOperatorBalanceTransactions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance/update", _BackofficeWallet_UpdateOperatorBalance0_HTTP_Handler(srv))
@@ -700,24 +705,24 @@ func _BackofficeWallet_SubAccountAdjust0_HTTP_Handler(srv BackofficeWalletHTTPSe
 	}
 }
 
-func _BackofficeWallet_GetOperatorSubAccount0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_ListOperatorSubAccounts0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetOperatorSubAccountRequest
+		var in ListOperatorSubAccountsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletGetOperatorSubAccount)
+		http.SetOperation(ctx, OperationBackofficeWalletListOperatorSubAccounts)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOperatorSubAccount(ctx, req.(*GetOperatorSubAccountRequest))
+			return srv.ListOperatorSubAccounts(ctx, req.(*ListOperatorSubAccountsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.GetOperatorSubAccountResponse)
+		reply := out.(*v1.ListOperatorSubAccountsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1679,8 +1684,6 @@ type BackofficeWalletHTTPClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, req *GetGamificationCurrencyConfigRequest, opts ...http.CallOption) (rsp *v1.GetGamificationCurrencyConfigResponse, err error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(ctx context.Context, req *GetOperatorBalanceRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalanceResponse, err error)
-	// GetOperatorSubAccount GetOperatorSubAccount returns the current row(s) for the operator (optionally filtered by product_type).
-	GetOperatorSubAccount(ctx context.Context, req *GetOperatorSubAccountRequest, opts ...http.CallOption) (rsp *v1.GetOperatorSubAccountResponse, err error)
 	// GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
 	GetOperatorWithdrawableAmount(ctx context.Context, req *BOGetOperatorWithdrawableAmountRequest, opts ...http.CallOption) (rsp *v1.GetOperatorWithdrawableAmountResponse, err error)
 	// GetUserSwapConfig GetUserSwapConfig returns the target operator's custom template plus the inherited default, and the aggregated enable flag.
@@ -1705,6 +1708,13 @@ type BackofficeWalletHTTPClient interface {
 	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorBalancesResponse, err error)
 	// ListOperatorSubAccountTransactions ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
 	ListOperatorSubAccountTransactions(ctx context.Context, req *ListOperatorSubAccountTransactionsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorSubAccountTransactionsResponse, err error)
+	// ListOperatorSubAccounts ListOperatorSubAccounts returns sub-account rows under the caller's
+	// operator hierarchy (system/retailer/company can see all the bottom
+	// operators they cover; bottom operators see their own row only). The
+	// shape is intentionally a list — operator_context filtering walks the
+	// hierarchy via BuildOperatorContextQuery, and product_type is an
+	// optional further filter.
+	ListOperatorSubAccounts(ctx context.Context, req *ListOperatorSubAccountsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorSubAccountsResponse, err error)
 	// ListOperatorWithdrawableAmounts ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	ListOperatorWithdrawableAmounts(ctx context.Context, req *ListOperatorWithdrawableAmountsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorWithdrawableAmountsResponse, err error)
 	// ListPromoCodeCampaignDetails ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
@@ -2011,20 +2021,6 @@ func (c *BackofficeWalletHTTPClientImpl) GetOperatorBalance(ctx context.Context,
 	return &out, nil
 }
 
-// GetOperatorSubAccount GetOperatorSubAccount returns the current row(s) for the operator (optionally filtered by product_type).
-func (c *BackofficeWalletHTTPClientImpl) GetOperatorSubAccount(ctx context.Context, in *GetOperatorSubAccountRequest, opts ...http.CallOption) (*v1.GetOperatorSubAccountResponse, error) {
-	var out v1.GetOperatorSubAccountResponse
-	pattern := "/v1/backoffice/wallet/operator/sub-account/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletGetOperatorSubAccount))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 // GetOperatorWithdrawableAmount GetOperatorWithdrawableAmount returns the computed withdrawable amount for a single target operator
 func (c *BackofficeWalletHTTPClientImpl) GetOperatorWithdrawableAmount(ctx context.Context, in *BOGetOperatorWithdrawableAmountRequest, opts ...http.CallOption) (*v1.GetOperatorWithdrawableAmountResponse, error) {
 	var out v1.GetOperatorWithdrawableAmountResponse
@@ -2185,6 +2181,25 @@ func (c *BackofficeWalletHTTPClientImpl) ListOperatorSubAccountTransactions(ctx 
 	pattern := "/v1/backoffice/wallet/operator/sub-account/transactions/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListOperatorSubAccountTransactions))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListOperatorSubAccounts ListOperatorSubAccounts returns sub-account rows under the caller's
+// operator hierarchy (system/retailer/company can see all the bottom
+// operators they cover; bottom operators see their own row only). The
+// shape is intentionally a list — operator_context filtering walks the
+// hierarchy via BuildOperatorContextQuery, and product_type is an
+// optional further filter.
+func (c *BackofficeWalletHTTPClientImpl) ListOperatorSubAccounts(ctx context.Context, in *ListOperatorSubAccountsRequest, opts ...http.CallOption) (*v1.ListOperatorSubAccountsResponse, error) {
+	var out v1.ListOperatorSubAccountsResponse
+	pattern := "/v1/backoffice/wallet/operator/sub-accounts/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletListOperatorSubAccounts))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

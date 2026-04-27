@@ -58,7 +58,7 @@ const (
 	Wallet_OperatorBalanceAdjust_FullMethodName               = "/api.wallet.service.v1.Wallet/OperatorBalanceAdjust"
 	Wallet_SubAccountTransfer_FullMethodName                  = "/api.wallet.service.v1.Wallet/SubAccountTransfer"
 	Wallet_SubAccountAdjust_FullMethodName                    = "/api.wallet.service.v1.Wallet/SubAccountAdjust"
-	Wallet_GetOperatorSubAccount_FullMethodName               = "/api.wallet.service.v1.Wallet/GetOperatorSubAccount"
+	Wallet_ListOperatorSubAccounts_FullMethodName             = "/api.wallet.service.v1.Wallet/ListOperatorSubAccounts"
 	Wallet_ListOperatorSubAccountTransactions_FullMethodName  = "/api.wallet.service.v1.Wallet/ListOperatorSubAccountTransactions"
 	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
 	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
@@ -204,7 +204,7 @@ type WalletClient interface {
 	SubAccountTransfer(ctx context.Context, in *SubAccountTransferRequest, opts ...grpc.CallOption) (*SubAccountTransferResponse, error)
 	// SubAccountAdjust manually credits/debits the sub-account (system-only).
 	SubAccountAdjust(ctx context.Context, in *SubAccountAdjustRequest, opts ...grpc.CallOption) (*SubAccountAdjustResponse, error)
-	GetOperatorSubAccount(ctx context.Context, in *GetOperatorSubAccountRequest, opts ...grpc.CallOption) (*GetOperatorSubAccountResponse, error)
+	ListOperatorSubAccounts(ctx context.Context, in *ListOperatorSubAccountsRequest, opts ...grpc.CallOption) (*ListOperatorSubAccountsResponse, error)
 	ListOperatorSubAccountTransactions(ctx context.Context, in *ListOperatorSubAccountTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorSubAccountTransactionsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
@@ -764,10 +764,10 @@ func (c *walletClient) SubAccountAdjust(ctx context.Context, in *SubAccountAdjus
 	return out, nil
 }
 
-func (c *walletClient) GetOperatorSubAccount(ctx context.Context, in *GetOperatorSubAccountRequest, opts ...grpc.CallOption) (*GetOperatorSubAccountResponse, error) {
+func (c *walletClient) ListOperatorSubAccounts(ctx context.Context, in *ListOperatorSubAccountsRequest, opts ...grpc.CallOption) (*ListOperatorSubAccountsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOperatorSubAccountResponse)
-	err := c.cc.Invoke(ctx, Wallet_GetOperatorSubAccount_FullMethodName, in, out, cOpts...)
+	out := new(ListOperatorSubAccountsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListOperatorSubAccounts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1494,7 +1494,7 @@ type WalletServer interface {
 	SubAccountTransfer(context.Context, *SubAccountTransferRequest) (*SubAccountTransferResponse, error)
 	// SubAccountAdjust manually credits/debits the sub-account (system-only).
 	SubAccountAdjust(context.Context, *SubAccountAdjustRequest) (*SubAccountAdjustResponse, error)
-	GetOperatorSubAccount(context.Context, *GetOperatorSubAccountRequest) (*GetOperatorSubAccountResponse, error)
+	ListOperatorSubAccounts(context.Context, *ListOperatorSubAccountsRequest) (*ListOperatorSubAccountsResponse, error)
 	ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*ListOperatorSubAccountTransactionsResponse, error)
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
@@ -1781,8 +1781,8 @@ func (UnimplementedWalletServer) SubAccountTransfer(context.Context, *SubAccount
 func (UnimplementedWalletServer) SubAccountAdjust(context.Context, *SubAccountAdjustRequest) (*SubAccountAdjustResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SubAccountAdjust not implemented")
 }
-func (UnimplementedWalletServer) GetOperatorSubAccount(context.Context, *GetOperatorSubAccountRequest) (*GetOperatorSubAccountResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetOperatorSubAccount not implemented")
+func (UnimplementedWalletServer) ListOperatorSubAccounts(context.Context, *ListOperatorSubAccountsRequest) (*ListOperatorSubAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperatorSubAccounts not implemented")
 }
 func (UnimplementedWalletServer) ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*ListOperatorSubAccountTransactionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorSubAccountTransactions not implemented")
@@ -2699,20 +2699,20 @@ func _Wallet_SubAccountAdjust_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_GetOperatorSubAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOperatorSubAccountRequest)
+func _Wallet_ListOperatorSubAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorSubAccountsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).GetOperatorSubAccount(ctx, in)
+		return srv.(WalletServer).ListOperatorSubAccounts(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_GetOperatorSubAccount_FullMethodName,
+		FullMethod: Wallet_ListOperatorSubAccounts_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).GetOperatorSubAccount(ctx, req.(*GetOperatorSubAccountRequest))
+		return srv.(WalletServer).ListOperatorSubAccounts(ctx, req.(*ListOperatorSubAccountsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4033,8 +4033,8 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_SubAccountAdjust_Handler,
 		},
 		{
-			MethodName: "GetOperatorSubAccount",
-			Handler:    _Wallet_GetOperatorSubAccount_Handler,
+			MethodName: "ListOperatorSubAccounts",
+			Handler:    _Wallet_ListOperatorSubAccounts_Handler,
 		},
 		{
 			MethodName: "ListOperatorSubAccountTransactions",

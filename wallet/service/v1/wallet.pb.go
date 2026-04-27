@@ -7019,7 +7019,7 @@ func (x *SubAccountAdjustResponse) GetCash() string {
 	return ""
 }
 
-type GetOperatorSubAccountRequest struct {
+type ListOperatorSubAccountsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// empty = return all product_types for this operator
@@ -7028,20 +7028,20 @@ type GetOperatorSubAccountRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetOperatorSubAccountRequest) Reset() {
-	*x = GetOperatorSubAccountRequest{}
+func (x *ListOperatorSubAccountsRequest) Reset() {
+	*x = ListOperatorSubAccountsRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorSubAccountRequest) String() string {
+func (x *ListOperatorSubAccountsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorSubAccountRequest) ProtoMessage() {}
+func (*ListOperatorSubAccountsRequest) ProtoMessage() {}
 
-func (x *GetOperatorSubAccountRequest) ProtoReflect() protoreflect.Message {
+func (x *ListOperatorSubAccountsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7053,19 +7053,19 @@ func (x *GetOperatorSubAccountRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorSubAccountRequest.ProtoReflect.Descriptor instead.
-func (*GetOperatorSubAccountRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListOperatorSubAccountsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorSubAccountsRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{79}
 }
 
-func (x *GetOperatorSubAccountRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListOperatorSubAccountsRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *GetOperatorSubAccountRequest) GetProductType() string {
+func (x *ListOperatorSubAccountsRequest) GetProductType() string {
 	if x != nil && x.ProductType != nil {
 		return *x.ProductType
 	}
@@ -7191,27 +7191,27 @@ func (x *OperatorSubAccount) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-type GetOperatorSubAccountResponse struct {
+type ListOperatorSubAccountsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SubAccounts   []*OperatorSubAccount  `protobuf:"bytes,1,rep,name=sub_accounts,json=subAccounts,proto3" json:"sub_accounts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetOperatorSubAccountResponse) Reset() {
-	*x = GetOperatorSubAccountResponse{}
+func (x *ListOperatorSubAccountsResponse) Reset() {
+	*x = ListOperatorSubAccountsResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorSubAccountResponse) String() string {
+func (x *ListOperatorSubAccountsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorSubAccountResponse) ProtoMessage() {}
+func (*ListOperatorSubAccountsResponse) ProtoMessage() {}
 
-func (x *GetOperatorSubAccountResponse) ProtoReflect() protoreflect.Message {
+func (x *ListOperatorSubAccountsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7223,12 +7223,12 @@ func (x *GetOperatorSubAccountResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorSubAccountResponse.ProtoReflect.Descriptor instead.
-func (*GetOperatorSubAccountResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListOperatorSubAccountsResponse.ProtoReflect.Descriptor instead.
+func (*ListOperatorSubAccountsResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{81}
 }
 
-func (x *GetOperatorSubAccountResponse) GetSubAccounts() []*OperatorSubAccount {
+func (x *ListOperatorSubAccountsResponse) GetSubAccounts() []*OperatorSubAccount {
 	if x != nil {
 		return x.SubAccounts
 	}
@@ -21792,8 +21792,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x04memo\x18\x06 \x01(\tR\x04memo\"U\n" +
 	"\x18SubAccountAdjustResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x02 \x01(\tR\x04cash\"\x9f\x01\n" +
-	"\x1cGetOperatorSubAccountRequest\x12F\n" +
+	"\x04cash\x18\x02 \x01(\tR\x04cash\"\xa1\x01\n" +
+	"\x1eListOperatorSubAccountsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12&\n" +
 	"\fproduct_type\x18\x02 \x01(\tH\x00R\vproductType\x88\x01\x01B\x0f\n" +
 	"\r_product_type\"\xc1\x04\n" +
@@ -21810,8 +21810,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"m\n" +
-	"\x1dGetOperatorSubAccountResponse\x12L\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"o\n" +
+	"\x1fListOperatorSubAccountsResponse\x12L\n" +
 	"\fsub_accounts\x18\x01 \x03(\v2).api.wallet.service.v1.OperatorSubAccountR\vsubAccounts\"\xf1\x03\n" +
 	")ListOperatorSubAccountTransactionsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12&\n" +
@@ -23024,7 +23024,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1dWITHDRAW_SCENARIO_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18WITHDRAW_SCENARIO_PLAYER\x10\x01\x12\x1f\n" +
 	"\x1bWITHDRAW_SCENARIO_AFFILIATE\x10\x02\x12\x1e\n" +
-	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xb6t\n" +
+	"\x1aWITHDRAW_SCENARIO_OPERATOR\x10\x032\xbct\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -23066,8 +23066,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\rOperatorDebit\x12+.api.wallet.service.v1.OperatorDebitRequest\x1a,.api.wallet.service.v1.OperatorDebitResponse\"\x00\x12\x84\x01\n" +
 	"\x15OperatorBalanceAdjust\x123.api.wallet.service.v1.OperatorBalanceAdjustRequest\x1a4.api.wallet.service.v1.OperatorBalanceAdjustResponse\"\x00\x12{\n" +
 	"\x12SubAccountTransfer\x120.api.wallet.service.v1.SubAccountTransferRequest\x1a1.api.wallet.service.v1.SubAccountTransferResponse\"\x00\x12u\n" +
-	"\x10SubAccountAdjust\x12..api.wallet.service.v1.SubAccountAdjustRequest\x1a/.api.wallet.service.v1.SubAccountAdjustResponse\"\x00\x12\x84\x01\n" +
-	"\x15GetOperatorSubAccount\x123.api.wallet.service.v1.GetOperatorSubAccountRequest\x1a4.api.wallet.service.v1.GetOperatorSubAccountResponse\"\x00\x12\xab\x01\n" +
+	"\x10SubAccountAdjust\x12..api.wallet.service.v1.SubAccountAdjustRequest\x1a/.api.wallet.service.v1.SubAccountAdjustResponse\"\x00\x12\x8a\x01\n" +
+	"\x17ListOperatorSubAccounts\x125.api.wallet.service.v1.ListOperatorSubAccountsRequest\x1a6.api.wallet.service.v1.ListOperatorSubAccountsResponse\"\x00\x12\xab\x01\n" +
 	"\"ListOperatorSubAccountTransactions\x12@.api.wallet.service.v1.ListOperatorSubAccountTransactionsRequest\x1aA.api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse\"\x00\x12\x84\x01\n" +
 	"\x15UpdateOperatorBalance\x123.api.wallet.service.v1.UpdateOperatorBalanceRequest\x1a4.api.wallet.service.v1.UpdateOperatorBalanceResponse\"\x00\x12\x9c\x01\n" +
 	"\x1dGetOperatorTransactionSummary\x12;.api.wallet.service.v1.GetOperatorTransactionSummaryRequest\x1a<.api.wallet.service.v1.GetOperatorTransactionSummaryResponse\"\x00\x12\x93\x01\n" +
@@ -23230,9 +23230,9 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*SubAccountTransferResponse)(nil),                                   // 78: api.wallet.service.v1.SubAccountTransferResponse
 	(*SubAccountAdjustRequest)(nil),                                      // 79: api.wallet.service.v1.SubAccountAdjustRequest
 	(*SubAccountAdjustResponse)(nil),                                     // 80: api.wallet.service.v1.SubAccountAdjustResponse
-	(*GetOperatorSubAccountRequest)(nil),                                 // 81: api.wallet.service.v1.GetOperatorSubAccountRequest
+	(*ListOperatorSubAccountsRequest)(nil),                               // 81: api.wallet.service.v1.ListOperatorSubAccountsRequest
 	(*OperatorSubAccount)(nil),                                           // 82: api.wallet.service.v1.OperatorSubAccount
-	(*GetOperatorSubAccountResponse)(nil),                                // 83: api.wallet.service.v1.GetOperatorSubAccountResponse
+	(*ListOperatorSubAccountsResponse)(nil),                              // 83: api.wallet.service.v1.ListOperatorSubAccountsResponse
 	(*ListOperatorSubAccountTransactionsRequest)(nil),                    // 84: api.wallet.service.v1.ListOperatorSubAccountTransactionsRequest
 	(*OperatorSubAccountTransaction)(nil),                                // 85: api.wallet.service.v1.OperatorSubAccountTransaction
 	(*ListOperatorSubAccountTransactionsResponse)(nil),                   // 86: api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse
@@ -23503,11 +23503,11 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	246, // 76: api.wallet.service.v1.SubAccountTransferRequest.target_operator_context:type_name -> api.common.OperatorContext
 	1,   // 77: api.wallet.service.v1.SubAccountTransferRequest.direction:type_name -> api.wallet.service.v1.SubAccountTransferRequest.Direction
 	246, // 78: api.wallet.service.v1.SubAccountAdjustRequest.target_operator_context:type_name -> api.common.OperatorContext
-	246, // 79: api.wallet.service.v1.GetOperatorSubAccountRequest.operator_context:type_name -> api.common.OperatorContext
+	246, // 79: api.wallet.service.v1.ListOperatorSubAccountsRequest.operator_context:type_name -> api.common.OperatorContext
 	246, // 80: api.wallet.service.v1.OperatorSubAccount.operator_context:type_name -> api.common.OperatorContext
 	247, // 81: api.wallet.service.v1.OperatorSubAccount.created_at:type_name -> google.protobuf.Timestamp
 	247, // 82: api.wallet.service.v1.OperatorSubAccount.updated_at:type_name -> google.protobuf.Timestamp
-	82,  // 83: api.wallet.service.v1.GetOperatorSubAccountResponse.sub_accounts:type_name -> api.wallet.service.v1.OperatorSubAccount
+	82,  // 83: api.wallet.service.v1.ListOperatorSubAccountsResponse.sub_accounts:type_name -> api.wallet.service.v1.OperatorSubAccount
 	246, // 84: api.wallet.service.v1.ListOperatorSubAccountTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
 	247, // 85: api.wallet.service.v1.ListOperatorSubAccountTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
 	247, // 86: api.wallet.service.v1.ListOperatorSubAccountTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
@@ -23737,7 +23737,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	75,  // 310: api.wallet.service.v1.Wallet.OperatorBalanceAdjust:input_type -> api.wallet.service.v1.OperatorBalanceAdjustRequest
 	77,  // 311: api.wallet.service.v1.Wallet.SubAccountTransfer:input_type -> api.wallet.service.v1.SubAccountTransferRequest
 	79,  // 312: api.wallet.service.v1.Wallet.SubAccountAdjust:input_type -> api.wallet.service.v1.SubAccountAdjustRequest
-	81,  // 313: api.wallet.service.v1.Wallet.GetOperatorSubAccount:input_type -> api.wallet.service.v1.GetOperatorSubAccountRequest
+	81,  // 313: api.wallet.service.v1.Wallet.ListOperatorSubAccounts:input_type -> api.wallet.service.v1.ListOperatorSubAccountsRequest
 	84,  // 314: api.wallet.service.v1.Wallet.ListOperatorSubAccountTransactions:input_type -> api.wallet.service.v1.ListOperatorSubAccountTransactionsRequest
 	87,  // 315: api.wallet.service.v1.Wallet.UpdateOperatorBalance:input_type -> api.wallet.service.v1.UpdateOperatorBalanceRequest
 	89,  // 316: api.wallet.service.v1.Wallet.GetOperatorTransactionSummary:input_type -> api.wallet.service.v1.GetOperatorTransactionSummaryRequest
@@ -23841,7 +23841,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	76,  // 414: api.wallet.service.v1.Wallet.OperatorBalanceAdjust:output_type -> api.wallet.service.v1.OperatorBalanceAdjustResponse
 	78,  // 415: api.wallet.service.v1.Wallet.SubAccountTransfer:output_type -> api.wallet.service.v1.SubAccountTransferResponse
 	80,  // 416: api.wallet.service.v1.Wallet.SubAccountAdjust:output_type -> api.wallet.service.v1.SubAccountAdjustResponse
-	83,  // 417: api.wallet.service.v1.Wallet.GetOperatorSubAccount:output_type -> api.wallet.service.v1.GetOperatorSubAccountResponse
+	83,  // 417: api.wallet.service.v1.Wallet.ListOperatorSubAccounts:output_type -> api.wallet.service.v1.ListOperatorSubAccountsResponse
 	86,  // 418: api.wallet.service.v1.Wallet.ListOperatorSubAccountTransactions:output_type -> api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse
 	88,  // 419: api.wallet.service.v1.Wallet.UpdateOperatorBalance:output_type -> api.wallet.service.v1.UpdateOperatorBalanceResponse
 	90,  // 420: api.wallet.service.v1.Wallet.GetOperatorTransactionSummary:output_type -> api.wallet.service.v1.GetOperatorTransactionSummaryResponse

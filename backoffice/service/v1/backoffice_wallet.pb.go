@@ -2521,7 +2521,7 @@ func (x *SubAccountAdjustResponse) GetCash() string {
 	return ""
 }
 
-type GetOperatorSubAccountRequest struct {
+type ListOperatorSubAccountsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// empty = return all product_types for this operator
@@ -2530,20 +2530,20 @@ type GetOperatorSubAccountRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetOperatorSubAccountRequest) Reset() {
-	*x = GetOperatorSubAccountRequest{}
+func (x *ListOperatorSubAccountsRequest) Reset() {
+	*x = ListOperatorSubAccountsRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorSubAccountRequest) String() string {
+func (x *ListOperatorSubAccountsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorSubAccountRequest) ProtoMessage() {}
+func (*ListOperatorSubAccountsRequest) ProtoMessage() {}
 
-func (x *GetOperatorSubAccountRequest) ProtoReflect() protoreflect.Message {
+func (x *ListOperatorSubAccountsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2555,19 +2555,19 @@ func (x *GetOperatorSubAccountRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorSubAccountRequest.ProtoReflect.Descriptor instead.
-func (*GetOperatorSubAccountRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListOperatorSubAccountsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorSubAccountsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *GetOperatorSubAccountRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListOperatorSubAccountsRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *GetOperatorSubAccountRequest) GetProductType() string {
+func (x *ListOperatorSubAccountsRequest) GetProductType() string {
 	if x != nil && x.ProductType != nil {
 		return *x.ProductType
 	}
@@ -6486,8 +6486,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x04memo\x18\x06 \x01(\tR\x04memo\"U\n" +
 	"\x18SubAccountAdjustResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x02 \x01(\tR\x04cash\"\x9f\x01\n" +
-	"\x1cGetOperatorSubAccountRequest\x12F\n" +
+	"\x04cash\x18\x02 \x01(\tR\x04cash\"\xa1\x01\n" +
+	"\x1eListOperatorSubAccountsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12&\n" +
 	"\fproduct_type\x18\x02 \x01(\tH\x00R\vproductType\x88\x01\x01B\x0f\n" +
 	"\r_product_type\"\xf1\x03\n" +
@@ -6861,7 +6861,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x0e_expiring_soonB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size2\xeb`\n" +
+	"_page_size2\xf3`\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -6882,8 +6882,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x15OperatorBalanceSettle\x127.api.backoffice.service.v1.OperatorBalanceSettleRequest\x1a8.api.backoffice.service.v1.OperatorBalanceSettleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/operator/balance-settle\x12\xc4\x01\n" +
 	"\x15OperatorBalanceAdjust\x127.api.backoffice.service.v1.OperatorBalanceAdjustRequest\x1a8.api.backoffice.service.v1.OperatorBalanceAdjustResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/operator/balance-adjust\x12\xc1\x01\n" +
 	"\x12SubAccountTransfer\x124.api.backoffice.service.v1.SubAccountTransferRequest\x1a5.api.backoffice.service.v1.SubAccountTransferResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/wallet/operator/sub-account/transfer\x12\xb9\x01\n" +
-	"\x10SubAccountAdjust\x122.api.backoffice.service.v1.SubAccountAdjustRequest\x1a3.api.backoffice.service.v1.SubAccountAdjustResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/wallet/operator/sub-account/adjust\x12\xc1\x01\n" +
-	"\x15GetOperatorSubAccount\x127.api.backoffice.service.v1.GetOperatorSubAccountRequest\x1a4.api.wallet.service.v1.GetOperatorSubAccountResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/wallet/operator/sub-account/get\x12\xf6\x01\n" +
+	"\x10SubAccountAdjust\x122.api.backoffice.service.v1.SubAccountAdjustRequest\x1a3.api.backoffice.service.v1.SubAccountAdjustResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/wallet/operator/sub-account/adjust\x12\xc9\x01\n" +
+	"\x17ListOperatorSubAccounts\x129.api.backoffice.service.v1.ListOperatorSubAccountsRequest\x1a6.api.wallet.service.v1.ListOperatorSubAccountsResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/wallet/operator/sub-accounts/list\x12\xf6\x01\n" +
 	"\"ListOperatorSubAccountTransactions\x12D.api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest\x1aA.api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse\"G\x82\xd3\xe4\x93\x02A:\x01*\"</v1/backoffice/wallet/operator/sub-account/transactions/list\x12\xe5\x01\n" +
 	"\x1fListOperatorBalanceTransactions\x12A.api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest\x1aB.api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/wallet/operator/transactions/list\x12\xc4\x01\n" +
 	"\x15UpdateOperatorBalance\x127.api.backoffice.service.v1.UpdateOperatorBalanceRequest\x1a8.api.backoffice.service.v1.UpdateOperatorBalanceResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/operator/balance/update\x12\xb4\x01\n" +
@@ -6978,7 +6978,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*SubAccountTransferResponse)(nil),                               // 32: api.backoffice.service.v1.SubAccountTransferResponse
 	(*SubAccountAdjustRequest)(nil),                                  // 33: api.backoffice.service.v1.SubAccountAdjustRequest
 	(*SubAccountAdjustResponse)(nil),                                 // 34: api.backoffice.service.v1.SubAccountAdjustResponse
-	(*GetOperatorSubAccountRequest)(nil),                             // 35: api.backoffice.service.v1.GetOperatorSubAccountRequest
+	(*ListOperatorSubAccountsRequest)(nil),                           // 35: api.backoffice.service.v1.ListOperatorSubAccountsRequest
 	(*ListOperatorSubAccountTransactionsRequest)(nil),                // 36: api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest
 	(*ListOperatorBalanceTransactionsRequest)(nil),                   // 37: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
 	(*OperatorBalanceTransaction)(nil),                               // 38: api.backoffice.service.v1.OperatorBalanceTransaction
@@ -7045,7 +7045,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*v1.UpdateOperatorCurrencyResponse)(nil),             // 99: api.wallet.service.v1.UpdateOperatorCurrencyResponse
 	(*v1.ListBottomOperatorBalancesResponse)(nil),         // 100: api.wallet.service.v1.ListBottomOperatorBalancesResponse
 	(*v1.ListCompanyOperatorBalancesResponse)(nil),        // 101: api.wallet.service.v1.ListCompanyOperatorBalancesResponse
-	(*v1.GetOperatorSubAccountResponse)(nil),              // 102: api.wallet.service.v1.GetOperatorSubAccountResponse
+	(*v1.ListOperatorSubAccountsResponse)(nil),            // 102: api.wallet.service.v1.ListOperatorSubAccountsResponse
 	(*v1.ListOperatorSubAccountTransactionsResponse)(nil), // 103: api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse
 	(*v1.GetOperatorBalanceResponse)(nil),                 // 104: api.wallet.service.v1.GetOperatorBalanceResponse
 	(*v1.SetDepositRewardSequencesResponse)(nil),          // 105: api.wallet.service.v1.SetDepositRewardSequencesResponse
@@ -7111,7 +7111,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	87,  // 20: api.backoffice.service.v1.SubAccountTransferRequest.target_operator_context:type_name -> api.common.OperatorContext
 	0,   // 21: api.backoffice.service.v1.SubAccountTransferRequest.direction:type_name -> api.backoffice.service.v1.SubAccountTransferRequest.Direction
 	87,  // 22: api.backoffice.service.v1.SubAccountAdjustRequest.target_operator_context:type_name -> api.common.OperatorContext
-	87,  // 23: api.backoffice.service.v1.GetOperatorSubAccountRequest.operator_context:type_name -> api.common.OperatorContext
+	87,  // 23: api.backoffice.service.v1.ListOperatorSubAccountsRequest.operator_context:type_name -> api.common.OperatorContext
 	87,  // 24: api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
 	86,  // 25: api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
 	86,  // 26: api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
@@ -7204,7 +7204,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	29,  // 113: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:input_type -> api.backoffice.service.v1.OperatorBalanceAdjustRequest
 	31,  // 114: api.backoffice.service.v1.BackofficeWallet.SubAccountTransfer:input_type -> api.backoffice.service.v1.SubAccountTransferRequest
 	33,  // 115: api.backoffice.service.v1.BackofficeWallet.SubAccountAdjust:input_type -> api.backoffice.service.v1.SubAccountAdjustRequest
-	35,  // 116: api.backoffice.service.v1.BackofficeWallet.GetOperatorSubAccount:input_type -> api.backoffice.service.v1.GetOperatorSubAccountRequest
+	35,  // 116: api.backoffice.service.v1.BackofficeWallet.ListOperatorSubAccounts:input_type -> api.backoffice.service.v1.ListOperatorSubAccountsRequest
 	36,  // 117: api.backoffice.service.v1.BackofficeWallet.ListOperatorSubAccountTransactions:input_type -> api.backoffice.service.v1.ListOperatorSubAccountTransactionsRequest
 	37,  // 118: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:input_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
 	40,  // 119: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:input_type -> api.backoffice.service.v1.UpdateOperatorBalanceRequest
@@ -7266,7 +7266,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	30,  // 175: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceAdjust:output_type -> api.backoffice.service.v1.OperatorBalanceAdjustResponse
 	32,  // 176: api.backoffice.service.v1.BackofficeWallet.SubAccountTransfer:output_type -> api.backoffice.service.v1.SubAccountTransferResponse
 	34,  // 177: api.backoffice.service.v1.BackofficeWallet.SubAccountAdjust:output_type -> api.backoffice.service.v1.SubAccountAdjustResponse
-	102, // 178: api.backoffice.service.v1.BackofficeWallet.GetOperatorSubAccount:output_type -> api.wallet.service.v1.GetOperatorSubAccountResponse
+	102, // 178: api.backoffice.service.v1.BackofficeWallet.ListOperatorSubAccounts:output_type -> api.wallet.service.v1.ListOperatorSubAccountsResponse
 	103, // 179: api.backoffice.service.v1.BackofficeWallet.ListOperatorSubAccountTransactions:output_type -> api.wallet.service.v1.ListOperatorSubAccountTransactionsResponse
 	39,  // 180: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
 	41,  // 181: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
