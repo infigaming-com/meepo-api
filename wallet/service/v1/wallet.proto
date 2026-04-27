@@ -1536,36 +1536,49 @@ message OperatorSubAccountTransaction {
 	int64 related_transaction_id = 3;
 	api.common.OperatorContext operator_context = 4;
 	string product_type = 5;
+	// Currency is fixed by the product rule (e.g. USDC for polymarket).
+	// There is no separate settlement_currency — the row is always in `currency`.
 	string currency = 6;
-	string settlement_currency = 7;
-	string reporting_currency = 8;
-	string transaction_type = 9;
+	// Reporting currency the operator's reports are denominated in (used to
+	// interpret cash_amount_reporting_currency / commission_amount_reporting_currency).
+	string reporting_currency = 7;
+	string transaction_type = 8;
 	// Native-currency balance evolution.
-	string original_cash = 10;
-	string cash = 11;
-	string cash_amount = 12;
-	// USD / reporting amounts of THIS row's delta only (no stale balance
-	// snapshots — original_cash_usd/cash_usd would be reverse-calculated against
-	// a now-irrelevant rate). Pair with the exchange_rate fields below for audit.
-	string cash_amount_usd = 13;
-	string cash_amount_reporting_currency = 14;
+	string original_cash = 9;
+	string cash = 10;
+	string cash_amount = 11;
+	// Per-row delta translated into USD and the operator's reporting currency
+	// at transaction time. No exchange_rate columns — sub-account currency is
+	// fixed to USDC (≈1 USD) and the reporting amount is the canonical figure.
+	string cash_amount_usd = 12;
+	string cash_amount_reporting_currency = 13;
 	// Winning commission attributed to this row (only populated on
 	// sub_account_game_credit when payout > bet). cash_amount is NOT reduced —
 	// commission is recorded for downstream operator/platform settlement.
-	string commission_amount = 15;
-	string commission_amount_usd = 16;
-	string commission_amount_reporting_currency = 17;
-	string commission_rate = 18;
-	// Rates captured at transaction time.
-	string exchange_rate = 19;
-	string usd_based_exchange_rate = 20;
-	string reporting_currency_exchange_rate = 21;
-	string status = 22;
-	string memo = 23;
-	// JSON-encoded metadata (e.g. polymarket event/order IDs)
-	string metadata = 24;
-	google.protobuf.Timestamp created_at = 25;
-	google.protobuf.Timestamp updated_at = 26;
+	string commission_amount = 14;
+	string commission_amount_usd = 15;
+	string commission_amount_reporting_currency = 16;
+	string commission_rate = 17;
+	string status = 18;
+	string memo = 19;
+	google.protobuf.Timestamp created_at = 20;
+	google.protobuf.Timestamp updated_at = 21;
+}
+
+// OperatorSubAccountAggregates groups the SUM-over-WHERE-clause totals
+// returned by ListOperatorSubAccountTransactions. Each metric is exposed
+// in both USD and the operator's reporting currency.
+message OperatorSubAccountAggregates {
+	string total_commission_usd = 1;
+	string total_commission_reporting_currency = 2;
+	string total_transfer_in_usd = 3;
+	string total_transfer_in_reporting_currency = 4;
+	string total_transfer_out_usd = 5;
+	string total_transfer_out_reporting_currency = 6;
+	string total_payouts_received_usd = 7;
+	string total_payouts_received_reporting_currency = 8;
+	string total_bets_placed_usd = 9;
+	string total_bets_placed_reporting_currency = 10;
 }
 
 message ListOperatorSubAccountTransactionsResponse {
@@ -1575,12 +1588,7 @@ message ListOperatorSubAccountTransactionsResponse {
 	int32 page_size = 4;
 	// Aggregates over the same WHERE clause as the paged query (operator +
 	// product_type + currency + time window), independent of page/page_size.
-	string total_commission_usd = 5;
-	string total_commission_reporting_currency = 6;
-	string total_transfer_in_usd = 7;
-	string total_transfer_out_usd = 8;
-	string total_payouts_received_usd = 9;
-	string total_bets_placed_usd = 10;
+	OperatorSubAccountAggregates aggregates = 5;
 }
 
 message UpdateOperatorBalanceRequest {

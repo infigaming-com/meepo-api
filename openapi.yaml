@@ -36083,21 +36083,12 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                totalCommissionUsd:
-                    type: string
+                aggregates:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.OperatorSubAccountAggregates'
                     description: |-
                         Aggregates over the same WHERE clause as the paged query (operator +
                          product_type + currency + time window), independent of page/page_size.
-                totalCommissionReportingCurrency:
-                    type: string
-                totalTransferInUsd:
-                    type: string
-                totalTransferOutUsd:
-                    type: string
-                totalPayoutsReceivedUsd:
-                    type: string
-                totalBetsPlacedUsd:
-                    type: string
         api.wallet.service.v1.ListOperatorSubAccountsResponse:
             type: object
             properties:
@@ -36316,6 +36307,33 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+        api.wallet.service.v1.OperatorSubAccountAggregates:
+            type: object
+            properties:
+                totalCommissionUsd:
+                    type: string
+                totalCommissionReportingCurrency:
+                    type: string
+                totalTransferInUsd:
+                    type: string
+                totalTransferInReportingCurrency:
+                    type: string
+                totalTransferOutUsd:
+                    type: string
+                totalTransferOutReportingCurrency:
+                    type: string
+                totalPayoutsReceivedUsd:
+                    type: string
+                totalPayoutsReceivedReportingCurrency:
+                    type: string
+                totalBetsPlacedUsd:
+                    type: string
+                totalBetsPlacedReportingCurrency:
+                    type: string
+            description: |-
+                OperatorSubAccountAggregates groups the SUM-over-WHERE-clause totals
+                 returned by ListOperatorSubAccountTransactions. Each metric is exposed
+                 in both USD and the operator's reporting currency.
         api.wallet.service.v1.OperatorSubAccountTransaction:
             type: object
             properties:
@@ -36334,10 +36352,14 @@ components:
                     type: string
                 currency:
                     type: string
-                settlementCurrency:
-                    type: string
+                    description: |-
+                        Currency is fixed by the product rule (e.g. USDC for polymarket).
+                         There is no separate settlement_currency — the row is always in `currency`.
                 reportingCurrency:
                     type: string
+                    description: |-
+                        Reporting currency the operator's reports are denominated in (used to
+                         interpret cash_amount_reporting_currency / commission_amount_reporting_currency).
                 transactionType:
                     type: string
                 originalCash:
@@ -36350,9 +36372,9 @@ components:
                 cashAmountUsd:
                     type: string
                     description: |-
-                        USD / reporting amounts of THIS row's delta only (no stale balance
-                         snapshots — original_cash_usd/cash_usd would be reverse-calculated against
-                         a now-irrelevant rate). Pair with the exchange_rate fields below for audit.
+                        Per-row delta translated into USD and the operator's reporting currency
+                         at transaction time. No exchange_rate columns — sub-account currency is
+                         fixed to USDC (≈1 USD) and the reporting amount is the canonical figure.
                 cashAmountReportingCurrency:
                     type: string
                 commissionAmount:
@@ -36367,20 +36389,10 @@ components:
                     type: string
                 commissionRate:
                     type: string
-                exchangeRate:
-                    type: string
-                    description: Rates captured at transaction time.
-                usdBasedExchangeRate:
-                    type: string
-                reportingCurrencyExchangeRate:
-                    type: string
                 status:
                     type: string
                 memo:
                     type: string
-                metadata:
-                    type: string
-                    description: JSON-encoded metadata (e.g. polymarket event/order IDs)
                 createdAt:
                     type: string
                     format: date-time
