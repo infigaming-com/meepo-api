@@ -2546,3 +2546,39 @@ func IsUpdateOperatorSubAccountFailed(err error) bool {
 func ErrorUpdateOperatorSubAccountFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UPDATE_OPERATOR_SUB_ACCOUNT_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetWinningCommissionConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_WINNING_COMMISSION_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetWinningCommissionConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_WINNING_COMMISSION_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetWinningCommissionConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_WINNING_COMMISSION_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorSetWinningCommissionConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_WINNING_COMMISSION_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidCommissionRate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_COMMISSION_RATE.String() && e.Code == 400
+}
+
+func ErrorInvalidCommissionRate(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_COMMISSION_RATE.String(), fmt.Sprintf(format, args...))
+}
