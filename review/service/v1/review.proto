@@ -412,10 +412,10 @@ message PlayerListTicketsResponse {
 		string payment_status = 5;
 		// Reviewer comment visible to the player (typically set on rejection to explain the reason)
 		string player_comment = 6;
-		// Ticket creation time (Unix timestamp in seconds)
-		int64 created_at = 7;
-		// Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
-		int64 reviewed_at = 8;
+		// Ticket creation time (UTC, RFC 3339 format, e.g. "2026-04-20T14:39:09.645Z")
+		google.protobuf.Timestamp created_at = 7;
+		// Time when the ticket was reviewed (UTC, RFC 3339 format; null if not yet reviewed)
+		google.protobuf.Timestamp reviewed_at = 8;
 	}
 	repeated Ticket tickets = 1;
 	// Current page number
@@ -447,8 +447,8 @@ message PlayerGetTicketResponse {
 	string payment_status = 5;
 	// Reviewer comment visible to the player (typically set on rejection)
 	string player_comment = 6;
-	// Ticket creation time (Unix timestamp in seconds)
-	int64 created_at = 7;
-	// Time when the ticket was reviewed (Unix timestamp in seconds, 0 if not yet reviewed)
-	int64 reviewed_at = 8;
+	// Ticket creation time (UTC, RFC 3339 format, e.g. "2026-04-20T14:39:09.645Z")
+	google.protobuf.Timestamp created_at = 7;
+	// Time when the ticket was reviewed (UTC, RFC 3339 format; null if not yet reviewed)
+	google.protobuf.Timestamp reviewed_at = 8;
 }
