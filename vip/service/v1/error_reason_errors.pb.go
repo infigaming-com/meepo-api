@@ -36,3 +36,17 @@ func IsBonusClaimRejected(err error) bool {
 func ErrorBonusClaimRejected(format string, args ...interface{}) *errors.Error {
 	return errors.New(403, ErrorReason_BONUS_CLAIM_REJECTED.String(), fmt.Sprintf(format, args...))
 }
+
+// No claimable VIP rewards found for the user.
+func IsNoClaimableReward(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NO_CLAIMABLE_REWARD.String() && e.Code == 404
+}
+
+// No claimable VIP rewards found for the user.
+func ErrorNoClaimableReward(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_NO_CLAIMABLE_REWARD.String(), fmt.Sprintf(format, args...))
+}
