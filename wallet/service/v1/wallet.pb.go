@@ -751,7 +751,8 @@ type GameDebitRequest struct {
 	RoundId         int64                   `protobuf:"varint,12,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	GameId          string                  `protobuf:"bytes,13,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	// product_type triggers operator sub-account debit in the same transaction when non-empty.
-	// Valid values are defined in wallet-service internal/data/sub_account_rules.go (e.g. "polymarket").
+	// Valid values are defined in wallet-service internal/data/sub_account_rules.go
+	// (e.g. "prediction" — covers Polymarket and similar prediction-market products).
 	// Wallet computes the sub-account-currency amount itself from `amount` +
 	// `settlement_currency` via the same exchange rates it uses for cash_amount_usd —
 	// caller does not (and should not) supply it.
@@ -6713,7 +6714,7 @@ type SubAccountTransferRequest struct {
 	// operator's main wallet (operator_balance) and its sub-account in a single tx.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	ProductType           string                  `protobuf:"bytes,2,opt,name=product_type,json=productType,proto3" json:"product_type,omitempty"`
-	// currency must equal the rule's Currency for this product_type (e.g. USDC for polymarket).
+	// currency must equal the rule's Currency for this product_type (e.g. USDC for "prediction").
 	Currency string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	// positive amount; direction indicates main->sub or sub->main.
 	CashAmount string                              `protobuf:"bytes,4,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
@@ -7357,7 +7358,7 @@ type OperatorSubAccountTransaction struct {
 	RelatedTransactionId int64                   `protobuf:"varint,3,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
 	OperatorContext      *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	ProductType          string                  `protobuf:"bytes,5,opt,name=product_type,json=productType,proto3" json:"product_type,omitempty"`
-	// Currency is fixed by the product rule (e.g. USDC for polymarket).
+	// Currency is fixed by the product rule (e.g. USDC for "prediction").
 	// There is no separate settlement_currency — the row is always in `currency`.
 	Currency string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Reporting currency the operator's reports are denominated in (used to

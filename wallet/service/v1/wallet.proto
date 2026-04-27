@@ -135,7 +135,7 @@ service Wallet {
 	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
 	rpc OperatorBalanceAdjust (OperatorBalanceAdjustRequest) returns (OperatorBalanceAdjustResponse) {}
 
-	// ========== Operator Sub-Account (e.g. Polymarket and future custody products) ==========
+	// ========== Operator Sub-Account (custody products: prediction markets, etc.) ==========
 	// Sub-accounts are per-(operator, product_type, currency). Product rules live in
 	// wallet-service internal/data/sub_account_rules.go — allowed currencies are fixed per product.
 	// Lifecycle: row is lazily created on first SubAccountTransfer IN; other entry points
@@ -566,7 +566,8 @@ message GameDebitRequest {
 	int64 round_id = 12;
 	string game_id = 13;
 	// product_type triggers operator sub-account debit in the same transaction when non-empty.
-	// Valid values are defined in wallet-service internal/data/sub_account_rules.go (e.g. "polymarket").
+	// Valid values are defined in wallet-service internal/data/sub_account_rules.go
+	// (e.g. "prediction" — covers Polymarket and similar prediction-market products).
 	// Wallet computes the sub-account-currency amount itself from `amount` +
 	// `settlement_currency` via the same exchange rates it uses for cash_amount_usd —
 	// caller does not (and should not) supply it.
@@ -1464,7 +1465,7 @@ message SubAccountTransferRequest {
 	// operator's main wallet (operator_balance) and its sub-account in a single tx.
 	api.common.OperatorContext target_operator_context = 1;
 	string product_type = 2;
-	// currency must equal the rule's Currency for this product_type (e.g. USDC for polymarket).
+	// currency must equal the rule's Currency for this product_type (e.g. USDC for "prediction").
 	string currency = 3;
 	// positive amount; direction indicates main->sub or sub->main.
 	string cash_amount = 4;
@@ -1562,7 +1563,7 @@ message OperatorSubAccountTransaction {
 	int64 related_transaction_id = 3;
 	api.common.OperatorContext operator_context = 4;
 	string product_type = 5;
-	// Currency is fixed by the product rule (e.g. USDC for polymarket).
+	// Currency is fixed by the product rule (e.g. USDC for "prediction").
 	// There is no separate settlement_currency — the row is always in `currency`.
 	string currency = 6;
 	// Reporting currency the operator's reports are denominated in (used to

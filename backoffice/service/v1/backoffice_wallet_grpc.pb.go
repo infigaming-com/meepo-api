@@ -122,7 +122,7 @@ type BackofficeWalletClient interface {
 	OperatorBalanceSettle(ctx context.Context, in *OperatorBalanceSettleRequest, opts ...grpc.CallOption) (*OperatorBalanceSettleResponse, error)
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
 	OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...grpc.CallOption) (*OperatorBalanceAdjustResponse, error)
-	// ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// ===== Operator Sub-Account (custody products: prediction markets, etc.) =====
 	// Sub-account row is lazily created on first SubAccountTransfer IN; no
 	// separate enable/disable RPC.
 	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
@@ -891,7 +891,7 @@ type BackofficeWalletServer interface {
 	OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error)
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
 	OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error)
-	// ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// ===== Operator Sub-Account (custody products: prediction markets, etc.) =====
 	// Sub-account row is lazily created on first SubAccountTransfer IN; no
 	// separate enable/disable RPC.
 	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.

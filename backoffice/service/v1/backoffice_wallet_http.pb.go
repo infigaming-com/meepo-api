@@ -200,7 +200,7 @@ type BackofficeWalletHTTPServer interface {
 	SetUserSwapTemplate(context.Context, *SetUserSwapTemplateRequest) (*v1.SetUserSwapTemplateResponse, error)
 	// SubAccountAdjust SubAccountAdjust manually credits/debits the sub-account (system-level only).
 	SubAccountAdjust(context.Context, *SubAccountAdjustRequest) (*SubAccountAdjustResponse, error)
-	// SubAccountTransfer ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// SubAccountTransfer ===== Operator Sub-Account (custody products: prediction markets, etc.) =====
 	// Sub-account row is lazily created on first SubAccountTransfer IN; no
 	// separate enable/disable RPC.
 	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
@@ -1768,7 +1768,7 @@ type BackofficeWalletHTTPClient interface {
 	SetUserSwapTemplate(ctx context.Context, req *SetUserSwapTemplateRequest, opts ...http.CallOption) (rsp *v1.SetUserSwapTemplateResponse, err error)
 	// SubAccountAdjust SubAccountAdjust manually credits/debits the sub-account (system-level only).
 	SubAccountAdjust(ctx context.Context, req *SubAccountAdjustRequest, opts ...http.CallOption) (rsp *SubAccountAdjustResponse, err error)
-	// SubAccountTransfer ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// SubAccountTransfer ===== Operator Sub-Account (custody products: prediction markets, etc.) =====
 	// Sub-account row is lazily created on first SubAccountTransfer IN; no
 	// separate enable/disable RPC.
 	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
@@ -2561,7 +2561,7 @@ func (c *BackofficeWalletHTTPClientImpl) SubAccountAdjust(ctx context.Context, i
 	return &out, nil
 }
 
-// SubAccountTransfer ===== Operator Sub-Account (Polymarket and future custody products) =====
+// SubAccountTransfer ===== Operator Sub-Account (custody products: prediction markets, etc.) =====
 // Sub-account row is lazily created on first SubAccountTransfer IN; no
 // separate enable/disable RPC.
 // SubAccountTransfer moves balance between the operator's main wallet and the sub-account.

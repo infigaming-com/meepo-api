@@ -2231,7 +2231,7 @@ type SubAccountTransferRequest struct {
 	// may initiate, enforced by BO RBAC (initiator is read from request context).
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	ProductType           string                  `protobuf:"bytes,2,opt,name=product_type,json=productType,proto3" json:"product_type,omitempty"`
-	// must equal the rule's currency for the product (e.g. USDC for polymarket)
+	// must equal the rule's currency for the product (e.g. USDC for "prediction")
 	Currency string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	// positive amount; direction picks main->sub or sub->main
 	CashAmount    string                              `protobuf:"bytes,4,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`

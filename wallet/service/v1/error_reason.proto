@@ -213,7 +213,7 @@ enum ErrorReason {
   INVALID_USER_IDS = 30198 [(errors.code) = 400];
   INVALID_BATCH_SIZE = 30199 [(errors.code) = 400];
   INVALID_CURRENCY = 30200 [(errors.code) = 400];
-  // operator sub-account (Polymarket & future custody products)
+  // operator sub-account (custody products: prediction markets, etc.)
   INVALID_SUB_ACCOUNT_PRODUCT_TYPE = 30201 [(errors.code) = 400];
   GET_OPERATOR_SUB_ACCOUNT_FAILED = 30202;
   SUB_ACCOUNT_NOT_ENABLED = 30203 [(errors.code) = 403];

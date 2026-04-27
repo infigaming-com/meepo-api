@@ -136,7 +136,7 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
-	// ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// ===== Operator Sub-Account (custody products: prediction markets, etc.) =====
 	// Sub-account row is lazily created on first SubAccountTransfer IN; no
 	// separate enable/disable RPC.
 	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
@@ -805,7 +805,7 @@ message SubAccountTransferRequest {
 	// may initiate, enforced by BO RBAC (initiator is read from request context).
 	api.common.OperatorContext target_operator_context = 1;
 	string product_type = 2;
-	// must equal the rule's currency for the product (e.g. USDC for polymarket)
+	// must equal the rule's currency for the product (e.g. USDC for "prediction")
 	string currency = 3;
 	// positive amount; direction picks main->sub or sub->main
 	string cash_amount = 4;

@@ -196,7 +196,7 @@ type WalletClient interface {
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
 	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
 	OperatorBalanceAdjust(ctx context.Context, in *OperatorBalanceAdjustRequest, opts ...grpc.CallOption) (*OperatorBalanceAdjustResponse, error)
-	// ========== Operator Sub-Account (e.g. Polymarket and future custody products) ==========
+	// ========== Operator Sub-Account (custody products: prediction markets, etc.) ==========
 	// Sub-accounts are per-(operator, product_type, currency). Product rules live in
 	// wallet-service internal/data/sub_account_rules.go — allowed currencies are fixed per product.
 	// Lifecycle: row is lazily created on first SubAccountTransfer IN; other entry points
@@ -1514,7 +1514,7 @@ type WalletServer interface {
 	// OperatorBalanceAdjust manually adjusts an operator or company balance (system-level only)
 	// transaction_type determines direction: operator_manual_credit or operator_manual_debit
 	OperatorBalanceAdjust(context.Context, *OperatorBalanceAdjustRequest) (*OperatorBalanceAdjustResponse, error)
-	// ========== Operator Sub-Account (e.g. Polymarket and future custody products) ==========
+	// ========== Operator Sub-Account (custody products: prediction markets, etc.) ==========
 	// Sub-accounts are per-(operator, product_type, currency). Product rules live in
 	// wallet-service internal/data/sub_account_rules.go — allowed currencies are fixed per product.
 	// Lifecycle: row is lazily created on first SubAccountTransfer IN; other entry points
