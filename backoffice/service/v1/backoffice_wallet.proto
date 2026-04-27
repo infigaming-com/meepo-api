@@ -136,6 +136,42 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+	// ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// Sub-account row is lazily created on first SubAccountTransfer IN; no
+	// separate enable/disable RPC.
+	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+	rpc SubAccountTransfer(SubAccountTransferRequest) returns (SubAccountTransferResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/transfer"
+			body: "*"
+		};
+	}
+	// SubAccountAdjust manually credits/debits the sub-account (system-level only).
+	rpc SubAccountAdjust(SubAccountAdjustRequest) returns (SubAccountAdjustResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/adjust"
+			body: "*"
+		};
+	}
+	// ListOperatorSubAccounts returns sub-account rows under the caller's
+	// operator hierarchy (system/retailer/company can see all the bottom
+	// operators they cover; bottom operators see their own row only). The
+	// shape is intentionally a list — operator_context filtering walks the
+	// hierarchy via BuildOperatorContextQuery, and product_type is an
+	// optional further filter.
+	rpc ListOperatorSubAccounts(ListOperatorSubAccountsRequest) returns (wallet.service.v1.ListOperatorSubAccountsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-accounts/list"
+			body: "*"
+		};
+	}
+	// ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
+	rpc ListOperatorSubAccountTransactions(ListOperatorSubAccountTransactionsRequest) returns (wallet.service.v1.ListOperatorSubAccountTransactionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/sub-account/transactions/list"
+			body: "*"
+		};
+	}
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	rpc ListOperatorBalanceTransactions(ListOperatorBalanceTransactionsRequest) returns (ListOperatorBalanceTransactionsResponse) {
 		option (google.api.http) = {
@@ -759,6 +795,73 @@ message OperatorBalanceAdjustResponse {
 	int64 transaction_id = 1;
 	// resulting balance after adjustment
 	string cash = 2;
+}
+
+// ===== Operator Sub-Account messages (BO entry-level; wallet-side adds reporting_currency etc.) =====
+
+message SubAccountTransferRequest {
+	// The operator that owns the sub-account; cash moves between this operator's
+	// main wallet and its sub-account. Only the operator itself or its company
+	// may initiate, enforced by BO RBAC (initiator is read from request context).
+	api.common.OperatorContext target_operator_context = 1;
+	string product_type = 2;
+	// must equal the rule's currency for the product (e.g. USDC for polymarket)
+	string currency = 3;
+	// positive amount; direction picks main->sub or sub->main
+	string cash_amount = 4;
+	enum Direction {
+		DIRECTION_UNSPECIFIED = 0;
+		DIRECTION_TO_SUB_ACCOUNT = 1;
+		DIRECTION_FROM_SUB_ACCOUNT = 2;
+	}
+	Direction direction = 5;
+	string memo = 6;
+}
+
+message SubAccountTransferResponse {
+	int64 operator_transaction_id = 1;
+	int64 sub_account_transaction_id = 2;
+	string operator_cash = 3;
+	string sub_account_cash = 4;
+}
+
+message SubAccountAdjustRequest {
+	// The operator whose sub-account is being adjusted. System-only operation,
+	// enforced by BO RBAC.
+	api.common.OperatorContext target_operator_context = 1;
+	string product_type = 2;
+	string currency = 3;
+	// "sub_account_adjust_credit" or "sub_account_adjust_debit"
+	string transaction_type = 4;
+	// always positive; direction derived from transaction_type
+	string cash_amount = 5;
+	string memo = 6;
+	// Caller-supplied unique key for idempotent retry. BO forwards verbatim;
+	// wallet enforces uniqueness via partial UNIQUE.
+	string idempotency_key = 7;
+}
+
+message SubAccountAdjustResponse {
+	int64 transaction_id = 1;
+	string cash = 2;
+}
+
+message ListOperatorSubAccountsRequest {
+	// operator_context scopes the result to this operator's hierarchy.
+	api.common.OperatorContext operator_context = 1;
+	// empty = no product_type filter (every sub-account in scope is returned).
+	optional string product_type = 2;
+}
+
+message ListOperatorSubAccountTransactionsRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional string product_type = 2;
+	optional string currency = 3;
+	repeated string transaction_types = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	optional int32 page = 7;
+	optional int32 page_size = 8;
 }
 
 message ListOperatorBalanceTransactionsRequest {

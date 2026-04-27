@@ -47,6 +47,8 @@ const OperationBackofficeWalletListFICAThresholdTransactions = "/api.backoffice.
 const OperationBackofficeWalletListManualJournalEntries = "/api.backoffice.service.v1.BackofficeWallet/ListManualJournalEntries"
 const OperationBackofficeWalletListOperatorBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 const OperationBackofficeWalletListOperatorBalances = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
+const OperationBackofficeWalletListOperatorSubAccountTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorSubAccountTransactions"
+const OperationBackofficeWalletListOperatorSubAccounts = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorSubAccounts"
 const OperationBackofficeWalletListOperatorWithdrawableAmounts = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorWithdrawableAmounts"
 const OperationBackofficeWalletListPromoCodeCampaignDetails = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaignDetails"
 const OperationBackofficeWalletListPromoCodeCampaigns = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaigns"
@@ -71,6 +73,8 @@ const OperationBackofficeWalletSetDepositRewardSequences = "/api.backoffice.serv
 const OperationBackofficeWalletSetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
 const OperationBackofficeWalletSetUserSwapEnabled = "/api.backoffice.service.v1.BackofficeWallet/SetUserSwapEnabled"
 const OperationBackofficeWalletSetUserSwapTemplate = "/api.backoffice.service.v1.BackofficeWallet/SetUserSwapTemplate"
+const OperationBackofficeWalletSubAccountAdjust = "/api.backoffice.service.v1.BackofficeWallet/SubAccountAdjust"
+const OperationBackofficeWalletSubAccountTransfer = "/api.backoffice.service.v1.BackofficeWallet/SubAccountTransfer"
 const OperationBackofficeWalletUpdateOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 const OperationBackofficeWalletUpdateOperatorCurrencyConfig = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
 const OperationBackofficeWalletUpdatePromoCodeCampaign = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaign"
@@ -134,6 +138,15 @@ type BackofficeWalletHTTPServer interface {
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// ListOperatorBalances ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
+	// ListOperatorSubAccountTransactions ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
+	ListOperatorSubAccountTransactions(context.Context, *ListOperatorSubAccountTransactionsRequest) (*v1.ListOperatorSubAccountTransactionsResponse, error)
+	// ListOperatorSubAccounts ListOperatorSubAccounts returns sub-account rows under the caller's
+	// operator hierarchy (system/retailer/company can see all the bottom
+	// operators they cover; bottom operators see their own row only). The
+	// shape is intentionally a list — operator_context filtering walks the
+	// hierarchy via BuildOperatorContextQuery, and product_type is an
+	// optional further filter.
+	ListOperatorSubAccounts(context.Context, *ListOperatorSubAccountsRequest) (*v1.ListOperatorSubAccountsResponse, error)
 	// ListOperatorWithdrawableAmounts ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	ListOperatorWithdrawableAmounts(context.Context, *ListOperatorWithdrawableAmountsRequest) (*v1.ListOperatorWithdrawableAmountsResponse, error)
 	// ListPromoCodeCampaignDetails ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
@@ -185,6 +198,13 @@ type BackofficeWalletHTTPServer interface {
 	SetUserSwapEnabled(context.Context, *SetUserSwapEnabledRequest) (*v1.SetUserSwapEnabledResponse, error)
 	// SetUserSwapTemplate SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
 	SetUserSwapTemplate(context.Context, *SetUserSwapTemplateRequest) (*v1.SetUserSwapTemplateResponse, error)
+	// SubAccountAdjust SubAccountAdjust manually credits/debits the sub-account (system-level only).
+	SubAccountAdjust(context.Context, *SubAccountAdjustRequest) (*SubAccountAdjustResponse, error)
+	// SubAccountTransfer ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// Sub-account row is lazily created on first SubAccountTransfer IN; no
+	// separate enable/disable RPC.
+	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+	SubAccountTransfer(context.Context, *SubAccountTransferRequest) (*SubAccountTransferResponse, error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// UpdateOperatorCurrencyConfig UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -220,6 +240,10 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/operator/balance-rollback", _BackofficeWallet_OperatorBalanceRollback0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance-settle", _BackofficeWallet_OperatorBalanceSettle0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance-adjust", _BackofficeWallet_OperatorBalanceAdjust0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/sub-account/transfer", _BackofficeWallet_SubAccountTransfer0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/sub-account/adjust", _BackofficeWallet_SubAccountAdjust0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/sub-accounts/list", _BackofficeWallet_ListOperatorSubAccounts0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/sub-account/transactions/list", _BackofficeWallet_ListOperatorSubAccountTransactions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/transactions/list", _BackofficeWallet_ListOperatorBalanceTransactions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance/update", _BackofficeWallet_UpdateOperatorBalance0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance/get", _BackofficeWallet_GetOperatorBalance0_HTTP_Handler(srv))
@@ -633,6 +657,94 @@ func _BackofficeWallet_OperatorBalanceAdjust0_HTTP_Handler(srv BackofficeWalletH
 			return err
 		}
 		reply := out.(*OperatorBalanceAdjustResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_SubAccountTransfer0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SubAccountTransferRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletSubAccountTransfer)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SubAccountTransfer(ctx, req.(*SubAccountTransferRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SubAccountTransferResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_SubAccountAdjust0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SubAccountAdjustRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletSubAccountAdjust)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SubAccountAdjust(ctx, req.(*SubAccountAdjustRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SubAccountAdjustResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_ListOperatorSubAccounts0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListOperatorSubAccountsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletListOperatorSubAccounts)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListOperatorSubAccounts(ctx, req.(*ListOperatorSubAccountsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListOperatorSubAccountsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_ListOperatorSubAccountTransactions0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListOperatorSubAccountTransactionsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletListOperatorSubAccountTransactions)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListOperatorSubAccountTransactions(ctx, req.(*ListOperatorSubAccountTransactionsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListOperatorSubAccountTransactionsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1594,6 +1706,15 @@ type BackofficeWalletHTTPClient interface {
 	ListOperatorBalanceTransactions(ctx context.Context, req *ListOperatorBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListOperatorBalanceTransactionsResponse, err error)
 	// ListOperatorBalances ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorBalancesResponse, err error)
+	// ListOperatorSubAccountTransactions ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
+	ListOperatorSubAccountTransactions(ctx context.Context, req *ListOperatorSubAccountTransactionsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorSubAccountTransactionsResponse, err error)
+	// ListOperatorSubAccounts ListOperatorSubAccounts returns sub-account rows under the caller's
+	// operator hierarchy (system/retailer/company can see all the bottom
+	// operators they cover; bottom operators see their own row only). The
+	// shape is intentionally a list — operator_context filtering walks the
+	// hierarchy via BuildOperatorContextQuery, and product_type is an
+	// optional further filter.
+	ListOperatorSubAccounts(ctx context.Context, req *ListOperatorSubAccountsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorSubAccountsResponse, err error)
 	// ListOperatorWithdrawableAmounts ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 	ListOperatorWithdrawableAmounts(ctx context.Context, req *ListOperatorWithdrawableAmountsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorWithdrawableAmountsResponse, err error)
 	// ListPromoCodeCampaignDetails ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
@@ -1645,6 +1766,13 @@ type BackofficeWalletHTTPClient interface {
 	SetUserSwapEnabled(ctx context.Context, req *SetUserSwapEnabledRequest, opts ...http.CallOption) (rsp *v1.SetUserSwapEnabledResponse, err error)
 	// SetUserSwapTemplate SetUserSwapTemplate full-replaces the user-swap configuration template for the target operator.
 	SetUserSwapTemplate(ctx context.Context, req *SetUserSwapTemplateRequest, opts ...http.CallOption) (rsp *v1.SetUserSwapTemplateResponse, err error)
+	// SubAccountAdjust SubAccountAdjust manually credits/debits the sub-account (system-level only).
+	SubAccountAdjust(ctx context.Context, req *SubAccountAdjustRequest, opts ...http.CallOption) (rsp *SubAccountAdjustResponse, err error)
+	// SubAccountTransfer ===== Operator Sub-Account (Polymarket and future custody products) =====
+	// Sub-account row is lazily created on first SubAccountTransfer IN; no
+	// separate enable/disable RPC.
+	// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+	SubAccountTransfer(ctx context.Context, req *SubAccountTransferRequest, opts ...http.CallOption) (rsp *SubAccountTransferResponse, err error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, req *UpdateOperatorBalanceRequest, opts ...http.CallOption) (rsp *UpdateOperatorBalanceResponse, err error)
 	// UpdateOperatorCurrencyConfig UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -2047,6 +2175,39 @@ func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalances(ctx context.Contex
 	return &out, nil
 }
 
+// ListOperatorSubAccountTransactions ListOperatorSubAccountTransactions lists the audit log for the operator's sub-account(s).
+func (c *BackofficeWalletHTTPClientImpl) ListOperatorSubAccountTransactions(ctx context.Context, in *ListOperatorSubAccountTransactionsRequest, opts ...http.CallOption) (*v1.ListOperatorSubAccountTransactionsResponse, error) {
+	var out v1.ListOperatorSubAccountTransactionsResponse
+	pattern := "/v1/backoffice/wallet/operator/sub-account/transactions/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletListOperatorSubAccountTransactions))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListOperatorSubAccounts ListOperatorSubAccounts returns sub-account rows under the caller's
+// operator hierarchy (system/retailer/company can see all the bottom
+// operators they cover; bottom operators see their own row only). The
+// shape is intentionally a list — operator_context filtering walks the
+// hierarchy via BuildOperatorContextQuery, and product_type is an
+// optional further filter.
+func (c *BackofficeWalletHTTPClientImpl) ListOperatorSubAccounts(ctx context.Context, in *ListOperatorSubAccountsRequest, opts ...http.CallOption) (*v1.ListOperatorSubAccountsResponse, error) {
+	var out v1.ListOperatorSubAccountsResponse
+	pattern := "/v1/backoffice/wallet/operator/sub-accounts/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletListOperatorSubAccounts))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // ListOperatorWithdrawableAmounts ListOperatorWithdrawableAmounts lists withdrawable amounts for operators filtered by hierarchy
 func (c *BackofficeWalletHTTPClientImpl) ListOperatorWithdrawableAmounts(ctx context.Context, in *ListOperatorWithdrawableAmountsRequest, opts ...http.CallOption) (*v1.ListOperatorWithdrawableAmountsResponse, error) {
 	var out v1.ListOperatorWithdrawableAmountsResponse
@@ -2378,6 +2539,37 @@ func (c *BackofficeWalletHTTPClientImpl) SetUserSwapTemplate(ctx context.Context
 	pattern := "/v1/backoffice/wallet/user-swap/template/set"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletSetUserSwapTemplate))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SubAccountAdjust SubAccountAdjust manually credits/debits the sub-account (system-level only).
+func (c *BackofficeWalletHTTPClientImpl) SubAccountAdjust(ctx context.Context, in *SubAccountAdjustRequest, opts ...http.CallOption) (*SubAccountAdjustResponse, error) {
+	var out SubAccountAdjustResponse
+	pattern := "/v1/backoffice/wallet/operator/sub-account/adjust"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletSubAccountAdjust))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SubAccountTransfer ===== Operator Sub-Account (Polymarket and future custody products) =====
+// Sub-account row is lazily created on first SubAccountTransfer IN; no
+// separate enable/disable RPC.
+// SubAccountTransfer moves balance between the operator's main wallet and the sub-account.
+func (c *BackofficeWalletHTTPClientImpl) SubAccountTransfer(ctx context.Context, in *SubAccountTransferRequest, opts ...http.CallOption) (*SubAccountTransferResponse, error) {
+	var out SubAccountTransferResponse
+	pattern := "/v1/backoffice/wallet/operator/sub-account/transfer"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletSubAccountTransfer))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
