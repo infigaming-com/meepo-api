@@ -157,6 +157,11 @@ service Wallet {
 	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
 	rpc GetCompanyFinancialSummary(GetCompanyFinancialSummaryRequest) returns (GetCompanyFinancialSummaryResponse) {}
 
+	// BatchGetCompanyFinancialSummaries returns financial summaries for multiple company operators in one call.
+	// Designed for list views that don't need max_withdrawable; the company_max_withdrawable_usd and
+	// custody_max_withdrawable_usd fields are left empty in the batch response.
+	rpc BatchGetCompanyFinancialSummaries(BatchGetCompanyFinancialSummariesRequest) returns (BatchGetCompanyFinancialSummariesResponse) {}
+
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	rpc GetOperatorBalanceTransactionsByIds(GetOperatorBalanceTransactionsByIdsRequest) returns (GetOperatorBalanceTransactionsByIdsResponse) {}
 
@@ -286,6 +291,16 @@ service Wallet {
 	rpc GetUserDepositRewardSequence(GetUserDepositRewardSequenceRequest) returns (GetUserDepositRewardSequenceResponse) {
 		option (google.api.http) = {
 			post: "/v1/wallet/deposit-reward/user-sequence"
+			body: "*"
+		};
+	}
+
+	// GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+	// for the operator+currency. Used by the registration page; operator is resolved from the Origin
+	// header and the endpoint does not require authentication.
+	rpc GetDepositRewardSequencesPreview(GetDepositRewardSequencesPreviewRequest) returns (GetDepositRewardSequencesPreviewResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/deposit-reward/sequences/preview"
 			body: "*"
 		};
 	}
@@ -1729,6 +1744,27 @@ message GetUserDepositRewardSequenceResponse {
 	RewardSequence current_reward_sequence = 4;
 }
 
+message GetDepositRewardSequencesPreviewRequest {
+	// Currency selected on the registration page; required.
+	string currency = 1;
+}
+
+message GetDepositRewardSequencesPreviewResponse {
+	string currency = 1;
+	bool welcome_reward_enabled = 2;
+	bool daily_reward_enabled = 3;
+	// Effective sequences a player will experience for the requested currency. Server-side
+	// processing: filter to enabled + currently within start/end window, sort by serial
+	// number, then truncate to the operator-wide cap (smallest valid-sequence count across
+	// currencies in the effective config; currencies with zero valid sequences are excluded
+	// when computing the cap — same semantics that GetUserDepositRewardSequence gates user
+	// eligibility on). Anything above the cap is unreachable for players, so the preview
+	// drops it. The slice length itself communicates the count; clients can render the
+	// response directly.
+	repeated RewardSequence welcome_reward_sequences = 4;
+	repeated RewardSequence daily_reward_sequences = 5;
+}
+
 message GetGamificationCurrencyConfigRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
@@ -2685,6 +2721,21 @@ message GetCompanyFinancialSummaryRequest {
 
 message GetCompanyFinancialSummaryResponse {
 	CompanyFinancialSummary summary = 1;
+}
+
+message BatchGetCompanyFinancialSummariesRequest {
+	api.common.OperatorContext operator_context = 1;
+	// company operator ids to fetch summaries for. Hard-capped at 200 entries server-side.
+	repeated int64 company_operator_ids = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+}
+
+message BatchGetCompanyFinancialSummariesResponse {
+	// keyed by company_operator_id. company_max_withdrawable_usd and custody_max_withdrawable_usd
+	// are NOT computed in the batch response (left empty); use the single-company GetCompanyFinancialSummary
+	// when MW is needed.
+	map<int64, CompanyFinancialSummary> summaries = 1;
 }
 
 message CompanyFinancialSummary {

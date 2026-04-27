@@ -63,6 +63,7 @@ const (
 	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
 	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
 	Wallet_GetCompanyFinancialSummary_FullMethodName          = "/api.wallet.service.v1.Wallet/GetCompanyFinancialSummary"
+	Wallet_BatchGetCompanyFinancialSummaries_FullMethodName   = "/api.wallet.service.v1.Wallet/BatchGetCompanyFinancialSummaries"
 	Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName = "/api.wallet.service.v1.Wallet/GetOperatorBalanceTransactionsByIds"
 	Wallet_SetDepositRewardSequences_FullMethodName           = "/api.wallet.service.v1.Wallet/SetDepositRewardSequences"
 	Wallet_DeleteDepositRewardSequences_FullMethodName        = "/api.wallet.service.v1.Wallet/DeleteDepositRewardSequences"
@@ -88,6 +89,7 @@ const (
 	Wallet_GetPromoCodeInfo_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
 	Wallet_ClaimPromoCode_FullMethodName                      = "/api.wallet.service.v1.Wallet/ClaimPromoCode"
 	Wallet_GetUserDepositRewardSequence_FullMethodName        = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
+	Wallet_GetDepositRewardSequencesPreview_FullMethodName    = "/api.wallet.service.v1.Wallet/GetDepositRewardSequencesPreview"
 	Wallet_GetGamificationCurrencyConfig_FullMethodName       = "/api.wallet.service.v1.Wallet/GetGamificationCurrencyConfig"
 	Wallet_UpdateOperatorCurrencyConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
 	Wallet_PushBetLimitsToBottomOperators_FullMethodName      = "/api.wallet.service.v1.Wallet/PushBetLimitsToBottomOperators"
@@ -212,6 +214,10 @@ type WalletClient interface {
 	GetOperatorTransactionSummary(ctx context.Context, in *GetOperatorTransactionSummaryRequest, opts ...grpc.CallOption) (*GetOperatorTransactionSummaryResponse, error)
 	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
 	GetCompanyFinancialSummary(ctx context.Context, in *GetCompanyFinancialSummaryRequest, opts ...grpc.CallOption) (*GetCompanyFinancialSummaryResponse, error)
+	// BatchGetCompanyFinancialSummaries returns financial summaries for multiple company operators in one call.
+	// Designed for list views that don't need max_withdrawable; the company_max_withdrawable_usd and
+	// custody_max_withdrawable_usd fields are left empty in the batch response.
+	BatchGetCompanyFinancialSummaries(ctx context.Context, in *BatchGetCompanyFinancialSummariesRequest, opts ...grpc.CallOption) (*BatchGetCompanyFinancialSummariesResponse, error)
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	GetOperatorBalanceTransactionsByIds(ctx context.Context, in *GetOperatorBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
@@ -285,6 +291,10 @@ type WalletClient interface {
 	ClaimPromoCode(ctx context.Context, in *ClaimPromoCodeRequest, opts ...grpc.CallOption) (*ClaimPromoCodeResponse, error)
 	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(ctx context.Context, in *GetUserDepositRewardSequenceRequest, opts ...grpc.CallOption) (*GetUserDepositRewardSequenceResponse, error)
+	// GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+	// for the operator+currency. Used by the registration page; operator is resolved from the Origin
+	// header and the endpoint does not require authentication.
+	GetDepositRewardSequencesPreview(ctx context.Context, in *GetDepositRewardSequencesPreviewRequest, opts ...grpc.CallOption) (*GetDepositRewardSequencesPreviewResponse, error)
 	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
@@ -814,6 +824,16 @@ func (c *walletClient) GetCompanyFinancialSummary(ctx context.Context, in *GetCo
 	return out, nil
 }
 
+func (c *walletClient) BatchGetCompanyFinancialSummaries(ctx context.Context, in *BatchGetCompanyFinancialSummariesRequest, opts ...grpc.CallOption) (*BatchGetCompanyFinancialSummariesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetCompanyFinancialSummariesResponse)
+	err := c.cc.Invoke(ctx, Wallet_BatchGetCompanyFinancialSummaries_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) GetOperatorBalanceTransactionsByIds(ctx context.Context, in *GetOperatorBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorBalanceTransactionsByIdsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorBalanceTransactionsByIdsResponse)
@@ -1058,6 +1078,16 @@ func (c *walletClient) GetUserDepositRewardSequence(ctx context.Context, in *Get
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserDepositRewardSequenceResponse)
 	err := c.cc.Invoke(ctx, Wallet_GetUserDepositRewardSequence_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetDepositRewardSequencesPreview(ctx context.Context, in *GetDepositRewardSequencesPreviewRequest, opts ...grpc.CallOption) (*GetDepositRewardSequencesPreviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDepositRewardSequencesPreviewResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetDepositRewardSequencesPreview_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1502,6 +1532,10 @@ type WalletServer interface {
 	GetOperatorTransactionSummary(context.Context, *GetOperatorTransactionSummaryRequest) (*GetOperatorTransactionSummaryResponse, error)
 	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
 	GetCompanyFinancialSummary(context.Context, *GetCompanyFinancialSummaryRequest) (*GetCompanyFinancialSummaryResponse, error)
+	// BatchGetCompanyFinancialSummaries returns financial summaries for multiple company operators in one call.
+	// Designed for list views that don't need max_withdrawable; the company_max_withdrawable_usd and
+	// custody_max_withdrawable_usd fields are left empty in the batch response.
+	BatchGetCompanyFinancialSummaries(context.Context, *BatchGetCompanyFinancialSummariesRequest) (*BatchGetCompanyFinancialSummariesResponse, error)
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
@@ -1575,6 +1609,10 @@ type WalletServer interface {
 	ClaimPromoCode(context.Context, *ClaimPromoCodeRequest) (*ClaimPromoCodeResponse, error)
 	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(context.Context, *GetUserDepositRewardSequenceRequest) (*GetUserDepositRewardSequenceResponse, error)
+	// GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+	// for the operator+currency. Used by the registration page; operator is resolved from the Origin
+	// header and the endpoint does not require authentication.
+	GetDepositRewardSequencesPreview(context.Context, *GetDepositRewardSequencesPreviewRequest) (*GetDepositRewardSequencesPreviewResponse, error)
 	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
@@ -1796,6 +1834,9 @@ func (UnimplementedWalletServer) GetOperatorTransactionSummary(context.Context, 
 func (UnimplementedWalletServer) GetCompanyFinancialSummary(context.Context, *GetCompanyFinancialSummaryRequest) (*GetCompanyFinancialSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetCompanyFinancialSummary not implemented")
 }
+func (UnimplementedWalletServer) BatchGetCompanyFinancialSummaries(context.Context, *BatchGetCompanyFinancialSummariesRequest) (*BatchGetCompanyFinancialSummariesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchGetCompanyFinancialSummaries not implemented")
+}
 func (UnimplementedWalletServer) GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorBalanceTransactionsByIds not implemented")
 }
@@ -1870,6 +1911,9 @@ func (UnimplementedWalletServer) ClaimPromoCode(context.Context, *ClaimPromoCode
 }
 func (UnimplementedWalletServer) GetUserDepositRewardSequence(context.Context, *GetUserDepositRewardSequenceRequest) (*GetUserDepositRewardSequenceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserDepositRewardSequence not implemented")
+}
+func (UnimplementedWalletServer) GetDepositRewardSequencesPreview(context.Context, *GetDepositRewardSequencesPreviewRequest) (*GetDepositRewardSequencesPreviewResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDepositRewardSequencesPreview not implemented")
 }
 func (UnimplementedWalletServer) GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*GetGamificationCurrencyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGamificationCurrencyConfig not implemented")
@@ -2789,6 +2833,24 @@ func _Wallet_GetCompanyFinancialSummary_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_BatchGetCompanyFinancialSummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetCompanyFinancialSummariesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).BatchGetCompanyFinancialSummaries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_BatchGetCompanyFinancialSummaries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).BatchGetCompanyFinancialSummaries(ctx, req.(*BatchGetCompanyFinancialSummariesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_GetOperatorBalanceTransactionsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOperatorBalanceTransactionsByIdsRequest)
 	if err := dec(in); err != nil {
@@ -3235,6 +3297,24 @@ func _Wallet_GetUserDepositRewardSequence_Handler(srv interface{}, ctx context.C
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GetUserDepositRewardSequence(ctx, req.(*GetUserDepositRewardSequenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetDepositRewardSequencesPreview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDepositRewardSequencesPreviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetDepositRewardSequencesPreview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetDepositRewardSequencesPreview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetDepositRewardSequencesPreview(ctx, req.(*GetDepositRewardSequencesPreviewRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4053,6 +4133,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_GetCompanyFinancialSummary_Handler,
 		},
 		{
+			MethodName: "BatchGetCompanyFinancialSummaries",
+			Handler:    _Wallet_BatchGetCompanyFinancialSummaries_Handler,
+		},
+		{
 			MethodName: "GetOperatorBalanceTransactionsByIds",
 			Handler:    _Wallet_GetOperatorBalanceTransactionsByIds_Handler,
 		},
@@ -4151,6 +4235,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserDepositRewardSequence",
 			Handler:    _Wallet_GetUserDepositRewardSequence_Handler,
+		},
+		{
+			MethodName: "GetDepositRewardSequencesPreview",
+			Handler:    _Wallet_GetDepositRewardSequencesPreview_Handler,
 		},
 		{
 			MethodName: "GetGamificationCurrencyConfig",

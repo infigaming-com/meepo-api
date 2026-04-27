@@ -2401,6 +2401,30 @@ func ErrorInvalidUserIds(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_INVALID_USER_IDS.String(), fmt.Sprintf(format, args...))
 }
 
+func IsInvalidBatchSize(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_BATCH_SIZE.String() && e.Code == 400
+}
+
+func ErrorInvalidBatchSize(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_BATCH_SIZE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidCurrency(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CURRENCY.String() && e.Code == 400
+}
+
+func ErrorInvalidCurrency(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_CURRENCY.String(), fmt.Sprintf(format, args...))
+}
+
 // operator sub-account (Polymarket & future custody products)
 func IsInvalidSubAccountProductType(err error) bool {
 	if err == nil {
@@ -2425,30 +2449,6 @@ func IsGetOperatorSubAccountFailed(err error) bool {
 
 func ErrorGetOperatorSubAccountFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_OPERATOR_SUB_ACCOUNT_FAILED.String(), fmt.Sprintf(format, args...))
-}
-
-func IsEnableOperatorSubAccountFailed(err error) bool {
-	if err == nil {
-		return false
-	}
-	e := errors.FromError(err)
-	return e.Reason == ErrorReason_ENABLE_OPERATOR_SUB_ACCOUNT_FAILED.String() && e.Code == 500
-}
-
-func ErrorEnableOperatorSubAccountFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_ENABLE_OPERATOR_SUB_ACCOUNT_FAILED.String(), fmt.Sprintf(format, args...))
-}
-
-func IsDisableOperatorSubAccountFailed(err error) bool {
-	if err == nil {
-		return false
-	}
-	e := errors.FromError(err)
-	return e.Reason == ErrorReason_DISABLE_OPERATOR_SUB_ACCOUNT_FAILED.String() && e.Code == 500
-}
-
-func ErrorDisableOperatorSubAccountFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_DISABLE_OPERATOR_SUB_ACCOUNT_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsSubAccountNotEnabled(err error) bool {

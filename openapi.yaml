@@ -11754,6 +11754,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetCurrenciesResponse'
+    /v1/wallet/deposit-reward/sequences/preview:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                GetDepositRewardSequencesPreview returns all currently active welcome/daily reward sequences
+                 for the operator+currency. Used by the registration page; operator is resolved from the Origin
+                 header and the endpoint does not require authentication.
+            operationId: Wallet_GetDepositRewardSequencesPreview
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetDepositRewardSequencesPreviewRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetDepositRewardSequencesPreviewResponse'
     /v1/wallet/deposit-reward/user-sequence:
         post:
             tags:
@@ -35380,6 +35402,38 @@ components:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
                 customDepositRewardConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
+        api.wallet.service.v1.GetDepositRewardSequencesPreviewRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                    description: Currency selected on the registration page; required.
+        api.wallet.service.v1.GetDepositRewardSequencesPreviewResponse:
+            type: object
+            properties:
+                currency:
+                    type: string
+                welcomeRewardEnabled:
+                    type: boolean
+                dailyRewardEnabled:
+                    type: boolean
+                welcomeRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                    description: |-
+                        Effective sequences a player will experience for the requested currency. Server-side
+                         processing: filter to enabled + currently within start/end window, sort by serial
+                         number, then truncate to the operator-wide cap (smallest valid-sequence count across
+                         currencies in the effective config; currencies with zero valid sequences are excluded
+                         when computing the cap — same semantics that GetUserDepositRewardSequence gates user
+                         eligibility on). Anything above the cap is unreachable for players, so the preview
+                         drops it. The slice length itself communicates the count; clients can render the
+                         response directly.
+                dailyRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
         api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest:
             type: object
             properties:

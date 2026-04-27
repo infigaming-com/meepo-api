@@ -225,11 +225,11 @@ const (
 	ErrorReason_USER_SWAP_FAILED                      ErrorReason = 30196
 	ErrorReason_USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED ErrorReason = 30197
 	ErrorReason_INVALID_USER_IDS                      ErrorReason = 30198
+	ErrorReason_INVALID_BATCH_SIZE                    ErrorReason = 30199
+	ErrorReason_INVALID_CURRENCY                      ErrorReason = 30200
 	// operator sub-account (Polymarket & future custody products)
-	ErrorReason_INVALID_SUB_ACCOUNT_PRODUCT_TYPE              ErrorReason = 30199
-	ErrorReason_GET_OPERATOR_SUB_ACCOUNT_FAILED               ErrorReason = 30200
-	ErrorReason_ENABLE_OPERATOR_SUB_ACCOUNT_FAILED            ErrorReason = 30201
-	ErrorReason_DISABLE_OPERATOR_SUB_ACCOUNT_FAILED           ErrorReason = 30202
+	ErrorReason_INVALID_SUB_ACCOUNT_PRODUCT_TYPE              ErrorReason = 30201
+	ErrorReason_GET_OPERATOR_SUB_ACCOUNT_FAILED               ErrorReason = 30202
 	ErrorReason_SUB_ACCOUNT_NOT_ENABLED                       ErrorReason = 30203
 	ErrorReason_SUB_ACCOUNT_INSUFFICIENT_OR_DISABLED          ErrorReason = 30204
 	ErrorReason_SUB_ACCOUNT_TRANSFER_FAILED                   ErrorReason = 30205
@@ -442,10 +442,10 @@ var (
 		30196: "USER_SWAP_FAILED",
 		30197: "USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED",
 		30198: "INVALID_USER_IDS",
-		30199: "INVALID_SUB_ACCOUNT_PRODUCT_TYPE",
-		30200: "GET_OPERATOR_SUB_ACCOUNT_FAILED",
-		30201: "ENABLE_OPERATOR_SUB_ACCOUNT_FAILED",
-		30202: "DISABLE_OPERATOR_SUB_ACCOUNT_FAILED",
+		30199: "INVALID_BATCH_SIZE",
+		30200: "INVALID_CURRENCY",
+		30201: "INVALID_SUB_ACCOUNT_PRODUCT_TYPE",
+		30202: "GET_OPERATOR_SUB_ACCOUNT_FAILED",
 		30203: "SUB_ACCOUNT_NOT_ENABLED",
 		30204: "SUB_ACCOUNT_INSUFFICIENT_OR_DISABLED",
 		30205: "SUB_ACCOUNT_TRANSFER_FAILED",
@@ -655,10 +655,10 @@ var (
 		"USER_SWAP_FAILED":                                                30196,
 		"USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED":                           30197,
 		"INVALID_USER_IDS":                                                30198,
-		"INVALID_SUB_ACCOUNT_PRODUCT_TYPE":                                30199,
-		"GET_OPERATOR_SUB_ACCOUNT_FAILED":                                 30200,
-		"ENABLE_OPERATOR_SUB_ACCOUNT_FAILED":                              30201,
-		"DISABLE_OPERATOR_SUB_ACCOUNT_FAILED":                             30202,
+		"INVALID_BATCH_SIZE":                                              30199,
+		"INVALID_CURRENCY":                                                30200,
+		"INVALID_SUB_ACCOUNT_PRODUCT_TYPE":                                30201,
+		"GET_OPERATOR_SUB_ACCOUNT_FAILED":                                 30202,
 		"SUB_ACCOUNT_NOT_ENABLED":                                         30203,
 		"SUB_ACCOUNT_INSUFFICIENT_OR_DISABLED":                            30204,
 		"SUB_ACCOUNT_TRANSFER_FAILED":                                     30205,
@@ -701,7 +701,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xa5@\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8e@\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -901,11 +901,11 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"%USER_SWAP_AMOUNT_EXCEEDS_WITHDRAWABLE\x10\xf3\xeb\x01\x1a\x04\xa8E\x90\x03\x12\x16\n" +
 	"\x10USER_SWAP_FAILED\x10\xf4\xeb\x01\x121\n" +
 	"%USER_SWAP_TARGET_CURRENCY_NOT_ALLOWED\x10\xf5\xeb\x01\x1a\x04\xa8E\x90\x03\x12\x1c\n" +
-	"\x10INVALID_USER_IDS\x10\xf6\xeb\x01\x1a\x04\xa8E\x90\x03\x12,\n" +
-	" INVALID_SUB_ACCOUNT_PRODUCT_TYPE\x10\xf7\xeb\x01\x1a\x04\xa8E\x90\x03\x12%\n" +
-	"\x1fGET_OPERATOR_SUB_ACCOUNT_FAILED\x10\xf8\xeb\x01\x12(\n" +
-	"\"ENABLE_OPERATOR_SUB_ACCOUNT_FAILED\x10\xf9\xeb\x01\x12)\n" +
-	"#DISABLE_OPERATOR_SUB_ACCOUNT_FAILED\x10\xfa\xeb\x01\x12#\n" +
+	"\x10INVALID_USER_IDS\x10\xf6\xeb\x01\x1a\x04\xa8E\x90\x03\x12\x1e\n" +
+	"\x12INVALID_BATCH_SIZE\x10\xf7\xeb\x01\x1a\x04\xa8E\x90\x03\x12\x1c\n" +
+	"\x10INVALID_CURRENCY\x10\xf8\xeb\x01\x1a\x04\xa8E\x90\x03\x12,\n" +
+	" INVALID_SUB_ACCOUNT_PRODUCT_TYPE\x10\xf9\xeb\x01\x1a\x04\xa8E\x90\x03\x12%\n" +
+	"\x1fGET_OPERATOR_SUB_ACCOUNT_FAILED\x10\xfa\xeb\x01\x12#\n" +
 	"\x17SUB_ACCOUNT_NOT_ENABLED\x10\xfb\xeb\x01\x1a\x04\xa8E\x93\x03\x120\n" +
 	"$SUB_ACCOUNT_INSUFFICIENT_OR_DISABLED\x10\xfc\xeb\x01\x1a\x04\xa8E\x90\x03\x12!\n" +
 	"\x1bSUB_ACCOUNT_TRANSFER_FAILED\x10\xfd\xeb\x01\x12\x1f\n" +
