@@ -22203,10 +22203,12 @@ components:
             type: object
             properties:
                 operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: operator_context scopes the result to this operator's hierarchy.
                 productType:
                     type: string
-                    description: empty = return all product_types for this operator
+                    description: empty = no product_type filter (every sub-account in scope is returned).
         api.backoffice.service.v1.ListOperatorTicketsRequest:
             type: object
             properties:

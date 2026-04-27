@@ -844,8 +844,9 @@ message SubAccountAdjustResponse {
 }
 
 message ListOperatorSubAccountsRequest {
+	// operator_context scopes the result to this operator's hierarchy.
 	api.common.OperatorContext operator_context = 1;
-	// empty = return all product_types for this operator
+	// empty = no product_type filter (every sub-account in scope is returned).
 	optional string product_type = 2;
 }
 

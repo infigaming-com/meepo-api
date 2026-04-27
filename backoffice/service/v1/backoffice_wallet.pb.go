@@ -2522,9 +2522,10 @@ func (x *SubAccountAdjustResponse) GetCash() string {
 }
 
 type ListOperatorSubAccountsRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// operator_context scopes the result to this operator's hierarchy.
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	// empty = return all product_types for this operator
+	// empty = no product_type filter (every sub-account in scope is returned).
 	ProductType   *string `protobuf:"bytes,2,opt,name=product_type,json=productType,proto3,oneof" json:"product_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
