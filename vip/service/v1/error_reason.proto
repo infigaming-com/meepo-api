@@ -13,4 +13,6 @@ enum ErrorReason {
   UNSPECIFIED = 0;
   // Claim rejected by risk-service rule (KYC/email/phone/IP/device/same-type).
   BONUS_CLAIM_REJECTED = 170001 [(errors.code) = 403];
+  // No claimable VIP rewards found for the user.
+  NO_CLAIMABLE_REWARD = 170002 [(errors.code) = 404];
 }
