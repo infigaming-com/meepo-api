@@ -228,19 +228,20 @@ const (
 	ErrorReason_INVALID_BATCH_SIZE                    ErrorReason = 30199
 	ErrorReason_INVALID_CURRENCY                      ErrorReason = 30200
 	// operator sub-account (custody products: prediction markets, etc.)
-	ErrorReason_INVALID_SUB_ACCOUNT_PRODUCT_TYPE              ErrorReason = 30201
-	ErrorReason_GET_OPERATOR_SUB_ACCOUNT_FAILED               ErrorReason = 30202
-	ErrorReason_SUB_ACCOUNT_NOT_ENABLED                       ErrorReason = 30203
-	ErrorReason_SUB_ACCOUNT_INSUFFICIENT_OR_DISABLED          ErrorReason = 30204
-	ErrorReason_SUB_ACCOUNT_TRANSFER_FAILED                   ErrorReason = 30205
-	ErrorReason_SUB_ACCOUNT_ADJUST_FAILED                     ErrorReason = 30206
-	ErrorReason_INVALID_SUB_ACCOUNT_CURRENCY                  ErrorReason = 30207
-	ErrorReason_LIST_OPERATOR_SUB_ACCOUNT_TRANSACTIONS_FAILED ErrorReason = 30208
-	ErrorReason_ADD_OPERATOR_SUB_ACCOUNT_TRANSACTION_FAILED   ErrorReason = 30209
-	ErrorReason_UPDATE_OPERATOR_SUB_ACCOUNT_FAILED            ErrorReason = 30210
-	ErrorReason_GET_PREDICTION_SETTINGS_FAILED                ErrorReason = 30211
-	ErrorReason_SET_PREDICTION_SETTINGS_FAILED                ErrorReason = 30212
-	ErrorReason_INVALID_COMMISSION_RATE                       ErrorReason = 30213
+	ErrorReason_INVALID_SUB_ACCOUNT_PRODUCT_TYPE                    ErrorReason = 30201
+	ErrorReason_GET_OPERATOR_SUB_ACCOUNT_FAILED                     ErrorReason = 30202
+	ErrorReason_SUB_ACCOUNT_NOT_ENABLED                             ErrorReason = 30203
+	ErrorReason_SUB_ACCOUNT_INSUFFICIENT_OR_DISABLED                ErrorReason = 30204
+	ErrorReason_SUB_ACCOUNT_TRANSFER_FAILED                         ErrorReason = 30205
+	ErrorReason_SUB_ACCOUNT_ADJUST_FAILED                           ErrorReason = 30206
+	ErrorReason_INVALID_SUB_ACCOUNT_CURRENCY                        ErrorReason = 30207
+	ErrorReason_LIST_OPERATOR_SUB_ACCOUNT_TRANSACTIONS_FAILED       ErrorReason = 30208
+	ErrorReason_ADD_OPERATOR_SUB_ACCOUNT_TRANSACTION_FAILED         ErrorReason = 30209
+	ErrorReason_UPDATE_OPERATOR_SUB_ACCOUNT_FAILED                  ErrorReason = 30210
+	ErrorReason_GET_PREDICTION_SETTINGS_FAILED                      ErrorReason = 30211
+	ErrorReason_SET_PREDICTION_SETTINGS_FAILED                      ErrorReason = 30212
+	ErrorReason_INVALID_COMMISSION_RATE                             ErrorReason = 30213
+	ErrorReason_GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED ErrorReason = 30214
 )
 
 // Enum value maps for ErrorReason.
@@ -460,6 +461,7 @@ var (
 		30211: "GET_PREDICTION_SETTINGS_FAILED",
 		30212: "SET_PREDICTION_SETTINGS_FAILED",
 		30213: "INVALID_COMMISSION_RATE",
+		30214: "GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -676,6 +678,7 @@ var (
 		"GET_PREDICTION_SETTINGS_FAILED":                                  30211,
 		"SET_PREDICTION_SETTINGS_FAILED":                                  30212,
 		"INVALID_COMMISSION_RATE":                                         30213,
+		"GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED":             30214,
 	}
 )
 
@@ -710,7 +713,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xff@\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xbaA\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -925,7 +928,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\"UPDATE_OPERATOR_SUB_ACCOUNT_FAILED\x10\x82\xec\x01\x12$\n" +
 	"\x1eGET_PREDICTION_SETTINGS_FAILED\x10\x83\xec\x01\x12$\n" +
 	"\x1eSET_PREDICTION_SETTINGS_FAILED\x10\x84\xec\x01\x12#\n" +
-	"\x17INVALID_COMMISSION_RATE\x10\x85\xec\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x17INVALID_COMMISSION_RATE\x10\x85\xec\x01\x1a\x04\xa8E\x90\x03\x129\n" +
+	"3GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED\x10\x86\xec\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
