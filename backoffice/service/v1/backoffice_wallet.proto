@@ -852,8 +852,6 @@ message SubAccountAdjustRequest {
 	// always positive; direction derived from transaction_type
 	string cash_amount = 5;
 	string memo = 6;
-	// No caller-supplied idempotency key — same convention as
-	// OperatorBalanceAdjust. Caller is responsible for not retrying blindly.
 }
 
 message SubAccountAdjustResponse {

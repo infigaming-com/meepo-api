@@ -36598,16 +36598,11 @@ components:
                     type: string
                 lifetimeCommissionUsd:
                     type: string
-                    description: |-
-                        Lifetime commission totals for this sub-account, sourced from
-                         winning_commission_records joined by real_operator_id + product_type.
                 lifetimeCommissionReportingCurrency:
                     type: string
                 commissionThisMonthUsd:
                     type: string
-                    description: |-
-                        Same aggregates restricted to the current calendar month
-                         [month-start UTC, now). Month boundary is UTC, not operator-local.
+                    description: Current calendar month, UTC.
                 commissionThisMonthReportingCurrency:
                     type: string
                 createdAt:
@@ -36653,17 +36648,10 @@ components:
                  in both USD and the operator's reporting currency.
 
                  total_commission_* / total_transfer_* / total_payouts_* / total_bets_*
-                 are scoped to the request's WHERE clause (operator + product_type +
-                 currency + time window). lifetime_commission_* / commission_this_month_*
-                 are independent: lifetime + current-calendar-month (UTC) commission
-                 across (operator scope + product_type), sourced from
+                 are scoped to the request's WHERE clause. lifetime_commission_* /
+                 commission_this_month_* are independent: lifetime + current calendar
+                 month (UTC) across (operator scope + product_type), sourced from
                  winning_commission_records.
-
-                 NOTE: singular "commission" everywhere — the in-window sum (field 1) and
-                 the lifetime/this-month sums (fields 11-14) differ only by their scope,
-                 not by their unit. Earlier drafts used plural "commissions" for the
-                 scope-independent fields; that pluralisation was a footgun (one
-                 missing "s" silently returned the wrong number) and has been retired.
         api.wallet.service.v1.OperatorSubAccountTransaction:
             type: object
             properties:

@@ -7072,17 +7072,14 @@ func (x *ListOperatorSubAccountsRequest) GetProductType() string {
 }
 
 type OperatorSubAccount struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	ProductType     string                  `protobuf:"bytes,2,opt,name=product_type,json=productType,proto3" json:"product_type,omitempty"`
-	Currency        string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	Cash            string                  `protobuf:"bytes,4,opt,name=cash,proto3" json:"cash,omitempty"`
-	// Lifetime commission totals for this sub-account, sourced from
-	// winning_commission_records joined by real_operator_id + product_type.
-	LifetimeCommissionUsd               string `protobuf:"bytes,5,opt,name=lifetime_commission_usd,json=lifetimeCommissionUsd,proto3" json:"lifetime_commission_usd,omitempty"`
-	LifetimeCommissionReportingCurrency string `protobuf:"bytes,6,opt,name=lifetime_commission_reporting_currency,json=lifetimeCommissionReportingCurrency,proto3" json:"lifetime_commission_reporting_currency,omitempty"`
-	// Same aggregates restricted to the current calendar month
-	// [month-start UTC, now). Month boundary is UTC, not operator-local.
+	state                               protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext                     *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ProductType                         string                  `protobuf:"bytes,2,opt,name=product_type,json=productType,proto3" json:"product_type,omitempty"`
+	Currency                            string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	Cash                                string                  `protobuf:"bytes,4,opt,name=cash,proto3" json:"cash,omitempty"`
+	LifetimeCommissionUsd               string                  `protobuf:"bytes,5,opt,name=lifetime_commission_usd,json=lifetimeCommissionUsd,proto3" json:"lifetime_commission_usd,omitempty"`
+	LifetimeCommissionReportingCurrency string                  `protobuf:"bytes,6,opt,name=lifetime_commission_reporting_currency,json=lifetimeCommissionReportingCurrency,proto3" json:"lifetime_commission_reporting_currency,omitempty"`
+	// Current calendar month, UTC.
 	CommissionThisMonthUsd               string                 `protobuf:"bytes,7,opt,name=commission_this_month_usd,json=commissionThisMonthUsd,proto3" json:"commission_this_month_usd,omitempty"`
 	CommissionThisMonthReportingCurrency string                 `protobuf:"bytes,8,opt,name=commission_this_month_reporting_currency,json=commissionThisMonthReportingCurrency,proto3" json:"commission_this_month_reporting_currency,omitempty"`
 	CreatedAt                            *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -7563,17 +7560,10 @@ func (x *OperatorSubAccountTransaction) GetUpdatedAt() *timestamppb.Timestamp {
 // in both USD and the operator's reporting currency.
 //
 // total_commission_* / total_transfer_* / total_payouts_* / total_bets_*
-// are scoped to the request's WHERE clause (operator + product_type +
-// currency + time window). lifetime_commission_* / commission_this_month_*
-// are independent: lifetime + current-calendar-month (UTC) commission
-// across (operator scope + product_type), sourced from
+// are scoped to the request's WHERE clause. lifetime_commission_* /
+// commission_this_month_* are independent: lifetime + current calendar
+// month (UTC) across (operator scope + product_type), sourced from
 // winning_commission_records.
-//
-// NOTE: singular "commission" everywhere — the in-window sum (field 1) and
-// the lifetime/this-month sums (fields 11-14) differ only by their scope,
-// not by their unit. Earlier drafts used plural "commissions" for the
-// scope-independent fields; that pluralisation was a footgun (one
-// missing "s" silently returned the wrong number) and has been retired.
 type OperatorSubAccountAggregates struct {
 	state                                 protoimpl.MessageState `protogen:"open.v1"`
 	TotalCommissionUsd                    string                 `protobuf:"bytes,1,opt,name=total_commission_usd,json=totalCommissionUsd,proto3" json:"total_commission_usd,omitempty"`
