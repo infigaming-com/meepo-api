@@ -1510,12 +1510,9 @@ message SubAccountAdjustRequest {
 	// always positive; direction derived from transaction_type.
 	string cash_amount = 5;
 	string memo = 6;
-	// Caller-supplied unique key for idempotent retry. Required: a network
-	// blip on a system-only manual debit/credit + admin clicks again would
-	// otherwise double-charge with no rolledback record to reconcile against.
-	// Wallet enforces uniqueness via a partial UNIQUE on
-	// (transaction_type, idempotency_key) WHERE idempotency_key != ''.
-	string idempotency_key = 7;
+	// No caller-supplied idempotency key — same convention as
+	// OperatorBalanceAdjust. Adjust is a low-frequency BO admin action;
+	// caller is responsible for not retrying blindly.
 }
 
 message SubAccountAdjustResponse {
@@ -1535,13 +1532,14 @@ message OperatorSubAccount {
 	string product_type = 2;
 	string currency = 3;
 	string cash = 4;
-	// Aggregated commission totals for this sub-account, sourced from
+	// Lifetime commission totals for this sub-account, sourced from
 	// winning_commission_records joined by real_operator_id + product_type.
-	string total_commissions_usd = 5;
-	string total_commissions_reporting_currency = 6;
-	// Same aggregates restricted to the current calendar month [month-start, now).
-	string commissions_this_month_usd = 7;
-	string commissions_this_month_reporting_currency = 8;
+	string lifetime_commission_usd = 5;
+	string lifetime_commission_reporting_currency = 6;
+	// Same aggregates restricted to the current calendar month
+	// [month-start UTC, now). Month boundary is UTC, not operator-local.
+	string commission_this_month_usd = 7;
+	string commission_this_month_reporting_currency = 8;
 	google.protobuf.Timestamp created_at = 9;
 	google.protobuf.Timestamp updated_at = 10;
 }
@@ -1610,9 +1608,16 @@ message OperatorSubAccountTransaction {
 //
 // total_commission_* / total_transfer_* / total_payouts_* / total_bets_*
 // are scoped to the request's WHERE clause (operator + product_type +
-// currency + time window). total_commissions_* / commissions_this_month_*
-// are independent: lifetime + current-calendar-month commission across
-// (operator scope + product_type), sourced from winning_commission_records.
+// currency + time window). lifetime_commission_* / commission_this_month_*
+// are independent: lifetime + current-calendar-month (UTC) commission
+// across (operator scope + product_type), sourced from
+// winning_commission_records.
+//
+// NOTE: singular "commission" everywhere — the in-window sum (field 1) and
+// the lifetime/this-month sums (fields 11-14) differ only by their scope,
+// not by their unit. Earlier drafts used plural "commissions" for the
+// scope-independent fields; that pluralisation was a footgun (one
+// missing "s" silently returned the wrong number) and has been retired.
 message OperatorSubAccountAggregates {
 	string total_commission_usd = 1;
 	string total_commission_reporting_currency = 2;
@@ -1624,10 +1629,10 @@ message OperatorSubAccountAggregates {
 	string total_payouts_received_reporting_currency = 8;
 	string total_bets_placed_usd = 9;
 	string total_bets_placed_reporting_currency = 10;
-	string total_commissions_usd = 11;
-	string total_commissions_reporting_currency = 12;
-	string commissions_this_month_usd = 13;
-	string commissions_this_month_reporting_currency = 14;
+	string lifetime_commission_usd = 11;
+	string lifetime_commission_reporting_currency = 12;
+	string commission_this_month_usd = 13;
+	string commission_this_month_reporting_currency = 14;
 }
 
 message ListOperatorSubAccountTransactionsResponse {

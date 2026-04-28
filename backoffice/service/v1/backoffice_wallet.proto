@@ -852,9 +852,8 @@ message SubAccountAdjustRequest {
 	// always positive; direction derived from transaction_type
 	string cash_amount = 5;
 	string memo = 6;
-	// Caller-supplied unique key for idempotent retry. BO forwards verbatim;
-	// wallet enforces uniqueness via partial UNIQUE.
-	string idempotency_key = 7;
+	// No caller-supplied idempotency key — same convention as
+	// OperatorBalanceAdjust. Caller is responsible for not retrying blindly.
 }
 
 message SubAccountAdjustResponse {

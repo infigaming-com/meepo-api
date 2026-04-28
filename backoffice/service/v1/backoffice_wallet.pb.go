@@ -2391,13 +2391,10 @@ type SubAccountAdjustRequest struct {
 	// "sub_account_adjust_credit" or "sub_account_adjust_debit"
 	TransactionType string `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	// always positive; direction derived from transaction_type
-	CashAmount string `protobuf:"bytes,5,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	Memo       string `protobuf:"bytes,6,opt,name=memo,proto3" json:"memo,omitempty"`
-	// Caller-supplied unique key for idempotent retry. BO forwards verbatim;
-	// wallet enforces uniqueness via partial UNIQUE.
-	IdempotencyKey string `protobuf:"bytes,7,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	CashAmount    string `protobuf:"bytes,5,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	Memo          string `protobuf:"bytes,6,opt,name=memo,proto3" json:"memo,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SubAccountAdjustRequest) Reset() {
@@ -2468,13 +2465,6 @@ func (x *SubAccountAdjustRequest) GetCashAmount() string {
 func (x *SubAccountAdjustRequest) GetMemo() string {
 	if x != nil {
 		return x.Memo
-	}
-	return ""
-}
-
-func (x *SubAccountAdjustRequest) GetIdempotencyKey() string {
-	if x != nil {
-		return x.IdempotencyKey
 	}
 	return ""
 }
@@ -6572,7 +6562,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x17operator_transaction_id\x18\x01 \x01(\x03R\x15operatorTransactionId\x12;\n" +
 	"\x1asub_account_transaction_id\x18\x02 \x01(\x03R\x17subAccountTransactionId\x12#\n" +
 	"\roperator_cash\x18\x03 \x01(\tR\foperatorCash\x12(\n" +
-	"\x10sub_account_cash\x18\x04 \x01(\tR\x0esubAccountCash\"\xb6\x02\n" +
+	"\x10sub_account_cash\x18\x04 \x01(\tR\x0esubAccountCash\"\x8d\x02\n" +
 	"\x17SubAccountAdjustRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12!\n" +
 	"\fproduct_type\x18\x02 \x01(\tR\vproductType\x12\x1a\n" +
@@ -6580,8 +6570,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12\x1f\n" +
 	"\vcash_amount\x18\x05 \x01(\tR\n" +
 	"cashAmount\x12\x12\n" +
-	"\x04memo\x18\x06 \x01(\tR\x04memo\x12'\n" +
-	"\x0fidempotency_key\x18\a \x01(\tR\x0eidempotencyKey\"U\n" +
+	"\x04memo\x18\x06 \x01(\tR\x04memo\"U\n" +
 	"\x18SubAccountAdjustResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\"\xa1\x01\n" +

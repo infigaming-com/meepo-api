@@ -11192,8 +11192,6 @@ func (m *SubAccountAdjustRequest) validate(all bool) error {
 
 	// no validation rules for Memo
 
-	// no validation rules for IdempotencyKey
-
 	if len(errors) > 0 {
 		return SubAccountAdjustRequestMultiError(errors)
 	}
@@ -11573,13 +11571,13 @@ func (m *OperatorSubAccount) validate(all bool) error {
 
 	// no validation rules for Cash
 
-	// no validation rules for TotalCommissionsUsd
+	// no validation rules for LifetimeCommissionUsd
 
-	// no validation rules for TotalCommissionsReportingCurrency
+	// no validation rules for LifetimeCommissionReportingCurrency
 
-	// no validation rules for CommissionsThisMonthUsd
+	// no validation rules for CommissionThisMonthUsd
 
-	// no validation rules for CommissionsThisMonthReportingCurrency
+	// no validation rules for CommissionThisMonthReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -12341,13 +12339,13 @@ func (m *OperatorSubAccountAggregates) validate(all bool) error {
 
 	// no validation rules for TotalBetsPlacedReportingCurrency
 
-	// no validation rules for TotalCommissionsUsd
+	// no validation rules for LifetimeCommissionUsd
 
-	// no validation rules for TotalCommissionsReportingCurrency
+	// no validation rules for LifetimeCommissionReportingCurrency
 
-	// no validation rules for CommissionsThisMonthUsd
+	// no validation rules for CommissionThisMonthUsd
 
-	// no validation rules for CommissionsThisMonthReportingCurrency
+	// no validation rules for CommissionThisMonthReportingCurrency
 
 	if len(errors) > 0 {
 		return OperatorSubAccountAggregatesMultiError(errors)
