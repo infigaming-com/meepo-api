@@ -7801,8 +7801,13 @@ type PredictionSettings struct {
 	CommissionRate string                 `protobuf:"bytes,1,opt,name=commission_rate,json=commissionRate,proto3" json:"commission_rate,omitempty"`
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// balance_alert_threshold is the absolute sub-account cash level below
+	// which an email alert fires through the business-notification pipeline.
+	// Plain decimal in the sub-account's settlement currency (USDC for
+	// "prediction"). "0" = disabled (per-operator opt-in).
+	BalanceAlertThreshold string `protobuf:"bytes,4,opt,name=balance_alert_threshold,json=balanceAlertThreshold,proto3" json:"balance_alert_threshold,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *PredictionSettings) Reset() {
@@ -7854,6 +7859,13 @@ func (x *PredictionSettings) GetUpdatedAt() *timestamppb.Timestamp {
 		return x.UpdatedAt
 	}
 	return nil
+}
+
+func (x *PredictionSettings) GetBalanceAlertThreshold() string {
+	if x != nil {
+		return x.BalanceAlertThreshold
+	}
+	return ""
 }
 
 type GetPredictionSettingsRequest struct {
@@ -7955,8 +7967,11 @@ type SetPredictionSettingsRequest struct {
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	// Plain ratio (e.g. "0.10" = 10%).
 	CommissionRate string `protobuf:"bytes,2,opt,name=commission_rate,json=commissionRate,proto3" json:"commission_rate,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Absolute decimal in the sub-account's settlement currency. "0" =
+	// disabled (per-operator opt-in). Non-zero values must be > 0.
+	BalanceAlertThreshold string `protobuf:"bytes,3,opt,name=balance_alert_threshold,json=balanceAlertThreshold,proto3" json:"balance_alert_threshold,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *SetPredictionSettingsRequest) Reset() {
@@ -7999,6 +8014,13 @@ func (x *SetPredictionSettingsRequest) GetTargetOperatorContext() *common.Operat
 func (x *SetPredictionSettingsRequest) GetCommissionRate() string {
 	if x != nil {
 		return x.CommissionRate
+	}
+	return ""
+}
+
+func (x *SetPredictionSettingsRequest) GetBalanceAlertThreshold() string {
+	if x != nil {
+		return x.BalanceAlertThreshold
 	}
 	return ""
 }
@@ -22458,20 +22480,22 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12S\n" +
 	"\n" +
 	"aggregates\x18\x05 \x01(\v23.api.wallet.service.v1.OperatorSubAccountAggregatesR\n" +
-	"aggregates\"\xb3\x01\n" +
+	"aggregates\"\xeb\x01\n" +
 	"\x12PredictionSettings\x12'\n" +
 	"\x0fcommission_rate\x18\x01 \x01(\tR\x0ecommissionRate\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"f\n" +
+	"updated_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x126\n" +
+	"\x17balance_alert_threshold\x18\x04 \x01(\tR\x15balanceAlertThreshold\"f\n" +
 	"\x1cGetPredictionSettingsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"f\n" +
 	"\x1dGetPredictionSettingsResponse\x12E\n" +
-	"\bsettings\x18\x01 \x01(\v2).api.wallet.service.v1.PredictionSettingsR\bsettings\"\x9c\x01\n" +
+	"\bsettings\x18\x01 \x01(\v2).api.wallet.service.v1.PredictionSettingsR\bsettings\"\xd4\x01\n" +
 	"\x1cSetPredictionSettingsRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12'\n" +
-	"\x0fcommission_rate\x18\x02 \x01(\tR\x0ecommissionRate\"f\n" +
+	"\x0fcommission_rate\x18\x02 \x01(\tR\x0ecommissionRate\x126\n" +
+	"\x17balance_alert_threshold\x18\x03 \x01(\tR\x15balanceAlertThreshold\"f\n" +
 	"\x1dSetPredictionSettingsResponse\x12E\n" +
 	"\bsettings\x18\x01 \x01(\v2).api.wallet.service.v1.PredictionSettingsR\bsettings\"\x80\x02\n" +
 	"\x1cUpdateOperatorBalanceRequest\x12U\n" +
