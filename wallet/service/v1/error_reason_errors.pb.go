@@ -2594,3 +2594,15 @@ func IsGenerateOperatorSubAccountTransactionIdFailed(err error) bool {
 func ErrorGenerateOperatorSubAccountTransactionIdFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidBalanceAlertThreshold(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_BALANCE_ALERT_THRESHOLD.String() && e.Code == 400
+}
+
+func ErrorInvalidBalanceAlertThreshold(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_BALANCE_ALERT_THRESHOLD.String(), fmt.Sprintf(format, args...))
+}

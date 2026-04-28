@@ -242,6 +242,7 @@ const (
 	ErrorReason_SET_PREDICTION_SETTINGS_FAILED                      ErrorReason = 30212
 	ErrorReason_INVALID_COMMISSION_RATE                             ErrorReason = 30213
 	ErrorReason_GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED ErrorReason = 30214
+	ErrorReason_INVALID_BALANCE_ALERT_THRESHOLD                     ErrorReason = 30215
 )
 
 // Enum value maps for ErrorReason.
@@ -462,6 +463,7 @@ var (
 		30212: "SET_PREDICTION_SETTINGS_FAILED",
 		30213: "INVALID_COMMISSION_RATE",
 		30214: "GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED",
+		30215: "INVALID_BALANCE_ALERT_THRESHOLD",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -679,6 +681,7 @@ var (
 		"SET_PREDICTION_SETTINGS_FAILED":                                  30212,
 		"INVALID_COMMISSION_RATE":                                         30213,
 		"GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED":             30214,
+		"INVALID_BALANCE_ALERT_THRESHOLD":                                 30215,
 	}
 )
 
@@ -713,7 +716,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xbaA\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xe7A\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -929,7 +932,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1eGET_PREDICTION_SETTINGS_FAILED\x10\x83\xec\x01\x12$\n" +
 	"\x1eSET_PREDICTION_SETTINGS_FAILED\x10\x84\xec\x01\x12#\n" +
 	"\x17INVALID_COMMISSION_RATE\x10\x85\xec\x01\x1a\x04\xa8E\x90\x03\x129\n" +
-	"3GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED\x10\x86\xec\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"3GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED\x10\x86\xec\x01\x12+\n" +
+	"\x1fINVALID_BALANCE_ALERT_THRESHOLD\x10\x87\xec\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
