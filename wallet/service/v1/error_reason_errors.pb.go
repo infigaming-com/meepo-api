@@ -2582,3 +2582,15 @@ func IsInvalidCommissionRate(err error) bool {
 func ErrorInvalidCommissionRate(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_INVALID_COMMISSION_RATE.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGenerateOperatorSubAccountTransactionIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateOperatorSubAccountTransactionIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_OPERATOR_SUB_ACCOUNT_TRANSACTION_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}

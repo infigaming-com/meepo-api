@@ -25616,11 +25616,6 @@ components:
                     description: always positive; direction derived from transaction_type
                 memo:
                     type: string
-                idempotencyKey:
-                    type: string
-                    description: |-
-                        Caller-supplied unique key for idempotent retry. BO forwards verbatim;
-                         wallet enforces uniqueness via partial UNIQUE.
         api.backoffice.service.v1.SubAccountAdjustResponse:
             type: object
             properties:
@@ -36400,11 +36395,7 @@ components:
                     type: integer
                     format: int32
                 aggregates:
-                    allOf:
-                        - $ref: '#/components/schemas/api.wallet.service.v1.OperatorSubAccountAggregates'
-                    description: |-
-                        Aggregates over the same WHERE clause as the paged query (operator +
-                         product_type + currency + time window), independent of page/page_size.
+                    $ref: '#/components/schemas/api.wallet.service.v1.OperatorSubAccountAggregates'
         api.wallet.service.v1.ListOperatorSubAccountsResponse:
             type: object
             properties:
@@ -36605,17 +36596,14 @@ components:
                     type: string
                 cash:
                     type: string
-                totalCommissionsUsd:
+                lifetimeCommissionUsd:
                     type: string
-                    description: |-
-                        Aggregated commission totals for this sub-account, sourced from
-                         winning_commission_records joined by real_operator_id + product_type.
-                totalCommissionsReportingCurrency:
+                lifetimeCommissionReportingCurrency:
                     type: string
-                commissionsThisMonthUsd:
+                commissionThisMonthUsd:
                     type: string
-                    description: Same aggregates restricted to the current calendar month [month-start, now).
-                commissionsThisMonthReportingCurrency:
+                    description: Current calendar month, UTC.
+                commissionThisMonthReportingCurrency:
                     type: string
                 createdAt:
                     type: string
@@ -36646,10 +36634,24 @@ components:
                     type: string
                 totalBetsPlacedReportingCurrency:
                     type: string
+                lifetimeCommissionUsd:
+                    type: string
+                lifetimeCommissionReportingCurrency:
+                    type: string
+                commissionThisMonthUsd:
+                    type: string
+                commissionThisMonthReportingCurrency:
+                    type: string
             description: |-
                 OperatorSubAccountAggregates groups the SUM-over-WHERE-clause totals
                  returned by ListOperatorSubAccountTransactions. Each metric is exposed
                  in both USD and the operator's reporting currency.
+
+                 total_commission_* / total_transfer_* / total_payouts_* / total_bets_*
+                 are scoped to the request's WHERE clause. lifetime_commission_* /
+                 commission_this_month_* are independent: lifetime + current calendar
+                 month (UTC) across (operator scope + product_type), sourced from
+                 winning_commission_records.
         api.wallet.service.v1.OperatorSubAccountTransaction:
             type: object
             properties:
