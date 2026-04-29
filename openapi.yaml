@@ -11983,8 +11983,7 @@ paths:
             description: |-
                 UserSwap swaps the user's withdrawable cash from source currency to target currency.
                  Player-only endpoint: the caller's user id and operator context are resolved
-                 from the auth token (`mctx.UserInfo`); `operator_context` on the request is
-                 optional — when absent, the token-derived context is used. Only the
+                 from the auth token (`mctx.UserInfo` / `mctx.GetOperatorContext`). Only the
                  withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
                  produces two balance transactions (swap_out + swap_in) plus corresponding
                  credit transactions. The target credit is created with
@@ -12003,6 +12002,30 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.UserSwapResponse'
+    /v1/wallet/user-swap/history:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                ListUserSwapHistory returns swap history for the currently authenticated
+                 player, paginated and time-range filterable. Each entry pairs the source
+                 (`user_balance_swap_out`) and target (`user_balance_swap_in`) legs of one
+                 logical swap; fee / exchange rate are sourced from the swap_out row's
+                 Extra.Swap so each entry is self-describing.
+            operationId: Wallet_ListUserSwapHistory
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.ListUserSwapHistoryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListUserSwapHistoryResponse'
     /v1/wallet/user-swap/player-config:
         post:
             tags:
@@ -36536,6 +36559,42 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.FreeBetDetail'
+        api.wallet.service.v1.ListUserSwapHistoryRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: 1-based; default 1.
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Default 20, capped at 100.
+                    format: int32
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                sourceCurrency:
+                    type: string
+                    description: Filter by source (from) currency; matches the swap_out row's settlement_currency.
+        api.wallet.service.v1.ListUserSwapHistoryResponse:
+            type: object
+            properties:
+                entries:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.UserSwapHistoryEntry'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse:
             type: object
             properties:
@@ -37105,6 +37164,25 @@ components:
         api.wallet.service.v1.SetUserSwapTemplateResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.SwapLeg:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                currency:
+                    type: string
+                cashAmount:
+                    type: string
+                    description: 'Signed change to total balance: negative on the source (out) leg, positive on the target (in) leg.'
+                beforeBalance:
+                    type: string
+                    description: cash + operator_bonus + provider_bonus before the leg was applied.
+                afterBalance:
+                    type: string
+                    description: cash + operator_bonus + provider_bonus after the leg was applied.
         api.wallet.service.v1.TurnoverCondition:
             type: object
             properties:
@@ -37209,11 +37287,37 @@ components:
                 updatedAt:
                     type: string
             description: UserSwapConfig is the operator-level template inherited by descendants when follow_parent=true.
+        api.wallet.service.v1.UserSwapHistoryEntry:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    description: Mirror of source_leg.created_at; included at the top level for sort/display convenience.
+                    format: date-time
+                sourceLeg:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.SwapLeg'
+                    description: user_balance_swap_out side.
+                targetLeg:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.SwapLeg'
+                    description: user_balance_swap_in side.
+                feeRate:
+                    type: string
+                    description: Effective fee rate at swap time (decimal string).
+                feeAmount:
+                    type: string
+                    description: Fee deducted from the source cash, in source currency.
+                exchangeRate:
+                    type: string
+                    description: source -> target rate, applied to (source_amount - fee).
+                bonusForfeited:
+                    type: boolean
+                    description: 'True when the swap forfeited bonuses (V1: always false; populated in a follow-up).'
+            description: 'One logical swap: source leg + target leg + shared swap-level fields.'
         api.wallet.service.v1.UserSwapRequest:
             type: object
             properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 sourceCurrency:
                     type: string
                     description: Source currency (must be in effective config.allowed_swap_out).

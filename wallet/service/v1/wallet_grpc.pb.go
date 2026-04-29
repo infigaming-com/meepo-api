@@ -75,6 +75,7 @@ const (
 	Wallet_GetUserSwapConfig_FullMethodName                   = "/api.wallet.service.v1.Wallet/GetUserSwapConfig"
 	Wallet_UserSwap_FullMethodName                            = "/api.wallet.service.v1.Wallet/UserSwap"
 	Wallet_GetPlayerSwapConfig_FullMethodName                 = "/api.wallet.service.v1.Wallet/GetPlayerSwapConfig"
+	Wallet_ListUserSwapHistory_FullMethodName                 = "/api.wallet.service.v1.Wallet/ListUserSwapHistory"
 	Wallet_SetAppDownloadRewardConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/SetAppDownloadRewardConfig"
 	Wallet_GetAppDownloadRewardConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/GetAppDownloadRewardConfig"
 	Wallet_ClaimAppDownloadReward_FullMethodName              = "/api.wallet.service.v1.Wallet/ClaimAppDownloadReward"
@@ -252,8 +253,7 @@ type WalletClient interface {
 	GetUserSwapConfig(ctx context.Context, in *GetUserSwapConfigRequest, opts ...grpc.CallOption) (*GetUserSwapConfigResponse, error)
 	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
 	// Player-only endpoint: the caller's user id and operator context are resolved
-	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
-	// optional — when absent, the token-derived context is used. Only the
+	// from the auth token (`mctx.UserInfo` / `mctx.GetOperatorContext`). Only the
 	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
 	// produces two balance transactions (swap_out + swap_in) plus corresponding
 	// credit transactions. The target credit is created with
@@ -263,6 +263,12 @@ type WalletClient interface {
 	// authenticated player — operator resolved from the auth token. Used by the
 	// player frontend to render fee / allowed currencies / bonus-clearing notice.
 	GetPlayerSwapConfig(ctx context.Context, in *GetPlayerSwapConfigRequest, opts ...grpc.CallOption) (*GetPlayerSwapConfigResponse, error)
+	// ListUserSwapHistory returns swap history for the currently authenticated
+	// player, paginated and time-range filterable. Each entry pairs the source
+	// (`user_balance_swap_out`) and target (`user_balance_swap_in`) legs of one
+	// logical swap; fee / exchange rate are sourced from the swap_out row's
+	// Extra.Swap so each entry is self-describing.
+	ListUserSwapHistory(ctx context.Context, in *ListUserSwapHistoryRequest, opts ...grpc.CallOption) (*ListUserSwapHistoryResponse, error)
 	// SetAppDownloadRewardConfig full-replaces the app download reward config for an operator.
 	// All existing country entries are deleted and replaced with the provided list.
 	// follow_parent is operator-level: when true, the operator inherits the parent's entire list.
@@ -953,6 +959,16 @@ func (c *walletClient) GetPlayerSwapConfig(ctx context.Context, in *GetPlayerSwa
 	return out, nil
 }
 
+func (c *walletClient) ListUserSwapHistory(ctx context.Context, in *ListUserSwapHistoryRequest, opts ...grpc.CallOption) (*ListUserSwapHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserSwapHistoryResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListUserSwapHistory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) SetAppDownloadRewardConfig(ctx context.Context, in *SetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*SetAppDownloadRewardConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetAppDownloadRewardConfigResponse)
@@ -1597,8 +1613,7 @@ type WalletServer interface {
 	GetUserSwapConfig(context.Context, *GetUserSwapConfigRequest) (*GetUserSwapConfigResponse, error)
 	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
 	// Player-only endpoint: the caller's user id and operator context are resolved
-	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
-	// optional — when absent, the token-derived context is used. Only the
+	// from the auth token (`mctx.UserInfo` / `mctx.GetOperatorContext`). Only the
 	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
 	// produces two balance transactions (swap_out + swap_in) plus corresponding
 	// credit transactions. The target credit is created with
@@ -1608,6 +1623,12 @@ type WalletServer interface {
 	// authenticated player — operator resolved from the auth token. Used by the
 	// player frontend to render fee / allowed currencies / bonus-clearing notice.
 	GetPlayerSwapConfig(context.Context, *GetPlayerSwapConfigRequest) (*GetPlayerSwapConfigResponse, error)
+	// ListUserSwapHistory returns swap history for the currently authenticated
+	// player, paginated and time-range filterable. Each entry pairs the source
+	// (`user_balance_swap_out`) and target (`user_balance_swap_in`) legs of one
+	// logical swap; fee / exchange rate are sourced from the swap_out row's
+	// Extra.Swap so each entry is self-describing.
+	ListUserSwapHistory(context.Context, *ListUserSwapHistoryRequest) (*ListUserSwapHistoryResponse, error)
 	// SetAppDownloadRewardConfig full-replaces the app download reward config for an operator.
 	// All existing country entries are deleted and replaced with the provided list.
 	// follow_parent is operator-level: when true, the operator inherits the parent's entire list.
@@ -1905,6 +1926,9 @@ func (UnimplementedWalletServer) UserSwap(context.Context, *UserSwapRequest) (*U
 }
 func (UnimplementedWalletServer) GetPlayerSwapConfig(context.Context, *GetPlayerSwapConfigRequest) (*GetPlayerSwapConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPlayerSwapConfig not implemented")
+}
+func (UnimplementedWalletServer) ListUserSwapHistory(context.Context, *ListUserSwapHistoryRequest) (*ListUserSwapHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListUserSwapHistory not implemented")
 }
 func (UnimplementedWalletServer) SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*SetAppDownloadRewardConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetAppDownloadRewardConfig not implemented")
@@ -3091,6 +3115,24 @@ func _Wallet_GetPlayerSwapConfig_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ListUserSwapHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserSwapHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListUserSwapHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListUserSwapHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListUserSwapHistory(ctx, req.(*ListUserSwapHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_SetAppDownloadRewardConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetAppDownloadRewardConfigRequest)
 	if err := dec(in); err != nil {
@@ -4257,6 +4299,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPlayerSwapConfig",
 			Handler:    _Wallet_GetPlayerSwapConfig_Handler,
+		},
+		{
+			MethodName: "ListUserSwapHistory",
+			Handler:    _Wallet_ListUserSwapHistory_Handler,
 		},
 		{
 			MethodName: "SetAppDownloadRewardConfig",
