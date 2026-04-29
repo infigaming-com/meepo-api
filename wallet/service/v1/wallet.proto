@@ -1557,9 +1557,9 @@ message ListOperatorSubAccountTransactionsRequest {
 
 message OperatorSubAccountTransaction {
 	int64 transaction_id = 1;
-	// Player-side balance_transaction.id this row is paired with — applies to
+	// Upstream-supplied external tx id; idempotency key for
 	// sub_account_game_debit / game_credit / game_rollback. 0 for transfer/adjust.
-	int64 player_transaction_id = 2;
+	int64 external_transaction_id = 2;
 	int64 related_transaction_id = 3;
 	api.common.OperatorContext operator_context = 4;
 	string product_type = 5;
