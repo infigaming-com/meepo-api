@@ -12095,7 +12095,7 @@ func (m *OperatorSubAccountTransaction) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
-	// no validation rules for PlayerTransactionId
+	// no validation rules for ExternalTransactionId
 
 	// no validation rules for RelatedTransactionId
 

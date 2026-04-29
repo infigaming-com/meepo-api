@@ -7337,12 +7337,12 @@ func (x *ListOperatorSubAccountTransactionsRequest) GetPageSize() int32 {
 type OperatorSubAccountTransaction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	// Player-side balance_transaction.id this row is paired with — applies to
+	// Upstream-supplied external tx id; idempotency key for
 	// sub_account_game_debit / game_credit / game_rollback. 0 for transfer/adjust.
-	PlayerTransactionId  int64                   `protobuf:"varint,2,opt,name=player_transaction_id,json=playerTransactionId,proto3" json:"player_transaction_id,omitempty"`
-	RelatedTransactionId int64                   `protobuf:"varint,3,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
-	OperatorContext      *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	ProductType          string                  `protobuf:"bytes,5,opt,name=product_type,json=productType,proto3" json:"product_type,omitempty"`
+	ExternalTransactionId int64                   `protobuf:"varint,2,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
+	RelatedTransactionId  int64                   `protobuf:"varint,3,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
+	OperatorContext       *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ProductType           string                  `protobuf:"bytes,5,opt,name=product_type,json=productType,proto3" json:"product_type,omitempty"`
 	// Currency is fixed by the product rule (e.g. USDC for "prediction").
 	// There is no separate settlement_currency — the row is always in `currency`.
 	Currency string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -7415,9 +7415,9 @@ func (x *OperatorSubAccountTransaction) GetTransactionId() int64 {
 	return 0
 }
 
-func (x *OperatorSubAccountTransaction) GetPlayerTransactionId() int64 {
+func (x *OperatorSubAccountTransaction) GetExternalTransactionId() int64 {
 	if x != nil {
-		return x.PlayerTransactionId
+		return x.ExternalTransactionId
 	}
 	return 0
 }
@@ -22734,10 +22734,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xd5\a\n" +
+	"_page_size\"\xd9\a\n" +
 	"\x1dOperatorSubAccountTransaction\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x122\n" +
-	"\x15player_transaction_id\x18\x02 \x01(\x03R\x13playerTransactionId\x124\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x126\n" +
+	"\x17external_transaction_id\x18\x02 \x01(\x03R\x15externalTransactionId\x124\n" +
 	"\x16related_transaction_id\x18\x03 \x01(\x03R\x14relatedTransactionId\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12!\n" +
 	"\fproduct_type\x18\x05 \x01(\tR\vproductType\x12\x1a\n" +

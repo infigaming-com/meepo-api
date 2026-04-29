@@ -36716,10 +36716,10 @@ components:
             properties:
                 transactionId:
                     type: string
-                playerTransactionId:
+                externalTransactionId:
                     type: string
                     description: |-
-                        Player-side balance_transaction.id this row is paired with — applies to
+                        Upstream-supplied external tx id; idempotency key for
                          sub_account_game_debit / game_credit / game_rollback. 0 for transfer/adjust.
                 relatedTransactionId:
                     type: string
