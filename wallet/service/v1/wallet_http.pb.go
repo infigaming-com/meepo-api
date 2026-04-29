@@ -36,6 +36,7 @@ const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBal
 const OperationWalletGetUserDepositRewardSequence = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
 const OperationWalletGetWalletConfig = "/api.wallet.service.v1.Wallet/GetWalletConfig"
 const OperationWalletListResponsibleGamblingConfigs = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
+const OperationWalletListUserSwapHistory = "/api.wallet.service.v1.Wallet/ListUserSwapHistory"
 const OperationWalletUserSwap = "/api.wallet.service.v1.Wallet/UserSwap"
 
 type WalletHTTPServer interface {
@@ -86,10 +87,15 @@ type WalletHTTPServer interface {
 	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error)
+	// ListUserSwapHistory ListUserSwapHistory returns swap history for the currently authenticated
+	// player, paginated and time-range filterable. Each entry pairs the source
+	// (`user_balance_swap_out`) and target (`user_balance_swap_in`) legs of one
+	// logical swap; fee / exchange rate are sourced from the swap_out row's
+	// Extra.Swap so each entry is self-describing.
+	ListUserSwapHistory(context.Context, *ListUserSwapHistoryRequest) (*ListUserSwapHistoryResponse, error)
 	// UserSwap UserSwap swaps the user's withdrawable cash from source currency to target currency.
 	// Player-only endpoint: the caller's user id and operator context are resolved
-	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
-	// optional — when absent, the token-derived context is used. Only the
+	// from the auth token (`mctx.UserInfo` / `mctx.GetOperatorContext`). Only the
 	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
 	// produces two balance transactions (swap_out + swap_in) plus corresponding
 	// credit transactions. The target credit is created with
@@ -105,6 +111,7 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/currencies/get", _Wallet_GetCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/user-swap", _Wallet_UserSwap0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/user-swap/player-config", _Wallet_GetPlayerSwapConfig0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/user-swap/history", _Wallet_ListUserSwapHistory0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/app-download-reward/claim", _Wallet_ClaimAppDownloadReward0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/app-download-reward/status", _Wallet_GetAppDownloadRewardStatus0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/promo-code/info", _Wallet_GetPromoCodeInfo0_HTTP_Handler(srv))
@@ -247,6 +254,28 @@ func _Wallet_GetPlayerSwapConfig0_HTTP_Handler(srv WalletHTTPServer) func(ctx ht
 			return err
 		}
 		reply := out.(*GetPlayerSwapConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Wallet_ListUserSwapHistory0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListUserSwapHistoryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletListUserSwapHistory)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListUserSwapHistory(ctx, req.(*ListUserSwapHistoryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListUserSwapHistoryResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -563,10 +592,15 @@ type WalletHTTPClient interface {
 	GetWalletConfig(ctx context.Context, req *GetWalletConfigRequest, opts ...http.CallOption) (rsp *GetWalletConfigResponse, err error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(ctx context.Context, req *ListResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *ListResponsibleGamblingConfigsResponse, err error)
+	// ListUserSwapHistory ListUserSwapHistory returns swap history for the currently authenticated
+	// player, paginated and time-range filterable. Each entry pairs the source
+	// (`user_balance_swap_out`) and target (`user_balance_swap_in`) legs of one
+	// logical swap; fee / exchange rate are sourced from the swap_out row's
+	// Extra.Swap so each entry is self-describing.
+	ListUserSwapHistory(ctx context.Context, req *ListUserSwapHistoryRequest, opts ...http.CallOption) (rsp *ListUserSwapHistoryResponse, err error)
 	// UserSwap UserSwap swaps the user's withdrawable cash from source currency to target currency.
 	// Player-only endpoint: the caller's user id and operator context are resolved
-	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
-	// optional — when absent, the token-derived context is used. Only the
+	// from the auth token (`mctx.UserInfo` / `mctx.GetOperatorContext`). Only the
 	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
 	// produces two balance transactions (swap_out + swap_in) plus corresponding
 	// credit transactions. The target credit is created with
@@ -833,10 +867,27 @@ func (c *WalletHTTPClientImpl) ListResponsibleGamblingConfigs(ctx context.Contex
 	return &out, nil
 }
 
+// ListUserSwapHistory ListUserSwapHistory returns swap history for the currently authenticated
+// player, paginated and time-range filterable. Each entry pairs the source
+// (`user_balance_swap_out`) and target (`user_balance_swap_in`) legs of one
+// logical swap; fee / exchange rate are sourced from the swap_out row's
+// Extra.Swap so each entry is self-describing.
+func (c *WalletHTTPClientImpl) ListUserSwapHistory(ctx context.Context, in *ListUserSwapHistoryRequest, opts ...http.CallOption) (*ListUserSwapHistoryResponse, error) {
+	var out ListUserSwapHistoryResponse
+	pattern := "/v1/wallet/user-swap/history"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletListUserSwapHistory))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // UserSwap UserSwap swaps the user's withdrawable cash from source currency to target currency.
 // Player-only endpoint: the caller's user id and operator context are resolved
-// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
-// optional — when absent, the token-derived context is used. Only the
+// from the auth token (`mctx.UserInfo` / `mctx.GetOperatorContext`). Only the
 // withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
 // produces two balance transactions (swap_out + swap_in) plus corresponding
 // credit transactions. The target credit is created with

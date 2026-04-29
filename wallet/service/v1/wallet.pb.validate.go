@@ -33251,35 +33251,6 @@ func (m *UserSwapRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UserSwapRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UserSwapRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UserSwapRequestValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	// no validation rules for SourceCurrency
 
 	// no validation rules for TargetCurrency
@@ -33713,6 +33684,663 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetPlayerSwapConfigResponseValidationError{}
+
+// Validate checks the field values on ListUserSwapHistoryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUserSwapHistoryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserSwapHistoryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListUserSwapHistoryRequestMultiError, or nil if none found.
+func (m *ListUserSwapHistoryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserSwapHistoryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserSwapHistoryRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserSwapHistoryRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserSwapHistoryRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserSwapHistoryRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserSwapHistoryRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserSwapHistoryRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.SourceCurrency != nil {
+		// no validation rules for SourceCurrency
+	}
+
+	if len(errors) > 0 {
+		return ListUserSwapHistoryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserSwapHistoryRequestMultiError is an error wrapping multiple
+// validation errors returned by ListUserSwapHistoryRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListUserSwapHistoryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserSwapHistoryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserSwapHistoryRequestMultiError) AllErrors() []error { return m }
+
+// ListUserSwapHistoryRequestValidationError is the validation error returned
+// by ListUserSwapHistoryRequest.Validate if the designated constraints aren't met.
+type ListUserSwapHistoryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserSwapHistoryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserSwapHistoryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserSwapHistoryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserSwapHistoryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserSwapHistoryRequestValidationError) ErrorName() string {
+	return "ListUserSwapHistoryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserSwapHistoryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserSwapHistoryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserSwapHistoryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserSwapHistoryRequestValidationError{}
+
+// Validate checks the field values on ListUserSwapHistoryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUserSwapHistoryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserSwapHistoryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListUserSwapHistoryResponseMultiError, or nil if none found.
+func (m *ListUserSwapHistoryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserSwapHistoryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetEntries() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserSwapHistoryResponseValidationError{
+						field:  fmt.Sprintf("Entries[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserSwapHistoryResponseValidationError{
+						field:  fmt.Sprintf("Entries[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserSwapHistoryResponseValidationError{
+					field:  fmt.Sprintf("Entries[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListUserSwapHistoryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserSwapHistoryResponseMultiError is an error wrapping multiple
+// validation errors returned by ListUserSwapHistoryResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListUserSwapHistoryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserSwapHistoryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserSwapHistoryResponseMultiError) AllErrors() []error { return m }
+
+// ListUserSwapHistoryResponseValidationError is the validation error returned
+// by ListUserSwapHistoryResponse.Validate if the designated constraints
+// aren't met.
+type ListUserSwapHistoryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserSwapHistoryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserSwapHistoryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserSwapHistoryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserSwapHistoryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserSwapHistoryResponseValidationError) ErrorName() string {
+	return "ListUserSwapHistoryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserSwapHistoryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserSwapHistoryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserSwapHistoryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserSwapHistoryResponseValidationError{}
+
+// Validate checks the field values on UserSwapHistoryEntry with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UserSwapHistoryEntry) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserSwapHistoryEntry with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UserSwapHistoryEntryMultiError, or nil if none found.
+func (m *UserSwapHistoryEntry) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserSwapHistoryEntry) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UserSwapHistoryEntryValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UserSwapHistoryEntryValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UserSwapHistoryEntryValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetSourceLeg()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UserSwapHistoryEntryValidationError{
+					field:  "SourceLeg",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UserSwapHistoryEntryValidationError{
+					field:  "SourceLeg",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSourceLeg()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UserSwapHistoryEntryValidationError{
+				field:  "SourceLeg",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetLeg()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UserSwapHistoryEntryValidationError{
+					field:  "TargetLeg",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UserSwapHistoryEntryValidationError{
+					field:  "TargetLeg",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetLeg()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UserSwapHistoryEntryValidationError{
+				field:  "TargetLeg",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for FeeRate
+
+	// no validation rules for FeeAmount
+
+	// no validation rules for ExchangeRate
+
+	// no validation rules for BonusForfeited
+
+	if len(errors) > 0 {
+		return UserSwapHistoryEntryMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserSwapHistoryEntryMultiError is an error wrapping multiple validation
+// errors returned by UserSwapHistoryEntry.ValidateAll() if the designated
+// constraints aren't met.
+type UserSwapHistoryEntryMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserSwapHistoryEntryMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserSwapHistoryEntryMultiError) AllErrors() []error { return m }
+
+// UserSwapHistoryEntryValidationError is the validation error returned by
+// UserSwapHistoryEntry.Validate if the designated constraints aren't met.
+type UserSwapHistoryEntryValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserSwapHistoryEntryValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserSwapHistoryEntryValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserSwapHistoryEntryValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserSwapHistoryEntryValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserSwapHistoryEntryValidationError) ErrorName() string {
+	return "UserSwapHistoryEntryValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UserSwapHistoryEntryValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserSwapHistoryEntry.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserSwapHistoryEntryValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserSwapHistoryEntryValidationError{}
+
+// Validate checks the field values on SwapLeg with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SwapLeg) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SwapLeg with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in SwapLegMultiError, or nil if none found.
+func (m *SwapLeg) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SwapLeg) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SwapLegValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SwapLegValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SwapLegValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Currency
+
+	// no validation rules for CashAmount
+
+	// no validation rules for BeforeBalance
+
+	// no validation rules for AfterBalance
+
+	if len(errors) > 0 {
+		return SwapLegMultiError(errors)
+	}
+
+	return nil
+}
+
+// SwapLegMultiError is an error wrapping multiple validation errors returned
+// by SwapLeg.ValidateAll() if the designated constraints aren't met.
+type SwapLegMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SwapLegMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SwapLegMultiError) AllErrors() []error { return m }
+
+// SwapLegValidationError is the validation error returned by SwapLeg.Validate
+// if the designated constraints aren't met.
+type SwapLegValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SwapLegValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SwapLegValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SwapLegValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SwapLegValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SwapLegValidationError) ErrorName() string { return "SwapLegValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SwapLegValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSwapLeg.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SwapLegValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SwapLegValidationError{}
 
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are

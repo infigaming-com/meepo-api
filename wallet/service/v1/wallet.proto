@@ -202,8 +202,7 @@ service Wallet {
 
 	// UserSwap swaps the user's withdrawable cash from source currency to target currency.
 	// Player-only endpoint: the caller's user id and operator context are resolved
-	// from the auth token (`mctx.UserInfo`); `operator_context` on the request is
-	// optional — when absent, the token-derived context is used. Only the
+	// from the auth token (`mctx.UserInfo` / `mctx.GetOperatorContext`). Only the
 	// withdrawable portion (credit.cash_turnover >= threshold) may be swapped;
 	// produces two balance transactions (swap_out + swap_in) plus corresponding
 	// credit transactions. The target credit is created with
@@ -221,6 +220,18 @@ service Wallet {
 	rpc GetPlayerSwapConfig(GetPlayerSwapConfigRequest) returns (GetPlayerSwapConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/wallet/user-swap/player-config"
+			body: "*"
+		};
+	}
+
+	// ListUserSwapHistory returns swap history for the currently authenticated
+	// player, paginated and time-range filterable. Each entry pairs the source
+	// (`user_balance_swap_out`) and target (`user_balance_swap_in`) legs of one
+	// logical swap; fee / exchange rate are sourced from the swap_out row's
+	// Extra.Swap so each entry is self-describing.
+	rpc ListUserSwapHistory(ListUserSwapHistoryRequest) returns (ListUserSwapHistoryResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/user-swap/history"
 			body: "*"
 		};
 	}
@@ -3208,13 +3219,12 @@ message GetUserSwapConfigResponse {
 }
 
 message UserSwapRequest {
-	api.common.OperatorContext operator_context = 1;
 	// Source currency (must be in effective config.allowed_swap_out).
-	string source_currency = 2;
+	string source_currency = 1;
 	// Target currency (must be in effective config.allowed_swap_in).
-	string target_currency = 3;
+	string target_currency = 2;
 	// Amount of source cash to swap. Must not exceed the user's withdrawable cash in source currency.
-	string cash_amount = 4;
+	string cash_amount = 3;
 }
 
 message UserSwapResponse {
@@ -3242,4 +3252,52 @@ message GetPlayerSwapConfigResponse {
 	// Aggregated user-swap feature flag — AND across self + all ancestors.
 	// When false the frontend should hide the swap entry point entirely.
 	bool aggregated_enabled = 2;
+}
+
+message ListUserSwapHistoryRequest {
+	// 1-based; default 1.
+	optional int32 page = 1;
+	// Default 20, capped at 100.
+	optional int32 page_size = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+	// Filter by source (from) currency; matches the swap_out row's settlement_currency.
+	optional string source_currency = 5;
+}
+
+message ListUserSwapHistoryResponse {
+	repeated UserSwapHistoryEntry entries = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+// One logical swap: source leg + target leg + shared swap-level fields.
+message UserSwapHistoryEntry {
+	// Mirror of source_leg.created_at; included at the top level for sort/display convenience.
+	google.protobuf.Timestamp created_at = 1;
+	// user_balance_swap_out side.
+	SwapLeg source_leg = 2;
+	// user_balance_swap_in side.
+	SwapLeg target_leg = 3;
+	// Effective fee rate at swap time (decimal string).
+	string fee_rate = 4;
+	// Fee deducted from the source cash, in source currency.
+	string fee_amount = 5;
+	// source -> target rate, applied to (source_amount - fee).
+	string exchange_rate = 6;
+	// True when the swap forfeited bonuses (V1: always false; populated in a follow-up).
+	bool bonus_forfeited = 7;
+}
+
+message SwapLeg {
+	int64 transaction_id = 1;
+	google.protobuf.Timestamp created_at = 2;
+	string currency = 3;
+	// Signed change to total balance: negative on the source (out) leg, positive on the target (in) leg.
+	string cash_amount = 4;
+	// cash + operator_bonus + provider_bonus before the leg was applied.
+	string before_balance = 5;
+	// cash + operator_bonus + provider_bonus after the leg was applied.
+	string after_balance = 6;
 }
