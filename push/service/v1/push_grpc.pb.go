@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Push_SendEmail_FullMethodName               = "/api.push.service.v1.Push/SendEmail"
+	Push_SendTemplatedEmail_FullMethodName      = "/api.push.service.v1.Push/SendTemplatedEmail"
 	Push_GetNotificationStats_FullMethodName    = "/api.push.service.v1.Push/GetNotificationStats"
 	Push_GetThirdPartyFeeStats_FullMethodName   = "/api.push.service.v1.Push/GetThirdPartyFeeStats"
 	Push_UpdateBetTickerConfig_FullMethodName   = "/api.push.service.v1.Push/UpdateBetTickerConfig"
@@ -34,6 +35,12 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PushClient interface {
 	SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*SendEmailResponse, error)
+	// SendTemplatedEmail renders a template stored in push.email_templates
+	// (subject inline + body files mounted at /email_templates/) and sends
+	// via the same backend as SendEmail. Use this when push-service should
+	// own template rendering. Use SendEmail (above) when the caller already
+	// has rendered subject/text/html.
+	SendTemplatedEmail(ctx context.Context, in *SendTemplatedEmailRequest, opts ...grpc.CallOption) (*SendTemplatedEmailResponse, error)
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
 	GetNotificationStats(ctx context.Context, in *GetNotificationStatsRequest, opts ...grpc.CallOption) (*GetNotificationStatsResponse, error)
@@ -60,6 +67,16 @@ func (c *pushClient) SendEmail(ctx context.Context, in *SendEmailRequest, opts .
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendEmailResponse)
 	err := c.cc.Invoke(ctx, Push_SendEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushClient) SendTemplatedEmail(ctx context.Context, in *SendTemplatedEmailRequest, opts ...grpc.CallOption) (*SendTemplatedEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendTemplatedEmailResponse)
+	err := c.cc.Invoke(ctx, Push_SendTemplatedEmail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -141,6 +158,12 @@ func (c *pushClient) UnregisterWebPushDevice(ctx context.Context, in *Unregister
 // for forward compatibility.
 type PushServer interface {
 	SendEmail(context.Context, *SendEmailRequest) (*SendEmailResponse, error)
+	// SendTemplatedEmail renders a template stored in push.email_templates
+	// (subject inline + body files mounted at /email_templates/) and sends
+	// via the same backend as SendEmail. Use this when push-service should
+	// own template rendering. Use SendEmail (above) when the caller already
+	// has rendered subject/text/html.
+	SendTemplatedEmail(context.Context, *SendTemplatedEmailRequest) (*SendTemplatedEmailResponse, error)
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
 	GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error)
@@ -165,6 +188,9 @@ type UnimplementedPushServer struct{}
 
 func (UnimplementedPushServer) SendEmail(context.Context, *SendEmailRequest) (*SendEmailResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendEmail not implemented")
+}
+func (UnimplementedPushServer) SendTemplatedEmail(context.Context, *SendTemplatedEmailRequest) (*SendTemplatedEmailResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendTemplatedEmail not implemented")
 }
 func (UnimplementedPushServer) GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetNotificationStats not implemented")
@@ -222,6 +248,24 @@ func _Push_SendEmail_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PushServer).SendEmail(ctx, req.(*SendEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Push_SendTemplatedEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendTemplatedEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).SendTemplatedEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_SendTemplatedEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).SendTemplatedEmail(ctx, req.(*SendTemplatedEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -362,6 +406,10 @@ var Push_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendEmail",
 			Handler:    _Push_SendEmail_Handler,
+		},
+		{
+			MethodName: "SendTemplatedEmail",
+			Handler:    _Push_SendTemplatedEmail_Handler,
 		},
 		{
 			MethodName: "GetNotificationStats",

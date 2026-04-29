@@ -6,8 +6,17 @@ option go_package = "github.com/infigaming-com/meepo-api/push/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.push.service.v1";
 
+import "common/common.proto";
+
 service Push {
 	rpc SendEmail(SendEmailRequest) returns (SendEmailResponse) {}
+
+	// SendTemplatedEmail renders a template stored in push.email_templates
+	// (subject inline + body files mounted at /email_templates/) and sends
+	// via the same backend as SendEmail. Use this when push-service should
+	// own template rendering. Use SendEmail (above) when the caller already
+	// has rendered subject/text/html.
+	rpc SendTemplatedEmail(SendTemplatedEmailRequest) returns (SendTemplatedEmailResponse) {}
 
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
@@ -47,6 +56,48 @@ message SendEmailRequest {
 }
 
 message SendEmailResponse {
+	int64 messageId = 1;
+}
+
+// SenderMode controls which sender push-service uses when delivering a
+// templated email. Default 0 honors the template's declared
+// default_sender_mode (the 99% case); the explicit values force one or
+// the other.
+enum SenderMode {
+	// Use the template row's declared default_sender_mode.
+	SENDER_MODE_TEMPLATE_DEFAULT = 0;
+	// Force speedix.io regardless of operator binding.
+	SENDER_MODE_SYSTEM = 1;
+	// Force operator email-domain binding (with fallback to speedix.io
+	// when no active binding exists for the operator).
+	SENDER_MODE_OPERATOR = 2;
+}
+
+message SendTemplatedEmailRequest {
+	// Template constant name; must exist as a row in push.email_templates.
+	string template = 1;
+	// Single-curly placeholder values for subject/text/html. Missing keys
+	// pass through verbatim (push-service logs a warning).
+	map<string, string> params = 2;
+	// Recipients. Caller resolves; push-service does not look up.
+	repeated string to = 3;
+	// Used by push-service for template-row lookup (operator/language
+	// fallback chain) and for operator email-domain binding when
+	// sender_mode resolves to OPERATOR.
+	api.common.OperatorContext operator_context = 4;
+	// Independent identity, mirrors SendEmailRequest.userId. 0 if N/A.
+	int64 user_id = 5;
+	// Override for the template's declared default_sender_mode. Default
+	// (TEMPLATE_DEFAULT) is the right choice for almost every caller.
+	SenderMode sender_mode = 6;
+	// Optional From override. Empty → push-service derives From from the
+	// resolved sender_mode (system default or operator binding).
+	string from = 7;
+	// Optional language. Empty → 'en'. Affects template-row lookup only.
+	optional string language = 8;
+}
+
+message SendTemplatedEmailResponse {
 	int64 messageId = 1;
 }
 
