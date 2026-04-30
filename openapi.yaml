@@ -36839,6 +36839,13 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+                balanceAlertThreshold:
+                    type: string
+                    description: |-
+                        balance_alert_threshold is the absolute sub-account cash level below
+                         which an email alert fires through the business-notification pipeline.
+                         Plain decimal in the sub-account's settlement currency (USDC for
+                         "prediction"). "0" = disabled (per-operator opt-in).
             description: |-
                 PredictionSettings captures platform-level configuration for the
                  "prediction" sub-account product family (Polymarket today; future

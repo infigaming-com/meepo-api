@@ -12685,6 +12685,8 @@ func (m *PredictionSettings) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for BalanceAlertThreshold
+
 	if len(errors) > 0 {
 		return PredictionSettingsMultiError(errors)
 	}
@@ -13081,6 +13083,10 @@ func (m *SetPredictionSettingsRequest) validate(all bool) error {
 	}
 
 	// no validation rules for CommissionRate
+
+	if m.BalanceAlertThreshold != nil {
+		// no validation rules for BalanceAlertThreshold
+	}
 
 	if len(errors) > 0 {
 		return SetPredictionSettingsRequestMultiError(errors)

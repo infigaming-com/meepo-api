@@ -66,6 +66,8 @@ const (
 	ErrorReason_OTP_PROVIDER_PERMISSION_DENIED         ErrorReason = 90412
 	ErrorReason_OTP_PROVIDER_BINDING_PERMISSION_DENIED ErrorReason = 90413
 	ErrorReason_OTP_PROVIDER_BINDING_INVALID_COUNTRY   ErrorReason = 90414
+	// Templated email errors (90500-90599)
+	ErrorReason_EMAIL_TEMPLATE_NOT_FOUND ErrorReason = 90500
 )
 
 // Enum value maps for ErrorReason.
@@ -108,6 +110,7 @@ var (
 		90412: "OTP_PROVIDER_PERMISSION_DENIED",
 		90413: "OTP_PROVIDER_BINDING_PERMISSION_DENIED",
 		90414: "OTP_PROVIDER_BINDING_INVALID_COUNTRY",
+		90500: "EMAIL_TEMPLATE_NOT_FOUND",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                            0,
@@ -147,6 +150,7 @@ var (
 		"OTP_PROVIDER_PERMISSION_DENIED":         90412,
 		"OTP_PROVIDER_BINDING_PERMISSION_DENIED": 90413,
 		"OTP_PROVIDER_BINDING_INVALID_COUNTRY":   90414,
+		"EMAIL_TEMPLATE_NOT_FOUND":               90500,
 	}
 )
 
@@ -181,7 +185,7 @@ var File_push_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\xd2\n" +
+	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\xf8\n" +
 	"\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
@@ -220,7 +224,8 @@ const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	"#OTP_PROVIDER_BINDING_ALREADY_EXISTS\x10\xab\xc2\x05\x1a\x04\xa8E\x99\x03\x12*\n" +
 	"\x1eOTP_PROVIDER_PERMISSION_DENIED\x10\xac\xc2\x05\x1a\x04\xa8E\x93\x03\x122\n" +
 	"&OTP_PROVIDER_BINDING_PERMISSION_DENIED\x10\xad\xc2\x05\x1a\x04\xa8E\x93\x03\x120\n" +
-	"$OTP_PROVIDER_BINDING_INVALID_COUNTRY\x10\xae\xc2\x05\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BO\n" +
+	"$OTP_PROVIDER_BINDING_INVALID_COUNTRY\x10\xae\xc2\x05\x1a\x04\xa8E\x90\x03\x12$\n" +
+	"\x18EMAIL_TEMPLATE_NOT_FOUND\x10\x84\xc3\x05\x1a\x04\xa8E\x94\x03\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (

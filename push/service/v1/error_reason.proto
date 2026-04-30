@@ -56,4 +56,7 @@ enum ErrorReason {
   OTP_PROVIDER_PERMISSION_DENIED = 90412 [(errors.code) = 403];
   OTP_PROVIDER_BINDING_PERMISSION_DENIED = 90413 [(errors.code) = 403];
   OTP_PROVIDER_BINDING_INVALID_COUNTRY = 90414 [(errors.code) = 400];
+
+  // Templated email errors (90500-90599)
+  EMAIL_TEMPLATE_NOT_FOUND = 90500 [(errors.code) = 404];
 }

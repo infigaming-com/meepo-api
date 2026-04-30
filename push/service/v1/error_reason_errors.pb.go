@@ -462,3 +462,17 @@ func IsOtpProviderBindingInvalidCountry(err error) bool {
 func ErrorOtpProviderBindingInvalidCountry(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_OTP_PROVIDER_BINDING_INVALID_COUNTRY.String(), fmt.Sprintf(format, args...))
 }
+
+// Templated email errors (90500-90599)
+func IsEmailTemplateNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_TEMPLATE_NOT_FOUND.String() && e.Code == 404
+}
+
+// Templated email errors (90500-90599)
+func ErrorEmailTemplateNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_EMAIL_TEMPLATE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
