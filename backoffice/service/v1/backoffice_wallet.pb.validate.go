@@ -4915,6 +4915,8 @@ func (m *SetPredictionSettingsRequest) validate(all bool) error {
 
 	// no validation rules for CommissionRate
 
+	// no validation rules for BalanceAlertThreshold
+
 	if len(errors) > 0 {
 		return SetPredictionSettingsRequestMultiError(errors)
 	}

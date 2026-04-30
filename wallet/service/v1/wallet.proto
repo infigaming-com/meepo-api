@@ -1678,14 +1678,9 @@ message SetPredictionSettingsRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	// Plain ratio (e.g. "0.10" = 10%).
 	string commission_rate = 2;
-	// Absolute decimal in the sub-account's settlement currency. "0" =
-	// disabled (per-operator opt-in). Non-zero values must be > 0.
-	//
-	// `optional` to distinguish "unset" from "explicit empty / zero": a
-	// partial-update RPC call (e.g. one that only changes commission_rate)
-	// MUST omit this field rather than send "", so the server preserves
-	// the existing row's threshold instead of silently resetting alerts to 0.
-	optional string balance_alert_threshold = 3;
+	// Absolute decimal, must be >= 0; "0" = disabled.
+	// Set overwrites the row — caller submits full state; no partial updates.
+	string balance_alert_threshold = 3;
 }
 
 message SetPredictionSettingsResponse {

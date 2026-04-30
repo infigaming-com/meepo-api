@@ -888,6 +888,9 @@ message GetPredictionSettingsRequest {
 message SetPredictionSettingsRequest {
 	// Plain ratio (0.10 = 10%).
 	string commission_rate = 1;
+	// Absolute decimal, must be >= 0; "0" = disabled.
+	// Set overwrites the row — caller submits full state; no partial updates.
+	string balance_alert_threshold = 2;
 }
 
 message ListOperatorBalanceTransactionsRequest {
