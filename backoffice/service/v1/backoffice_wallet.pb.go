@@ -2721,10 +2721,11 @@ type SetPredictionSettingsRequest struct {
 	// Plain ratio (0.10 = 10%).
 	CommissionRate string `protobuf:"bytes,1,opt,name=commission_rate,json=commissionRate,proto3" json:"commission_rate,omitempty"`
 	// Absolute decimal in the sub-account's settlement currency. "0" =
-	// disabled (per-operator opt-in). `optional` so an absent field
-	// preserves the existing row's threshold on partial updates —
-	// mirrors wallet.SetPredictionSettingsRequest.balance_alert_threshold.
-	BalanceAlertThreshold *string `protobuf:"bytes,2,opt,name=balance_alert_threshold,json=balanceAlertThreshold,proto3,oneof" json:"balance_alert_threshold,omitempty"`
+	// disabled (per-operator opt-in). Server overwrites the row with
+	// every Set call, so callers MUST submit the full state (including
+	// the current threshold value) on every save — partial-update
+	// semantics are intentionally not supported on this RPC.
+	BalanceAlertThreshold string `protobuf:"bytes,2,opt,name=balance_alert_threshold,json=balanceAlertThreshold,proto3" json:"balance_alert_threshold,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -2767,8 +2768,8 @@ func (x *SetPredictionSettingsRequest) GetCommissionRate() string {
 }
 
 func (x *SetPredictionSettingsRequest) GetBalanceAlertThreshold() string {
-	if x != nil && x.BalanceAlertThreshold != nil {
-		return *x.BalanceAlertThreshold
+	if x != nil {
+		return x.BalanceAlertThreshold
 	}
 	return ""
 }
@@ -6607,11 +6608,10 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\x1e\n" +
-	"\x1cGetPredictionSettingsRequest\"\xa0\x01\n" +
+	"\x1cGetPredictionSettingsRequest\"\x7f\n" +
 	"\x1cSetPredictionSettingsRequest\x12'\n" +
-	"\x0fcommission_rate\x18\x01 \x01(\tR\x0ecommissionRate\x12;\n" +
-	"\x17balance_alert_threshold\x18\x02 \x01(\tH\x00R\x15balanceAlertThreshold\x88\x01\x01B\x1a\n" +
-	"\x18_balance_alert_threshold\"\xc3\x04\n" +
+	"\x0fcommission_rate\x18\x01 \x01(\tR\x0ecommissionRate\x126\n" +
+	"\x17balance_alert_threshold\x18\x02 \x01(\tR\x15balanceAlertThreshold\"\xc3\x04\n" +
 	"&ListOperatorBalanceTransactionsRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x123\n" +
 	"\x15settlement_currencies\x18\x02 \x03(\tR\x14settlementCurrencies\x12+\n" +
@@ -7444,7 +7444,6 @@ func file_backoffice_service_v1_backoffice_wallet_proto_init() {
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[15].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[34].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[35].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[37].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[38].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[44].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[48].OneofWrappers = []any{}

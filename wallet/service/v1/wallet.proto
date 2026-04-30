@@ -1679,13 +1679,12 @@ message SetPredictionSettingsRequest {
 	// Plain ratio (e.g. "0.10" = 10%).
 	string commission_rate = 2;
 	// Absolute decimal in the sub-account's settlement currency. "0" =
-	// disabled (per-operator opt-in). Non-zero values must be > 0.
-	//
-	// `optional` to distinguish "unset" from "explicit empty / zero": a
-	// partial-update RPC call (e.g. one that only changes commission_rate)
-	// MUST omit this field rather than send "", so the server preserves
-	// the existing row's threshold instead of silently resetting alerts to 0.
-	optional string balance_alert_threshold = 3;
+	// disabled (per-operator opt-in). Server overwrites the row with
+	// every Set call, so callers MUST submit the full state (including
+	// the current threshold value) on every save — partial-update
+	// semantics are intentionally not supported on this RPC. Non-zero
+	// values must be > 0.
+	string balance_alert_threshold = 3;
 }
 
 message SetPredictionSettingsResponse {

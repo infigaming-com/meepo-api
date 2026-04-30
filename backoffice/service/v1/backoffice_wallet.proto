@@ -889,10 +889,11 @@ message SetPredictionSettingsRequest {
 	// Plain ratio (0.10 = 10%).
 	string commission_rate = 1;
 	// Absolute decimal in the sub-account's settlement currency. "0" =
-	// disabled (per-operator opt-in). `optional` so an absent field
-	// preserves the existing row's threshold on partial updates —
-	// mirrors wallet.SetPredictionSettingsRequest.balance_alert_threshold.
-	optional string balance_alert_threshold = 2;
+	// disabled (per-operator opt-in). Server overwrites the row with
+	// every Set call, so callers MUST submit the full state (including
+	// the current threshold value) on every save — partial-update
+	// semantics are intentionally not supported on this RPC.
+	string balance_alert_threshold = 2;
 }
 
 message ListOperatorBalanceTransactionsRequest {
