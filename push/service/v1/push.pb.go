@@ -326,7 +326,9 @@ type SendTemplatedEmailRequest struct {
 	// (TEMPLATE_DEFAULT) is the right choice for almost every caller.
 	SenderMode SenderMode `protobuf:"varint,6,opt,name=sender_mode,json=senderMode,proto3,enum=api.push.service.v1.SenderMode" json:"sender_mode,omitempty"`
 	// Optional From override. Empty → push-service derives From from the
-	// resolved sender_mode (system default or operator binding).
+	// resolved sender mode: SYSTEM uses the configured speedix.io sender;
+	// OPERATOR uses the operator's bound sending email when the binding
+	// is active, otherwise falls back to the system sender.
 	From string `protobuf:"bytes,7,opt,name=from,proto3" json:"from,omitempty"`
 	// Optional language. Empty → 'en'. Affects template-row lookup only.
 	Language      *string `protobuf:"bytes,8,opt,name=language,proto3,oneof" json:"language,omitempty"`

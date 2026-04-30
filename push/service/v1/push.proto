@@ -91,7 +91,9 @@ message SendTemplatedEmailRequest {
 	// (TEMPLATE_DEFAULT) is the right choice for almost every caller.
 	SenderMode sender_mode = 6;
 	// Optional From override. Empty → push-service derives From from the
-	// resolved sender_mode (system default or operator binding).
+	// resolved sender mode: SYSTEM uses the configured speedix.io sender;
+	// OPERATOR uses the operator's bound sending email when the binding
+	// is active, otherwise falls back to the system sender.
 	string from = 7;
 	// Optional language. Empty → 'en'. Affects template-row lookup only.
 	optional string language = 8;
