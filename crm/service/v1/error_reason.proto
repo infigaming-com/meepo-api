@@ -36,4 +36,35 @@ enum ErrorReason {
   // Calculation errors
   CALCULATION_IN_PROGRESS = 40 [(errors.code) = 409];
   CALCULATION_FAILED = 41 [(errors.code) = 500];
+
+  // ========== Risk (claim eligibility / game restriction) errors ==========
+  // Migrated from risk-service (api.risk.service.v1.ErrorReason 160001-160026).
+  CLAIM_RULE_NOT_FOUND = 160001 [(errors.code) = 404];
+  GAME_RESTRICTION_RULE_NOT_FOUND = 160002 [(errors.code) = 404];
+  INVALID_RULE_NAME = 160003 [(errors.code) = 400];
+  INVALID_PRIORITY = 160004 [(errors.code) = 400];
+  INVALID_TARGET_OBJECT = 160005 [(errors.code) = 400];
+  INVALID_SEGMENT_ID = 160006 [(errors.code) = 400];
+  DUPLICATE_RULE_NAME = 160007 [(errors.code) = 409];
+  CLAIM_REJECTED_KYC_REQUIRED = 160008 [(errors.code) = 403];
+  CLAIM_REJECTED_PHONE_REQUIRED = 160009 [(errors.code) = 403];
+  CLAIM_REJECTED_EMAIL_REQUIRED = 160010 [(errors.code) = 403];
+  CLAIM_REJECTED_SAME_TYPE_ACTIVE = 160011 [(errors.code) = 403];
+  CLAIM_REJECTED_IP_LIMIT_EXCEEDED = 160012 [(errors.code) = 403];
+  CLAIM_REJECTED_SAME_REWARD_IP_LIMIT_EXCEEDED = 160013 [(errors.code) = 403];
+  CLAIM_REJECTED_DEVICE_LIMIT_EXCEEDED = 160014 [(errors.code) = 403];
+  CLAIM_REJECTED_SAME_REWARD_DEVICE_LIMIT_EXCEEDED = 160015 [(errors.code) = 403];
+  // Deprecated: use CLAIM_RULE_NOT_CONFIGURED for missing-rule cases.
+  CLAIM_REJECTED_NO_MATCHING_RULE = 160016 [(errors.code) = 403];
+  // No active claim rule is configured for this operator/segment. Configuration error, not a user rejection.
+  CLAIM_RULE_NOT_CONFIGURED = 160017;
+  GAME_RESTRICTED_BONUS_NOT_ALLOWED = 160018 [(errors.code) = 403];
+  GAME_RESTRICTED_BONUS_BUY_DISABLED = 160019 [(errors.code) = 403];
+  GAME_RESTRICTED_PROVIDER_NOT_ALLOWED = 160020 [(errors.code) = 403];
+  GAME_RESTRICTED_GAME_NOT_ALLOWED = 160021 [(errors.code) = 403];
+  CRM_SERVICE_ERROR = 160022;
+  USER_SERVICE_ERROR = 160023;
+  WALLET_SERVICE_ERROR = 160024;
+  DATABASE_ERROR = 160025;
+  RULE_EVALUATION_ERROR = 160026;
 }

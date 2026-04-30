@@ -45,43 +45,125 @@ const (
 	// Calculation errors
 	ErrorReason_CALCULATION_IN_PROGRESS ErrorReason = 40
 	ErrorReason_CALCULATION_FAILED      ErrorReason = 41
+	// ========== Risk (claim eligibility / game restriction) errors ==========
+	// Migrated from risk-service (api.risk.service.v1.ErrorReason 160001-160026).
+	ErrorReason_CLAIM_RULE_NOT_FOUND                             ErrorReason = 160001
+	ErrorReason_GAME_RESTRICTION_RULE_NOT_FOUND                  ErrorReason = 160002
+	ErrorReason_INVALID_RULE_NAME                                ErrorReason = 160003
+	ErrorReason_INVALID_PRIORITY                                 ErrorReason = 160004
+	ErrorReason_INVALID_TARGET_OBJECT                            ErrorReason = 160005
+	ErrorReason_INVALID_SEGMENT_ID                               ErrorReason = 160006
+	ErrorReason_DUPLICATE_RULE_NAME                              ErrorReason = 160007
+	ErrorReason_CLAIM_REJECTED_KYC_REQUIRED                      ErrorReason = 160008
+	ErrorReason_CLAIM_REJECTED_PHONE_REQUIRED                    ErrorReason = 160009
+	ErrorReason_CLAIM_REJECTED_EMAIL_REQUIRED                    ErrorReason = 160010
+	ErrorReason_CLAIM_REJECTED_SAME_TYPE_ACTIVE                  ErrorReason = 160011
+	ErrorReason_CLAIM_REJECTED_IP_LIMIT_EXCEEDED                 ErrorReason = 160012
+	ErrorReason_CLAIM_REJECTED_SAME_REWARD_IP_LIMIT_EXCEEDED     ErrorReason = 160013
+	ErrorReason_CLAIM_REJECTED_DEVICE_LIMIT_EXCEEDED             ErrorReason = 160014
+	ErrorReason_CLAIM_REJECTED_SAME_REWARD_DEVICE_LIMIT_EXCEEDED ErrorReason = 160015
+	// Deprecated: use CLAIM_RULE_NOT_CONFIGURED for missing-rule cases.
+	ErrorReason_CLAIM_REJECTED_NO_MATCHING_RULE ErrorReason = 160016
+	// No active claim rule is configured for this operator/segment. Configuration error, not a user rejection.
+	ErrorReason_CLAIM_RULE_NOT_CONFIGURED            ErrorReason = 160017
+	ErrorReason_GAME_RESTRICTED_BONUS_NOT_ALLOWED    ErrorReason = 160018
+	ErrorReason_GAME_RESTRICTED_BONUS_BUY_DISABLED   ErrorReason = 160019
+	ErrorReason_GAME_RESTRICTED_PROVIDER_NOT_ALLOWED ErrorReason = 160020
+	ErrorReason_GAME_RESTRICTED_GAME_NOT_ALLOWED     ErrorReason = 160021
+	ErrorReason_CRM_SERVICE_ERROR                    ErrorReason = 160022
+	ErrorReason_USER_SERVICE_ERROR                   ErrorReason = 160023
+	ErrorReason_WALLET_SERVICE_ERROR                 ErrorReason = 160024
+	ErrorReason_DATABASE_ERROR                       ErrorReason = 160025
+	ErrorReason_RULE_EVALUATION_ERROR                ErrorReason = 160026
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0:  "ERROR_REASON_UNSPECIFIED",
-		1:  "SEGMENT_NOT_FOUND",
-		2:  "SEGMENT_KEY_ALREADY_EXISTS",
-		3:  "SEGMENT_INVALID_RULES",
-		4:  "SEGMENT_LIMIT_EXCEEDED",
-		5:  "SEGMENT_PERMISSION_DENIED",
-		6:  "SEGMENT_CANNOT_DELETE_INHERITED",
-		10: "FIELD_NOT_FOUND",
-		11: "OPERATOR_NOT_SUPPORTED",
-		12: "VALUE_INVALID",
-		20: "USER_AGGREGATE_NOT_FOUND",
-		30: "OPERATOR_CONTEXT_NOT_FOUND",
-		31: "OPERATOR_CONTEXT_PERMISSION_DENIED",
-		40: "CALCULATION_IN_PROGRESS",
-		41: "CALCULATION_FAILED",
+		0:      "ERROR_REASON_UNSPECIFIED",
+		1:      "SEGMENT_NOT_FOUND",
+		2:      "SEGMENT_KEY_ALREADY_EXISTS",
+		3:      "SEGMENT_INVALID_RULES",
+		4:      "SEGMENT_LIMIT_EXCEEDED",
+		5:      "SEGMENT_PERMISSION_DENIED",
+		6:      "SEGMENT_CANNOT_DELETE_INHERITED",
+		10:     "FIELD_NOT_FOUND",
+		11:     "OPERATOR_NOT_SUPPORTED",
+		12:     "VALUE_INVALID",
+		20:     "USER_AGGREGATE_NOT_FOUND",
+		30:     "OPERATOR_CONTEXT_NOT_FOUND",
+		31:     "OPERATOR_CONTEXT_PERMISSION_DENIED",
+		40:     "CALCULATION_IN_PROGRESS",
+		41:     "CALCULATION_FAILED",
+		160001: "CLAIM_RULE_NOT_FOUND",
+		160002: "GAME_RESTRICTION_RULE_NOT_FOUND",
+		160003: "INVALID_RULE_NAME",
+		160004: "INVALID_PRIORITY",
+		160005: "INVALID_TARGET_OBJECT",
+		160006: "INVALID_SEGMENT_ID",
+		160007: "DUPLICATE_RULE_NAME",
+		160008: "CLAIM_REJECTED_KYC_REQUIRED",
+		160009: "CLAIM_REJECTED_PHONE_REQUIRED",
+		160010: "CLAIM_REJECTED_EMAIL_REQUIRED",
+		160011: "CLAIM_REJECTED_SAME_TYPE_ACTIVE",
+		160012: "CLAIM_REJECTED_IP_LIMIT_EXCEEDED",
+		160013: "CLAIM_REJECTED_SAME_REWARD_IP_LIMIT_EXCEEDED",
+		160014: "CLAIM_REJECTED_DEVICE_LIMIT_EXCEEDED",
+		160015: "CLAIM_REJECTED_SAME_REWARD_DEVICE_LIMIT_EXCEEDED",
+		160016: "CLAIM_REJECTED_NO_MATCHING_RULE",
+		160017: "CLAIM_RULE_NOT_CONFIGURED",
+		160018: "GAME_RESTRICTED_BONUS_NOT_ALLOWED",
+		160019: "GAME_RESTRICTED_BONUS_BUY_DISABLED",
+		160020: "GAME_RESTRICTED_PROVIDER_NOT_ALLOWED",
+		160021: "GAME_RESTRICTED_GAME_NOT_ALLOWED",
+		160022: "CRM_SERVICE_ERROR",
+		160023: "USER_SERVICE_ERROR",
+		160024: "WALLET_SERVICE_ERROR",
+		160025: "DATABASE_ERROR",
+		160026: "RULE_EVALUATION_ERROR",
 	}
 	ErrorReason_value = map[string]int32{
-		"ERROR_REASON_UNSPECIFIED":           0,
-		"SEGMENT_NOT_FOUND":                  1,
-		"SEGMENT_KEY_ALREADY_EXISTS":         2,
-		"SEGMENT_INVALID_RULES":              3,
-		"SEGMENT_LIMIT_EXCEEDED":             4,
-		"SEGMENT_PERMISSION_DENIED":          5,
-		"SEGMENT_CANNOT_DELETE_INHERITED":    6,
-		"FIELD_NOT_FOUND":                    10,
-		"OPERATOR_NOT_SUPPORTED":             11,
-		"VALUE_INVALID":                      12,
-		"USER_AGGREGATE_NOT_FOUND":           20,
-		"OPERATOR_CONTEXT_NOT_FOUND":         30,
-		"OPERATOR_CONTEXT_PERMISSION_DENIED": 31,
-		"CALCULATION_IN_PROGRESS":            40,
-		"CALCULATION_FAILED":                 41,
+		"ERROR_REASON_UNSPECIFIED":                         0,
+		"SEGMENT_NOT_FOUND":                                1,
+		"SEGMENT_KEY_ALREADY_EXISTS":                       2,
+		"SEGMENT_INVALID_RULES":                            3,
+		"SEGMENT_LIMIT_EXCEEDED":                           4,
+		"SEGMENT_PERMISSION_DENIED":                        5,
+		"SEGMENT_CANNOT_DELETE_INHERITED":                  6,
+		"FIELD_NOT_FOUND":                                  10,
+		"OPERATOR_NOT_SUPPORTED":                           11,
+		"VALUE_INVALID":                                    12,
+		"USER_AGGREGATE_NOT_FOUND":                         20,
+		"OPERATOR_CONTEXT_NOT_FOUND":                       30,
+		"OPERATOR_CONTEXT_PERMISSION_DENIED":               31,
+		"CALCULATION_IN_PROGRESS":                          40,
+		"CALCULATION_FAILED":                               41,
+		"CLAIM_RULE_NOT_FOUND":                             160001,
+		"GAME_RESTRICTION_RULE_NOT_FOUND":                  160002,
+		"INVALID_RULE_NAME":                                160003,
+		"INVALID_PRIORITY":                                 160004,
+		"INVALID_TARGET_OBJECT":                            160005,
+		"INVALID_SEGMENT_ID":                               160006,
+		"DUPLICATE_RULE_NAME":                              160007,
+		"CLAIM_REJECTED_KYC_REQUIRED":                      160008,
+		"CLAIM_REJECTED_PHONE_REQUIRED":                    160009,
+		"CLAIM_REJECTED_EMAIL_REQUIRED":                    160010,
+		"CLAIM_REJECTED_SAME_TYPE_ACTIVE":                  160011,
+		"CLAIM_REJECTED_IP_LIMIT_EXCEEDED":                 160012,
+		"CLAIM_REJECTED_SAME_REWARD_IP_LIMIT_EXCEEDED":     160013,
+		"CLAIM_REJECTED_DEVICE_LIMIT_EXCEEDED":             160014,
+		"CLAIM_REJECTED_SAME_REWARD_DEVICE_LIMIT_EXCEEDED": 160015,
+		"CLAIM_REJECTED_NO_MATCHING_RULE":                  160016,
+		"CLAIM_RULE_NOT_CONFIGURED":                        160017,
+		"GAME_RESTRICTED_BONUS_NOT_ALLOWED":                160018,
+		"GAME_RESTRICTED_BONUS_BUY_DISABLED":               160019,
+		"GAME_RESTRICTED_PROVIDER_NOT_ALLOWED":             160020,
+		"GAME_RESTRICTED_GAME_NOT_ALLOWED":                 160021,
+		"CRM_SERVICE_ERROR":                                160022,
+		"USER_SERVICE_ERROR":                               160023,
+		"WALLET_SERVICE_ERROR":                             160024,
+		"DATABASE_ERROR":                                   160025,
+		"RULE_EVALUATION_ERROR":                            160026,
 	}
 )
 
@@ -116,7 +198,7 @@ var File_crm_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_crm_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"!crm/service/v1/error_reason.proto\x12\x12api.crm.service.v1\x1a\x13errors/errors.proto*\x96\x04\n" +
+	"!crm/service/v1/error_reason.proto\x12\x12api.crm.service.v1\x1a\x13errors/errors.proto*\x99\f\n" +
 	"\vErrorReason\x12\x1c\n" +
 	"\x18ERROR_REASON_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x11SEGMENT_NOT_FOUND\x10\x01\x1a\x04\xa8E\x94\x03\x12$\n" +
@@ -133,7 +215,33 @@ const file_crm_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1aOPERATOR_CONTEXT_NOT_FOUND\x10\x1e\x1a\x04\xa8E\x90\x03\x12,\n" +
 	"\"OPERATOR_CONTEXT_PERMISSION_DENIED\x10\x1f\x1a\x04\xa8E\x93\x03\x12!\n" +
 	"\x17CALCULATION_IN_PROGRESS\x10(\x1a\x04\xa8E\x99\x03\x12\x1c\n" +
-	"\x12CALCULATION_FAILED\x10)\x1a\x04\xa8E\xf4\x03\x1a\x04\xa0E\xf4\x03BM\n" +
+	"\x12CALCULATION_FAILED\x10)\x1a\x04\xa8E\xf4\x03\x12 \n" +
+	"\x14CLAIM_RULE_NOT_FOUND\x10\x81\xe2\t\x1a\x04\xa8E\x94\x03\x12+\n" +
+	"\x1fGAME_RESTRICTION_RULE_NOT_FOUND\x10\x82\xe2\t\x1a\x04\xa8E\x94\x03\x12\x1d\n" +
+	"\x11INVALID_RULE_NAME\x10\x83\xe2\t\x1a\x04\xa8E\x90\x03\x12\x1c\n" +
+	"\x10INVALID_PRIORITY\x10\x84\xe2\t\x1a\x04\xa8E\x90\x03\x12!\n" +
+	"\x15INVALID_TARGET_OBJECT\x10\x85\xe2\t\x1a\x04\xa8E\x90\x03\x12\x1e\n" +
+	"\x12INVALID_SEGMENT_ID\x10\x86\xe2\t\x1a\x04\xa8E\x90\x03\x12\x1f\n" +
+	"\x13DUPLICATE_RULE_NAME\x10\x87\xe2\t\x1a\x04\xa8E\x99\x03\x12'\n" +
+	"\x1bCLAIM_REJECTED_KYC_REQUIRED\x10\x88\xe2\t\x1a\x04\xa8E\x93\x03\x12)\n" +
+	"\x1dCLAIM_REJECTED_PHONE_REQUIRED\x10\x89\xe2\t\x1a\x04\xa8E\x93\x03\x12)\n" +
+	"\x1dCLAIM_REJECTED_EMAIL_REQUIRED\x10\x8a\xe2\t\x1a\x04\xa8E\x93\x03\x12+\n" +
+	"\x1fCLAIM_REJECTED_SAME_TYPE_ACTIVE\x10\x8b\xe2\t\x1a\x04\xa8E\x93\x03\x12,\n" +
+	" CLAIM_REJECTED_IP_LIMIT_EXCEEDED\x10\x8c\xe2\t\x1a\x04\xa8E\x93\x03\x128\n" +
+	",CLAIM_REJECTED_SAME_REWARD_IP_LIMIT_EXCEEDED\x10\x8d\xe2\t\x1a\x04\xa8E\x93\x03\x120\n" +
+	"$CLAIM_REJECTED_DEVICE_LIMIT_EXCEEDED\x10\x8e\xe2\t\x1a\x04\xa8E\x93\x03\x12<\n" +
+	"0CLAIM_REJECTED_SAME_REWARD_DEVICE_LIMIT_EXCEEDED\x10\x8f\xe2\t\x1a\x04\xa8E\x93\x03\x12+\n" +
+	"\x1fCLAIM_REJECTED_NO_MATCHING_RULE\x10\x90\xe2\t\x1a\x04\xa8E\x93\x03\x12\x1f\n" +
+	"\x19CLAIM_RULE_NOT_CONFIGURED\x10\x91\xe2\t\x12-\n" +
+	"!GAME_RESTRICTED_BONUS_NOT_ALLOWED\x10\x92\xe2\t\x1a\x04\xa8E\x93\x03\x12.\n" +
+	"\"GAME_RESTRICTED_BONUS_BUY_DISABLED\x10\x93\xe2\t\x1a\x04\xa8E\x93\x03\x120\n" +
+	"$GAME_RESTRICTED_PROVIDER_NOT_ALLOWED\x10\x94\xe2\t\x1a\x04\xa8E\x93\x03\x12,\n" +
+	" GAME_RESTRICTED_GAME_NOT_ALLOWED\x10\x95\xe2\t\x1a\x04\xa8E\x93\x03\x12\x17\n" +
+	"\x11CRM_SERVICE_ERROR\x10\x96\xe2\t\x12\x18\n" +
+	"\x12USER_SERVICE_ERROR\x10\x97\xe2\t\x12\x1a\n" +
+	"\x14WALLET_SERVICE_ERROR\x10\x98\xe2\t\x12\x14\n" +
+	"\x0eDATABASE_ERROR\x10\x99\xe2\t\x12\x1b\n" +
+	"\x15RULE_EVALUATION_ERROR\x10\x9a\xe2\t\x1a\x04\xa0E\xf4\x03BM\n" +
 	"\x12api.crm.service.v1P\x01Z5github.com/infigaming-com/meepo-api/crm/service/v1;v1b\x06proto3"
 
 var (
