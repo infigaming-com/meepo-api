@@ -458,8 +458,6 @@ func (m *SendTemplatedEmailRequest) validate(all bool) error {
 
 	// no validation rules for SenderMode
 
-	// no validation rules for From
-
 	if m.Language != nil {
 		// no validation rules for Language
 	}
