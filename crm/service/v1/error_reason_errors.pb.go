@@ -200,3 +200,323 @@ func IsCalculationFailed(err error) bool {
 func ErrorCalculationFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CALCULATION_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// ========== Risk (claim eligibility / game restriction) errors ==========
+// Migrated from risk-service (api.risk.service.v1.ErrorReason 160001-160026).
+func IsClaimRuleNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_RULE_NOT_FOUND.String() && e.Code == 404
+}
+
+// ========== Risk (claim eligibility / game restriction) errors ==========
+// Migrated from risk-service (api.risk.service.v1.ErrorReason 160001-160026).
+func ErrorClaimRuleNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_CLAIM_RULE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGameRestrictionRuleNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_RESTRICTION_RULE_NOT_FOUND.String() && e.Code == 404
+}
+
+func ErrorGameRestrictionRuleNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_GAME_RESTRICTION_RULE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidRuleName(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_RULE_NAME.String() && e.Code == 400
+}
+
+func ErrorInvalidRuleName(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_RULE_NAME.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPriority(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_PRIORITY.String() && e.Code == 400
+}
+
+func ErrorInvalidPriority(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_PRIORITY.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidTargetObject(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_TARGET_OBJECT.String() && e.Code == 400
+}
+
+func ErrorInvalidTargetObject(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_TARGET_OBJECT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidSegmentId(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_SEGMENT_ID.String() && e.Code == 400
+}
+
+func ErrorInvalidSegmentId(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_SEGMENT_ID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDuplicateRuleName(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DUPLICATE_RULE_NAME.String() && e.Code == 409
+}
+
+func ErrorDuplicateRuleName(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_DUPLICATE_RULE_NAME.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimRejectedKycRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_REJECTED_KYC_REQUIRED.String() && e.Code == 403
+}
+
+func ErrorClaimRejectedKycRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_CLAIM_REJECTED_KYC_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimRejectedPhoneRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_REJECTED_PHONE_REQUIRED.String() && e.Code == 403
+}
+
+func ErrorClaimRejectedPhoneRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_CLAIM_REJECTED_PHONE_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimRejectedEmailRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_REJECTED_EMAIL_REQUIRED.String() && e.Code == 403
+}
+
+func ErrorClaimRejectedEmailRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_CLAIM_REJECTED_EMAIL_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimRejectedSameTypeActive(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_REJECTED_SAME_TYPE_ACTIVE.String() && e.Code == 403
+}
+
+func ErrorClaimRejectedSameTypeActive(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_CLAIM_REJECTED_SAME_TYPE_ACTIVE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimRejectedIpLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_REJECTED_IP_LIMIT_EXCEEDED.String() && e.Code == 403
+}
+
+func ErrorClaimRejectedIpLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_CLAIM_REJECTED_IP_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimRejectedSameRewardIpLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_REJECTED_SAME_REWARD_IP_LIMIT_EXCEEDED.String() && e.Code == 403
+}
+
+func ErrorClaimRejectedSameRewardIpLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_CLAIM_REJECTED_SAME_REWARD_IP_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimRejectedDeviceLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_REJECTED_DEVICE_LIMIT_EXCEEDED.String() && e.Code == 403
+}
+
+func ErrorClaimRejectedDeviceLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_CLAIM_REJECTED_DEVICE_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimRejectedSameRewardDeviceLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_REJECTED_SAME_REWARD_DEVICE_LIMIT_EXCEEDED.String() && e.Code == 403
+}
+
+func ErrorClaimRejectedSameRewardDeviceLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_CLAIM_REJECTED_SAME_REWARD_DEVICE_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+// Deprecated: use CLAIM_RULE_NOT_CONFIGURED for missing-rule cases.
+func IsClaimRejectedNoMatchingRule(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_REJECTED_NO_MATCHING_RULE.String() && e.Code == 403
+}
+
+// Deprecated: use CLAIM_RULE_NOT_CONFIGURED for missing-rule cases.
+func ErrorClaimRejectedNoMatchingRule(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_CLAIM_REJECTED_NO_MATCHING_RULE.String(), fmt.Sprintf(format, args...))
+}
+
+// No active claim rule is configured for this operator/segment. Configuration error, not a user rejection.
+func IsClaimRuleNotConfigured(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_RULE_NOT_CONFIGURED.String() && e.Code == 500
+}
+
+// No active claim rule is configured for this operator/segment. Configuration error, not a user rejection.
+func ErrorClaimRuleNotConfigured(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLAIM_RULE_NOT_CONFIGURED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGameRestrictedBonusNotAllowed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_RESTRICTED_BONUS_NOT_ALLOWED.String() && e.Code == 403
+}
+
+func ErrorGameRestrictedBonusNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_GAME_RESTRICTED_BONUS_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGameRestrictedBonusBuyDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_RESTRICTED_BONUS_BUY_DISABLED.String() && e.Code == 403
+}
+
+func ErrorGameRestrictedBonusBuyDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_GAME_RESTRICTED_BONUS_BUY_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGameRestrictedProviderNotAllowed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_RESTRICTED_PROVIDER_NOT_ALLOWED.String() && e.Code == 403
+}
+
+func ErrorGameRestrictedProviderNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_GAME_RESTRICTED_PROVIDER_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGameRestrictedGameNotAllowed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_RESTRICTED_GAME_NOT_ALLOWED.String() && e.Code == 403
+}
+
+func ErrorGameRestrictedGameNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_GAME_RESTRICTED_GAME_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCrmServiceError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CRM_SERVICE_ERROR.String() && e.Code == 500
+}
+
+func ErrorCrmServiceError(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CRM_SERVICE_ERROR.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserServiceError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_SERVICE_ERROR.String() && e.Code == 500
+}
+
+func ErrorUserServiceError(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_SERVICE_ERROR.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWalletServiceError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WALLET_SERVICE_ERROR.String() && e.Code == 500
+}
+
+func ErrorWalletServiceError(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WALLET_SERVICE_ERROR.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDatabaseError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DATABASE_ERROR.String() && e.Code == 500
+}
+
+func ErrorDatabaseError(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DATABASE_ERROR.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRuleEvaluationError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_RULE_EVALUATION_ERROR.String() && e.Code == 500
+}
+
+func ErrorRuleEvaluationError(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_RULE_EVALUATION_ERROR.String(), fmt.Sprintf(format, args...))
+}
