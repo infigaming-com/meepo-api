@@ -7967,12 +7967,8 @@ type SetPredictionSettingsRequest struct {
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	// Plain ratio (e.g. "0.10" = 10%).
 	CommissionRate string `protobuf:"bytes,2,opt,name=commission_rate,json=commissionRate,proto3" json:"commission_rate,omitempty"`
-	// Absolute decimal in the sub-account's settlement currency. "0" =
-	// disabled (per-operator opt-in). Server overwrites the row with
-	// every Set call, so callers MUST submit the full state (including
-	// the current threshold value) on every save — partial-update
-	// semantics are intentionally not supported on this RPC. Non-zero
-	// values must be > 0.
+	// Absolute decimal, must be >= 0; "0" = disabled.
+	// Set overwrites the row — caller submits full state; no partial updates.
 	BalanceAlertThreshold string `protobuf:"bytes,3,opt,name=balance_alert_threshold,json=balanceAlertThreshold,proto3" json:"balance_alert_threshold,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
