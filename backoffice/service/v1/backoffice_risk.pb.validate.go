@@ -18,7 +18,7 @@ import (
 
 	"google.golang.org/protobuf/types/known/anypb"
 
-	v1 "github.com/infigaming-com/meepo-api/risk/service/v1"
+	v1 "github.com/infigaming-com/meepo-api/crm/service/v1"
 )
 
 // ensure the imports are used

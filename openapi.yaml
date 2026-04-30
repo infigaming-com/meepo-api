@@ -7533,7 +7533,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.GetBonusBuyConfigResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.GetBonusBuyConfigResponse'
     /v1/backoffice/risk/bonus-buy-config/update:
         post:
             tags:
@@ -7551,7 +7551,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.UpdateBonusBuyConfigResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateBonusBuyConfigResponse'
     /v1/backoffice/risk/claim-rule/create:
         post:
             tags:
@@ -7570,7 +7570,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.CreateClaimRuleResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.CreateClaimRuleResponse'
     /v1/backoffice/risk/claim-rule/delete:
         post:
             tags:
@@ -7588,7 +7588,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.DeleteClaimRuleResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.DeleteClaimRuleResponse'
     /v1/backoffice/risk/claim-rule/get:
         post:
             tags:
@@ -7606,7 +7606,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.GetClaimRuleResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.GetClaimRuleResponse'
     /v1/backoffice/risk/claim-rule/list:
         post:
             tags:
@@ -7624,7 +7624,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.ListClaimRulesResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.ListClaimRulesResponse'
     /v1/backoffice/risk/claim-rule/priority/update:
         post:
             tags:
@@ -7642,7 +7642,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.UpdateClaimRulePriorityResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateClaimRulePriorityResponse'
     /v1/backoffice/risk/claim-rule/status/update:
         post:
             tags:
@@ -7660,7 +7660,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.UpdateClaimRuleStatusResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateClaimRuleStatusResponse'
     /v1/backoffice/risk/claim-rule/update:
         post:
             tags:
@@ -7678,7 +7678,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.UpdateClaimRuleResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateClaimRuleResponse'
     /v1/backoffice/risk/game-restriction-rule/create:
         post:
             tags:
@@ -7697,7 +7697,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.CreateGameRestrictionRuleResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.CreateGameRestrictionRuleResponse'
     /v1/backoffice/risk/game-restriction-rule/delete:
         post:
             tags:
@@ -7715,7 +7715,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.DeleteGameRestrictionRuleResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.DeleteGameRestrictionRuleResponse'
     /v1/backoffice/risk/game-restriction-rule/get:
         post:
             tags:
@@ -7733,7 +7733,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.GetGameRestrictionRuleResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.GetGameRestrictionRuleResponse'
     /v1/backoffice/risk/game-restriction-rule/list:
         post:
             tags:
@@ -7751,7 +7751,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.ListGameRestrictionRulesResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.ListGameRestrictionRulesResponse'
     /v1/backoffice/risk/game-restriction-rule/priority/update:
         post:
             tags:
@@ -7769,7 +7769,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.UpdateGameRestrictionRulePriorityResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateGameRestrictionRulePriorityResponse'
     /v1/backoffice/risk/game-restriction-rule/status/update:
         post:
             tags:
@@ -7787,7 +7787,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.UpdateGameRestrictionRuleStatusResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateGameRestrictionRuleStatusResponse'
     /v1/backoffice/risk/game-restriction-rule/update:
         post:
             tags:
@@ -7805,7 +7805,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.risk.service.v1.UpdateGameRestrictionRuleResponse'
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateGameRestrictionRuleResponse'
     /v1/backoffice/system/integrity/file-info/config/set:
         post:
             tags:
@@ -15798,14 +15798,14 @@ components:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.ClaimRule'
+                    $ref: '#/components/schemas/api.crm.service.v1.ClaimRule'
         api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest:
             type: object
             properties:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.GameRestrictionRule'
+                    $ref: '#/components/schemas/api.crm.service.v1.GameRestrictionRule'
         api.backoffice.service.v1.BackofficeCreateGameTagRequest:
             type: object
             properties:
@@ -16056,7 +16056,7 @@ components:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.ClaimRule'
+                    $ref: '#/components/schemas/api.crm.service.v1.ClaimRule'
         api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest:
             type: object
             properties:
@@ -16104,7 +16104,7 @@ components:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.GameRestrictionRule'
+                    $ref: '#/components/schemas/api.crm.service.v1.GameRestrictionRule'
         api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest:
             type: object
             properties:
@@ -27721,6 +27721,25 @@ components:
                 isRequired:
                     type: boolean
             description: AssetVersionInput represents input data for creating/updating asset versions inline
+        api.crm.service.v1.BonusBuyConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                enabled:
+                    type: boolean
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
         api.crm.service.v1.CalculateSegmentResponse:
             type: object
             properties:
@@ -27733,6 +27752,89 @@ components:
                 usersRemoved:
                     type: string
                     description: Number of users who no longer match and were marked as left the segment
+        api.crm.service.v1.ClaimRule:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                priority:
+                    type: integer
+                    format: int32
+                targetObject:
+                    enum:
+                        - TARGET_OBJECT_ALL_PLAYERS
+                        - TARGET_OBJECT_CRM_SEGMENT
+                    type: string
+                    format: enum
+                segmentId:
+                    type: string
+                segmentName:
+                    type: string
+                applicableRewardTypes:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Which reward_type values this rule applies to. Empty = applies to ALL
+                         reward types (backwards-compatible default). Non-empty = only matches
+                         CheckClaimEligibility requests whose reward_type is in the list.
+                         Examples: ["vip_reward"], ["promo_code","deposit_reward"], [].
+                requireKyc:
+                    type: boolean
+                    description: Account restrictions
+                requirePhone:
+                    type: boolean
+                requireEmail:
+                    type: boolean
+                sameTypeExclusion:
+                    type: boolean
+                    description: Exclusion logic
+                ipDedupEnabled:
+                    type: boolean
+                    description: Risk detection - IP
+                sameIpClaimLimit:
+                    type: integer
+                    format: int32
+                sameRewardSameIpLimit:
+                    type: integer
+                    format: int32
+                deviceDedupEnabled:
+                    type: boolean
+                    description: Risk detection - Device
+                sameDeviceClaimLimit:
+                    type: integer
+                    format: int32
+                sameRewardSameDeviceLimit:
+                    type: integer
+                    format: int32
+                ipDeviceWindowHours:
+                    type: integer
+                    description: Sliding time window in hours for IP/Device dedup counts (default 0 = use 24h fallback).
+                    format: int32
+                status:
+                    enum:
+                        - RULE_STATUS_ACTIVE
+                        - RULE_STATUS_DISABLED
+                    type: string
+                    format: enum
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                inheritedFromLevel:
+                    type: string
+                    description: '"self" | "system" | "retailer" | "company" | "operator"'
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: ClaimRule controls who can claim a bonus.
         api.crm.service.v1.CreateAssetResponse:
             type: object
             properties:
@@ -27743,6 +27845,16 @@ components:
             properties:
                 version:
                     $ref: '#/components/schemas/api.crm.service.v1.AssetVersion'
+        api.crm.service.v1.CreateClaimRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.crm.service.v1.ClaimRule'
+        api.crm.service.v1.CreateGameRestrictionRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.crm.service.v1.GameRestrictionRule'
         api.crm.service.v1.CreateSegmentResponse:
             type: object
             properties:
@@ -27755,6 +27867,12 @@ components:
             type: object
             properties: {}
         api.crm.service.v1.DeleteAssetVersionResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.DeleteClaimRuleResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.DeleteGameRestrictionRuleResponse:
             type: object
             properties: {}
         api.crm.service.v1.DeleteSegmentResponse:
@@ -27791,6 +27909,58 @@ components:
                     type: boolean
                     description: Whether this field supports currency filtering (e.g., deposit_amount can be filtered by "USD", "EUR")
             description: Field schema for the frontend query builder - describes a single queryable field
+        api.crm.service.v1.GameRestrictionRule:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                priority:
+                    type: integer
+                    format: int32
+                targetObject:
+                    enum:
+                        - TARGET_OBJECT_ALL_PLAYERS
+                        - TARGET_OBJECT_CRM_SEGMENT
+                    type: string
+                    format: enum
+                segmentId:
+                    type: string
+                segmentName:
+                    type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameTagIds:
+                    type: array
+                    items:
+                        type: string
+                allGames:
+                    type: boolean
+                status:
+                    enum:
+                        - RULE_STATUS_ACTIVE
+                        - RULE_STATUS_DISABLED
+                    type: string
+                    format: enum
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                inheritedFromLevel:
+                    type: string
+                    description: '"self" | "system" | "retailer" | "company" | "operator"'
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: GameRestrictionRule controls which games a bonus holder can play.
         api.crm.service.v1.GetAssetResponse:
             type: object
             properties:
@@ -27801,6 +27971,21 @@ components:
             properties:
                 version:
                     $ref: '#/components/schemas/api.crm.service.v1.AssetVersion'
+        api.crm.service.v1.GetBonusBuyConfigResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.crm.service.v1.BonusBuyConfig'
+        api.crm.service.v1.GetClaimRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.crm.service.v1.ClaimRule'
+        api.crm.service.v1.GetGameRestrictionRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.crm.service.v1.GameRestrictionRule'
         api.crm.service.v1.GetSegmentFieldSchemaResponse:
             type: object
             properties:
@@ -27889,6 +28074,38 @@ components:
                     format: int32
                 total:
                     type: string
+        api.crm.service.v1.ListClaimRulesResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.ClaimRule'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.crm.service.v1.ListGameRestrictionRulesResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.GameRestrictionRule'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.crm.service.v1.ListSegmentsResponse:
             type: object
             properties:
@@ -28082,6 +28299,33 @@ components:
             properties:
                 version:
                     $ref: '#/components/schemas/api.crm.service.v1.AssetVersion'
+        api.crm.service.v1.UpdateBonusBuyConfigResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.crm.service.v1.BonusBuyConfig'
+        api.crm.service.v1.UpdateClaimRulePriorityResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.UpdateClaimRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.crm.service.v1.ClaimRule'
+        api.crm.service.v1.UpdateClaimRuleStatusResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.UpdateGameRestrictionRulePriorityResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.UpdateGameRestrictionRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.crm.service.v1.GameRestrictionRule'
+        api.crm.service.v1.UpdateGameRestrictionRuleStatusResponse:
+            type: object
+            properties: {}
         api.crm.service.v1.UpdateSegmentResponse:
             type: object
             properties:
@@ -32078,250 +32322,6 @@ components:
                     description: raw values used for the check
                 requestValue:
                     type: string
-        api.risk.service.v1.BonusBuyConfig:
-            type: object
-            properties:
-                id:
-                    type: string
-                enabled:
-                    type: boolean
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                systemOperatorId:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-        api.risk.service.v1.ClaimRule:
-            type: object
-            properties:
-                id:
-                    type: string
-                name:
-                    type: string
-                priority:
-                    type: integer
-                    format: int32
-                targetObject:
-                    enum:
-                        - TARGET_OBJECT_ALL_PLAYERS
-                        - TARGET_OBJECT_CRM_SEGMENT
-                    type: string
-                    format: enum
-                segmentId:
-                    type: string
-                segmentName:
-                    type: string
-                applicableRewardTypes:
-                    type: array
-                    items:
-                        type: string
-                    description: |-
-                        Which reward_type values this rule applies to. Empty = applies to ALL
-                         reward types (backwards-compatible default). Non-empty = only matches
-                         CheckClaimEligibility requests whose reward_type is in the list.
-                         Examples: ["vip_reward"], ["promo_code","deposit_reward"], [].
-                requireKyc:
-                    type: boolean
-                    description: Account restrictions
-                requirePhone:
-                    type: boolean
-                requireEmail:
-                    type: boolean
-                sameTypeExclusion:
-                    type: boolean
-                    description: Exclusion logic
-                ipDedupEnabled:
-                    type: boolean
-                    description: Risk detection - IP
-                sameIpClaimLimit:
-                    type: integer
-                    format: int32
-                sameRewardSameIpLimit:
-                    type: integer
-                    format: int32
-                deviceDedupEnabled:
-                    type: boolean
-                    description: Risk detection - Device
-                sameDeviceClaimLimit:
-                    type: integer
-                    format: int32
-                sameRewardSameDeviceLimit:
-                    type: integer
-                    format: int32
-                ipDeviceWindowHours:
-                    type: integer
-                    description: Sliding time window in hours for IP/Device dedup counts (default 0 = use 24h fallback).
-                    format: int32
-                status:
-                    enum:
-                        - RULE_STATUS_ACTIVE
-                        - RULE_STATUS_DISABLED
-                    type: string
-                    format: enum
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                systemOperatorId:
-                    type: string
-                inheritedFromLevel:
-                    type: string
-                    description: '"self" | "system" | "retailer" | "company" | "operator"'
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-            description: ClaimRule controls who can claim a bonus.
-        api.risk.service.v1.CreateClaimRuleResponse:
-            type: object
-            properties:
-                rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.ClaimRule'
-        api.risk.service.v1.CreateGameRestrictionRuleResponse:
-            type: object
-            properties:
-                rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.GameRestrictionRule'
-        api.risk.service.v1.DeleteClaimRuleResponse:
-            type: object
-            properties: {}
-        api.risk.service.v1.DeleteGameRestrictionRuleResponse:
-            type: object
-            properties: {}
-        api.risk.service.v1.GameRestrictionRule:
-            type: object
-            properties:
-                id:
-                    type: string
-                name:
-                    type: string
-                priority:
-                    type: integer
-                    format: int32
-                targetObject:
-                    enum:
-                        - TARGET_OBJECT_ALL_PLAYERS
-                        - TARGET_OBJECT_CRM_SEGMENT
-                    type: string
-                    format: enum
-                segmentId:
-                    type: string
-                segmentName:
-                    type: string
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                gameTagIds:
-                    type: array
-                    items:
-                        type: string
-                allGames:
-                    type: boolean
-                status:
-                    enum:
-                        - RULE_STATUS_ACTIVE
-                        - RULE_STATUS_DISABLED
-                    type: string
-                    format: enum
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                systemOperatorId:
-                    type: string
-                inheritedFromLevel:
-                    type: string
-                    description: '"self" | "system" | "retailer" | "company" | "operator"'
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-            description: GameRestrictionRule controls which games a bonus holder can play.
-        api.risk.service.v1.GetBonusBuyConfigResponse:
-            type: object
-            properties:
-                config:
-                    $ref: '#/components/schemas/api.risk.service.v1.BonusBuyConfig'
-        api.risk.service.v1.GetClaimRuleResponse:
-            type: object
-            properties:
-                rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.ClaimRule'
-        api.risk.service.v1.GetGameRestrictionRuleResponse:
-            type: object
-            properties:
-                rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.GameRestrictionRule'
-        api.risk.service.v1.ListClaimRulesResponse:
-            type: object
-            properties:
-                rules:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.risk.service.v1.ClaimRule'
-                total:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.risk.service.v1.ListGameRestrictionRulesResponse:
-            type: object
-            properties:
-                rules:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.risk.service.v1.GameRestrictionRule'
-                total:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.risk.service.v1.UpdateBonusBuyConfigResponse:
-            type: object
-            properties:
-                config:
-                    $ref: '#/components/schemas/api.risk.service.v1.BonusBuyConfig'
-        api.risk.service.v1.UpdateClaimRulePriorityResponse:
-            type: object
-            properties: {}
-        api.risk.service.v1.UpdateClaimRuleResponse:
-            type: object
-            properties:
-                rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.ClaimRule'
-        api.risk.service.v1.UpdateClaimRuleStatusResponse:
-            type: object
-            properties: {}
-        api.risk.service.v1.UpdateGameRestrictionRulePriorityResponse:
-            type: object
-            properties: {}
-        api.risk.service.v1.UpdateGameRestrictionRuleResponse:
-            type: object
-            properties:
-                rule:
-                    $ref: '#/components/schemas/api.risk.service.v1.GameRestrictionRule'
-        api.risk.service.v1.UpdateGameRestrictionRuleStatusResponse:
-            type: object
-            properties: {}
         api.user.service.v1.AddOperatorApexDomainResponse:
             type: object
             properties:

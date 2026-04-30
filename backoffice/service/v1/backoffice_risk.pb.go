@@ -8,7 +8,7 @@ package v1
 
 import (
 	common "github.com/infigaming-com/meepo-api/common"
-	v1 "github.com/infigaming-com/meepo-api/risk/service/v1"
+	v1 "github.com/infigaming-com/meepo-api/crm/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -356,7 +356,7 @@ type BackofficeUpdateClaimRuleStatusRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	RuleId                int64                   `protobuf:"varint,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
-	Status                v1.RuleStatus           `protobuf:"varint,3,opt,name=status,proto3,enum=api.risk.service.v1.RuleStatus" json:"status,omitempty"`
+	Status                v1.RuleStatus           `protobuf:"varint,3,opt,name=status,proto3,enum=api.crm.service.v1.RuleStatus" json:"status,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -744,7 +744,7 @@ type BackofficeUpdateGameRestrictionRuleStatusRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	RuleId                int64                   `protobuf:"varint,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
-	Status                v1.RuleStatus           `protobuf:"varint,3,opt,name=status,proto3,enum=api.risk.service.v1.RuleStatus" json:"status,omitempty"`
+	Status                v1.RuleStatus           `protobuf:"varint,3,opt,name=status,proto3,enum=api.crm.service.v1.RuleStatus" json:"status,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -900,13 +900,13 @@ var File_backoffice_service_v1_backoffice_risk_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_risk_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_risk.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a\x1arisk/service/v1/risk.proto\"\xab\x01\n" +
+	"+backoffice/service/v1/backoffice_risk.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a\x19crm/service/v1/risk.proto\"\xaa\x01\n" +
 	" BackofficeCreateClaimRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x122\n" +
-	"\x04rule\x18\x02 \x01(\v2\x1e.api.risk.service.v1.ClaimRuleR\x04rule\"\xab\x01\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x121\n" +
+	"\x04rule\x18\x02 \x01(\v2\x1d.api.crm.service.v1.ClaimRuleR\x04rule\"\xaa\x01\n" +
 	" BackofficeUpdateClaimRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x122\n" +
-	"\x04rule\x18\x02 \x01(\v2\x1e.api.risk.service.v1.ClaimRuleR\x04rule\"\x90\x01\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x121\n" +
+	"\x04rule\x18\x02 \x01(\v2\x1d.api.crm.service.v1.ClaimRuleR\x04rule\"\x90\x01\n" +
 	" BackofficeDeleteClaimRuleRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\"\xa7\x01\n" +
@@ -920,17 +920,17 @@ const file_backoffice_service_v1_backoffice_risk_proto_rawDesc = "" +
 	"(BackofficeUpdateClaimRulePriorityRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x12\x1a\n" +
-	"\bpriority\x18\x03 \x01(\x05R\bpriority\"\xcf\x01\n" +
+	"\bpriority\x18\x03 \x01(\x05R\bpriority\"\xce\x01\n" +
 	"&BackofficeUpdateClaimRuleStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
-	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x127\n" +
-	"\x06status\x18\x03 \x01(\x0e2\x1f.api.risk.service.v1.RuleStatusR\x06status\"\xbf\x01\n" +
+	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x126\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1e.api.crm.service.v1.RuleStatusR\x06status\"\xbe\x01\n" +
 	"*BackofficeCreateGameRestrictionRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12<\n" +
-	"\x04rule\x18\x02 \x01(\v2(.api.risk.service.v1.GameRestrictionRuleR\x04rule\"\xbf\x01\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12;\n" +
+	"\x04rule\x18\x02 \x01(\v2'.api.crm.service.v1.GameRestrictionRuleR\x04rule\"\xbe\x01\n" +
 	"*BackofficeUpdateGameRestrictionRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12<\n" +
-	"\x04rule\x18\x02 \x01(\v2(.api.risk.service.v1.GameRestrictionRuleR\x04rule\"\x9a\x01\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12;\n" +
+	"\x04rule\x18\x02 \x01(\v2'.api.crm.service.v1.GameRestrictionRuleR\x04rule\"\x9a\x01\n" +
 	"*BackofficeDeleteGameRestrictionRuleRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\"\xb1\x01\n" +
@@ -944,33 +944,33 @@ const file_backoffice_service_v1_backoffice_risk_proto_rawDesc = "" +
 	"2BackofficeUpdateGameRestrictionRulePriorityRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x12\x1a\n" +
-	"\bpriority\x18\x03 \x01(\x05R\bpriority\"\xd9\x01\n" +
+	"\bpriority\x18\x03 \x01(\x05R\bpriority\"\xd8\x01\n" +
 	"0BackofficeUpdateGameRestrictionRuleStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
-	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x127\n" +
-	"\x06status\x18\x03 \x01(\x0e2\x1f.api.risk.service.v1.RuleStatusR\x06status\"y\n" +
+	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x126\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1e.api.crm.service.v1.RuleStatusR\x06status\"y\n" +
 	"\"BackofficeGetBonusBuyConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\x96\x01\n" +
 	"%BackofficeUpdateBonusBuyConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x18\n" +
-	"\aenabled\x18\x02 \x01(\bR\aenabled2\xaf\x19\n" +
-	"\x0eBackofficeRisk\x12\xae\x01\n" +
-	"\x0fCreateClaimRule\x12;.api.backoffice.service.v1.BackofficeCreateClaimRuleRequest\x1a,.api.risk.service.v1.CreateClaimRuleResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/risk/claim-rule/create\x12\xae\x01\n" +
-	"\x0fUpdateClaimRule\x12;.api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest\x1a,.api.risk.service.v1.UpdateClaimRuleResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/risk/claim-rule/update\x12\xae\x01\n" +
-	"\x0fDeleteClaimRule\x12;.api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest\x1a,.api.risk.service.v1.DeleteClaimRuleResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/risk/claim-rule/delete\x12\xa9\x01\n" +
-	"\x0eListClaimRules\x12:.api.backoffice.service.v1.BackofficeListClaimRulesRequest\x1a+.api.risk.service.v1.ListClaimRulesResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/risk/claim-rule/list\x12\xa2\x01\n" +
-	"\fGetClaimRule\x128.api.backoffice.service.v1.BackofficeGetClaimRuleRequest\x1a).api.risk.service.v1.GetClaimRuleResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/risk/claim-rule/get\x12\xcf\x01\n" +
-	"\x17UpdateClaimRulePriority\x12C.api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest\x1a4.api.risk.service.v1.UpdateClaimRulePriorityResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/risk/claim-rule/priority/update\x12\xc7\x01\n" +
-	"\x15UpdateClaimRuleStatus\x12A.api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest\x1a2.api.risk.service.v1.UpdateClaimRuleStatusResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/risk/claim-rule/status/update\x12\xd7\x01\n" +
-	"\x19CreateGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest\x1a6.api.risk.service.v1.CreateGameRestrictionRuleResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/risk/game-restriction-rule/create\x12\xd7\x01\n" +
-	"\x19UpdateGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest\x1a6.api.risk.service.v1.UpdateGameRestrictionRuleResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/risk/game-restriction-rule/update\x12\xd7\x01\n" +
-	"\x19DeleteGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest\x1a6.api.risk.service.v1.DeleteGameRestrictionRuleResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/risk/game-restriction-rule/delete\x12\xd2\x01\n" +
-	"\x18ListGameRestrictionRules\x12D.api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest\x1a5.api.risk.service.v1.ListGameRestrictionRulesResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/risk/game-restriction-rule/list\x12\xcb\x01\n" +
-	"\x16GetGameRestrictionRule\x12B.api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest\x1a3.api.risk.service.v1.GetGameRestrictionRuleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/risk/game-restriction-rule/get\x12\xf8\x01\n" +
-	"!UpdateGameRestrictionRulePriority\x12M.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest\x1a>.api.risk.service.v1.UpdateGameRestrictionRulePriorityResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/v1/backoffice/risk/game-restriction-rule/priority/update\x12\xf0\x01\n" +
-	"\x1fUpdateGameRestrictionRuleStatus\x12K.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest\x1a<.api.risk.service.v1.UpdateGameRestrictionRuleStatusResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/risk/game-restriction-rule/status/update\x12\xb7\x01\n" +
-	"\x11GetBonusBuyConfig\x12=.api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest\x1a..api.risk.service.v1.GetBonusBuyConfigResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/risk/bonus-buy-config/get\x12\xc3\x01\n" +
-	"\x14UpdateBonusBuyConfig\x12@.api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest\x1a1.api.risk.service.v1.UpdateBonusBuyConfigResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/risk/bonus-buy-config/updateB[\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled2\x9f\x19\n" +
+	"\x0eBackofficeRisk\x12\xad\x01\n" +
+	"\x0fCreateClaimRule\x12;.api.backoffice.service.v1.BackofficeCreateClaimRuleRequest\x1a+.api.crm.service.v1.CreateClaimRuleResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/risk/claim-rule/create\x12\xad\x01\n" +
+	"\x0fUpdateClaimRule\x12;.api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest\x1a+.api.crm.service.v1.UpdateClaimRuleResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/risk/claim-rule/update\x12\xad\x01\n" +
+	"\x0fDeleteClaimRule\x12;.api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest\x1a+.api.crm.service.v1.DeleteClaimRuleResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/risk/claim-rule/delete\x12\xa8\x01\n" +
+	"\x0eListClaimRules\x12:.api.backoffice.service.v1.BackofficeListClaimRulesRequest\x1a*.api.crm.service.v1.ListClaimRulesResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/risk/claim-rule/list\x12\xa1\x01\n" +
+	"\fGetClaimRule\x128.api.backoffice.service.v1.BackofficeGetClaimRuleRequest\x1a(.api.crm.service.v1.GetClaimRuleResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/risk/claim-rule/get\x12\xce\x01\n" +
+	"\x17UpdateClaimRulePriority\x12C.api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest\x1a3.api.crm.service.v1.UpdateClaimRulePriorityResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/risk/claim-rule/priority/update\x12\xc6\x01\n" +
+	"\x15UpdateClaimRuleStatus\x12A.api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest\x1a1.api.crm.service.v1.UpdateClaimRuleStatusResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/risk/claim-rule/status/update\x12\xd6\x01\n" +
+	"\x19CreateGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest\x1a5.api.crm.service.v1.CreateGameRestrictionRuleResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/risk/game-restriction-rule/create\x12\xd6\x01\n" +
+	"\x19UpdateGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest\x1a5.api.crm.service.v1.UpdateGameRestrictionRuleResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/risk/game-restriction-rule/update\x12\xd6\x01\n" +
+	"\x19DeleteGameRestrictionRule\x12E.api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest\x1a5.api.crm.service.v1.DeleteGameRestrictionRuleResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/risk/game-restriction-rule/delete\x12\xd1\x01\n" +
+	"\x18ListGameRestrictionRules\x12D.api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest\x1a4.api.crm.service.v1.ListGameRestrictionRulesResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/risk/game-restriction-rule/list\x12\xca\x01\n" +
+	"\x16GetGameRestrictionRule\x12B.api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest\x1a2.api.crm.service.v1.GetGameRestrictionRuleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/risk/game-restriction-rule/get\x12\xf7\x01\n" +
+	"!UpdateGameRestrictionRulePriority\x12M.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest\x1a=.api.crm.service.v1.UpdateGameRestrictionRulePriorityResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/v1/backoffice/risk/game-restriction-rule/priority/update\x12\xef\x01\n" +
+	"\x1fUpdateGameRestrictionRuleStatus\x12K.api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest\x1a;.api.crm.service.v1.UpdateGameRestrictionRuleStatusResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/risk/game-restriction-rule/status/update\x12\xb6\x01\n" +
+	"\x11GetBonusBuyConfig\x12=.api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest\x1a-.api.crm.service.v1.GetBonusBuyConfigResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/risk/bonus-buy-config/get\x12\xc2\x01\n" +
+	"\x14UpdateBonusBuyConfig\x12@.api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest\x1a0.api.crm.service.v1.UpdateBonusBuyConfigResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/risk/bonus-buy-config/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -1004,47 +1004,47 @@ var file_backoffice_service_v1_backoffice_risk_proto_goTypes = []any{
 	(*BackofficeGetBonusBuyConfigRequest)(nil),                 // 14: api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest
 	(*BackofficeUpdateBonusBuyConfigRequest)(nil),              // 15: api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest
 	(*common.OperatorContext)(nil),                             // 16: api.common.OperatorContext
-	(*v1.ClaimRule)(nil),                                       // 17: api.risk.service.v1.ClaimRule
-	(v1.RuleStatus)(0),                                         // 18: api.risk.service.v1.RuleStatus
-	(*v1.GameRestrictionRule)(nil),                             // 19: api.risk.service.v1.GameRestrictionRule
-	(*v1.CreateClaimRuleResponse)(nil),                         // 20: api.risk.service.v1.CreateClaimRuleResponse
-	(*v1.UpdateClaimRuleResponse)(nil),                         // 21: api.risk.service.v1.UpdateClaimRuleResponse
-	(*v1.DeleteClaimRuleResponse)(nil),                         // 22: api.risk.service.v1.DeleteClaimRuleResponse
-	(*v1.ListClaimRulesResponse)(nil),                          // 23: api.risk.service.v1.ListClaimRulesResponse
-	(*v1.GetClaimRuleResponse)(nil),                            // 24: api.risk.service.v1.GetClaimRuleResponse
-	(*v1.UpdateClaimRulePriorityResponse)(nil),                 // 25: api.risk.service.v1.UpdateClaimRulePriorityResponse
-	(*v1.UpdateClaimRuleStatusResponse)(nil),                   // 26: api.risk.service.v1.UpdateClaimRuleStatusResponse
-	(*v1.CreateGameRestrictionRuleResponse)(nil),               // 27: api.risk.service.v1.CreateGameRestrictionRuleResponse
-	(*v1.UpdateGameRestrictionRuleResponse)(nil),               // 28: api.risk.service.v1.UpdateGameRestrictionRuleResponse
-	(*v1.DeleteGameRestrictionRuleResponse)(nil),               // 29: api.risk.service.v1.DeleteGameRestrictionRuleResponse
-	(*v1.ListGameRestrictionRulesResponse)(nil),                // 30: api.risk.service.v1.ListGameRestrictionRulesResponse
-	(*v1.GetGameRestrictionRuleResponse)(nil),                  // 31: api.risk.service.v1.GetGameRestrictionRuleResponse
-	(*v1.UpdateGameRestrictionRulePriorityResponse)(nil),       // 32: api.risk.service.v1.UpdateGameRestrictionRulePriorityResponse
-	(*v1.UpdateGameRestrictionRuleStatusResponse)(nil),         // 33: api.risk.service.v1.UpdateGameRestrictionRuleStatusResponse
-	(*v1.GetBonusBuyConfigResponse)(nil),                       // 34: api.risk.service.v1.GetBonusBuyConfigResponse
-	(*v1.UpdateBonusBuyConfigResponse)(nil),                    // 35: api.risk.service.v1.UpdateBonusBuyConfigResponse
+	(*v1.ClaimRule)(nil),                                       // 17: api.crm.service.v1.ClaimRule
+	(v1.RuleStatus)(0),                                         // 18: api.crm.service.v1.RuleStatus
+	(*v1.GameRestrictionRule)(nil),                             // 19: api.crm.service.v1.GameRestrictionRule
+	(*v1.CreateClaimRuleResponse)(nil),                         // 20: api.crm.service.v1.CreateClaimRuleResponse
+	(*v1.UpdateClaimRuleResponse)(nil),                         // 21: api.crm.service.v1.UpdateClaimRuleResponse
+	(*v1.DeleteClaimRuleResponse)(nil),                         // 22: api.crm.service.v1.DeleteClaimRuleResponse
+	(*v1.ListClaimRulesResponse)(nil),                          // 23: api.crm.service.v1.ListClaimRulesResponse
+	(*v1.GetClaimRuleResponse)(nil),                            // 24: api.crm.service.v1.GetClaimRuleResponse
+	(*v1.UpdateClaimRulePriorityResponse)(nil),                 // 25: api.crm.service.v1.UpdateClaimRulePriorityResponse
+	(*v1.UpdateClaimRuleStatusResponse)(nil),                   // 26: api.crm.service.v1.UpdateClaimRuleStatusResponse
+	(*v1.CreateGameRestrictionRuleResponse)(nil),               // 27: api.crm.service.v1.CreateGameRestrictionRuleResponse
+	(*v1.UpdateGameRestrictionRuleResponse)(nil),               // 28: api.crm.service.v1.UpdateGameRestrictionRuleResponse
+	(*v1.DeleteGameRestrictionRuleResponse)(nil),               // 29: api.crm.service.v1.DeleteGameRestrictionRuleResponse
+	(*v1.ListGameRestrictionRulesResponse)(nil),                // 30: api.crm.service.v1.ListGameRestrictionRulesResponse
+	(*v1.GetGameRestrictionRuleResponse)(nil),                  // 31: api.crm.service.v1.GetGameRestrictionRuleResponse
+	(*v1.UpdateGameRestrictionRulePriorityResponse)(nil),       // 32: api.crm.service.v1.UpdateGameRestrictionRulePriorityResponse
+	(*v1.UpdateGameRestrictionRuleStatusResponse)(nil),         // 33: api.crm.service.v1.UpdateGameRestrictionRuleStatusResponse
+	(*v1.GetBonusBuyConfigResponse)(nil),                       // 34: api.crm.service.v1.GetBonusBuyConfigResponse
+	(*v1.UpdateBonusBuyConfigResponse)(nil),                    // 35: api.crm.service.v1.UpdateBonusBuyConfigResponse
 }
 var file_backoffice_service_v1_backoffice_risk_proto_depIdxs = []int32{
 	16, // 0: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 1: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.rule:type_name -> api.risk.service.v1.ClaimRule
+	17, // 1: api.backoffice.service.v1.BackofficeCreateClaimRuleRequest.rule:type_name -> api.crm.service.v1.ClaimRule
 	16, // 2: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 3: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.rule:type_name -> api.risk.service.v1.ClaimRule
+	17, // 3: api.backoffice.service.v1.BackofficeUpdateClaimRuleRequest.rule:type_name -> api.crm.service.v1.ClaimRule
 	16, // 4: api.backoffice.service.v1.BackofficeDeleteClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 5: api.backoffice.service.v1.BackofficeListClaimRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 6: api.backoffice.service.v1.BackofficeGetClaimRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 7: api.backoffice.service.v1.BackofficeUpdateClaimRulePriorityRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 8: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 9: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.status:type_name -> api.risk.service.v1.RuleStatus
+	18, // 9: api.backoffice.service.v1.BackofficeUpdateClaimRuleStatusRequest.status:type_name -> api.crm.service.v1.RuleStatus
 	16, // 10: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	19, // 11: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.rule:type_name -> api.risk.service.v1.GameRestrictionRule
+	19, // 11: api.backoffice.service.v1.BackofficeCreateGameRestrictionRuleRequest.rule:type_name -> api.crm.service.v1.GameRestrictionRule
 	16, // 12: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	19, // 13: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.rule:type_name -> api.risk.service.v1.GameRestrictionRule
+	19, // 13: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleRequest.rule:type_name -> api.crm.service.v1.GameRestrictionRule
 	16, // 14: api.backoffice.service.v1.BackofficeDeleteGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 15: api.backoffice.service.v1.BackofficeListGameRestrictionRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 16: api.backoffice.service.v1.BackofficeGetGameRestrictionRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 17: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRulePriorityRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 18: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 19: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.status:type_name -> api.risk.service.v1.RuleStatus
+	18, // 19: api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest.status:type_name -> api.crm.service.v1.RuleStatus
 	16, // 20: api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	16, // 21: api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	0,  // 22: api.backoffice.service.v1.BackofficeRisk.CreateClaimRule:input_type -> api.backoffice.service.v1.BackofficeCreateClaimRuleRequest
@@ -1063,22 +1063,22 @@ var file_backoffice_service_v1_backoffice_risk_proto_depIdxs = []int32{
 	13, // 35: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRuleStatus:input_type -> api.backoffice.service.v1.BackofficeUpdateGameRestrictionRuleStatusRequest
 	14, // 36: api.backoffice.service.v1.BackofficeRisk.GetBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeGetBonusBuyConfigRequest
 	15, // 37: api.backoffice.service.v1.BackofficeRisk.UpdateBonusBuyConfig:input_type -> api.backoffice.service.v1.BackofficeUpdateBonusBuyConfigRequest
-	20, // 38: api.backoffice.service.v1.BackofficeRisk.CreateClaimRule:output_type -> api.risk.service.v1.CreateClaimRuleResponse
-	21, // 39: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRule:output_type -> api.risk.service.v1.UpdateClaimRuleResponse
-	22, // 40: api.backoffice.service.v1.BackofficeRisk.DeleteClaimRule:output_type -> api.risk.service.v1.DeleteClaimRuleResponse
-	23, // 41: api.backoffice.service.v1.BackofficeRisk.ListClaimRules:output_type -> api.risk.service.v1.ListClaimRulesResponse
-	24, // 42: api.backoffice.service.v1.BackofficeRisk.GetClaimRule:output_type -> api.risk.service.v1.GetClaimRuleResponse
-	25, // 43: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRulePriority:output_type -> api.risk.service.v1.UpdateClaimRulePriorityResponse
-	26, // 44: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRuleStatus:output_type -> api.risk.service.v1.UpdateClaimRuleStatusResponse
-	27, // 45: api.backoffice.service.v1.BackofficeRisk.CreateGameRestrictionRule:output_type -> api.risk.service.v1.CreateGameRestrictionRuleResponse
-	28, // 46: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRule:output_type -> api.risk.service.v1.UpdateGameRestrictionRuleResponse
-	29, // 47: api.backoffice.service.v1.BackofficeRisk.DeleteGameRestrictionRule:output_type -> api.risk.service.v1.DeleteGameRestrictionRuleResponse
-	30, // 48: api.backoffice.service.v1.BackofficeRisk.ListGameRestrictionRules:output_type -> api.risk.service.v1.ListGameRestrictionRulesResponse
-	31, // 49: api.backoffice.service.v1.BackofficeRisk.GetGameRestrictionRule:output_type -> api.risk.service.v1.GetGameRestrictionRuleResponse
-	32, // 50: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRulePriority:output_type -> api.risk.service.v1.UpdateGameRestrictionRulePriorityResponse
-	33, // 51: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRuleStatus:output_type -> api.risk.service.v1.UpdateGameRestrictionRuleStatusResponse
-	34, // 52: api.backoffice.service.v1.BackofficeRisk.GetBonusBuyConfig:output_type -> api.risk.service.v1.GetBonusBuyConfigResponse
-	35, // 53: api.backoffice.service.v1.BackofficeRisk.UpdateBonusBuyConfig:output_type -> api.risk.service.v1.UpdateBonusBuyConfigResponse
+	20, // 38: api.backoffice.service.v1.BackofficeRisk.CreateClaimRule:output_type -> api.crm.service.v1.CreateClaimRuleResponse
+	21, // 39: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRule:output_type -> api.crm.service.v1.UpdateClaimRuleResponse
+	22, // 40: api.backoffice.service.v1.BackofficeRisk.DeleteClaimRule:output_type -> api.crm.service.v1.DeleteClaimRuleResponse
+	23, // 41: api.backoffice.service.v1.BackofficeRisk.ListClaimRules:output_type -> api.crm.service.v1.ListClaimRulesResponse
+	24, // 42: api.backoffice.service.v1.BackofficeRisk.GetClaimRule:output_type -> api.crm.service.v1.GetClaimRuleResponse
+	25, // 43: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRulePriority:output_type -> api.crm.service.v1.UpdateClaimRulePriorityResponse
+	26, // 44: api.backoffice.service.v1.BackofficeRisk.UpdateClaimRuleStatus:output_type -> api.crm.service.v1.UpdateClaimRuleStatusResponse
+	27, // 45: api.backoffice.service.v1.BackofficeRisk.CreateGameRestrictionRule:output_type -> api.crm.service.v1.CreateGameRestrictionRuleResponse
+	28, // 46: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRule:output_type -> api.crm.service.v1.UpdateGameRestrictionRuleResponse
+	29, // 47: api.backoffice.service.v1.BackofficeRisk.DeleteGameRestrictionRule:output_type -> api.crm.service.v1.DeleteGameRestrictionRuleResponse
+	30, // 48: api.backoffice.service.v1.BackofficeRisk.ListGameRestrictionRules:output_type -> api.crm.service.v1.ListGameRestrictionRulesResponse
+	31, // 49: api.backoffice.service.v1.BackofficeRisk.GetGameRestrictionRule:output_type -> api.crm.service.v1.GetGameRestrictionRuleResponse
+	32, // 50: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRulePriority:output_type -> api.crm.service.v1.UpdateGameRestrictionRulePriorityResponse
+	33, // 51: api.backoffice.service.v1.BackofficeRisk.UpdateGameRestrictionRuleStatus:output_type -> api.crm.service.v1.UpdateGameRestrictionRuleStatusResponse
+	34, // 52: api.backoffice.service.v1.BackofficeRisk.GetBonusBuyConfig:output_type -> api.crm.service.v1.GetBonusBuyConfigResponse
+	35, // 53: api.backoffice.service.v1.BackofficeRisk.UpdateBonusBuyConfig:output_type -> api.crm.service.v1.UpdateBonusBuyConfigResponse
 	38, // [38:54] is the sub-list for method output_type
 	22, // [22:38] is the sub-list for method input_type
 	22, // [22:22] is the sub-list for extension type_name

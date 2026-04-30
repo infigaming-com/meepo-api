@@ -10,7 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
-	v1 "github.com/infigaming-com/meepo-api/risk/service/v1"
+	v1 "github.com/infigaming-com/meepo-api/crm/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
